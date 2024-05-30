@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 
 class LandingTab1Light extends StatelessWidget {
@@ -36,7 +38,7 @@ class LandingTab1Light extends StatelessWidget {
               Positioned(
                 left: 0,
                 top: 831,
-                child: Container(
+                child: SizedBox(
                   width: 393,
                   height: 21,
                   child: Stack(
@@ -45,7 +47,7 @@ class LandingTab1Light extends StatelessWidget {
                         left: 266,
                         top: 8,
                         child: Transform(
-                          transform: Matrix4.identity()..translate(0.0, 0.0)..rotateZ(3.14),
+                          transform: Matrix4.identity()..translate(0.0)..rotateZ(3.14),
                           child: Container(
                             width: 139,
                             height: 5,
@@ -65,7 +67,7 @@ class LandingTab1Light extends StatelessWidget {
               Positioned(
                 left: 0,
                 top: 787,
-                child: Container(
+                child: SizedBox(
                   width: 393,
                   height: 44,
                   child: Stack(
@@ -84,7 +86,6 @@ class LandingTab1Light extends StatelessWidget {
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
                               Container(
                                 width: 8,

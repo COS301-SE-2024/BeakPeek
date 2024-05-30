@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:beakpeek/landing_tab_1_light.dart';  // Make sure to adjust the import path
+import 'package:beakpeek/landing_tab_1_light.dart';
+import 'package:beakpeek/landing_tab_2_light.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +12,26 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bird-Watching Companion',
+      title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const Scaffold(
-        body: LandingTab1Light(),
+      home: const LandingPage(),
+    );
+  }
+}
+
+class LandingPage extends StatelessWidget {
+  const LandingPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: PageView(
+        children: const [
+          LandingTab1Light(),
+          LandingTab2Light(),
+        ],
       ),
     );
   }
