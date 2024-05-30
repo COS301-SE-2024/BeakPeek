@@ -43,7 +43,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: flutter-coverage-report
-          path: coverage/lcov.info
+          path: ./beakpeek/coverage/lcov.info
 
   codecov:
     needs: test
@@ -53,12 +53,12 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: flutter-coverage-report
-          path: coverage
+          path: ./beakpeak/coverage
 
       - name: Upload Flutter Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: coverage/lcov.info
+          files: lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: true
