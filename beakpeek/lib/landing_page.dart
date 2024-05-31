@@ -1,5 +1,7 @@
 import 'package:beakpeek/landing_tab_1_light.dart';
 import 'package:beakpeek/landing_tab_2_light.dart';
+import 'package:beakpeek/log_in.dart';
+import 'package:beakpeek/sign_up.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatefulWidget {
@@ -14,9 +16,17 @@ class LandingPage extends StatefulWidget {
 class _LandingPageState extends State<LandingPage> {
   Widget? activeScreen;
 
-  void loginFunc() {}
+  void loginFunc() {
+    setState(() {
+      activeScreen = const LogIn();
+    });
+  }
 
-  void signinFunc() {}
+  void signinFunc() {
+    setState(() {
+      activeScreen = const SignUp();
+    });
+  }
 
   @override
   void initState() {

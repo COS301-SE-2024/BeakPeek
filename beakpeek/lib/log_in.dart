@@ -1,8 +1,8 @@
 // ignore_for_file: lines_longer_than_80_chars
 import 'package:flutter/material.dart';
 
-class SignInLight extends StatelessWidget {
-  const SignInLight({super.key});
+class LogIn extends StatelessWidget {
+  const LogIn({super.key});
 
   @override
   Widget build(BuildContext context) {
