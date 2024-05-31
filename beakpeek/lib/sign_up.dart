@@ -237,15 +237,17 @@ class SignUp extends StatelessWidget {
                         child: SizedBox(
                           width: 304,
                           height: 48,
-                          child: Text(
-                            'Create account',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontFamily: 'SF Pro Display',
-                              fontWeight: FontWeight.w500,
-                              height: 2.5,
+                          child: ElevatedButton(
+                            onPressed: null, // Add your onPressed callback here
+                            child: Text(
+                              'Create Account',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
