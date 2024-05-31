@@ -5,7 +5,10 @@ import 'package:beakpeek/sign_up.dart';
 import 'package:beakpeek/log_in.dart';
 
 class LandingTab2Light extends StatelessWidget {
-  const LandingTab2Light({super.key});
+  const LandingTab2Light(this.signin, this.login, {super.key});
+
+  final void Function() signin;
+  final void Function() login;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +34,7 @@ class LandingTab2Light extends StatelessWidget {
                   height: 393,
                   decoration: const BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('images/landing2.png'),
+                      image: AssetImage('assets/images/landing2.png'),
                       fit: BoxFit.fill,
                     ),
                   ),
@@ -51,7 +54,9 @@ class LandingTab2Light extends StatelessWidget {
                         child: Transform(
                           // ignore: duplicate_ignore
                           // ignore: lines_longer_than_80_chars
-                          transform: Matrix4.identity()..translate(0.0)..rotateZ(3.14),
+                          transform: Matrix4.identity()
+                            ..translate(0.0)
+                            ..rotateZ(3.14),
                           child: Container(
                             width: 139,
                             height: 5,
@@ -80,7 +85,8 @@ class LandingTab2Light extends StatelessWidget {
                         left: 172,
                         top: 10,
                         child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 12, vertical: 8),
                           decoration: ShapeDecoration(
                             color: const Color(0xFF0D0D0D),
                             shape: RoundedRectangleBorder(
@@ -162,14 +168,16 @@ class LandingTab2Light extends StatelessWidget {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const SignUpLight()),
+                                MaterialPageRoute(
+                                    builder: (context) => const SignUp()),
                               );
                             },
                             child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 // color: Colors.blue, // Change the color to match your design
-                                borderRadius: BorderRadius.circular(10), // Adjust the border radius as needed
+                                borderRadius: BorderRadius.circular(
+                                    10), // Adjust the border radius as needed
                               ),
                               child: const Text(
                                 'Sign Up',
@@ -229,14 +237,16 @@ class LandingTab2Light extends StatelessWidget {
                             onTap: () {
                               Navigator.push(
                                 context,
-                                MaterialPageRoute(builder: (context) => const SignInLight()),
+                                MaterialPageRoute(
+                                    builder: (context) => const SignInLight()),
                               );
                             },
                             child: Container(
                               alignment: Alignment.center,
                               decoration: BoxDecoration(
                                 // color: Colors.blue, // Change the color to match your design
-                                borderRadius: BorderRadius.circular(10), // Adjust the border radius as needed
+                                borderRadius: BorderRadius.circular(
+                                    10), // Adjust the border radius as needed
                               ),
                               child: const Text(
                                 'Sign In',

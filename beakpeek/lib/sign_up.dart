@@ -2,15 +2,15 @@
 
 import 'package:flutter/material.dart';
 
-class SignUpLight extends StatelessWidget {
-  const SignUpLight({super.key});
+class SignUp extends StatelessWidget {
+  const SignUp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       // resizeToAvoidBottomInset: false,
       body: SingleChildScrollView(
-      child: Container(
+        child: Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
           clipBehavior: Clip.antiAlias,
@@ -26,7 +26,9 @@ class SignUpLight extends StatelessWidget {
                 left: -145,
                 top: 33.29,
                 child: Transform(
-                  transform: Matrix4.identity()..translate(0.0)..rotateZ(-0.15),
+                  transform: Matrix4.identity()
+                    ..translate(0.0)
+                    ..rotateZ(-0.15),
                   child: Container(
                     width: 413.26,
                     height: 461.10,
@@ -51,7 +53,9 @@ class SignUpLight extends StatelessWidget {
                         left: 266,
                         top: 8,
                         child: Transform(
-                          transform: Matrix4.identity()..translate(0.0)..rotateZ(3.14),
+                          transform: Matrix4.identity()
+                            ..translate(0.0)
+                            ..rotateZ(3.14),
                           child: Container(
                             width: 139,
                             height: 5,
