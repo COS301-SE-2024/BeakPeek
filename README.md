@@ -1,3 +1,7 @@
 # BeakPeek
 
 [![codecov](https://codecov.io/gh/COS301-SE-2024/BeakPeek/graph/badge.svg?token=pVNeEnxgU7)](https://codecov.io/gh/COS301-SE-2024/BeakPeek)
+
+| Name       | Profile                      | Role   | Description                                                                       | Links                                                                                                                                                                                                                                                                                 |
+|:------------:|:------------------------------:|:--------:|:-----------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Ivan Horak | ![Ivan Horak](res/Ivan.jpeg) | DevOps | I have a passion for DevOps and becoming more efficient when Developing or coding | <a href="https://github.com/ChuufMaster" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a> <a href="https://www.linkedin.com/in/ivan-horak-computer-science/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a> |
