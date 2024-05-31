@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'package:beakpeek/landing_tab_1_light.dart';
 import 'package:flutter/material.dart';
 
 class SignInLight extends StatelessWidget {
@@ -203,15 +204,17 @@ class SignInLight extends StatelessWidget {
                         child: SizedBox(
                           width: 304,
                           height: 48,
-                          child: Text(
-                            'Sign in',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 18,
-                              fontFamily: 'SF Pro Display',
-                              fontWeight: FontWeight.w500,
-                              height: 2.5,
+                          child: ElevatedButton(
+                            onPressed: null, // Add your onPressed callback here
+                            child: Text(
+                              'Sign in',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
