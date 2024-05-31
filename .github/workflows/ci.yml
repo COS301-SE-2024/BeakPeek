@@ -46,7 +46,7 @@ jobs:
           path: ./beakpeek/coverage/lcov.info
 
   codecov:
-    needs: test
+    # needs: test
     runs-on: ubuntu-latest
     steps:
       - name: Download coverage artifact

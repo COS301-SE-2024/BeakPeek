@@ -32,6 +32,7 @@ coverage/
 .pub-cache/
 .pub/
 /build/
+beakpeek/build
 
 # Symbolication related
 app.*.symbols
