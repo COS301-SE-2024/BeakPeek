@@ -2,8 +2,13 @@
 
 import 'package:aad_b2c_webview/aad_b2c_webview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-void main() {
+Future main() async {
+  await dotenv
+      .load(); // mergeWith optional, you can include Platform.environment for Mobile/Desktop app
+
   runApp(const MyApp());
 }
 
