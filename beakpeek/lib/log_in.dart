@@ -7,13 +7,23 @@ class LogIn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      backgroundColor: Color(0xFFF3F1ED),
+    return Scaffold(
+      backgroundColor: const Color(0xFFF3F1ED),
       body: SingleChildScrollView(
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            LoginStack(),
+            const LoginStack(),
+            IconButton(
+              icon: Image.asset('assets/icons/google.png'),
+              onPressed: () {},
+              tooltip: 'Sign in with google',
+            ),
+            IconButton(
+              icon: Image.asset('assets/icons/facebook.png'),
+              onPressed: () {},
+              tooltip: 'Sign in with google',
+            ),
           ],
         ),
       ),

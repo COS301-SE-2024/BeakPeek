@@ -5,18 +5,15 @@ class BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          BottomNavItem('Home', 'home.png'),
-          BottomNavItem('Map', 'map.png'),
-          BottomNavItem('Add Sighting', 'addSighting.png'),
-          BottomNavItem('Sightings', 'sightings.png'),
-          BottomNavItem('Profile', 'profile.png'),
-        ],
-      ),
+    return const Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        BottomNavItem('Home', 'home.png'),
+        BottomNavItem('Map', 'map.png'),
+        BottomNavItem('Add Sighting', 'addSighting.png'),
+        BottomNavItem('Sightings', 'sightings.png'),
+        BottomNavItem('Profile', 'profile.png'),
+      ],
     );
   }
 }
