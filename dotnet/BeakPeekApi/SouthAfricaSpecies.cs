@@ -6,5 +6,3 @@ public class SaSpeciesContext : DbContext
 {
     // public DbSet
 }
-
-public class SaSpecies
