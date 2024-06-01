@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'package:beakpeek/LandingText/signup_stack.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatelessWidget {
@@ -13,7 +14,7 @@ class SignUp extends StatelessWidget {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const LoginStack(),
+            const SignupStack(),
             IconButton(
               icon: Image.asset('assets/icons/google.png'),
               onPressed: () {},

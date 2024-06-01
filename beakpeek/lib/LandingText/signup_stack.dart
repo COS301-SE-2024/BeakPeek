@@ -1,8 +1,8 @@
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:flutter/material.dart';
 
-class LoginStack extends StatelessWidget {
-  const LoginStack({super.key});
+class SignupStack extends StatelessWidget {
+  const SignupStack({super.key});
 
   @override
   Widget build(BuildContext context) {
