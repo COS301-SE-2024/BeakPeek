@@ -6,10 +6,7 @@ import 'package:beakpeek/LandingText/cust_text_span.dart';
 import 'package:flutter/material.dart';
 
 class LandingTab2Light extends StatelessWidget {
-  const LandingTab2Light(this.signin, this.login, {super.key});
-
-  final void Function() signin;
-  final void Function() login;
+  const LandingTab2Light({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,11 +24,11 @@ class LandingTab2Light extends StatelessWidget {
             const SizedBox(
               height: 30,
             ),
-            CustButtons(login, 'Login', Colors.black, Colors.white),
+            const CustButtons('/login', 'Login', Colors.black, Colors.white),
             const SizedBox(
               height: 20,
             ),
-            CustButtons(signin, 'Sign IN', Colors.white, Colors.black),
+            const CustButtons('/signup', 'Sign IN', Colors.white, Colors.black),
             const SizedBox(
               height: 20,
             ),

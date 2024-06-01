@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CustButtons extends StatelessWidget {
-  const CustButtons(this.onclick, this.textD, this.c, this.tc, {super.key});
+  const CustButtons(this.path, this.textD, this.c, this.tc, {super.key});
 
-  final void Function() onclick;
+  final String path;
   final String textD;
   final Color c;
   final Color tc;
   @override
   Widget build(BuildContext context) {
     return FilledButton(
-      onPressed: onclick,
+      onPressed: () {
+        Navigator.pushNamed(context, path);
+      },
       style: FilledButton.styleFrom(
         backgroundColor: c,
         minimumSize: const Size(350, 50),
