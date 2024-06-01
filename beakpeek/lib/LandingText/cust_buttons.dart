@@ -29,7 +29,9 @@ class CustButtons extends StatelessWidget {
 }
 
 class CustOutlinedButton extends StatelessWidget {
-  const CustOutlinedButton(this.onclick, this.textD, this.c, this.tc, {super.key});
+  // ignore: lines_longer_than_80_chars
+  const CustOutlinedButton(this.onclick, this.textD, this.c, this.tc,
+      {super.key});
 
   final void Function() onclick;
   final String textD;
@@ -40,7 +42,7 @@ class CustOutlinedButton extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         return SizedBox(
-          width: constraints.maxWidth/3, // Match the parent's width
+          width: constraints.maxWidth / 3, // Match the parent's width
           child: OutlinedButton(
             onPressed: onclick,
             style: OutlinedButton.styleFrom(

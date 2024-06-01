@@ -21,6 +21,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+// ignore: camel_case_types
 class home extends StatelessWidget {
   const home({super.key});
 
@@ -80,14 +81,14 @@ class home extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Image.asset(
-                            'assets/images/map.png',
-                          ),
+                        'assets/images/map.png',
+                      ),
                       // const SizedBox(height: 20),
                       // ignore: lines_longer_than_80_chars
                       // CustOutlinedButton(() {}, 'View Map',Colors.white , const Color(0xFF033A30)),
                       const SizedBox(height: 16),
                       CustButtons(
-                        () {},
+                        () {} as String,
                         'View Map',
                         const Color(0xFF033A30),
                         Colors.white,
@@ -130,8 +131,7 @@ class SearchBar extends StatelessWidget {
               ),
             ],
           ),
-          
-          child:  Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
@@ -154,7 +154,3 @@ class SearchBar extends StatelessWidget {
     );
   }
 }
-
-
-
-

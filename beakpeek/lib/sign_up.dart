@@ -29,6 +29,7 @@ class SignUp extends StatelessWidget {
         ),
       ),
     );
+
     // return Scaffold(
     //   // resizeToAvoidBottomInset: false,
     //   body: SingleChildScrollView(

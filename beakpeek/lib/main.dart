@@ -9,7 +9,7 @@ void main() {
     routes: <String, WidgetBuilder>{
       '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
-      '/signup': (context) => const SignUp(),
+      '/signup': (context) => const SignUp()
     },
   ));
 }
