@@ -1,5 +1,13 @@
 import 'package:beakpeek/LandingText/login_stack.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_appauth/flutter_appauth.dart';
+
+const client = '560ea41c-e579-4a11-90c9-e3c825b5a88c';
+const rediret = 'https://beakpeak.b2clogin.com/oauth2/nativeclient';
+const flow = 'B2C_1_SignUpAndSignInUserFlow';
+const scope = ['openid'];
+const tenant = 'BeakPeeak';
+const discovery = 'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/';
 
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
@@ -9,9 +17,22 @@ class LogIn extends StatefulWidget {
 }
 
 class _LogInState extends State<LogIn> {
-  String? jwtToken;
-  String? refreshToken;
+  final FlutterAppAuth _appAuth = const FlutterAppAuth();
 
+  final String _clientId = client;
+  final String _redirectUrl = rediret;
+  //final String _issuer = 'https://demo.duendesoftware.com';
+  final List<String> _scopes = <String>[
+    'openid',
+  ];
+
+  final AuthorizationServiceConfiguration _serviceConfiguration =
+      const AuthorizationServiceConfiguration(
+    authorizationEndpoint:
+        'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/authorize',
+    tokenEndpoint:
+        'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/token',
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,13 +43,8 @@ class _LogInState extends State<LogIn> {
           children: [
             const LoginStack(),
             IconButton(
-              icon: Image.asset('assets/icons/google.png'),
-              onPressed: () {},
-              tooltip: 'Sign in with google',
-            ),
-            IconButton(
               icon: Image.asset('assets/icons/facebook.png'),
-              onPressed: () {},
+              onPressed: () => _signInWithAutoCodeExchange(),
               tooltip: 'Sign in with google',
             ),
           ],
@@ -36,4 +52,54 @@ class _LogInState extends State<LogIn> {
       ),
     );
   }
+
+  // Future<void> _exchangeCode() async {
+  //   try {
+  //     _setBusyState();
+  //     final TokenResponse? result = await _appAuth.token(TokenRequest(
+  //         _clientId, _redirectUrl,
+  //         authorizationCode: _authorizationCode,
+  //         discoveryUrl: _discoveryUrl,
+  //         codeVerifier: _codeVerifier,
+  //         nonce: _nonce,
+  //         scopes: _scopes));
+  //     _processTokenResponse(result);
+  //     await _testApi(result);
+  //   } catch (_) {
+  //     _clearBusyState();
+  //   }
+  // }
+
+  Future<void> _signInWithAutoCodeExchange(
+      {bool preferEphemeralSession = false}) async {
+    try {
+      _setBusyState();
+
+      final AuthorizationTokenResponse? result =
+          await _appAuth.authorizeAndExchangeCode(
+        AuthorizationTokenRequest(
+          _clientId,
+          _redirectUrl,
+          serviceConfiguration: _serviceConfiguration,
+          scopes: _scopes,
+          preferEphemeralSession: preferEphemeralSession,
+        ),
+      );
+      if (result != null) {}
+    } catch (_) {}
+  }
+
+  void _setBusyState() {
+    setState(() {});
+  }
+
+  // Future<void> _testApi(TokenResponse? response) async {
+  //   final http.Response httpResponse = await http.get(
+  //       Uri.parse('https://demo.duendesoftware.com/api/test'),
+  //       headers: <String, String>{'Authorization': 'Bearer $_accessToken'});
+  //   setState(() {
+  //     _userInfo = httpResponse.statusCode == 200 ? httpResponse.body : '';
+  //     _isBusy = false;
+  //   });
+  // }
 }
