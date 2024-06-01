@@ -9,13 +9,7 @@ namespace BeakPeekApi.Models
         {
         }
 
-        public DbSet<MyTable> MyTables { get; set; }
-    }
-
-    public class MyTable
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public DbSet<GautengBirdSpecies> GautengBirdSpecies { get; set; }
     }
 }
 

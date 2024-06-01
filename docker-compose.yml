@@ -12,14 +12,17 @@ services:
       - db
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__DefaultConnection=Server=db;Database=BeakPeak;User=sa;Password=MillenniumDB@1;
+      - ConnectionStrings__DefaultConnection=Server=db;Database=BeakPeek;User=sa;Password=Your_password123;TrustServerCertificate=true;
   db:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
     ports:
     - "1433:1433"
     environment:
-    - ACCEPT_EULA=y
-    - SA_PASSWORD=MillenniumDB@1
+      SA_PASSWORD: "Your_password123"
+      ACCEPT_EULA: "Y"
     volumes:
-      - ./scripts/sqlscripts:/docker-entrupoint-intidb.d
+      - ./scripts/sqlscripts:/docker-entrypoint-initdb.d
+      - ./res/species/province_gauteng_specieslist.csv:/tmp/province_gauteng_specieslist.csv
+      - ./scripts/bash/custom-entrypoint.sh:/usr/config/custom-entrypoint.sh
+    command: ["/bin/bash", "/usr/config/custom-entrypoint.sh"]
