@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BeakPeekApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b853038f3c3e2ec9e6d5642ec4b6ca1423b73d14")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0d085135c69ab61a04f5b9301522899e99414b1")]
 [assembly: System.Reflection.AssemblyProductAttribute("BeakPeekApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BeakPeekApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
