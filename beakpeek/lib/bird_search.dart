@@ -118,7 +118,7 @@ class FilterState extends State<ListFilter> {
   void filter(String value) {
     setState(() {
       outputList =
-          birds.where((bird) => bird.commonSpecies.startsWith(value)).toList();
+          birds.where((bird) => bird.commonSpecies.contains(value)).toList();
     });
   }
 
@@ -128,43 +128,54 @@ class FilterState extends State<ListFilter> {
       children: [
         TextField(
           controller: _controller,
-          onChanged: (value) {
+          onSubmitted: (value) {
             filter(value);
           },
           decoration: const InputDecoration(
+            fillColor: Colors.black,
             labelText: 'Search',
           ),
         ),
-        OverflowBox(
-          child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: outputList.length,
-            itemBuilder: (context, index) {
-              final bird = outputList[index];
-              return ListTile(
-                title: Text(
-                    '${bird.commonSpecies} (${bird.genus} ${bird.species})'),
-                subtitle: Text('Group: ${bird.commonGroup}'),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text('${bird.reportingRate}%'),
-                    const SizedBox(width: 8),
-                    Container(
-                      width: 20,
-                      height: 20,
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: _getColorForReportingRate(bird.reportingRate),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
+        ListB(outputList),
       ],
+    );
+  }
+}
+
+class ListB extends StatelessWidget {
+  const ListB(this.outputList, {super.key});
+  final List<Bird> outputList;
+
+  @override
+  Widget build(BuildContext context) {
+    return OverflowBox(
+      child: ListView.builder(
+        shrinkWrap: true,
+        itemCount: outputList.length,
+        itemBuilder: (context, index) {
+          final bird = outputList[index];
+          return ListTile(
+            title:
+                Text('${bird.commonSpecies} (${bird.genus} ${bird.species})'),
+            subtitle: Text('Group: ${bird.commonGroup}'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('${bird.reportingRate}%'),
+                const SizedBox(width: 8),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _getColorForReportingRate(bird.reportingRate),
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 
