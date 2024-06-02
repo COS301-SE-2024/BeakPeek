@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-=======
-import 'package:beakpeek/LandingText/signup_stack.dart';
->>>>>>> 05e77e4 (Resolved merge conflicts)
 import 'package:beakpeek/LandingText/login_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
