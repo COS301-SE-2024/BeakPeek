@@ -9,6 +9,10 @@ const scope = ['openid'];
 const tenant = 'BeakPeeak';
 const discovery = 'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/';
 
+void onRedirect(BuildContext context) {
+  Navigator.pushNamed(context, '/home');
+}
+
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
@@ -21,7 +25,6 @@ class _LogInState extends State<LogIn> {
 
   final String _clientId = client;
   final String _redirectUrl = rediret;
-  //final String _issuer = 'https://demo.duendesoftware.com';
   final List<String> _scopes = <String>[
     'openid',
   ];
@@ -43,7 +46,7 @@ class _LogInState extends State<LogIn> {
           children: [
             const LoginStack(),
             IconButton(
-              icon: Image.asset('assets/icons/facebook.png'),
+              icon: Image.asset('assets/icons/google.png'),
               onPressed: () => _signInWithAutoCodeExchange(),
               tooltip: 'Sign in with google',
             ),
@@ -53,28 +56,9 @@ class _LogInState extends State<LogIn> {
     );
   }
 
-  // Future<void> _exchangeCode() async {
-  //   try {
-  //     _setBusyState();
-  //     final TokenResponse? result = await _appAuth.token(TokenRequest(
-  //         _clientId, _redirectUrl,
-  //         authorizationCode: _authorizationCode,
-  //         discoveryUrl: _discoveryUrl,
-  //         codeVerifier: _codeVerifier,
-  //         nonce: _nonce,
-  //         scopes: _scopes));
-  //     _processTokenResponse(result);
-  //     await _testApi(result);
-  //   } catch (_) {
-  //     _clearBusyState();
-  //   }
-  // }
-
   Future<void> _signInWithAutoCodeExchange(
       {bool preferEphemeralSession = false}) async {
     try {
-      _setBusyState();
-
       final AuthorizationTokenResponse? result =
           await _appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
@@ -85,21 +69,13 @@ class _LogInState extends State<LogIn> {
           preferEphemeralSession: preferEphemeralSession,
         ),
       );
-      if (result != null) {}
+      if (result != null) {
+        _setBusyState();
+      }
     } catch (_) {}
   }
 
   void _setBusyState() {
-    setState(() {});
+    onRedirect(context);
   }
-
-  // Future<void> _testApi(TokenResponse? response) async {
-  //   final http.Response httpResponse = await http.get(
-  //       Uri.parse('https://demo.duendesoftware.com/api/test'),
-  //       headers: <String, String>{'Authorization': 'Bearer $_accessToken'});
-  //   setState(() {
-  //     _userInfo = httpResponse.statusCode == 200 ? httpResponse.body : '';
-  //     _isBusy = false;
-  //   });
-  // }
 }

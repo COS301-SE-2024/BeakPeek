@@ -1,3 +1,4 @@
+import 'package:beakpeek/home.dart';
 import 'package:beakpeek/landing_page.dart';
 import 'package:beakpeek/log_in.dart';
 import 'package:beakpeek/sign_up.dart';
@@ -9,7 +10,8 @@ void main() {
     routes: <String, WidgetBuilder>{
       '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
-      '/signup': (context) => const SignUp()
+      '/signup': (context) => const SignUp(),
+      '/home': (context) => const home(),
     },
   ));
 }
