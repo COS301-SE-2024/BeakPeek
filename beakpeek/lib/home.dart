@@ -98,6 +98,15 @@ class Home extends StatelessWidget {
                               Colors.white,
                             ),
                           ),
+                          SizedBox(height: screenHeight * 0.01),
+                          const Center(
+                            child: CustButtons(
+                              '/birdSearch',
+                              'Search Birds Temp',
+                              Color(0xFF033A30),
+                              Colors.white,
+                            ),
+                          ),
                         ],
                       ),
                     ),
