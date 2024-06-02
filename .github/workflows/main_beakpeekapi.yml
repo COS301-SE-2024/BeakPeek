@@ -38,7 +38,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}
+          path: ${{env.DOTNET_ROOT}}/BeakPeek
 
   deploy:
     runs-on: ubuntu-latest
