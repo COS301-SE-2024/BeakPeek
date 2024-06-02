@@ -1,3 +1,114 @@
-# BeakPeek
+<p align="center">
+    </br>
+    <img alt="BeakPeak" src="res/Logo.png">
+    </br>
+</p>
 
-[![codecov](https://codecov.io/gh/COS301-SE-2024/BeakPeek/graph/badge.svg?token=pVNeEnxgU7)](https://codecov.io/gh/COS301-SE-2024/BeakPeek)
+<p align="center">
+  <img src="https://img.shields.io/codecov/c/gh/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="CodeCov">
+  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/ci.yml?style=for-the-badge" alt="Build">
+  <img src="https://img.shields.io/github/issues/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
+  <img src="https://img.shields.io/github/issues-closed/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
+</p>
+
+<h2>☁️About</h2>
+
+<p>BeakPeek is a bird watching and tracking app that makes it much easier to locate birds in South Africa all on your mobile phone.</p>
+
+<h2>🗓️Project Management</h2>
+
+<a href="https://github.com/orgs/COS301-SE-2024/projects/106">Project Board</a>
+
+<h2>⚙️Technologies</h2>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Codecov-F01F7A?style=for-the-badge&logo=Codecov&logoColor=white" alt="Codecov">
+  <img src="https://img.shields.io/badge/microsoft%20azure-0089D6?style=for-the-badge&logo=microsoft-azure&logoColor=white" alt="Azure">
+  <img src="https://img.shields.io/badge/GitHub_Actions-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="GitHub Actions">
+  <img src="https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white" alt="MS SQL server">
+  <img src="https://img.shields.io/badge/Figma-F24E1E?style=for-the-badge&logo=figma&logoColor=white" alt="Figma">
+  <img src="https://img.shields.io/badge/.NET-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt="Dotnet">
+  <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" alt="Docker">
+  <img src="https://img.shields.io/badge/Markdown-000000?style=for-the-badge&logo=markdown&logoColor=white" alt="Markdown">
+  <img src="https://img.shields.io/badge/NeoVim-%2357A143.svg?&style=for-the-badge&logo=neovim&logoColor=white" alt="Neovim">
+  <img src="https://img.shields.io/badge/VSCode-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white" alt="VS Code">
+  <img src="https://img.shields.io/badge/Visual_Studio-5C2D91?style=for-the-badge&logo=visual%20studio&logoColor=white" alt="Visual Studio">
+  <img src="https://img.shields.io/badge/Dart-0175C2?style=for-the-badge&logo=dart&logoColor=white" alt="Dart">
+  <img src="https://img.shields.io/badge/Flutter-02569B?style=for-the-badge&logo=flutter&logoColor=white" alt="Flutter">
+  <img src="https://img.shields.io/badge/Android-3DDC84?style=for-the-badge&logo=android&logoColor=white" alt="Android">
+  <img src="https://img.shields.io/badge/iOS-000000?style=for-the-badge&logo=ios&logoColor=white" alt="iOS">
+  <img src="https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black" alt="Linux">
+  <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu">
+  <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows">
+  <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
+  <img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" alt="App Store">
+  <img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" alt="Google Play">
+  <img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" alt="Powershell">
+  <img src="https://img.shields.io/badge/wezterm-4E49EE?style=for-the-badge&logo=wezterm&logoColor=white" alt="WezTerm">
+</p>
+
+<h2>🤝Team</h2>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Profile</th>
+    <th>Role</th>
+    <th>Description</th>
+    <th>Links</th>
+  </tr>
+  <tr>
+    <td>Charl Pretorius</td>
+    <td><img heigth="140" width="auto" src="res/Charl.jpg" alt="Charl Pretorius"></td>
+    <td>Team Lead / Data Architect</td>
+    <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He contributed greatly towards the success of a civil lawsuit gaining valuable insight into real world legal disputes. He currently works as the most experienced tutor at the Menlo Park Kip McGrath tutoring center part time and redesigned the database system for a cattle farm. All while being on track to complete his computer science degree in the minimum amount of time. During his first year of computer science he also completed all first year data science modules. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
+    <td>
+      <a href="https://github.com/CharlSparrow" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
+      <a href="https://www.linkedin.com/in/charl-pretorius-computer-scientist/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
+    </td>
+  </tr>
+  <tr>
+    <td>Ivan Horak</td>
+    <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
+    <td>DevOps Engineer</td>
+    <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
+    <td>
+      <a href="https://github.com/ChuufMaster" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
+      <a href="https://www.linkedin.com/in/ivan-horak-computer-science/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
+    </td>
+  </tr>
+  <tr>
+    <td>Justin Hudson</td>
+    <td><img heigth="140" width="auto" src="res/Justin.jpg" alt="Justin Hudson"></td>
+    <td>Integration/Services Engineer</td>
+    <td>Justin loves making programs work and knowing how everything works.</td>
+    <td>
+      <a href="https://github.com/u21543152" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
+      <a href="https://www.linkedin.com/in/justin-hudson-385867302/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
+    </td>
+  </tr>
+  <tr>
+    <td>Jarod Jeffery</td>
+    <td><img heigth="140" width="auto" src="res/Jarod.png" alt="Jarod Jeffery"></td>
+    <td>Backend/Frontend/Integration</td>
+    <td>Jarod enjoys working on complex problems and finding unique solutions to them. His personal motto is "If I do not know I can find out!". This motto is shown in his numerous qualifications in various development languages.</td>
+    <td>
+      <a href="https://github.com/JarodJeffery" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
+      <a href="https://www.linkedin.com/in/jarod-jeffery-717536219/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
+    </td>
+  </tr>
+    <tr>
+    <td>Matthew Botha</td>
+    <td><img heigth="140" width="auto" src="" alt="Matthew Botha"></td>
+    <td>Designer/UI Engineer</td>
+    <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
+    <td>
+      <a href="https://github.com/mattgbotha" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
+      <a href="https://www.linkedin.com/in/matthew-botha-80b875181/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
+    </td>
+  </tr>
+</table>
+
+<div>
+<h1 href="">System Requirement Specification</h1>
+</div>

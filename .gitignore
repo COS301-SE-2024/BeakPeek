@@ -32,6 +32,8 @@ coverage/
 .pub-cache/
 .pub/
 /build/
+beakpeek/build/**
+dotnet/BeakPeek
 
 # Symbolication related
 app.*.symbols
