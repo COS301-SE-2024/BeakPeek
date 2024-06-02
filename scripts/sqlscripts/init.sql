@@ -28,10 +28,3 @@ CREATE TABLE GautengBirdSpecies (
     ReportingRate DECIMAL(5,2)
 );
 GO
--- LOAD DATA INFILE '../../res/species/province_gauteng_specieslist.csv'
--- INTO TABLE GautengBirdSpecies
--- FIELDS TERMINATED BY ';'
--- ENCLOSED BY '"'
--- LINES TERMINATED BY '\n'
--- IGNORE 1 ROWS
--- (Pentad, Spp, Common_group, Common_species, Genus, Species, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec, Total_Records, Total_Cards, ReportingRate);
