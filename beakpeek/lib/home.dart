@@ -1,122 +1,129 @@
-// ignore_for_file: camel_case_types
-
 import 'package:flutter/material.dart';
 import 'package:beakpeek/LandingText/cust_buttons.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/LandingText/nav.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+// void main() {
+//   runApp(const MyApp());
+// }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: Home(),
+//       ),
+//     );
+//   }
+// }
+
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    return Scaffold(
         backgroundColor: Color(0xFFF3F1ED),
-        body: home(),
-      ),
-    );
-  }
-}
-
-class home extends StatelessWidget {
-  const home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const SizedBox(height: 20),
-                      const SearchBar(),
-                      const SizedBox(height: 20),
-                      const CustRichText(
-                        'Justin\'s Bird of the Day',
-                        Color(0xFF033A30),
-                        ta: TextAlign.left,
-                        fontS: 22,
-                      ),
-                      // const SizedBox(height: 10),
-                      Stack(
-                        alignment: Alignment.center,
+        body: Center(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.all(screenWidth * 0.04),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Image.asset(
-                            'assets/images/home.png',
+                          SizedBox(height: screenHeight * 0.05),
+                          const TopSearchBar(),
+                          SizedBox(height: screenHeight * 0.01),
+                          const CustRichText(
+                            'Bird of the Day',
+                            Color(0xFF033A30),
+                            ta: TextAlign.left,
+                            fontS: 22,
                           ),
-                          Positioned(
-                            bottom: 0,
-                            left: 0,
-                            right: 0,
-                            child: Container(
-                              color: Colors.black.withOpacity(0.5),
-                              child: const CustRichText(
-                                'Black Fronted Bushsrike',
-                                Colors.white,
-                                fontS: 20,
+                          SizedBox(height: screenHeight * 0.01),
+                          Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Image.asset(
+                                'assets/images/home.png',
+                                width:
+                                    screenWidth * 0.92, // 92% of screen width
+                                fit: BoxFit.cover,
                               ),
+                              Positioned(
+                                bottom: 0,
+                                left: 0,
+                                right: 0,
+                                child: Container(
+                                  color: Colors.black.withOpacity(0.5),
+                                  child: const CustRichText(
+                                    'Black Fronted Bushsrike',
+                                    Colors.white,
+                                    fontS: 20,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: screenHeight * 0.01),
+                          const CustRichText(
+                            'Your Area Map',
+                            Color(0xFF033A30),
+                            ta: TextAlign.left,
+                            fontS: 22,
+                          ),
+                          SizedBox(height: screenHeight * 0.01),
+                          Image.asset(
+                            'assets/images/map.png',
+                            width: screenWidth * 0.92,
+                            fit: BoxFit.cover,
+                          ),
+                          SizedBox(height: screenHeight * 0.01),
+                          const Center(
+                            child: CustButtons(
+                              '/map',
+                              'View Map',
+                              Color(0xFF033A30),
+                              Colors.white,
                             ),
                           ),
                         ],
                       ),
-                      const SizedBox(height: 10),
-                      // const SizedBox(height: 30),
-                      const CustRichText(
-                        'Your Area Map',
-                        Color(0xFF033A30),
-                        ta: TextAlign.left,
-                        fontS: 22,
-                      ),
-                      const SizedBox(height: 10),
-                      Image.asset(
-                        'assets/images/map.png',
-                      ),
-                      // const SizedBox(height: 20),
-                      // ignore: lines_longer_than_80_chars
-                      // CustOutlinedButton(() {}, 'View Map',Colors.white , const Color(0xFF033A30)),
-                      const SizedBox(height: 16),
-                      const CustButtons(
-                        '/map',
-                        'View Map',
-                        Color(0xFF033A30),
-                        Colors.white,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
-              ),
+                const BottomNavigation(),
+              ],
             ),
-            const BottomNavigation(),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+class TopSearchBar extends StatelessWidget {
+  const TopSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
         Image.asset(
           'assets/icons/Logo.png',
+          width: screenWidth * 0.1, // 10% of screen width
         ),
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -146,11 +153,14 @@ class SearchBar extends StatelessWidget {
               ),
               Opacity(
                 opacity: 0.60,
-                child: Image.asset('assets/icons/search.png'),
+                child: Image.asset(
+                  'assets/icons/search.png',
+                  width: screenWidth * 0.05, // 5% of screen width
+                ),
               ),
             ],
           ),
-        )
+        ),
       ],
     );
   }
