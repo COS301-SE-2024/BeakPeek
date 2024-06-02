@@ -3,6 +3,9 @@
 
 name: Build and deploy ASP.Net Core app to Azure Web App - BeakPeekApi
 
+env:
+  DOTNET_ROOT: ./dotnet
+  AZURE_SQL_CONNECTIONSTRING: "Server=tcp:beakpeek.database.windows.net,1433;Initial Catalog=BeakPeekDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";"
 on:
   push:
     branches:
@@ -26,13 +29,13 @@ jobs:
         run: dotnet build --configuration Release
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/BeakPeakApi
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/myapp
+          path: ${{env.DOTNET_ROOT}}/BeakPeekApi
 
   deploy:
     runs-on: ubuntu-latest
