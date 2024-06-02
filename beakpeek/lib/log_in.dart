@@ -10,6 +10,10 @@ const scope = ['openid'];
 const tenant = 'BeakPeeak';
 const discovery = 'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/';
 
+void onRedirect(BuildContext context) {
+  Navigator.pushNamed(context, '/home');
+}
+
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
@@ -22,7 +26,6 @@ class _SignUpState extends State<LogIn> {
 
   final String _clientId = client;
   final String _redirectUrl = rediret;
-  //final String _issuer = 'https://demo.duendesoftware.com';
   final List<String> _scopes = <String>[
     'openid',
   ];
@@ -50,7 +53,7 @@ class _SignUpState extends State<LogIn> {
               tooltip: 'Sign in with google',
             ),
             IconButton(
-              icon: Image.asset('assets/icons/facebook.png'),
+              icon: Image.asset('assets/icons/google.png'),
               onPressed: () => _signInWithAutoCodeExchange(),
               tooltip: 'Sign in with google',
             ),
@@ -63,8 +66,6 @@ class _SignUpState extends State<LogIn> {
   Future<void> _signInWithAutoCodeExchange(
       {bool preferEphemeralSession = false}) async {
     try {
-      _setBusyState();
-
       final AuthorizationTokenResponse? result =
           await _appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
@@ -75,11 +76,13 @@ class _SignUpState extends State<LogIn> {
           preferEphemeralSession: preferEphemeralSession,
         ),
       );
-      if (result != null) {}
+      if (result != null) {
+        _setBusyState();
+      }
     } catch (_) {}
   }
 
   void _setBusyState() {
-    setState(() {});
+    onRedirect(context);
   }
 }

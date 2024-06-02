@@ -17,6 +17,10 @@ void main() {
   ));
 }
 
+void onRedirect(BuildContext context) {
+  Navigator.of(context).pushNamedAndRemoveUntil('/demo', (route) => false);
+}
+
 class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
@@ -258,6 +262,8 @@ class _MyAppState extends State<MyApp> {
 
       if (result != null) {
         _processAuthResponse(result);
+        // ignore: use_build_context_synchronously
+        onRedirect(context);
       }
     } catch (_) {
       _clearBusyState();
@@ -346,13 +352,7 @@ class _MyAppState extends State<MyApp> {
   }
 
   void _processAuthTokenResponse(AuthorizationTokenResponse response) {
-    setState(() {
-      _accessToken = _accessTokenTextController.text = response.accessToken!;
-      _idToken = _idTokenTextController.text = response.idToken!;
-      _refreshToken = _refreshTokenTextController.text = response.refreshToken!;
-      _accessTokenExpirationTextController.text =
-          response.accessTokenExpirationDateTime!.toIso8601String();
-    });
+    onRedirect(context);
   }
 
   void _processAuthResponse(AuthorizationResponse response) {

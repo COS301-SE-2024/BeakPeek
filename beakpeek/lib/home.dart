@@ -3,38 +3,6 @@ import 'package:beakpeek/LandingText/cust_buttons.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/LandingText/nav.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       home: Home(),
-//       ),
-//     );
-//   }
-// }
-
-class Home extends StatelessWidget {
-  const Home({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return Scaffold(
-        backgroundColor: Color(0xFFF3F1ED),
-        body: home(),
-      ),
-    );
-  }
-}
-
 // ignore: camel_case_types
 class home extends StatelessWidget {
   const home({super.key});
@@ -134,9 +102,6 @@ class home extends StatelessWidget {
                           ),
                         ],
                       ),
-<<<<<<< HEAD
-                    ),
-=======
                       const SizedBox(height: 10),
                       // const SizedBox(height: 30),
                       const CustRichText(
@@ -160,7 +125,6 @@ class home extends StatelessWidget {
                         Colors.white,
                       ),
                     ],
->>>>>>> 1ac3a5a (tests)
                   ),
                 ),
                 const BottomNavigation(),
