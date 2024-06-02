@@ -22,6 +22,10 @@ class MapSampleState extends State<MapSample> {
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
 
+  get mapTapHandled => null;
+
+  get polygonTappedId => null;
+
   @override
   void initState() {
     super.initState();

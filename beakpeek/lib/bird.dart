@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-
 import 'package:flutter/material.dart';
 
 class ResizableBottomSheet extends StatefulWidget {
@@ -15,15 +14,14 @@ class ResizableBottomSheet extends StatefulWidget {
 
 class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
   double _heightFactor = 0.5; // Initial height factor
-  String _selectedSortOption = 'Rarity Ascending';
+  String _selectedSortOption = 'Sort';
   String _selectedFilterOption = 'All';
   late Future<List<Bird>> _birdList;
 
   @override
   void initState() {
     super.initState();
-    _birdList = fetchBirds(
-        widget.pentadId); // Fetch and sort birds from the API initially
+    _birdList = fetchBirds(widget.pentadId); // Fetch and sort birds from the API initially
   }
 
   void _refreshBirdList() {
@@ -47,10 +45,10 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
         birds.sort((a, b) => b.reportingRate.compareTo(a.reportingRate));
         break;
       case 'Alphabetically Ascending':
-        birds.sort((a, b) => a.commonSpecies.compareTo(b.commonSpecies));
+        birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
         break;
       case 'Alphabetically Descending':
-        birds.sort((a, b) => b.commonSpecies.compareTo(a.commonSpecies));
+        birds.sort((a, b) => b.commonGroup.compareTo(a.commonGroup));
         break;
       default:
         // No sorting
@@ -64,10 +62,8 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         setState(() {
-          _heightFactor -=
-              details.primaryDelta! / MediaQuery.of(context).size.height;
-          _heightFactor = _heightFactor.clamp(
-              0.2, 0.9); // Limit height factor between 0.2 and 1.0
+          _heightFactor -= details.primaryDelta! / MediaQuery.of(context).size.height;
+          _heightFactor = _heightFactor.clamp(0.2, 0.9); // Limit height factor between 0.2 and 1.0
         });
       },
       child: FractionallySizedBox(
@@ -103,6 +99,7 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
                   DropdownButton<String>(
                     value: _selectedSortOption,
                     items: <String>[
+                      'Sort',
                       'Rarity Ascending',
                       'Rarity Descending',
                       'Alphabetically Ascending',
@@ -225,8 +222,12 @@ class BirdList extends StatelessWidget {
       itemBuilder: (context, index) {
         final bird = birds[index];
         return ListTile(
-          title: Text('${bird.commonSpecies} (${bird.genus} ${bird.species})'),
-          subtitle: Text('Group: ${bird.commonGroup}'),
+          title: Text(
+            bird.commonGroup != 'None'
+              ? '${bird.commonGroup} ${bird.commonSpecies}'
+              : bird.commonSpecies
+            ),
+          subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
             children: [
