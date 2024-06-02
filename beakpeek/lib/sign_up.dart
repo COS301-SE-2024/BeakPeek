@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 
 const client = '560ea41c-e579-4a11-90c9-e3c825b5a88c';
-const rediret = 'https://beakpeak.b2clogin.com/oauth2/nativeclient';
+const rediret = 'com.example.beakpeek://oauthredirect/';
 const flow = 'B2C_1_SignUpAndSignInUserFlow';
 const scope = ['openid'];
 const tenant = 'BeakPeeak';
