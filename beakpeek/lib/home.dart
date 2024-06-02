@@ -75,6 +75,12 @@ class home extends StatelessWidget {
                         const Color(0xFF033A30),
                         Colors.white,
                       ),
+                      const CustButtons(
+                        '/birds',
+                        'View Birds',
+                        Color(0xFF033A30),
+                        Colors.white,
+                      ),
                     ],
                   ),
                 ),
