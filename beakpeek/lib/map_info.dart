@@ -15,57 +15,57 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xFFF3F1ED),
-        body: home(),
+        body: MapInfo(),
       ),
     );
   }
 }
 
-class home extends StatelessWidget {
-  const home({super.key});
+class MapInfo extends StatelessWidget {
+  const MapInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              // child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      const SizedBox(height: 30),
-                      const SearchBar(),
-                      const SizedBox(height: 20),
-                      const CustRichText(
-                        'Your Area Map',
-                        Color(0xFF033A30),
-                        ta: TextAlign.left,
-                        fontS: 22,
-                      ),
-                      const SizedBox(height: 10),
-                      Expanded(
-                        child: MapSample(),
-                      ),
-                    ],
-                  )
+    return const Scaffold(
+        backgroundColor: Color(0xFFF3F1ED),
+        body: Center(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  // child: SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 30),
+                          TopSearchBar(),
+                          SizedBox(height: 20),
+                          CustRichText(
+                            'Your Area Map',
+                            Color(0xFF033A30),
+                            ta: TextAlign.left,
+                            fontS: 22,
+                          ),
+                          SizedBox(height: 10),
+                          Expanded(
+                            child: MapSample(),
+                          ),
+                        ],
+                      )),
                 ),
-              ),
-            // ),
-            const BottomNavigation(),
-          ],
-        ),
-      ),
-    );
+                BottomNavigation(),
+              ],
+            ),
+          ),
+        ));
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+class TopSearchBar extends StatelessWidget {
+  const TopSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +89,7 @@ class SearchBar extends StatelessWidget {
               ),
             ],
           ),
-          
-          child:  Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
@@ -113,7 +112,3 @@ class SearchBar extends StatelessWidget {
     );
   }
 }
-
-
-
-
