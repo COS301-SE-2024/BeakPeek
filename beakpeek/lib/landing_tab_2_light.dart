@@ -28,7 +28,7 @@ class LandingTab2Light extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const CustButtons('/signup', 'Sign IN', Colors.white, Colors.black),
+            const CustButtons('/signup', 'Sign Up', Colors.white, Colors.black),
             const SizedBox(
               height: 20,
             ),
