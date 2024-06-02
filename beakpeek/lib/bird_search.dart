@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:convert';
-
+import 'package:http/http.dart';
 import 'package:flutter/material.dart';
 
 class BirdSearch extends StatefulWidget {
@@ -28,7 +28,7 @@ class _BirdSearchState extends State<BirdSearch> {
           .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies'));
 
       if (response.statusCode == 200) {
-        List<dynamic> jsonResponse = json.decode(response.body);
+        final List<dynamic> jsonResponse = json.decode(response.body);
         return jsonResponse.map((data) => Bird.fromJson(data)).toList();
       } else {
         print('Request failed with status: ${response.statusCode}');
