@@ -13,7 +13,7 @@
 
 <h2>☁️About</h2>
 
-<p>Flutter is a bird watching and tracking app that makes it much easier to locate birds in South Africa all on your mobile phone.</p>
+<p>BeakPeek is a bird watching and tracking app that makes it much easier to locate birds in South Africa all on your mobile phone.</p>
 
 <h2>🗓️Project Management</h2>
 
