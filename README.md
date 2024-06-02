@@ -61,7 +61,7 @@
     <td>Charl Pretorius</td>
     <td><img heigth="140" width="auto" src="res/Charl.jpg" alt="Charl Pretorius"></td>
     <td>Team Lead / Data Architect</td>
-    <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He contributed greatly towards the success of a civil lawsuit gaining valuable insight into real world legal disputes. He currently works as the most experienced tutor at the Menlo Park Kip McGrath tutoring center part time and redesigned the database system for a cattle farm. All while being on track to complete his computer science degree in the minimum amount of time. During his first year of computer science he also completed all first year data science modules. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
+    <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He contributed greatly towards the success of a civil lawsuit gaining valuable insight into real world legal disputes. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
     <td>
       <a href="https://github.com/CharlSparrow" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/charl-pretorius-computer-scientist/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
@@ -81,7 +81,7 @@
     <td>Justin Hudson</td>
     <td><img heigth="140" width="auto" src="res/Justin.jpg" alt="Justin Hudson"></td>
     <td>Integration/Services Engineer</td>
-    <td>Justin loves making programs work and knowing how everything works.</td>
+    <td>Justin loves making programs efficient and effective and enjoys seeing how everything functions.</td>
     <td>
       <a href="https://github.com/u21543152" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/justin-hudson-385867302/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
