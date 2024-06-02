@@ -17,6 +17,7 @@ void main() {
       '/home': (context) => const Home(),
       '/birdSearch': (context) => const BirdSearch(),
       '/map': (context) => const MapInfo(),
+      '/oauthredirect': (context) => const home(),
     },
   ));
 }
