@@ -4,7 +4,7 @@
 name: Build and deploy ASP.Net Core app to Azure Web App - BeakPeekApi
 
 env:
-  DOTNET_ROOT: ./dotnet
+  DOTNET_ROOT: ./dotnet/BeakPeekApi/
   AZURE_SQL_CONNECTIONSTRING: "Server=tcp:beakpeek.database.windows.net,1433;Initial Catalog=BeakPeekDB;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;Authentication=\"Active Directory Default\";"
 on:
   push:
