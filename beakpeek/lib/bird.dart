@@ -107,7 +107,7 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
                       'Rarity Descending',
                       'Alphabetically Ascending',
                       'Alphabetically Descending'
-                    ].map((String value) {
+                    ].map((value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -126,7 +126,7 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
                       'Birds You\'ve Seen',
                       'Birds You Haven\'t Seen',
                       'All'
-                    ].map((String value) {
+                    ].map((value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -170,7 +170,7 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
           'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad'));
 
       if (response.statusCode == 200) {
-        List<dynamic> jsonResponse = json.decode(response.body);
+        final List<dynamic> jsonResponse = json.decode(response.body);
         return jsonResponse.map((data) => Bird.fromJson(data)).toList();
       } else {
         print('Request failed with status: ${response.statusCode}');
@@ -215,7 +215,7 @@ class Bird {
 }
 
 class BirdList extends StatelessWidget {
-  BirdList({required this.birds});
+  const BirdList({super.key, required this.birds});
   final List<Bird> birds;
 
   @override

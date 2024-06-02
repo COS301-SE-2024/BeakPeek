@@ -7,13 +7,13 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/',
+    initialRoute: '/birdSearch',
     routes: <String, WidgetBuilder>{
-      '/': (context) => const BirdSearch(),
+      '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
       '/signup': (context) => const SignUp(),
       '/home': (context) => const home(),
-      '/birdSearch': (context) => const LandingPage(),
+      '/birdSearch': (context) => const BirdSearch(),
     },
   ));
 }

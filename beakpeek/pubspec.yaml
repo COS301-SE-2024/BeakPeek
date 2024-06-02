@@ -31,7 +31,6 @@ dependencies:
   flutter:
     sdk: flutter
   google_maps_flutter: ^2.1.0
-  http: ^0.13.3
   # geolocator: ^10.0.0
   webview_flutter: ^2.0.14
   xml: ^5.3.1

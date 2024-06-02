@@ -115,8 +115,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-<<<<<<< HEAD
-=======
   flutter_web_plugins:
     dependency: transitive
     description: flutter
@@ -178,22 +176,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.15.4"
->>>>>>> 14467e75c22067d1d4b845fc17286981079ff01c
   http:
     dependency: "direct main"
     description:
       name: http
-<<<<<<< HEAD
       sha256: "761a297c042deedc1ffbb156d6e2af13886bb305c2a343a4d972504cd67dd938"
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
-=======
-      sha256: "5895291c13fa8a3bd82e76d5627f69e0d85ca6a30dcac95c4ea19a5d555879c2"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.13.6"
->>>>>>> 14467e75c22067d1d4b845fc17286981079ff01c
   http_parser:
     dependency: transitive
     description:
@@ -202,8 +192,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.0.2"
-<<<<<<< HEAD
-=======
   js:
     dependency: transitive
     description:
@@ -220,7 +208,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.7.4"
->>>>>>> 14467e75c22067d1d4b845fc17286981079ff01c
   leak_tracker:
     dependency: transitive
     description:
@@ -293,14 +280,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
-  plugin_platform_interface:
-    dependency: transitive
-    description:
-      name: plugin_platform_interface
-      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
-      url: "https://pub.dev"
-    source: hosted
-    version: "2.1.8"
   petitparser:
     dependency: transitive
     description:
@@ -418,8 +397,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.5.1"
-<<<<<<< HEAD
-=======
   webview_flutter:
     dependency: "direct main"
     description:
@@ -460,7 +437,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.1"
->>>>>>> 14467e75c22067d1d4b845fc17286981079ff01c
 sdks:
   dart: ">=3.4.1 <4.0.0"
   flutter: ">=3.22.0"
