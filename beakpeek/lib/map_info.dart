@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:beakpeek/map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
@@ -26,7 +28,7 @@ class home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Column(
@@ -34,29 +36,28 @@ class home extends StatelessWidget {
           children: [
             Expanded(
               // child: SingleChildScrollView(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+              child: Padding(
+                  padding: EdgeInsets.all(8.0),
                   child: Column(
                     children: [
-                      const SizedBox(height: 30),
-                      const SearchBar(),
-                      const SizedBox(height: 20),
-                      const CustRichText(
+                      SizedBox(height: 30),
+                      SearchBar(),
+                      SizedBox(height: 20),
+                      CustRichText(
                         'Your Area Map',
                         Color(0xFF033A30),
                         ta: TextAlign.left,
                         fontS: 22,
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                       Expanded(
                         child: MapSample(),
                       ),
                     ],
-                  )
-                ),
-              ),
+                  )),
+            ),
             // ),
-            const BottomNavigation(),
+            BottomNavigation(),
           ],
         ),
       ),
@@ -89,8 +90,7 @@ class SearchBar extends StatelessWidget {
               ),
             ],
           ),
-          
-          child:  Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
@@ -113,7 +113,3 @@ class SearchBar extends StatelessWidget {
     );
   }
 }
-
-
-
-
