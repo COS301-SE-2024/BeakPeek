@@ -5,8 +5,8 @@ import 'package:beakpeek/bird.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-class BirdSearch extends StatefulWidget {
-  const BirdSearch({super.key});
+// class BirdSearch extends StatefulWidget {
+//   const BirdSearch({super.key});
 
   @override
   State<BirdSearch> createState() => _BirdListState();
@@ -46,11 +46,11 @@ class _BirdListState extends State<BirdSearch> {
     );
   }
 
-  Future<List<Bird>> fetchBirds() async {
-    try {
-      // print(pentadId);
-      final response = await http
-          .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies'));
+//   Future<List<Bird>> fetchBirds() async {
+//     try {
+//       // print(pentadId);
+//       final response = await http
+//           .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies'));
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonResponse = json.decode(response.body);

@@ -17,14 +17,14 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xFFF3F1ED),
-        body: home(),
+        body: MapInfo(),
       ),
     );
   }
 }
 
-class home extends StatelessWidget {
-  const home({super.key});
+class MapInfo extends StatelessWidget {
+  const MapInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -65,8 +65,8 @@ class home extends StatelessWidget {
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+class TopSearchBar extends StatelessWidget {
+  const TopSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
