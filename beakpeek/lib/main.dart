@@ -9,14 +9,13 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/',
+    initialRoute: '/birdSearch',
     routes: <String, WidgetBuilder>{
       '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
       '/signup': (context) => const SignUp(),
-      '/home': (context) => const Home(),
-      '/birdSearch': (context) => const LandingPage(),
-      '/map': (context) => const MapInfo(),
+      '/home': (context) => const home(),
+      '/birdSearch': (context) => const BirdSearch(),
     },
   ));
 }
