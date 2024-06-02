@@ -45,7 +45,7 @@ class _SignUpState extends State<SignUp> {
             const SignupStack(),
             IconButton(
               icon: Image.asset('assets/icons/google.png'),
-              onPressed: () {},
+              onPressed: () {Navigator.pushNamed(context, '/home');},
               tooltip: 'Sign in with google',
             ),
             IconButton(
