@@ -97,4 +97,14 @@
       <a href="https://www.linkedin.com/in/jarod-jeffery-717536219/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
     </td>
   </tr>
+    <tr>
+    <td>Matthew Botha</td>
+    <td><img heigth="140" width="auto" src="" alt="Matthew Botha"></td>
+    <td>Designer/UI Engineer</td>
+    <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
+    <td>
+      <a href="https://github.com/mattgbotha" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
+      <a href="https://www.linkedin.com/in/matthew-botha-80b875181/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
+    </td>
+  </tr>
 </table>
