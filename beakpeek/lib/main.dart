@@ -1,3 +1,4 @@
+import 'package:beakpeek/bird_search.dart';
 import 'package:beakpeek/home.dart';
 import 'package:beakpeek/landing_page.dart';
 import 'package:beakpeek/log_in.dart';
@@ -11,7 +12,8 @@ void main() {
       '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
       '/signup': (context) => const SignUp(),
-      '/home': (context) => const home(),
+      '/oauthredirect': (context) => const home(),
+      '/birdSearch': (context) => const BirdSearch(),
     },
   ));
 }
