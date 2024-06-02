@@ -56,7 +56,7 @@ jobs:
           path: ./beakpeek/coverage
 
   Codecov-Upload:
-    needs: test
+    needs: Run-Flutter-Tests
     runs-on: ubuntu-latest
     steps:
       - name: Download coverage artifact
