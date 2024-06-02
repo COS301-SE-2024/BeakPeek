@@ -1,11 +1,13 @@
+// ignore_for_file: avoid_print, library_private_types_in_public_api
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 import 'package:flutter/material.dart';
 
 class ResizableBottomSheet extends StatefulWidget {
+  const ResizableBottomSheet({super.key, required this.pentadId});
   final String pentadId;
-  const ResizableBottomSheet({Key? key, required this.pentadId}) : super(key: key);
 
   @override
   _ResizableBottomSheetState createState() => _ResizableBottomSheetState();
@@ -20,7 +22,8 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _birdList = fetchBirds(widget.pentadId); // Fetch and sort birds from the API initially
+    _birdList = fetchBirds(
+        widget.pentadId); // Fetch and sort birds from the API initially
   }
 
   void _refreshBirdList() {
@@ -61,8 +64,10 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         setState(() {
-          _heightFactor -= details.primaryDelta! / MediaQuery.of(context).size.height;
-          _heightFactor = _heightFactor.clamp(0.2, 0.9); // Limit height factor between 0.2 and 1.0
+          _heightFactor -=
+              details.primaryDelta! / MediaQuery.of(context).size.height;
+          _heightFactor = _heightFactor.clamp(
+              0.2, 0.9); // Limit height factor between 0.2 and 1.0
         });
       },
       child: FractionallySizedBox(
@@ -97,8 +102,12 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
                 children: [
                   DropdownButton<String>(
                     value: _selectedSortOption,
-                    items: <String>['Rarity Ascending', 'Rarity Descending', 'Alphabetically Ascending', 'Alphabetically Descending']
-                        .map((String value) {
+                    items: <String>[
+                      'Rarity Ascending',
+                      'Rarity Descending',
+                      'Alphabetically Ascending',
+                      'Alphabetically Descending'
+                    ].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -113,8 +122,11 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
                   ),
                   DropdownButton<String>(
                     value: _selectedFilterOption,
-                    items: <String>['Birds You\'ve Seen', 'Birds You Haven\'t Seen', 'All']
-                        .map((String value) {
+                    items: <String>[
+                      'Birds You\'ve Seen',
+                      'Birds You Haven\'t Seen',
+                      'All'
+                    ].map((String value) {
                       return DropdownMenuItem<String>(
                         value: value,
                         child: Text(value),
@@ -154,7 +166,8 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
   Future<List<Bird>> fetchBirds(String pentadId) async {
     try {
       // print(pentadId);
-      final response = await http.get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad'));
+      final response = await http.get(Uri.parse(
+          'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad'));
 
       if (response.statusCode == 200) {
         List<dynamic> jsonResponse = json.decode(response.body);
@@ -168,18 +181,9 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
       throw Exception('Failed to load birds: $error');
     }
   }
-
 }
 
 class Bird {
-  final String pentad;
-  final int spp;
-  final String commonGroup;
-  final String commonSpecies;
-  final String genus;
-  final String species;
-  final double reportingRate;
-
   Bird({
     required this.pentad,
     required this.spp,
@@ -201,12 +205,18 @@ class Bird {
       reportingRate: json['reportingRate'],
     );
   }
+  final String pentad;
+  final int spp;
+  final String commonGroup;
+  final String commonSpecies;
+  final String genus;
+  final String species;
+  final double reportingRate;
 }
 
 class BirdList extends StatelessWidget {
-  final List<Bird> birds;
-
   BirdList({required this.birds});
+  final List<Bird> birds;
 
   @override
   Widget build(BuildContext context) {
