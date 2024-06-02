@@ -117,8 +117,10 @@ class FilterState extends State<ListFilter> {
 
   void filter(String value) {
     setState(() {
-      outputList =
-          birds.where((bird) => bird.commonSpecies.contains(value)).toList();
+      outputList = birds
+          .where((bird) =>
+              (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()))
+          .toList();
     });
   }
 
@@ -136,7 +138,9 @@ class FilterState extends State<ListFilter> {
             labelText: 'Search',
           ),
         ),
-        ListB(outputList),
+        Expanded(
+          child: ListB(outputList),
+        ),
       ],
     );
   }
