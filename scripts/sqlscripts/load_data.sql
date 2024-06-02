@@ -8,3 +8,5 @@ WITH (
     FIRSTROW = 2
 );
 GO
+ALTER TABLE GautengBirdSpecies ADD id INT IDENTITY(1,1) NOT NULL
+GO

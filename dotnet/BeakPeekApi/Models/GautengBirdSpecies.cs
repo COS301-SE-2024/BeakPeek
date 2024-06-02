@@ -24,11 +24,5 @@ namespace BeakPeekApi.Models
         public int Total_Cards { get; set; }
         public decimal ReportingRate { get; set; }
         public int id {get; set;}
-        // private Guid _id;
-        // [Key]
-        // public Guid ID
-        // {
-        //     get { return _id; }
-        // }
     }
 }

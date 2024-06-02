@@ -1,15 +1,20 @@
 version: '3.8'
 
-
 services:
   webapi:
+    container_name: webapi
     build:
       context: .
+      target: development
       dockerfile: Dockerfile
     ports:
       - "5000:8080"
     depends_on:
       - db
+    develop:
+      watch:
+        - path: .
+          action: rebuild 
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db;Database=BeakPeek;User=sa;Password=Your_password123;TrustServerCertificate=true;

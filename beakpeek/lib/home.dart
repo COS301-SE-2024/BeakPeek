@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types
+
 import 'package:flutter/material.dart';
 import 'package:beakpeek/LandingText/cust_buttons.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
@@ -80,16 +82,16 @@ class home extends StatelessWidget {
                       ),
                       const SizedBox(height: 10),
                       Image.asset(
-                            'assets/images/map.png',
-                          ),
+                        'assets/images/map.png',
+                      ),
                       // const SizedBox(height: 20),
                       // ignore: lines_longer_than_80_chars
                       // CustOutlinedButton(() {}, 'View Map',Colors.white , const Color(0xFF033A30)),
                       const SizedBox(height: 16),
-                      CustButtons(
-                        () {},
+                      const CustButtons(
+                        '/map',
                         'View Map',
-                        const Color(0xFF033A30),
+                        Color(0xFF033A30),
                         Colors.white,
                       ),
                     ],
@@ -130,8 +132,7 @@ class SearchBar extends StatelessWidget {
               ),
             ],
           ),
-          
-          child:  Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
@@ -154,7 +155,3 @@ class SearchBar extends StatelessWidget {
     );
   }
 }
-
-
-
-
