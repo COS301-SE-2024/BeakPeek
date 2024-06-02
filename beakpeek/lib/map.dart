@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, lines_longer_than_80_chars, avoid_types_on_closure_parameters
+
 import 'package:beakpeek/bird.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -6,8 +8,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:xml/xml.dart';
 // import 'package:beakpeek/LandingText/nav.dart';
 
-
 class MapSample extends StatefulWidget {
+  const MapSample({super.key});
+
   @override
   State<MapSample> createState() => MapSampleState();
 }
@@ -47,39 +50,48 @@ class MapSampleState extends State<MapSample> {
   }
 
   Widget _buildProvinceDropdown() {
-  return DropdownButton<String>(
-    value: _selectedProvince,
-    onChanged: (newValue) {
-      setState(() {
-        _selectedProvince = newValue!;
-        _cameraPosition = _getCameraPositionForProvince(newValue);
-        _loadKmlData();
-      });
+    return DropdownButton<String>(
+      value: _selectedProvince,
+      onChanged: (newValue) {
+        setState(() {
+          _selectedProvince = newValue!;
+          _cameraPosition = _getCameraPositionForProvince(newValue);
+          _loadKmlData();
+        });
 
-      // Move the camera to the new position
-      mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-    },
-    items: <String>['gauteng', 'westerncape', 'Eastern Cape'] // Add more provinces as needed
-        .map<DropdownMenuItem<String>>((String value) {
-      return DropdownMenuItem<String>(
-        value: value,
-        child: Text(value),
-      );
-    }).toList(),
-  );
-}
+        // Move the camera to the new position
+        mapController
+            .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+      },
+      items: <String>[
+        'gauteng',
+        'westerncape',
+        'Eastern Cape'
+      ] // Add more provinces as needed
+          .map<DropdownMenuItem<String>>((String value) {
+        return DropdownMenuItem<String>(
+          value: value,
+          child: Text(value),
+        );
+      }).toList(),
+    );
+  }
 
   CameraPosition _getCameraPositionForProvince(String province) {
     // Set camera positions for different provinces
     switch (province) {
       case 'gauteng':
-        return const CameraPosition(target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
+        return const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
       case 'westerncape':
-        return const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 10.0);
+        return const CameraPosition(
+            target: LatLng(-33.9249, 18.4241), zoom: 10.0);
       case 'Eastern Cape':
-        return const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 8.0);
+        return const CameraPosition(
+            target: LatLng(-32.2968, 26.4194), zoom: 8.0);
       default:
-        return const CameraPosition(target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
+        return const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
     }
   }
 
@@ -89,13 +101,15 @@ class MapSampleState extends State<MapSample> {
 
   Future<void> _loadKmlData() async {
     try {
-      final kmlString = await rootBundle.loadString('assets/province_$_selectedProvince.kml');
+      final kmlString =
+          await rootBundle.loadString('assets/province_$_selectedProvince.kml');
       final polygonsData = KmlParser.parseKml(kmlString);
 
       setState(() {
         _polygons = polygonsData.map((polygonData) {
           final id = polygonData['id'];
-          final coordinates = (polygonData['coordinates'] as List<Map<String, double>>)
+          final coordinates = (polygonData['coordinates']
+                  as List<Map<String, double>>)
               .map((coord) => LatLng(coord['latitude']!, coord['longitude']!))
               .toList();
           return Polygon(
@@ -107,7 +121,6 @@ class MapSampleState extends State<MapSample> {
             consumeTapEvents: true,
             onTap: () {
               _onPolygonTapped(id);
-              
             },
           );
         }).toSet();
@@ -117,18 +130,19 @@ class MapSampleState extends State<MapSample> {
     }
   }
 
-void _onPolygonTapped(String id) {
-  print('Polygon with ID: $id tapped');
-  // Show the draggable bottom sheet
-  showModalBottomSheet(
-    context: context,
-    isScrollControlled: true, // Set to true to allow full screen dragging
-    builder: (context) {
-      return ResizableBottomSheet(pentadId: id); // Assuming DraggableBirdSheet is your bottom sheet widget
-    },
-  );
-}
-
+  void _onPolygonTapped(String id) {
+    print('Polygon with ID: $id tapped');
+    // Show the draggable bottom sheet
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true, // Set to true to allow full screen dragging
+      builder: (context) {
+        return ResizableBottomSheet(
+            pentadId:
+                id); // Assuming DraggableBirdSheet is your bottom sheet widget
+      },
+    );
+  }
 
   void _onMapTap(LatLng latLng) {
     print('Map tapped at: $latLng');
@@ -148,7 +162,7 @@ class KmlParser {
       if (idElement != null && coordinatesElements.isNotEmpty) {
         final pentadId = idElement.text.trim();
 
-        List<Map<String, double>> polygonCoordinates = [];
+        final List<Map<String, double>> polygonCoordinates = [];
         for (var coordinatesElement in coordinatesElements) {
           final coordinateText = coordinatesElement.text.trim();
           final coordinateParts = coordinateText.split(' ');
@@ -177,5 +191,4 @@ class KmlParser {
 
     return polygonsData;
   }
-
 }
