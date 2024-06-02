@@ -1,4 +1,4 @@
-name: CODECOV coverage upload
+name: CICD
 on:
   push:
     branches:
@@ -12,7 +12,7 @@ defaults:
     working-directory: ./beakpeek
 
 jobs:
-  test:
+  Run-Flutter-Tests:
     runs-on: ubuntu-latest
     
     steps:
@@ -45,7 +45,7 @@ jobs:
           name: flutter-coverage-report
           path: ./beakpeek/coverage/lcov.info
 
-  codecov:
+  Codecov-Upload:
     needs: test
     runs-on: ubuntu-latest
     steps:
