@@ -1,5 +1,3 @@
-// ignore_for_file: camel_case_types
-
 import 'package:beakpeek/map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
@@ -28,40 +26,41 @@ class MapInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Expanded(
-              // child: SingleChildScrollView(
-              child: Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 30),
-                      SearchBar(),
-                      SizedBox(height: 20),
-                      CustRichText(
-                        'Your Area Map',
-                        Color(0xFF033A30),
-                        ta: TextAlign.left,
-                        fontS: 22,
-                      ),
-                      SizedBox(height: 10),
-                      Expanded(
-                        child: MapSample(),
-                      ),
-                    ],
-                  )),
+    return const Scaffold(
+        backgroundColor: Color(0xFFF3F1ED),
+        body: Center(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  // child: SingleChildScrollView(
+                  child: Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 30),
+                          TopSearchBar(),
+                          SizedBox(height: 20),
+                          CustRichText(
+                            'Your Area Map',
+                            Color(0xFF033A30),
+                            ta: TextAlign.left,
+                            fontS: 22,
+                          ),
+                          SizedBox(height: 10),
+                          Expanded(
+                            child: MapSample(),
+                          ),
+                        ],
+                      )),
+                ),
+                BottomNavigation(),
+              ],
             ),
-            // ),
-            BottomNavigation(),
-          ],
-        ),
-      ),
-    );
+          ),
+        ));
   }
 }
 

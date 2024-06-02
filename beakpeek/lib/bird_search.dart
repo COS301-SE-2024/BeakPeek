@@ -5,8 +5,8 @@ import 'package:beakpeek/bird.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-// class BirdSearch extends StatefulWidget {
-//   const BirdSearch({super.key});
+class BirdSearch extends StatefulWidget {
+  const BirdSearch({super.key});
 
   @override
   State<BirdSearch> createState() => _BirdListState();
@@ -46,11 +46,11 @@ class _BirdListState extends State<BirdSearch> {
     );
   }
 
-//   Future<List<Bird>> fetchBirds() async {
-//     try {
-//       // print(pentadId);
-//       final response = await http
-//           .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies'));
+  Future<List<Bird>> fetchBirds() async {
+    try {
+      // print(pentadId);
+      final response = await http
+          .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies'));
 
       if (response.statusCode == 200) {
         final List<dynamic> jsonResponse = json.decode(response.body);
@@ -128,6 +128,7 @@ class FilterState extends State<ListFilter> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        SizedBox(height: 60),
         TextField(
           controller: _controller,
           onSubmitted: (value) {
@@ -159,9 +160,10 @@ class ListB extends StatelessWidget {
         itemBuilder: (context, index) {
           final bird = outputList[index];
           return ListTile(
-            title:
-                Text('${bird.commonSpecies} (${bird.genus} ${bird.species})'),
-            subtitle: Text('Group: ${bird.commonGroup}'),
+            title: Text(bird.commonGroup != 'None'
+                ? '${bird.commonGroup} ${bird.commonSpecies}'
+                : bird.commonSpecies),
+            subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
