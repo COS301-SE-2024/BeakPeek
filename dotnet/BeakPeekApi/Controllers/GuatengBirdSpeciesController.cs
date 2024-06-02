@@ -118,5 +118,20 @@ namespace BeakPeekApi.Controllers
         {
             return _context.GautengBirdSpecies.Any(e => e.Pentad == id);
         }
+
+        [HttpGet("{pentad}/pentad")]
+        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> GetGautengBirdSpecies(string pentad)
+        {
+            var speciesList = await _context.GautengBirdSpecies
+                                            .Where(s => s.Pentad == pentad)
+                                            .ToListAsync();
+
+            if (speciesList == null || speciesList.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(speciesList);
+        }
     }
 }

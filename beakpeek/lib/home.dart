@@ -86,10 +86,10 @@ class home extends StatelessWidget {
                       // ignore: lines_longer_than_80_chars
                       // CustOutlinedButton(() {}, 'View Map',Colors.white , const Color(0xFF033A30)),
                       const SizedBox(height: 16),
-                      CustButtons(
-                        () {},
+                      const CustButtons(
+                        '',
                         'View Map',
-                        const Color(0xFF033A30),
+                        Color(0xFF033A30),
                         Colors.white,
                       ),
                     ],
