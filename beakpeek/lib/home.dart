@@ -43,10 +43,10 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: screenHeight * 0.05),
-                          const SearchBar(),
+                          const TopSearchBar(),
                           SizedBox(height: screenHeight * 0.01),
                           const CustRichText(
-                            'Justin\'s Bird of the Day',
+                            'Bird of the Day',
                             Color(0xFF033A30),
                             ta: TextAlign.left,
                             fontS: 22,
@@ -111,8 +111,8 @@ class Home extends StatelessWidget {
   }
 }
 
-class SearchBar extends StatelessWidget {
-  const SearchBar({super.key});
+class TopSearchBar extends StatelessWidget {
+  const TopSearchBar({super.key});
 
   @override
   Widget build(BuildContext context) {
