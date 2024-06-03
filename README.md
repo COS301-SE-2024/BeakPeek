@@ -105,7 +105,7 @@
   </tr>
     <tr>
     <td>Matthew Botha</td>
-    <td><img heigth="140" width="auto" src="" alt="Matthew Botha"></td>
+    <td><img heigth="140" width="auto" src="res/IMG_1427.jpeg" alt="Matthew Botha"></td>
     <td>Designer/UI Engineer</td>
     <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
     <td>
