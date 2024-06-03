@@ -47,6 +47,10 @@
   <img src="https://img.shields.io/badge/wezterm-4E49EE?style=for-the-badge&logo=wezterm&logoColor=white" alt="WezTerm">
 </p>
 
+<h2 id="demos"> Demos</h2>
+[![Demo 1](https://img.youtube.com/vi/Rbq9yniwfl0/0.jpg)](https://youtu.be/Rbq9yniwfl0)
+<img alt="" src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png">
+
 <h2>🤝Team</h2>
 
 <table>
