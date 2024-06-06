@@ -15,6 +15,7 @@ on:
      - development
     paths:
       - beakpeek/**
+  workflow_dispatch:
 
 jobs:
   dotnet-codecov:
