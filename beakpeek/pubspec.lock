@@ -58,7 +58,7 @@ packages:
     source: hosted
     version: "1.18.0"
   coverage:
-    dependency: "direct main"
+    dependency: "direct dev"
     description:
       name: coverage
       sha256: "3945034e86ea203af7a056d98e98e42a5518fff200d6e8e6647e1886b07e936e"
