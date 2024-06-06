@@ -41,12 +41,12 @@ dependencies:
   page_view_dot_indicator: ^2.3.0
   flutter_appauth: ^6.0.6
   http: ^1.2.1
-  coverage: ^1.8.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  coverage: ^1.8.0
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
