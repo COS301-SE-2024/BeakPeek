@@ -7,6 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Moq.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
 
 namespace BeakPeekApi.Tests.Controllers
 {
@@ -36,6 +37,33 @@ namespace BeakPeekApi.Tests.Controllers
             var result = await _controller.GetGautengBirdSpecies();
 
             Xunit.Assert.Equal(3, result.Value.Count());
+        }
+
+
+        [Fact]
+        public async Task GetGautengBirdSpecies_ReturnsNotFound_WhenIdDoesNotExist()
+        {
+
+            _mockContext.Setup(x => x.GautengBirdSpecies.FindAsync(1)).ReturnsAsync((GautengBirdSpecies)null);
+
+            var result = await _controller.GetGautengBirdSpecies(1);
+
+            Assert.IsType<NotFoundResult>(result.Result);
+
+        }
+
+        [Fact]
+        public async Task GetGautengBirdSpecies_ReturnsSpecies_WhenIdExists()
+        {
+
+            var species = new GautengBirdSpecies { Pentad = "1" };
+            _mockContext.Setup(x => x.GautengBirdSpecies.FindAsync(1)).ReturnsAsync(species);
+
+            var result = await _controller.GetGautengBirdSpecies(1);
+
+            Assert.IsType<GautengBirdSpecies>(result.Value);
+            Assert.Equal("1", result.Value.Pentad);
+
         }
 
         // Add more tests here for other methods in your controller
