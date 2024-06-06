@@ -39,33 +39,10 @@ jobs:
       - name: Run Flutter tests
         run: flutter test --coverage
 
-      # - name: Upload coverage artifact
-      #   uses: actions/upload-artifact@v3
-      #   with:
-      #     name: flutterCov
-      #     path: ./beakpeek/coverage
-
       - name: Upload Flutter Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
           files: ./beakpeek/coverage/lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
-          # verbose: true
-
-  # Codecov-Upload:
-  #   needs: Run-Flutter-Tests
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Download coverage artifact
-  #       uses: actions/download-artifact@v3
-  #       with:
-  #         name: flutterCov
-  #
-  #     - name: Upload Flutter Coverage to Codecov
-  #       uses: codecov/codecov-action@v3
-  #       with:
-  #         files: ./beakpeek/coverage/lcov.info
-  #         token: ${{ secrets.CODECOV_TOKEN }}
-  #         fail_ci_if_error: true
-  #         # verbose: true
+          verbose: true
