@@ -4,17 +4,20 @@ on:
   push:
     branches:
       - 'main'
-      - 'dev'
+      - 'development'
     paths:
       - dotnet/**
+
+  pull_request:
+    branches:
+     - main
+     - development
+    paths:
+      - beakpeek/**
 
 jobs:
   dotnet-codecov:
     runs-on: ubuntu-latest
-
-    # defaults:
-    #   run:
-    #     working-directory: dotnet/BeakPeekApi.Test
 
     steps:
       - uses: actions/checkout@v4
@@ -44,7 +47,3 @@ jobs:
           name: Dotnet Coverage
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
-
-      # - name: Upload coverage report to Codecov
-      #   working-directory: dotnet/BeakPeekApi.Test
-      #   run: codecov -f "./coverage.cobertura.xml"

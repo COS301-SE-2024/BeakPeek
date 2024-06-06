@@ -3,11 +3,15 @@ on:
   push:
     branches:
       - main
+      - development
     paths:
       - beakpeek/**
   pull_request:
     branches:
      - main
+     - development
+    paths:
+      - beakpeek/**
 
 defaults:
   run:
@@ -48,3 +52,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: true
+          name: Flutter Coverage
