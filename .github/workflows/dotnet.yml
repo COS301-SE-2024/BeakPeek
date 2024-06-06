@@ -1,4 +1,4 @@
-name: Generate coverage report on push
+name: Codecov Dotnet
 
 on:
   push:
@@ -7,32 +7,42 @@ on:
       - 'dev'
 
 jobs:
-  generate-coverage-report-on-push:
+  dotnet-codecov:
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ./dotnet/BeakPeekApi.Test
+    # defaults:
+    #   run:
+    #     working-directory: dotnet/BeakPeekApi.Test
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Setup .NET
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: 8.0.x
 
       - name: Restore dependencies
+        working-directory: dotnet
         run: dotnet restore
 
       - name: Build project
+        working-directory: dotnet
         run: dotnet build --no-restore
 
       - name: Generate coverage report
-        run: dotnet test --no-build --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+        working-directory: dotnet
+        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
 
-      - name: Install Codecov GitHub Action
-        uses: codecov/codecov-action@v2
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v4
+        with:
+          directory: ./dotnet/BeakPeekApi.Tests/
+          files: ./coverage.cobertura.xml
+          name: Dotnet Coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true
 
-      - name: Upload coverage report to Codecov
-        run: codecov -f "./coverage.cobertura.xml"
+      # - name: Upload coverage report to Codecov
+      #   working-directory: dotnet/BeakPeekApi.Test
+      #   run: codecov -f "./coverage.cobertura.xml"

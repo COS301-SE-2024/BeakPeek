@@ -1,17 +1,17 @@
 using Xunit;
 using Moq;
-using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Controllers;
 using BeakPeekApi.Models;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Moq.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 
-namespace BeakPeekApi.Tests
+namespace BeakPeekApi.Tests.Controllers
 {
     public class GautengBirdSpeciesControllerTests
     {
-        private readonly Mock<DbSet<GautengBirdSpecies>> _mockSet;
         private readonly Mock<AppDbContext> _mockContext;
         private readonly GautengBirdSpeciesController _controller;
 
@@ -24,14 +24,8 @@ namespace BeakPeekApi.Tests
                 new GautengBirdSpecies { Pentad = "3", Genus = "TestGenus3", Common_species = "TestSpecies3" },
             }.AsQueryable();
 
-            _mockSet = new Mock<DbSet<GautengBirdSpecies>>();
-            _mockSet.As<IQueryable<GautengBirdSpecies>>().Setup(m => m.Provider).Returns(data.Provider);
-            _mockSet.As<IQueryable<GautengBirdSpecies>>().Setup(m => m.Expression).Returns(data.Expression);
-            _mockSet.As<IQueryable<GautengBirdSpecies>>().Setup(m => m.ElementType).Returns(data.ElementType);
-            _mockSet.As<IQueryable<GautengBirdSpecies>>().Setup(m => m.GetEnumerator()).Returns(data.GetEnumerator());
-
-            _mockContext = new Mock<AppDbContext>();
-            _mockContext.Setup(c => c.GautengBirdSpecies).Returns(_mockSet.Object);
+            _mockContext = new Mock<AppDbContext>(new DbContextOptions<AppDbContext>());
+            _mockContext.Setup(c => c.GautengBirdSpecies).ReturnsDbSet(data);
 
             _controller = new GautengBirdSpeciesController(_mockContext.Object);
         }
