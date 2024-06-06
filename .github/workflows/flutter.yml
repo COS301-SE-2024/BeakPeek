@@ -4,6 +4,7 @@ on:
     branches:
       - main
       - development
+      - 'dev/test/**'
     paths:
       - beakpeek/**
   pull_request:
