@@ -1,6 +1,5 @@
-// ignore_for_file: avoid_print, lines_longer_than_80_chars, avoid_types_on_closure_parameters
-
-import 'package:beakpeek/bird.dart';
+// ignore_for_file: avoid_print, lines_longer_than_80_chars, avoid_types_on_closure_parameters, always_declare_return_types, type_annotate_public_apis
+import 'package:beakpeek/View/Home/bird.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:xml/xml.dart' as xml;

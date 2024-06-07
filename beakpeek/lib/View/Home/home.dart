@@ -12,7 +12,7 @@ class Home extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-        backgroundColor: Color(0xFFF3F1ED),
+        backgroundColor: const Color(0xFFF3F1ED),
         body: Center(
           child: Align(
             alignment: Alignment.bottomCenter,

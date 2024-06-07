@@ -1,5 +1,5 @@
 import 'package:beakpeek/LandingText/nav.dart';
-import 'package:beakpeek/home.dart';
+import 'package:beakpeek/View/Home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -28,4 +28,3 @@ void main() {
     expect(find.byType(BottomNavigation), findsOneWidget);
   });
 }
-

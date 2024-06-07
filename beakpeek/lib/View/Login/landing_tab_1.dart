@@ -3,8 +3,8 @@
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:flutter/material.dart';
 
-class LandingTab1Light extends StatelessWidget {
-  const LandingTab1Light({super.key});
+class LandingTab1 extends StatelessWidget {
+  const LandingTab1({super.key});
 
   @override
   Widget build(BuildContext context) {
