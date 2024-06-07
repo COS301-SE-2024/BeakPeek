@@ -3,9 +3,8 @@ import 'package:beakpeek/LandingText/cust_buttons.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/LandingText/nav.dart';
 
-// ignore: camel_case_types
-class home extends StatelessWidget {
-  const home({super.key});
+class Home extends StatelessWidget {
+  const Home({super.key});
 
   @override
   Widget build(BuildContext context) {
