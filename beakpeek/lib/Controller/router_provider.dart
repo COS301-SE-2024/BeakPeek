@@ -1,0 +1,42 @@
+import 'package:beakpeek/View/Home/home.dart';
+import 'package:beakpeek/View/Login/landing_page.dart';
+import 'package:beakpeek/View/Login/log_in.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
+      path: '/',
+      builder: (context, state) {
+        return const LandingPage();
+      },
+      routes: <RouteBase>[
+        GoRoute(
+          path: 'home',
+          builder: (context, state) {
+            return const Home();
+          },
+        ),
+        GoRoute(
+          path: 'Login',
+          builder: (context, state) {
+            return const LogIn();
+          },
+        ),
+      ],
+    ),
+  ],
+);
+
+class RouterProvider extends StatelessWidget {
+  /// Constructs a [MyApp]
+  const RouterProvider({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp.router(
+      routerConfig: _router,
+    );
+  }
+}
