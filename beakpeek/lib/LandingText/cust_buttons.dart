@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 
 class CustButtons extends StatelessWidget {
@@ -29,7 +31,6 @@ class CustButtons extends StatelessWidget {
 }
 
 class CustOutlinedButton extends StatelessWidget {
-  // ignore: lines_longer_than_80_chars
   const CustOutlinedButton(this.onclick, this.textD, this.c, this.tc,
       {super.key});
 

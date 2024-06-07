@@ -1,0 +1,56 @@
+name: Codecov Dotnet
+
+on:
+  push:
+    branches:
+      - 'main'
+      - 'development'
+      - 'dev/test/**'
+    paths:
+      - dotnet/**
+
+  pull_request:
+    branches:
+     - main
+     - development
+    paths:
+      - beakpeek/**
+  workflow_dispatch:
+
+jobs:
+  dotnet-codecov:
+    runs-on: ubuntu-latest
+    
+    env:
+      NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+          cache: true
+          cache-dependency-path: dotnet/BeakPeekApi.Tests/packages.lock.json
+
+      - name: Restore dependencies
+        working-directory: dotnet
+        run: dotnet restore --locked-mode
+
+      - name: Build project
+        working-directory: dotnet
+        run: dotnet build --no-restore
+
+      - name: Generate coverage report
+        working-directory: dotnet
+        run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
+
+      - name: Upload Coverage
+        uses: codecov/codecov-action@v4
+        with:
+          directory: ./dotnet/BeakPeekApi.Tests/
+          files: ./coverage.cobertura.xml
+          name: Dotnet Coverage
+          token: ${{ secrets.CODECOV_TOKEN }}
+          verbose: true

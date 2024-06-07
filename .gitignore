@@ -10,7 +10,9 @@
 .svn/
 migrate_working_dir/
 .env
+.secrets
 coverage/
+.github/workflows/test.yml
 
 # IntelliJ related
 *.iml
@@ -32,7 +34,7 @@ coverage/
 .pub-cache/
 .pub/
 /build/
-beakpeek/build
+beakpeek/build/**
 
 # Symbolication related
 app.*.symbols
