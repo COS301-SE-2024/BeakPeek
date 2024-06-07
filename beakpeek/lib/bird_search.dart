@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print, lines_longer_than_80_chars
 
 import 'dart:convert';
-import 'package:beakpeek/bird.dart';
+import 'package:beakpeek/Module/bird.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -128,7 +128,7 @@ class FilterState extends State<ListFilter> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        SizedBox(height: 60),
+        const SizedBox(height: 60),
         TextField(
           controller: _controller,
           onSubmitted: (value) {
