@@ -47,6 +47,7 @@ jobs:
       - name: Run Flutter tests
         run: flutter test --coverage
 
+<<<<<<< HEAD
 <<<<<<< HEAD:.github/workflows/flutter.yml
 =======
       - name: Upload coverage artifact
@@ -66,6 +67,8 @@ jobs:
           path: ./beakpeak/coverage
 
 >>>>>>> ec957a3 (Update ci.yml):.github/workflows/ci.yml
+=======
+>>>>>>> cab3b6e (Resovled pick)
       - name: Upload Flutter Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
