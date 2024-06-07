@@ -1,27 +1,27 @@
 import 'package:flutter/widgets.dart';
 
 abstract class LandingStyles {
-  static const TextStyle loginHeadingDark = TextStyle(
+  static const TextStyle loginHeadingBlack = TextStyle(
     color: Color(0xFF033A30),
-    fontSize: 44,
+    fontSize: 40,
     fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     height: 0,
   );
 
   static const TextStyle loginHeadingYellow = TextStyle(
     color: Color(0xFFECAD31),
-    fontSize: 44,
+    fontSize: 40,
     fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     height: 0,
   );
 
   static const TextStyle landingPageHeading = TextStyle(
     color: Color.fromARGB(255, 139, 107, 77),
-    fontSize: 44,
+    fontSize: 40,
     fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w700,
+    fontWeight: FontWeight.w600,
     height: 0,
   );
 }
