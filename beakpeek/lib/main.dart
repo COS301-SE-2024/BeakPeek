@@ -1,8 +1,9 @@
-import 'package:beakpeek/bird_search.dart';
-import 'package:beakpeek/home.dart';
-import 'package:beakpeek/landing_page.dart';
-import 'package:beakpeek/log_in.dart';
-import 'package:beakpeek/sign_up.dart';
+import 'package:beakpeek/View/Home/bird_search.dart';
+import 'package:beakpeek/View/Home/home.dart';
+import 'package:beakpeek/View/Login/landing_page.dart';
+import 'package:beakpeek/View/Login/log_in.dart';
+import 'package:beakpeek/View/Home/map_info.dart';
+import 'package:beakpeek/View/Login/sign_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,8 +13,9 @@ void main() {
       '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
       '/signup': (context) => const SignUp(),
-      '/oauthredirect': (context) => const home(),
+      '/home': (context) => const Home(),
       '/birdSearch': (context) => const BirdSearch(),
+      '/map': (context) => const MapInfo(),
     },
   ));
 }

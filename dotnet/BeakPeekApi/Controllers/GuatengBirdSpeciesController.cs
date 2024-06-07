@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace BeakPeekApi.Controllers
 {
@@ -21,10 +24,10 @@ namespace BeakPeekApi.Controllers
             return await _context.GautengBirdSpecies.ToListAsync();
         }
 
-        [HttpGet("{Genus}")]
-        public async Task<ActionResult<GautengBirdSpecies>> GetGautengBirdSpecies(string Genus)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<GautengBirdSpecies>> GetGautengBirdSpecies(int id)
         {
-            var species = await _context.GautengBirdSpecies.FindAsync(Genus);
+            var species = await _context.GautengBirdSpecies.FindAsync(id);
 
             if (species == null)
             {
@@ -32,6 +35,30 @@ namespace BeakPeekApi.Controllers
             }
 
             return species;
+        }
+
+        [HttpGet("search")]
+        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> SearchGautentBirdSpecies(string genus = null, string commonSpecies = null)
+        {
+            IQueryable<GautengBirdSpecies> query = _context.GautengBirdSpecies;
+
+            if (!string.IsNullOrEmpty(genus))
+            {
+                query = query.Where(b => EF.Functions.Like(b.Genus, $"%{genus}%"));
+            }
+
+            if (!string.IsNullOrEmpty(commonSpecies))
+            {
+                query = query.Where(b => EF.Functions.Like(b.Common_species, $"%{commonSpecies}%"));
+            }
+
+            var results = await query.ToListAsync();
+
+            if (!results.Any())
+            {
+                return NotFound();
+            }
+            return results;
         }
 
         [HttpPost]
@@ -90,6 +117,21 @@ namespace BeakPeekApi.Controllers
         private bool GautengBirdSpeciesExists(string id)
         {
             return _context.GautengBirdSpecies.Any(e => e.Pentad == id);
+        }
+
+        [HttpGet("{pentad}/pentad")]
+        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> GetGautengBirdSpecies(string pentad)
+        {
+            var speciesList = await _context.GautengBirdSpecies
+                                            .Where(s => s.Pentad == pentad)
+                                            .ToListAsync();
+
+            if (speciesList == null || speciesList.Count == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(speciesList);
         }
     }
 }
