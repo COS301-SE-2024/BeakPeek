@@ -1,11 +1,11 @@
 import 'package:beakpeek/Styles/map_page_styles.dart';
 import 'package:beakpeek/View/Home/map.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/LandingText/nav.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'package:beakpeek/Model/top_search_bar.dart';
+import 'package:beakpeek/View/Home/bird_map.dart';
+import 'package:flutter/material.dart';
+import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/Styles/map_page_styles.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

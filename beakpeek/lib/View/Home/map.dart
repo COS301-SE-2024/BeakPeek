@@ -1,8 +1,13 @@
+<<<<<<<< HEAD:beakpeek/lib/View/Home/bird_map.dart
 // bird_map.dart
 
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/View/Home/bird_sheet.dart';
 import 'package:flutter/foundation.dart';
+========
+// ignore_for_file: avoid_print, lines_longer_than_80_chars, avoid_types_on_closure_parameters, always_declare_return_types, type_annotate_public_apis
+import 'package:beakpeek/View/Home/bird.dart';
+>>>>>>>> 00bf3e6 (file moving/ renaming):beakpeek/lib/View/Home/map.dart
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
