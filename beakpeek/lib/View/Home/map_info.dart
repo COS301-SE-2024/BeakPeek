@@ -1,8 +1,9 @@
 import 'package:beakpeek/Module/top_search_bar.dart';
 import 'package:beakpeek/View/Home/bird_map.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/Module/nav.dart';
+import 'package:beakpeek/Styles/map_page_styles.dart';
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -50,7 +51,6 @@ class MapInfo extends StatelessWidget {
                           SizedBox(height: 10),
                           Expanded(
                             child: BirdMap(),
-                          ),
                         ],
                       )),
                 ),
