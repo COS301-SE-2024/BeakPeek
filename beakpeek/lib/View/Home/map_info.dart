@@ -1,4 +1,4 @@
-import 'package:beakpeek/map.dart';
+import 'package:beakpeek/View/Home/map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/LandingText/nav.dart';

@@ -1,5 +1,5 @@
-import 'package:beakpeek/landing_tab_1_light.dart';
-import 'package:beakpeek/landing_tab_2_light.dart';
+import 'package:beakpeek/View/Login/landing_tab_1.dart';
+import 'package:beakpeek/View/Login/landing_tab_2.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatefulWidget {
@@ -18,8 +18,8 @@ class _LandingPageState extends State<LandingPage> {
       backgroundColor: const Color(0xFFF3F1ED),
       body: PageView(
         children: const [
-          LandingTab1Light(),
-          LandingTab2Light(),
+          LandingTab1(),
+          LandingTab2(),
         ],
       ),
     );
