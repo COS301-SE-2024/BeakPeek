@@ -3,22 +3,6 @@ import 'package:beakpeek/LandingText/cust_buttons.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/LandingText/nav.dart';
 
-// void main() {
-//   runApp(const MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const MaterialApp(
-//       home: Home(),
-//       ),
-//     );
-//   }
-// }
-
 class Home extends StatelessWidget {
   const Home({super.key});
 
