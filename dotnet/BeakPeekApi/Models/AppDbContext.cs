@@ -9,7 +9,7 @@ namespace BeakPeekApi.Models
         {
         }
 
-        public DbSet<GautengBirdSpecies> GautengBirdSpecies { get; set; }
+        public virtual DbSet<GautengBirdSpecies> GautengBirdSpecies { get; set; }
     }
 }
 

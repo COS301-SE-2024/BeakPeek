@@ -10,7 +10,9 @@
 .svn/
 migrate_working_dir/
 .env
+.secrets
 coverage/
+.github/workflows/test.yml
 
 # IntelliJ related
 *.iml

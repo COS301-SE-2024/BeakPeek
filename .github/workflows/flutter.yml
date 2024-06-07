@@ -3,9 +3,17 @@ on:
   push:
     branches:
       - main
+      - development
+      - 'dev/test/**'
+    paths:
+      - beakpeek/**
   pull_request:
     branches:
      - main
+     - development
+    paths:
+      - beakpeek/**
+  workflow_dispatch:
 
 defaults:
   run:
@@ -39,26 +47,11 @@ jobs:
       - name: Run Flutter tests
         run: flutter test --coverage
 
-      - name: Upload coverage artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: flutter-coverage-report
-          path: ./beakpeek/coverage
-
-  Codecov-Upload:
-    needs: Run-Flutter-Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download coverage artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: flutter-coverage-report
-          path: ./beakpeak/coverage
-
       - name: Upload Flutter Coverage to Codecov
         uses: codecov/codecov-action@v3
         with:
-          files: lcov.info
+          files: ./beakpeek/coverage/lcov.info
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: true
+          name: Flutter Coverage

@@ -21,11 +21,12 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
   @override
   void initState() {
     super.initState();
-    _birdList = fetchBirds(widget.pentadId); // Fetch and sort birds from the API initially
+    _birdList = fetchBirds(widget.pentadId,
+        http.Client()); // Fetch and sort birds from the API initially
   }
 
   void _refreshBirdList() {
-    _birdList = fetchBirds(widget.pentadId).then((birds) {
+    _birdList = fetchBirds(widget.pentadId, http.Client()).then((birds) {
       // Sort the list of birds based on the selected sort option
       return _sortBirds(birds, _selectedSortOption);
     }).catchError((error) {
@@ -62,8 +63,10 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         setState(() {
-          _heightFactor -= details.primaryDelta! / MediaQuery.of(context).size.height;
-          _heightFactor = _heightFactor.clamp(0.2, 0.9); // Limit height factor between 0.2 and 1.0
+          _heightFactor -=
+              details.primaryDelta! / MediaQuery.of(context).size.height;
+          _heightFactor = _heightFactor.clamp(
+              0.2, 0.9); // Limit height factor between 0.2 and 1.0
         });
       },
       child: FractionallySizedBox(
@@ -160,7 +163,7 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
     );
   }
 
-  Future<List<Bird>> fetchBirds(String pentadId) async {
+  /* Future<List<Bird>> fetchBirds(String pentadId) async {
     try {
       // print(pentadId);
       final response = await http.get(Uri.parse(
@@ -177,6 +180,25 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
       print('Error fetching birds: $error');
       throw Exception('Failed to load birds: $error');
     }
+  } */
+}
+
+Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
+  try {
+    // print(pentadId);
+    final response = await client.get(Uri.parse(
+        'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> jsonResponse = json.decode(response.body);
+      return jsonResponse.map((data) => Bird.fromJson(data)).toList();
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+      throw Exception('Failed to load birds');
+    }
+  } catch (error) {
+    print('Error fetching birds: $error');
+    throw Exception('Failed to load birds: $error');
   }
 }
 
@@ -222,11 +244,9 @@ class BirdList extends StatelessWidget {
       itemBuilder: (context, index) {
         final bird = birds[index];
         return ListTile(
-          title: Text(
-            bird.commonGroup != 'None'
+          title: Text(bird.commonGroup != 'None'
               ? '${bird.commonGroup} ${bird.commonSpecies}'
-              : bird.commonSpecies
-            ),
+              : bird.commonSpecies),
           subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
           trailing: Row(
             mainAxisSize: MainAxisSize.min,
