@@ -1,8 +1,8 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:beakpeek/LandingText/cust_buttons.dart';
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/LandingText/cust_text_span.dart';
+import 'package:beakpeek/Styles/landing_page_styles.dart';
 import 'package:flutter/material.dart';
 
 class LandingTab2 extends StatelessWidget {
@@ -39,12 +39,14 @@ class LandingTab2 extends StatelessWidget {
             const SizedBox(
               height: 20,
             ),
-            const Align(
-              alignment: FractionalOffset(0.1, 0.5),
-              child: CustRichText(
-                'Explore, \nDiscover, \nAnd Share',
-                Color.fromARGB(255, 139, 107, 77),
-                ta: TextAlign.left,
+            Align(
+              alignment: const FractionalOffset(0.1, 0.5),
+              child: RichText(
+                text: const TextSpan(
+                  text: 'Explore, \nDiscover, \nAnd Share',
+                  style: LandingStyles.loginHeadingBlack,
+                ),
+                textAlign: TextAlign.left,
               ),
             ),
           ],
