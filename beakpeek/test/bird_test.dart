@@ -1,4 +1,4 @@
-import 'package:beakpeek/Module/bird.dart';
+import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
