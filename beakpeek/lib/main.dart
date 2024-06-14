@@ -1,4 +1,9 @@
-import 'package:beakpeek/Controller/router_provider.dart';
+import 'package:beakpeek/view/home/bird_search.dart';
+import 'package:beakpeek/view/home/home.dart';
+import 'package:beakpeek/view/login/landing_page.dart';
+import 'package:beakpeek/log_in.dart';
+import 'package:beakpeek/view/home/map_info.dart';
+import 'package:beakpeek/sign_up.dart';
 import 'package:flutter/material.dart';
 
 void main() {
