@@ -75,7 +75,6 @@ flutter:
   assets:
     - assets/images/landing1.png
     - assets/images/landing2.png
-    - assets/images/landing2Resize.png
     - assets/images/signUp.png
     - assets/images/logIn.png
     - assets/icons/home.png
