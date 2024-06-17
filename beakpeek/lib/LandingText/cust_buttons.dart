@@ -35,12 +35,20 @@ class CustomFilledButton extends StatelessWidget {
   }
 }
 
-class CustOutlinedButton extends StatelessWidget {
-  // ignore: lines_longer_than_80_chars
-  const CustOutlinedButton(this.onclick, this.textD, this.c, this.tc,
-      {super.key});
+class CustomOutlinedButton extends StatelessWidget {
+  const CustomOutlinedButton({
+    required this.routePath,
+    required this.buttonText,
+    required this.backgroundColor,
+    required this.textColor,
+    super.key,
+  });
 
-<<<<<<< HEAD
+  final String routePath;
+  final String buttonText;
+  final Color backgroundColor;
+  final Color textColor;
+
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
@@ -58,33 +66,6 @@ class CustOutlinedButton extends StatelessWidget {
           color: textColor,
         ),
       ),
-=======
-  final void Function() onclick;
-  final String textD;
-  final Color c;
-  final Color tc;
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SizedBox(
-          width: constraints.maxWidth / 3, // Match the parent's width
-          child: OutlinedButton(
-            onPressed: onclick,
-            style: OutlinedButton.styleFrom(
-              backgroundColor: c,
-              foregroundColor: c,
-            ),
-            child: Text(
-              textD,
-              style: TextStyle(
-                color: tc,
-              ),
-            ),
-          ),
-        );
-      },
->>>>>>> 07c3a7f (tests)
     );
   }
 }
