@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     initialRoute: '/',
     routes: <String, WidgetBuilder>{
       '/': (context) => const LandingPage(),

@@ -44,7 +44,7 @@ class LandingTab2 extends StatelessWidget {
               child: RichText(
                 text: const TextSpan(
                   text: 'Explore, \nDiscover, \nAnd Share',
-                  style: LandingStyles.loginHeadingBlack,
+                  style: LandingStyles.loginHeadingDark,
                 ),
                 textAlign: TextAlign.left,
               ),
