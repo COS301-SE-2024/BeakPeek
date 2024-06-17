@@ -63,8 +63,10 @@ class LandingTab2 extends StatelessWidget {
               ),
             ),
             Image.asset(
-              'assets/images/landing2Resize.png',
-              fit: BoxFit.fitWidth,
+              'assets/images/landing2.png',
+              height: 450,
+              width: double.infinity,
+              fit: BoxFit.contain,
             ),
           ],
         ),
