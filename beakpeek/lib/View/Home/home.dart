@@ -1,7 +1,9 @@
 import 'package:beakpeek/Styles/home_page_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/custom_buttons.dart';
-import 'package:beakpeek/LandingText/nav.dart';
+import 'package:beakpeek/Model/top_search_bar.dart';
+import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/LandingText/custom_buttons.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
