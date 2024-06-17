@@ -31,6 +31,9 @@ class CustomFilledButton extends StatelessWidget {
         buttonText,
         style: TextStyle(
           color: textColor,
+          fontFamily: 'SF Pro Display',
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
         ),
       ),
     );
@@ -66,6 +69,9 @@ class CustomOutlinedButton extends StatelessWidget {
         buttonText,
         style: TextStyle(
           color: textColor,
+          fontFamily: 'SF Pro Display',
+          fontWeight: FontWeight.w500,
+          fontSize: 18,
         ),
       ),
     );
