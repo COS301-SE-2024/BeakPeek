@@ -1,4 +1,5 @@
 // ignore_for_file: lines_longer_than_80_chars
+
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
 
@@ -8,7 +9,7 @@ class LandingTab1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF0ECE6),
+      backgroundColor: const Color(0xffF0EDE6),
       body: SafeArea(
         child: Column(
           children: [
