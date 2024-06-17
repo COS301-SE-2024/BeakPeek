@@ -78,20 +78,20 @@ class Home extends StatelessWidget {
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           const Center(
-                            child: CustButtons(
-                              '/map',
-                              'View Map',
-                              Color(0xFF033A30),
-                              Colors.white,
+                            child: CustomFilledButton(
+                              routePath: '/map',
+                              buttonText: 'View Map',
+                              backgroundColor: Color(0xFF033A30),
+                              textColor: Colors.white,
                             ),
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           const Center(
-                            child: CustButtons(
-                              '/birdSearch',
-                              'Search Birds Temp',
-                              Color(0xFF033A30),
-                              Colors.white,
+                            child: CustomFilledButton(
+                              routePath: '/birdSearch',
+                              buttonText: 'Search Birds Temp',
+                              backgroundColor: Color(0xFF033A30),
+                              textColor: Colors.white,
                             ),
                           ),
                         ],
