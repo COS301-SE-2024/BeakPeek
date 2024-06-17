@@ -61,10 +61,7 @@ class CustomOutlinedButton extends StatelessWidget {
         Navigator.pushNamed(context, routePath);
       },
       style: OutlinedButton.styleFrom(
-        side: BorderSide(
-          color: backgroundColor,
-          width: 1.5,
-        ),
+        side: BorderSide(color: backgroundColor),
         backgroundColor: Colors.transparent,
         minimumSize: const Size(350, 50),
       ),
