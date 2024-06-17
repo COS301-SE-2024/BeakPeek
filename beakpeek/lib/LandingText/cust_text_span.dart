@@ -5,36 +5,30 @@ class CustTextSpan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const TextStyle baseTextStyle = TextStyle(
+      color: Color(0xB200383E),
+      fontSize: 20,
+      fontFamily: 'SF Pro Display',
+      fontWeight: FontWeight.w400,
+    );
+
+    const TextStyle highlightedTextStyle = TextStyle(
+      color: Color(0xFFCE7625),
+    );
+
     return RichText(
       text: const TextSpan(
-        text: 'Create an account or sign in \nto join the',
-        style: TextStyle(
-          color: Color(0xB200383E),
-          fontSize: 20,
-          fontFamily: 'SF Pro Display',
-          fontWeight: FontWeight.w400,
-          height: 0,
-        ),
+        style: baseTextStyle,
         children: <TextSpan>[
           TextSpan(
+            text: 'Create an account or sign in \nto join the',
+          ),
+          TextSpan(
             text: ' BeakPeak',
-            style: TextStyle(
-              color: Color(0xFFCE7625),
-              fontSize: 20,
-              fontFamily: 'SF Pro Display',
-              fontWeight: FontWeight.w400,
-              height: 0,
-            ),
+            style: highlightedTextStyle,
           ),
           TextSpan(
             text: ' community.',
-            style: TextStyle(
-              color: Color(0xB200383E),
-              fontSize: 20,
-              fontFamily: 'SF Pro Display',
-              fontWeight: FontWeight.w400,
-              height: 0,
-            ),
           ),
         ],
       ),
