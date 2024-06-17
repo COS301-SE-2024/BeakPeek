@@ -1,27 +1,34 @@
 import 'package:flutter/material.dart';
 
-class CustButtons extends StatelessWidget {
-  const CustButtons(this.path, this.textD, this.c, this.tc, {super.key});
+class CustomFilledButton extends StatelessWidget {
+  const CustomFilledButton({
+    required this.routePath,
+    required this.buttonText,
+    required this.backgroundColor,
+    required this.textColor,
+    super.key,
+  });
 
-  final String path;
-  final String textD;
-  final Color c;
-  final Color tc;
+  final String routePath;
+  final String buttonText;
+  final Color backgroundColor;
+  final Color textColor;
+
   @override
   Widget build(BuildContext context) {
     return FilledButton(
       onPressed: () {
-        Navigator.pushNamed(context, path);
+        Navigator.pushNamed(context, routePath);
       },
       style: FilledButton.styleFrom(
-        backgroundColor: c,
+        backgroundColor: backgroundColor,
         minimumSize: const Size(350, 50),
         shadowColor: Colors.black,
       ),
       child: Text(
-        textD,
+        buttonText,
         style: TextStyle(
-          color: tc,
+          color: textColor,
         ),
       ),
     );
@@ -33,31 +40,23 @@ class CustOutlinedButton extends StatelessWidget {
   const CustOutlinedButton(this.onclick, this.textD, this.c, this.tc,
       {super.key});
 
-  final void Function() onclick;
-  final String textD;
-  final Color c;
-  final Color tc;
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return SizedBox(
-          width: constraints.maxWidth / 3, // Match the parent's width
-          child: OutlinedButton(
-            onPressed: onclick,
-            style: OutlinedButton.styleFrom(
-              backgroundColor: c,
-              foregroundColor: c,
-            ),
-            child: Text(
-              textD,
-              style: TextStyle(
-                color: tc,
-              ),
-            ),
-          ),
-        );
+    return OutlinedButton(
+      onPressed: () {
+        Navigator.pushNamed(context, routePath);
       },
+      style: OutlinedButton.styleFrom(
+        side: BorderSide(color: backgroundColor),
+        backgroundColor: Colors.transparent,
+        minimumSize: const Size(350, 50),
+      ),
+      child: Text(
+        buttonText,
+        style: TextStyle(
+          color: textColor,
+        ),
+      ),
     );
   }
 }
