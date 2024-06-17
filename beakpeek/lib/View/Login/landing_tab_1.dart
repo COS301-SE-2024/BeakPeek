@@ -7,41 +7,46 @@ class LandingTab1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        verticalDirection: VerticalDirection.up,
-        children: [
-          Image.asset(
-            'assets/images/landing1.png',
-          ),
-          const SizedBox(
-            height: 50,
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'Your Ultimate',
-              style: LandingStyles.loginHeadingBlack,
+    return Scaffold(
+      backgroundColor: const Color(0xffF0ECE6),
+      body: SafeArea(
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const SizedBox(
+                      height: 100,
+                    ),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: const TextSpan(
+                        style: LandingStyles.loginHeadingDark,
+                        children: [
+                          TextSpan(text: 'Your Ultimate\n'),
+                          TextSpan(
+                              text: 'Bird-Watching\n',
+                              style: LandingStyles.loginHeadingYellow),
+                          TextSpan(
+                            text: 'Companion',
+                          ),
+                        ],
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 170),
+                      child: Image.asset(
+                        'assets/images/landing1.png',
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'Bird-Watching',
-              style: LandingStyles.loginHeadingYellow,
-            ),
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          RichText(
-            text: const TextSpan(
-              text: 'Companion',
-              style: LandingStyles.loginHeadingBlack,
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
