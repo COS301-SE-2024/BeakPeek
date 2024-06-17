@@ -1,8 +1,8 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:flutter/material.dart';
-import 'package:beakpeek/LandingText/custom_buttons.dart';
-import 'package:beakpeek/LandingText/custom_text_span.dart';
+import 'package:beakpeek/Styles/custom_buttons.dart';
+import 'package:beakpeek/Styles/custom_text_span.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
 
 class LandingTab2 extends StatelessWidget {
