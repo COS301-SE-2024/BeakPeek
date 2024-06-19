@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/',
+    initialRoute: '/birdSearch',
     routes: <String, WidgetBuilder>{
       '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
