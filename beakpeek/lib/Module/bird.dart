@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 class Bird {
   Bird({
     required this.pentad,
