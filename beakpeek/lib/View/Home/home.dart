@@ -4,7 +4,8 @@ import 'package:beakpeek/LandingText/cust_buttons.dart';
 import 'package:beakpeek/LandingText/nav.dart';
 
 class Home extends StatelessWidget {
-  const Home({super.key});
+  const Home({this.from, super.key});
+  final String? from;
 
   @override
   Widget build(BuildContext context) {

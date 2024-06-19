@@ -1,7 +1,7 @@
 // ignore_for_file: avoid_print, library_private_types_in_public_api
 
 import 'dart:convert';
-import 'package:beakpeek/Module/bird.dart';
+import 'package:beakpeek/Model/bird.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
