@@ -13,7 +13,7 @@ migrate_working_dir/
 .secrets
 coverage/
 .github/workflows/test.yml
-*/**.bak**
+*.bak**
 
 # IntelliJ related
 *.iml
