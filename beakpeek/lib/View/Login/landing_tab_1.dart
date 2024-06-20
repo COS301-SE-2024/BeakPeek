@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
-
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:flutter/material.dart';
+import 'package:beakpeek/Styles/landing_page_styles.dart';
 
 class LandingTab1 extends StatelessWidget {
   const LandingTab1({super.key});
@@ -18,23 +17,29 @@ class LandingTab1 extends StatelessWidget {
           const SizedBox(
             height: 50,
           ),
-          const CustRichText(
-            'Your Ultimate',
-            Color(0xFF033A30),
+          RichText(
+            text: const TextSpan(
+              text: 'Your Ultimate',
+              style: LandingStyles.loginHeadingBlack,
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          const CustRichText(
-            'Bird-Watching',
-            Color(0xFFECAD31),
+          RichText(
+            text: const TextSpan(
+              text: 'Bird-Watching',
+              style: LandingStyles.loginHeadingYellow,
+            ),
           ),
           const SizedBox(
             height: 10,
           ),
-          const CustRichText(
-            ' Companion ',
-            Color(0xFF033A30),
+          RichText(
+            text: const TextSpan(
+              text: 'Companion',
+              style: LandingStyles.loginHeadingBlack,
+            ),
           ),
         ],
       ),
