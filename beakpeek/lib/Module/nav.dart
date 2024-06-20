@@ -28,9 +28,14 @@ class BottomNavItem extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          'assets/icons/$file',
-          width: 60,
+        TextButton(
+          onPressed: () {
+            Navigator.pushNamed(context, '/${label.toLowerCase()}');
+          },
+          child: Image.asset(
+            'assets/icons/$file',
+            width: 60,
+          ),
         ),
         // const SizedBox(height: 1),
         Text(

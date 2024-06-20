@@ -87,7 +87,6 @@ flutter:
     - assets/icons/search.png
     - assets/icons/google.png
     - assets/icons/facebook.png
-    - assets/googleMaps.html
     - assets/province_gauteng.kml
     - assets/country_southafrica.kml
     - assets/province_westerncape.kml
