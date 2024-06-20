@@ -5,15 +5,15 @@ import 'package:beakpeek/Model/bird.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
-class ResizableBottomSheet extends StatefulWidget {
-  const ResizableBottomSheet({super.key, required this.pentadId});
+class BirdSheet extends StatefulWidget {
+  const BirdSheet({super.key, required this.pentadId});
   final String pentadId;
 
   @override
-  _ResizableBottomSheetState createState() => _ResizableBottomSheetState();
+  _BirdSheetState createState() => _BirdSheetState();
 }
 
-class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
+class _BirdSheetState extends State<BirdSheet> {
   double _heightFactor = 0.5; // Initial height factor
   String _selectedSortOption = 'Sort';
   String _selectedFilterOption = 'All';
@@ -40,16 +40,16 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
   List<Bird> _sortBirds(List<Bird> birds, String sortOption) {
     // Sorting logic based on the selected sort option
     switch (sortOption) {
-      case 'Rarity Ascending':
+      case 'Rarity Asc':
         birds.sort((a, b) => a.reportingRate.compareTo(b.reportingRate));
         break;
-      case 'Rarity Descending':
+      case 'Rarity Desc':
         birds.sort((a, b) => b.reportingRate.compareTo(a.reportingRate));
         break;
-      case 'Alphabetically Ascending':
+      case 'Alphabetically Asc':
         birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
         break;
-      case 'Alphabetically Descending':
+      case 'Alphabetically Desc':
         birds.sort((a, b) => b.commonGroup.compareTo(a.commonGroup));
         break;
       default:
@@ -100,45 +100,49 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  DropdownButton<String>(
-                    value: _selectedSortOption,
-                    items: <String>[
-                      'Sort',
-                      'Rarity Ascending',
-                      'Rarity Descending',
-                      'Alphabetically Ascending',
-                      'Alphabetically Descending'
-                    ].map((value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedSortOption = newValue!;
-                        _refreshBirdList();
-                      });
-                    },
+                  Flexible(
+                    child: DropdownButton<String>(
+                      value: _selectedSortOption,
+                      items: <String>[
+                        'Sort',
+                        'Rarity Asc',
+                        'Rarity Desc',
+                        'Alphabetically Asc',
+                        'Alphabetically Desc'
+                      ].map((value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedSortOption = newValue!;
+                          _refreshBirdList();
+                        });
+                      },
+                    ),
                   ),
-                  DropdownButton<String>(
-                    value: _selectedFilterOption,
-                    items: <String>[
-                      'Birds You\'ve Seen',
-                      'Birds You Haven\'t Seen',
-                      'All'
-                    ].map((value) {
-                      return DropdownMenuItem<String>(
-                        value: value,
-                        child: Text(value),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        _selectedFilterOption = newValue!;
-                        _refreshBirdList();
-                      });
-                    },
+                  Flexible(
+                    child: DropdownButton<String>(
+                      value: _selectedFilterOption,
+                      items: <String>[
+                        'Birds You\'ve Seen',
+                        'Birds You Haven\'t Seen',
+                        'All'
+                      ].map((value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          _selectedFilterOption = newValue!;
+                          _refreshBirdList();
+                        });
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -149,8 +153,6 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
-                      return Center(child: Text('Error: ${snapshot.error}'));
-                    } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return const Center(child: Text('No birds found.'));
                     }
                     return BirdList(birds: snapshot.data!);
@@ -163,25 +165,6 @@ class _ResizableBottomSheetState extends State<ResizableBottomSheet> {
       ),
     );
   }
-
-  /* Future<List<Bird>> fetchBirds(String pentadId) async {
-    try {
-      // print(pentadId);
-      final response = await http.get(Uri.parse(
-          'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad'));
-
-      if (response.statusCode == 200) {
-        final List<dynamic> jsonResponse = json.decode(response.body);
-        return jsonResponse.map((data) => Bird.fromJson(data)).toList();
-      } else {
-        print('Request failed with status: ${response.statusCode}');
-        throw Exception('Failed to load birds');
-      }
-    } catch (error) {
-      print('Error fetching birds: $error');
-      throw Exception('Failed to load birds: $error');
-    }
-  } */
 }
 
 Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
@@ -198,8 +181,8 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
       throw Exception('Failed to load birds');
     }
   } catch (error) {
-    print('Error fetching birds: $error');
-    throw Exception('Failed to load birds: $error');
+    print('Error fetching birds BRUH: $error');
+    throw Exception(error);
   }
 }
 
@@ -209,32 +192,34 @@ class BirdList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: birds.length,
-      itemBuilder: (context, index) {
-        final bird = birds[index];
-        return ListTile(
-          title: Text(bird.commonGroup != 'None'
-              ? '${bird.commonGroup} ${bird.commonSpecies}'
-              : bird.commonSpecies),
-          subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
-          trailing: Row(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text('${bird.reportingRate}%'),
-              const SizedBox(width: 8),
-              Container(
-                width: 20,
-                height: 20,
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: _getColorForReportingRate(bird.reportingRate),
+    return Material(
+      child: ListView.builder(
+        itemCount: birds.length,
+        itemBuilder: (context, index) {
+          final bird = birds[index];
+          return ListTile(
+            title: Text(bird.commonGroup != 'None'
+                ? '${bird.commonGroup} ${bird.commonSpecies}'
+                : bird.commonSpecies),
+            subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text('${bird.reportingRate}%'),
+                const SizedBox(width: 8),
+                Container(
+                  width: 20,
+                  height: 20,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: _getColorForReportingRate(bird.reportingRate),
+                  ),
                 ),
-              ),
-            ],
-          ),
-        );
-      },
+              ],
+            ),
+          );
+        },
+      ),
     );
   }
 

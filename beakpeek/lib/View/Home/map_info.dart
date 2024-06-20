@@ -1,11 +1,8 @@
-import 'package:beakpeek/Styles/map_page_styles.dart';
-import 'package:beakpeek/View/Home/map.dart';
+import 'package:beakpeek/Model/top_search_bar.dart';
+import 'package:beakpeek/View/Home/bird_map.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/LandingText/nav.dart';
-
-void main() {
-  runApp(const MyApp());
-}
+import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/Styles/map_page_styles.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -52,8 +49,8 @@ class MapInfo extends StatelessWidget {
                           ),
                           const SizedBox(height: 10),
                           const Expanded(
-                            child: MapSample(),
-                          ),
+                            child: BirdMap(),
+                          )
                         ],
                       )),
                 ),
@@ -62,54 +59,5 @@ class MapInfo extends StatelessWidget {
             ),
           ),
         ));
-  }
-}
-
-class TopSearchBar extends StatelessWidget {
-  const TopSearchBar({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Image.asset(
-          'assets/icons/Logo.png',
-        ),
-        Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-          height: 48,
-          decoration: BoxDecoration(
-            color: const Color(0xFFEEEEEB),
-            borderRadius: BorderRadius.circular(30),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x3F737373),
-                blurRadius: 20,
-                offset: Offset(0, 4),
-              ),
-            ],
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              const Text(
-                'Search birds and sightings...',
-                style: TextStyle(
-                  color: Color(0x9900383E),
-                  fontSize: 16,
-                  fontFamily: 'SF Pro Display',
-                  fontWeight: FontWeight.w400,
-                ),
-              ),
-              Opacity(
-                opacity: 0.60,
-                child: Image.asset('assets/icons/search.png'),
-              ),
-            ],
-          ),
-        )
-      ],
-    );
   }
 }
