@@ -41,4 +41,28 @@ class BirdSearchFunctions {
       return 3;
     }
   }
+
+  Widget getData(Bird bird) {
+    return ListTile(
+      title: Text(bird.commonGroup != 'None'
+          ? '${bird.commonGroup} ${bird.commonSpecies}'
+          : bird.commonSpecies),
+      subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
+      trailing: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text('${bird.reportingRate}%'),
+          const SizedBox(width: 8),
+          Container(
+            width: 20,
+            height: 20,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: colorArray[getColorForReportingRate(bird.reportingRate)],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
