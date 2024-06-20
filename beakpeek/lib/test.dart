@@ -2,7 +2,6 @@
 
 import 'package:aad_b2c_webview/aad_b2c_webview.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 Future main() async {

@@ -1,6 +1,7 @@
 // bird_map.dart
 
 import 'package:beakpeek/View/Home/bird_sheet.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:xml/xml.dart' as xml;
@@ -8,9 +9,9 @@ import 'package:flutter/services.dart' show rootBundle;
 import 'package:xml/xml.dart';
 
 class BirdMap extends StatefulWidget {
-  final GoogleMapController? testController;
-
   const BirdMap({super.key, this.testController});
+
+  final GoogleMapController? testController;
 
   @override
   State<BirdMap> createState() => BirdMapState();
@@ -69,7 +70,7 @@ class BirdMapState extends State<BirdMap> {
         'westerncape',
         'Eastern Cape'
       ] // Add more provinces as needed
-          .map<DropdownMenuItem<String>>((String value) {
+          .map<DropdownMenuItem<String>>((value) {
         return DropdownMenuItem<String>(
           value: value,
           child: Text(value),
@@ -127,26 +128,30 @@ class BirdMapState extends State<BirdMap> {
         }).toSet();
       });
     } catch (e) {
-      print('Error loading KML data: $e');
+      if (kDebugMode) {
+        print('Error loading KML data: $e');
+      }
     }
   }
 
   void _onPolygonTapped(String id) {
-    print('Polygon with ID: $id tapped');
+    if (kDebugMode) {
+      print('Polygon with ID: $id tapped');
+    }
     // Show the draggable bottom sheet
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return BirdSheet(
-            pentadId:
-                id);
+        return BirdSheet(pentadId: id);
       },
     );
   }
 
   void _onMapTap(LatLng latLng) {
-    print('Map tapped at: $latLng');
+    if (kDebugMode) {
+      print('Map tapped at: $latLng');
+    }
     // Handle map tap event here
   }
 }

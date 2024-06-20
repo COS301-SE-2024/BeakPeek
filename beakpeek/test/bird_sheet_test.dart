@@ -1,6 +1,4 @@
-import 'dart:convert';
-
-import 'package:beakpeek/Module/bird.dart';
+import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
@@ -13,8 +11,7 @@ import 'bird_sheet_test.mocks.dart';
 @GenerateMocks([http.Client])
 void main() {
   group('ResizableBottomSheet Widget Test', () {
-    testWidgets('Test initial state - Error response',
-        (WidgetTester tester) async {
+    testWidgets('Test initial state - Error response', (tester) async {
       // Mock http client
       final mockClient = MockClient();
       const pentadId = 'testId';
@@ -47,8 +44,7 @@ void main() {
       expect(find.byType(BirdList), findsNothing);
     });
 
-    testWidgets('Test initial state - Successful response',
-        (WidgetTester tester) async {
+    testWidgets('Test initial state - Successful response', (tester) async {
       // Define your JSON response
       final List<Map<String, dynamic>> jsonResponse = [
         {
@@ -76,9 +72,11 @@ void main() {
       // debugDumpApp();
 
       // Verify the widget's initial state
-      expect(find.text('Test Common Group Test Common Species'), findsOneWidget);
+      expect(
+          find.text('Test Common Group Test Common Species'), findsOneWidget);
     });
 
+    // ignore: lines_longer_than_80_chars
     // testWidgets('Test sorting - Ascending order', (WidgetTester tester) async {
     //   // Mock http client
     //   final mockClient = MockClient();
