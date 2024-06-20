@@ -19,9 +19,10 @@ class Bird {
       commonSpecies: json['common_species'],
       genus: json['genus'],
       species: json['species'],
-      reportingRate: json['reportingRate'],
+      reportingRate: json['reportingRate'].toDouble(),
     );
   }
+
   final String pentad;
   final int spp;
   final String commonGroup;
