@@ -153,8 +153,6 @@ class _BirdSheetState extends State<BirdSheet> {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
-                      //   return Center(child: Text('Error: ${snapshot.error}'));
-                      // } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                       return const Center(child: Text('No birds found.'));
                     }
                     return BirdList(birds: snapshot.data!);
@@ -189,7 +187,7 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
 }
 
 class BirdList extends StatelessWidget {
-  const BirdList({Key? key, required this.birds}) : super(key: key);
+  const BirdList({super.key, required this.birds});
   final List<Bird> birds;
 
   @override

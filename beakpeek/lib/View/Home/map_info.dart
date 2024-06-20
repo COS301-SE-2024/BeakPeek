@@ -1,9 +1,8 @@
-import 'package:beakpeek/Module/top_search_bar.dart';
+import 'package:beakpeek/Model/top_search_bar.dart';
 import 'package:beakpeek/View/Home/bird_map.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Module/nav.dart';
+import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/map_page_styles.dart';
-
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -48,9 +47,10 @@ class MapInfo extends StatelessWidget {
                             ),
                             textAlign: TextAlign.left,
                           ),
-                          SizedBox(height: 10),
-                          Expanded(
+                          const SizedBox(height: 10),
+                          const Expanded(
                             child: BirdMap(),
+                          )
                         ],
                       )),
                 ),
@@ -61,4 +61,3 @@ class MapInfo extends StatelessWidget {
         ));
   }
 }
-
