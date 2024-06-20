@@ -18,13 +18,8 @@ class BirdSearchFunctions {
         throw Exception('Failed to load birds');
       }
     } catch (error) {
-      final response = await client
-          .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies'));
-      final List<dynamic> jsonResponse = json.decode(response.body);
-      print(response.body);
       print('Error fetching birds: $error');
-      throw Exception(
-          'Failed to load birds: $error, the response is $jsonResponse');
+      throw Exception('Failed to load birds: $error, ');
     }
   }
 

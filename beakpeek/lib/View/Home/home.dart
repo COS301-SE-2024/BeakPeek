@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: screenHeight * 0.05),
-                          const TopSearchBar(),
+                          const SearchbarContainer(),
                           SizedBox(height: screenHeight * 0.01),
                           RichText(
                             text: const TextSpan(
@@ -135,6 +135,7 @@ class Home extends StatelessWidget {
   }
 }
 
+//replacing with dropbown search bar
 class TopSearchBar extends StatelessWidget {
   const TopSearchBar({super.key});
 
