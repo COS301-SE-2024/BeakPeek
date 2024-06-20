@@ -1,6 +1,6 @@
+import 'package:beakpeek/Styles/map_page_styles.dart';
 import 'package:beakpeek/View/Home/map.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:beakpeek/LandingText/nav.dart';
 
 void main() {
@@ -26,8 +26,8 @@ class MapInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        backgroundColor: Color(0xFFF3F1ED),
+    return Scaffold(
+        backgroundColor: const Color(0xFFF3F1ED),
         body: Center(
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -37,26 +37,27 @@ class MapInfo extends StatelessWidget {
                 Expanded(
                   // child: SingleChildScrollView(
                   child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          SizedBox(height: 30),
-                          TopSearchBar(),
-                          SizedBox(height: 20),
-                          CustRichText(
-                            'Your Area Map',
-                            Color(0xFF033A30),
-                            ta: TextAlign.left,
-                            fontS: 22,
+                          const SizedBox(height: 30),
+                          const TopSearchBar(),
+                          const SizedBox(height: 20),
+                          RichText(
+                            text: const TextSpan(
+                              text: 'Your Area Map',
+                              style: MapPageStyles.mapHeadingGreen,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-                          SizedBox(height: 10),
-                          Expanded(
+                          const SizedBox(height: 10),
+                          const Expanded(
                             child: MapSample(),
                           ),
                         ],
                       )),
                 ),
-                BottomNavigation(),
+                const BottomNavigation(),
               ],
             ),
           ),
