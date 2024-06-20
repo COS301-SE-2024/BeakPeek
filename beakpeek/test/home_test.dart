@@ -1,4 +1,5 @@
-import 'package:beakpeek/LandingText/nav.dart';
+import 'package:beakpeek/Module/nav.dart';
+import 'package:beakpeek/Module/top_search_bar.dart';
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
