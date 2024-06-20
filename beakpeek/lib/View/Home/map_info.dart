@@ -23,8 +23,8 @@ class MapInfo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-        backgroundColor: Color(0xFFF3F1ED),
+    return Scaffold(
+        backgroundColor: const Color(0xFFF3F1ED),
         body: Center(
           child: Align(
             alignment: Alignment.bottomCenter,
@@ -34,17 +34,18 @@ class MapInfo extends StatelessWidget {
                 Expanded(
                   // child: SingleChildScrollView(
                   child: Padding(
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       child: Column(
                         children: [
-                          SizedBox(height: 30),
-                          TopSearchBar(),
-                          SizedBox(height: 20),
-                          CustRichText(
-                            'Your Area Map',
-                            Color(0xFF033A30),
-                            ta: TextAlign.left,
-                            fontS: 22,
+                          const SizedBox(height: 30),
+                          const TopSearchBar(),
+                          const SizedBox(height: 20),
+                          RichText(
+                            text: const TextSpan(
+                              text: 'Your Area Map',
+                              style: MapPageStyles.mapHeadingGreen,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
                           SizedBox(height: 10),
                           Expanded(
@@ -53,10 +54,11 @@ class MapInfo extends StatelessWidget {
                         ],
                       )),
                 ),
-                BottomNavigation(),
+                const BottomNavigation(),
               ],
             ),
           ),
         ));
   }
 }
+
