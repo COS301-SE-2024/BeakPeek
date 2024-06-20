@@ -1,3 +1,4 @@
+import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/LandingText/cust_buttons.dart';
 import 'package:beakpeek/LandingText/cust_rich_text.dart';
@@ -27,7 +28,7 @@ class Home extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(height: screenHeight * 0.05),
-                          const TopSearchBar(),
+                          const SearchbarContainer(),
                           SizedBox(height: screenHeight * 0.01),
                           const CustRichText(
                             'Bird of the Day',
@@ -83,14 +84,6 @@ class Home extends StatelessWidget {
                             ),
                           ),
                           SizedBox(height: screenHeight * 0.01),
-                          const Center(
-                            child: CustButtons(
-                              '/birdSearch',
-                              'Search Birds Temp',
-                              Color(0xFF033A30),
-                              Colors.white,
-                            ),
-                          ),
                         ],
                       ),
                     ),
@@ -104,6 +97,7 @@ class Home extends StatelessWidget {
   }
 }
 
+//replacing with dropbown search bar
 class TopSearchBar extends StatelessWidget {
   const TopSearchBar({super.key});
 
