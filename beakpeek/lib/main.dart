@@ -6,7 +6,6 @@ import 'package:beakpeek/map_info.dart';
 import 'package:beakpeek/sign_up.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(MaterialApp(
     initialRoute: '/',
@@ -16,7 +15,7 @@ void main() {
       '/signup': (context) => const SignUp(),
       '/home': (context) => const Home(),
       '/birdSearch': (context) => const BirdSearch(),
-      '/map' : (context) => const MapInfo(),
+      '/map': (context) => const MapInfo(),
     },
   ));
 }

@@ -13,6 +13,7 @@ class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
   @override
+<<<<<<< HEAD
   State<LogIn> createState() => _SignUpState();
 }
 

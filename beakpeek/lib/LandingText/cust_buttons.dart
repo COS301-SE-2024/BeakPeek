@@ -31,6 +31,7 @@ class CustButtons extends StatelessWidget {
 }
 
 class CustOutlinedButton extends StatelessWidget {
+  // ignore: lines_longer_than_80_chars
   const CustOutlinedButton(this.onclick, this.textD, this.c, this.tc,
       {super.key});
 

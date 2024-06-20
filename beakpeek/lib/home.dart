@@ -29,18 +29,43 @@ class Home extends StatelessWidget {
 
     return Scaffold(
         backgroundColor: Color(0xFFF3F1ED),
-        body: Center(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: EdgeInsets.all(screenWidth * 0.04),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+        body: home(),
+      ),
+    );
+  }
+}
+
+// ignore: camel_case_types
+class home extends StatelessWidget {
+  const home({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Align(
+        alignment: Alignment.bottomCenter,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      const SearchBar(),
+                      const SizedBox(height: 20),
+                      const CustRichText(
+                        'Justin\'s Bird of the Day',
+                        Color(0xFF033A30),
+                        ta: TextAlign.left,
+                        fontS: 22,
+                      ),
+                      // const SizedBox(height: 10),
+                      Stack(
+                        alignment: Alignment.center,
                         children: [
                           SizedBox(height: screenHeight * 0.05),
                           const TopSearchBar(),
@@ -109,7 +134,33 @@ class Home extends StatelessWidget {
                           ),
                         ],
                       ),
+<<<<<<< HEAD
                     ),
+=======
+                      const SizedBox(height: 10),
+                      // const SizedBox(height: 30),
+                      const CustRichText(
+                        'Your Area Map',
+                        Color(0xFF033A30),
+                        ta: TextAlign.left,
+                        fontS: 22,
+                      ),
+                      const SizedBox(height: 10),
+                      Image.asset(
+                        'assets/images/map.png',
+                      ),
+                      // const SizedBox(height: 20),
+                      // ignore: lines_longer_than_80_chars
+                      // CustOutlinedButton(() {}, 'View Map',Colors.white , const Color(0xFF033A30)),
+                      const SizedBox(height: 16),
+                      CustButtons(
+                        () {} as String,
+                        'View Map',
+                        const Color(0xFF033A30),
+                        Colors.white,
+                      ),
+                    ],
+>>>>>>> 1ac3a5a (tests)
                   ),
                 ),
                 const BottomNavigation(),
