@@ -1,4 +1,5 @@
 import 'package:beakpeek/LandingText/signup_stack.dart';
+import 'package:beakpeek/LandingText/login_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 
@@ -13,7 +14,6 @@ class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
   @override
-<<<<<<< HEAD
   State<LogIn> createState() => _SignUpState();
 }
 
