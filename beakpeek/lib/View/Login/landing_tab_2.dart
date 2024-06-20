@@ -48,14 +48,14 @@ class LandingTab2 extends StatelessWidget {
                   const Spacer(flex: 3),
                   const CustomOutlinedButton(
                     routePath: '/signup',
-                    buttonText: 'Sign Up',
+                    buttonText: 'Sign Up / Sign In',
                     backgroundColor: Color(0xff033A30),
                     textColor: Color(0xff033A30),
                   ),
                   const SizedBox(height: 20),
                   const CustomFilledButton(
-                    routePath: '/login',
-                    buttonText: 'Sign In',
+                    routePath: '/home',
+                    buttonText: 'Sign In as Guest',
                     backgroundColor: Color(0xff033A30),
                     textColor: Colors.white,
                   ),
