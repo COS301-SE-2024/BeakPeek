@@ -28,6 +28,6 @@ services:
       ACCEPT_EULA: "Y"
     volumes:
       - ./scripts/sqlscripts:/docker-entrypoint-initdb.d
-      - ./res/species/test_docker_list.csv:/tmp/province_gauteng_specieslist.csv
+      - ./res/species/province_gauteng_specieslist.csv:/tmp/province_gauteng_specieslist.csv
       - ./scripts/bash/custom-entrypoint.sh:/usr/config/custom-entrypoint.sh
     command: ["/bin/bash", "/usr/config/custom-entrypoint.sh"]

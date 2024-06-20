@@ -1,29 +1,27 @@
-// ignore_for_file: avoid_print, lines_longer_than_80_chars, avoid_types_on_closure_parameters, always_declare_return_types, type_annotate_public_apis
-import 'package:beakpeek/View/Home/bird.dart';
+// bird_map.dart
+
+import 'package:beakpeek/View/Home/bird_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:xml/xml.dart' as xml;
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:xml/xml.dart';
-// import 'package:beakpeek/LandingText/nav.dart';
 
-class MapSample extends StatefulWidget {
-  const MapSample({super.key});
+class BirdMap extends StatefulWidget {
+  final GoogleMapController? testController;
+
+  const BirdMap({super.key, this.testController});
 
   @override
-  State<MapSample> createState() => MapSampleState();
+  State<BirdMap> createState() => BirdMapState();
 }
 
-class MapSampleState extends State<MapSample> {
+class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
   String _selectedProvince = 'gauteng'; // Default selected province
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
-
-  get mapTapHandled => null;
-
-  get polygonTappedId => null;
 
   @override
   void initState() {
@@ -99,7 +97,7 @@ class MapSampleState extends State<MapSample> {
   }
 
   void _onMapCreated(GoogleMapController controller) {
-    mapController = controller;
+    mapController = widget.testController ?? controller;
   }
 
   Future<void> _loadKmlData() async {
@@ -138,11 +136,11 @@ class MapSampleState extends State<MapSample> {
     // Show the draggable bottom sheet
     showModalBottomSheet(
       context: context,
-      isScrollControlled: true, // Set to true to allow full screen dragging
+      isScrollControlled: true,
       builder: (context) {
-        return ResizableBottomSheet(
+        return BirdSheet(
             pentadId:
-                id); // Assuming DraggableBirdSheet is your bottom sheet widget
+                id);
       },
     );
   }
