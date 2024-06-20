@@ -1,12 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
-=======
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
-import 'package:flutter/material.dart';
->>>>>>> 00bf3e6 (file moving/ renaming)
 
 class LandingTab1 extends StatelessWidget {
   const LandingTab1({super.key});

@@ -1,16 +1,9 @@
 // ignore_for_file: lines_longer_than_80_chars
 
-<<<<<<< HEAD
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Styles/custom_text_span.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
-=======
-import 'package:beakpeek/LandingText/cust_buttons.dart';
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
-import 'package:beakpeek/LandingText/cust_text_span.dart';
-import 'package:flutter/material.dart';
->>>>>>> 00bf3e6 (file moving/ renaming)
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
