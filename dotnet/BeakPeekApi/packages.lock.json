@@ -2,6 +2,12 @@
   "version": 1,
   "dependencies": {
     "net8.0": {
+      "CsvHelper": {
+        "type": "Direct",
+        "requested": "[33.0.0, )",
+        "resolved": "33.0.0",
+        "contentHash": "EbB8Fnl2qCq/0qsV7jOR3NIfPGNjr/RKpHF6aAJx2kJT/xgW3U86o2wKd/ENQE+9ilORqJg/t7bxyJL+uLC2Zg=="
+      },
       "Microsoft.EntityFrameworkCore": {
         "type": "Direct",
         "requested": "[8.0.6, )",
