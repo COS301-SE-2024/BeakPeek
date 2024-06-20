@@ -1,4 +1,4 @@
-import 'package:beakpeek/View/Home/bird_search.dart';
+import 'package:beakpeek/View/Home/Searching/bird_search.dart';
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Login/landing_page.dart';
 import 'package:beakpeek/View/Login/log_in.dart';
@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/birdSearch',
+    initialRoute: '/home',
     routes: <String, WidgetBuilder>{
       '/': (context) => const LandingPage(),
       '/login': (context) => const LogIn(),
