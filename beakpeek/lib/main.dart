@@ -15,7 +15,6 @@ void main() {
       '/login': (context) => const LogIn(),
       '/signup': (context) => const SignUp(),
       '/home': (context) => const Home(),
-      '/birdSearch': (context) => const BirdSearch(),
       '/map': (context) => const MapInfo(),
       '/oauthredirect': (context) => const home(),
     },
