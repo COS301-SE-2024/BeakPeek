@@ -44,6 +44,11 @@ dependencies:
   http: ^1.2.1
   webview_flutter_android: ^3.16.4
   flutter_appauth: ^6.0.6
+  dropdown_search: ^5.0.6
+  flutter_searchable_dropdown: ^2.0.0
+  searchfield: ^1.0.5
+  searchable_listview: ^2.14.0
+  dynamic_searchbar: ^1.0.0
   aad_b2c_webview: ^0.0.56
   go_router: ^14.1.4
 
