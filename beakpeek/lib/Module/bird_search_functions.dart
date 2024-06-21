@@ -96,7 +96,7 @@ List<Bird> searchForBird(List<Bird> birds, String value) {
 }
 
 List<Bird> getUniqueBirds(List<Bird> birds) {
-  final Set<String> uniqueBirdKeys = {};
+  final List<String> uniqueBirdKeys = [];
   final List<Bird> uniqueBirds = [];
 
   for (var bird in birds) {
@@ -104,6 +104,11 @@ List<Bird> getUniqueBirds(List<Bird> birds) {
     if (!uniqueBirdKeys.contains(birdKey)) {
       uniqueBirdKeys.add(birdKey);
       uniqueBirds.add(bird);
+    } else {
+      final int index = uniqueBirdKeys.indexOf(birdKey, 0);
+      if (uniqueBirds[index].reportingRate < bird.reportingRate) {
+        uniqueBirds[index] = bird;
+      }
     }
   }
 
