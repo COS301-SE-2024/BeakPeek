@@ -9,9 +9,11 @@ import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
 import 'package:searchable_listview/searchable_listview.dart';
 
 class FilterableSearchbar extends StatefulWidget {
-  const FilterableSearchbar({super.key, required this.birds});
-  const FilterableSearchbar.list(this.birds, {super.key});
+  const FilterableSearchbar(
+      {super.key, required this.birds, required this.sort});
+  const FilterableSearchbar.list(this.birds, this.sort, {super.key});
   final List<Bird> birds;
+  final int sort;
 
   @override
   State<FilterableSearchbar> createState() {
@@ -22,7 +24,7 @@ class FilterableSearchbar extends StatefulWidget {
 class FilterableSearchbarState extends State<FilterableSearchbar> {
   List<Widget> items = [];
   final SearchController controller = SearchController();
-
+  List<Bird> temp = [];
   @override
   void initState() {
     super.initState();
@@ -30,7 +32,12 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
   }
 
   void searchBarTyping(String data) {
-    print(data);
+    if (data.isEmpty) {
+      items = BirdSearchFunctions().getWidgetListOfBirds(widget.birds);
+    } else {
+      temp = BirdSearchFunctions().searchForBird(widget.birds, data);
+      items = BirdSearchFunctions().getWidgetListOfBirds(temp);
+    }
   }
 
   @override
@@ -39,7 +46,11 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
       children: [
         SearchAnchor(
           viewHintText: 'Search Bird...',
-          viewOnChanged: (value) => searchBarTyping(value),
+          viewOnChanged: (value) {
+            setState(() {
+              searchBarTyping(value);
+            });
+          },
           builder: (context, controller) {
             return IconButton(
               icon: const Icon(Icons.search),
@@ -51,6 +62,46 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
           suggestionsBuilder: (context, controller) {
             return items;
           },
+        ),
+        Row(
+          children: [
+            FilledButton(
+              onPressed: () {
+                setState(
+                  () {
+                    temp =
+                        BirdSearchFunctions().sortAlphabetically(widget.birds);
+                    items = BirdSearchFunctions().getWidgetListOfBirds(temp);
+                  },
+                );
+              },
+              style: FilledButton.styleFrom(
+                minimumSize: const Size(50, 50),
+                shadowColor: Colors.black,
+              ),
+              child: const Text(
+                'A-Z',
+              ),
+            ),
+            FilledButton(
+              onPressed: () {
+                setState(
+                  () {
+                    temp =
+                        BirdSearchFunctions().sortRepotRateDESC(widget.birds);
+                    items = BirdSearchFunctions().getWidgetListOfBirds(temp);
+                  },
+                );
+              },
+              style: FilledButton.styleFrom(
+                minimumSize: const Size(50, 50),
+                shadowColor: Colors.black,
+              ),
+              child: const Text(
+                'ReportRate',
+              ),
+            ),
+          ],
         ),
       ],
     );

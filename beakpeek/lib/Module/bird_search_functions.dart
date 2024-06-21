@@ -74,4 +74,22 @@ class BirdSearchFunctions {
     }
     return listOfBirdWidgets;
   }
+
+  List<Bird> sortAlphabetically(List<Bird> birds) {
+    birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
+    return birds;
+  }
+
+  List<Bird> sortRepotRateDESC(List<Bird> birds) {
+    birds.sort((a, b) => b.reportingRate.compareTo(a.reportingRate));
+    return birds;
+  }
+
+  List<Bird> searchForBird(List<Bird> birds, String value) {
+    final List<Bird> results = birds
+        .where((bird) =>
+            (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()))
+        .toList();
+    return results;
+  }
 }
