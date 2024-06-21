@@ -13,6 +13,7 @@ class SearchbarContainer extends StatefulWidget {
 
 class _SearchcarContainerState extends State<SearchbarContainer> {
   late Future<List<Bird>> birds;
+  int sort = 0;
   @override
   void initState() {
     super.initState();
@@ -25,51 +26,18 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
     return Column(
       children: [
         FutureBuilder<List<Bird>>(
-            future: birds,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text('No birds found.'));
-              }
-              //print(snapshot.data!);
-              return FilterableSearchbar(birds: snapshot.data!);
-            }),
-        Row(
-          children: [
-            FilledButton(
-              onPressed: () {},
-              style: FilledButton.styleFrom(
-                minimumSize: const Size(50, 50),
-                shadowColor: Colors.black,
-              ),
-              child: const Text(
-                'A-Z',
-              ),
-            ),
-            // FilledButton(
-            //   onPressed: () {},
-            //   style: FilledButton.styleFrom(
-            //     minimumSize: const Size(50, 50),
-            //     shadowColor: Colors.black,
-            //   ),
-            //   child: const Text(
-            //     'ReportRate',
-            //   ),
-            // ),
-            // FilledButton(
-            //   onPressed: () {},
-            //   style: FilledButton.styleFrom(
-            //     minimumSize: const Size(50, 50),
-            //     shadowColor: Colors.black,
-            //   ),
-            //   child: const Text(
-            //     'Region',
-            //   ),
-            // ),
-          ],
+          future: birds,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('No birds found.'));
+            }
+            //print(snapshot.data!);
+            return FilterableSearchbar(sort: sort, birds: snapshot.data!);
+          },
         ),
       ],
     );
