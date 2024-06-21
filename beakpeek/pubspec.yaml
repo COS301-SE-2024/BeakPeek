@@ -44,6 +44,8 @@ dependencies:
   dropdown_search: ^5.0.6
   flutter_searchable_dropdown: ^2.0.0
   searchfield: ^1.0.5
+  searchable_listview: ^2.14.0
+  dynamic_searchbar: ^1.0.0
 
 dev_dependencies:
   flutter_test:
