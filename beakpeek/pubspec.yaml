@@ -30,22 +30,27 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_maps_flutter: ^2.1.0
+  google_maps_flutter: ^2.2.8
   # geolocator: ^10.0.0
-  webview_flutter: ^2.0.14
+  webview_flutter: 4.8.0
   xml: ^5.3.1
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   carousel_slider: ^4.2.1
   page_view_dot_indicator: ^2.3.0
-  flutter_appauth: ^6.0.6
+  flutter_dotenv: ^5.1.0
+  pkce: ^1.1.0+1
   http: ^1.2.1
+  webview_flutter_android: ^3.16.4
+  flutter_appauth: ^6.0.6
   dropdown_search: ^5.0.6
   flutter_searchable_dropdown: ^2.0.0
   searchfield: ^1.0.5
   searchable_listview: ^2.14.0
   dynamic_searchbar: ^1.0.0
+  aad_b2c_webview: ^0.0.56
+  go_router: ^14.1.4
 
 dev_dependencies:
   flutter_test:
@@ -75,7 +80,6 @@ flutter:
   assets:
     - assets/images/landing1.png
     - assets/images/landing2.png
-    - assets/images/landing2Resize.png
     - assets/images/signUp.png
     - assets/images/logIn.png
     - assets/icons/home.png
@@ -88,7 +92,6 @@ flutter:
     - assets/icons/search.png
     - assets/icons/google.png
     - assets/icons/facebook.png
-    - assets/googleMaps.html
     - assets/province_gauteng.kml
     - assets/country_southafrica.kml
     - assets/province_westerncape.kml

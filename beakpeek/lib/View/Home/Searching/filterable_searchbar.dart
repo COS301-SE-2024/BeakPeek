@@ -1,7 +1,7 @@
 // ignore_for_file: use_key_in_widget_constructors, body_might_complete_normally_nullable, unused_import, lines_longer_than_80_chars, avoid_unnecessary_containers
 
-import 'package:beakpeek/Module/bird.dart';
-import 'package:beakpeek/Module/bird_search_functions.dart';
+import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/bird_search_functions.dart';
 
 import 'package:dynamic_searchbar/dynamic_searchbar.dart';
 import 'package:flutter/material.dart';

@@ -1,8 +1,8 @@
+import 'package:beakpeek/Styles/home_page_styles.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/LandingText/cust_buttons.dart';
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
-import 'package:beakpeek/LandingText/nav.dart';
+import 'package:beakpeek/Styles/custom_buttons.dart';
+import 'package:beakpeek/Model/nav.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -30,11 +30,12 @@ class Home extends StatelessWidget {
                           SizedBox(height: screenHeight * 0.05),
                           const SearchbarContainer(),
                           SizedBox(height: screenHeight * 0.01),
-                          const CustRichText(
-                            'Bird of the Day',
-                            Color(0xFF033A30),
-                            ta: TextAlign.left,
-                            fontS: 22,
+                          RichText(
+                            text: const TextSpan(
+                              text: 'Bird of the Day',
+                              style: HomePageStyles.homeGreenHeading,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           Stack(
@@ -52,21 +53,23 @@ class Home extends StatelessWidget {
                                 right: 0,
                                 child: Container(
                                   color: Colors.black.withOpacity(0.5),
-                                  child: const CustRichText(
-                                    'Black Fronted Bushsrike',
-                                    Colors.white,
-                                    fontS: 20,
+                                  child: RichText(
+                                    text: const TextSpan(
+                                      text: 'Black Fronted Bushsrike',
+                                      style: HomePageStyles.homeWhiteHeading,
+                                    ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
                           SizedBox(height: screenHeight * 0.01),
-                          const CustRichText(
-                            'Your Area Map',
-                            Color(0xFF033A30),
-                            ta: TextAlign.left,
-                            fontS: 22,
+                          RichText(
+                            text: const TextSpan(
+                              text: 'Your Area Map',
+                              style: HomePageStyles.homeGreenHeading,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           Image.asset(
@@ -76,11 +79,11 @@ class Home extends StatelessWidget {
                           ),
                           SizedBox(height: screenHeight * 0.01),
                           const Center(
-                            child: CustButtons(
-                              '/map',
-                              'View Map',
-                              Color(0xFF033A30),
-                              Colors.white,
+                            child: CustomFilledButton(
+                              routePath: '/map',
+                              buttonText: 'View Map',
+                              backgroundColor: Color(0xFF033A30),
+                              textColor: Colors.white,
                             ),
                           ),
                           SizedBox(height: screenHeight * 0.01),
