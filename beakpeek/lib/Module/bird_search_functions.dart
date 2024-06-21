@@ -12,7 +12,9 @@ class BirdSearchFunctions {
       print(response);
       if (response.statusCode == 200) {
         final List<dynamic> jsonResponse = json.decode(response.body);
-        return jsonResponse.map((data) => Bird.fromJson(data)).toList();
+        final List<Bird> birds =
+            jsonResponse.map((data) => Bird.fromJson(data)).toList();
+        return getUniqueBirds(birds);
       } else {
         print('Request failed with status: ${response.statusCode}');
         throw Exception('Failed to load birds');
@@ -91,5 +93,20 @@ class BirdSearchFunctions {
             (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()))
         .toList();
     return results;
+  }
+
+  List<Bird> getUniqueBirds(List<Bird> birds) {
+    final Set<String> uniqueBirdKeys = {};
+    final List<Bird> uniqueBirds = [];
+
+    for (var bird in birds) {
+      final birdKey = '${bird.commonGroup}-${bird.commonSpecies}';
+      if (!uniqueBirdKeys.contains(birdKey)) {
+        uniqueBirdKeys.add(birdKey);
+        uniqueBirds.add(bird);
+      }
+    }
+
+    return uniqueBirds;
   }
 }
