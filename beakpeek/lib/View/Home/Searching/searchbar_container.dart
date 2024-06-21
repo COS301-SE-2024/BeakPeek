@@ -17,7 +17,7 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
   @override
   void initState() {
     super.initState();
-    birds = BirdSearchFunctions()
+    birds = bsf
         .fetchAllBirds(Client()); // Fetch and sort birds from the API initially
   }
 

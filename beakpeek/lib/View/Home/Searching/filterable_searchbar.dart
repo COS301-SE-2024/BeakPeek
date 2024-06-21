@@ -28,15 +28,15 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
   @override
   void initState() {
     super.initState();
-    items = BirdSearchFunctions().getWidgetListOfBirds(widget.birds);
+    items = bsf.getWidgetListOfBirds(widget.birds);
   }
 
   void searchBarTyping(String data) {
     if (data.isEmpty) {
-      items = BirdSearchFunctions().getWidgetListOfBirds(widget.birds);
+      items = bsf.getWidgetListOfBirds(widget.birds);
     } else {
-      temp = BirdSearchFunctions().searchForBird(widget.birds, data);
-      items = BirdSearchFunctions().getWidgetListOfBirds(temp);
+      temp = bsf.searchForBird(widget.birds, data);
+      items = bsf.getWidgetListOfBirds(temp);
     }
   }
 
@@ -69,9 +69,8 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
               onPressed: () {
                 setState(
                   () {
-                    temp =
-                        BirdSearchFunctions().sortAlphabetically(widget.birds);
-                    items = BirdSearchFunctions().getWidgetListOfBirds(temp);
+                    temp = bsf.sortAlphabetically(widget.birds);
+                    items = bsf.getWidgetListOfBirds(temp);
                   },
                 );
               },
@@ -87,9 +86,8 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
               onPressed: () {
                 setState(
                   () {
-                    temp =
-                        BirdSearchFunctions().sortRepotRateDESC(widget.birds);
-                    items = BirdSearchFunctions().getWidgetListOfBirds(temp);
+                    temp = bsf.sortRepotRateDESC(widget.birds);
+                    items = bsf.getWidgetListOfBirds(temp);
                   },
                 );
               },
