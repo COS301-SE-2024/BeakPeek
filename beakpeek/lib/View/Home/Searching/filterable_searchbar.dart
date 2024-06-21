@@ -2,7 +2,6 @@
 
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
-
 import 'package:dynamic_searchbar/dynamic_searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';

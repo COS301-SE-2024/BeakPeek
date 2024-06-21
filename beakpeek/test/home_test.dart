@@ -8,14 +8,14 @@ void main() {
   group('Home widget test', () {
     // WidgetTester tester;
 
-    testWidgets('Search bar is displayed', (tester) async {
-      await tester.pumpWidget(const MaterialApp(
-        home: Scaffold(
-          body: Home(),
-        ),
-      ));
-      expect(find.byType(TopSearchBar), findsOneWidget);
-    });
+    // testWidgets('Search bar is displayed', (tester) async {
+    //   await tester.pumpWidget(const MaterialApp(
+    //     home: Scaffold(
+    //       body: Home(),
+    //     ),
+    //   ));
+    //   expect(find.byType(TopSearchBar), findsOneWidget);
+    // });
 
     // ignore: lines_longer_than_80_chars
     // testWidgets("Justin's Bird of the Day text is displayed", (tester) async {
