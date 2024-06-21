@@ -65,4 +65,13 @@ class BirdSearchFunctions {
       ),
     );
   }
+
+  List<Widget> getWidgetListOfBirds(List<Bird> birds) {
+    final List<Widget> listOfBirdWidgets = [];
+
+    for (var i = 0; i < birds.length; i++) {
+      listOfBirdWidgets.add(getData(birds[i]));
+    }
+    return listOfBirdWidgets;
+  }
 }
