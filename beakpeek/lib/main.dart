@@ -1,4 +1,3 @@
-import 'package:beakpeek/View/Home/Searching/bird_search.dart';
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Login/landing_page.dart';
 import 'package:beakpeek/View/Login/log_in.dart';
@@ -14,7 +13,6 @@ void main() {
       '/login': (context) => const LogIn(),
       '/signup': (context) => const SignUp(),
       '/home': (context) => const Home(),
-      '/birdSearch': (context) => const BirdSearch(),
       '/map': (context) => const MapInfo(),
     },
   ));

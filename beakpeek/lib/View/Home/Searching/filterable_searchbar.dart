@@ -2,7 +2,7 @@
 
 import 'package:beakpeek/Module/bird.dart';
 import 'package:beakpeek/Module/bird_search_functions.dart';
-import 'package:beakpeek/View/Home/Searching/bird_data.dart';
+
 import 'package:dynamic_searchbar/dynamic_searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
@@ -29,11 +29,17 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
     items = BirdSearchFunctions().getWidgetListOfBirds(widget.birds);
   }
 
+  void searchBarTyping(String data) {
+    print(data);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         SearchAnchor(
+          viewHintText: 'Search Bird...',
+          viewOnChanged: (value) => searchBarTyping(value),
           builder: (context, controller) {
             return IconButton(
               icon: const Icon(Icons.search),
