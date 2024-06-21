@@ -49,26 +49,26 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
                 'A-Z',
               ),
             ),
-            FilledButton(
-              onPressed: () {},
-              style: FilledButton.styleFrom(
-                minimumSize: const Size(50, 50),
-                shadowColor: Colors.black,
-              ),
-              child: const Text(
-                'ReportRate',
-              ),
-            ),
-            FilledButton(
-              onPressed: () {},
-              style: FilledButton.styleFrom(
-                minimumSize: const Size(50, 50),
-                shadowColor: Colors.black,
-              ),
-              child: const Text(
-                'Region',
-              ),
-            ),
+            // FilledButton(
+            //   onPressed: () {},
+            //   style: FilledButton.styleFrom(
+            //     minimumSize: const Size(50, 50),
+            //     shadowColor: Colors.black,
+            //   ),
+            //   child: const Text(
+            //     'ReportRate',
+            //   ),
+            // ),
+            // FilledButton(
+            //   onPressed: () {},
+            //   style: FilledButton.styleFrom(
+            //     minimumSize: const Size(50, 50),
+            //     shadowColor: Colors.black,
+            //   ),
+            //   child: const Text(
+            //     'Region',
+            //   ),
+            // ),
           ],
         ),
       ],

@@ -2,8 +2,11 @@
 
 import 'package:beakpeek/Module/bird.dart';
 import 'package:beakpeek/Module/bird_search_functions.dart';
+import 'package:beakpeek/View/Home/Searching/bird_data.dart';
+import 'package:dynamic_searchbar/dynamic_searchbar.dart';
 import 'package:flutter/material.dart';
-import 'package:searchfield/searchfield.dart';
+import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
+import 'package:searchable_listview/searchable_listview.dart';
 
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar({super.key, required this.birds});
@@ -17,51 +20,33 @@ class FilterableSearchbar extends StatefulWidget {
 }
 
 class FilterableSearchbarState extends State<FilterableSearchbar> {
+  List<Widget> items = [];
+  final SearchController controller = SearchController();
+
+  @override
+  void initState() {
+    super.initState();
+    items = BirdSearchFunctions().getWidgetListOfBirds(widget.birds);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return SearchField(
-      suggestions: widget.birds
-          .map(
-            (bird) => SearchFieldListItem<Bird>(bird.toString(),
-                item: bird,
-                // Use child to show Custom Widgets in the suggestions
-                // defaults to Text widget
-                child: BirdSearchFunctions().getData(bird)),
-          )
-          .toList(),
-      hint: 'Search by Bird Name',
-      readOnly: true,
-      maxSuggestionsInViewPort: 20,
+    return Column(
+      children: [
+        SearchAnchor(
+          builder: (context, controller) {
+            return IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () {
+                controller.openView();
+              },
+            );
+          },
+          suggestionsBuilder: (context, controller) {
+            return items;
+          },
+        ),
+      ],
     );
   }
 }
-
-// ListView.builder(
-//       itemCount: birds.length,
-//       itemBuilder: (context, index) {
-//         final bird = birds[index];
-    // final colorGOYR =
-    //     BirdSearchFunctions().getColorForReportingRate(bird.reportingRate);
-//         return ListTile(
-//           title: Text(bird.commonGroup != 'None'
-//               ? '${bird.commonGroup} ${bird.commonSpecies}'
-//               : bird.commonSpecies),
-//           subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
-//           trailing: Row(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               Text('${bird.reportingRate}%'),
-//               const SizedBox(width: 8),
-//               Container(
-//                 width: 20,
-//                 height: 20,
-//                 decoration: BoxDecoration(
-//                   shape: BoxShape.circle,
-//                   color: BirdSearchFunctions().colorArray[colorGOYR],
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       },
-//     );
