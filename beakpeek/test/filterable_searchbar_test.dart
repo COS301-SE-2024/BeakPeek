@@ -55,6 +55,28 @@ void main() {
           await tester.pumpAndSettle();
         },
       );
+
+      testWidgets(
+        'Test empty List',
+        (tester) async {
+          final List<Bird> empty = [];
+          final Widget testW = FilterableSearchbar(birds: empty, sort: 0);
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: testW,
+              ),
+            ),
+          );
+          await tester.tap(find.text('ReportRate'));
+          await tester.pumpAndSettle();
+          await tester.tap(find.byIcon(Icons.search));
+          await tester.pumpAndSettle();
+          expect(find.byType(SearchBar), findsOne);
+          await tester.enterText(find.byType(SearchBar), 'here');
+          await tester.pumpAndSettle();
+        },
+      );
     },
   );
 }

@@ -1,3 +1,4 @@
+// ignore_for_file: avoid_print
 
 import 'dart:convert';
 
@@ -47,27 +48,26 @@ class KmlParser {
     return polygonsData;
   }
 }
+
 class BirdMapFunctions {
-  Future<List<Bird>> fetchBirdsByGroupAndSpecies(String commonGroup, String commonSpecies) async {
-  final Uri uri = Uri.http(
-    '10.0.2.2:5000', 
-    '/api/GautengBirdSpecies/search', 
-    {'commonGroup': commonGroup, 'commonSpecies': commonSpecies}
-  );
+  Future<List<Bird>> fetchBirdsByGroupAndSpecies(
+      String commonGroup, String commonSpecies) async {
+    final Uri uri = Uri.http('10.0.2.2:5000', '/api/GautengBirdSpecies/search',
+        {'commonGroup': commonGroup, 'commonSpecies': commonSpecies});
 
-  try {
-    final response = await http.get(uri);
+    try {
+      final response = await http.get(uri);
 
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(response.body);
-      return jsonResponse.map((data) => Bird.fromJson(data)).toList();
-    } else {
-      print('Request failed with status: ${response.statusCode}');
-      throw Exception('Failed to load birds');
+      if (response.statusCode == 200) {
+        final List<dynamic> jsonResponse = json.decode(response.body);
+        return jsonResponse.map((data) => Bird.fromJson(data)).toList();
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        throw Exception('Failed to load birds');
+      }
+    } catch (error) {
+      print('Error fetching birds: $error');
+      throw Exception('Failed to load birds: $error');
     }
-  } catch (error) {
-    print('Error fetching birds: $error');
-    throw Exception('Failed to load birds: $error');
   }
-}
 }
