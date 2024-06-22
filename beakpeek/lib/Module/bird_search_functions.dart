@@ -8,7 +8,6 @@ Future<List<Bird>> fetchAllBirds(http.Client client) async {
   try {
     final response = await client
         .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies'));
-    print(response);
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
       final List<Bird> birds =

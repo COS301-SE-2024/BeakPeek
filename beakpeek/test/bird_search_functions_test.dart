@@ -41,8 +41,10 @@ void main() {
       test(
         'getColorRepert Rate',
         () {
-          final rate = getColorForReportingRate(20.0);
-          expect(rate, 0);
+          expect(getColorForReportingRate(20.0), 0);
+          expect(getColorForReportingRate(40.0), 1);
+          expect(getColorForReportingRate(60.0), 2);
+          expect(getColorForReportingRate(80.0), 3);
         },
       );
 
