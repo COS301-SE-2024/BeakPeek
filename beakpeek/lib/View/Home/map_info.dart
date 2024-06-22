@@ -24,40 +24,41 @@ class MapInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xFFF3F1ED),
-        body: Center(
-          child: Align(
-            alignment: Alignment.bottomCenter,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  // child: SingleChildScrollView(
-                  child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        children: [
-                          const SizedBox(height: 30),
-                          const TopSearchBar(),
-                          const SizedBox(height: 20),
-                          RichText(
-                            text: const TextSpan(
-                              text: 'Your Area Map',
-                              style: MapPageStyles.mapHeadingGreen,
-                            ),
-                            textAlign: TextAlign.left,
+      backgroundColor: const Color(0xFFF3F1ED),
+      body: Center(
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Expanded(
+                // child: SingleChildScrollView(
+                child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 30),
+                        const TopSearchBar(),
+                        const SizedBox(height: 20),
+                        RichText(
+                          text: const TextSpan(
+                            text: 'Your Area Map',
+                            style: MapPageStyles.mapHeadingGreen,
                           ),
-                          const SizedBox(height: 10),
-                          const Expanded(
-                            child: BirdMap(),
-                          )
-                        ],
-                      )),
-                ),
-                const BottomNavigation(),
-              ],
-            ),
+                          textAlign: TextAlign.left,
+                        ),
+                        const SizedBox(height: 10),
+                        const Expanded(
+                          child: BirdMap(),
+                        )
+                      ],
+                    )),
+              ),
+              const BottomNavigation(),
+            ],
           ),
-        ));
+        ),
+      ),
+    );
   }
 }

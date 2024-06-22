@@ -49,10 +49,14 @@ void main() {
           await tester.pumpAndSettle();
           await tester.tap(find.byIcon(Icons.search));
           await tester.pumpAndSettle();
-          expect(find.byType(SearchBar), findsOne);
+          expect(find.byType(SearchAnchor), findsOne);
           expect(find.byType(ListTile), findsAtLeast(2));
-          await tester.enterText(find.byType(SearchBar), 'here');
+          expect(find.byType(SearchBar), findsOne);
+          await tester.tap(find.byType(SearchBar));
           await tester.pumpAndSettle();
+          await tester.enterText(find.byType(SearchBar), 'h');
+          await tester.pump(Durations.short2);
+          expect(find.byType(ListTile), findsAtLeast(1));
         },
       );
 
