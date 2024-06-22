@@ -38,6 +38,18 @@ void main() {
         },
       );
 
+      test('throws an exception if the http call completes with an error', () {
+        final client = MockClient();
+
+        // Use Mockito to return an unsuccessful response when it calls the
+        // provided http.Client.
+        when(client
+                .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies')))
+            .thenAnswer((_) async => http.Response('Not Found', 404));
+
+        expect(fetchAllBirds(client), throwsException);
+      });
+
       test(
         'getColorRepert Rate',
         () {
