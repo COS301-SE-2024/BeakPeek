@@ -75,6 +75,7 @@ void main() {
           expect(find.byType(SearchBar), findsOne);
           await tester.enterText(find.byType(SearchBar), 'here');
           await tester.pumpAndSettle();
+          expect(find.byType(ListTile), findsNothing);
         },
       );
     },
