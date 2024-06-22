@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar(
       {super.key, required this.birds, required this.sort});
-  // coverage:ignore-line
+  // codecov:ignore:next
   const FilterableSearchbar.list(this.birds, this.sort, {super.key});
   final List<Bird> birds;
   final int sort;
