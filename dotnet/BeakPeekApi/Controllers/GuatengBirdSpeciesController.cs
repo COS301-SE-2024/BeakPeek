@@ -38,15 +38,15 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> SearchGautentBirdSpecies(string genus = null, string commonSpecies = null)
+        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> SearchGautentBirdSpecies(string commonGroup = null, string commonSpecies = null)
         {
             IQueryable<GautengBirdSpecies> query = _context.GautengBirdSpecies;
 
-            if (!string.IsNullOrEmpty(genus))
+            if (!string.IsNullOrEmpty(commonGroup))
             {
-                query = query.Where(b => EF.Functions.Like(b.Genus, $"%{genus}%"));
+                query = query.Where(b => EF.Functions.Like(b.Common_group, $"%{commonGroup}%"));
             }
-
+ 
             if (!string.IsNullOrEmpty(commonSpecies))
             {
                 query = query.Where(b => EF.Functions.Like(b.Common_species, $"%{commonSpecies}%"));
