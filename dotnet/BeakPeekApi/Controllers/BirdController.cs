@@ -43,9 +43,9 @@ namespace BeakPeekApi.Controllers
         {
             IQueryable<Bird> query = _context.Birds;
 
-            if (!string.IsNullOrEmpty(genus))
+            if (!string.IsNullOrEmpty(commonGroup))
             {
-                query = query.Where(b => EF.Functions.Like(b.Genus, $"%{genus}%"));
+                query = query.Where(b => EF.Functions.Like(b.Common_group, $"%{commonGroup}%"));
             }
 
             if (!string.IsNullOrEmpty(commonSpecies))
