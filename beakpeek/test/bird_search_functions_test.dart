@@ -72,6 +72,41 @@ void main() {
         },
       );
 
+      testWidgets(
+        'Test getData ',
+        (tester) async {
+          final birds = [
+            Bird(
+              pentad: '1',
+              spp: 1,
+              commonGroup: 'commonGroup',
+              commonSpecies: 'commonSpecies',
+              genus: 'genus',
+              species: 'species',
+              reportingRate: 10.0,
+            ),
+            Bird(
+              pentad: '1',
+              spp: 1,
+              commonGroup: 'commonGroup',
+              commonSpecies: 'commonSpecies',
+              genus: 'genus',
+              species: 'species',
+              reportingRate: 10.0,
+            ),
+          ];
+          final testW = getWidgetListOfBirds(birds);
+          await tester.pumpWidget(MaterialApp(
+            home: Scaffold(
+              body: ListView(
+                children: testW,
+              ),
+            ),
+          ));
+          expect(find.byType(ListTile), findsAtLeast(2));
+        },
+      );
+
       test(
         'Bird search Function',
         () {
@@ -98,6 +133,70 @@ void main() {
 
           final search = searchForBird(birds, 'common');
           expect(search, birds);
+        },
+      );
+
+      test(
+        'Sort alphabetical ',
+        () {
+          final birds = [
+            Bird(
+              pentad: '1',
+              spp: 1,
+              commonGroup: 'BcommonGroup',
+              commonSpecies: 'commonSpecies',
+              genus: 'genus',
+              species: 'species',
+              reportingRate: 10.0,
+            ),
+            Bird(
+              pentad: '1',
+              spp: 1,
+              commonGroup: 'AcommonGroup',
+              commonSpecies: 'commonSpecies',
+              genus: 'genus',
+              species: 'species',
+              reportingRate: 20.0,
+            ),
+          ];
+
+          final sortedList = sortAlphabetically(birds);
+          expect(sortedList.length, 2);
+          expect(sortedList[0].commonGroup, 'AcommonGroup');
+          expect(sortedList[1].commonGroup, 'BcommonGroup');
+        },
+      );
+
+      test(
+        'Sort Report Rate ',
+        () {
+          final birds = [
+            Bird(
+              pentad: '1',
+              spp: 1,
+              commonGroup: 'BcommonGroup',
+              commonSpecies: 'commonSpecies',
+              genus: 'genus',
+              species: 'species',
+              reportingRate: 10.0,
+            ),
+            Bird(
+              pentad: '1',
+              spp: 1,
+              commonGroup: 'AcommonGroup',
+              commonSpecies: 'commonSpecies',
+              genus: 'genus',
+              species: 'species',
+              reportingRate: 20.0,
+            ),
+          ];
+
+          final sortedList = sortRepotRateDESC(birds);
+          expect(sortedList.length, 2);
+          expect(sortedList[0].commonGroup, 'AcommonGroup');
+          expect(sortedList[1].commonGroup, 'BcommonGroup');
+          expect(sortedList[1].reportingRate, 10.0);
+          expect(sortedList[0].reportingRate, 20.0);
         },
       );
 
