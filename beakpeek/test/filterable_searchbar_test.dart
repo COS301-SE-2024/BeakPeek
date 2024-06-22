@@ -7,8 +7,8 @@ final birdL = [
   Bird(
     pentad: '1',
     spp: 1,
-    commonGroup: 'commonGroup',
-    commonSpecies: 'commonSpecies',
+    commonGroup: 'here',
+    commonSpecies: 'here',
     genus: 'genus',
     species: 'species',
     reportingRate: 10.0,
@@ -50,7 +50,9 @@ void main() {
           await tester.tap(find.byIcon(Icons.search));
           await tester.pumpAndSettle();
           expect(find.byType(SearchBar), findsOne);
-          expect(find.byType(ListTile), findsAtLeast(1));
+          expect(find.byType(ListTile), findsAtLeast(2));
+          await tester.enterText(find.byType(SearchBar), 'here');
+          await tester.pumpAndSettle();
         },
       );
     },
