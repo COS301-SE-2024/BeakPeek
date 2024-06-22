@@ -51,6 +51,7 @@ dependencies:
   dynamic_searchbar: ^1.0.0
   aad_b2c_webview: ^0.0.56
   go_router: ^14.1.4
+  # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
   flutter_test:
