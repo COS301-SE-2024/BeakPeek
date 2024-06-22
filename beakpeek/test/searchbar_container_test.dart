@@ -20,7 +20,6 @@ void main() {
               ),
             ),
           );
-
           expect(find.byType(Column), findsAtLeast(1));
           expect(find.byType(FutureBuilder<List<Bird>>), findsOne);
         },
