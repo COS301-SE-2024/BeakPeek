@@ -96,6 +96,11 @@
           "System.Diagnostics.EventLog": "6.0.0"
         }
       },
+      "CsvHelper": {
+        "type": "Transitive",
+        "resolved": "33.0.0",
+        "contentHash": "EbB8Fnl2qCq/0qsV7jOR3NIfPGNjr/RKpHF6aAJx2kJT/xgW3U86o2wKd/ENQE+9ilORqJg/t7bxyJL+uLC2Zg=="
+      },
       "Microsoft.Bcl.AsyncInterfaces": {
         "type": "Transitive",
         "resolved": "1.1.1",
@@ -1468,6 +1473,7 @@
       "beakpeekapi": {
         "type": "Project",
         "dependencies": {
+          "CsvHelper": "[33.0.0, )",
           "Microsoft.EntityFrameworkCore": "[8.0.6, )",
           "Microsoft.EntityFrameworkCore.InMemory": "[8.0.6, )",
           "Microsoft.EntityFrameworkCore.SqlServer": "[8.0.6, )",

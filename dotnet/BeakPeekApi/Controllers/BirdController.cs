@@ -26,7 +26,7 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bird>> GetBirds(int id)
+        public async Task<ActionResult<Bird>> GetBird(int id)
         {
             var species = await _context.Birds.FindAsync(id);
 
@@ -39,7 +39,7 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Bird>>> SearchGautentBirdSpecies(string genus = null, string commonSpecies = null)
+        public async Task<ActionResult<IEnumerable<Bird>>> SearchBirdSpecies(string genus = null, string commonSpecies = null)
         {
             IQueryable<Bird> query = _context.Birds;
 
@@ -101,7 +101,7 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBird(string id)
+        public async Task<IActionResult> DeleteBird(int id)
         {
             var species = await _context.Birds.FindAsync(id);
             if (species == null)

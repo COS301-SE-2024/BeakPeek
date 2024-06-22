@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
+using BeakPeekApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -39,6 +40,7 @@ if (!builder.Environment.IsDevelopment())
 // connection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+builder.Services.AddScoped<CsvImporter>();
 
 var app = builder.Build();
 
@@ -54,7 +56,6 @@ app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthorization();
 app.UseAuthentication();
-
 app.MapControllers();
 
 app.Run();
