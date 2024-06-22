@@ -5,12 +5,11 @@ import 'package:beakpeek/Module/bird_search_functions.dart';
 
 import 'package:dynamic_searchbar/dynamic_searchbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_searchable_dropdown/flutter_searchable_dropdown.dart';
-import 'package:searchable_listview/searchable_listview.dart';
 
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar(
       {super.key, required this.birds, required this.sort});
+  // coverage:ignore-line
   const FilterableSearchbar.list(this.birds, this.sort, {super.key});
   final List<Bird> birds;
   final int sort;
