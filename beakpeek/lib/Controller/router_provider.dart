@@ -1,6 +1,5 @@
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Login/landing_page.dart';
-import 'package:beakpeek/View/Login/log_in.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,12 +15,6 @@ final GoRouter _router = GoRouter(
           path: 'home',
           builder: (context, state) {
             return const Home();
-          },
-        ),
-        GoRoute(
-          path: 'Login',
-          builder: (context, state) {
-            return const LogIn();
           },
         ),
       ],
