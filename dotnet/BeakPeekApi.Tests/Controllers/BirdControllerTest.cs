@@ -168,32 +168,40 @@ public class BirdControllerTests
         Assert.IsType<NotFoundResult>(result);
     }
 
+
     [Fact]
     public async Task GetBirdsByPentad_ReturnsBirdsByPentad()
     {
         // Arrange
+
         var pentad = "1234";
 
         // Act
-        var result = await _controller.GetBirds(pentad);
+        var result = await _controller.GetBirdsInPentad(pentad);
 
         // Assert
         var actionResult = Assert.IsType<ActionResult<IEnumerable<Bird>>>(result);
-        var returnValue = Assert.IsType<List<Bird>>(actionResult.Value);
+        var okResult = actionResult.Result as OkObjectResult;
+        Assert.NotNull(okResult);
+
+        var returnValue = Assert.IsType<List<Bird>>(okResult.Value);
         Assert.Single(returnValue);
         Assert.Equal(pentad, returnValue[0].Pentad);
     }
+
+
 
     [Fact]
     public async Task GetBirdsByPentad_ReturnsNotFoundForInvalidPentad()
     {
         // Arrange
-        var pentad = "9999";
+        var birdId = "999";
 
         // Act
-        var result = await _controller.GetBirds(pentad);
+        var result = await _controller.GetBirdsInPentad(birdId);
 
         // Assert
         Assert.IsType<NotFoundResult>(result.Result);
     }
+
 }

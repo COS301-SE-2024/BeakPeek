@@ -121,18 +121,19 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpGet("{pentad}/pentad")]
-        public async Task<ActionResult<IEnumerable<Bird>>> GetBirds(string pentad)
+        public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInPentad(string pentad)
         {
-            var speciesList = await _context.Birds
+
+            var pentadBirdList = await _context.Birds
                                             .Where(s => s.Pentad == pentad)
                                             .ToListAsync();
 
-            if (speciesList == null || speciesList.Count == 0)
+            if (pentadBirdList == null || pentadBirdList.Count() == 0)
             {
                 return NotFound();
             }
 
-            return Ok(speciesList);
+            return Ok(pentadBirdList);
         }
     }
 }

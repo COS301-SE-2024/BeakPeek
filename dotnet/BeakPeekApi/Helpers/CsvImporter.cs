@@ -21,14 +21,14 @@ namespace BeakPeekApi.Helpers
 
             if (province == null)
             {
-                Console.WriteLine("Adding new province");
+                // Console.WriteLine("Adding new province");
                 province = new Province { Name = provinceName };
                 _context.Provinces.Add(province);
                 _context.SaveChanges();
             }
             else
             {
-                Console.WriteLine($"Province with name: {provinceName}");
+                // Console.WriteLine($"Province with name: {provinceName}");
             }
 
             using (var reader = new StreamReader(filepath))
@@ -53,14 +53,14 @@ namespace BeakPeekApi.Helpers
             if (province != null)
             {
                 var records = _context.Birds.Where(r => r.ProvinceId == province.Id).ToList();
-                Console.WriteLine($"Found {records.Count} records to remove for province: {provinceName}");
+                // Console.WriteLine($"Found {records.Count} records to remove for province: {provinceName}");
                 _context.Birds.RemoveRange(records);
                 _context.SaveChanges();
-                Console.WriteLine("Records removed and changes saved.");
+                // Console.WriteLine("Records removed and changes saved.");
             }
             else
             {
-                Console.WriteLine($"No province found with name: {provinceName}");
+                // Console.WriteLine($"No province found with name: {provinceName}");
             }
         }
 
