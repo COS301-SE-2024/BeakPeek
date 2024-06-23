@@ -50,7 +50,15 @@ using (var scope = app.Services.CreateScope())
     dbContext.Database.Migrate();
 
     var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
-    csvImporter.ImportAllCsvData("/data");
+    if (builder.Environment.IsDevelopment())
+    {
+        csvImporter.ImportAllCsvData("/data");
+    }
+    else
+    {
+        var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
+        csvImporter.ImportAllCsvData(csvDirectoryPath);
+    }
 }
 
 // Configure the HTTP request pipeline.
