@@ -135,5 +135,26 @@ namespace BeakPeekApi.Controllers
 
             return Ok(pentadBirdList);
         }
+
+        [HttpGet("GetBirdsInProvince/{province}")]
+        public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInProvince(string province)
+        {
+            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
+            if (provinceID == null)
+            {
+                return NotFound("Province not found");
+            }
+            var provinceBirdList = await _context.Birds
+                                            .Where(b => b.ProvinceId == provinceID.Id)
+                                            .ToListAsync();
+
+            if (provinceBirdList == null || provinceBirdList.Count() == 0)
+            {
+                return NotFound();
+            }
+
+            return Ok(provinceBirdList);
+
+        }
     }
 }

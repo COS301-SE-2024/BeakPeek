@@ -1,5 +1,7 @@
 
 
+using System.Text.Json.Serialization;
+
 namespace BeakPeekApi.Models
 {
     public class Bird
@@ -15,6 +17,8 @@ namespace BeakPeekApi.Models
         public int Total_Records { get; set; }
         public int Total_Cards { get; set; }
         public int ProvinceId { get; set; }
+
+        [JsonIgnore]
         public Province Province { get; set; }
 
     }

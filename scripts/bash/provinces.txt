@@ -6,3 +6,4 @@ limpopo
 mpumalanga
 northerncape
 northwest
+westerncape
