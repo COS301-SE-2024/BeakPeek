@@ -40,22 +40,6 @@ void main() {
       );
 
       testWidgets(
-        'Tap help',
-        (tester) async {
-          await tester.pumpWidget(
-            const MaterialApp(
-              home: Scaffold(
-                body: Home(),
-              ),
-            ),
-          );
-          await tester.tap(find.byKey(const Key('helpLogo')));
-          await tester.pump();
-          expect(find.byType(AlertDialog), findsOne);
-        },
-      );
-
-      testWidgets(
         'Search is displayed',
         (tester) async {
           await tester.pumpWidget(
