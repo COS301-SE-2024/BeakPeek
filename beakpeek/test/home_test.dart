@@ -35,7 +35,23 @@ void main() {
               ),
             ),
           );
-          expect(find.byType(GestureDetector), findsAtLeast(1));
+          expect(find.byKey(const Key('helpLogo')), findsAtLeast(1));
+        },
+      );
+
+      testWidgets(
+        'Tap help',
+        (tester) async {
+          await tester.pumpWidget(
+            const MaterialApp(
+              home: Scaffold(
+                body: Home(),
+              ),
+            ),
+          );
+          await tester.tap(find.byKey(const Key('helpLogo')));
+          await tester.pump();
+          expect(find.byType(AlertDialog), findsOne);
         },
       );
 
