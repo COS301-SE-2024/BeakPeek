@@ -59,7 +59,12 @@ class UserProfileState extends State<UserProfile> {
               ),
             ),
             //fullname
-            //livelist
+            const Center(
+              child: Text('Live List'),
+            ),
+            Container(
+              child: getLiveList(),
+            ),
             Center(
               child: SliderButton(
                 icon: Center(
