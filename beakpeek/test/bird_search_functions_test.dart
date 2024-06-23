@@ -246,24 +246,3 @@ void main() {
     },
   );
 }
-
-// final birds = [
-//   Bird(
-//     pentad: '1',
-//     spp: 1,
-//     commonGroup: 'commonGroup',
-//     commonSpecies: 'commonSpecies',
-//     genus: 'genus',
-//     species: 'species',
-//     reportingRate: 10.0,
-//   ),
-//   Bird(
-//     pentad: '1',
-//     spp: 1,
-//     commonGroup: 'commonGroup',
-//     commonSpecies: 'commonSpecies',
-//     genus: 'genus',
-//     species: 'species',
-//     reportingRate: 10.0,
-//   ),
-// ];

@@ -1,4 +1,3 @@
-
 import 'package:beakpeek/View/Home/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +12,10 @@ void main() {
     await tester.pumpWidget(
       const MaterialApp(
         home: Scaffold(
-          body: HeatMap(commonGroup: 'Dove', commonSpecies: 'Laughing',),
+          body: HeatMap(
+            commonGroup: 'Dove',
+            commonSpecies: 'Laughing',
+          ),
         ),
       ),
     );
