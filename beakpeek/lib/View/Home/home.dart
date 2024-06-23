@@ -3,6 +3,7 @@ import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/Model/home_model_functions.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -71,6 +72,15 @@ class Home extends StatelessWidget {
                             ),
                             textAlign: TextAlign.left,
                           ),
+                            SizedBox(width: screenWidth*0.02), // Spacing between text and icon
+                              GestureDetector(
+                                onTap: () => showHelpPopup(context),
+                                child: const Icon(
+                                  IconData(0xe309, fontFamily: 'MaterialIcons', matchTextDirection: true),
+                                  size: 20.0, // Adjust size as needed
+                                  color: Colors.green, // Optional: Set color to match theme
+                                ),
+                              ),                         
                           SizedBox(height: screenHeight * 0.01),
                           Image.asset(
                             'assets/images/map.png',
