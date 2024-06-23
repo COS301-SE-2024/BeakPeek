@@ -1,22 +1,26 @@
-// bird_map.dart
-
+import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_map.dart';
-import 'package:beakpeek/View/Home/bird_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
-class BirdMap extends StatefulWidget {
-  const BirdMap({super.key, this.testController});
+class HeatMap extends StatefulWidget {
+  const HeatMap(
+      {super.key,
+      this.testController,
+      required this.commonGroup,
+      required this.commonSpecies});
 
   final GoogleMapController? testController;
+  final String commonGroup;
+  final String commonSpecies;
 
   @override
-  State<BirdMap> createState() => BirdMapState();
+  State<HeatMap> createState() => HeatMapState();
 }
 
-class BirdMapState extends State<BirdMap> {
+class HeatMapState extends State<HeatMap> {
   late GoogleMapController mapController;
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
   String _selectedProvince = 'gauteng'; // Default selected province
@@ -31,6 +35,18 @@ class BirdMapState extends State<BirdMap> {
       zoom: 11.0,
     );
     _loadKmlData();
+  }
+
+  Color _getColorForReportingRate(double reportingRate) {
+    if (reportingRate < 40) {
+      return Colors.red.withOpacity(0.4);
+    } else if (reportingRate < 60) {
+      return Colors.orange.withOpacity(0.4);
+    } else if (reportingRate < 80) {
+      return Colors.yellow.withOpacity(0.4);
+    } else {
+      return Colors.green.withOpacity(0.4);
+    }
   }
 
   @override
@@ -81,8 +97,7 @@ class BirdMapState extends State<BirdMap> {
     // Set camera positions for different provinces
     switch (province) {
       case 'gauteng':
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593));
+        return const CameraPosition(target: LatLng(-25.7559141, 28.2330593));
       case 'westerncape':
         return const CameraPosition(
             target: LatLng(-33.9249, 18.4241), zoom: 2.0);
@@ -90,8 +105,7 @@ class BirdMapState extends State<BirdMap> {
         return const CameraPosition(
             target: LatLng(-32.2968, 26.4194), zoom: 2.0);
       default:
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593));
+        return const CameraPosition(target: LatLng(-25.7559141, 28.2330593));
     }
   }
 
@@ -104,7 +118,8 @@ class BirdMapState extends State<BirdMap> {
       final kmlString =
           await rootBundle.loadString('assets/province_$_selectedProvince.kml');
       final polygonsData = KmlParser.parseKml(kmlString);
-
+      final birdData = await BirdMapFunctions().fetchBirdsByGroupAndSpecies(
+          widget.commonGroup, widget.commonSpecies);
       setState(() {
         _polygons = polygonsData.map((polygonData) {
           final id = polygonData['id'];
@@ -112,16 +127,25 @@ class BirdMapState extends State<BirdMap> {
                   as List<Map<String, double>>)
               .map((coord) => LatLng(coord['latitude']!, coord['longitude']!))
               .toList();
+          final bird = birdData.firstWhere(
+            (b) => b.pentad == id,
+            orElse: () => Bird(
+                pentad: '',
+                reportingRate: 0.0,
+                spp: 0,
+                commonGroup: '',
+                commonSpecies: '',
+                genus: '',
+                species: ''),
+          );
+          final color = _getColorForReportingRate(bird.reportingRate);
           return Polygon(
             polygonId: PolygonId(id),
             points: coordinates,
             strokeColor: Colors.transparent,
-            fillColor: Colors.transparent,
+            fillColor: color,
             strokeWidth: 2,
             consumeTapEvents: true,
-            onTap: () {
-              _onPolygonTapped(id);
-            },
           );
         }).toSet();
       });
@@ -131,19 +155,4 @@ class BirdMapState extends State<BirdMap> {
       }
     }
   }
-
-  void _onPolygonTapped(String id) {
-    if (kDebugMode) {
-      print('Polygon with ID: $id tapped');
-    }
-    // Show the draggable bottom sheet
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true,
-      builder: (context) {
-        return BirdSheet(pentadId: id);
-      },
-    );
-  }
-
 }
