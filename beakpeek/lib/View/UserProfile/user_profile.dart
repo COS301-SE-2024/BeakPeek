@@ -222,7 +222,7 @@ class UserProfileState extends State<UserProfile> {
                                   color: Colors.grey.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 7,
-                                  offset: Offset(0, 3),
+                                  offset: const Offset(0, 3),
                                 ),
                               ),
                             ),
