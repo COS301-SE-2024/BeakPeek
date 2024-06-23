@@ -5,19 +5,16 @@ services:
     container_name: webapi
     build:
       context: .
-      target: development
       dockerfile: Dockerfile
     ports:
       - "5000:8080"
     depends_on:
       - db
-    develop:
-      watch:
-        - path: .
-          action: rebuild 
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ConnectionStrings__DefaultConnection=Server=db;Database=BeakPeek;User=sa;Password=Your_password123;TrustServerCertificate=true;
+    volumes:
+      - ./res/testData:/data
   db:
     image: "mcr.microsoft.com/mssql/server:2022-latest"
     container_name: sql_server2022
@@ -26,8 +23,5 @@ services:
     environment:
       SA_PASSWORD: "Your_password123"
       ACCEPT_EULA: "Y"
-    volumes:
-      - ./scripts/sqlscripts:/docker-entrypoint-initdb.d
-      - ./res/species/province_gauteng_specieslist.csv:/tmp/province_gauteng_specieslist.csv
-      - ./scripts/bash/custom-entrypoint.sh:/usr/config/custom-entrypoint.sh
-    command: ["/bin/bash", "/usr/config/custom-entrypoint.sh"]
+    restart: always
+

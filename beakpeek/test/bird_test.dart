@@ -43,7 +43,7 @@ void main() {
       // Use Mockito to return a successful response when it calls the
       // provided http.Client.
       when(client.get(Uri.parse(
-              'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad')))
+              'http://10.0.2.2:5000/api/Bird/$pentadId/pentad')))
           .thenAnswer((_) async => http.Response('''
           [
             {
