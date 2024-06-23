@@ -1,15 +1,24 @@
 #!/bin/bash
-# Start SQL Server
-/opt/mssql/bin/sqlservr &
 
-# Wait for SQL Server to start
-sleep 30
+# Wait for SQL Server to be available
+echo "Waiting for SQL Server to be available..."
+until /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Your_password123 -d master -Q "SELECT 1" &>/dev/null; do
+  echo -n "."
+  sleep 1
+done
 
-# Run the initialization script
-/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Your_password123 -i /docker-entrypoint-initdb.d/init.sql
+echo "SQL Server is up and running"
 
-# Run the data loading script
-/opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Your_password123 -i /docker-entrypoint-initdb.d/load_data.sql
+# Run initial scripts
+for f in /docker-entrypoint-initdb.d/*; do
+  case "$f" in
+    *.sh)  echo "$0: running $f"; . "$f" ;;
+    *.sql) echo "$0: running $f"; /opt/mssql-tools/bin/sqlcmd -S localhost -U sa -P Your_password123 -d master -i "$f" ;;
+    *)     echo "$0: ignoring $f" ;;
+  esac
+done
+
+echo "Database initialization and data import completed"
 
 # Keep the container running
-wait
+tail -f /dev/null

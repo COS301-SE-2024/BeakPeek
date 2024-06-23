@@ -116,4 +116,27 @@ public class CsvImporterTests
         Assert.Equal(22, birdRecord.Total_Cards);
         Assert.Equal(27.3, birdRecord.ReportingRate);
     }
+
+    [Fact]
+    public void ImportAllCsvData_ShouldCallImportCsvDataForEachCsvFile()
+    {
+        // Arrange
+        var directoryPath = "../../../testData/";
+        var csvFiles = Directory.GetFiles(directoryPath, "*.csv");
+
+
+        // Act
+        _csvImporter.ImportAllCsvData(directoryPath);
+
+        // Assert
+        foreach (var csvFile in csvFiles)
+        {
+            var province = Path.GetFileNameWithoutExtension(csvFile);
+            var provinceInDb = _context.Provinces.FirstOrDefault(p => p.Name == province);
+
+            Assert.NotNull(provinceInDb);
+            Assert.Equal(49, provinceInDb.Birds.Count());
+        }
+    }
 }
+
