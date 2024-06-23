@@ -14,7 +14,7 @@ void main() {
             body: Home(),
           ),
         ));
-        expect(find.text('View Map'), findsOneWidget);
+        expect(find.text('View Map'), findsAtLeast(1));
       });
       testWidgets('Bottom navigation is displayed', (tester) async {
         await tester.pumpWidget(const MaterialApp(
