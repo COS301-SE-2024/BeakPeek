@@ -5,7 +5,6 @@ namespace BeakPeekApi.Models
     public class AppDbContext : DbContext
     {
 
-        public virtual DbSet<GautengBirdSpecies> GautengBirdSpecies { get; set; }
         public DbSet<Province> Provinces { get; set; }
         public DbSet<Bird> Birds { get; set; }
 
