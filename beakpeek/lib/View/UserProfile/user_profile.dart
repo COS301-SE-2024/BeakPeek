@@ -27,6 +27,7 @@ class UserProfileState extends State<UserProfile> {
   }
 
   void editName(String data) {
+    localStorage.setItem('fullName', data);
     setState(() {
       name = data;
     });
@@ -45,6 +46,9 @@ class UserProfileState extends State<UserProfile> {
               outlineColor: Colors.red,
               outlineWidth: 5,
               name: name,
+              image: Image.asset(
+                'assets/images/profileImages/images.jpg',
+              ).image,
             ),
             TextField(
               maxLines: 2,
