@@ -1,5 +1,28 @@
+import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
+
+final birds = [
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'Laughing',
+    commonSpecies: 'Dove',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 10.0,
+  ),
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'African',
+    commonSpecies: 'Eagle',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 10.0,
+  ),
+];
 
 ThemeMode getThemeMode(String data) {
   if (data.isEmpty) {
@@ -32,4 +55,14 @@ String getLabelIcon() {
     return 'Dark Mode';
   }
   return 'Light Mode';
+}
+
+Widget getLiveList() {
+  final List<Widget> items = getWidgetListOfBirds(birds);
+  return Column(
+    children: [
+      items[0],
+      items[1],
+    ],
+  );
 }
