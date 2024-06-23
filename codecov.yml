@@ -8,3 +8,6 @@ component_management:
       name: dotnet
       paths:
         - dotnet/**
+
+ignore:
+  - "dotnet/BeakPeekApi/Migrations"
