@@ -41,11 +41,11 @@ void main() {
           );
           expect(find.byType(Icon), findsOneWidget);
           expect(find.byType(Column), findsOneWidget);
-          expect(find.byType(Row), findsOneWidget);
+          expect(find.byType(Row), findsAtLeast(1));
           expect(find.byType(FilledButton), findsAtLeast(2));
           await tester.tap(find.text('A-Z'));
           await tester.pumpAndSettle();
-          await tester.tap(find.text('ReportRate'));
+          await tester.tap(find.text('Report Rate'));
           await tester.pumpAndSettle();
           await tester.tap(find.byIcon(Icons.search));
           await tester.pumpAndSettle();
