@@ -81,6 +81,27 @@ class UserProfileState extends State<UserProfile> {
                 label: Text(iconLabel),
               ),
             ),
+            Center(
+              child: FilledButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/home');
+                },
+                style: FilledButton.styleFrom(
+                  backgroundColor: const Color(0xFF033A30),
+                  minimumSize: const Size(350, 50),
+                  shadowColor: Colors.black,
+                ),
+                child: const Text(
+                  'Home',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'SF Pro Display',
+                    fontWeight: FontWeight.w500,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
           ],
         ),
       ),

@@ -1,7 +1,6 @@
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:localstorage/localstorage.dart';
 
 import 'filterable_searchbar_test.dart';
 
