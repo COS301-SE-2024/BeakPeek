@@ -1,5 +1,7 @@
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:profile_photo/profile_photo.dart';
 import 'package:slider_button/slider_button.dart';
 
 class UserProfile extends StatefulWidget {
@@ -13,15 +15,21 @@ class UserProfile extends StatefulWidget {
 class UserProfileState extends State<UserProfile> {
   Widget iconDisplay = getIcon();
   String iconLabel = getLabelIcon();
+  String name = localStorage.getItem('fullName') ?? '';
   @override
   void initState() {
+    if (name.isEmpty) {
+      name = 'Elm Boog';
+    }
     iconDisplay = getIcon();
     iconLabel = getLabelIcon();
     super.initState();
   }
 
-  void changeIcon() {
-    setState(() {});
+  void editName(String data) {
+    setState(() {
+      name = data;
+    });
   }
 
   @override
@@ -30,7 +38,22 @@ class UserProfileState extends State<UserProfile> {
       body: Center(
         child: Column(
           children: [
-            //profile photo
+            ProfilePhoto(
+              totalWidth: 200,
+              cornerRadius: 100,
+              color: Colors.blue,
+              outlineColor: Colors.red,
+              outlineWidth: 5,
+              name: name,
+            ),
+            TextField(
+              maxLines: 2,
+              onChanged: (value) => editName(value),
+              decoration: const InputDecoration(
+                label: Text('Full name'),
+                hintText: 'Elm Boog',
+              ),
+            ),
             //fullname
             //livelist
             Center(
