@@ -11,3 +11,4 @@ component_management:
 
 ignore:
   - "dotnet/BeakPeekApi/Migrations"
+  - "dotnet/BeakPeekApi/Program.cs"
