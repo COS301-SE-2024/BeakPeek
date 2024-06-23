@@ -72,7 +72,7 @@ void main() {
               ),
             ),
           );
-          await tester.tap(find.text('ReportRate'));
+          await tester.tap(find.text('Report Rate'));
           await tester.pumpAndSettle();
           await tester.tap(find.byIcon(Icons.search));
           await tester.pumpAndSettle();
