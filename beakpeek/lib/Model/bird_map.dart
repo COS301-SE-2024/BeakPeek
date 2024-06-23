@@ -52,7 +52,7 @@ class KmlParser {
 class BirdMapFunctions {
   Future<List<Bird>> fetchBirdsByGroupAndSpecies(
       String commonGroup, String commonSpecies) async {
-    final Uri uri = Uri.http('10.0.2.2:5000', '/api/GautengBirdSpecies/search',
+    final Uri uri = Uri.http('10.0.2.2:5000', '/api/Bird/search',
         {'commonGroup': commonGroup, 'commonSpecies': commonSpecies});
 
     try {
