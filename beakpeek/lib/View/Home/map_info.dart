@@ -25,29 +25,30 @@ class MapInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F1ED),
-      body: Center(
-        child: Align(
-          alignment: Alignment.bottomCenter,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Expanded(
-                // child: SingleChildScrollView(
-                child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      children: [
-                        const SizedBox(height: 30),
-                        const TopSearchBar(),
-                        const SizedBox(height: 20),
-                        RichText(
-                          text: const TextSpan(
-                            text: 'Your Area Map',
-                            style: MapPageStyles.mapHeadingGreen,
+        backgroundColor: const Color(0xFFF3F1ED),
+        body: Center(
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Expanded(
+                  // child: SingleChildScrollView(
+                  child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        children: [
+                          const SizedBox(height: 30),
+                          const TopSearchBar(),
+                          const SizedBox(height: 20),
+                          RichText(
+                            text: const TextSpan(
+                              text: 'Your Area Map',
+                              style: MapPageStyles.mapHeadingGreen,
+                            ),
+                            textAlign: TextAlign.left,
                           ),
-<<<<<<< HEAD
-                          SizedBox(width: 8), // Spacing between text and icon
+                          const SizedBox(width: 8), // Spacing between text
                           GestureDetector(
                             onTap: () {
                               const content =
@@ -74,22 +75,7 @@ class MapInfo extends StatelessWidget {
                 const BottomNavigation(),
               ],
             ),
-=======
-                          textAlign: TextAlign.left,
-                        ),
-                        const SizedBox(height: 10),
-                        const Expanded(
-                          child: BirdMap(),
-                        )
-                      ],
-                    )),
-              ),
-              const BottomNavigation(),
-            ],
->>>>>>> 145c53c1a7f4a68c548c81a66c4dacb084ddadb6
           ),
-        ),
-      ),
-    );
+        ));
   }
 }
