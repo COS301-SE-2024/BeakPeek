@@ -25,25 +25,5 @@ void main() {
         },
       );
     },
-
-
-    testWidgets(
-        'me testing',
-        (tester) async {
-          await tester.pumpWidget(
-            MaterialApp(
-              home: Scaffold(
-                body: Builder(
-                  builder: (context) {
-                    return buildHelpDialog(context, '');
-                  },
-                ),
-              ),
-            ),
-          );
-
-          expect(find.byType(AlertDialog), findsOne);
-        },
-      );
   );
 }
