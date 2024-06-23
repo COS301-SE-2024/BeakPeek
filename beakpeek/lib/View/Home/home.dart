@@ -53,10 +53,21 @@ class Home extends StatelessWidget {
                                 right: 0,
                                 child: Container(
                                   color: Colors.black.withOpacity(0.5),
+                                  padding: EdgeInsets.symmetric(
+                                      horizontal: 16.0,
+                                      vertical:
+                                          8.0), // Adjust padding as per your preference
                                   child: RichText(
                                     text: const TextSpan(
-                                      text: 'Black Fronted Bushsrike',
-                                      style: HomePageStyles.homeWhiteHeading,
+                                      text: 'Black Fronted Bushshrike',
+                                      style: TextStyle(
+                                        color: Colors.white, // Text color
+                                        fontSize: 18.0, // Text size
+                                        fontWeight:
+                                            FontWeight.bold, // Text weight
+                                        fontFamily:
+                                            'Roboto', // Optional: Custom font family
+                                      ),
                                     ),
                                   ),
                                 ),
