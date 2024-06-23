@@ -3,7 +3,7 @@ import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Model/nav.dart';
-import 'package:beakpeek/Model/home_model_functions.dart';
+import 'package:beakpeek/Model/help_icon_model_functions.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
