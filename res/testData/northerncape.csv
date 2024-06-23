@@ -1,0 +1,500 @@
+Pentad,Spp,Common_group,Common_species,Genus,Species,Jan,Feb,Mar,Apr,May,Jun,Jul,Aug,Sep,Oct,Nov,Dec,Total_Records,Total_Cards,ReportingRate
+2445_2000,1,Ostrich,Common,Struthio,camelus,33.3,,50.0,100.0,,,50.0,50.0,60.0,0.0,100.0,,10,18,55.6
+2445_2000,78,Stork,Abdim's,Ciconia,abdimii,33.3,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,105,,Secretarybird,Sagittarius,serpentarius,33.3,,50.0,50.0,,,0.0,0.0,0.0,100.0,0.0,,4,18,22.2
+2445_2000,107,Vulture,White-backed,Gyps,africanus,33.3,,100.0,0.0,,,50.0,50.0,80.0,0.0,0.0,,9,18,50.0
+2445_2000,108,Vulture,Lappet-faced,Torgos,tracheliotos,0.0,,50.0,50.0,,,0.0,0.0,20.0,0.0,0.0,,3,18,16.7
+2445_2000,114,Falcon,Lanner,Falco,biarmicus,33.3,,0.0,0.0,,,0.0,50.0,40.0,0.0,100.0,,5,18,27.8
+2445_2000,117,Falcon,Red-necked,Falco,chicquera,0.0,,0.0,0.0,,,0.0,0.0,60.0,0.0,0.0,,3,18,16.7
+2445_2000,122,Kestrel,Greater,Falco,rupicoloides,0.0,,0.0,0.0,,,0.0,0.0,80.0,100.0,0.0,,5,18,27.8
+2445_2000,123,Kestrel,Rock,Falco,rupicolus,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,126,Falcon,Pygmy,Polihierax,semitorquatus,0.0,,0.0,0.0,,,0.0,0.0,40.0,0.0,0.0,,2,18,11.1
+2445_2000,128,Kite,Black,Milvus,migrans,33.3,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,129,Kite,Yellow-billed,Milvus,aegyptius,33.3,,50.0,0.0,,,0.0,50.0,0.0,0.0,0.0,,3,18,16.7
+2445_2000,130,Kite,"Black-winged ",Elanus,caeruleus,66.7,,50.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,4,18,22.2
+2445_2000,134,Eagle,Tawny,Aquila,rapax,33.3,,0.0,50.0,,,0.0,100.0,40.0,0.0,0.0,,6,18,33.3
+2445_2000,142,Eagle,Martial,Polemaetus,bellicosus,0.0,,0.0,0.0,,,0.0,0.0,60.0,0.0,100.0,,4,18,22.2
+2445_2000,146,Eagle,"Black-chested Snake",Circaetus,pectoralis,66.7,,50.0,0.0,,,0.0,50.0,0.0,100.0,0.0,,5,18,27.8
+2445_2000,151,,Bateleur,Terathopius,ecaudatus,33.3,,50.0,50.0,,,0.0,100.0,20.0,100.0,0.0,,7,18,38.9
+2445_2000,162,Goshawk,Gabar,Micronisus,gabar,0.0,,0.0,0.0,,,0.0,0.0,60.0,0.0,0.0,,3,18,16.7
+2445_2000,165,Goshawk,"Pale Chanting",Melierax,canorus,66.7,,100.0,100.0,,,50.0,100.0,80.0,100.0,100.0,,15,18,83.3
+2445_2000,182,Spurfowl,Red-billed,Pternistis,adspersus,33.3,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,196,Buttonquail,Common,Turnix,sylvaticus,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,217,Bustard,Kori,Ardeotis,kori,66.7,,50.0,50.0,,,100.0,0.0,20.0,100.0,0.0,,8,18,44.4
+2445_2000,242,Lapwing,Crowned,Vanellus,coronatus,66.7,,50.0,100.0,,,100.0,100.0,60.0,100.0,0.0,,13,18,72.2
+2445_2000,277,Courser,Temminck's,Cursorius,temminckii,0.0,,50.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,307,Sandgrouse,Namaqua,Pterocles,namaqua,100.0,,0.0,100.0,,,50.0,0.0,20.0,100.0,0.0,,8,18,44.4
+2445_2000,308,Sandgrouse,Burchell's,Pterocles,burchelli,0.0,,0.0,50.0,,,0.0,0.0,20.0,100.0,0.0,,3,18,16.7
+2445_2000,316,Dove,"Cape Turtle",Streptopelia,capicola,100.0,,100.0,100.0,,,100.0,100.0,100.0,0.0,100.0,,17,18,94.4
+2445_2000,317,Dove,Laughing,Spilopelia,senegalensis,0.0,,50.0,50.0,,,0.0,0.0,40.0,0.0,0.0,,4,18,22.2
+2445_2000,318,Dove,Namaqua,Oena,capensis,100.0,,50.0,100.0,,,50.0,0.0,80.0,100.0,100.0,,13,18,72.2
+2445_2000,364,Owl,"Southern White-faced Scops",Ptilopsis,granti,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,365,Owlet,Pearl-spotted,Glaucidium,perlatum,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,369,Eagle-Owl,Verreaux's,Bubo,lacteus,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,378,Swift,Common,Apus,apus,33.3,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,403,Kingfisher,Striped,Halcyon,chelicuti,33.3,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,411,Bee-eater,Swallow-tailed,Merops,hirundineus,100.0,,0.0,50.0,,,0.0,0.0,60.0,0.0,100.0,,8,18,44.4
+2445_2000,413,Roller,Lilac-breasted,Coracias,caudatus,33.3,,0.0,100.0,,,50.0,100.0,80.0,100.0,100.0,,12,18,66.7
+2445_2000,418,Hoopoe,African,Upupa,africana,0.0,,50.0,0.0,,,0.0,0.0,60.0,100.0,0.0,,5,18,27.8
+2445_2000,421,Scimitarbill,Common,Rhinopomastus,cyanomelas,33.3,,100.0,0.0,,,0.0,0.0,40.0,0.0,0.0,,5,18,27.8
+2445_2000,424,Hornbill,"African Grey",Lophoceros,nasutus,0.0,,50.0,0.0,,,50.0,0.0,0.0,0.0,0.0,,2,18,11.1
+2445_2000,426,Hornbill,"Southern Yellow-billed",Tockus,leucomelas,66.7,,0.0,50.0,,,100.0,0.0,80.0,100.0,0.0,,10,18,55.6
+2445_2000,432,Barbet,"Acacia Pied",Tricholaema,leucomelas,33.3,,0.0,0.0,,,0.0,0.0,40.0,0.0,0.0,,3,18,16.7
+2445_2000,459,Lark,Fawn-colored,Calendulauda,africanoides,100.0,,0.0,100.0,,,50.0,100.0,60.0,0.0,100.0,,12,18,66.7
+2445_2000,460,Lark,Sabota,Calendulauda,sabota,66.7,,0.0,100.0,,,0.0,0.0,40.0,0.0,0.0,,6,18,33.3
+2445_2000,474,Lark,Spike-heeled,Chersomanes,albofasciata,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,485,Sparrow-Lark,Grey-backed,Eremopterix,verticalis,66.7,,50.0,0.0,,,50.0,0.0,0.0,0.0,0.0,,4,18,22.2
+2445_2000,488,Lark,Red-capped,Calandrella,cinerea,33.3,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,502,Swallow,"Greater Striped",Cecropis,cucullata,0.0,,0.0,0.0,,,0.0,0.0,40.0,0.0,0.0,,2,18,11.1
+2445_2000,514,Tit,Ashy,Melaniparus,cinerascens,66.7,,0.0,50.0,,,0.0,0.0,40.0,0.0,0.0,,5,18,27.8
+2445_2000,517,Drongo,Fork-tailed,Dicrurus,adsimilis,66.7,,50.0,100.0,,,100.0,100.0,100.0,100.0,100.0,,16,18,88.9
+2445_2000,523,Crow,Cape,Corvus,capensis,100.0,,50.0,100.0,,,0.0,0.0,100.0,100.0,100.0,,13,18,72.2
+2445_2000,544,Bulbul,"African Red-eyed",Pycnonotus,nigricans,0.0,,0.0,50.0,,,50.0,50.0,40.0,0.0,0.0,,5,18,27.8
+2445_2000,568,Wheatear,Capped,Oenanthe,pileata,100.0,,50.0,100.0,,,0.0,0.0,0.0,100.0,0.0,,7,18,38.9
+2445_2000,570,Chat,Familiar,Oenanthe,familiaris,66.7,,0.0,100.0,,,100.0,50.0,60.0,0.0,100.0,,11,18,61.1
+2445_2000,575,Chat,"Ant-eating ",Myrmecocichla,formicivora,100.0,,100.0,100.0,,,50.0,100.0,40.0,0.0,0.0,,12,18,66.7
+2445_2000,586,"Scrub Robin",Kalahari,Cercotrichas,paena,66.7,,0.0,0.0,,,100.0,50.0,80.0,0.0,100.0,,10,18,55.6
+2445_2000,600,Eremomela,Yellow-bellied,Eremomela,icteropygialis,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,619,Warbler,Rufous-eared,Malcorus,pectoralis,33.3,,0.0,50.0,,,0.0,0.0,0.0,0.0,0.0,,2,18,11.1
+2445_2000,630,Cisticola,Desert,Cisticola,aridulus,0.0,,0.0,0.0,,,50.0,50.0,40.0,0.0,0.0,,4,18,22.2
+2445_2000,650,Prinia,Black-chested,Prinia,flavicans,100.0,,50.0,50.0,,,50.0,50.0,100.0,100.0,100.0,,14,18,77.8
+2445_2000,658,Warbler,Chestnut-vented,Curruca,subcoerulea,100.0,,50.0,50.0,,,0.0,50.0,80.0,100.0,100.0,,12,18,66.7
+2445_2000,661,Flycatcher,Marico,Melaenornis,mariquensis,100.0,,0.0,100.0,,,100.0,100.0,100.0,0.0,100.0,,15,18,83.3
+2445_2000,663,Flycatcher,Chat,Melaenornis,infuscatus,66.7,,50.0,0.0,,,100.0,100.0,60.0,0.0,100.0,,11,18,61.1
+2445_2000,674,Batis,Pririt,Batis,pririt,0.0,,0.0,0.0,,,0.0,0.0,80.0,0.0,0.0,,4,18,22.2
+2445_2000,692,Pipit,African,Anthus,cinnamomeus,66.7,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,2,18,11.1
+2445_2000,695,Pipit,Buffy,Anthus,vaalensis,33.3,,0.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,706,Shrike,"Lesser Grey",Lanius,minor,100.0,,50.0,0.0,,,0.0,0.0,0.0,0.0,0.0,,4,18,22.2
+2445_2000,707,Fiscal,"Southern ",Lanius,collaris,33.3,,50.0,100.0,,,50.0,100.0,80.0,0.0,100.0,,12,18,66.7
+2445_2000,711,Shrike,Crimson-breasted,Laniarius,atrococcineus,66.7,,0.0,50.0,,,50.0,50.0,60.0,0.0,0.0,,8,18,44.4
+2445_2000,731,,Brubru,Nilaus,afer,66.7,,0.0,50.0,,,0.0,0.0,0.0,0.0,0.0,,3,18,16.7
+2445_2000,735,Starling,Wattled,Creatophora,cinerea,0.0,,0.0,50.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,737,Starling,Cape,Lamprotornis,nitens,100.0,,0.0,100.0,,,100.0,100.0,100.0,100.0,100.0,,16,18,88.9
+2445_2000,743,Starling,Burchell's,Lamprotornis,australis,100.0,,100.0,0.0,,,50.0,0.0,20.0,0.0,0.0,,7,18,38.9
+2445_2000,780,Sparrow-Weaver,"White-browed ",Plocepasser,mahali,100.0,,50.0,100.0,,,100.0,100.0,100.0,100.0,0.0,,16,18,88.9
+2445_2000,783,Weaver,Sociable,Philetairus,socius,66.7,,100.0,100.0,,,50.0,100.0,60.0,100.0,100.0,,14,18,77.8
+2445_2000,786,Sparrow,Cape,Passer,melanurus,33.3,,50.0,50.0,,,100.0,50.0,60.0,100.0,100.0,,11,18,61.1
+2445_2000,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,100.0,,100.0,50.0,,,50.0,100.0,100.0,100.0,100.0,,16,18,88.9
+2445_2000,803,Weaver,"Southern Masked ",Ploceus,velatus,0.0,,0.0,50.0,,,50.0,50.0,0.0,0.0,0.0,,3,18,16.7
+2445_2000,805,Quelea,Red-billed,Quelea,quelea,0.0,,0.0,0.0,,,50.0,0.0,40.0,0.0,0.0,,3,18,16.7
+2445_2000,820,Finch,Red-headed,Amadina,erythrocephala,33.3,,0.0,100.0,,,50.0,0.0,80.0,0.0,100.0,,9,18,50.0
+2445_2000,840,Waxbill,Violet-eared,Granatina,granatina,33.3,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,2,18,11.1
+2445_2000,847,Whydah,Shaft-tailed,Vidua,regia,66.7,,0.0,50.0,,,0.0,0.0,0.0,0.0,0.0,,3,18,16.7
+2445_2000,860,Canary,Black-throated,Crithagra,atrogularis,0.0,,0.0,0.0,,,0.0,0.0,20.0,0.0,0.0,,1,18,5.6
+2445_2000,866,Canary,Yellow,Crithagra,flaviventris,100.0,,100.0,100.0,,,50.0,50.0,100.0,100.0,100.0,,16,18,88.9
+2445_2000,871,Bunting,Lark-like,Emberiza,impetuani,0.0,,0.0,0.0,,,0.0,50.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,1035,Korhaan,"Northern Black",Afrotis,afraoides,33.3,,50.0,50.0,,,0.0,0.0,0.0,0.0,0.0,,3,18,16.7
+2445_2000,1183,Lark,"Eastern Clapper",Mirafra,fasciolata,0.0,,0.0,50.0,,,0.0,0.0,0.0,0.0,0.0,,1,18,5.6
+2445_2000,4142,Sparrow,"Southern Grey-headed",Passer,diffusus,100.0,,50.0,50.0,,,0.0,50.0,80.0,0.0,100.0,,11,18,61.1
+2450_2000,1,Ostrich,Common,Struthio,camelus,,,0.0,,,,,50.0,,,,,1,3,33.3
+2450_2000,107,Vulture,White-backed,Gyps,africanus,,,100.0,,,,,0.0,,,,,1,3,33.3
+2450_2000,122,Kestrel,Greater,Falco,rupicoloides,,,0.0,,,,,100.0,,,,,2,3,66.7
+2450_2000,126,Falcon,Pygmy,Polihierax,semitorquatus,,,100.0,,,,,0.0,,,,,1,3,33.3
+2450_2000,165,Goshawk,"Pale Chanting",Melierax,canorus,,,100.0,,,,,50.0,,,,,2,3,66.7
+2450_2000,316,Dove,"Cape Turtle",Streptopelia,capicola,,,100.0,,,,,100.0,,,,,3,3,100.0
+2450_2000,459,Lark,Fawn-colored,Calendulauda,africanoides,,,100.0,,,,,100.0,,,,,3,3,100.0
+2450_2000,460,Lark,Sabota,Calendulauda,sabota,,,0.0,,,,,50.0,,,,,1,3,33.3
+2450_2000,517,Drongo,Fork-tailed,Dicrurus,adsimilis,,,0.0,,,,,50.0,,,,,1,3,33.3
+2450_2000,531,Tit,"Cape Penduline",Anthoscopus,minutus,,,100.0,,,,,0.0,,,,,1,3,33.3
+2450_2000,575,Chat,"Ant-eating ",Myrmecocichla,formicivora,,,100.0,,,,,100.0,,,,,3,3,100.0
+2450_2000,586,"Scrub Robin",Kalahari,Cercotrichas,paena,,,0.0,,,,,100.0,,,,,2,3,66.7
+2450_2000,650,Prinia,Black-chested,Prinia,flavicans,,,100.0,,,,,0.0,,,,,1,3,33.3
+2450_2000,661,Flycatcher,Marico,Melaenornis,mariquensis,,,0.0,,,,,100.0,,,,,2,3,66.7
+2450_2000,663,Flycatcher,Chat,Melaenornis,infuscatus,,,0.0,,,,,100.0,,,,,2,3,66.7
+2450_2000,707,Fiscal,"Southern ",Lanius,collaris,,,0.0,,,,,100.0,,,,,2,3,66.7
+2450_2000,737,Starling,Cape,Lamprotornis,nitens,,,100.0,,,,,100.0,,,,,3,3,100.0
+2450_2000,783,Weaver,Sociable,Philetairus,socius,,,100.0,,,,,100.0,,,,,3,3,100.0
+2450_2000,786,Sparrow,Cape,Passer,melanurus,,,100.0,,,,,0.0,,,,,1,3,33.3
+2450_2000,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,,,100.0,,,,,50.0,,,,,2,3,66.7
+2450_2000,803,Weaver,"Southern Masked ",Ploceus,velatus,,,100.0,,,,,50.0,,,,,2,3,66.7
+2450_2000,847,Whydah,Shaft-tailed,Vidua,regia,,,100.0,,,,,0.0,,,,,1,3,33.3
+2450_2000,866,Canary,Yellow,Crithagra,flaviventris,,,0.0,,,,,50.0,,,,,1,3,33.3
+2450_2000,1035,Korhaan,"Northern Black",Afrotis,afraoides,,,100.0,,,,,100.0,,,,,3,3,100.0
+2450_2005,1,Ostrich,Common,Struthio,camelus,100.0,50.0,50.0,60.0,100.0,,100.0,100.0,75.0,50.0,0.0,100.0,19,26,73.1
+2450_2005,6,Grebe,Little,Tachybaptus,ruficollis,25.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,61,Egret,"Western Cattle",Bubulcus,ibis,50.0,0.0,50.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,78,Stork,Abdim's,Ciconia,abdimii,50.0,50.0,0.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,4,26,15.4
+2450_2005,80,Stork,White,Ciconia,ciconia,0.0,50.0,0.0,40.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,105,,Secretarybird,Sagittarius,serpentarius,75.0,50.0,50.0,60.0,0.0,,0.0,0.0,0.0,100.0,0.0,0.0,10,26,38.5
+2450_2005,107,Vulture,White-backed,Gyps,africanus,50.0,50.0,50.0,60.0,0.0,,0.0,0.0,75.0,50.0,0.0,100.0,12,26,46.2
+2450_2005,108,Vulture,Lappet-faced,Torgos,tracheliotos,0.0,50.0,50.0,40.0,100.0,,0.0,0.0,0.0,0.0,0.0,100.0,6,26,23.1
+2450_2005,114,Falcon,Lanner,Falco,biarmicus,100.0,100.0,100.0,80.0,100.0,,100.0,0.0,100.0,100.0,100.0,100.0,23,26,88.5
+2450_2005,117,Falcon,Red-necked,Falco,chicquera,25.0,0.0,0.0,0.0,0.0,,0.0,50.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,120,Falcon,Red-footed,Falco,vespertinus,0.0,50.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,122,Kestrel,Greater,Falco,rupicoloides,0.0,50.0,100.0,0.0,0.0,,0.0,50.0,0.0,0.0,0.0,0.0,4,26,15.4
+2450_2005,123,Kestrel,Rock,Falco,rupicolus,0.0,0.0,50.0,0.0,0.0,,0.0,50.0,50.0,0.0,0.0,0.0,4,26,15.4
+2450_2005,125,Kestrel,Lesser,Falco,naumanni,0.0,100.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,126,Falcon,Pygmy,Polihierax,semitorquatus,50.0,50.0,50.0,60.0,100.0,,0.0,50.0,0.0,0.0,0.0,0.0,9,26,34.6
+2450_2005,128,Kite,Black,Milvus,migrans,50.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,129,Kite,Yellow-billed,Milvus,aegyptius,50.0,50.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,130,Kite,"Black-winged ",Elanus,caeruleus,50.0,0.0,50.0,40.0,0.0,,0.0,0.0,0.0,50.0,0.0,0.0,6,26,23.1
+2450_2005,134,Eagle,Tawny,Aquila,rapax,75.0,100.0,100.0,40.0,0.0,,0.0,50.0,25.0,50.0,0.0,0.0,12,26,46.2
+2450_2005,139,Eagle,Booted,Hieraaetus,pennatus,25.0,0.0,0.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,141,Hawk-eagle,African,Aquila,spilogaster,0.0,0.0,0.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,142,Eagle,Martial,Polemaetus,bellicosus,75.0,50.0,50.0,20.0,0.0,,0.0,50.0,0.0,0.0,0.0,0.0,7,26,26.9
+2450_2005,145,Eagle,"Brown Snake ",Circaetus,cinereus,25.0,0.0,50.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,146,Eagle,"Black-chested Snake",Circaetus,pectoralis,0.0,100.0,50.0,20.0,0.0,,0.0,0.0,0.0,50.0,0.0,0.0,5,26,19.2
+2450_2005,151,,Bateleur,Terathopius,ecaudatus,0.0,100.0,100.0,20.0,0.0,,100.0,0.0,75.0,50.0,0.0,0.0,11,26,42.3
+2450_2005,154,Buzzard,Common,Buteo,buteo,50.0,100.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,4,26,15.4
+2450_2005,161,,Shikra,Accipiter,badius,25.0,0.0,0.0,0.0,100.0,,0.0,0.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,162,Goshawk,Gabar,Micronisus,gabar,25.0,0.0,100.0,60.0,100.0,,50.0,0.0,50.0,50.0,0.0,0.0,11,26,42.3
+2450_2005,165,Goshawk,"Pale Chanting",Melierax,canorus,100.0,100.0,100.0,100.0,100.0,,100.0,100.0,100.0,100.0,100.0,100.0,26,26,100.0
+2450_2005,182,Spurfowl,Red-billed,Pternistis,adspersus,25.0,0.0,0.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,189,Quail,Common,Coturnix,coturnix,25.0,50.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,196,Buttonquail,Common,Turnix,sylvaticus,0.0,50.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,217,Bustard,Kori,Ardeotis,kori,100.0,100.0,100.0,80.0,100.0,,50.0,100.0,0.0,0.0,0.0,0.0,16,26,61.5
+2450_2005,224,Korhaan,Red-crested,Lophotis,ruficrista,25.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,242,Lapwing,Crowned,Vanellus,coronatus,75.0,100.0,100.0,100.0,0.0,,100.0,50.0,75.0,0.0,0.0,100.0,19,26,73.1
+2450_2005,307,Sandgrouse,Namaqua,Pterocles,namaqua,75.0,100.0,50.0,60.0,100.0,,50.0,0.0,100.0,100.0,100.0,100.0,19,26,73.1
+2450_2005,308,Sandgrouse,Burchell's,Pterocles,burchelli,0.0,0.0,0.0,20.0,0.0,,50.0,0.0,25.0,100.0,100.0,0.0,6,26,23.1
+2450_2005,311,Pigeon,Speckled,Columba,guinea,50.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,100.0,0.0,3,26,11.5
+2450_2005,316,Dove,"Cape Turtle",Streptopelia,capicola,100.0,50.0,100.0,80.0,100.0,,100.0,100.0,100.0,100.0,100.0,100.0,24,26,92.3
+2450_2005,317,Dove,Laughing,Spilopelia,senegalensis,25.0,50.0,50.0,60.0,0.0,,0.0,0.0,75.0,0.0,0.0,0.0,9,26,34.6
+2450_2005,318,Dove,Namaqua,Oena,capensis,75.0,100.0,100.0,100.0,100.0,,50.0,0.0,50.0,100.0,100.0,100.0,20,26,76.9
+2450_2005,344,Cuckoo,Black,Cuculus,clamosus,25.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,346,Cuckoo,"Great Spotted",Clamator,glandarius,0.0,50.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,352,Cuckoo,Diederik,Chrysococcyx,caprius,25.0,50.0,50.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,100.0,4,26,15.4
+2450_2005,359,Owl,"Western Barn ",Tyto,alba,75.0,50.0,100.0,60.0,100.0,,0.0,0.0,50.0,50.0,100.0,100.0,15,26,57.7
+2450_2005,364,Owl,"Southern White-faced Scops",Ptilopsis,granti,0.0,0.0,0.0,40.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,365,Owlet,Pearl-spotted,Glaucidium,perlatum,0.0,0.0,50.0,40.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,368,Eagle-Owl,Spotted,Bubo,africanus,50.0,0.0,100.0,0.0,100.0,,50.0,0.0,25.0,50.0,0.0,0.0,8,26,30.8
+2450_2005,369,Eagle-Owl,Verreaux's,Bubo,lacteus,0.0,0.0,0.0,0.0,0.0,,0.0,0.0,25.0,50.0,0.0,0.0,2,26,7.7
+2450_2005,372,Nightjar,Rufous-cheeked,Caprimulgus,rufigena,75.0,100.0,50.0,0.0,0.0,,0.0,0.0,100.0,100.0,100.0,100.0,14,26,53.8
+2450_2005,373,Nightjar,Fiery-necked,Caprimulgus,pectoralis,25.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,378,Swift,Common,Apus,apus,50.0,50.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,100.0,4,26,15.4
+2450_2005,392,Mousebird,Red-faced,Urocolius,indicus,0.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,100.0,1,26,3.8
+2450_2005,403,Kingfisher,Striped,Halcyon,chelicuti,0.0,0.0,0.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,411,Bee-eater,Swallow-tailed,Merops,hirundineus,75.0,100.0,0.0,80.0,100.0,,0.0,0.0,25.0,50.0,0.0,100.0,13,26,50.0
+2450_2005,413,Roller,Lilac-breasted,Coracias,caudatus,50.0,100.0,50.0,40.0,0.0,,0.0,50.0,50.0,50.0,0.0,0.0,11,26,42.3
+2450_2005,418,Hoopoe,African,Upupa,africana,0.0,100.0,50.0,60.0,0.0,,50.0,0.0,50.0,50.0,100.0,0.0,11,26,42.3
+2450_2005,421,Scimitarbill,Common,Rhinopomastus,cyanomelas,50.0,50.0,50.0,0.0,0.0,,0.0,0.0,75.0,0.0,0.0,100.0,8,26,30.8
+2450_2005,424,Hornbill,"African Grey",Lophoceros,nasutus,0.0,0.0,0.0,0.0,0.0,,50.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,426,Hornbill,"Southern Yellow-billed",Tockus,leucomelas,25.0,0.0,100.0,80.0,0.0,,100.0,0.0,0.0,50.0,0.0,0.0,10,26,38.5
+2450_2005,432,Barbet,"Acacia Pied",Tricholaema,leucomelas,50.0,100.0,100.0,60.0,0.0,,50.0,0.0,75.0,0.0,0.0,100.0,14,26,53.8
+2450_2005,450,Woodpecker,Cardinal,Dendropicos,fuscescens,0.0,0.0,0.0,20.0,0.0,,0.0,0.0,25.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,457,Lark,Monotonous,Mirafra,passerina,25.0,50.0,50.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,459,Lark,Fawn-colored,Calendulauda,africanoides,100.0,100.0,100.0,80.0,0.0,,100.0,50.0,75.0,0.0,0.0,100.0,19,26,73.1
+2450_2005,460,Lark,Sabota,Calendulauda,sabota,50.0,50.0,0.0,40.0,0.0,,0.0,50.0,25.0,0.0,0.0,100.0,8,26,30.8
+2450_2005,474,Lark,Spike-heeled,Chersomanes,albofasciata,0.0,0.0,0.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,485,Sparrow-Lark,Grey-backed,Eremopterix,verticalis,50.0,0.0,100.0,60.0,0.0,,0.0,0.0,0.0,0.0,100.0,100.0,9,26,34.6
+2450_2005,492,Lark,Stark's,Spizocorys,starki,0.0,0.0,0.0,0.0,0.0,,0.0,0.0,25.0,50.0,0.0,0.0,2,26,7.7
+2450_2005,493,Swallow,Barn,Hirundo,rustica,0.0,0.0,50.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,504,Swallow,"South African Cliff ",Petrochelidon,spilodera,0.0,0.0,0.0,0.0,0.0,,0.0,50.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,514,Tit,Ashy,Melaniparus,cinerascens,75.0,0.0,50.0,20.0,100.0,,50.0,0.0,25.0,50.0,100.0,100.0,11,26,42.3
+2450_2005,517,Drongo,Fork-tailed,Dicrurus,adsimilis,100.0,100.0,100.0,100.0,100.0,,100.0,100.0,100.0,100.0,0.0,100.0,25,26,96.2
+2450_2005,523,Crow,Cape,Corvus,capensis,75.0,100.0,100.0,60.0,0.0,,100.0,50.0,25.0,100.0,100.0,100.0,18,26,69.2
+2450_2005,544,Bulbul,"African Red-eyed",Pycnonotus,nigricans,0.0,0.0,0.0,80.0,100.0,,100.0,0.0,75.0,0.0,0.0,100.0,11,26,42.3
+2450_2005,568,Wheatear,Capped,Oenanthe,pileata,50.0,100.0,100.0,60.0,0.0,,0.0,0.0,0.0,0.0,0.0,100.0,10,26,38.5
+2450_2005,570,Chat,Familiar,Oenanthe,familiaris,100.0,50.0,100.0,80.0,100.0,,0.0,0.0,75.0,100.0,0.0,0.0,17,26,65.4
+2450_2005,575,Chat,"Ant-eating ",Myrmecocichla,formicivora,50.0,50.0,100.0,100.0,0.0,,50.0,50.0,75.0,0.0,0.0,100.0,16,26,61.5
+2450_2005,586,"Scrub Robin",Kalahari,Cercotrichas,paena,100.0,100.0,100.0,100.0,100.0,,50.0,50.0,100.0,50.0,100.0,100.0,23,26,88.5
+2450_2005,600,Eremomela,Yellow-bellied,Eremomela,icteropygialis,50.0,0.0,0.0,0.0,0.0,,50.0,0.0,25.0,0.0,0.0,100.0,5,26,19.2
+2450_2005,619,Warbler,Rufous-eared,Malcorus,pectoralis,25.0,0.0,50.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,621,Crombec,Long-billed,Sylvietta,rufescens,0.0,0.0,0.0,20.0,0.0,,0.0,0.0,25.0,0.0,0.0,100.0,3,26,11.5
+2450_2005,630,Cisticola,Desert,Cisticola,aridulus,0.0,50.0,50.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,650,Prinia,Black-chested,Prinia,flavicans,100.0,100.0,100.0,100.0,0.0,,50.0,50.0,100.0,100.0,100.0,100.0,23,26,88.5
+2450_2005,658,Warbler,Chestnut-vented,Curruca,subcoerulea,75.0,100.0,100.0,60.0,100.0,,50.0,0.0,75.0,50.0,0.0,100.0,17,26,65.4
+2450_2005,661,Flycatcher,Marico,Melaenornis,mariquensis,75.0,0.0,100.0,80.0,0.0,,100.0,100.0,50.0,0.0,0.0,100.0,16,26,61.5
+2450_2005,663,Flycatcher,Chat,Melaenornis,infuscatus,0.0,0.0,0.0,0.0,0.0,,50.0,50.0,25.0,50.0,0.0,0.0,4,26,15.4
+2450_2005,674,Batis,Pririt,Batis,pririt,100.0,0.0,100.0,60.0,0.0,,50.0,0.0,75.0,100.0,0.0,100.0,16,26,61.5
+2450_2005,692,Pipit,African,Anthus,cinnamomeus,25.0,0.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,695,Pipit,Buffy,Anthus,vaalensis,0.0,0.0,0.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,706,Shrike,"Lesser Grey",Lanius,minor,50.0,100.0,100.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,6,26,23.1
+2450_2005,707,Fiscal,"Southern ",Lanius,collaris,25.0,0.0,0.0,80.0,0.0,,0.0,0.0,25.0,0.0,0.0,0.0,6,26,23.1
+2450_2005,708,Shrike,Red-backed,Lanius,collurio,50.0,50.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,711,Shrike,Crimson-breasted,Laniarius,atrococcineus,75.0,100.0,100.0,80.0,100.0,,100.0,50.0,100.0,50.0,0.0,0.0,20,26,76.9
+2450_2005,714,Tchagra,Brown-crowned,Tchagra,australis,0.0,0.0,0.0,20.0,0.0,,0.0,0.0,0.0,50.0,0.0,0.0,2,26,7.7
+2450_2005,731,,Brubru,Nilaus,afer,75.0,100.0,50.0,20.0,0.0,,0.0,0.0,50.0,50.0,0.0,0.0,10,26,38.5
+2450_2005,735,Starling,Wattled,Creatophora,cinerea,50.0,50.0,50.0,60.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,7,26,26.9
+2450_2005,737,Starling,Cape,Lamprotornis,nitens,100.0,100.0,100.0,100.0,100.0,,100.0,100.0,100.0,0.0,0.0,0.0,22,26,84.6
+2450_2005,743,Starling,Burchell's,Lamprotornis,australis,50.0,0.0,0.0,20.0,100.0,,0.0,0.0,0.0,0.0,0.0,0.0,4,26,15.4
+2450_2005,780,Sparrow-Weaver,"White-browed ",Plocepasser,mahali,75.0,50.0,50.0,80.0,0.0,,100.0,50.0,75.0,0.0,0.0,0.0,15,26,57.7
+2450_2005,783,Weaver,Sociable,Philetairus,socius,100.0,100.0,100.0,100.0,100.0,,100.0,50.0,100.0,100.0,100.0,100.0,25,26,96.2
+2450_2005,785,Sparrow,Great,Passer,motitensis,0.0,0.0,0.0,40.0,100.0,,0.0,0.0,0.0,0.0,0.0,0.0,3,26,11.5
+2450_2005,786,Sparrow,Cape,Passer,melanurus,50.0,100.0,100.0,100.0,100.0,,50.0,0.0,75.0,100.0,100.0,100.0,20,26,76.9
+2450_2005,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,100.0,50.0,100.0,100.0,100.0,,100.0,100.0,100.0,100.0,100.0,100.0,25,26,96.2
+2450_2005,803,Weaver,"Southern Masked ",Ploceus,velatus,25.0,50.0,50.0,60.0,0.0,,0.0,0.0,0.0,0.0,0.0,100.0,7,26,26.9
+2450_2005,805,Quelea,Red-billed,Quelea,quelea,0.0,50.0,50.0,40.0,100.0,,50.0,0.0,0.0,100.0,100.0,100.0,10,26,38.5
+2450_2005,820,Finch,Red-headed,Amadina,erythrocephala,100.0,100.0,100.0,100.0,0.0,,50.0,0.0,25.0,100.0,100.0,100.0,19,26,73.1
+2450_2005,840,Waxbill,Violet-eared,Granatina,granatina,0.0,0.0,0.0,40.0,0.0,,0.0,0.0,50.0,50.0,100.0,0.0,6,26,23.1
+2450_2005,841,Waxbill,Black-faced,Brunhilda,erythronotos,25.0,0.0,0.0,60.0,100.0,,0.0,0.0,25.0,0.0,0.0,0.0,6,26,23.1
+2450_2005,847,Whydah,Shaft-tailed,Vidua,regia,75.0,100.0,100.0,60.0,100.0,,0.0,0.0,0.0,0.0,0.0,0.0,11,26,42.3
+2450_2005,860,Canary,Black-throated,Crithagra,atrogularis,25.0,0.0,50.0,40.0,0.0,,0.0,0.0,0.0,0.0,0.0,0.0,4,26,15.4
+2450_2005,865,Canary,White-throated,Crithagra,albogularis,25.0,0.0,0.0,0.0,0.0,,0.0,0.0,25.0,0.0,0.0,0.0,2,26,7.7
+2450_2005,866,Canary,Yellow,Crithagra,flaviventris,25.0,50.0,50.0,100.0,100.0,,50.0,0.0,100.0,0.0,0.0,100.0,15,26,57.7
+2450_2005,871,Bunting,Lark-like,Emberiza,impetuani,0.0,0.0,0.0,60.0,0.0,,0.0,0.0,0.0,50.0,0.0,100.0,5,26,19.2
+2450_2005,940,Dove,Rock,Columba,livia,0.0,0.0,0.0,0.0,0.0,,0.0,0.0,25.0,0.0,0.0,0.0,1,26,3.8
+2450_2005,1035,Korhaan,"Northern Black",Afrotis,afraoides,50.0,50.0,0.0,40.0,0.0,,0.0,0.0,25.0,0.0,0.0,0.0,6,26,23.1
+2450_2005,1183,Lark,"Eastern Clapper",Mirafra,fasciolata,50.0,50.0,100.0,20.0,0.0,,0.0,0.0,0.0,0.0,0.0,100.0,7,26,26.9
+2450_2005,4142,Sparrow,"Southern Grey-headed",Passer,diffusus,75.0,100.0,100.0,60.0,100.0,,100.0,50.0,100.0,50.0,100.0,100.0,21,26,80.8
+2450_2010,1,Ostrich,Common,Struthio,camelus,100.0,,,,,,,,100.0,,,,6,6,100.0
+2450_2010,78,Stork,Abdim's,Ciconia,abdimii,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,105,,Secretarybird,Sagittarius,serpentarius,100.0,,,,,,,,25.0,,,,3,6,50.0
+2450_2010,107,Vulture,White-backed,Gyps,africanus,50.0,,,,,,,,75.0,,,,4,6,66.7
+2450_2010,108,Vulture,Lappet-faced,Torgos,tracheliotos,50.0,,,,,,,,75.0,,,,4,6,66.7
+2450_2010,109,Vulture,White-headed,Trigonoceps,occipitalis,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,114,Falcon,Lanner,Falco,biarmicus,100.0,,,,,,,,0.0,,,,2,6,33.3
+2450_2010,117,Falcon,Red-necked,Falco,chicquera,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,122,Kestrel,Greater,Falco,rupicoloides,50.0,,,,,,,,50.0,,,,3,6,50.0
+2450_2010,129,Kite,Yellow-billed,Milvus,aegyptius,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,130,Kite,"Black-winged ",Elanus,caeruleus,50.0,,,,,,,,25.0,,,,2,6,33.3
+2450_2010,134,Eagle,Tawny,Aquila,rapax,100.0,,,,,,,,50.0,,,,4,6,66.7
+2450_2010,139,Eagle,Booted,Hieraaetus,pennatus,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,142,Eagle,Martial,Polemaetus,bellicosus,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,146,Eagle,"Black-chested Snake",Circaetus,pectoralis,100.0,,,,,,,,25.0,,,,3,6,50.0
+2450_2010,151,,Bateleur,Terathopius,ecaudatus,100.0,,,,,,,,100.0,,,,6,6,100.0
+2450_2010,162,Goshawk,Gabar,Micronisus,gabar,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,165,Goshawk,"Pale Chanting",Melierax,canorus,100.0,,,,,,,,75.0,,,,5,6,83.3
+2450_2010,217,Bustard,Kori,Ardeotis,kori,100.0,,,,,,,,50.0,,,,4,6,66.7
+2450_2010,218,Bustard,Ludwig's,Neotis,ludwigii,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,242,Lapwing,Crowned,Vanellus,coronatus,50.0,,,,,,,,25.0,,,,2,6,33.3
+2450_2010,275,Thick-knee,Spotted,Burhinus,capensis,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,307,Sandgrouse,Namaqua,Pterocles,namaqua,100.0,,,,,,,,25.0,,,,3,6,50.0
+2450_2010,316,Dove,"Cape Turtle",Streptopelia,capicola,100.0,,,,,,,,75.0,,,,5,6,83.3
+2450_2010,317,Dove,Laughing,Spilopelia,senegalensis,50.0,,,,,,,,25.0,,,,2,6,33.3
+2450_2010,318,Dove,Namaqua,Oena,capensis,100.0,,,,,,,,25.0,,,,3,6,50.0
+2450_2010,411,Bee-eater,Swallow-tailed,Merops,hirundineus,50.0,,,,,,,,25.0,,,,2,6,33.3
+2450_2010,413,Roller,Lilac-breasted,Coracias,caudatus,50.0,,,,,,,,75.0,,,,4,6,66.7
+2450_2010,421,Scimitarbill,Common,Rhinopomastus,cyanomelas,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,424,Hornbill,"African Grey",Lophoceros,nasutus,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,459,Lark,Fawn-colored,Calendulauda,africanoides,100.0,,,,,,,,25.0,,,,3,6,50.0
+2450_2010,492,Lark,Stark's,Spizocorys,starki,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,514,Tit,Ashy,Melaniparus,cinerascens,50.0,,,,,,,,25.0,,,,2,6,33.3
+2450_2010,517,Drongo,Fork-tailed,Dicrurus,adsimilis,100.0,,,,,,,,75.0,,,,5,6,83.3
+2450_2010,523,Crow,Cape,Corvus,capensis,100.0,,,,,,,,100.0,,,,6,6,100.0
+2450_2010,568,Wheatear,Capped,Oenanthe,pileata,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,570,Chat,Familiar,Oenanthe,familiaris,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,575,Chat,"Ant-eating ",Myrmecocichla,formicivora,50.0,,,,,,,,75.0,,,,4,6,66.7
+2450_2010,586,"Scrub Robin",Kalahari,Cercotrichas,paena,100.0,,,,,,,,100.0,,,,6,6,100.0
+2450_2010,619,Warbler,Rufous-eared,Malcorus,pectoralis,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,630,Cisticola,Desert,Cisticola,aridulus,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,650,Prinia,Black-chested,Prinia,flavicans,100.0,,,,,,,,50.0,,,,4,6,66.7
+2450_2010,658,Warbler,Chestnut-vented,Curruca,subcoerulea,50.0,,,,,,,,50.0,,,,3,6,50.0
+2450_2010,661,Flycatcher,Marico,Melaenornis,mariquensis,50.0,,,,,,,,100.0,,,,5,6,83.3
+2450_2010,663,Flycatcher,Chat,Melaenornis,infuscatus,50.0,,,,,,,,75.0,,,,4,6,66.7
+2450_2010,674,Batis,Pririt,Batis,pririt,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,706,Shrike,"Lesser Grey",Lanius,minor,100.0,,,,,,,,0.0,,,,2,6,33.3
+2450_2010,707,Fiscal,"Southern ",Lanius,collaris,50.0,,,,,,,,75.0,,,,4,6,66.7
+2450_2010,708,Shrike,Red-backed,Lanius,collurio,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,711,Shrike,Crimson-breasted,Laniarius,atrococcineus,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,735,Starling,Wattled,Creatophora,cinerea,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,737,Starling,Cape,Lamprotornis,nitens,100.0,,,,,,,,100.0,,,,6,6,100.0
+2450_2010,780,Sparrow-Weaver,"White-browed ",Plocepasser,mahali,100.0,,,,,,,,75.0,,,,5,6,83.3
+2450_2010,783,Weaver,Sociable,Philetairus,socius,100.0,,,,,,,,75.0,,,,5,6,83.3
+2450_2010,786,Sparrow,Cape,Passer,melanurus,50.0,,,,,,,,75.0,,,,4,6,66.7
+2450_2010,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,100.0,,,,,,,,100.0,,,,6,6,100.0
+2450_2010,805,Quelea,Red-billed,Quelea,quelea,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,820,Finch,Red-headed,Amadina,erythrocephala,50.0,,,,,,,,50.0,,,,3,6,50.0
+2450_2010,840,Waxbill,Violet-eared,Granatina,granatina,0.0,,,,,,,,25.0,,,,1,6,16.7
+2450_2010,866,Canary,Yellow,Crithagra,flaviventris,0.0,,,,,,,,50.0,,,,2,6,33.3
+2450_2010,1035,Korhaan,"Northern Black",Afrotis,afraoides,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,1183,Lark,"Eastern Clapper",Mirafra,fasciolata,50.0,,,,,,,,0.0,,,,1,6,16.7
+2450_2010,4142,Sparrow,"Southern Grey-headed",Passer,diffusus,0.0,,,,,,,,50.0,,,,2,6,33.3
+2455_2000,1,Ostrich,Common,Struthio,camelus,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,105,,Secretarybird,Sagittarius,serpentarius,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,107,Vulture,White-backed,Gyps,africanus,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,108,Vulture,Lappet-faced,Torgos,tracheliotos,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,114,Falcon,Lanner,Falco,biarmicus,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,122,Kestrel,Greater,Falco,rupicoloides,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,151,,Bateleur,Terathopius,ecaudatus,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,165,Goshawk,"Pale Chanting",Melierax,canorus,,,66.7,,,,,100.0,,,,,3,4,75.0
+2455_2000,217,Bustard,Kori,Ardeotis,kori,,,100.0,,,,,0.0,,,,,3,4,75.0
+2455_2000,242,Lapwing,Crowned,Vanellus,coronatus,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,307,Sandgrouse,Namaqua,Pterocles,namaqua,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,308,Sandgrouse,Burchell's,Pterocles,burchelli,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,316,Dove,"Cape Turtle",Streptopelia,capicola,,,66.7,,,,,100.0,,,,,3,4,75.0
+2455_2000,318,Dove,Namaqua,Oena,capensis,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,421,Scimitarbill,Common,Rhinopomastus,cyanomelas,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,426,Hornbill,"Southern Yellow-billed",Tockus,leucomelas,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,450,Woodpecker,Cardinal,Dendropicos,fuscescens,,,0.0,,,,,100.0,,,,,1,4,25.0
+2455_2000,459,Lark,Fawn-colored,Calendulauda,africanoides,,,66.7,,,,,100.0,,,,,3,4,75.0
+2455_2000,460,Lark,Sabota,Calendulauda,sabota,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,474,Lark,Spike-heeled,Chersomanes,albofasciata,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,514,Tit,Ashy,Melaniparus,cinerascens,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,517,Drongo,Fork-tailed,Dicrurus,adsimilis,,,100.0,,,,,100.0,,,,,4,4,100.0
+2455_2000,523,Crow,Cape,Corvus,capensis,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,544,Bulbul,"African Red-eyed",Pycnonotus,nigricans,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,575,Chat,"Ant-eating ",Myrmecocichla,formicivora,,,100.0,,,,,100.0,,,,,4,4,100.0
+2455_2000,586,"Scrub Robin",Kalahari,Cercotrichas,paena,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,619,Warbler,Rufous-eared,Malcorus,pectoralis,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,621,Crombec,Long-billed,Sylvietta,rufescens,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,630,Cisticola,Desert,Cisticola,aridulus,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,650,Prinia,Black-chested,Prinia,flavicans,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,658,Warbler,Chestnut-vented,Curruca,subcoerulea,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,661,Flycatcher,Marico,Melaenornis,mariquensis,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,663,Flycatcher,Chat,Melaenornis,infuscatus,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,706,Shrike,"Lesser Grey",Lanius,minor,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,707,Fiscal,"Southern ",Lanius,collaris,,,0.0,,,,,100.0,,,,,1,4,25.0
+2455_2000,735,Starling,Wattled,Creatophora,cinerea,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,737,Starling,Cape,Lamprotornis,nitens,,,33.3,,,,,100.0,,,,,2,4,50.0
+2455_2000,743,Starling,Burchell's,Lamprotornis,australis,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,780,Sparrow-Weaver,"White-browed ",Plocepasser,mahali,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,783,Weaver,Sociable,Philetairus,socius,,,100.0,,,,,100.0,,,,,4,4,100.0
+2455_2000,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,,,100.0,,,,,0.0,,,,,3,4,75.0
+2455_2000,803,Weaver,"Southern Masked ",Ploceus,velatus,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,805,Quelea,Red-billed,Quelea,quelea,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,820,Finch,Red-headed,Amadina,erythrocephala,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,847,Whydah,Shaft-tailed,Vidua,regia,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,866,Canary,Yellow,Crithagra,flaviventris,,,66.7,,,,,0.0,,,,,2,4,50.0
+2455_2000,871,Bunting,Lark-like,Emberiza,impetuani,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,1035,Korhaan,"Northern Black",Afrotis,afraoides,,,100.0,,,,,100.0,,,,,4,4,100.0
+2455_2000,1183,Lark,"Eastern Clapper",Mirafra,fasciolata,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2000,4142,Sparrow,"Southern Grey-headed",Passer,diffusus,,,33.3,,,,,0.0,,,,,1,4,25.0
+2455_2010,1,Ostrich,Common,Struthio,camelus,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,78,Stork,Abdim's,Ciconia,abdimii,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,105,,Secretarybird,Sagittarius,serpentarius,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,114,Falcon,Lanner,Falco,biarmicus,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,117,Falcon,Red-necked,Falco,chicquera,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,129,Kite,Yellow-billed,Milvus,aegyptius,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,134,Eagle,Tawny,Aquila,rapax,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,145,Eagle,"Brown Snake ",Circaetus,cinereus,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,146,Eagle,"Black-chested Snake",Circaetus,pectoralis,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,151,,Bateleur,Terathopius,ecaudatus,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,165,Goshawk,"Pale Chanting",Melierax,canorus,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,217,Bustard,Kori,Ardeotis,kori,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,307,Sandgrouse,Namaqua,Pterocles,namaqua,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,316,Dove,"Cape Turtle",Streptopelia,capicola,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,318,Dove,Namaqua,Oena,capensis,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,459,Lark,Fawn-colored,Calendulauda,africanoides,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,517,Drongo,Fork-tailed,Dicrurus,adsimilis,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,568,Wheatear,Capped,Oenanthe,pileata,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,570,Chat,Familiar,Oenanthe,familiaris,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,575,Chat,"Ant-eating ",Myrmecocichla,formicivora,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,619,Warbler,Rufous-eared,Malcorus,pectoralis,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,650,Prinia,Black-chested,Prinia,flavicans,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,658,Warbler,Chestnut-vented,Curruca,subcoerulea,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,661,Flycatcher,Marico,Melaenornis,mariquensis,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,706,Shrike,"Lesser Grey",Lanius,minor,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,735,Starling,Wattled,Creatophora,cinerea,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,737,Starling,Cape,Lamprotornis,nitens,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,780,Sparrow-Weaver,"White-browed ",Plocepasser,mahali,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,783,Weaver,Sociable,Philetairus,socius,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,820,Finch,Red-headed,Amadina,erythrocephala,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,866,Canary,Yellow,Crithagra,flaviventris,100.0,,,,,,,,,,,,1,1,100.0
+2455_2010,1183,Lark,"Eastern Clapper",Mirafra,fasciolata,100.0,,,,,,,,,,,,1,1,100.0
+2455_2015,1,Ostrich,Common,Struthio,camelus,100.0,,100.0,100.0,,,100.0,,66.7,,,,6,7,85.7
+2455_2015,105,,Secretarybird,Sagittarius,serpentarius,100.0,,100.0,0.0,,,0.0,,66.7,,,,4,7,57.1
+2455_2015,107,Vulture,White-backed,Gyps,africanus,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,108,Vulture,Lappet-faced,Torgos,tracheliotos,0.0,,100.0,0.0,,,100.0,,0.0,,,,2,7,28.6
+2455_2015,114,Falcon,Lanner,Falco,biarmicus,100.0,,100.0,0.0,,,0.0,,33.3,,,,3,7,42.9
+2455_2015,122,Kestrel,Greater,Falco,rupicoloides,0.0,,100.0,100.0,,,100.0,,66.7,,,,5,7,71.4
+2455_2015,129,Kite,Yellow-billed,Milvus,aegyptius,100.0,,0.0,0.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,130,Kite,"Black-winged ",Elanus,caeruleus,0.0,,0.0,0.0,,,100.0,,33.3,,,,2,7,28.6
+2455_2015,134,Eagle,Tawny,Aquila,rapax,0.0,,100.0,100.0,,,0.0,,33.3,,,,3,7,42.9
+2455_2015,142,Eagle,Martial,Polemaetus,bellicosus,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,145,Eagle,"Brown Snake ",Circaetus,cinereus,100.0,,100.0,0.0,,,0.0,,0.0,,,,2,7,28.6
+2455_2015,146,Eagle,"Black-chested Snake",Circaetus,pectoralis,0.0,,100.0,100.0,,,0.0,,100.0,,,,5,7,71.4
+2455_2015,151,,Bateleur,Terathopius,ecaudatus,100.0,,0.0,0.0,,,0.0,,33.3,,,,2,7,28.6
+2455_2015,161,,Shikra,Accipiter,badius,0.0,,0.0,100.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,165,Goshawk,"Pale Chanting",Melierax,canorus,100.0,,100.0,100.0,,,100.0,,100.0,,,,7,7,100.0
+2455_2015,196,Buttonquail,Common,Turnix,sylvaticus,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,217,Bustard,Kori,Ardeotis,kori,100.0,,100.0,0.0,,,100.0,,33.3,,,,4,7,57.1
+2455_2015,242,Lapwing,Crowned,Vanellus,coronatus,100.0,,100.0,100.0,,,100.0,,0.0,,,,4,7,57.1
+2455_2015,307,Sandgrouse,Namaqua,Pterocles,namaqua,0.0,,0.0,100.0,,,100.0,,33.3,,,,3,7,42.9
+2455_2015,308,Sandgrouse,Burchell's,Pterocles,burchelli,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,316,Dove,"Cape Turtle",Streptopelia,capicola,100.0,,100.0,100.0,,,100.0,,33.3,,,,5,7,71.4
+2455_2015,317,Dove,Laughing,Spilopelia,senegalensis,0.0,,100.0,0.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,318,Dove,Namaqua,Oena,capensis,100.0,,100.0,0.0,,,100.0,,33.3,,,,4,7,57.1
+2455_2015,368,Eagle-Owl,Spotted,Bubo,africanus,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,411,Bee-eater,Swallow-tailed,Merops,hirundineus,0.0,,100.0,0.0,,,0.0,,66.7,,,,3,7,42.9
+2455_2015,413,Roller,Lilac-breasted,Coracias,caudatus,100.0,,100.0,100.0,,,0.0,,33.3,,,,4,7,57.1
+2455_2015,418,Hoopoe,African,Upupa,africana,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,421,Scimitarbill,Common,Rhinopomastus,cyanomelas,0.0,,100.0,0.0,,,0.0,,33.3,,,,2,7,28.6
+2455_2015,426,Hornbill,"Southern Yellow-billed",Tockus,leucomelas,0.0,,100.0,0.0,,,100.0,,0.0,,,,2,7,28.6
+2455_2015,450,Woodpecker,Cardinal,Dendropicos,fuscescens,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,459,Lark,Fawn-colored,Calendulauda,africanoides,0.0,,0.0,100.0,,,0.0,,66.7,,,,3,7,42.9
+2455_2015,485,Sparrow-Lark,Grey-backed,Eremopterix,verticalis,0.0,,100.0,0.0,,,0.0,,66.7,,,,3,7,42.9
+2455_2015,514,Tit,Ashy,Melaniparus,cinerascens,0.0,,0.0,0.0,,,100.0,,0.0,,,,1,7,14.3
+2455_2015,517,Drongo,Fork-tailed,Dicrurus,adsimilis,100.0,,100.0,100.0,,,0.0,,100.0,,,,6,7,85.7
+2455_2015,523,Crow,Cape,Corvus,capensis,100.0,,100.0,100.0,,,100.0,,66.7,,,,6,7,85.7
+2455_2015,568,Wheatear,Capped,Oenanthe,pileata,100.0,,100.0,0.0,,,0.0,,0.0,,,,2,7,28.6
+2455_2015,570,Chat,Familiar,Oenanthe,familiaris,0.0,,0.0,0.0,,,100.0,,0.0,,,,1,7,14.3
+2455_2015,575,Chat,"Ant-eating ",Myrmecocichla,formicivora,100.0,,0.0,0.0,,,100.0,,33.3,,,,3,7,42.9
+2455_2015,586,"Scrub Robin",Kalahari,Cercotrichas,paena,0.0,,0.0,100.0,,,100.0,,100.0,,,,5,7,71.4
+2455_2015,600,Eremomela,Yellow-bellied,Eremomela,icteropygialis,100.0,,0.0,0.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,619,Warbler,Rufous-eared,Malcorus,pectoralis,100.0,,0.0,0.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,630,Cisticola,Desert,Cisticola,aridulus,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,650,Prinia,Black-chested,Prinia,flavicans,100.0,,100.0,100.0,,,100.0,,66.7,,,,6,7,85.7
+2455_2015,658,Warbler,Chestnut-vented,Curruca,subcoerulea,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,661,Flycatcher,Marico,Melaenornis,mariquensis,100.0,,100.0,0.0,,,100.0,,100.0,,,,6,7,85.7
+2455_2015,663,Flycatcher,Chat,Melaenornis,infuscatus,0.0,,0.0,0.0,,,0.0,,66.7,,,,2,7,28.6
+2455_2015,674,Batis,Pririt,Batis,pririt,100.0,,0.0,0.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,706,Shrike,"Lesser Grey",Lanius,minor,100.0,,0.0,0.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,707,Fiscal,"Southern ",Lanius,collaris,0.0,,100.0,100.0,,,100.0,,66.7,,,,5,7,71.4
+2455_2015,708,Shrike,Red-backed,Lanius,collurio,100.0,,0.0,0.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,711,Shrike,Crimson-breasted,Laniarius,atrococcineus,100.0,,100.0,0.0,,,0.0,,0.0,,,,2,7,28.6
+2455_2015,731,,Brubru,Nilaus,afer,100.0,,100.0,0.0,,,100.0,,0.0,,,,3,7,42.9
+2455_2015,737,Starling,Cape,Lamprotornis,nitens,100.0,,100.0,0.0,,,100.0,,100.0,,,,6,7,85.7
+2455_2015,743,Starling,Burchell's,Lamprotornis,australis,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,780,Sparrow-Weaver,"White-browed ",Plocepasser,mahali,100.0,,100.0,100.0,,,0.0,,66.7,,,,5,7,71.4
+2455_2015,783,Weaver,Sociable,Philetairus,socius,100.0,,100.0,100.0,,,100.0,,100.0,,,,7,7,100.0
+2455_2015,786,Sparrow,Cape,Passer,melanurus,0.0,,100.0,0.0,,,100.0,,100.0,,,,5,7,71.4
+2455_2015,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,100.0,,100.0,100.0,,,100.0,,100.0,,,,7,7,100.0
+2455_2015,803,Weaver,"Southern Masked ",Ploceus,velatus,100.0,,100.0,0.0,,,0.0,,33.3,,,,3,7,42.9
+2455_2015,805,Quelea,Red-billed,Quelea,quelea,0.0,,0.0,0.0,,,0.0,,66.7,,,,2,7,28.6
+2455_2015,820,Finch,Red-headed,Amadina,erythrocephala,0.0,,100.0,0.0,,,100.0,,66.7,,,,4,7,57.1
+2455_2015,840,Waxbill,Violet-eared,Granatina,granatina,0.0,,0.0,0.0,,,0.0,,33.3,,,,1,7,14.3
+2455_2015,866,Canary,Yellow,Crithagra,flaviventris,100.0,,100.0,100.0,,,100.0,,66.7,,,,6,7,85.7
+2455_2015,871,Bunting,Lark-like,Emberiza,impetuani,0.0,,0.0,100.0,,,0.0,,0.0,,,,1,7,14.3
+2455_2015,4142,Sparrow,"Southern Grey-headed",Passer,diffusus,0.0,,0.0,0.0,,,100.0,,66.7,,,,3,7,42.9
+2500_2000,165,Goshawk,"Pale Chanting",Melierax,canorus,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,316,Dove,"Cape Turtle",Streptopelia,capicola,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,459,Lark,Fawn-colored,Calendulauda,africanoides,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,460,Lark,Sabota,Calendulauda,sabota,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,474,Lark,Spike-heeled,Chersomanes,albofasciata,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,517,Drongo,Fork-tailed,Dicrurus,adsimilis,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,544,Bulbul,"African Red-eyed",Pycnonotus,nigricans,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,586,"Scrub Robin",Kalahari,Cercotrichas,paena,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,650,Prinia,Black-chested,Prinia,flavicans,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,658,Warbler,Chestnut-vented,Curruca,subcoerulea,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,663,Flycatcher,Chat,Melaenornis,infuscatus,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,737,Starling,Cape,Lamprotornis,nitens,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,783,Weaver,Sociable,Philetairus,socius,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,866,Canary,Yellow,Crithagra,flaviventris,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,1035,Korhaan,"Northern Black",Afrotis,afraoides,,,,,,,,,100.0,,,,1,1,100.0
+2500_2000,4142,Sparrow,"Southern Grey-headed",Passer,diffusus,,,,,,,,,100.0,,,,1,1,100.0
+2500_2005,1,Ostrich,Common,Struthio,camelus,0.0,,60.0,42.9,50.0,0.0,,50.0,100.0,100.0,50.0,0.0,14,27,51.9
+2500_2005,55,Heron,Black-headed,Ardea,melanocephala,0.0,,0.0,0.0,0.0,0.0,,0.0,25.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,61,Egret,"Western Cattle",Bubulcus,ibis,0.0,,0.0,28.6,0.0,0.0,,0.0,0.0,0.0,0.0,50.0,3,27,11.1
+2500_2005,78,Stork,Abdim's,Ciconia,abdimii,0.0,,20.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,105,,Secretarybird,Sagittarius,serpentarius,0.0,,0.0,42.9,50.0,0.0,,0.0,50.0,0.0,0.0,100.0,8,27,29.6
+2500_2005,107,Vulture,White-backed,Gyps,africanus,0.0,,40.0,28.6,50.0,100.0,,0.0,25.0,0.0,0.0,0.0,7,27,25.9
+2500_2005,108,Vulture,Lappet-faced,Torgos,tracheliotos,0.0,,80.0,28.6,50.0,100.0,,0.0,25.0,100.0,50.0,0.0,11,27,40.7
+2500_2005,114,Falcon,Lanner,Falco,biarmicus,100.0,,100.0,100.0,100.0,100.0,,50.0,100.0,100.0,50.0,100.0,25,27,92.6
+2500_2005,117,Falcon,Red-necked,Falco,chicquera,0.0,,0.0,0.0,0.0,100.0,,50.0,0.0,0.0,0.0,0.0,2,27,7.4
+2500_2005,122,Kestrel,Greater,Falco,rupicoloides,0.0,,0.0,0.0,0.0,0.0,,50.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,126,Falcon,Pygmy,Polihierax,semitorquatus,0.0,,0.0,0.0,50.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,130,Kite,"Black-winged ",Elanus,caeruleus,100.0,,0.0,14.3,0.0,0.0,,0.0,0.0,0.0,0.0,50.0,3,27,11.1
+2500_2005,134,Eagle,Tawny,Aquila,rapax,100.0,,20.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,2,27,7.4
+2500_2005,139,Eagle,Booted,Hieraaetus,pennatus,0.0,,0.0,0.0,50.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,142,Eagle,Martial,Polemaetus,bellicosus,0.0,,40.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,2,27,7.4
+2500_2005,146,Eagle,"Black-chested Snake",Circaetus,pectoralis,0.0,,40.0,14.3,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,3,27,11.1
+2500_2005,151,,Bateleur,Terathopius,ecaudatus,0.0,,0.0,28.6,0.0,0.0,,50.0,0.0,0.0,0.0,0.0,3,27,11.1
+2500_2005,162,Goshawk,Gabar,Micronisus,gabar,0.0,,0.0,0.0,50.0,100.0,,50.0,0.0,0.0,0.0,0.0,3,27,11.1
+2500_2005,165,Goshawk,"Pale Chanting",Melierax,canorus,100.0,,80.0,100.0,100.0,100.0,,100.0,100.0,100.0,100.0,100.0,26,27,96.3
+2500_2005,169,Harrier,Black,Circus,maurus,0.0,,20.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,171,Harrier-Hawk,African,Polyboroides,typus,0.0,,0.0,14.3,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,217,Bustard,Kori,Ardeotis,kori,100.0,,40.0,71.4,100.0,0.0,,50.0,75.0,100.0,50.0,0.0,16,27,59.3
+2500_2005,228,Jacana,African,Actophilornis,africanus,0.0,,40.0,0.0,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,2,27,7.4
+2500_2005,242,Lapwing,Crowned,Vanellus,coronatus,0.0,,40.0,0.0,0.0,0.0,,50.0,25.0,0.0,0.0,50.0,5,27,18.5
+2500_2005,275,Thick-knee,Spotted,Burhinus,capensis,0.0,,0.0,0.0,0.0,0.0,,50.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,307,Sandgrouse,Namaqua,Pterocles,namaqua,0.0,,0.0,14.3,100.0,0.0,,0.0,25.0,0.0,0.0,0.0,4,27,14.8
+2500_2005,308,Sandgrouse,Burchell's,Pterocles,burchelli,0.0,,0.0,0.0,50.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,311,Pigeon,Speckled,Columba,guinea,0.0,,0.0,14.3,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,316,Dove,"Cape Turtle",Streptopelia,capicola,100.0,,100.0,100.0,100.0,100.0,,100.0,100.0,100.0,100.0,100.0,27,27,100.0
+2500_2005,317,Dove,Laughing,Spilopelia,senegalensis,0.0,,40.0,71.4,0.0,0.0,,0.0,0.0,0.0,50.0,50.0,9,27,33.3
+2500_2005,318,Dove,Namaqua,Oena,capensis,0.0,,80.0,100.0,50.0,100.0,,0.0,75.0,0.0,100.0,100.0,20,27,74.1
+2500_2005,341,Cuckoo,African,Cuculus,gularis,0.0,,0.0,0.0,0.0,0.0,,0.0,0.0,100.0,0.0,0.0,1,27,3.7
+2500_2005,352,Cuckoo,Diederik,Chrysococcyx,caprius,100.0,,40.0,14.3,0.0,0.0,,0.0,25.0,0.0,50.0,50.0,7,27,25.9
+2500_2005,359,Owl,"Western Barn ",Tyto,alba,0.0,,80.0,42.9,100.0,0.0,,0.0,50.0,100.0,50.0,50.0,14,27,51.9
+2500_2005,365,Owlet,Pearl-spotted,Glaucidium,perlatum,0.0,,0.0,14.3,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,368,Eagle-Owl,Spotted,Bubo,africanus,0.0,,60.0,28.6,50.0,0.0,,50.0,100.0,100.0,50.0,50.0,14,27,51.9
+2500_2005,369,Eagle-Owl,Verreaux's,Bubo,lacteus,0.0,,20.0,28.6,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,3,27,11.1
+2500_2005,372,Nightjar,Rufous-cheeked,Caprimulgus,rufigena,0.0,,40.0,14.3,0.0,0.0,,0.0,25.0,100.0,100.0,50.0,8,27,29.6
+2500_2005,373,Nightjar,Fiery-necked,Caprimulgus,pectoralis,0.0,,0.0,14.3,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,1,27,3.7
+2500_2005,378,Swift,Common,Apus,apus,0.0,,60.0,28.6,0.0,0.0,,0.0,0.0,0.0,0.0,0.0,5,27,18.5
+2500_2005,385,Swift,Little,Apus,affinis,0.0,,0.0,0.0,0.0,0.0,,0.0,0.0,100.0,0.0,0.0,1,27,3.7
+2500_2005,391,Mousebird,White-backed,Colius,colius,100.0,,20.0,0.0,0.0,0.0,,50.0,25.0,100.0,0.0,0.0,5,27,18.5
+2500_2005,392,Mousebird,Red-faced,Urocolius,indicus,0.0,,60.0,14.3,50.0,0.0,,0.0,0.0,0.0,50.0,0.0,6,27,22.2

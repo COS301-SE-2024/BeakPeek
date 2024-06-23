@@ -14,7 +14,7 @@ on:
      - main
      - development
     paths:
-      - beakpeek/**
+      - dotnet/**
   workflow_dispatch:
 
 jobs:

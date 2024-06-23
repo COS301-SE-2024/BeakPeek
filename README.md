@@ -6,9 +6,12 @@
 
 <p align="center">
   <img src="https://img.shields.io/codecov/c/gh/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="CodeCov">
-  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/ci.yml?style=for-the-badge" alt="Build">
   <img src="https://img.shields.io/github/issues/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   <img src="https://img.shields.io/github/issues-closed/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
+  </br>
+  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/dotnet.yml?style=for-the-badge" alt=".NET Tests">
+  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/flutter.yml?style=for-the-badge" alt="Flutter Tests">
+  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/main_beakpeekapi.yml?style=for-the-badge" alt=".Net Deploy">
 </p>
 
 <h2>☁️About</h2>
@@ -51,7 +54,9 @@
 
 [![Demo 1](https://img.youtube.com/vi/Rbq9yniwfl0/0.jpg)](https://youtu.be/Rbq9yniwfl0)
 
-<img alt="" src="https://raw.githubusercontent.com/andreasbm/readme/master/assets/lines/aqua.png">
+  <h2 href="">System Requirement Specification</h1>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v2" > SRSv2 </a>
+</div>
 
 <h2>🤝Team</h2>
 
@@ -64,7 +69,12 @@
     <th>Links</th>
   </tr>
   <tr>
-    <td>Charl Pretorius</td>
+    <td>
+      Charl Pretorius
+      <br/>
+      <br/>
+      <a href="https://github.com/CharlSparrow" target="_blank">CharlSparrow</a>
+    </td>
     <td><img heigth="140" width="auto" src="res/Charl.jpg" alt="Charl Pretorius"></td>
     <td>Team Lead / Data Architect</td>
     <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He contributed greatly towards the success of a civil lawsuit gaining valuable insight into real world legal disputes. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
@@ -74,7 +84,12 @@
     </td>
   </tr>
   <tr>
-    <td>Ivan Horak</td>
+    <td>
+      Ivan Horak
+      <br/>
+      <br/>
+      <a href="https://github.com/ChuufMaster" target="_blank">ChuufMaster</a>
+    </td>
     <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
     <td>DevOps Engineer</td>
     <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
@@ -84,7 +99,12 @@
     </td>
   </tr>
   <tr>
-    <td>Justin Hudson</td>
+    <td>
+      Justin Hudson
+      <br/>
+      <br/>
+      <a href="https://github.com/u21543152" target="_blank">u21456552</a>
+    </td>
     <td><img heigth="140" width="auto" src="res/Justin.jpg" alt="Justin Hudson"></td>
     <td>Integration/Services Engineer</td>
     <td>Justin loves making programs efficient and effective and enjoys seeing how everything functions.</td>
@@ -94,7 +114,12 @@
     </td>
   </tr>
   <tr>
-    <td>Jarod Jeffery</td>
+    <td>
+      Jarod Jeffery
+      <br/>
+      <br/>
+      <a href="https://github.com/JarodJeffery" target="_blank">JarodJeffery</a>
+    </td>
     <td><img heigth="140" width="auto" src="res/Jarod.png" alt="Jarod Jeffery"></td>
     <td>Backend/Frontend/Integration</td>
     <td>Jarod enjoys working on complex problems and finding unique solutions to them. His personal motto is "If I do not know I can find out!". This motto is shown in his numerous qualifications in various development languages.</td>
@@ -104,7 +129,12 @@
     </td>
   </tr>
     <tr>
-    <td>Matthew Botha</td>
+    <td>
+      Matthew Botha
+      <br/>
+      <br/>
+      <a href="https://github.com/mattgbotha" target="_blank">mattgbotha</a>
+    </td>
     <td><img heigth="140" width="auto" src="res/IMG_1427.jpeg" alt="Matthew Botha"></td>
     <td>Designer/UI Engineer</td>
     <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
@@ -114,7 +144,3 @@
     </td>
   </tr>
 </table>
-
-<div>
-<h1 href="">System Requirement Specification</h1>
-</div>

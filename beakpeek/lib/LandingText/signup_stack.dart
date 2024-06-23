@@ -1,4 +1,3 @@
-import 'package:beakpeek/LandingText/cust_rich_text.dart';
 import 'package:flutter/material.dart';
 
 class SignupStack extends StatelessWidget {
@@ -15,32 +14,44 @@ class SignupStack extends StatelessWidget {
             fit: BoxFit.fitWidth,
           ),
         ),
-        const Align(
+        Align(
           heightFactor: 2,
-          alignment: FractionalOffset(0.9, 1),
+          alignment: const FractionalOffset(0.9, 1),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              CustRichText(
-                'Sign in',
-                Color(0xFFF97142),
-                fontS: 36,
-              ),
-              CustRichText(
-                'now!',
-                Color(0xFF00383E),
-                fontS: 36,
+              RichText(
+                text: const TextSpan(
+                  text: 'Sign in',
+                  style: TextStyle(
+                    color: Color(0xFFF97142),
+                    fontSize: 36,
+                  ),
+                  children: [
+                    TextSpan(
+                      text: 'Now!',
+                      style: TextStyle(
+                        color: Color(0xFF00383E),
+                        fontSize: 36,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
         ),
-        const Align(
+        Align(
           heightFactor: 10.3,
-          alignment: FractionalOffset(0.1, 1),
-          child: CustRichText(
-            'Sign in!',
-            Color(0xFF00383E),
-            fontS: 36,
+          alignment: const FractionalOffset(0.1, 1),
+          child: RichText(
+            text: const TextSpan(
+              text: 'Sign in!',
+              style: TextStyle(
+                color: Color(0xFF00383E),
+                fontSize: 36,
+              ),
+            ),
           ),
         ),
       ],

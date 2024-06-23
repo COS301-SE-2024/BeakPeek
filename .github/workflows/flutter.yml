@@ -35,11 +35,11 @@ jobs:
         uses: actions/cache@v3
         with:
           path: |
-            ~./.pub-cache
-            ~./.flutter
+            ~/.pub-cache
+            ~/.flutter
           keys: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
-            ${{ runner.os }}-pub-
+            ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
 
       - name: Install Flutter dependecies
         run: flutter pub get
