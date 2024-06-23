@@ -26,6 +26,20 @@ void main() {
       });
 
       testWidgets(
+        'Help Icon',
+        (tester) async {
+          await tester.pumpWidget(
+            const MaterialApp(
+              home: Scaffold(
+                body: Home(),
+              ),
+            ),
+          );
+          expect(find.byType(GestureDetector), findsAtLeast(1));
+        },
+      );
+
+      testWidgets(
         'Search is displayed',
         (tester) async {
           await tester.pumpWidget(

@@ -43,8 +43,7 @@ void main() {
 
         // Use Mockito to return an unsuccessful response when it calls the
         // provided http.Client.
-        when(client
-                .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies')))
+        when(client.get(Uri.parse('http://10.0.2.2:5000/api/Bird')))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         expect(fetchAllBirds(client), throwsException);
@@ -246,24 +245,3 @@ void main() {
     },
   );
 }
-
-// final birds = [
-//   Bird(
-//     pentad: '1',
-//     spp: 1,
-//     commonGroup: 'commonGroup',
-//     commonSpecies: 'commonSpecies',
-//     genus: 'genus',
-//     species: 'species',
-//     reportingRate: 10.0,
-//   ),
-//   Bird(
-//     pentad: '1',
-//     spp: 1,
-//     commonGroup: 'commonGroup',
-//     commonSpecies: 'commonSpecies',
-//     genus: 'genus',
-//     species: 'species',
-//     reportingRate: 10.0,
-//   ),
-// ];
