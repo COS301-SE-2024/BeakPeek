@@ -48,11 +48,11 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
                   searchBarTyping(value);
                 },
                 builder: (context, controller) {
-                  return Row(
+                  return const Row(
                     children: [
-                      const Icon(Icons.search),
-                      const SizedBox(width: 5),
-                      const Text('Search'),
+                      Icon(Icons.search),
+                      SizedBox(width: 5),
+                      Text('Search'),
                     ],
                   );
                 },
@@ -69,7 +69,7 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
                 });
               },
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xff033A30),
+                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
                 minimumSize: const Size(60, 30),
                 shadowColor: Colors.black,
               ),
@@ -86,7 +86,7 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
                 });
               },
               style: FilledButton.styleFrom(
-                backgroundColor: const Color(0xff033A30),
+                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
                 minimumSize: const Size(60, 30),
                 shadowColor: Colors.black,
               ),

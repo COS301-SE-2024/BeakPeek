@@ -48,7 +48,7 @@ class Home extends StatelessWidget {
                                     color: Colors.grey.withOpacity(0.5),
                                     spreadRadius: 2,
                                     blurRadius: 5,
-                                    offset: Offset(0, 3),
+                                    offset: const Offset(0, 3),
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(20.0),
@@ -69,19 +69,19 @@ class Home extends StatelessWidget {
                               left: 0,
                               right: 0,
                               child: ClipRRect(
-                                borderRadius: BorderRadius.only(
+                                borderRadius: const BorderRadius.only(
                                   bottomLeft: Radius.circular(20.0),
                                   bottomRight: Radius.circular(20.0),
                                 ),
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: Colors.black.withOpacity(0.5),
-                                    borderRadius: BorderRadius.only(
+                                    borderRadius: const BorderRadius.only(
                                       bottomLeft: Radius.circular(20.0),
                                       bottomRight: Radius.circular(20.0),
                                     ),
                                   ),
-                                  padding: EdgeInsets.symmetric(
+                                  padding: const EdgeInsets.symmetric(
                                       horizontal: 16.0, vertical: 8.0),
                                   child: RichText(
                                     text: const TextSpan(
@@ -115,7 +115,7 @@ class Home extends StatelessWidget {
                                 color: Colors.grey.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
-                                offset: Offset(0, 3),
+                                offset: const Offset(0, 3),
                               ),
                             ],
                             borderRadius: BorderRadius.circular(20.0),
