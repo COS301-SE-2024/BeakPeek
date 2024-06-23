@@ -49,10 +49,37 @@ void main() {
           await tester.pumpAndSettle();
           await tester.tap(find.byIcon(Icons.search));
           await tester.pumpAndSettle();
-          expect(find.byType(SearchBar), findsOne);
+          expect(find.byType(SearchAnchor), findsOne);
           expect(find.byType(ListTile), findsAtLeast(2));
+          expect(find.byType(SearchBar), findsOne);
+          await tester.tap(find.byType(SearchBar));
+          await tester.pumpAndSettle();
+          await tester.enterText(find.byType(SearchBar), 'h');
+          await tester.pump(Durations.short2);
+          expect(find.byType(ListTile), findsAtLeast(1));
+        },
+      );
+
+      testWidgets(
+        'Test empty List',
+        (tester) async {
+          final List<Bird> empty = [];
+          final Widget testW = FilterableSearchbar(birds: empty, sort: 0);
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: testW,
+              ),
+            ),
+          );
+          await tester.tap(find.text('ReportRate'));
+          await tester.pumpAndSettle();
+          await tester.tap(find.byIcon(Icons.search));
+          await tester.pumpAndSettle();
+          expect(find.byType(SearchBar), findsOne);
           await tester.enterText(find.byType(SearchBar), 'here');
           await tester.pumpAndSettle();
+          expect(find.byType(ListTile), findsNothing);
         },
       );
     },

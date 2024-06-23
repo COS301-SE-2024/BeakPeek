@@ -1,12 +1,11 @@
 // bird_map.dart
 
+import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/View/Home/bird_sheet.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:xml/xml.dart' as xml;
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:xml/xml.dart';
 
 class BirdMap extends StatefulWidget {
   const BirdMap({super.key, this.testController});
@@ -44,7 +43,6 @@ class BirdMapState extends State<BirdMap> {
             onMapCreated: _onMapCreated,
             initialCameraPosition: _cameraPosition,
             polygons: _polygons,
-            onTap: _onMapTap,
           ),
         ),
       ],
@@ -84,16 +82,16 @@ class BirdMapState extends State<BirdMap> {
     switch (province) {
       case 'gauteng':
         return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
+            target: LatLng(-25.7559141, 28.2330593));
       case 'westerncape':
         return const CameraPosition(
-            target: LatLng(-33.9249, 18.4241), zoom: 10.0);
+            target: LatLng(-33.9249, 18.4241), zoom: 2.0);
       case 'Eastern Cape':
         return const CameraPosition(
-            target: LatLng(-32.2968, 26.4194), zoom: 8.0);
+            target: LatLng(-32.2968, 26.4194), zoom: 2.0);
       default:
         return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
+            target: LatLng(-25.7559141, 28.2330593));
     }
   }
 
@@ -148,53 +146,4 @@ class BirdMapState extends State<BirdMap> {
     );
   }
 
-  void _onMapTap(LatLng latLng) {
-    if (kDebugMode) {
-      print('Map tapped at: $latLng');
-    }
-    // Handle map tap event here
-  }
-}
-
-class KmlParser {
-  static List<Map<String, dynamic>> parseKml(String kmlString) {
-    final document = XmlDocument.parse(kmlString);
-    final List<Map<String, dynamic>> polygonsData = [];
-
-    for (var placemark in document.findAllElements('Placemark')) {
-      final idElement = placemark.findElements('name').firstOrNull;
-      final coordinatesElements = placemark.findAllElements('coordinates');
-      // print(coordinatesElements);
-      if (idElement != null && coordinatesElements.isNotEmpty) {
-        final pentadId = idElement.text.trim();
-
-        final List<Map<String, double>> polygonCoordinates = [];
-        for (var coordinatesElement in coordinatesElements) {
-          final coordinateText = coordinatesElement.text.trim();
-          final coordinateParts = coordinateText.split(' ');
-
-          for (var part in coordinateParts) {
-            final latLng = part.split(',');
-            if (latLng.length >= 2) {
-              final latitude = double.tryParse(latLng[1]);
-              final longitude = double.tryParse(latLng[0]);
-              if (latitude != null && longitude != null) {
-                polygonCoordinates.add({
-                  'latitude': latitude,
-                  'longitude': longitude,
-                });
-              }
-            }
-          }
-        }
-
-        polygonsData.add({
-          'id': pentadId,
-          'coordinates': polygonCoordinates,
-        });
-      }
-    }
-
-    return polygonsData;
-  }
 }
