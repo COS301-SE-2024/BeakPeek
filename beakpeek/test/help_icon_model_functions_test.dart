@@ -7,7 +7,7 @@ void main() {
     'Help icons Test',
     () {
       testWidgets(
-        'me testing',
+        'help testing',
         (tester) async {
           await tester.pumpWidget(
             MaterialApp(

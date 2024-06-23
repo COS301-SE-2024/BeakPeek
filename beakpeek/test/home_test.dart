@@ -35,7 +35,7 @@ void main() {
               ),
             ),
           );
-          expect(find.byType(GestureDetector), findsAtLeast(1));
+          expect(find.byKey(const Key('helpLogo')), findsAtLeast(1));
         },
       );
 
