@@ -72,15 +72,25 @@ class Home extends StatelessWidget {
                             ),
                             textAlign: TextAlign.left,
                           ),
-                            SizedBox(width: screenWidth*0.02), // Spacing between text and icon
-                              GestureDetector(
-                                onTap: () => showHelpPopup(context),
-                                child: const Icon(
-                                  IconData(0xe309, fontFamily: 'MaterialIcons', matchTextDirection: true),
-                                  size: 20.0, // Adjust size as needed
-                                  color: Colors.green, // Optional: Set color to match theme
-                                ),
-                              ),                         
+                          SizedBox(
+                              width: screenWidth *
+                                  0.02), // Spacing between text and icon
+                          GestureDetector(
+                            onTap: () {
+                              const content =
+                                  'This map shows you your current location.
+                                  Click anywhere and you will see all the birds in that area!';
+                              showHelpPopup(context, content);
+                            },
+                            child: const Icon(
+                              IconData(0xe309,
+                                  fontFamily: 'MaterialIcons',
+                                  matchTextDirection: true),
+                              size: 20.0, // Adjust size as needed
+                              color: Colors
+                                  .green, // Optional: Set color to match theme
+                            ),
+                          ),
                           SizedBox(height: screenHeight * 0.01),
                           Image.asset(
                             'assets/images/map.png',
