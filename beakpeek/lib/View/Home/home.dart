@@ -1,3 +1,4 @@
+import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Styles/home_page_styles.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
