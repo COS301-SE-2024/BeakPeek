@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/View/Home/heat_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
@@ -171,7 +172,7 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
   try {
     // print(pentadId);
     final response = await client.get(Uri.parse(
-        'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad'));
+        'http://10.0.2.2:5000/api/Bird/$pentadId/pentad'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
@@ -192,12 +193,26 @@ class BirdList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Material(
-      child: ListView.builder(
-        itemCount: birds.length,
-        itemBuilder: (context, index) {
-          final bird = birds[index];
-          return ListTile(
+  return Material(
+    child: ListView.builder(
+      itemCount: birds.length,
+      itemBuilder: (context, index) {
+        final bird = birds[index];
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Scaffold(
+                  body: HeatMap(
+                    commonGroup: bird.commonGroup,
+                    commonSpecies: bird.commonSpecies,
+                  ),
+                ),
+              ),
+            );
+          },
+          child: ListTile(
             title: Text(bird.commonGroup != 'None'
                 ? '${bird.commonGroup} ${bird.commonSpecies}'
                 : bird.commonSpecies),
@@ -217,11 +232,12 @@ class BirdList extends StatelessWidget {
                 ),
               ],
             ),
-          );
-        },
-      ),
-    );
-  }
+          ),
+        );
+      },
+    ),
+  );
+}
 
   Color _getColorForReportingRate(double reportingRate) {
     if (reportingRate < 40) {

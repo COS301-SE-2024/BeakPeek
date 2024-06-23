@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
+using BeakPeekApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,28 +20,46 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
 
-var connection = String.Empty;
-if (builder.Environment.IsDevelopment())
+var connection = builder.Configuration.GetConnectionString("DefaultConnection");
+
+if (!builder.Environment.IsDevelopment())
 {
-    builder.Configuration.AddEnvironmentVariables().AddJsonFile("appsettings.Development.json");
-    connection = builder.Configuration.GetConnectionString("DefaultConnection");
-}
-else
-{
-    // connection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
-    //
-    // connection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
-    builder.Configuration.AddEnvironmentVariables().AddJsonFile("appsettings.Development.json");
-    connection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
+    var envConnection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
+    if (!string.IsNullOrEmpty(envConnection))
+    {
+        connection = envConnection;
+    }
 }
 
 // connection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+builder.Services.AddTransient<CsvImporter>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+
+    var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+    if (builder.Environment.IsDevelopment())
+    {
+        csvImporter.ImportAllCsvData("/data");
+    }
+    else
+    {
+        var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
+        csvImporter.ImportAllCsvData(csvDirectoryPath);
+    }
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -54,7 +73,6 @@ app.UseHttpsRedirection();
 app.UseCors();
 app.UseAuthorization();
 app.UseAuthentication();
-
 app.MapControllers();
 
 app.Run();
