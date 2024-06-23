@@ -37,195 +37,203 @@ class UserProfileState extends State<UserProfile> {
     return Scaffold(
       body: Stack(
         children: [
-          Column(
-            children: [
-              const SizedBox(height: 40),
+          SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 40),
 
-              // Profile image and name in center
-              Expanded(
-                child: Center(
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        CircleAvatar(
-                          radius: 78,
-                          backgroundColor: const Color(0xFF033A30),
-                          child: CircleAvatar(
-                            radius: 75,
-                            backgroundImage: const AssetImage(
-                              'assets/images/profileImages/images.jpg',
-                            ),
-                            onBackgroundImageError: (_, __) => const Icon(
-                                Icons.person,
-                                size: 75,
-                                color: Colors.white),
+                // Profile image and name in center
+                Center(
+                  child: Column(
+                    children: [
+                      CircleAvatar(
+                        radius: 78,
+                        backgroundColor: const Color(0xFF033A30),
+                        child: CircleAvatar(
+                          radius: 75,
+                          backgroundImage: const AssetImage(
+                            'assets/images/profileImages/images.jpg',
+                          ),
+                          onBackgroundImageError: (_, __) => const Icon(
+                            Icons.person,
+                            size: 75,
+                            color: Colors.white,
                           ),
                         ),
-                        const SizedBox(height: 20),
+                      ),
+                      const SizedBox(height: 20),
 
-                        // Name Field
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                          child: TextField(
-                            onChanged: (value) => editName(value),
-                            decoration: const InputDecoration(
-                              labelText: 'Full Name',
-                              hintText: 'Elm Boog',
-                              border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.all(12.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF033A30)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
+                      // Name Field
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextField(
+                          onChanged: (value) => editName(value),
+                          decoration: const InputDecoration(
+                            labelText: 'Full Name',
+                            hintText: 'Elm Boog',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.all(12.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF033A30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
                             ),
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black54,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
                             ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-
-                        // Bio Field
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: TextField(
-                            maxLines: 3,
-                            // onChanged: (value) => editBio(value),
-                            decoration: InputDecoration(
-                              labelText: 'Bio',
-                              hintText: 'Tell us about yourself...',
-                              border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.all(12.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF033A30)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
-                            ),
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black54,
-                            ),
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black54,
                           ),
                         ),
-                        const SizedBox(height: 20),
+                      ),
+                      const SizedBox(height: 20),
 
-                        // Email Field
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20.0),
-                          child: TextField(
-                            keyboardType: TextInputType.emailAddress,
-                            // onChanged: (value) => editEmail(value),
-                            decoration: InputDecoration(
-                              labelText: 'Email',
-                              hintText: 'example@mail.com',
-                              border: OutlineInputBorder(),
-                              contentPadding: EdgeInsets.all(12.0),
-                              focusedBorder: OutlineInputBorder(
-                                borderSide:
-                                    BorderSide(color: Color(0xFF033A30)),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide(color: Colors.grey),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(12)),
-                              ),
+                      // Bio Field
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextField(
+                          maxLines: 3,
+                          // onChanged: (value) => editBio(value),
+                          decoration: InputDecoration(
+                            labelText: 'Bio',
+                            hintText: 'Tell us about yourself...',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.all(12.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF033A30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
                             ),
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.black54,
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
                             ),
                           ),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
                         ),
-                        const SizedBox(height: 20),
+                      ),
+                      const SizedBox(height: 20),
 
-                        // Subheading
-                        const Text(
+                      // Email Field
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          // onChanged: (value) => editEmail(value),
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'example@mail.com',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.all(12.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF033A30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                          ),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+
+                      // Subheading
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
                           'Your Life List',
                           style: TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 10),
-
-                        // Live List
-                        getLiveList(),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-
-              // Divider between the list and buttons
-              const Divider(height: 1, thickness: 1),
-
-              // Buttons at the bottom
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 16.0, horizontal: 16.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    // Dark mode slider
-                    SliderButton(
-                      icon: Center(
-                        child: iconDisplay,
                       ),
-                      action: () async {
-                        widget.change();
-                        setState(() {
-                          iconDisplay = getIcon();
-                          iconLabel = getLabelIcon();
-                        });
-                        return false;
-                      },
-                      label: Text(iconLabel),
-                    ),
-                    const SizedBox(height: 16),
+                      const SizedBox(height: 10),
 
-                    // Home button
-                    FilledButton(
-                      onPressed: () {
-                        Navigator.pushNamed(context, '/home');
-                      },
-                      style: FilledButton.styleFrom(
-                        backgroundColor: const Color(0xFF033A30),
-                        minimumSize: const Size(double.infinity, 50),
-                        shadowColor: Colors.black,
-                      ),
-                      child: const Text(
-                        'Home',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'SF Pro Display',
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
+                      // Live List
+                      getLiveList(),
+
+                      // Divider between the list and buttons
+                      const Divider(height: 1, thickness: 1),
+
+                      // Buttons at the bottom
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Home button
+                            FilledButton(
+                              onPressed: () {
+                                Navigator.pushNamed(context, '/home');
+                              },
+                              style: FilledButton.styleFrom(
+                                backgroundColor: const Color(0xFF033A30),
+                                minimumSize: const Size(200, 50),
+                                shadowColor: Colors.black,
+                              ),
+                              child: const Text(
+                                'Home',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'SF Pro Display',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
+
+                            // Dark mode slider
+                            Transform.scale(
+                              scale: 0.8,
+                              child: SliderButton(
+                                icon: Center(
+                                  child: iconDisplay,
+                                ),
+                                action: () async {
+                                  widget.change();
+                                  setState(() {
+                                    iconDisplay = getIcon();
+                                    iconLabel = getLabelIcon();
+                                  });
+                                  return false;
+                                },
+                                width: 120,
+                                height: 60,
+                                boxShadow: BoxShadow(
+                                  color: Colors.grey.withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 7,
+                                  offset: Offset(0, 3),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
 
           // Positioned settings icon
