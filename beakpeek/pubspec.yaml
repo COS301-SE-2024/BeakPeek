@@ -54,6 +54,7 @@ dependencies:
   localstorage: ^5.0.0
   slider_button: ^2.1.0
   slidable_button: ^3.0.0+1
+  profile_photo: ^1.0.3
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
