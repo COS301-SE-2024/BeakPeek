@@ -1,8 +1,8 @@
 import 'package:beakpeek/Styles/home_page_styles.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/Model/help_icon_model_functions.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -107,26 +107,49 @@ class Home extends StatelessWidget {
                           ),
                           textAlign: TextAlign.left,
                         ),
-                        SizedBox(height: screenHeight * 0.01),
-                        Container(
-                          decoration: BoxDecoration(
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                            borderRadius: BorderRadius.circular(20.0),
+                        const SizedBox(width: 8), // Spacing between text
+                        GestureDetector(
+                          key: const Key('helpLogo'),
+                          onTap: () {
+                            const content =
+                                // ignore: lines_longer_than_80_chars
+                                'This map shows you your current location. Click anywhere and you will see all the birds in that area! You can use the filters to customise what you see and you can use the search bar to see the heat map of a specific bird!';
+                            showHelpPopup(context, content);
+                          },
+                          child: const Icon(
+                            IconData(0xe309,
+                                fontFamily: 'MaterialIcons',
+                                matchTextDirection: true),
+                            size: 20.0, // Adjust size as needed
+                            color: Colors
+                                .green, // Optional: Set color to match theme
                           ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(
-                                20.0), // Adjust radius as needed
-                            child: Image.asset(
-                              'assets/images/map.png',
-                              width: screenWidth * 0.92,
-                              fit: BoxFit.cover,
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        Image.asset(
+                          'assets/images/map.png',
+                          width: screenWidth * 0.92,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        Center(
+                          child: FilledButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/map');
+                            },
+                            style: FilledButton.styleFrom(
+                              backgroundColor: const Color(0xFF033A30),
+                              minimumSize: const Size(350, 50),
+                              shadowColor: Colors.black,
+                            ),
+                            child: const Text(
+                              'View Map',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ),
