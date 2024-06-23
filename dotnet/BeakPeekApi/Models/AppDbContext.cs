@@ -6,9 +6,8 @@ namespace BeakPeekApi.Models
     {
 
         public virtual DbSet<GautengBirdSpecies> GautengBirdSpecies { get; set; }
-        public DbSet<Bird> Birds { get; set; }
         public DbSet<Province> Provinces { get; set; }
-
+        public DbSet<Bird> Birds { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
