@@ -1,8 +1,9 @@
+import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
-import 'package:beakpeek/bird.dart';
+import 'package:beakpeek/View/Home/bird_sheet.dart';
 // class MockClient extends Mock implements http.Client {}
 
 import 'bird_test.mocks.dart';
@@ -42,7 +43,7 @@ void main() {
       // Use Mockito to return a successful response when it calls the
       // provided http.Client.
       when(client.get(Uri.parse(
-              'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad')))
+              'http://10.0.2.2:5000/api/Bird/$pentadId/pentad')))
           .thenAnswer((_) async => http.Response('''
           [
             {

@@ -1,22 +1,57 @@
-import 'package:beakpeek/bird_search.dart';
-import 'package:beakpeek/home.dart';
-import 'package:beakpeek/landing_page.dart';
-import 'package:beakpeek/log_in.dart';
-import 'package:beakpeek/map_info.dart';
-import 'package:beakpeek/sign_up.dart';
+import 'package:beakpeek/Model/user_profile_function.dart';
+import 'package:beakpeek/View/Home/home.dart';
+import 'package:beakpeek/View/Login/landing_page.dart';
+import 'package:beakpeek/View/Home/map_info.dart';
+import 'package:beakpeek/View/UserProfile/user_profile.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initLocalStorage();
+  runApp(const Main());
+}
 
-void main() {
-  runApp(MaterialApp(
-    initialRoute: '/',
-    routes: <String, WidgetBuilder>{
-      '/': (context) => const LandingPage(),
-      '/login': (context) => const LogIn(),
-      '/signup': (context) => const SignUp(),
-      '/home': (context) => const Home(),
-      '/birdSearch': (context) => const BirdSearch(),
-      '/map' : (context) => const MapInfo(),
-    },
-  ));
+class Main extends StatefulWidget {
+  const Main({super.key});
+  @override
+  State<Main> createState() => MainState();
+}
+
+class MainState extends State<Main> {
+  ThemeMode darkLight = ThemeMode.system;
+
+  @override
+  void initState() {
+    darkLight = getThemeMode(localStorage.getItem('theme') ?? '');
+    super.initState();
+  }
+
+  void changeTheme() {
+    setState(() {
+      darkLight = changeThemeMode();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      theme: ThemeData(
+        brightness: Brightness.light,
+        /* light theme settings */
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        /* dark theme settings */
+      ),
+      themeMode: darkLight,
+      initialRoute: '/home',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => const LandingPage(),
+        '/home': (context) => const Home(),
+        '/map': (context) => const MapInfo(),
+        '/profile': (context) => UserProfile(change: changeTheme),
+      },
+    );
+  }
 }

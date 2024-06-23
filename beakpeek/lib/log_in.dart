@@ -1,27 +1,30 @@
-import 'package:beakpeek/LandingText/signup_stack.dart';
+import 'package:beakpeek/LandingText/login_stack.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_appauth/flutter_appauth.dart';
 
 const client = 'CLIENT_DART_API_KEY';
-const rediret = 'com.example.beakpeek://oauthredirect/';
+const rediret = 'https://beakpeak.b2clogin.com/oauth2/nativeclient';
 const flow = 'B2C_1_SignUpAndSignInUserFlow';
 const scope = ['openid'];
 const tenant = 'BeakPeeak';
 const discovery = 'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/';
 
+void onRedirect(BuildContext context) {
+  Navigator.pushNamed(context, '/home');
+}
+
 class LogIn extends StatefulWidget {
   const LogIn({super.key});
 
   @override
-  State<LogIn> createState() => _SignUpState();
+  State<LogIn> createState() => _LogInState();
 }
 
-class _SignUpState extends State<LogIn> {
+class _LogInState extends State<LogIn> {
   final FlutterAppAuth _appAuth = const FlutterAppAuth();
 
   final String _clientId = client;
   final String _redirectUrl = rediret;
-  //final String _issuer = 'https://demo.duendesoftware.com';
   final List<String> _scopes = <String>[
     'openid',
   ];
@@ -33,7 +36,6 @@ class _SignUpState extends State<LogIn> {
     tokenEndpoint:
         'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/token',
   );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,14 +44,9 @@ class _SignUpState extends State<LogIn> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SignupStack(),
+            const LoginStack(),
             IconButton(
               icon: Image.asset('assets/icons/google.png'),
-              onPressed: () {},
-              tooltip: 'Sign in with google',
-            ),
-            IconButton(
-              icon: Image.asset('assets/icons/facebook.png'),
               onPressed: () => _signInWithAutoCodeExchange(),
               tooltip: 'Sign in with google',
             ),
@@ -62,8 +59,6 @@ class _SignUpState extends State<LogIn> {
   Future<void> _signInWithAutoCodeExchange(
       {bool preferEphemeralSession = false}) async {
     try {
-      _setBusyState();
-
       final AuthorizationTokenResponse? result =
           await _appAuth.authorizeAndExchangeCode(
         AuthorizationTokenRequest(
@@ -74,11 +69,13 @@ class _SignUpState extends State<LogIn> {
           preferEphemeralSession: preferEphemeralSession,
         ),
       );
-      if (result != null) {}
+      if (result != null) {
+        _setBusyState();
+      }
     } catch (_) {}
   }
 
   void _setBusyState() {
-    setState(() {});
+    onRedirect(context);
   }
 }
