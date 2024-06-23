@@ -55,6 +55,7 @@ void main() {
           'genus': 'Test Genus',
           'species': 'Test Species',
           'reportingRate': 1.0,
+
         }
       ];
 
@@ -76,59 +77,5 @@ void main() {
           find.text('Test Common Group Test Common Species'), findsOneWidget);
     });
 
-    // ignore: lines_longer_than_80_chars
-    // testWidgets('Test sorting - Ascending order', (WidgetTester tester) async {
-    //   // Mock http client
-    //   final mockClient = MockClient();
-    //   const pentadId = 'testId';
-
-    //   // Provide mock response for fetchBirds
-    //   when(mockClient.get(Uri.parse(
-    //           'http://10.0.2.2:5000/api/GautengBirdSpecies/$pentadId/pentad')))
-    //       .thenAnswer((_) async => http.Response('''
-    //   [
-    //     {
-    //       "pentad": "Test Pentad",
-    //       "spp": 1,
-    //       "common_group": "Test Common Group",
-    //       "common_species": "Test Common Species",
-    //       "genus": "Test Genus",
-    //       "species": "Test Species",
-    //       "reportingRate": 1.0
-    //     },
-    //     {
-    //       "pentad": "Test Pentad 2",
-    //       "spp": 2,
-    //       "common_group": "Test Common Group 2",
-    //       "common_species": "Test Common Species 2",
-    //       "genus": "Test Genus 2",
-    //       "species": "Test Species 2",
-    //       "reportingRate": 0.5
-    //     }
-    //   ]
-    //   ''', 200));
-
-    //   // Build our widget and trigger a frame.
-    //   await tester.pumpWidget(const MaterialApp(
-    //     home: Scaffold(
-    //       body: BirdSheet(pentadId: pentadId),
-    //     ),
-    //   ));
-
-    //   // Wait for the widget to rebuild after future resolves
-    //   await tester.pumpAndSettle();
-
-    //   // Simulate selecting sort option
-    //   await tester.tap(find.byKey(const Key('sort_button')));
-    //   await tester.pumpAndSettle();
-
-    //   // Select 'Rarity Ascending' option
-    //   await tester.tap(find.text('Rarity Ascending').last);
-    //   await tester.pumpAndSettle();
-
-    //   // Verify that BirdList widget is found and the first item has the expected text
-    //   expect(find.byType(BirdList), findsOneWidget);
-    //   expect(find.text('Test Pentad 2'), findsOneWidget);
-    // });
   });
 }
