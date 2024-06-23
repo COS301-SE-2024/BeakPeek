@@ -78,8 +78,8 @@ class Home extends StatelessWidget {
                           GestureDetector(
                             onTap: () {
                               const content =
-                                  'This map shows you your current location.
-                                  Click anywhere and you will see all the birds in that area!';
+                                  // ignore: lines_longer_than_80_chars
+                                  'This map shows you your current location. Click anywhere and you will see all the birds in that area!';
                               showHelpPopup(context, content);
                             },
                             child: const Icon(
