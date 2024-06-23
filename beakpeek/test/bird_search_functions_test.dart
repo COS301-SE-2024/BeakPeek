@@ -18,8 +18,8 @@ void main() {
         () async {
           final client = MockClient();
 
-          when(client.get(
-                  Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies')))
+          when(client.get(Uri.parse(
+                  'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
               .thenAnswer((_) async => http.Response('''
           [
             {
@@ -43,8 +43,8 @@ void main() {
 
         // Use Mockito to return an unsuccessful response when it calls the
         // provided http.Client.
-        when(client
-                .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies')))
+        when(client.get(Uri.parse(
+                'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         expect(fetchAllBirds(client), throwsException);
