@@ -40,9 +40,18 @@ if (!builder.Environment.IsDevelopment())
 // connection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
-builder.Services.AddScoped<CsvImporter>();
+builder.Services.AddTransient<CsvImporter>();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    dbContext.Database.Migrate();
+
+    var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+    csvImporter.ImportAllCsvData("/data");
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
