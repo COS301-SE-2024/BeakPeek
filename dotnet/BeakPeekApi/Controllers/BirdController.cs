@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
@@ -9,25 +10,25 @@ namespace BeakPeekApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class GautengBirdSpeciesController : ControllerBase
+    public class BirdController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public GautengBirdSpeciesController(AppDbContext context)
+        public BirdController(AppDbContext context)
         {
             _context = context;
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> GetGautengBirdSpecies()
+        public async Task<ActionResult<IEnumerable<Bird>>> GetBirds()
         {
-            return await _context.GautengBirdSpecies.ToListAsync();
+            return await _context.Birds.ToListAsync();
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GautengBirdSpecies>> GetGautengBirdSpecies(int id)
+        public async Task<ActionResult<Bird>> GetBird(int id)
         {
-            var species = await _context.GautengBirdSpecies.FindAsync(id);
+            var species = await _context.Birds.FindAsync(id);
 
             if (species == null)
             {
@@ -38,15 +39,15 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> SearchGautentBirdSpecies(string commonGroup = null, string commonSpecies = null)
+        public async Task<ActionResult<IEnumerable<Bird>>> SearchBirdSpecies(string genus = null, string commonSpecies = null)
         {
-            IQueryable<GautengBirdSpecies> query = _context.GautengBirdSpecies;
+            IQueryable<Bird> query = _context.Birds;
 
-            if (!string.IsNullOrEmpty(commonGroup))
+            if (!string.IsNullOrEmpty(genus))
             {
-                query = query.Where(b => EF.Functions.Like(b.Common_group, $"%{commonGroup}%"));
+                query = query.Where(b => EF.Functions.Like(b.Genus, $"%{genus}%"));
             }
- 
+
             if (!string.IsNullOrEmpty(commonSpecies))
             {
                 query = query.Where(b => EF.Functions.Like(b.Common_species, $"%{commonSpecies}%"));
@@ -62,16 +63,16 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<GautengBirdSpecies>> PostGautengBirdSpecies(GautengBirdSpecies species)
+        public async Task<ActionResult<Bird>> PostBirds(Bird species)
         {
-            _context.GautengBirdSpecies.Add(species);
+            _context.Birds.Add(species);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetGautengBirdSpecies), new { id = species.Pentad }, species);
+            return CreatedAtAction(nameof(GetBirds), new { id = species.Pentad }, species);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutGautengBirdSpecies(string id, GautengBirdSpecies species)
+        public async Task<IActionResult> PutBird(string id, Bird species)
         {
             if (id != species.Pentad)
             {
@@ -86,7 +87,7 @@ namespace BeakPeekApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!GautengBirdSpeciesExists(id))
+                if (!BirdExists(id))
                 {
                     return NotFound();
                 }
@@ -100,38 +101,39 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteGautengBirdSpecies(string id)
+        public async Task<IActionResult> DeleteBird(int id)
         {
-            var species = await _context.GautengBirdSpecies.FindAsync(id);
+            var species = await _context.Birds.FindAsync(id);
             if (species == null)
             {
                 return NotFound();
             }
 
-            _context.GautengBirdSpecies.Remove(species);
+            _context.Birds.Remove(species);
             await _context.SaveChangesAsync();
 
             return NoContent();
         }
 
-        private bool GautengBirdSpeciesExists(string id)
+        private bool BirdExists(string id)
         {
-            return _context.GautengBirdSpecies.Any(e => e.Pentad == id);
+            return _context.Birds.Any(e => e.Pentad == id);
         }
 
         [HttpGet("{pentad}/pentad")]
-        public async Task<ActionResult<IEnumerable<GautengBirdSpecies>>> GetGautengBirdSpecies(string pentad)
+        public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInPentad(string pentad)
         {
-            var speciesList = await _context.GautengBirdSpecies
+
+            var pentadBirdList = await _context.Birds
                                             .Where(s => s.Pentad == pentad)
                                             .ToListAsync();
 
-            if (speciesList == null || speciesList.Count == 0)
+            if (pentadBirdList == null || pentadBirdList.Count() == 0)
             {
                 return NotFound();
             }
 
-            return Ok(speciesList);
+            return Ok(pentadBirdList);
         }
     }
 }

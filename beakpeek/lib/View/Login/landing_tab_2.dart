@@ -1,7 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Styles/custom_text_span.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
 
@@ -46,18 +45,46 @@ class LandingTab2 extends StatelessWidget {
                     child: CustTextSpan(),
                   ),
                   const Spacer(flex: 3),
-                  const CustomOutlinedButton(
-                    routePath: '/signup',
-                    buttonText: 'Sign Up / Sign In',
-                    backgroundColor: Color(0xff033A30),
-                    textColor: Color(0xff033A30),
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(
+                        color: Color(0xff033A30),
+                      ),
+                      backgroundColor: Colors.transparent,
+                      minimumSize: const Size(350, 50),
+                    ),
+                    child: const Text(
+                      'Sign Up / Sign In',
+                      style: TextStyle(
+                        color: Color(0xff033A30),
+                        fontFamily: 'SF Pro Display',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 20),
-                  const CustomFilledButton(
-                    routePath: '/home',
-                    buttonText: 'Sign In as Guest',
-                    backgroundColor: Color(0xff033A30),
-                    textColor: Colors.white,
+                  FilledButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    style: FilledButton.styleFrom(
+                      backgroundColor: const Color(0xff033A30),
+                      minimumSize: const Size(350, 50),
+                      shadowColor: Colors.black,
+                    ),
+                    child: const Text(
+                      'Sign In as Guest',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'SF Pro Display',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18,
+                      ),
+                    ),
                   ),
                 ],
               ),
