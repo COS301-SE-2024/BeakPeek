@@ -72,6 +72,7 @@ class Home extends StatelessWidget {
                         ),
                         const SizedBox(width: 8), // Spacing between text
                         GestureDetector(
+                          key: const Key('helpLogo'),
                           onTap: () {
                             const content =
                                 // ignore: lines_longer_than_80_chars
