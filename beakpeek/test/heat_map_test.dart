@@ -65,13 +65,15 @@ void main() {
       // Test for westerncape
       expect(
         heatMapState.getCameraPositionForProvince('westerncape'),
-        equals(const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 2.0)),
+        equals(
+            const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 2.0)),
       );
 
       // Test for Eastern Cape
       expect(
         heatMapState.getCameraPositionForProvince('Eastern Cape'),
-        equals(const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 2.0)),
+        equals(
+            const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 2.0)),
       );
 
       // Test for an unknown province (default case)
