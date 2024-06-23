@@ -43,7 +43,8 @@ void main() {
 
         // Use Mockito to return an unsuccessful response when it calls the
         // provided http.Client.
-        when(client.get(Uri.parse('http://10.0.2.2:5000/api/Bird')))
+        when(client
+                .get(Uri.parse('http://10.0.2.2:5000/api/GautengBirdSpecies')))
             .thenAnswer((_) async => http.Response('Not Found', 404));
 
         expect(fetchAllBirds(client), throwsException);
