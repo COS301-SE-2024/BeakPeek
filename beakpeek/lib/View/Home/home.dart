@@ -68,14 +68,14 @@ class Home extends StatelessWidget {
                             text: 'Your Area Map',
                             style: HomePageStyles.homeGreenHeading,
                           ),
-                          SizedBox(
-                              width: screenWidth *
-                                  0.02), // Spacing between text and icon
+                          textAlign: TextAlign.left,
+                        ),
+                        const SizedBox(width: 8), // Spacing between text
                           GestureDetector(
                             onTap: () {
                               const content =
                                   // ignore: lines_longer_than_80_chars
-                                  'This map shows you your current location. Click anywhere and you will see all the birds in that area!';
+                                  'This map shows you your current location. Click anywhere and you will see all the birds in that area! You can use the filters to customise what you see and you can use the search bar to see the heat map of a specific bird!';
                               showHelpPopup(context, content);
                             },
                             child: const Icon(
@@ -87,31 +87,30 @@ class Home extends StatelessWidget {
                                   .green, // Optional: Set color to match theme
                             ),
                           ),
-                          SizedBox(height: screenHeight * 0.01),
-                          Image.asset(
-                            'assets/images/map.png',
-                            width: screenWidth * 0.92,
-                            fit: BoxFit.cover,
-                          ),
-                          SizedBox(height: screenHeight * 0.01),
-                          Center(
-                            child: FilledButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/map');
-                              },
-                              style: FilledButton.styleFrom(
-                                backgroundColor: const Color(0xFF033A30),
-                                minimumSize: const Size(350, 50),
-                                shadowColor: Colors.black,
-                              ),
-                              child: const Text(
-                                'View Map',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'SF Pro Display',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                ),
+                        SizedBox(height: screenHeight * 0.01),
+                        Image.asset(
+                          'assets/images/map.png',
+                          width: screenWidth * 0.92,
+                          fit: BoxFit.cover,
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
+                        Center(
+                          child: FilledButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/map');
+                            },
+                            style: FilledButton.styleFrom(
+                              backgroundColor: const Color(0xFF033A30),
+                              minimumSize: const Size(350, 50),
+                              shadowColor: Colors.black,
+                            ),
+                            child: const Text(
+                              'View Map',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
                               ),
                             ),
                           ),
