@@ -34,10 +34,10 @@ class HeatMapState extends State<HeatMap> {
       target: _defaultCenter,
       zoom: 11.0,
     );
-    _loadKmlData();
+    loadKmlData();
   }
 
-  Color _getColorForReportingRate(double reportingRate) {
+  Color getColorForReportingRate(double reportingRate) {
     if (reportingRate < 40) {
       return Colors.red.withOpacity(0.4);
     } else if (reportingRate < 60) {
@@ -71,8 +71,8 @@ class HeatMapState extends State<HeatMap> {
       onChanged: (newValue) {
         setState(() {
           _selectedProvince = newValue!;
-          _cameraPosition = _getCameraPositionForProvince(newValue);
-          _loadKmlData();
+          _cameraPosition = getCameraPositionForProvince(newValue);
+          loadKmlData();
         });
 
         // Move the camera to the new position
@@ -93,7 +93,7 @@ class HeatMapState extends State<HeatMap> {
     );
   }
 
-  CameraPosition _getCameraPositionForProvince(String province) {
+  CameraPosition getCameraPositionForProvince(String province) {
     // Set camera positions for different provinces
     switch (province) {
       case 'gauteng':
@@ -113,7 +113,7 @@ class HeatMapState extends State<HeatMap> {
     mapController = widget.testController ?? controller;
   }
 
-  Future<void> _loadKmlData() async {
+  Future<void> loadKmlData() async {
     try {
       final kmlString =
           await rootBundle.loadString('assets/province_$_selectedProvince.kml');
@@ -138,7 +138,7 @@ class HeatMapState extends State<HeatMap> {
                 genus: '',
                 species: ''),
           );
-          final color = _getColorForReportingRate(bird.reportingRate);
+          final color = getColorForReportingRate(bird.reportingRate);
           return Polygon(
             polygonId: PolygonId(id),
             points: coordinates,
