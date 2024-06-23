@@ -116,4 +116,6 @@ public class CsvImporterTests
         Assert.Equal(22, birdRecord.Total_Cards);
         Assert.Equal(27.3, birdRecord.ReportingRate);
     }
+
 }
+
