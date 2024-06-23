@@ -14,6 +14,7 @@ on:
     paths-ignore:
       - 'doc/**'
       - 'res/**'
+      - 'beakpeek/**'
   workflow_dispatch:
 
 jobs:
@@ -34,6 +35,11 @@ jobs:
 
       - name: dotnet publish
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/BeakPeekApi ./dotnet/BeakPeekApi/BeakPeekApi.csproj
+
+      - name: Copy CSV files
+        run: |
+          mkdir -p ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species
+          cp -r ./res/species/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
