@@ -7,12 +7,11 @@ import 'package:flutter/material.dart';
 void main() {
   runApp(
     MaterialApp(
-      initialRoute: '/birdmap',
+      initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (context) => const LandingPage(),
         '/home': (context) => const Home(),
         '/map': (context) => const MapInfo(),
-        '/birdmap': (context) => const BirdMap(),
       },
     ),
   );
