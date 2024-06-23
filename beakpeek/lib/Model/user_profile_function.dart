@@ -17,3 +17,19 @@ ThemeMode changeThemeMode() {
   localStorage.setItem('theme', '');
   return ThemeMode.light;
 }
+
+Widget getIcon() {
+  final check = localStorage.getItem('theme') ?? '';
+  if (check.isEmpty) {
+    return const Icon(Icons.dark_mode_outlined);
+  }
+  return const Icon(Icons.light_mode_outlined);
+}
+
+String getLabelIcon() {
+  final check = localStorage.getItem('theme') ?? '';
+  if (check.isEmpty) {
+    return 'Dark Mode';
+  }
+  return 'Light Mode';
+}
