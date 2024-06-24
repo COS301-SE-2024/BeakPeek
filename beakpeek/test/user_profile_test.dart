@@ -2,7 +2,7 @@ import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'filterable_searchbar_test.dart';
+import 'Searching/filterable_searchbar_test.dart';
 
 void change() {}
 void main() {
@@ -27,7 +27,7 @@ void main() {
           expect(birdL[1].commonSpecies, 'commonSpecies');
           expect(birdL[1].genus, 'genus');
           expect(birdL[0].species, 'species');
-          expect(birdL[0].reportingRate, 10.0);
+          expect(birdL[0].reportingRate, 20.0);
         },
       );
 
