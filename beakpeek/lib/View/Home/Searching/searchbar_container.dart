@@ -1,5 +1,5 @@
 import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
+import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
@@ -17,7 +17,7 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
   @override
   void initState() {
     super.initState();
-    birds = bsf
+    birds = db
         .fetchAllBirds(Client()); // Fetch and sort birds from the API initially
   }
 
