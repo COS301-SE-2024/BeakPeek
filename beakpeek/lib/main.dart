@@ -45,7 +45,7 @@ class MainState extends State<Main> {
         /* dark theme settings */
       ),
       themeMode: darkLight,
-      initialRoute: '/home',
+      initialRoute: '/',
       routes: <String, WidgetBuilder>{
         '/': (context) => const LandingPage(),
         '/home': (context) => const Home(),

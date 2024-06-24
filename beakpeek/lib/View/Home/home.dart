@@ -133,27 +133,7 @@ class Home extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         SizedBox(height: screenHeight * 0.01),
-                        Center(
-                          child: FilledButton(
-                            onPressed: () {
-                              Navigator.pushNamed(context, '/map');
-                            },
-                            style: FilledButton.styleFrom(
-                              backgroundColor: const Color(0xFF033A30),
-                              minimumSize: const Size(350, 50),
-                              shadowColor: Colors.black,
-                            ),
-                            child: const Text(
-                              'View Map',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontFamily: 'SF Pro Display',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
-                              ),
-                            ),
-                          ),
-                        ),
+
                         SizedBox(height: screenHeight * 0.01),
                         const Center(
                           child: CustomFilledButton(

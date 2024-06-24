@@ -52,10 +52,11 @@
 
 <h2 id="demos"> Demos</h2>
 
-[![Demo 1](https://img.youtube.com/vi/Rbq9yniwfl0/0.jpg)](https://youtu.be/Rbq9yniwfl0)
+[![Demo 2](https://img.youtube.com/vi/LUgWIDLSAU8/0.jpg)](https://youtu.be/LUgWIDLSAU8)
 
   <h2 href="">System Requirement Specification</h1>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v2" > SRSv2 </a>
+  <a href="doc/SRS_SoftwareRequirementSpecification/SRS v2.pdf" > SRSv2 pdf</a>
 </div>
 
 <h2>🤝Team</h2>
