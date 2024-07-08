@@ -79,6 +79,8 @@ class UserProfileState extends State<UserProfile> {
                     ),
                   ),
 
+                  const Divider(height: 1, thickness: 1),
+
                   // Name Field with Subheading
                   const SizedBox(height: 20),
                   const Text('Full Name', style: ProfilePageStyles.subheading),
@@ -98,7 +100,9 @@ class UserProfileState extends State<UserProfile> {
                   Text(email, style: ProfilePageStyles.content),
 
                   // Subheading for Life List
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 20),
+                  const Divider(height: 1, thickness: 1),
+                  const SizedBox(height: 20),
                   const Text('Your Life List',
                       style: ProfilePageStyles.heading),
                   const SizedBox(height: 10),
@@ -107,6 +111,7 @@ class UserProfileState extends State<UserProfile> {
                   getLiveList(),
 
                   // Divider between the list and buttons
+                  const SizedBox(height: 20),
                   const Divider(height: 1, thickness: 1),
 
                   // Buttons at the bottom

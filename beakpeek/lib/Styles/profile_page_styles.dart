@@ -6,7 +6,7 @@ abstract class ProfilePageStyles {
   static const double borderRadius = 30.0;
 
   static const TextStyle heading = TextStyle(
-    color: Color(0xFF033A30),
+    color: secondaryColor,
     fontSize: 24,
     fontFamily: 'SF Pro Display',
     fontWeight: FontWeight.bold,
