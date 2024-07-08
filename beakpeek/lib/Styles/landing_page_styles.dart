@@ -24,4 +24,18 @@ abstract class LandingStyles {
     fontWeight: FontWeight.w700,
     height: 0,
   );
+
+  static const TextStyle primaryButtonText = TextStyle(
+    color: Color(0xFFFFFFFF),
+    fontFamily: 'SF Pro Display',
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+  );
+
+  static const TextStyle secondaryButtonText = TextStyle(
+    color: Color(0xff033A30),
+    fontFamily: 'SF Pro Display',
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+  );
 }

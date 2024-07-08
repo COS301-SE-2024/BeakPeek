@@ -56,15 +56,8 @@ class LandingTab2 extends StatelessWidget {
                       backgroundColor: Colors.transparent,
                       minimumSize: const Size(350, 50),
                     ),
-                    child: const Text(
-                      'Sign Up / Sign In',
-                      style: TextStyle(
-                        color: Color(0xff033A30),
-                        fontFamily: 'SF Pro Display',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                      ),
-                    ),
+                    child: const Text('Sign Up / Sign In',
+                        style: LandingStyles.secondaryButtonText),
                   ),
                   const SizedBox(height: 20),
                   FilledButton(
@@ -76,15 +69,8 @@ class LandingTab2 extends StatelessWidget {
                       minimumSize: const Size(350, 50),
                       shadowColor: Colors.black,
                     ),
-                    child: const Text(
-                      'Sign In as Guest',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'SF Pro Display',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                      ),
-                    ),
+                    child: const Text('Sign In as Guest',
+                        style: LandingStyles.primaryButtonText),
                   ),
                 ],
               ),
