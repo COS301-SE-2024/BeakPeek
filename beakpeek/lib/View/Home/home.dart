@@ -1,4 +1,3 @@
-import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Styles/home_page_styles.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
@@ -135,12 +134,25 @@ class Home extends StatelessWidget {
                         SizedBox(height: screenHeight * 0.01),
 
                         SizedBox(height: screenHeight * 0.01),
-                        const Center(
-                          child: CustomFilledButton(
-                            routePath: '/map',
-                            buttonText: 'View Map',
-                            backgroundColor: Color(0xFF033A30),
-                            textColor: Colors.white,
+                        Center(
+                          child: FilledButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/map');
+                            },
+                            style: FilledButton.styleFrom(
+                              backgroundColor: const Color(0xFF033A30),
+                              minimumSize: const Size(350, 50),
+                              shadowColor: Colors.black,
+                            ),
+                            child: const Text(
+                              'View Map',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(height: screenHeight * 0.01),
