@@ -26,6 +26,7 @@ class UserProfileState extends State<UserProfile> {
 
   @override
   void initState() {
+    super.initState();
     if (name.isEmpty) {
       name = 'Elm Boog';
     }
@@ -37,7 +38,6 @@ class UserProfileState extends State<UserProfile> {
     }
     iconDisplay = getIcon();
     iconLabel = getLabelIcon();
-    super.initState();
   }
 
   void editName(String data) {
@@ -152,9 +152,8 @@ class UserProfileState extends State<UserProfile> {
                   // Live List
                   getLiveList(),
 
-                  // Divider between the list and buttons
-                  const SizedBox(height: 20),
-                  const Divider(height: 1, thickness: 1),
+                  // Padding to prevent overlap with the bottom fixed container
+                  const SizedBox(height: 100),
                 ],
               ),
             ),
@@ -196,13 +195,13 @@ class UserProfileState extends State<UserProfile> {
             ),
           ),
 
-          // Positioned icon (back)
+          // Container for buttons at the bottom
           Positioned(
             bottom: 0,
             left: 0,
             right: 0,
             child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              padding: const EdgeInsets.all(20.0),
               color: Colors.white, // White background for the container
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -251,6 +250,7 @@ class UserProfileState extends State<UserProfile> {
   }
 }
 
+// Fields for user personal information
 class ProfileField extends StatelessWidget {
   const ProfileField({
     required this.icon,
