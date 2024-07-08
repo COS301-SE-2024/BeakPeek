@@ -221,16 +221,27 @@ class UserProfileState extends State<UserProfile> {
 
           // Positioned settings icon
           Positioned(
-            top: 16,
-            right: 16,
-            child: IconButton(
-              iconSize: 36,
-              icon: const Icon(Icons.settings),
-              onPressed: () {
-                Navigator.pushNamed(context, '/settings');
-              },
-            ),
-          ),
+              top: 16,
+              right: 16,
+              child: Row(
+                children: [
+                  const SizedBox(width: 8),
+                  IconButton(
+                    iconSize: 30,
+                    icon: const Icon(Icons.edit),
+                    onPressed: () {
+                      // Action for edit profile
+                    },
+                  ),
+                  IconButton(
+                    iconSize: 30,
+                    icon: const Icon(Icons.settings),
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/settings');
+                    },
+                  ),
+                ],
+              )),
         ],
       ),
     );
