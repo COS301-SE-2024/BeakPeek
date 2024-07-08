@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 abstract class ProfilePageStyles {
   static const Color primaryColor = Color(0xFF033A30);
   static const Color secondaryColor = Color.fromARGB(188, 3, 58, 48);
+  static const Color iconColorDarkMode = Color.fromARGB(255, 180, 180, 180);
+  static const Color iconColorLightMode = Color.fromARGB(255, 58, 58, 58);
   static const double borderRadius = 30.0;
 
   static const TextStyle heading = TextStyle(

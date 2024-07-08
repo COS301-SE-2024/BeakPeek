@@ -130,17 +130,31 @@ class UserProfileState extends State<UserProfile> {
                         ),
 
                         // Dark mode switch
-                        Switch(
-                          value:
-                              Theme.of(context).brightness == Brightness.dark,
-                          onChanged: (value) {
-                            widget.change();
-                            setState(() {
-                              iconDisplay = getIcon();
-                              iconLabel = getLabelIcon();
-                            });
-                          },
-                          activeColor: ProfilePageStyles.primaryColor,
+                        Row(
+                          children: [
+                            Icon(
+                              Theme.of(context).brightness == Brightness.dark
+                                  ? Icons.wb_sunny
+                                  : Icons.nightlight_round,
+                              color: Theme.of(context).brightness ==
+                                      Brightness.dark
+                                  ? ProfilePageStyles.iconColorDarkMode
+                                  : ProfilePageStyles.iconColorLightMode,
+                            ),
+                            const SizedBox(width: 2),
+                            Switch(
+                              value: Theme.of(context).brightness ==
+                                  Brightness.dark,
+                              onChanged: (value) {
+                                widget.change();
+                                setState(() {
+                                  iconDisplay = getIcon();
+                                  iconLabel = getLabelIcon();
+                                });
+                              },
+                              activeColor: ProfilePageStyles.primaryColor,
+                            ),
+                          ],
                         ),
                       ],
                     ),
