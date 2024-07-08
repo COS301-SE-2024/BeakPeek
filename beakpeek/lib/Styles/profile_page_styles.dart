@@ -8,8 +8,8 @@ abstract class ProfilePageStyles {
   static const double borderRadius = 30.0;
 
   static const TextStyle heading = TextStyle(
-    color: secondaryColor,
-    fontSize: 24,
+    color: primaryColor,
+    fontSize: 32,
     fontFamily: 'SF Pro Display',
     fontWeight: FontWeight.bold,
   );
@@ -23,6 +23,18 @@ abstract class ProfilePageStyles {
 
   static const TextStyle content = TextStyle(
     color: Colors.black87,
+    fontSize: 18,
+    fontFamily: 'SF Pro Display',
+  );
+
+  static const TextStyle secondaryContent = TextStyle(
+    color: Colors.black54,
+    fontSize: 18,
+    fontFamily: 'SF Pro Display',
+  );
+
+  static const TextStyle smallContent = TextStyle(
+    color: Colors.black38,
     fontSize: 18,
     fontFamily: 'SF Pro Display',
   );

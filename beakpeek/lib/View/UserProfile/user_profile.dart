@@ -19,6 +19,11 @@ class UserProfileState extends State<UserProfile> {
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
   String email = localStorage.getItem('email') ?? 'example@mail.com';
 
+  // Added variables
+  String phone = localStorage.getItem('phone') ?? '+123456789';
+  String website = localStorage.getItem('website') ?? 'https://example.com';
+  String location = localStorage.getItem('location') ?? 'Unknown Location';
+
   @override
   void initState() {
     if (name.isEmpty) {
@@ -53,14 +58,14 @@ class UserProfileState extends State<UserProfile> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 60),
 
                   // Profile image and name in center
                   Center(
                     child: Column(
                       children: [
                         CircleAvatar(
-                          radius: 78,
+                          radius: 75,
                           backgroundColor: ProfilePageStyles.primaryColor,
                           child: CircleAvatar(
                             radius: 75,
@@ -74,37 +79,74 @@ class UserProfileState extends State<UserProfile> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 10),
+
+                        // User name
+                        Text(name, style: ProfilePageStyles.heading),
+
+                        // Active since
+                        const Text('Active since - June 2024',
+                            style: ProfilePageStyles.smallContent),
+                        const SizedBox(height: 10),
                       ],
                     ),
                   ),
 
                   const Divider(height: 1, thickness: 1),
 
-                  // Name Field with Subheading
+                  const SizedBox(height: 10),
+                  const Text('Personal Information',
+                      style: ProfilePageStyles.subheading),
                   const SizedBox(height: 20),
-                  const Text('Full Name', style: ProfilePageStyles.subheading),
-                  const SizedBox(height: 8),
-                  Text(name, style: ProfilePageStyles.content),
+
+                  // Email Field
+                  ProfileField(
+                    icon: Icons.email,
+                    label: 'Email',
+                    content: email,
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Phone Field
+                  ProfileField(
+                    icon: Icons.phone,
+                    label: 'Phone',
+                    content: phone,
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Website Field
+                  ProfileField(
+                    icon: Icons.web,
+                    label: 'Website',
+                    content: website,
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  // Location Field
+                  ProfileField(
+                    icon: Icons.location_on,
+                    label: 'Location',
+                    content: location,
+                  ),
+
+                  const SizedBox(height: 10),
 
                   // Bio Field with Subheading
-                  const SizedBox(height: 20),
-                  const Text('Bio', style: ProfilePageStyles.subheading),
-                  const SizedBox(height: 8),
-                  Text(bio, style: ProfilePageStyles.content),
-
-                  // Email Field with Subheading
-                  const SizedBox(height: 20),
-                  const Text('Email', style: ProfilePageStyles.subheading),
-                  const SizedBox(height: 8),
-                  Text(email, style: ProfilePageStyles.content),
+                  ProfileField(
+                    icon: Icons.info,
+                    label: 'Bio',
+                    content: bio,
+                  ),
 
                   // Subheading for Life List
                   const SizedBox(height: 20),
                   const Divider(height: 1, thickness: 1),
                   const SizedBox(height: 20),
-                  const Text('Your Life List',
-                      style: ProfilePageStyles.heading),
+                  const Text('Life List', style: ProfilePageStyles.subheading),
                   const SizedBox(height: 10),
 
                   // Live List
@@ -113,52 +155,6 @@ class UserProfileState extends State<UserProfile> {
                   // Divider between the list and buttons
                   const SizedBox(height: 20),
                   const Divider(height: 1, thickness: 1),
-
-                  // Buttons at the bottom
-                  Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 30.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        // Home button
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/home');
-                          },
-                          style: ProfilePageStyles.elevatedButtonStyle(),
-                          child: const Text('Home'),
-                        ),
-
-                        // Dark mode switch
-                        Row(
-                          children: [
-                            Icon(
-                              Theme.of(context).brightness == Brightness.dark
-                                  ? Icons.wb_sunny
-                                  : Icons.nightlight_round,
-                              color: Theme.of(context).brightness ==
-                                      Brightness.dark
-                                  ? ProfilePageStyles.iconColorDarkMode
-                                  : ProfilePageStyles.iconColorLightMode,
-                            ),
-                            const SizedBox(width: 2),
-                            Switch(
-                              value: Theme.of(context).brightness ==
-                                  Brightness.dark,
-                              onChanged: (value) {
-                                widget.change();
-                                setState(() {
-                                  iconDisplay = getIcon();
-                                  iconLabel = getLabelIcon();
-                                });
-                              },
-                              activeColor: ProfilePageStyles.primaryColor,
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
                 ],
               ),
             ),
@@ -166,25 +162,138 @@ class UserProfileState extends State<UserProfile> {
 
           // Positioned icons (pencil and settings)
           Positioned(
-            top: 16,
+            top: 32,
             right: 16,
             child: Row(
               children: [
                 IconButton(
-                  iconSize: 36,
+                  iconSize: 28,
                   icon: const Icon(Icons.edit),
                   onPressed: () {
                     // Action for edit profile icon
                   },
                 ),
                 IconButton(
-                  iconSize: 36,
+                  iconSize: 28,
                   icon: const Icon(Icons.settings),
                   onPressed: () {
                     Navigator.pushNamed(context, '/settings');
                   },
                 ),
               ],
+            ),
+          ),
+
+          Positioned(
+            top: 32,
+            left: 16,
+            child: IconButton(
+              iconSize: 28,
+              icon: const Icon(Icons.arrow_back),
+              onPressed: () {
+                // Action for edit profile icon
+              },
+            ),
+          ),
+
+          // Positioned icon (back)
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Container(
+              padding: const EdgeInsets.symmetric(vertical: 10.0),
+              color: Colors.white, // White background for the container
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Home button
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/home');
+                    },
+                    style: ProfilePageStyles.elevatedButtonStyle(),
+                    child: const Text('Home'),
+                  ),
+
+                  // Dark mode switch
+                  Row(
+                    children: [
+                      Icon(
+                        Theme.of(context).brightness == Brightness.dark
+                            ? Icons.wb_sunny
+                            : Icons.nightlight_round,
+                        color: Theme.of(context).brightness == Brightness.dark
+                            ? ProfilePageStyles.iconColorDarkMode
+                            : ProfilePageStyles.iconColorLightMode,
+                      ),
+                      const SizedBox(width: 2),
+                      Switch(
+                        value: Theme.of(context).brightness == Brightness.dark,
+                        onChanged: (value) {
+                          widget.change();
+                          setState(() {
+                            iconDisplay = getIcon();
+                            iconLabel = getLabelIcon();
+                          });
+                        },
+                        activeColor: ProfilePageStyles.primaryColor,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ProfileField extends StatelessWidget {
+  const ProfileField({
+    required this.icon,
+    required this.label,
+    required this.content,
+    this.backgroundColor,
+    this.padding,
+    super.key,
+  });
+
+  final IconData icon;
+  final String label;
+  final String content;
+  final Color? backgroundColor;
+  final EdgeInsets? padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: padding ?? const EdgeInsets.all(12.0),
+      decoration: BoxDecoration(
+        color: backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
+        borderRadius: BorderRadius.circular(20.0),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              Icon(
+                icon,
+                color: ProfilePageStyles.primaryColor,
+              ),
+              const SizedBox(width: 8),
+              Text(label, style: ProfilePageStyles.secondaryContent),
+            ],
+          ),
+          Expanded(
+            child: Text(
+              content,
+              style: ProfilePageStyles.content,
+              textAlign: TextAlign.right,
+              overflow: TextOverflow.ellipsis,
             ),
           ),
         ],
