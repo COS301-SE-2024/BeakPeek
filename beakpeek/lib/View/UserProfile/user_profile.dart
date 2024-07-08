@@ -7,6 +7,7 @@ class UserProfile extends StatefulWidget {
   const UserProfile({required this.change, super.key});
   const UserProfile.changeTheme(this.change, {super.key});
   final Function() change;
+
   @override
   State<UserProfile> createState() => UserProfileState();
 }
@@ -15,10 +16,19 @@ class UserProfileState extends State<UserProfile> {
   Widget iconDisplay = getIcon();
   String iconLabel = getLabelIcon();
   String name = localStorage.getItem('fullName') ?? '';
+  String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
+  String email = localStorage.getItem('email') ?? 'example@mail.com';
+
   @override
   void initState() {
     if (name.isEmpty) {
       name = 'Elm Boog';
+    }
+    if (bio.isEmpty) {
+      bio = 'Tell us about yourself...';
+    }
+    if (email.isEmpty) {
+      email = 'elmboog@gmail.com';
     }
     iconDisplay = getIcon();
     iconLabel = getLabelIcon();
@@ -67,88 +77,61 @@ class UserProfileState extends State<UserProfile> {
                       // Name Field
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                        child: TextField(
-                          onChanged: (value) => editName(value),
-                          decoration: const InputDecoration(
-                            labelText: 'Full Name',
-                            hintText: 'Elm Boog',
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.all(12.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFF033A30)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                            ),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.all(12.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black54,
+                          child: Text(
+                            name,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black54,
+                            ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
 
                       // Bio Field
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: TextField(
-                          maxLines: 3,
-                          // onChanged: (value) => editBio(value),
-                          decoration: InputDecoration(
-                            labelText: 'Bio',
-                            hintText: 'Tell us about yourself...',
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.all(12.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFF033A30)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.all(12.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black54,
+                          child: Text(
+                            bio,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black54,
+                            ),
                           ),
                         ),
                       ),
                       const SizedBox(height: 20),
 
                       // Email Field
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: TextField(
-                          keyboardType: TextInputType.emailAddress,
-                          // onChanged: (value) => editEmail(value),
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            hintText: 'example@mail.com',
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.all(12.0),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Color(0xFF033A30)),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: Colors.grey),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(12)),
-                            ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Container(
+                          alignment: Alignment.centerLeft,
+                          padding: const EdgeInsets.all(12.0),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.grey),
+                            borderRadius: BorderRadius.circular(12),
                           ),
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Colors.black54,
+                          child: Text(
+                            email,
+                            style: const TextStyle(
+                              fontSize: 18,
+                              color: Colors.black54,
+                            ),
                           ),
                         ),
                       ),
