@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:beakpeek/View/Home/home.dart';
