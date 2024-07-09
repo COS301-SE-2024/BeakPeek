@@ -39,6 +39,19 @@
             android:value="2" />
     </application>
 
+    <!--Intent filter to capture System Browser or Authenticator calling back to our app after sign-in-->
+    <activity
+        android:name="com.microsoft.identity.client.BrowserTabActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+            <data android:scheme="msauth"
+                android:host="com.example.beakpeek"
+                android:path="QkM6MDU6Q0U6NTI6N0M6OUY6MkM6RTA6MDY6MTM6OUU6NjQ6Mjk6QkI6QzA6MzQ6Q0E6QzQ6Nzc6Nzk=" />
+        </intent-filter>
+    </activity>
+
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
