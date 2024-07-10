@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/custom_text_span.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
@@ -47,7 +48,7 @@ class LandingTab2 extends StatelessWidget {
                   const Spacer(flex: 3),
                   OutlinedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      loginFunction();
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(
