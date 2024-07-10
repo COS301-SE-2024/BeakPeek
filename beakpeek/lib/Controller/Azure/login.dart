@@ -5,8 +5,6 @@ import 'dart:convert' show jsonDecode;
 import 'package:http/http.dart' as http;
 import 'package:beakpeek/Controller/Azure/config.dart' as config;
 
-bool loggedIN = false;
-
 void loginFunction() async {
   final url = Uri.https(
     'beakpeak.b2clogin.com',
@@ -24,6 +22,10 @@ void loginFunction() async {
 
   final code = Uri.parse(result).queryParameters['code'];
 
+  if (code == null) {
+    return;
+  }
+
   final tokenUrl = Uri.https(config.initialUrl, config.tokenUrl);
 
   final response = await http.post(
@@ -38,5 +40,8 @@ void loginFunction() async {
   );
 
   final accessToken = jsonDecode(response.body)['id_token'] as String;
-  print(accessToken);
+
+  config.accessToken = accessToken;
+
+  config.loggedIN = true;
 }
