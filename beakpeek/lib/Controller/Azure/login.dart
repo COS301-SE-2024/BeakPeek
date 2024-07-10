@@ -22,5 +22,9 @@ void loginFunction() async {
   final result = await FlutterWebAuth2.authenticate(
       url: url.toString(), callbackUrlScheme: 'com.example.beakpeek');
 
-  print(result);
+  final code = Uri.parse(result).queryParameters['code'];
+  print('Code $code');
+
+  final tokenUrl = Uri.https(config.initialUrl, config.tokenUrl);
+  print(tokenUrl);
 }
