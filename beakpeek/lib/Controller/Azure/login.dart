@@ -37,5 +37,6 @@ void loginFunction() async {
     },
   );
 
-  print(response.body);
+  final accessToken = jsonDecode(response.body)['id_token'] as String;
+  print(accessToken);
 }
