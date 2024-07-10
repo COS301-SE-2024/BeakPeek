@@ -23,8 +23,19 @@ void loginFunction() async {
       url: url.toString(), callbackUrlScheme: 'com.example.beakpeek');
 
   final code = Uri.parse(result).queryParameters['code'];
-  print('Code $code');
 
   final tokenUrl = Uri.https(config.initialUrl, config.tokenUrl);
-  print(tokenUrl);
+
+  final response = await http.post(
+    tokenUrl,
+    body: {
+      'client_id': config.clientID,
+      'scope': 'openid',
+      'redirect_uri': config.redirectURL,
+      'grant_type': 'authorization_code',
+      'code': code,
+    },
+  );
+
+  print(response.body);
 }
