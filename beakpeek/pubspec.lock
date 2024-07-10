@@ -9,14 +9,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "67.0.0"
-  aad_b2c_webview:
-    dependency: "direct main"
-    description:
-      name: aad_b2c_webview
-      sha256: c9fe0e531c42708ffca161521219b988bf9cc6aa71dd8f4507a9c7fc27dc329a
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.56"
   analyzer:
     dependency: transitive
     description:
@@ -233,14 +225,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.0.6"
-  dynamic_searchbar:
-    dependency: "direct main"
-    description:
-      name: dynamic_searchbar
-      sha256: c017a26a139b8997be9db9c658fd4741492a05407bb43a1e5a3c81499fb68b92
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.0.0"
   fake_async:
     dependency: transitive
     description:
@@ -278,22 +262,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_appauth:
+  flutter_azure_b2c:
     dependency: "direct main"
     description:
-      name: flutter_appauth
-      sha256: f2696d4cf437f627fa09bc4864afdd8c80273f2e293fde544b18202a627754b1
+      name: flutter_azure_b2c
+      sha256: "5c5a3127a5c4a51cdfd7ad1712b492f5b80022041a35a682454f9e1df285af58"
       url: "https://pub.dev"
     source: hosted
-    version: "6.0.6"
-  flutter_appauth_platform_interface:
-    dependency: transitive
-    description:
-      name: flutter_appauth_platform_interface
-      sha256: "44feaa7058191b5d3cd7c9ff195262725773643121bcada172d49c2ddcff71cb"
-      url: "https://pub.dev"
-    source: hosted
-    version: "6.0.0"
+    version: "0.0.10"
   flutter_dotenv:
     dependency: "direct main"
     description:
@@ -302,14 +278,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.1.0"
-  flutter_hooks:
-    dependency: transitive
-    description:
-      name: flutter_hooks
-      sha256: "6a126f703b89499818d73305e4ce1e3de33b4ae1c5512e3b8eab4b986f46774c"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.18.6"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -368,14 +336,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "14.2.0"
-  google_fonts:
-    dependency: transitive
-    description:
-      name: google_fonts
-      sha256: e20ff62b158b96f392bfc8afe29dee1503c94fbea2cbe8186fd59b756b8ae982
-      url: "https://pub.dev"
-    source: hosted
-    version: "5.1.0"
   google_maps:
     dependency: transitive
     description:
@@ -468,10 +428,10 @@ packages:
     dependency: transitive
     description:
       name: intl
-      sha256: "3bc132a9dbce73a7e4a21a17d06e1878839ffbf975568bc875c60537824b0c4d"
+      sha256: "910f85bce16fb5c6f614e117efa303e85a1731bb0081edf3604a2ae6e9a3cc91"
       url: "https://pub.dev"
     source: hosted
-    version: "0.18.1"
+    version: "0.17.0"
   io:
     dependency: transitive
     description:
@@ -592,6 +552,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.4.4"
+  msal_js:
+    dependency: transitive
+    description:
+      name: msal_js
+      sha256: "9800af5d1d4b389572803e8331bd9e57a55c1b9dd2b6ca83aacf98ef9ed81f44"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.14.0"
   package_config:
     dependency: transitive
     description:

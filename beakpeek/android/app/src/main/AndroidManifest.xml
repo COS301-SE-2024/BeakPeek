@@ -1,4 +1,7 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.beakpeek">
+
     <application
         android:label="beakpeek"
         android:name="${applicationName}"
@@ -30,6 +33,22 @@
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+
+            <intent-filter>
+                <action android:name="com.example.beakpeek.HANDLE_AUTHORIZATION_RESPONSE"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name="com.linusu.flutter_web_auth_2.CallbackActivity"
+            android:exported="true">
+            <intent-filter android:label="flutter_web_auth_2">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="com.example.beakpeek" />
+            </intent-filter>
         </activity>
 
         <!-- Don't delete the meta-data below.
@@ -39,18 +58,7 @@
             android:value="2" />
     </application>
 
-    <!--Intent filter to capture System Browser or Authenticator calling back to our app after sign-in-->
-    <activity
-        android:name="com.microsoft.identity.client.BrowserTabActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.VIEW" />
-            <category android:name="android.intent.category.DEFAULT" />
-            <category android:name="android.intent.category.BROWSABLE" />
-            <data android:scheme="msauth"
-                android:host="com.example.beakpeek"
-                android:path="QkM6MDU6Q0U6NTI6N0M6OUY6MkM6RTA6MDY6MTM6OUU6NjQ6Mjk6QkI6QzA6MzQ6Q0E6QzQ6Nzc6Nzk=" />
-        </intent-filter>
-    </activity>
+    
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
