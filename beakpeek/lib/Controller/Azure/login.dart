@@ -1,3 +1,8 @@
+// ignore_for_file: unused_import
+
+import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
+import 'dart:convert' show jsonDecode;
+import 'package:http/http.dart' as http;
 import 'package:beakpeek/Controller/Azure/config.dart' as config;
 
 bool loggedIN = false;
@@ -14,5 +19,8 @@ void loginFunction() async {
     },
   );
 
-  print(url);
+  final result = await FlutterWebAuth2.authenticate(
+      url: url.toString(), callbackUrlScheme: 'com.example.beakpeek');
+
+  print(result);
 }
