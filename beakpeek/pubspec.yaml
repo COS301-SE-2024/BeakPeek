@@ -53,6 +53,7 @@ dependencies:
   slidable_button: ^3.0.0+1
   profile_photo: ^1.0.3
   flutter_azure_b2c: ^0.0.10
+  flutter_web_auth_2: ^3.1.2
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
