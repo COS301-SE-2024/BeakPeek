@@ -39,7 +39,9 @@ void main() {
           // provided http.Client.
           when(client.get(Uri.parse(
                   'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
-              .thenAnswer((_) async => http.Response('', 400));
+              .thenAnswer(
+            (_) async => http.Response('', 400),
+          );
           await tester.pumpWidget(
             const MaterialApp(
               home: Scaffold(
