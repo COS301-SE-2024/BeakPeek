@@ -5,7 +5,7 @@ import 'package:beakpeek/View/Home/map_info.dart';
 import 'package:beakpeek/View/UserProfile/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:beakpeek/Controller/Azure/config.dart' as config;
+import 'package:beakpeek/config_azure.dart' as config;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
