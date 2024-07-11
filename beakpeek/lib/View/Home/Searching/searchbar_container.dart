@@ -17,8 +17,7 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
   @override
   void initState() {
     super.initState();
-    birds = db
-        .fetchAllBirds(Client()); // Fetch and sort birds from the API initially
+    birds = db.fetchAllBirds(Client());
   }
 
   @override
@@ -33,7 +32,6 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
-            //print(snapshot.data!);
             return FilterableSearchbar(sort: sort, birds: snapshot.data!);
           },
         ),
