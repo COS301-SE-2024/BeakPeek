@@ -1,5 +1,4 @@
 // ignore_for_file: lines_longer_than_80_chars
-
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
