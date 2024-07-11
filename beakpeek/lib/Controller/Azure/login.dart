@@ -22,10 +22,6 @@ void loginFunction() async {
 
   final code = Uri.parse(result).queryParameters['code'];
 
-  if (code == null) {
-    return;
-  }
-
   final tokenUrl = Uri.https(config.initialUrl, config.tokenUrl);
 
   final response = await http.post(
