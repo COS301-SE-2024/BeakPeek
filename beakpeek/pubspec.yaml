@@ -43,18 +43,17 @@ dependencies:
   pkce: ^1.1.0+1
   http: ^1.2.1
   webview_flutter_android: ^3.16.4
-  flutter_appauth: ^6.0.6
   dropdown_search: ^5.0.6
   flutter_searchable_dropdown: ^2.0.0
   searchfield: ^1.0.5
   searchable_listview: ^2.14.0
-  dynamic_searchbar: ^1.0.0
-  aad_b2c_webview: ^0.0.56
   go_router: ^14.1.4
   localstorage: ^5.0.0
   slider_button: ^2.1.0
   slidable_button: ^3.0.0+1
   profile_photo: ^1.0.3
+  flutter_azure_b2c: ^0.0.10
+  flutter_web_auth_2: ^3.1.2
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:

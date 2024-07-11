@@ -5,6 +5,7 @@ import 'package:beakpeek/View/Home/map_info.dart';
 import 'package:beakpeek/View/UserProfile/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:beakpeek/config_azure.dart' as config;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,10 +22,19 @@ class Main extends StatefulWidget {
 class MainState extends State<Main> {
   ThemeMode darkLight = ThemeMode.system;
 
+  String route = '/';
   @override
   void initState() {
     darkLight = getThemeMode(localStorage.getItem('theme') ?? '');
     super.initState();
+  }
+
+  void changeRoute() {
+    if (config.loggedIN) {
+      setState(() {
+        route = '/home';
+      });
+    }
   }
 
   void changeTheme() {
@@ -45,9 +55,9 @@ class MainState extends State<Main> {
         /* dark theme settings */
       ),
       themeMode: darkLight,
-      initialRoute: '/',
+      initialRoute: route,
       routes: <String, WidgetBuilder>{
-        '/': (context) => const LandingPage(),
+        '/': (context) => LandingPage(routeChange: changeRoute),
         '/home': (context) => const Home(),
         '/map': (context) => const MapInfo(),
         '/profile': (context) => UserProfile(change: changeTheme),
