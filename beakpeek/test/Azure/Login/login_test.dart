@@ -25,7 +25,7 @@ void main() {
               expect(methodCall.arguments['callbackUrlScheme'] as String,
                   'com.example.beakpeek');
 
-              return 'https://com.example.beakpeek://login-callback/?code=eyJraW';
+              return 'com.example.beakpeek://login-callback/?code=eyJraW';
             },
           );
         },
