@@ -3,7 +3,7 @@
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'dart:convert' show jsonDecode;
 import 'package:http/http.dart' as http;
-import 'package:beakpeek/Controller/Azure/config.dart' as config;
+import 'package:beakpeek/config_azure.dart' as config;
 
 void loginFunction() async {
   final url = Uri.https(
