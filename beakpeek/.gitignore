@@ -43,4 +43,4 @@ app.*.map.json
 /android/app/release
 
 # Azure Config file
-/lib/Controller/Azure/config.dart
+/lib/config_azure.dart
