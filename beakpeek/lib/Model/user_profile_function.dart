@@ -3,7 +3,7 @@ import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 
-final birds = [
+final birdL = [
   Bird(
     pentad: '1',
     spp: 1,
@@ -58,7 +58,7 @@ String getLabelIcon() {
 }
 
 Widget getLiveList() {
-  final List<Widget> items = getWidgetListOfBirds(birds);
+  final List<Widget> items = getWidgetListOfBirds(birdL);
   return Column(
     children: [
       items[0],
