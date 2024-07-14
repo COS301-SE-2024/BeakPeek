@@ -12,16 +12,16 @@ class UserProfile extends StatefulWidget {
 }
 
 class UserProfileState extends State<UserProfile> {
-  Widget iconDisplay = getIcon();
-  String iconLabel = getLabelIcon();
+  Widget iconDisplay = getIcon(localStorage);
+  String iconLabel = getLabelIcon(localStorage);
   String name = localStorage.getItem('fullName') ?? '';
   @override
   void initState() {
     if (name.isEmpty) {
       name = 'Elm Boog';
     }
-    iconDisplay = getIcon();
-    iconLabel = getLabelIcon();
+    iconDisplay = getIcon(localStorage);
+    iconLabel = getLabelIcon(localStorage);
     super.initState();
   }
 
@@ -199,8 +199,8 @@ class UserProfileState extends State<UserProfile> {
                                 action: () async {
                                   widget.change();
                                   setState(() {
-                                    iconDisplay = getIcon();
-                                    iconLabel = getLabelIcon();
+                                    iconDisplay = getIcon(localStorage);
+                                    iconLabel = getLabelIcon(localStorage);
                                   });
                                   return false;
                                 },
