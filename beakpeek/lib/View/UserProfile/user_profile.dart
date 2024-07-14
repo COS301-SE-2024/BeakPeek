@@ -12,16 +12,16 @@ class UserProfile extends StatefulWidget {
 }
 
 class UserProfileState extends State<UserProfile> {
-  Widget iconDisplay = getIcon();
-  String iconLabel = getLabelIcon();
+  Widget iconDisplay = getIcon(localStorage);
+  String iconLabel = getLabelIcon(localStorage);
   String name = localStorage.getItem('fullName') ?? '';
   @override
   void initState() {
     if (name.isEmpty) {
       name = 'Elm Boog';
     }
-    iconDisplay = getIcon();
-    iconLabel = getLabelIcon();
+    iconDisplay = getIcon(localStorage);
+    iconLabel = getLabelIcon(localStorage);
     super.initState();
   }
 
@@ -42,8 +42,6 @@ class UserProfileState extends State<UserProfile> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 const SizedBox(height: 40),
-
-                // Profile image and name in center
                 Center(
                   child: Column(
                     children: [
@@ -63,8 +61,6 @@ class UserProfileState extends State<UserProfile> {
                         ),
                       ),
                       const SizedBox(height: 20),
-
-                      // Name Field
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextField(
@@ -93,13 +89,10 @@ class UserProfileState extends State<UserProfile> {
                         ),
                       ),
                       const SizedBox(height: 20),
-
-                      // Bio Field
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextField(
                           maxLines: 3,
-                          // onChanged: (value) => editBio(value),
                           decoration: InputDecoration(
                             labelText: 'Bio',
                             hintText: 'Tell us about yourself...',
@@ -123,13 +116,10 @@ class UserProfileState extends State<UserProfile> {
                         ),
                       ),
                       const SizedBox(height: 20),
-
-                      // Email Field
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: TextField(
                           keyboardType: TextInputType.emailAddress,
-                          // onChanged: (value) => editEmail(value),
                           decoration: InputDecoration(
                             labelText: 'Email',
                             hintText: 'example@mail.com',
@@ -153,8 +143,6 @@ class UserProfileState extends State<UserProfile> {
                         ),
                       ),
                       const SizedBox(height: 20),
-
-                      // Subheading
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: Text(
@@ -211,8 +199,8 @@ class UserProfileState extends State<UserProfile> {
                                 action: () async {
                                   widget.change();
                                   setState(() {
-                                    iconDisplay = getIcon();
-                                    iconLabel = getLabelIcon();
+                                    iconDisplay = getIcon(localStorage);
+                                    iconLabel = getLabelIcon(localStorage);
                                   });
                                   return false;
                                 },

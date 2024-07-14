@@ -24,4 +24,15 @@ abstract class LandingStyles {
     fontWeight: FontWeight.w700,
     height: 0,
   );
+
+  static const TextStyle baseTextStyle = TextStyle(
+    color: Color(0xB200383E),
+    fontSize: 20,
+    fontFamily: 'SF Pro Display',
+    fontWeight: FontWeight.w400,
+  );
+
+  static const TextStyle highlightedTextStyle = TextStyle(
+    color: Color(0xFFCE7625),
+  );
 }
