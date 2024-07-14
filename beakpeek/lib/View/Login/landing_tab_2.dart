@@ -2,7 +2,6 @@
 
 import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Styles/custom_text_span.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
 
 class LandingTab2 extends StatelessWidget {
@@ -41,9 +40,25 @@ class LandingTab2 extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Align(
-                    alignment: Alignment(-0.5, 0.0),
-                    child: CustTextSpan(),
+                  Align(
+                    alignment: const Alignment(-0.5, 0.0),
+                    child: RichText(
+                      text: const TextSpan(
+                        style: LandingStyles.baseTextStyle,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Create an account or sign in \nto join the',
+                          ),
+                          TextSpan(
+                            text: ' BeakPeak',
+                            style: LandingStyles.highlightedTextStyle,
+                          ),
+                          TextSpan(
+                            text: ' community.',
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   const Spacer(flex: 3),
                   OutlinedButton(

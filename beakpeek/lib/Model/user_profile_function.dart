@@ -1,9 +1,9 @@
-import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/bird_search_functions.dart';
 
-final birds = [
+final birdL = [
   Bird(
     pentad: '1',
     spp: 1,
@@ -31,7 +31,7 @@ ThemeMode getThemeMode(String data) {
   return ThemeMode.dark;
 }
 
-ThemeMode changeThemeMode() {
+ThemeMode changeThemeMode(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';
   if (check.isEmpty) {
     localStorage.setItem('theme', 'dark');
@@ -41,7 +41,7 @@ ThemeMode changeThemeMode() {
   return ThemeMode.light;
 }
 
-Widget getIcon() {
+Widget getIcon(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';
   if (check.isEmpty) {
     return const Icon(Icons.dark_mode_outlined);
@@ -49,7 +49,7 @@ Widget getIcon() {
   return const Icon(Icons.light_mode_outlined);
 }
 
-String getLabelIcon() {
+String getLabelIcon(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';
   if (check.isEmpty) {
     return 'Dark Mode';
@@ -58,7 +58,7 @@ String getLabelIcon() {
 }
 
 Widget getLiveList() {
-  final List<Widget> items = getWidgetListOfBirds(birds);
+  final List<Widget> items = getWidgetListOfBirds(birdL);
   return Column(
     children: [
       items[0],

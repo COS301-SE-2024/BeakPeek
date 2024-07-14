@@ -23,11 +23,6 @@ class Bird {
     );
   }
 
-  // @override
-  // String toString() {
-  //   return '$commonGroup $commonSpecies';
-  // }
-
   final String pentad;
   final int spp;
   final String commonGroup;
