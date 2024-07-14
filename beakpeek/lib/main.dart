@@ -39,7 +39,7 @@ class MainState extends State<Main> {
 
   void changeTheme() {
     setState(() {
-      darkLight = changeThemeMode();
+      darkLight = changeThemeMode(localStorage);
     });
   }
 
