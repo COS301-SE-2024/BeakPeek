@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:go_router/go_router.dart';
@@ -35,10 +37,14 @@ void loginFunction(BuildContext context) async {
     },
   );
 
+  if (response.statusCode == 400) {
+    context.go('/');
+    return;
+  }
+
   final accessToken = jsonDecode(response.body)['id_token'] as String;
 
   config.accessToken = accessToken;
   config.loggedIN = true;
-  // ignore: use_build_context_synchronously
   context.go('/home');
 }

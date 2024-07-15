@@ -17,8 +17,7 @@ class RoutingData {
       GoRoute(
         path: '/profile',
         builder: (context, state) {
-          final Function() changeT = state.extra! as Function();
-          return UserProfile(change: changeT);
+          return const UserProfile();
         },
       ),
       GoRoute(
