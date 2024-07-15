@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -30,7 +31,7 @@ class BottomNavItem extends StatelessWidget {
       children: [
         TextButton(
           onPressed: () {
-            Navigator.pushNamed(context, '/${label.toLowerCase()}');
+            context.go('/${label.toLowerCase()}');
           },
           child: Image.asset(
             'assets/icons/$file',

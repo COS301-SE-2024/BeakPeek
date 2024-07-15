@@ -1,9 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
+import 'package:go_router/go_router.dart';
 import 'dart:convert' show jsonDecode;
 import 'package:http/http.dart' as http;
 import 'package:beakpeek/config_azure.dart' as config;
 
-void loginFunction() async {
+void loginFunction(BuildContext context) async {
   final url = Uri.https(
     'beakpeak.b2clogin.com',
     'beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/authorize',
@@ -36,6 +38,7 @@ void loginFunction() async {
   final accessToken = jsonDecode(response.body)['id_token'] as String;
 
   config.accessToken = accessToken;
-
   config.loggedIN = true;
+  // ignore: use_build_context_synchronously
+  context.go('/home');
 }

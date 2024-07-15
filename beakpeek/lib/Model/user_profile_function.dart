@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
+import 'package:beakpeek/Controller/Main/theme_provider.dart';
 
 final birdL = [
   Bird(
@@ -35,9 +36,11 @@ ThemeMode changeThemeMode(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';
   if (check.isEmpty) {
     localStorage.setItem('theme', 'dark');
+    ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
     return ThemeMode.dark;
   }
   localStorage.setItem('theme', '');
+  ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
   return ThemeMode.light;
 }
 

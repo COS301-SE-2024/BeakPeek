@@ -1,11 +1,11 @@
+import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
-import 'package:beakpeek/View/Home/home.dart';
-import 'package:beakpeek/View/Login/landing_page.dart';
-import 'package:beakpeek/View/Home/map_info.dart';
-import 'package:beakpeek/View/UserProfile/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:beakpeek/config_azure.dart' as config;
+import 'package:beakpeek/Controller/Main/routing_data.dart';
+import 'package:provider/provider.dart';
+
+late final ValueNotifier<bool> notifier;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,46 +22,36 @@ class Main extends StatefulWidget {
 class MainState extends State<Main> {
   ThemeMode darkLight = ThemeMode.system;
 
-  String route = '/';
+  void changeTheme() {
+    setState(
+      () {
+        darkLight = changeThemeMode(localStorage);
+      },
+    );
+  }
+
   @override
   void initState() {
     darkLight = getThemeMode(localStorage.getItem('theme') ?? '');
     super.initState();
   }
 
-  void changeRoute() {
-    if (config.loggedIN) {
-      setState(() {
-        route = '/home';
-      });
-    }
-  }
-
-  void changeTheme() {
-    setState(() {
-      darkLight = changeThemeMode(localStorage);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        brightness: Brightness.light,
-        /* light theme settings */
+    return ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp.router(
+            theme: ThemeData(
+                useMaterial3: true, colorScheme: themeProvider.lightScheme),
+            darkTheme: ThemeData(
+                useMaterial3: true, colorScheme: themeProvider.darkScheme),
+            themeMode: themeProvider.themeMode,
+            routerConfig: RoutingData().router,
+          );
+        },
       ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        /* dark theme settings */
-      ),
-      themeMode: darkLight,
-      initialRoute: route,
-      routes: <String, WidgetBuilder>{
-        '/': (context) => LandingPage(routeChange: changeRoute),
-        '/home': (context) => const Home(),
-        '/map': (context) => const MapInfo(),
-        '/profile': (context) => UserProfile(change: changeTheme),
-      },
     );
   }
 }

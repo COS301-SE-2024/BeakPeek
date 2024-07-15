@@ -3,6 +3,7 @@ import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Model/help_icon_model_functions.dart';
+import 'package:go_router/go_router.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -138,7 +139,7 @@ class Home extends StatelessWidget {
                         Center(
                           child: FilledButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/map');
+                              context.go('/map');
                             },
                             style: FilledButton.styleFrom(
                               backgroundColor: const Color(0xFF033A30),
