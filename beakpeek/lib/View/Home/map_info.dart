@@ -5,19 +5,19 @@ import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/map_page_styles.dart';
 import 'package:beakpeek/Model/help_icon_model_functions.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        backgroundColor: Color(0xFFF3F1ED),
-        body: MapInfo(),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return const MaterialApp(
+//       home: Scaffold(
+//         backgroundColor: Color(0xFFF3F1ED),
+//         body: MapInfo(),
+//       ),
+//     );
+//   }
+// }
 
 class MapInfo extends StatelessWidget {
   const MapInfo({super.key});
