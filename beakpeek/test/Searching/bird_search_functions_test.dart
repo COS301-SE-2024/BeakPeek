@@ -8,7 +8,27 @@ import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
 import '../bird_test.mocks.dart';
-import 'filterable_searchbar_test.dart';
+
+List<Bird> birdL = [
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'Laughing',
+    commonSpecies: 'Dove',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 10.0,
+  ),
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'African',
+    commonSpecies: 'Eagle',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 20.0,
+  ),
+];
 
 @GenerateMocks([http.Client])
 void main() {

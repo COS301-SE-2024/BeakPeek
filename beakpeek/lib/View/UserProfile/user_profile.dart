@@ -4,9 +4,7 @@ import 'package:localstorage/localstorage.dart';
 import 'package:slider_button/slider_button.dart';
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({required this.change, super.key});
-  const UserProfile.changeTheme(this.change, {super.key});
-  final Function() change;
+  const UserProfile({super.key});
   @override
   State<UserProfile> createState() => UserProfileState();
 }
@@ -197,7 +195,7 @@ class UserProfileState extends State<UserProfile> {
                                   child: iconDisplay,
                                 ),
                                 action: () async {
-                                  widget.change();
+                                  changeThemeMode(localStorage);
                                   setState(() {
                                     iconDisplay = getIcon(localStorage);
                                     iconLabel = getLabelIcon(localStorage);

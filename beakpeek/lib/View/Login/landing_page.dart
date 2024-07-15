@@ -4,10 +4,7 @@ import 'package:beakpeek/View/Login/landing_tab_2.dart';
 import 'package:flutter/material.dart';
 
 class LandingPage extends StatefulWidget {
-  const LandingPage({required this.routeChange, super.key});
-  const LandingPage.changeRoute(this.routeChange, {super.key});
-  final Function() routeChange;
-
+  const LandingPage({super.key});
   @override
   State<LandingPage> createState() {
     return _LandingPageState();
