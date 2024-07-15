@@ -3,10 +3,10 @@
 import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/landing_page_styles.dart';
+import 'package:go_router/go_router.dart';
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,7 +63,7 @@ class LandingTab2 extends StatelessWidget {
                   const Spacer(flex: 3),
                   OutlinedButton(
                     onPressed: () {
-                      loginFunction();
+                      loginFunction(context);
                     },
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(
@@ -85,7 +85,7 @@ class LandingTab2 extends StatelessWidget {
                   const SizedBox(height: 20),
                   FilledButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      context.go('/home');
                     },
                     style: FilledButton.styleFrom(
                       backgroundColor: const Color(0xff033A30),
