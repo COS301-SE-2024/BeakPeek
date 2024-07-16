@@ -22,14 +22,15 @@ builder.Services.AddSwaggerGen();
 
 var connection = String.Empty;
 
+builder.Configuration
+    .SetBasePath(Directory.GetCurrentDirectory())
+    .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+    .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
+    .AddEnvironmentVariables();
+
 if (builder.Environment.IsDevelopment())
 {
 
-    builder.Configuration
-        .SetBasePath(Directory.GetCurrentDirectory())
-        .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-        .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
-        .AddEnvironmentVariables();
     connection = builder.Configuration.GetConnectionString("DefaultConnection");
 }
 else
@@ -39,30 +40,57 @@ else
     {
         connection = envConnection;
     }
+    else
+    {
+        throw new InvalidOperationException("Connection string not found.");
+    }
 }
-
-// connection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 builder.Services.AddTransient<CsvImporter>();
 
 var app = builder.Build();
 
-using (var scope = app.Services.CreateScope())
+try
 {
-    var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    dbContext.Database.Migrate();
 
-    var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
-    if (builder.Environment.IsDevelopment())
+    using (var scope = app.Services.CreateScope())
     {
-        csvImporter.ImportAllCsvData("/data");
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            dbContext.Database.Migrate();
+        }
+        else
+        {
+            if (dbContext.Database.GetPendingMigrations().Any())
+            {
+                dbContext.Database.Migrate();
+            }
+        }
+
+        var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+        if (builder.Environment.IsDevelopment())
+        {
+            csvImporter.ImportAllCsvData("/data");
+        }
+        else
+        {
+            var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
+            if (!Directory.Exists(csvDirectoryPath))
+            {
+                throw new DriveNotFoundException($"CSV directory not found: {csvDirectoryPath}");
+            }
+            csvImporter.ImportAllCsvData(csvDirectoryPath);
+        }
     }
-    else
-    {
-        var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
-        csvImporter.ImportAllCsvData(csvDirectoryPath);
-    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Exception during startup: {ex.Message}");
+    Console.WriteLine(ex.StackTrace);
+    throw;
 }
 
 // Configure the HTTP request pipeline.
