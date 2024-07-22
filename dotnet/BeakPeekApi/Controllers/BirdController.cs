@@ -1,10 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 using BeakPeekApi.Helpers;
 
 namespace BeakPeekApi.Controllers
@@ -23,27 +19,6 @@ namespace BeakPeekApi.Controllers
         }
 
         // Existing methods here...
-
-        [HttpGet("info/{birdName}")]
-        public async Task<ActionResult<BirdInfoModels>> GetBirdInfo(string birdName)
-        {
-            var info = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName);
-            var images = await _birdInfoHelper.FetchBirdImagesFromFlickr(birdName);
-
-            if (info == null || images == null || !images.Any())
-            {
-                return NotFound();
-            }
-
-            return new BirdInfoModels
-            {
-                Name = birdName,
-                Description = info,
-                Images = images
-            };
-        }
-
-
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirds()
