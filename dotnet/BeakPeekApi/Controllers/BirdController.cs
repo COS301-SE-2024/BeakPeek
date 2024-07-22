@@ -1,10 +1,12 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace BeakPeekApi.Controllers
 {
@@ -13,11 +15,99 @@ namespace BeakPeekApi.Controllers
     public class BirdController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly HttpClient _httpClient;
+        
 
-        public BirdController(AppDbContext context)
+        public BirdController(AppDbContext context, HttpClient httpClient)
         {
             _context = context;
+            _httpClient = httpClient;
         }
+
+        // Existing methods here...
+
+        [HttpGet("info/{birdName}")]
+        public async Task<ActionResult<BirdInfoDto>> GetBirdInfo(string birdName)
+        {
+            var info = await FetchBirdInfoFromWikipedia(birdName);
+            var images = await FetchBirdImagesFromFlickr(birdName);
+
+            if (info == null || images == null || !images.Any())
+            {
+                return NotFound();
+            }
+
+            return new BirdInfoDto
+            {
+                Name = birdName,
+                Description = info,
+                Images = images
+            };
+        }
+
+        private async Task<string> FetchBirdInfoFromWikipedia(string birdName)
+        {
+            var url = $"https://en.wikipedia.org/api/rest_v1/page/summary/{birdName}";
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var wikiResponse = JsonConvert.DeserializeObject<WikipediaResponse>(content);
+
+            return wikiResponse?.Extract;
+        }
+
+        private async Task<List<BirdImageDto>> FetchBirdImagesFromFlickr(string birdName)
+        {
+            var url = $"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={flickrApiKey}&text={birdName}&format=json&nojsoncallback=1&per_page=5";
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return null;
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var flickrResponse = JsonConvert.DeserializeObject<FlickrResponse>(content);
+
+            if (flickrResponse?.Photos?.Photo == null)
+            {
+                return new List<BirdImageDto>();
+            }
+
+            var tasks = flickrResponse.Photos.Photo.Select(async p =>
+            {
+                var ownerInfo = await FetchOwnerInfoFromFlickr(p.Owner);
+                return new BirdImageDto
+                {
+                    Url = $"https://live.staticflickr.com/{p.Server}/{p.Id}_{p.Secret}.jpg",
+                    Owner = ownerInfo
+                };
+            });
+
+            return (await Task.WhenAll(tasks)).ToList();
+        }
+
+        private async Task<string> FetchOwnerInfoFromFlickr(string ownerId)
+        {
+            var url = $"https://www.flickr.com/services/rest/?method=flickr.people.getInfo&api_key={flickrApiKey}&user_id={ownerId}&format=json&nojsoncallback=1";
+            var response = await _httpClient.GetAsync(url);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                return "Unknown";
+            }
+
+            var content = await response.Content.ReadAsStringAsync();
+            var ownerResponse = JsonConvert.DeserializeObject<FlickrOwnerResponse>(content);
+
+            return ownerResponse?.Person?.Username?._Content ?? "Unknown";
+        }
+
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirds()
