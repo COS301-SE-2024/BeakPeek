@@ -52,6 +52,12 @@
           "Microsoft.EntityFrameworkCore.Relational": "8.0.6"
         }
       },
+      "Newtonsoft.Json": {
+        "type": "Direct",
+        "requested": "[13.0.1, )",
+        "resolved": "13.0.1",
+        "contentHash": "ppPFpBcvxdsfUonNcvITKqLl3bqxWbDCZIzDWHzjpdAHRFfZe0Dw9HmA0+za13IdyrgJwpkDTDA9fHaxOrt20A=="
+      },
       "Swashbuckle.AspNetCore": {
         "type": "Direct",
         "requested": "[6.4.0, )",
