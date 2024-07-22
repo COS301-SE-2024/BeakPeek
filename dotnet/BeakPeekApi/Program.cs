@@ -49,6 +49,7 @@ else
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 builder.Services.AddTransient<CsvImporter>();
+builder.Services.AddTransient<BirdInfoHelper>();
 
 var app = builder.Build();
 
