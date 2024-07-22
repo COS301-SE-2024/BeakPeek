@@ -4,6 +4,7 @@ using BeakPeekApi.Helpers;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var flickrApiKey = builder.Configuration["FLICKR_API_KEY"];
 // Add services to the container.
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(
@@ -19,6 +20,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddHttpClient();
 
 var connection = String.Empty;
 
