@@ -3,6 +3,7 @@ import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Login/landing_page.dart';
 import 'package:beakpeek/View/Home/map_info.dart';
 import 'package:beakpeek/View/UserProfile/user_profile.dart';
+import 'package:beakpeek/View/Home/bird_page.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 
@@ -51,6 +52,7 @@ class MainState extends State<Main> {
         '/home': (context) => const Home(),
         '/map': (context) => const MapInfo(),
         '/profile': (context) => UserProfile(change: changeTheme),
+        '/bird': (context) => const BirdPage(),
       },
     );
   }

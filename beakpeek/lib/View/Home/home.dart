@@ -42,26 +42,31 @@ class Home extends StatelessWidget {
                         Stack(
                           alignment: Alignment.center,
                           children: [
-                            Container(
-                              decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                    color: Colors.grey.withOpacity(0.5),
-                                    spreadRadius: 2,
-                                    blurRadius: 5,
-                                    offset: const Offset(0, 3),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushNamed(context, '/bird');
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                  borderRadius: BorderRadius.circular(20.0),
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(
+                                      20.0), // Adjust radius as needed
+                                  child: Image.asset(
+                                    'assets/images/home.png',
+                                    width: screenWidth *
+                                        0.92, // 92% of screen width
+                                    fit: BoxFit.cover,
                                   ),
-                                ],
-                                borderRadius: BorderRadius.circular(20.0),
-                              ),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(
-                                    20.0), // Adjust radius as needed
-                                child: Image.asset(
-                                  'assets/images/home.png',
-                                  width:
-                                      screenWidth * 0.92, // 92% of screen width
-                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -133,7 +138,6 @@ class Home extends StatelessWidget {
                           fit: BoxFit.cover,
                         ),
                         SizedBox(height: screenHeight * 0.01),
-
                         SizedBox(height: screenHeight * 0.01),
                         const Center(
                           child: CustomFilledButton(
