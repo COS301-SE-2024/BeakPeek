@@ -117,15 +117,6 @@ class UserProfileState extends State<UserProfile> {
 
                   const SizedBox(height: 10),
 
-                  // Website Field
-                  ProfileField(
-                    icon: Icons.web,
-                    label: 'Website',
-                    content: website,
-                  ),
-
-                  const SizedBox(height: 10),
-
                   // Location Field
                   ProfileField(
                     icon: Icons.location_on,
