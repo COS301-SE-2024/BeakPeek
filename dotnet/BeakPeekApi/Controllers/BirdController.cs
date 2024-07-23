@@ -25,7 +25,6 @@ namespace BeakPeekApi.Controllers
         {
             return await _context.Birds.ToListAsync();
         }
-
         [HttpGet("{id}")]
         public async Task<ActionResult<Bird>> GetBird(int id)
         {
