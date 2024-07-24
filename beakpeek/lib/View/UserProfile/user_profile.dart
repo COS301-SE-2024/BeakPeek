@@ -181,7 +181,7 @@ class UserProfileState extends State<UserProfile> {
               iconSize: 28,
               icon: const Icon(Icons.arrow_back),
               onPressed: () {
-                // Action for edit profile icon
+                Navigator.pushNamed(context, '/home');
               },
             ),
           ),
