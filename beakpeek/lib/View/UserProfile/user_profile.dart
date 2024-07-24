@@ -1,4 +1,5 @@
 import 'package:beakpeek/Model/user_profile_function.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Styles/profile_page_styles.dart';
@@ -60,13 +61,13 @@ class UserProfileState extends State<UserProfile> {
                 children: [
                   const SizedBox(height: 60),
 
-                  // Profile image and name in center
+                  // Profile image and name section
                   Center(
                     child: Column(
                       children: [
                         CircleAvatar(
                           radius: 75,
-                          backgroundColor: ProfilePageStyles.primaryColor,
+                          backgroundColor: GlobalStyles.primaryColor,
                           child: CircleAvatar(
                             radius: 75,
                             backgroundImage: const AssetImage(
@@ -81,12 +82,12 @@ class UserProfileState extends State<UserProfile> {
                         ),
                         const SizedBox(height: 10),
 
-                        // User name
-                        Text(name, style: ProfilePageStyles.heading),
+                        // Username
+                        Text(name, style: GlobalStyles.subHeadingDark),
 
                         // Active since
                         const Text('Active since - June 2024',
-                            style: ProfilePageStyles.smallContent),
+                            style: GlobalStyles.smallContent),
                         const SizedBox(height: 10),
                       ],
                     ),
@@ -96,7 +97,7 @@ class UserProfileState extends State<UserProfile> {
 
                   const SizedBox(height: 10),
                   const Text('Personal Information',
-                      style: ProfilePageStyles.subheading),
+                      style: GlobalStyles.subheadingLight),
                   const SizedBox(height: 20),
 
                   // Email Field
@@ -137,7 +138,7 @@ class UserProfileState extends State<UserProfile> {
                   const SizedBox(height: 20),
                   const Divider(height: 1, thickness: 1),
                   const SizedBox(height: 20),
-                  const Text('Life List', style: ProfilePageStyles.subheading),
+                  const Text('Life List', style: GlobalStyles.subheadingLight),
                   const SizedBox(height: 10),
 
                   // Live List
@@ -227,7 +228,7 @@ class UserProfileState extends State<UserProfile> {
                             iconLabel = getLabelIcon();
                           });
                         },
-                        activeColor: ProfilePageStyles.primaryColor,
+                        activeColor: GlobalStyles.primaryColor,
                       ),
                     ],
                   ),
@@ -273,16 +274,16 @@ class ProfileField extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: ProfilePageStyles.primaryColor,
+                color: GlobalStyles.primaryColor,
               ),
               const SizedBox(width: 8),
-              Text(label, style: ProfilePageStyles.secondaryContent),
+              Text(label, style: GlobalStyles.smallContent),
             ],
           ),
           Expanded(
             child: Text(
               content,
-              style: ProfilePageStyles.content,
+              style: GlobalStyles.content,
               textAlign: TextAlign.right,
               overflow: TextOverflow.ellipsis,
             ),
