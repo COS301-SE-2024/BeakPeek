@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
 using BeakPeekApi.Helpers;
-using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
