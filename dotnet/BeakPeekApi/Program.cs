@@ -1,10 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
 using BeakPeekApi.Helpers;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var flickrApiKey = builder.Configuration["FLICKR_API_KEY"];
+// Env.Load();
+
+// var flickrApiKey = Environment.GetEnvironmentVariable("FLICKR_API_KEY");
 // Add services to the container.
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(
@@ -63,7 +66,7 @@ try
 
         if (builder.Environment.IsDevelopment())
         {
-            dbContext.Database.Migrate();
+            // dbContext.Database.Migrate();
         }
         else
         {
@@ -76,7 +79,7 @@ try
         var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
         if (builder.Environment.IsDevelopment())
         {
-            csvImporter.ImportAllCsvData("/data");
+            // csvImporter.ImportAllCsvData("/data");
         }
         else
         {
