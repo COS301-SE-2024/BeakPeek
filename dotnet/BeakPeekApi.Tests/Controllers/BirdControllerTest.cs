@@ -3,12 +3,12 @@ using BeakPeekApi.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
-public class BirdControllerTests
+public class BirdControllerTest
 {
     private readonly AppDbContext _context;
     private readonly BirdController _controller;
 
-    public BirdControllerTests()
+    public BirdControllerTest()
     {
         var options = new DbContextOptionsBuilder<AppDbContext>()
             .UseInMemoryDatabase(databaseName: "TestDatabase")

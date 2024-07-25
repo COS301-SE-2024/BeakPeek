@@ -22,7 +22,7 @@ namespace BeakPeekApi.Helpers
             _httpClient = httpClient;
         }
 
-        public async Task<string> FetchBirdInfoFromWikipedia(string birdName)
+        public async Task<string?> FetchBirdInfoFromWikipedia(string birdName)
         {
             var url = $"https://en.wikipedia.org/api/rest_v1/page/summary/{birdName}";
             var response = await _httpClient.GetAsync(url);
@@ -38,7 +38,7 @@ namespace BeakPeekApi.Helpers
             return wikiResponse?.Extract;
         }
 
-        public async Task<List<BirdImageModel>> FetchBirdImagesFromFlickr(string birdName)
+        public async Task<List<BirdImageModel>?> FetchBirdImagesFromFlickr(string birdName)
         {
             var url = $"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={_flickrApiKey}&text={birdName}&format=json&nojsoncallback=1&per_page=5";
             var response = await _httpClient.GetAsync(url);
@@ -49,6 +49,8 @@ namespace BeakPeekApi.Helpers
             }
 
             var content = await response.Content.ReadFromJsonAsync<FlickrResponse>();
+            if (content == null)
+            { return null; }
             FlickrResponse flickrResponse = content;
 
             if (flickrResponse?.Photos?.Photo == null)

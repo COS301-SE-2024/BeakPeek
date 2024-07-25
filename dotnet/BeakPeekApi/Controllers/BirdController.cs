@@ -10,12 +10,10 @@ namespace BeakPeekApi.Controllers
     public class BirdController : ControllerBase
     {
         private readonly AppDbContext _context;
-        private BirdInfoHelper _birdInfoHelper;
 
-        public BirdController(AppDbContext context, BirdInfoHelper birdInfoHelper)
+        public BirdController(AppDbContext context)
         {
             _context = context;
-            _birdInfoHelper = birdInfoHelper;
         }
 
         // Existing methods here...
