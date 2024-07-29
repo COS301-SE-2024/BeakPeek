@@ -1,5 +1,6 @@
 using System.Net;
 using System.Net.Http.Json;
+using System.Reflection.Metadata.Ecma335;
 using BeakPeekApi.Helpers;
 using BeakPeekApi.Models;
 using Microsoft.Extensions.Configuration;
@@ -189,10 +190,10 @@ public class BirdInfoHelperTest
             Photos = new Photos
             {
                 Photo = new List<Photo>
-                {
-                    new Photo { Id = "1", Owner = "owner1", Secret = "secret1", Server = "server1" },
-                    new Photo { Id = "2", Owner = "owner2", Secret = "secret2", Server = "server2" }
-                }
+            {
+                new Photo { Id = "1", ownername = "owner1", Secret = "secret1", Server = "server1" },
+                new Photo { Id = "2", ownername = "owner2", Secret = "secret2", Server = "server2" }
+            }
             }
         };
         var flickrResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
@@ -204,35 +205,21 @@ public class BirdInfoHelperTest
             .Protected()
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
-                It.Is<HttpRequestMessage>(req => req.RequestUri == null || req.RequestUri.AbsoluteUri.Contains("flickr.photos.search")),
+                ItExpr.IsAny<HttpRequestMessage>(),
                 ItExpr.IsAny<CancellationToken>())
             .ReturnsAsync(flickrResponseMessage);
-
-        var ownerResponse = new FlickrOwnerResponse
-        {
-            Person = new Person { Username = new Username { _Content = "OwnerName" } }
-        };
-        var ownerResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
-        {
-            Content = JsonContent.Create(ownerResponse)
-        };
-
-        _httpMessageHandlerMock
-            .Protected()
-            .Setup<Task<HttpResponseMessage>>(
-                "SendAsync",
-                It.Is<HttpRequestMessage>(req => req.RequestUri == null || req.RequestUri.AbsoluteUri.Contains("flickr.people.getInfo")),
-                ItExpr.IsAny<CancellationToken>())
-            .ReturnsAsync(ownerResponseMessage);
 
         // Act
         var result = await _birdInfoHelper.FetchBirdImagesFromFlickr(birdName);
 
+        Console.WriteLine(result);
+
         // Assert
         Assert.Equal(2, result.Count);
         Assert.All(result, img => Assert.Contains("https://live.staticflickr.com", img.Url));
-        Assert.All(result, img => Assert.Equal("OwnerName", img.Owner));
+        Assert.All(result, img => Assert.Contains("owner", img.Owner));
     }
+
 
     [Fact]
     public async Task FetchOwnerInfoFromFlickr_ReturnsOwnerName_WhenResponseIsSuccessful()
