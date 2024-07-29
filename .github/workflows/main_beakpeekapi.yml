@@ -62,7 +62,7 @@ jobs:
           dotnet new tool-manifest
           dotnet tool install --global dotnet-ef
           dotnet tool restore
-          dotnet-ef database update --connection '${{ secrets.DBCONNECTION }}'
+          dotnet-ef database update --connection '${{ env.AZURE_SQL_CONNECTIONSTRING }}'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
