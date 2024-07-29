@@ -44,7 +44,7 @@ namespace BeakPeekApi.Helpers
             {
                 return null;
             }
-            
+
             var content = await response.Content.ReadFromJsonAsync<FlickrResponse>();
             if (content == null)
             { return null; }

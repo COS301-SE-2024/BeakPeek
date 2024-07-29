@@ -25,15 +25,15 @@ namespace BeakPeekApi.Controllers
 
             if (info == null || images == null || !images.Any())
             {
-                return NotFound();
+                return NotFound("Not found");
             }
 
-            return new BirdInfoModels
+            return Ok(new BirdInfoModels
             {
                 Name = birdName,
                 Description = info,
                 Images = images
-            };
+            });
         }
     }
 }

@@ -86,7 +86,9 @@ namespace BeakPeekApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BirdExists(id))
+                var birdExists = _context.Birds.Any(e => e.Pentad == id);
+
+                if (!birdExists)
                 {
                     return NotFound();
                 }
@@ -114,10 +116,6 @@ namespace BeakPeekApi.Controllers
             return NoContent();
         }
 
-        private bool BirdExists(string id)
-        {
-            return _context.Birds.Any(e => e.Pentad == id);
-        }
 
         [HttpGet("{pentad}/pentad")]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInPentad(string pentad)
