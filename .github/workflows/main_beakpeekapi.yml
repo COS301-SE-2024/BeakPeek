@@ -41,9 +41,13 @@ jobs:
           mkdir -p ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species
           cp -r ./res/species/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species/
 
+      - name: Copy appsettings.json to correct directory so that it doesn't included any sectrets
+        run: cp ./appsettings.json ./dotnet/BeakPeekApi/
+
       - name: Run EF
         run: |
           cd ./dotnet/BeakPeekApi
+          cp ../../appsettings.json .
           dotnet new tool-manifest
           dotnet tool install --global dotnet-ef
           dotnet tool restore
