@@ -44,6 +44,7 @@ jobs:
       - name: Run EF
         run: |
           cd ./dotnet/BeakPeekApi
+          dotnet new tool-manifest
           dotnet tool install --global dotnet-ef
           dotnet tool restore
           dotnet-ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBCONNECTION }}'
