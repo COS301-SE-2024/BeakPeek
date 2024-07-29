@@ -49,7 +49,7 @@ abstract class BirdPageStyles {
   static ButtonStyle elevatedButtonStyle() {
     return ElevatedButton.styleFrom(
       backgroundColor: primaryColor,
-      minimumSize: const Size(250, 50),
+      minimumSize: const Size(380, 50),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(borderRadius),
       ),

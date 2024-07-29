@@ -1,3 +1,4 @@
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/bird_page_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
@@ -30,25 +31,39 @@ class BirdPage extends StatelessWidget {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.arrow_back),
-                              color: BirdPageStyles.primaryColor,
+                              color: GlobalStyles.primaryColor,
                               onPressed: () {
-                                Navigator.pushNamed(context, '/home');
+                                Navigator.pop(context);
                               },
                             ),
+                            const Spacer(),
                             const Text(
                               'Bird Information',
                               style: BirdPageStyles.heading,
                             ),
+                            const Spacer(flex: 2),
                           ],
                         ),
                         SizedBox(height: screenHeight * 0.01),
                         Center(
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(20.0),
-                            child: Image.asset(
-                              'assets/images/home.png',
-                              width: screenWidth * 0.92,
-                              fit: BoxFit.cover,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.1),
+                                    spreadRadius: 5,
+                                    blurRadius: 7,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Image.asset(
+                                'assets/images/home.png',
+                                width: screenWidth * 0.92,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
@@ -61,7 +76,7 @@ class BirdPage extends StatelessWidget {
                           content: 'Black Fronted Bushshrike',
                           prominent: true,
                         ),
-                        SizedBox(height: screenHeight * 0.01),
+                        SizedBox(height: screenHeight * 0.02),
 
                         // Bird description
                         const ProfileField(
@@ -70,7 +85,7 @@ class BirdPage extends StatelessWidget {
                           content:
                               // ignore: lines_longer_than_80_chars
                               'A striking bird with black and yellow plumage. This bird is known for its vibrant colors and melodic song. It can often be seen in forest edges, woodlands, and gardens, and has a diet that mainly consists of insects and small invertebrates.',
-                          large: true,
+                          prominent: true,
                         ),
                       ],
                     ),
@@ -79,7 +94,7 @@ class BirdPage extends StatelessWidget {
               ),
               ElevatedButton(
                 onPressed: () {
-                  // Action for the button (to be implemented later)
+                  // Action for the button
                 },
                 style: BirdPageStyles.elevatedButtonStyle(),
                 child: const Text('Show Heat Map'),
@@ -119,8 +134,16 @@ class ProfileField extends StatelessWidget {
     return Container(
       padding: padding ?? const EdgeInsets.all(12.0),
       decoration: BoxDecoration(
-        color: backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
+        color: backgroundColor ?? Colors.white,
         borderRadius: BorderRadius.circular(20.0),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            spreadRadius: 3,
+            blurRadius: 5,
+            offset: const Offset(0, 3),
+          ),
+        ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
