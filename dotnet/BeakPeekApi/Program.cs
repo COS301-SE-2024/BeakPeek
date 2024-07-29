@@ -64,28 +64,28 @@ try
         {
             dbContext.Database.Migrate();
         }
-        else
+        /* else
         {
             if (dbContext.Database.GetPendingMigrations().Any())
             {
                 dbContext.Database.Migrate();
             }
-        }
+        } */
 
         var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
         if (builder.Environment.IsDevelopment())
         {
             csvImporter.ImportAllCsvData("/data");
         }
-        else
-        {
-            var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
-            if (!Directory.Exists(csvDirectoryPath))
-            {
-                throw new DriveNotFoundException($"CSV directory not found: {csvDirectoryPath}");
-            }
-            csvImporter.ImportAllCsvData(csvDirectoryPath);
-        }
+        // else
+        // {
+        //     var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
+        //     if (!Directory.Exists(csvDirectoryPath))
+        //     {
+        //         throw new DriveNotFoundException($"CSV directory not found: {csvDirectoryPath}");
+        //     }
+        //     csvImporter.ImportAllCsvData(csvDirectoryPath);
+        // }
     }
 }
 catch (Exception ex)

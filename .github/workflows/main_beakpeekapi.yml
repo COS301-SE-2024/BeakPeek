@@ -41,6 +41,12 @@ jobs:
           mkdir -p ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species
           cp -r ./res/species/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species/
 
+      - name: Run EF
+        run: |
+          dotnet tool install --global dotnet-ef
+          dotnet tool restore
+          dotnet ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBCONNECTION }}'
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
