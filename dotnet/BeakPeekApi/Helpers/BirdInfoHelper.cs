@@ -1,7 +1,4 @@
-using System.Globalization;
 using BeakPeekApi.Models;
-using CsvHelper;
-using CsvHelper.Configuration;
 
 namespace BeakPeekApi.Helpers
 {
@@ -40,14 +37,14 @@ namespace BeakPeekApi.Helpers
 
         public async Task<List<BirdImageModel>?> FetchBirdImagesFromFlickr(string birdName)
         {
-            var url = $"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={_flickrApiKey}&text={birdName}&format=json&nojsoncallback=1&per_page=5";
+            var url = $"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={_flickrApiKey}&text={birdName}&format=json&nojsoncallback=1&per_page=5&extras=owner_name";
             var response = await _httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
             {
                 return null;
             }
-
+            
             var content = await response.Content.ReadFromJsonAsync<FlickrResponse>();
             if (content == null)
             { return null; }
@@ -60,11 +57,12 @@ namespace BeakPeekApi.Helpers
 
             var tasks = flickrResponse.Photos.Photo.Select(async p =>
             {
-                var ownerInfo = await FetchOwnerInfoFromFlickr(p.Owner);
+                // Console.WriteLine(p);
+                var ownerInfo = p.ownername;
                 return new BirdImageModel
                 {
                     Url = $"https://live.staticflickr.com/{p.Server}/{p.Id}_{p.Secret}.jpg",
-                    Owner = ownerInfo
+                    Owner = ownerInfo,
                 };
             });
 
