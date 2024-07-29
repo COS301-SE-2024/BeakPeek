@@ -28,11 +28,25 @@ public class BirdControllerTest
 
         var birds = new List<Bird>
         {
-            new Bird { Id = 1, Pentad = "1234", Spp = 1, Common_group = "Group1", Common_species = "Species1", Genus = "Genus1", Species = "Species1" },
-            new Bird { Id = 2, Pentad = "5678", Spp = 2, Common_group = "Group2", Common_species = "Species2", Genus = "Genus2", Species = "Species2" }
+            new Bird { Id = 1, Pentad = "1234", Spp = 1, Common_group = "Group1", Common_species = "Species1", Genus = "Genus1", Species = "Species1", ProvinceId = 1 },
+            new Bird { Id = 2, Pentad = "5678", Spp = 2, Common_group = "Group2", Common_species = "Species2", Genus = "Genus2", Species = "Species2" , ProvinceId = 1 }
         };
 
+
+        var birds_2 = new List<Bird>
+        {
+            new Bird { Id = 4, Pentad = "9012", Spp = 2, Common_group = "Group2", Common_species = "Species2", Genus = "Genus2", Species = "Species2" , ProvinceId = 2 },
+            new Bird { Id = 5, Pentad = "3456", Spp = 3, Common_group = "Group3", Common_species = "Species3", Genus = "Genus3", Species = "Species3" , ProvinceId = 2 }
+        };
+
+        var provinces = new List<Province> {
+            new Province { Id = 1, Name = "test_province_1", Birds = birds },
+            new Province { Id = 2, Name = "test_province_2", Birds = birds_2 }
+        };
+
+        _context.Provinces.AddRange(provinces);
         _context.Birds.AddRange(birds);
+        _context.Birds.AddRange(birds_2);
         _context.SaveChanges();
     }
 
@@ -45,7 +59,7 @@ public class BirdControllerTest
         // Assert
         var actionResult = Assert.IsType<ActionResult<IEnumerable<Bird>>>(result);
         var returnValue = Assert.IsType<List<Bird>>(actionResult.Value);
-        Assert.Equal(2, returnValue.Count);
+        Assert.Equal(4, returnValue.Count);
     }
 
     [Fact]
@@ -94,7 +108,7 @@ public class BirdControllerTest
     public async Task PostBirds_AddsBirdToContext()
     {
         // Arrange
-        var bird = new Bird { Id = 3, Pentad = "91011", Spp = 3, Common_group = "Group3", Common_species = "Species3", Genus = "Genus3", Species = "Species3" };
+        var bird = new Bird { Id = 3, Pentad = "91011", Spp = 3, Common_group = "Group3", Common_species = "Species3", Genus = "Genus3", Species = "Species3", ProvinceId = 1 };
 
         // Act
         var result = await _controller.PostBirds(bird);
@@ -106,7 +120,7 @@ public class BirdControllerTest
         Assert.Equal(bird.Pentad, returnValue.Pentad);
 
         var birds = await _context.Birds.ToListAsync();
-        Assert.Equal(3, birds.Count);
+        Assert.Equal(5, birds.Count);
     }
 
     [Fact]
@@ -131,7 +145,7 @@ public class BirdControllerTest
     {
         // Arrange
         var pentad = "1234";
-        var bird = new Bird { Id = 3, Pentad = "5678", Spp = 2, Common_group = "Group2", Common_species = "Species2", Genus = "Genus2", Species = "Species2" };
+        var bird = new Bird { Id = 6, Pentad = "5678", Spp = 2, Common_group = "Group2", Common_species = "Species2", Genus = "Genus2", Species = "Species2" };
 
         // Act
         var result = await _controller.PutBird(pentad, bird);
@@ -152,7 +166,7 @@ public class BirdControllerTest
         // Assert
         Assert.IsType<NoContentResult>(result);
         var birds = await _context.Birds.ToListAsync();
-        Assert.Single(birds);
+        birds.Count().Equals(3);
     }
 
     [Fact]
@@ -195,13 +209,75 @@ public class BirdControllerTest
     public async Task GetBirdsByPentad_ReturnsNotFoundForInvalidPentad()
     {
         // Arrange
-        var birdId = "999";
+        var pentad = "999";
 
         // Act
-        var result = await _controller.GetBirdsInPentad(birdId);
+        var result = await _controller.GetBirdsInPentad(pentad);
 
         // Assert
         Assert.IsType<NotFoundResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task GetBirdsInProvince_ReturnsBirdsInProvince()
+    {
+        var province = "test_province_1";
+
+        // Act
+        var result = await _controller.GetBirdsInProvince(province);
+
+        // Assert
+        var actionResult = Assert.IsType<ActionResult<IEnumerable<Bird>>>(result);
+        var okResult = actionResult.Result as OkObjectResult;
+        Assert.NotNull(okResult);
+
+        var returnValue = Assert.IsType<List<Bird>>(okResult.Value);
+        Assert.Equal(2, returnValue.Count());
+        Assert.Equal(province, returnValue[0].Province.Name);
+    }
+
+    [Fact]
+    public async Task GetBirdsInPovince_ReturnsNotFound()
+    {
+        string province = "test_province_3";
+
+        var result = await _controller.GetBirdsInProvince(province);
+
+        Assert.IsType<NotFoundObjectResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task GetNumBirdByProvince_ReturnsNumber()
+    {
+        string province = "test_province_2";
+
+        var result = await _controller.GetNumBirdsByProvince(province);
+
+        var actionResult = Assert.IsType<OkObjectResult>(result.Result);
+        var objectResult = Assert.IsType<int>(actionResult.Value);
+
+        objectResult.Equals(2);
+    }
+
+    [Fact]
+    public async Task GetNumBirdByProvince_ReturnsNotFound()
+    {
+        string province = "test_province_3";
+        var result = await _controller.GetNumBirdsByProvince(province);
+
+        Assert.IsType<NotFoundObjectResult>(result.Result);
+    }
+
+    [Fact]
+    public async Task GetNumBirdsReturnsNumber()
+    {
+        var result = await _controller.GetNumBirds();
+
+        var actionResult = Assert.IsType<OkObjectResult>(result.Result);
+
+        var objectResult = Assert.IsType<int>(actionResult.Value);
+
+        objectResult.Equals(4);
     }
 
 }

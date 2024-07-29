@@ -23,6 +23,7 @@ namespace BeakPeekApi.Controllers
         {
             return await _context.Birds.ToListAsync();
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult<Bird>> GetBird(int id)
         {
@@ -153,6 +154,28 @@ namespace BeakPeekApi.Controllers
 
             return Ok(provinceBirdList);
 
+        }
+
+        [HttpGet("GetNumBirdByProvince/{province}")]
+        public async Task<ActionResult<int>> GetNumBirdsByProvince(string province)
+        {
+            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
+            if (provinceID == null)
+            {
+                return NotFound("Province not found");
+            }
+            var numBirdsInProvince = await _context.Birds
+                                            .Where(b => b.ProvinceId == provinceID.Id)
+                                            .CountAsync();
+
+            return Ok(numBirdsInProvince);
+        }
+
+        [HttpGet("GetNumBirds/{province}")]
+        public async Task<ActionResult<int>> GetNumBirds()
+        {
+            var numBirdsInProvince = await _context.Birds.CountAsync();
+            return Ok(numBirdsInProvince);
         }
     }
 }
