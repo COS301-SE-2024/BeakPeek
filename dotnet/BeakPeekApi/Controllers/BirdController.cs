@@ -1,10 +1,7 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BeakPeekApi.Helpers;
 
 namespace BeakPeekApi.Controllers
 {
@@ -18,6 +15,8 @@ namespace BeakPeekApi.Controllers
         {
             _context = context;
         }
+
+        // Existing methods here...
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirds()
@@ -87,7 +86,9 @@ namespace BeakPeekApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BirdExists(id))
+                var birdExists = _context.Birds.Any(e => e.Pentad == id);
+
+                if (!birdExists)
                 {
                     return NotFound();
                 }
@@ -115,10 +116,6 @@ namespace BeakPeekApi.Controllers
             return NoContent();
         }
 
-        private bool BirdExists(string id)
-        {
-            return _context.Birds.Any(e => e.Pentad == id);
-        }
 
         [HttpGet("{pentad}/pentad")]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInPentad(string pentad)
@@ -155,6 +152,28 @@ namespace BeakPeekApi.Controllers
 
             return Ok(provinceBirdList);
 
+        }
+
+        [HttpGet("GetNumBirdByProvince/{province}")]
+        public async Task<ActionResult<int>> GetNumBirdsByProvince(string province)
+        {
+            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
+            if (provinceID == null)
+            {
+                return NotFound("Province not found");
+            }
+            var numBirdsInProvince = await _context.Birds
+                                            .Where(b => b.ProvinceId == provinceID.Id)
+                                            .CountAsync();
+
+            return Ok(numBirdsInProvince);
+        }
+
+        [HttpGet("GetNumBirds/{province}")]
+        public async Task<ActionResult<int>> GetNumBirds()
+        {
+            var numBirdsInProvince = await _context.Birds.CountAsync();
+            return Ok(numBirdsInProvince);
         }
     }
 }
