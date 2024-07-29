@@ -40,6 +40,8 @@ namespace BeakPeekApi.Models
         public string Server { get; set; }
 
         public string Owner { get; set; }
+
+        public string ownername {get; set; }
     }
 
     public class FlickrOwnerResponse
