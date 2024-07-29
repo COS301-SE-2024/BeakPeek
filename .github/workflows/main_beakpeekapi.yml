@@ -46,7 +46,7 @@ jobs:
           cd ./dotnet/BeakPeekApi
           dotnet tool install --global dotnet-ef
           dotnet tool restore
-          dotnet ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBCONNECTION }}'
+          dotnet-ef database update -p DotNetCoreSqlDb --connection '${{ secrets.DBCONNECTION }}'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
