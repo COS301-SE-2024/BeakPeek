@@ -175,5 +175,26 @@ namespace BeakPeekApi.Controllers
             var numBirdsInProvince = await _context.Birds.CountAsync();
             return Ok(numBirdsInProvince);
         }
+
+        [HttpGet("GetBirdProvinces/{common_species}/{common_group}")]
+        public async Task<ActionResult<IEnumerable<string>>> GetBirdProvinces(string common_species, string common_group)
+        {
+            var birds = await _context.Birds
+                .Where(b => b.Common_species == common_species && b.Common_group == common_group)
+                .ToListAsync<Bird>();
+
+            if (birds == null || birds.Count() == 0)
+            {
+                return NotFound("No birds found that match the common species or common group");
+            }
+
+            HashSet<string> provinces = new HashSet<string>();
+            foreach (Bird bird in birds)
+            {
+                provinces.Add(bird.Province.Name);
+            }
+
+            return Ok(provinces.ToList<string>());
+        }
     }
 }
