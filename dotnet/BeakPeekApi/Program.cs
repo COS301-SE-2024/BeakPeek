@@ -31,11 +31,6 @@ builder.Configuration
 
 if (builder.Environment.IsDevelopment())
 {
-
-    connection = builder.Configuration.GetConnectionString("DefaultConnection");
-}
-else
-{
     var envConnection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
     if (!string.IsNullOrEmpty(envConnection))
     {
@@ -43,8 +38,12 @@ else
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found.");
+        throw new InvalidOperationException("Connection string not found. poo");
     }
+}
+else
+{
+    connection = builder.Configuration.GetConnectionString("DefaultConnection");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
