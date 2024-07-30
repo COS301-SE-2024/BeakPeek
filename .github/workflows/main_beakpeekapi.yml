@@ -51,9 +51,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5D6295D608424272A2BFFC5143476471 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_BA8DF4AF441F4EC9A875EF0629F3FAF3 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_36822282DC074434908D68FCBC323FC9 }}
+          client-id: ${{ secrets.AZURE_CLIENTID }}
+          tenant-id: ${{ secrets.AZURE_TENANTID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
 
       - name: Run EF
         run: |
