@@ -280,4 +280,36 @@ public class BirdControllerTest
         objectResult.Equals(4);
     }
 
+    [Fact]
+    public async Task GetBirdProvinces_ReturnsList()
+    {
+        string common_species = "Species2";
+        string common_group = "Group2";
+        string province_1 = "test_province_1";
+        string province_2 = "test_province_2";
+
+        var result = await _controller.GetBirdProvinces(common_species, common_group);
+
+        var actionResult = Assert.IsType<OkObjectResult>(result.Result);
+
+        var objectResult = Assert.IsType<List<string>>(actionResult.Value);
+
+        Assert.Equal(2, objectResult.Count());
+        Assert.Contains("test_province_1", objectResult);
+        Assert.Contains("test_province_2", objectResult);
+        Assert.Equal(1, objectResult.FindAll(p => p.Equals(province_1)).Count());
+        Assert.Equal(1, objectResult.FindAll(p => p.Equals(province_2)).Count());
+    }
+
+    [Fact]
+    public async Task GetBirdProvinces_ReturnsNotFound()
+    {
+        string common_species = "no_species";
+        string common_group = "no_group";
+
+        var result = await _controller.GetBirdProvinces(common_species, common_group);
+
+        var actionResult = Assert.IsType<NotFoundObjectResult>(result.Result);
+    }
+
 }
