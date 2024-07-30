@@ -47,7 +47,13 @@ void main() {
   group('Live List tests', () {
     testWidgets('getLiveList returns correct list of bird widgets',
         (tester) async {
-      await tester.pumpWidget(MaterialApp(home: Scaffold(body: getLiveList())));
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: getLiveList(birds),
+          ),
+        ),
+      );
 
       expect(find.text('Laughing Dove'), findsOneWidget);
       expect(find.text('African Eagle'), findsOneWidget);

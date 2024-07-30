@@ -1,3 +1,4 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
@@ -12,6 +13,7 @@ class SearchbarContainer extends StatefulWidget {
 }
 
 class _SearchcarContainerState extends State<SearchbarContainer> {
+  late LifeListProvider lifeList = LifeListProvider.instance;
   late Future<List<Bird>> birds;
   int sort = 0;
   @override

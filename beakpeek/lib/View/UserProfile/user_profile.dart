@@ -1,5 +1,8 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:slider_button/slider_button.dart';
 
@@ -10,6 +13,8 @@ class UserProfile extends StatefulWidget {
 }
 
 class UserProfileState extends State<UserProfile> {
+  late LifeListProvider lifeList = LifeListProvider.instance;
+  late Future<List<Bird>> birds;
   Widget iconDisplay = getIcon(localStorage);
   String iconLabel = getLabelIcon(localStorage);
   String name = localStorage.getItem('fullName') ?? '';
@@ -20,6 +25,7 @@ class UserProfileState extends State<UserProfile> {
     }
     iconDisplay = getIcon(localStorage);
     iconLabel = getLabelIcon(localStorage);
+    birds = lifeList.fetchLifeList();
     super.initState();
   }
 
@@ -154,7 +160,20 @@ class UserProfileState extends State<UserProfile> {
                       const SizedBox(height: 10),
 
                       // Live List
-                      getLiveList(),
+                      FutureBuilder<List<Bird>>(
+                        future: birds,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          }
+                          return getLiveList(snapshot.data!);
+                        },
+                      ),
 
                       // Divider between the list and buttons
                       const Divider(height: 1, thickness: 1),
@@ -169,7 +188,7 @@ class UserProfileState extends State<UserProfile> {
                             // Home button
                             FilledButton(
                               onPressed: () {
-                                Navigator.pushNamed(context, '/home');
+                                context.go('/home');
                               },
                               style: FilledButton.styleFrom(
                                 backgroundColor: const Color(0xFF033A30),

@@ -1,4 +1,5 @@
 import 'package:beakpeek/Controller/DB/database_calls.dart';
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
@@ -73,6 +74,7 @@ void main() {
       testWidgets(
         'Test getData ',
         (tester) async {
+          late final LifeListProvider lifeList = LifeListProvider.instance;
           final bird = Bird(
             pentad: '1',
             spp: 1,
@@ -82,7 +84,7 @@ void main() {
             species: 'species',
             reportingRate: 10.0,
           );
-          final Widget testW = getData(bird);
+          final Widget testW = getData(bird, lifeList);
           await tester.pumpWidget(MaterialApp(
             home: Scaffold(
               body: ListView(
@@ -259,10 +261,11 @@ void main() {
       testWidgets(
         'Testing GetData',
         (tester) async {
+          late final LifeListProvider lifeList = LifeListProvider.instance;
           await tester.pumpWidget(
             MaterialApp(
               home: Scaffold(
-                body: getData(birdL[0]),
+                body: getData(birdL[0], lifeList),
               ),
             ),
           );
