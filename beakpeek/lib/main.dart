@@ -1,11 +1,9 @@
+import 'package:beakpeek/Controller/Main/routing_data.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:beakpeek/Controller/Main/routing_data.dart';
 import 'package:provider/provider.dart';
-
-late final ValueNotifier<bool> notifier;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
