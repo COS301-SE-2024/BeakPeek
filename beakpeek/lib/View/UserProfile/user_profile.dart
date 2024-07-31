@@ -1,6 +1,9 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Styles/profile_page_styles.dart';
 
@@ -14,6 +17,8 @@ class UserProfile extends StatefulWidget {
 }
 
 class UserProfileState extends State<UserProfile> {
+  late LifeListProvider lifeList = LifeListProvider.instance;
+  late Future<List<Bird>> birds;
   Widget iconDisplay = getIcon(localStorage);
   String iconLabel = getLabelIcon(localStorage);
   String name = localStorage.getItem('fullName') ?? '';
@@ -37,8 +42,10 @@ class UserProfileState extends State<UserProfile> {
     if (email.isEmpty) {
       email = 'example@mail.com';
     }
-    iconDisplay = getIcon();
-    iconLabel = getLabelIcon();
+    iconDisplay = getIcon(localStorage);
+    iconLabel = getLabelIcon(localStorage);
+    birds = lifeList.fetchLifeList();
+    super.initState();
   }
 
   void editName(String data) {
@@ -80,8 +87,66 @@ class UserProfileState extends State<UserProfile> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 10),
+                      ),
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: Text(
+                          'Your Life List',
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
 
+                      // Live List
+                      FutureBuilder<List<Bird>>(
+                        future: birds,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                                child: CircularProgressIndicator());
+                          } else if (snapshot.hasError) {
+                            return Center(
+                                child: Text('Error: ${snapshot.error}'));
+                          }
+                          return getLiveList(snapshot.data!);
+                        },
+                      ),
+
+                      // Divider between the list and buttons
+                      const Divider(height: 1, thickness: 1),
+
+                      // Buttons at the bottom
+                      Padding(
+                        padding:
+                            const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Home button
+                            FilledButton(
+                              onPressed: () {
+                                context.go('/home');
+                              },
+                              style: FilledButton.styleFrom(
+                                backgroundColor: const Color(0xFF033A30),
+                                minimumSize: const Size(200, 50),
+                                shadowColor: Colors.black,
+                              ),
+                              child: const Text(
+                                'Home',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontFamily: 'SF Pro Display',
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 18,
+                                ),
+                              ),
+                            ),
                         // Username
                         Text(name, style: GlobalStyles.subHeadingDark),
 

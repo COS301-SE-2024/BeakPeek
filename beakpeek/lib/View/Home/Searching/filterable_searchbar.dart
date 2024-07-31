@@ -1,3 +1,4 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
 import 'package:flutter/material.dart';
@@ -5,8 +6,6 @@ import 'package:flutter/material.dart';
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar(
       {super.key, required this.birds, required this.sort});
-
-  const FilterableSearchbar.list(this.birds, this.sort, {super.key});
   final List<Bird> birds;
   final int sort;
 
@@ -17,6 +16,7 @@ class FilterableSearchbar extends StatefulWidget {
 }
 
 class FilterableSearchbarState extends State<FilterableSearchbar> {
+  late LifeListProvider lifeList = LifeListProvider.instance;
   List<Widget> items = [];
   final SearchController controller = SearchController();
   List<Bird> temp = [];

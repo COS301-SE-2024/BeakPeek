@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 class Bird {
   Bird({
     required this.pentad,
@@ -30,4 +28,21 @@ class Bird {
   final String genus;
   final String species;
   final double reportingRate;
+
+  Map<String, Object?> toMap() {
+    return {
+      'pentad': pentad,
+      'spp': spp,
+      'commonGroup': commonGroup,
+      'commonSpecies': commonSpecies,
+      'genus': genus,
+      'species': species,
+      'reportingRate': reportingRate,
+    };
+  }
+
+  @override
+  String toString() {
+    return '''Bird{spp: $spp, commonGroup: $commonGroup, commonSpecies: $commonSpecies}''';
+  }
 }

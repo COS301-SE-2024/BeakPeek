@@ -1,3 +1,4 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +21,7 @@ int getColorForReportingRate(double reportingRate) {
   }
 }
 
-Widget getData(Bird bird) {
+Widget getData(Bird bird, LifeListProvider lifeList) {
   return ListTile(
     title: Text(bird.commonGroup != 'None'
         ? '${bird.commonGroup} ${bird.commonSpecies}'
@@ -39,16 +40,51 @@ Widget getData(Bird bird) {
             color: colorArray[getColorForReportingRate(bird.reportingRate)],
           ),
         ),
+        FutureBuilder(
+          future: lifeList.isDuplicate(bird),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            }
+            if (snapshot.data!) {
+              return FilledButton(
+                onPressed: () => {},
+                child: const Text('Seen'),
+              );
+            } else {
+              return FilledButton(
+                onPressed: () => {
+                  lifeList.insertBird(bird),
+                },
+                child: const Text('Add To Life list'),
+              );
+            }
+          },
+        ),
       ],
     ),
   );
 }
 
+bool isSeen(Bird bird, LifeListProvider lifeList) {
+  // ignore: prefer_const_declarations
+  late bool seen = false;
+  lifeList.isDuplicate(bird).then(
+    (value) {
+      seen = value;
+    },
+  );
+  return seen;
+}
+
 List<Widget> getWidgetListOfBirds(List<Bird> birds) {
   final List<Widget> listOfBirdWidgets = [];
+  late final LifeListProvider lifeList = LifeListProvider.instance;
 
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getData(birds[i]));
+    listOfBirdWidgets.add(getData(birds[i], lifeList));
   }
   return listOfBirdWidgets;
 }
