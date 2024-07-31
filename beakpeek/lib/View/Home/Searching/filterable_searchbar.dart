@@ -43,6 +43,7 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
           children: [
             Expanded(
               child: SearchAnchor(
+                searchController: controller,
                 viewHintText: 'Search Bird...',
                 viewOnChanged: (value) {
                   searchBarTyping(value);
