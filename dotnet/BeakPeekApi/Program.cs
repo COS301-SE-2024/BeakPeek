@@ -43,7 +43,7 @@ if (!builder.Environment.IsDevelopment())
 }
 else
 {
-    connection = builder.Configuration.GetConnectionString("DefaultConnection");
+    connection = builder.Configuration.GetConnectionString("DefaultConnection_2");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));

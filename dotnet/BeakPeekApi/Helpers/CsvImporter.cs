@@ -91,7 +91,7 @@ namespace BeakPeekApi.Helpers
             Map(m => m.Common_species).Index(3);
             Map(m => m.Genus).Index(4);
             Map(m => m.Species).Index(5);
-            Map(m => m.Total_Records).Index(18);
+            Map(m => m.Total_Records).Index(18).TypeConverter<Int32WithCommaConverter>();
             Map(m => m.Total_Cards).Index(19).TypeConverter<Int32WithCommaConverter>();
             Map(m => m.ReportingRate).Index(20);
             Map(m => m.ProvinceId).Ignore();
