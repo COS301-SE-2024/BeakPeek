@@ -52,32 +52,32 @@ builder.Services.AddTransient<BirdInfoHelper>();
 
 var app = builder.Build();
 
-if (builder.Environment.IsDevelopment())
+
+try
 {
-    try
+    using (var scope = app.Services.CreateScope())
     {
-        using (var scope = app.Services.CreateScope())
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        if (dbContext.Database.GetPendingMigrations().Any())
         {
-            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+            dbContext.Database.Migrate();
+        }
 
-            if (dbContext.Database.GetPendingMigrations().Any())
-            {
-                dbContext.Database.Migrate();
-            }
-
+        if (builder.Environment.IsDevelopment())
+        {
             var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
             if (Directory.Exists("/data"))
                 csvImporter.ImportAllCsvData("/data");
         }
     }
-    catch (Exception ex)
-    {
-        Console.WriteLine($"Exception during startup: {ex.Message}");
-        Console.WriteLine(ex.StackTrace);
-        throw;
-    }
 }
-
+catch (Exception ex)
+{
+    Console.WriteLine($"Exception during startup: {ex.Message}");
+    Console.WriteLine(ex.StackTrace);
+    throw;
+}
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

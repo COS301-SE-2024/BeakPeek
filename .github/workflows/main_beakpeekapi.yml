@@ -48,21 +48,6 @@ jobs:
           mkdir -p ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species
           cp -r ./res/species/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species/
 
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          client-id: ${{ secrets.AZURE_CLIENTID }}
-          tenant-id: ${{ secrets.AZURE_TENANTID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONID }}
-
-      - name: Run EF
-        run: |
-          cd ./dotnet/BeakPeekApi
-          cp ../../appsettings.json .
-          dotnet new tool-manifest
-          dotnet tool install --global dotnet-ef
-          dotnet tool restore
-          dotnet-ef database update --connection '${{ env.AZURE_SQL_CONNECTIONSTRING }}'
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
