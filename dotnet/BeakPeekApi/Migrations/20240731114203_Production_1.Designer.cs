@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeakPeekApi.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20240716100820_BeakPeekDB_migration")]
-    partial class BeakPeekDB_migration
+    [Migration("20240731114203_Production_1")]
+    partial class Production_1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

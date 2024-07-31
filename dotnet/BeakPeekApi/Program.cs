@@ -29,7 +29,7 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-if (builder.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment())
 {
     var envConnection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
     if (!string.IsNullOrEmpty(envConnection))
@@ -38,7 +38,7 @@ if (builder.Environment.IsDevelopment())
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found. poo");
+        throw new InvalidOperationException("Connection string not found.");
     }
 }
 else
@@ -52,46 +52,30 @@ builder.Services.AddTransient<BirdInfoHelper>();
 
 var app = builder.Build();
 
-try
+if (builder.Environment.IsDevelopment())
 {
-
-    using (var scope = app.Services.CreateScope())
+    try
     {
-        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+        using (var scope = app.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        if (builder.Environment.IsDevelopment())
-        {
-            dbContext.Database.Migrate();
-        }
-        /* else
-        {
             if (dbContext.Database.GetPendingMigrations().Any())
             {
                 dbContext.Database.Migrate();
             }
-        } */
 
-        var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
-        if (builder.Environment.IsDevelopment())
-        {
-            csvImporter.ImportAllCsvData("/data");
+            var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+            if (Directory.Exists("/data"))
+                csvImporter.ImportAllCsvData("/data");
         }
-        // else
-        // {
-        //     var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
-        //     if (!Directory.Exists(csvDirectoryPath))
-        //     {
-        //         throw new DriveNotFoundException($"CSV directory not found: {csvDirectoryPath}");
-        //     }
-        //     csvImporter.ImportAllCsvData(csvDirectoryPath);
-        // }
     }
-}
-catch (Exception ex)
-{
-    Console.WriteLine($"Exception during startup: {ex.Message}");
-    Console.WriteLine(ex.StackTrace);
-    throw;
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Exception during startup: {ex.Message}");
+        Console.WriteLine(ex.StackTrace);
+        throw;
+    }
 }
 
 // Configure the HTTP request pipeline.
