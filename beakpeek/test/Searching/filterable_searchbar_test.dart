@@ -4,7 +4,8 @@ import 'package:mockito/mockito.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
-import '../lifelistprovider/life_list_provider_test.mocks.dart';
+
+import 'life_list_provider_test.mocks.dart';
 
 final birdL = [
   Bird(
