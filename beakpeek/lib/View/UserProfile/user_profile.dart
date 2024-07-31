@@ -3,10 +3,10 @@ import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:slider_button/slider_button.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
-import 'package:http/http.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -123,6 +123,34 @@ class UserProfileState extends State<UserProfile> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 20),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 20.0),
+                        child: TextField(
+                          keyboardType: TextInputType.emailAddress,
+                          decoration: InputDecoration(
+                            labelText: 'Email',
+                            hintText: 'example@mail.com',
+                            border: OutlineInputBorder(),
+                            contentPadding: EdgeInsets.all(12.0),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Color(0xFF033A30)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                            enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: Colors.grey),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12)),
+                            ),
+                          ),
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 20),
                       const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 20.0),
                         child: Text(
@@ -133,7 +161,6 @@ class UserProfileState extends State<UserProfile> {
                           ),
                         ),
                       ),
-                      // Live List
                       const Text('Live List'),
                       FutureBuilder<List<Bird>>(
                         future: birds,
@@ -169,8 +196,10 @@ class UserProfileState extends State<UserProfile> {
                           return progressBars(snapshot.data!);
                         },
                       ),
+
                       // Divider between the list and buttons
                       const Divider(height: 1, thickness: 1),
+
                       // Buttons at the bottom
                       Padding(
                         padding:
@@ -233,6 +262,7 @@ class UserProfileState extends State<UserProfile> {
               ],
             ),
           ),
+
           // Positioned settings icon
           Positioned(
             top: 16,

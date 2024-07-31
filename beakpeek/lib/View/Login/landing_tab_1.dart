@@ -1,7 +1,5 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Styles/landing_page_styles.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 
 class LandingTab1 extends StatelessWidget {
   const LandingTab1({super.key});
@@ -24,12 +22,12 @@ class LandingTab1 extends StatelessWidget {
                     RichText(
                       textAlign: TextAlign.center,
                       text: const TextSpan(
-                        style: LandingStyles.loginHeadingDark,
+                        style: GlobalStyles.mainHeadingDark,
                         children: [
                           TextSpan(text: 'Your Ultimate\n'),
                           TextSpan(
                               text: 'Bird-Watching\n',
-                              style: LandingStyles.loginHeadingYellow),
+                              style: GlobalStyles.mainHeadingYellow),
                           TextSpan(
                             text: 'Companion',
                           ),
