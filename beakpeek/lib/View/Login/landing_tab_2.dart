@@ -4,7 +4,6 @@ import 'package:beakpeek/Styles/global_styles.dart';
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,9 +37,25 @@ class LandingTab2 extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 20),
-                  const Align(
-                    alignment: Alignment(-0.5, 0.0),
-                    child: CustTextSpan(),
+                  Align(
+                    alignment: const Alignment(-0.5, 0.0),
+                    child: RichText(
+                      text: const TextSpan(
+                        style: LandingStyles.baseTextStyle,
+                        children: <TextSpan>[
+                          TextSpan(
+                            text: 'Create an account or sign in \nto join the',
+                          ),
+                          TextSpan(
+                            text: ' BeakPeak',
+                            style: LandingStyles.highlightedTextStyle,
+                          ),
+                          TextSpan(
+                            text: ' community.',
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                   const Spacer(flex: 3),
                   OutlinedButton(
@@ -48,7 +63,7 @@ class LandingTab2 extends StatelessWidget {
                     child: const Text('Sign In as Guest',
                         style: GlobalStyles.secondaryButtonText),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      loginFunction(context);
                     },
                   ),
                   const SizedBox(height: 20),
@@ -57,7 +72,7 @@ class LandingTab2 extends StatelessWidget {
                     child: const Text('Sign Up / Sign In',
                         style: GlobalStyles.primaryButtonText),
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      context.go('/home');
                     },
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Login/landing_page.dart';
@@ -22,24 +23,35 @@ class Main extends StatefulWidget {
 class MainState extends State<Main> {
   ThemeMode darkLight = ThemeMode.system;
 
+  void changeTheme() {
+    setState(
+      () {
+        darkLight = changeThemeMode(localStorage);
+      },
+    );
+  }
+
   @override
   void initState() {
     darkLight = getThemeMode(localStorage.getItem('theme') ?? '');
     super.initState();
   }
 
-  void changeTheme() {
-    setState(() {
-      darkLight = changeThemeMode();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData(
-        brightness: Brightness.light,
-        /* light theme settings */
+    return ChangeNotifierProvider(
+      create: (context) => ThemeProvider(),
+      child: Consumer<ThemeProvider>(
+        builder: (context, themeProvider, child) {
+          return MaterialApp.router(
+            theme: ThemeData(
+                useMaterial3: true, colorScheme: themeProvider.lightScheme),
+            darkTheme: ThemeData(
+                useMaterial3: true, colorScheme: themeProvider.darkScheme),
+            themeMode: themeProvider.themeMode,
+            routerConfig: RoutingData().router,
+          );
+        },
       ),
       darkTheme: ThemeData(
         brightness: Brightness.dark,

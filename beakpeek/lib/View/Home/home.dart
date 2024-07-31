@@ -1,9 +1,9 @@
-import 'package:beakpeek/Styles/custom_buttons.dart';
 import 'package:beakpeek/Styles/home_page_styles.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Model/help_icon_model_functions.dart';
+import 'package:go_router/go_router.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -118,8 +118,10 @@ class Home extends StatelessWidget {
                           key: const Key('helpLogo'),
                           onTap: () {
                             const content =
-                                // ignore: lines_longer_than_80_chars
-                                'This map shows you your current location. Click anywhere and you will see all the birds in that area! You can use the filters to customise what you see and you can use the search bar to see the heat map of a specific bird!';
+                                '''This map shows you your current location. 
+                                Click anywhere and you will see all the birds in that area! 
+                                You can use the filters to customise what you see. 
+                                You can use the search bar to see the heat map of a specific bird!''';
                             showHelpPopup(context, content);
                           },
                           child: const Icon(
@@ -139,12 +141,25 @@ class Home extends StatelessWidget {
                         ),
                         SizedBox(height: screenHeight * 0.01),
                         SizedBox(height: screenHeight * 0.01),
-                        const Center(
-                          child: CustomFilledButton(
-                            routePath: '/map',
-                            buttonText: 'View Map',
-                            backgroundColor: Color(0xFF033A30),
-                            textColor: Colors.white,
+                        Center(
+                          child: FilledButton(
+                            onPressed: () {
+                              context.go('/map');
+                            },
+                            style: FilledButton.styleFrom(
+                              backgroundColor: const Color(0xFF033A30),
+                              minimumSize: const Size(350, 50),
+                              shadowColor: Colors.black,
+                            ),
+                            child: const Text(
+                              'View Map',
+                              style: TextStyle(
+                                color: Color.fromARGB(255, 255, 255, 255),
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                              ),
+                            ),
                           ),
                         ),
                         SizedBox(height: screenHeight * 0.01),

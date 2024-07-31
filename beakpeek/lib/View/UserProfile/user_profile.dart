@@ -14,8 +14,8 @@ class UserProfile extends StatefulWidget {
 }
 
 class UserProfileState extends State<UserProfile> {
-  Widget iconDisplay = getIcon();
-  String iconLabel = getLabelIcon();
+  Widget iconDisplay = getIcon(localStorage);
+  String iconLabel = getLabelIcon(localStorage);
   String name = localStorage.getItem('fullName') ?? '';
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
   String email = localStorage.getItem('email') ?? 'example@mail.com';

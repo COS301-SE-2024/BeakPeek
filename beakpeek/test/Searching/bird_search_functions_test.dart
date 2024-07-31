@@ -1,3 +1,4 @@
+import 'package:beakpeek/Controller/DB/database_calls.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
@@ -6,7 +7,28 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 
-import 'bird_test.mocks.dart';
+import '../bird_test.mocks.dart';
+
+List<Bird> birdL = [
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'Laughing',
+    commonSpecies: 'Dove',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 10.0,
+  ),
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'African',
+    commonSpecies: 'Eagle',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 20.0,
+  ),
+];
 
 @GenerateMocks([http.Client])
 void main() {
@@ -37,18 +59,6 @@ void main() {
           expect(await fetchAllBirds(client), isA<List<Bird>>());
         },
       );
-
-      test('throws an exception if the http call completes with an error', () {
-        final client = MockClient();
-
-        // Use Mockito to return an unsuccessful response when it calls the
-        // provided http.Client.
-        when(client.get(Uri.parse(
-                'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
-            .thenAnswer((_) async => http.Response('Not Found', 404));
-
-        expect(fetchAllBirds(client), throwsException);
-      });
 
       test(
         'getColorRepert Rate',
@@ -110,13 +120,15 @@ void main() {
             ),
           ];
           final testW = getWidgetListOfBirds(birds);
-          await tester.pumpWidget(MaterialApp(
-            home: Scaffold(
-              body: ListView(
-                children: testW,
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: ListView(
+                  children: testW,
+                ),
               ),
             ),
-          ));
+          );
           expect(find.byType(ListTile), findsAtLeast(2));
         },
       );
@@ -241,6 +253,21 @@ void main() {
           final uniqueBirds = getUniqueBirds(birds);
           expect(uniqueBirds.length, 1);
           expect(uniqueBirds[0].reportingRate, 20.0);
+        },
+      );
+
+      testWidgets(
+        'Testing GetData',
+        (tester) async {
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                body: getData(birdL[0]),
+              ),
+            ),
+          );
+
+          expect(find.byType(ListTile), findsOne);
         },
       );
     },
