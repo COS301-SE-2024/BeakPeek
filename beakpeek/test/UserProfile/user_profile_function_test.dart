@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/Controller/DB/database_calls.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 import 'local_storage_test.mocks.dart';
