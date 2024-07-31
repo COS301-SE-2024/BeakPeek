@@ -59,5 +59,12 @@ namespace BeakPeekApi.Controllers
             _csvImporter.ClearProvinceData(province);
             return Ok();
         }
+
+        [HttpPost("importAll")]
+        public IActionResult ImportAll([FromQuery] string path)
+        {
+            _csvImporter.ImportAllCsvData(path);
+            return Ok();
+        }
     }
 }
