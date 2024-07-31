@@ -37,6 +37,11 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
+      - name: Get App Setting
+        run: |
+          cd ./dotnet/BeakPeekApi
+          cp ../../appsettings.json .
+
       - name: Build with dotnet
         run: dotnet build --configuration Release ./dotnet/BeakPeekApi/BeakPeekApi.csproj
 
@@ -47,11 +52,6 @@ jobs:
         run: |
           mkdir -p ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species
           cp -r ./res/species/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species/
-
-      - name: Get App Setting
-        run: |
-          cd ./dotnet/BeakPeekApi
-          cp ../../appsettings.json .
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
