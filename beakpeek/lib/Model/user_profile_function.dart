@@ -1,47 +1,10 @@
+import 'package:beakpeek/Controller/DB/database_calls.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
-
-final birdL = [
-  Bird(
-    pentad: '1',
-    spp: 1,
-    commonGroup: 'Laughing',
-    commonSpecies: 'Dove',
-    genus: 'genus',
-    species: 'species',
-    reportingRate: 65.0,
-  ),
-  Bird(
-    pentad: '1',
-    spp: 1,
-    commonGroup: 'African',
-    commonSpecies: 'Eagle',
-    genus: 'genus',
-    species: 'species',
-    reportingRate: 10.0,
-  ),
-  Bird(
-    pentad: '1',
-    spp: 1,
-    commonGroup: 'Common',
-    commonSpecies: 'Pigeon',
-    genus: 'genus',
-    species: 'species',
-    reportingRate: 85.0,
-  ),
-  Bird(
-    pentad: '1',
-    spp: 1,
-    commonGroup: 'Ivan',
-    commonSpecies: 'Horak',
-    genus: 'genus',
-    species: 'species',
-    reportingRate: 42.0,
-  ),
-];
 
 ThemeMode getThemeMode(String data) {
   if (data.isEmpty) {
@@ -98,7 +61,6 @@ Widget getLiveList(List<Bird> birds) {
 }
 
 List<Widget> getWidgetLifeList(List<Bird> birds) {
-  //print(birds);
   final List<Widget> listOfBirdWidgets = [];
   for (var i = 0; i < birds.length; i++) {
     listOfBirdWidgets.add(getLifeListData(birds[i]));
@@ -136,4 +98,36 @@ Widget getLifeListData(Bird bird) {
 List<Bird> sortAlphabetically(List<Bird> birds) {
   birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
   return birds;
+}
+
+Widget progressBars(List<int> birdNums) {
+  return SizedBox(
+    height: 200,
+    child: ListView.builder(
+      itemCount: provinces.length,
+      itemBuilder: (context, index) {
+        final String prov = provinces[index];
+        return Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+              child: Text(
+                prov,
+                style: const TextStyle(color: Colors.black),
+              ),
+            ),
+            FAProgressBar(
+              currentValue: getPercent(birdNums[index], 1000),
+              displayText: '%',
+              size: 15,
+            ),
+          ],
+        );
+      },
+    ),
+  );
+}
+
+double getPercent(int numTotalBirds, int birdsInLife) {
+  return ((birdsInLife / numTotalBirds) * 100);
 }

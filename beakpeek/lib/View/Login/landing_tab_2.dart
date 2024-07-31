@@ -1,6 +1,7 @@
+import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Styles/custom_text_span.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:go_router/go_router.dart';
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
@@ -41,14 +42,14 @@ class LandingTab2 extends StatelessWidget {
                     alignment: const Alignment(-0.5, 0.0),
                     child: RichText(
                       text: const TextSpan(
-                        style: LandingStyles.baseTextStyle,
+                        style: GlobalStyles.content,
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Create an account or sign in \nto join the',
                           ),
                           TextSpan(
                             text: ' BeakPeak',
-                            style: LandingStyles.highlightedTextStyle,
+                            style: GlobalStyles.mainHeadingYellow,
                           ),
                           TextSpan(
                             text: ' community.',
@@ -60,7 +61,7 @@ class LandingTab2 extends StatelessWidget {
                   const Spacer(flex: 3),
                   OutlinedButton(
                     style: GlobalStyles.secondaryButton,
-                    child: const Text('Sign In as Guest',
+                    child: const Text('Sign Up / Sign In',
                         style: GlobalStyles.secondaryButtonText),
                     onPressed: () {
                       loginFunction(context);
@@ -69,7 +70,7 @@ class LandingTab2 extends StatelessWidget {
                   const SizedBox(height: 20),
                   FilledButton(
                     style: GlobalStyles.primaryButton,
-                    child: const Text('Sign Up / Sign In',
+                    child: const Text('Sign In as Guest',
                         style: GlobalStyles.primaryButtonText),
                     onPressed: () {
                       context.go('/home');

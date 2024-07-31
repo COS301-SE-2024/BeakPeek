@@ -4,35 +4,54 @@ import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
 import 'package:flutter/material.dart';
 
 class FilterableSearchbar extends StatefulWidget {
-  const FilterableSearchbar(
-      {super.key, required this.birds, required this.sort});
+  const FilterableSearchbar({
+    super.key,
+    required this.birds,
+    required this.sort,
+  });
+
   final List<Bird> birds;
   final int sort;
 
   @override
   State<FilterableSearchbar> createState() {
-    return FilterableSearchbarState();
+    return _FilterableSearchbarState();
   }
 }
 
-class FilterableSearchbarState extends State<FilterableSearchbar> {
-  late LifeListProvider lifeList = LifeListProvider.instance;
+class _FilterableSearchbarState extends State<FilterableSearchbar> {
+  late final LifeListProvider lifeList = LifeListProvider.instance;
   List<Widget> items = [];
   final SearchController controller = SearchController();
-  List<Bird> temp = [];
+  late List<Bird> filteredBirds;
+
   @override
   void initState() {
     super.initState();
-    items = bsf.getWidgetListOfBirds(widget.birds);
+    filteredBirds = widget.birds;
+    items = bsf.getWidgetListOfBirds(filteredBirds);
   }
 
   void searchBarTyping(String data) {
-    if (data.isEmpty) {
-      items = bsf.getWidgetListOfBirds(widget.birds);
-    } else {
-      temp = bsf.searchForBird(widget.birds, data);
-      items = bsf.getWidgetListOfBirds(temp);
-    }
+    setState(() {
+      filteredBirds =
+          data.isEmpty ? widget.birds : bsf.searchForBird(widget.birds, data);
+      items = bsf.getWidgetListOfBirds(filteredBirds);
+    });
+  }
+
+  void sortAlphabetically() {
+    setState(() {
+      filteredBirds = bsf.sortAlphabetically(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds);
+    });
+  }
+
+  void sortByReportingRate() {
+    setState(() {
+      filteredBirds = bsf.sortRepotRateDESC(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds);
+    });
   }
 
   @override
@@ -43,10 +62,9 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
           children: [
             Expanded(
               child: SearchAnchor(
+                searchController: controller,
                 viewHintText: 'Search Bird...',
-                viewOnChanged: (value) {
-                  searchBarTyping(value);
-                },
+                viewOnChanged: searchBarTyping,
                 builder: (context, controller) {
                   return const Row(
                     children: [
@@ -61,38 +79,25 @@ class FilterableSearchbarState extends State<FilterableSearchbar> {
                 },
               ),
             ),
+            const SizedBox(width: 10),
             FilledButton(
-              onPressed: () {
-                setState(() {
-                  temp = bsf.sortAlphabetically(widget.birds);
-                  items = bsf.getWidgetListOfBirds(temp);
-                });
-              },
+              onPressed: sortAlphabetically,
               style: FilledButton.styleFrom(
                 backgroundColor: const Color.fromARGB(178, 3, 58, 48),
                 minimumSize: const Size(60, 30),
                 shadowColor: Colors.black,
               ),
-              child: const Text(
-                'A-Z',
-              ),
+              child: const Text('A-Z'),
             ),
-            const SizedBox(width: 5),
+            const SizedBox(width: 10),
             FilledButton(
-              onPressed: () {
-                setState(() {
-                  temp = bsf.sortRepotRateDESC(widget.birds);
-                  items = bsf.getWidgetListOfBirds(temp);
-                });
-              },
+              onPressed: sortByReportingRate,
               style: FilledButton.styleFrom(
                 backgroundColor: const Color.fromARGB(178, 3, 58, 48),
-                minimumSize: const Size(60, 30),
+                minimumSize: const Size(100, 30),
                 shadowColor: Colors.black,
               ),
-              child: const Text(
-                'Report Rate',
-              ),
+              child: const Text('Report Rate'),
             ),
           ],
         ),

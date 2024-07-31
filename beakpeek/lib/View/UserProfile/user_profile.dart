@@ -2,15 +2,15 @@ import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/Styles/profile_page_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:beakpeek/Styles/profile_page_styles.dart';
+import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 
 class UserProfile extends StatefulWidget {
-  const UserProfile({required this.change, super.key});
-  const UserProfile.changeTheme(this.change, {super.key});
-  final Function() change;
+  const UserProfile({super.key});
 
   @override
   State<UserProfile> createState() => UserProfileState();
@@ -22,6 +22,7 @@ class UserProfileState extends State<UserProfile> {
   Widget iconDisplay = getIcon(localStorage);
   String iconLabel = getLabelIcon(localStorage);
   String name = localStorage.getItem('fullName') ?? '';
+  late Future<List<int>> numBirds;
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
   String email = localStorage.getItem('email') ?? 'example@mail.com';
 
@@ -45,6 +46,7 @@ class UserProfileState extends State<UserProfile> {
     iconDisplay = getIcon(localStorage);
     iconLabel = getLabelIcon(localStorage);
     birds = lifeList.fetchLifeList();
+    numBirds = db.getNumberOfBirdsInProvinces(Client());
     super.initState();
   }
 
@@ -67,8 +69,6 @@ class UserProfileState extends State<UserProfile> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 60),
-
-                  // Profile image and name section
                   Center(
                     child: Column(
                       children: [
@@ -87,66 +87,9 @@ class UserProfileState extends State<UserProfile> {
                             ),
                           ),
                         ),
-                      ),
-                      const SizedBox(height: 20),
-                      const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        child: Text(
-                          'Your Life List',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
 
-                      // Live List
-                      FutureBuilder<List<Bird>>(
-                        future: birds,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const Center(
-                                child: CircularProgressIndicator());
-                          } else if (snapshot.hasError) {
-                            return Center(
-                                child: Text('Error: ${snapshot.error}'));
-                          }
-                          return getLiveList(snapshot.data!);
-                        },
-                      ),
-
-                      // Divider between the list and buttons
-                      const Divider(height: 1, thickness: 1),
-
-                      // Buttons at the bottom
-                      Padding(
-                        padding:
-                            const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 40.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // Home button
-                            FilledButton(
-                              onPressed: () {
-                                context.go('/home');
-                              },
-                              style: FilledButton.styleFrom(
-                                backgroundColor: const Color(0xFF033A30),
-                                minimumSize: const Size(200, 50),
-                                shadowColor: Colors.black,
-                              ),
-                              child: const Text(
-                                'Home',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontFamily: 'SF Pro Display',
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 18,
-                                ),
-                              ),
-                            ),
+                        // Divider between the list and buttons
+                        const Divider(height: 1, thickness: 1),
                         // Username
                         Text(name, style: GlobalStyles.subHeadingDark),
 
@@ -164,13 +107,6 @@ class UserProfileState extends State<UserProfile> {
                   const Text('Personal Information',
                       style: GlobalStyles.subheadingLight),
                   const SizedBox(height: 20),
-
-                  // Email Field
-                  ProfileField(
-                    icon: Icons.email,
-                    label: 'Email',
-                    content: email,
-                  ),
 
                   const SizedBox(height: 10),
 
@@ -204,10 +140,38 @@ class UserProfileState extends State<UserProfile> {
                   const Divider(height: 1, thickness: 1),
                   const SizedBox(height: 20),
                   const Text('Life List', style: GlobalStyles.subheadingLight),
+                  FutureBuilder<List<Bird>>(
+                    future: birds,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(child: Text('Error: ${snapshot.error}'));
+                      }
+                      return getLiveList(snapshot.data!);
+                    },
+                  ),
                   const SizedBox(height: 10),
-
-                  // Live List
-                  getLiveList(),
+                  const Text(
+                    'Achivements',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  FutureBuilder<List<int>>(
+                    future: numBirds,
+                    builder: (context, snapshot) {
+                      if (snapshot.connectionState == ConnectionState.waiting) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (snapshot.hasError) {
+                        return Center(
+                          child: Text(
+                            'Error: ${snapshot.error}',
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        );
+                      }
+                      return progressBars(snapshot.data!);
+                    },
+                  ),
 
                   // Padding to prevent overlap with the bottom fixed container
                   const SizedBox(height: 100),
@@ -215,43 +179,6 @@ class UserProfileState extends State<UserProfile> {
               ),
             ),
           ),
-
-          // Positioned icons (pencil and settings)
-          Positioned(
-            top: 32,
-            right: 16,
-            child: Row(
-              children: [
-                IconButton(
-                  iconSize: 28,
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    // Action for edit profile icon
-                  },
-                ),
-                IconButton(
-                  iconSize: 28,
-                  icon: const Icon(Icons.settings),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/settings');
-                  },
-                ),
-              ],
-            ),
-          ),
-
-          Positioned(
-            top: 32,
-            left: 16,
-            child: IconButton(
-              iconSize: 28,
-              icon: const Icon(Icons.arrow_back),
-              onPressed: () {
-                Navigator.pushNamed(context, '/home');
-              },
-            ),
-          ),
-
           // Container for buttons at the bottom
           Positioned(
             bottom: 0,
@@ -266,7 +193,7 @@ class UserProfileState extends State<UserProfile> {
                   // Home button
                   ElevatedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/home');
+                      context.go('/home');
                     },
                     style: ProfilePageStyles.elevatedButtonStyle(),
                     child: const Text('Home'),
@@ -287,10 +214,9 @@ class UserProfileState extends State<UserProfile> {
                       Switch(
                         value: Theme.of(context).brightness == Brightness.dark,
                         onChanged: (value) {
-                          widget.change();
                           setState(() {
-                            iconDisplay = getIcon();
-                            iconLabel = getLabelIcon();
+                            iconDisplay = getIcon(localStorage);
+                            iconLabel = getLabelIcon(localStorage);
                           });
                         },
                         activeColor: GlobalStyles.primaryColor,

@@ -1,16 +1,25 @@
 // ignore_for_file: avoid_print
-
 import 'dart:convert';
-
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:http/http.dart' as http;
+
+const List<String> provinces = [
+  'easterncape',
+  'freestate',
+  'gauteng',
+  'kwazulu-natal',
+  'limpopo',
+  'mpumalanga',
+  'northerncape',
+  'northwest',
+  //'westerncape'
+];
 
 Future<List<Bird>> fetchAllBirds(http.Client client) async {
   try {
     final response = await client.get(
         Uri.parse('http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng'));
-    //print(response.body);
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
       final List<Bird> birds =
@@ -23,5 +32,27 @@ Future<List<Bird>> fetchAllBirds(http.Client client) async {
   } catch (error) {
     print('Error fetching birds: $error');
     throw Exception('Failed to load birds: $error, ');
+  }
+}
+
+Future<List<int>> getNumberOfBirdsInProvinces(http.Client client) async {
+  late final List<int> numbers = [];
+  try {
+    for (var i = 0; i < provinces.length; i++) {
+      final String temp = provinces[i];
+      final response = await client.get(Uri.parse(
+          'http://10.0.2.2:5000/api/Bird/GetNumBirdByProvince/$temp'));
+      if (response.statusCode == 200) {
+        final int jsonResponse = json.decode(response.body);
+        numbers.add(jsonResponse);
+      } else {
+        print('Request failed with status: ${response.statusCode}');
+        throw Exception('Failed to load amount of birds');
+      }
+    }
+    return numbers;
+  } catch (error) {
+    print('Error fetching amount of birds: $error');
+    throw Exception('Failed to load number of birds: $error, ');
   }
 }

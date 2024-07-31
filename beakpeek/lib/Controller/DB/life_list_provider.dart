@@ -54,7 +54,10 @@ class LifeListProvider {
   Future<List<Bird>> fetchLifeList() async {
     final db = await instance.database;
 
-    final List<Map<String, Object?>> birdMap = await db.query('birds');
+    final List<Map<String, Object?>> birdMap = await db.query(
+      'birds',
+      orderBy: 'commonGroup DESC, commonSpecies DESC',
+    );
     return [
       for (final {
             'pentad': pentad as String,
@@ -98,10 +101,8 @@ class LifeListProvider {
     );
 
     if (maps.isNotEmpty) {
-      print('duplicate');
       return true;
     } else {
-      print('not duplicate');
       return false;
     }
   }

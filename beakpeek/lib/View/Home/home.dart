@@ -154,7 +154,7 @@ class Home extends StatelessWidget {
                             child: const Text(
                               'View Map',
                               style: TextStyle(
-                                color: Color.fromARGB(255, 255, 255, 255),
+                                color: Color.fromARGB(255, 0, 0, 0),
                                 fontFamily: 'SF Pro Display',
                                 fontWeight: FontWeight.w500,
                                 fontSize: 18,

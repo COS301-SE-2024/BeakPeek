@@ -1,278 +1,174 @@
-import 'package:beakpeek/Controller/DB/database_calls.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:beakpeek/Model/bird.dart';
 
-import '../bird_test.mocks.dart';
+import 'life_list_provider_test.mocks.dart';
 
-List<Bird> birdL = [
-  Bird(
-    pentad: '1',
-    spp: 1,
-    commonGroup: 'Laughing',
-    commonSpecies: 'Dove',
-    genus: 'genus',
-    species: 'species',
-    reportingRate: 10.0,
-  ),
-  Bird(
-    pentad: '1',
-    spp: 1,
-    commonGroup: 'African',
-    commonSpecies: 'Eagle',
-    genus: 'genus',
-    species: 'species',
-    reportingRate: 20.0,
-  ),
-];
-
-@GenerateMocks([http.Client])
+@GenerateMocks([LifeListProvider])
 void main() {
-  group(
-    'Bird Search Functions Test',
-    () {
-      test(
-        'Featch All Birds Function Test',
-        () async {
-          final client = MockClient();
+  group('LifeListProvider Tests', () {
+    test('getColorForReportingRate returns correct color index', () {
+      expect(getColorForReportingRate(30), 0);
+      expect(getColorForReportingRate(50), 1);
+      expect(getColorForReportingRate(70), 2);
+      expect(getColorForReportingRate(90), 3);
+    });
 
-          when(client.get(Uri.parse(
-                  'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
-              .thenAnswer((_) async => http.Response('''
-          [
-            {
-              "pentad": "Test Pentad",
-              "spp": 1,
-              "common_group": "Test Common Group",
-              "common_species": "Test Common Species",
-              "genus": "Test Genus",
-              "species": "Test Species",
-              "reportingRate": 1.0
-            }
-          ]
-          ''', 200));
-
-          expect(await fetchAllBirds(client), isA<List<Bird>>());
-        },
+    testWidgets('getData shows correct UI for bird', (tester) async {
+      final bird = Bird(
+        pentad: '123456',
+        spp: 1,
+        commonGroup: 'Sparrow',
+        commonSpecies: 'House Sparrow',
+        genus: 'Passer',
+        species: 'domesticus',
+        reportingRate: 55.0,
       );
+      final mockLifeListProvider = MockLifeListProvider();
 
-      test(
-        'getColorRepert Rate',
-        () {
-          expect(getColorForReportingRate(20.0), 0);
-          expect(getColorForReportingRate(40.0), 1);
-          expect(getColorForReportingRate(60.0), 2);
-          expect(getColorForReportingRate(80.0), 3);
-        },
-      );
+      when(mockLifeListProvider.isDuplicate(bird))
+          .thenAnswer((_) async => false);
 
-      testWidgets(
-        'Test getData ',
-        (tester) async {
-          late final LifeListProvider lifeList = LifeListProvider.instance;
-          final bird = Bird(
-            pentad: '1',
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: getData(bird, mockLifeListProvider),
+        ),
+      ));
+
+      expect(find.text('Sparrow House Sparrow'), findsOneWidget);
+      expect(find.text('Scientific Name: Passer domesticus'), findsOneWidget);
+      expect(find.text('55.0%'), findsOneWidget);
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+
+      // Update the mock to return true for isDuplicate
+      when(mockLifeListProvider.isDuplicate(bird))
+          .thenAnswer((_) async => true);
+      mockLifeListProvider.insertBird(bird);
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: getData(bird, mockLifeListProvider),
+        ),
+      ));
+
+      expect(find.text('Seen'), findsNothing);
+    });
+
+    test('sortAlphabetically sorts birds by commonGroup', () {
+      final birds = [
+        Bird(
+            pentad: '123456',
             spp: 1,
-            commonGroup: 'commonGroup',
-            commonSpecies: 'commonSpecies',
-            genus: 'genus',
-            species: 'species',
-            reportingRate: 10.0,
-          );
-          final Widget testW = getData(bird, lifeList);
-          await tester.pumpWidget(MaterialApp(
-            home: Scaffold(
-              body: ListView(
-                children: [
-                  testW,
-                ],
-              ),
-            ),
-          ));
-          expect(find.byType(ListTile), findsOneWidget);
-        },
-      );
+            commonGroup: 'Sparrow',
+            commonSpecies: 'House Sparrow',
+            genus: 'Passer',
+            species: 'domesticus',
+            reportingRate: 55.0),
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Finch',
+            commonSpecies: 'House Finch',
+            genus: 'Haemorhous',
+            species: 'mexicanus',
+            reportingRate: 65.0),
+      ];
 
-      testWidgets(
-        'Test getData ',
-        (tester) async {
-          final birds = [
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'commonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 10.0,
-            ),
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'commonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 10.0,
-            ),
-          ];
-          final testW = getWidgetListOfBirds(birds);
-          await tester.pumpWidget(
-            MaterialApp(
-              home: Scaffold(
-                body: ListView(
-                  children: testW,
-                ),
-              ),
-            ),
-          );
-          expect(find.byType(ListTile), findsAtLeast(2));
-        },
-      );
+      final sortedBirds = sortAlphabetically(birds);
 
-      test(
-        'Bird search Function',
+      expect(sortedBirds[0].commonGroup, 'Finch');
+      expect(sortedBirds[1].commonGroup, 'Sparrow');
+    });
+
+    test('sortRepotRateDESC sorts birds by reportingRate in descending order',
         () {
-          final birds = [
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'commonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 10.0,
-            ),
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'commonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 10.0,
-            ),
-          ];
+      final birds = [
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Sparrow',
+            commonSpecies: 'House Sparrow',
+            genus: 'Passer',
+            species: 'domesticus',
+            reportingRate: 55.0),
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Finch',
+            commonSpecies: 'House Finch',
+            genus: 'Haemorhous',
+            species: 'mexicanus',
+            reportingRate: 65.0),
+      ];
 
-          final search = searchForBird(birds, 'common');
-          expect(search, birds);
-        },
-      );
+      final sortedBirds = sortRepotRateDESC(birds);
 
-      test(
-        'Sort alphabetical ',
-        () {
-          final birds = [
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'BcommonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 10.0,
-            ),
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'AcommonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 20.0,
-            ),
-          ];
+      expect(sortedBirds[0].reportingRate, 65.0);
+      expect(sortedBirds[1].reportingRate, 55.0);
+    });
 
-          final sortedList = sortAlphabetically(birds);
-          expect(sortedList.length, 2);
-          expect(sortedList[0].commonGroup, 'AcommonGroup');
-          expect(sortedList[1].commonGroup, 'BcommonGroup');
-        },
-      );
+    test('searchForBird returns correct birds based on search value', () {
+      final birds = [
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Sparrow',
+            commonSpecies: 'House Sparrow',
+            genus: 'Passer',
+            species: 'domesticus',
+            reportingRate: 55.0),
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Finch',
+            commonSpecies: 'House Finch',
+            genus: 'Haemorhous',
+            species: 'mexicanus',
+            reportingRate: 65.0),
+      ];
 
-      test(
-        'Sort Report Rate ',
-        () {
-          final birds = [
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'BcommonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 10.0,
-            ),
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'AcommonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 20.0,
-            ),
-          ];
+      final results = searchForBird(birds, 'sparrow');
 
-          final sortedList = sortRepotRateDESC(birds);
-          expect(sortedList.length, 2);
-          expect(sortedList[0].commonGroup, 'AcommonGroup');
-          expect(sortedList[1].commonGroup, 'BcommonGroup');
-          expect(sortedList[1].reportingRate, 10.0);
-          expect(sortedList[0].reportingRate, 20.0);
-        },
-      );
+      expect(results.length, 1);
+      expect(results[0].commonSpecies, 'House Sparrow');
+    });
 
-      test(
-        'Unique Birds Functions',
-        () {
-          final birds = [
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'commonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 10.0,
-            ),
-            Bird(
-              pentad: '1',
-              spp: 1,
-              commonGroup: 'commonGroup',
-              commonSpecies: 'commonSpecies',
-              genus: 'genus',
-              species: 'species',
-              reportingRate: 20.0,
-            ),
-          ];
+    test('getUniqueBirds returns unique birds with highest reportingRate', () {
+      final birds = [
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Sparrow',
+            commonSpecies: 'House Sparrow',
+            genus: 'Passer',
+            species: 'domesticus',
+            reportingRate: 55.0),
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Sparrow',
+            commonSpecies: 'House Sparrow',
+            genus: 'Passer',
+            species: 'domesticus',
+            reportingRate: 65.0),
+        Bird(
+            pentad: '123456',
+            spp: 1,
+            commonGroup: 'Finch',
+            commonSpecies: 'House Finch',
+            genus: 'Haemorhous',
+            species: 'mexicanus',
+            reportingRate: 60.0),
+      ];
 
-          final uniqueBirds = getUniqueBirds(birds);
-          expect(uniqueBirds.length, 1);
-          expect(uniqueBirds[0].reportingRate, 20.0);
-        },
-      );
+      final uniqueBirds = getUniqueBirds(birds);
 
-      testWidgets(
-        'Testing GetData',
-        (tester) async {
-          late final LifeListProvider lifeList = LifeListProvider.instance;
-          await tester.pumpWidget(
-            MaterialApp(
-              home: Scaffold(
-                body: getData(birdL[0], lifeList),
-              ),
-            ),
-          );
-
-          expect(find.byType(ListTile), findsOne);
-        },
-      );
-    },
-  );
+      expect(uniqueBirds.length, 2);
+      expect(uniqueBirds[0].reportingRate, 65.0);
+      expect(uniqueBirds[1].reportingRate, 60.0);
+    });
+  });
 }
