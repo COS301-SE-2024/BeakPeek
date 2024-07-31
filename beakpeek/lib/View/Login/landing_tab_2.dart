@@ -1,9 +1,6 @@
-// ignore_for_file: lines_longer_than_80_chars
-
-import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Styles/landing_page_styles.dart';
-import 'package:go_router/go_router.dart';
+import 'package:beakpeek/Styles/custom_text_span.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
@@ -23,14 +20,14 @@ class LandingTab2 extends StatelessWidget {
                     child: RichText(
                       textAlign: TextAlign.left,
                       text: const TextSpan(
-                        style: LandingStyles.loginHeadingDark,
+                        style: GlobalStyles.mainHeadingDark,
                         children: [
                           TextSpan(
                             text: 'Explore,\n',
                           ),
                           TextSpan(
                             text: 'Discover,\n',
-                            style: LandingStyles.loginHeadingYellow,
+                            style: GlobalStyles.mainHeadingYellow,
                           ),
                           TextSpan(
                             text: 'and Share',
@@ -62,45 +59,21 @@ class LandingTab2 extends StatelessWidget {
                   ),
                   const Spacer(flex: 3),
                   OutlinedButton(
+                    style: GlobalStyles.secondaryButton,
+                    child: const Text('Sign In as Guest',
+                        style: GlobalStyles.secondaryButtonText),
                     onPressed: () {
                       loginFunction(context);
                     },
-                    style: OutlinedButton.styleFrom(
-                      side: const BorderSide(
-                        color: Color(0xff033A30),
-                      ),
-                      backgroundColor: Colors.transparent,
-                      minimumSize: const Size(350, 50),
-                    ),
-                    child: const Text(
-                      'Sign Up / Sign In',
-                      style: TextStyle(
-                        color: Color(0xff033A30),
-                        fontFamily: 'SF Pro Display',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                      ),
-                    ),
                   ),
                   const SizedBox(height: 20),
                   FilledButton(
+                    style: GlobalStyles.primaryButton,
+                    child: const Text('Sign Up / Sign In',
+                        style: GlobalStyles.primaryButtonText),
                     onPressed: () {
                       context.go('/home');
                     },
-                    style: FilledButton.styleFrom(
-                      backgroundColor: const Color(0xff033A30),
-                      minimumSize: const Size(350, 50),
-                      shadowColor: Colors.black,
-                    ),
-                    child: const Text(
-                      'Sign In as Guest',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontFamily: 'SF Pro Display',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18,
-                      ),
-                    ),
                   ),
                 ],
               ),
