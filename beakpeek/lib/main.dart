@@ -1,11 +1,12 @@
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
+import 'package:beakpeek/View/Home/home.dart';
+import 'package:beakpeek/View/Login/landing_page.dart';
+import 'package:beakpeek/View/Home/map_info.dart';
+import 'package:beakpeek/View/UserProfile/user_profile.dart';
+import 'package:beakpeek/View/Home/bird_page.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:beakpeek/Controller/Main/routing_data.dart';
-import 'package:provider/provider.dart';
-
-late final ValueNotifier<bool> notifier;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -52,6 +53,19 @@ class MainState extends State<Main> {
           );
         },
       ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        /* dark theme settings */
+      ),
+      themeMode: darkLight,
+      initialRoute: '/',
+      routes: <String, WidgetBuilder>{
+        '/': (context) => const LandingPage(),
+        '/home': (context) => const Home(),
+        '/map': (context) => const MapInfo(),
+        '/profile': (context) => UserProfile(change: changeTheme),
+        '/bird': (context) => const BirdPage(),
+      },
     );
   }
 }

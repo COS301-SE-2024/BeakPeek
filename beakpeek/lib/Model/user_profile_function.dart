@@ -12,7 +12,7 @@ final birdL = [
     commonSpecies: 'Dove',
     genus: 'genus',
     species: 'species',
-    reportingRate: 10.0,
+    reportingRate: 65.0,
   ),
   Bird(
     pentad: '1',
@@ -22,6 +22,24 @@ final birdL = [
     genus: 'genus',
     species: 'species',
     reportingRate: 10.0,
+  ),
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'Common',
+    commonSpecies: 'Pigeon',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 85.0,
+  ),
+  Bird(
+    pentad: '1',
+    spp: 1,
+    commonGroup: 'Ivan',
+    commonSpecies: 'Horak',
+    genus: 'genus',
+    species: 'species',
+    reportingRate: 42.0,
   ),
 ];
 
@@ -63,9 +81,6 @@ String getLabelIcon(LocalStorage localStorage) {
 Widget getLiveList() {
   final List<Widget> items = getWidgetListOfBirds(birdL);
   return Column(
-    children: [
-      items[0],
-      items[1],
-    ],
+    children: [...items],
   );
 }
