@@ -1,22 +1,16 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:beakpeek/Model/bird.dart'; // Adjust the import to the actual file location
-import '../lifelistprovider/life_list_provider_test.mocks.dart';
+import 'package:beakpeek/Model/bird.dart';
 
+import 'life_list_provider_test.mocks.dart';
+
+@GenerateMocks([LifeListProvider])
 void main() {
   group('LifeListProvider Tests', () {
-    final bird = Bird(
-      pentad: '12345',
-      spp: 1,
-      commonGroup: 'Sparrow',
-      commonSpecies: 'House Sparrow',
-      genus: 'Passer',
-      species: 'domesticus',
-      reportingRate: 55.0,
-    );
-
     test('getColorForReportingRate returns correct color index', () {
       expect(getColorForReportingRate(30), 0);
       expect(getColorForReportingRate(50), 1);
@@ -25,9 +19,17 @@ void main() {
     });
 
     testWidgets('getData shows correct UI for bird', (tester) async {
+      final bird = Bird(
+        pentad: '123456',
+        spp: 1,
+        commonGroup: 'Sparrow',
+        commonSpecies: 'House Sparrow',
+        genus: 'Passer',
+        species: 'domesticus',
+        reportingRate: 55.0,
+      );
       final mockLifeListProvider = MockLifeListProvider();
 
-      // Stub the isDuplicate method for the specific bird
       when(mockLifeListProvider.isDuplicate(bird))
           .thenAnswer((_) async => false);
 
@@ -45,7 +47,12 @@ void main() {
       // Update the mock to return true for isDuplicate
       when(mockLifeListProvider.isDuplicate(bird))
           .thenAnswer((_) async => true);
-      await tester.pump();
+      mockLifeListProvider.insertBird(bird);
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: getData(bird, mockLifeListProvider),
+        ),
+      ));
 
       expect(find.text('Seen'), findsNothing);
     });
@@ -53,7 +60,7 @@ void main() {
     test('sortAlphabetically sorts birds by commonGroup', () {
       final birds = [
         Bird(
-            pentad: '12345',
+            pentad: '123456',
             spp: 1,
             commonGroup: 'Sparrow',
             commonSpecies: 'House Sparrow',
@@ -61,8 +68,8 @@ void main() {
             species: 'domesticus',
             reportingRate: 55.0),
         Bird(
-            pentad: '67890',
-            spp: 2,
+            pentad: '123456',
+            spp: 1,
             commonGroup: 'Finch',
             commonSpecies: 'House Finch',
             genus: 'Haemorhous',
@@ -80,7 +87,7 @@ void main() {
         () {
       final birds = [
         Bird(
-            pentad: '12345',
+            pentad: '123456',
             spp: 1,
             commonGroup: 'Sparrow',
             commonSpecies: 'House Sparrow',
@@ -88,8 +95,8 @@ void main() {
             species: 'domesticus',
             reportingRate: 55.0),
         Bird(
-            pentad: '67890',
-            spp: 2,
+            pentad: '123456',
+            spp: 1,
             commonGroup: 'Finch',
             commonSpecies: 'House Finch',
             genus: 'Haemorhous',
@@ -106,7 +113,7 @@ void main() {
     test('searchForBird returns correct birds based on search value', () {
       final birds = [
         Bird(
-            pentad: '12345',
+            pentad: '123456',
             spp: 1,
             commonGroup: 'Sparrow',
             commonSpecies: 'House Sparrow',
@@ -114,8 +121,8 @@ void main() {
             species: 'domesticus',
             reportingRate: 55.0),
         Bird(
-            pentad: '67890',
-            spp: 2,
+            pentad: '123456',
+            spp: 1,
             commonGroup: 'Finch',
             commonSpecies: 'House Finch',
             genus: 'Haemorhous',
@@ -132,7 +139,7 @@ void main() {
     test('getUniqueBirds returns unique birds with highest reportingRate', () {
       final birds = [
         Bird(
-            pentad: '12345',
+            pentad: '123456',
             spp: 1,
             commonGroup: 'Sparrow',
             commonSpecies: 'House Sparrow',
@@ -140,7 +147,7 @@ void main() {
             species: 'domesticus',
             reportingRate: 55.0),
         Bird(
-            pentad: '12345',
+            pentad: '123456',
             spp: 1,
             commonGroup: 'Sparrow',
             commonSpecies: 'House Sparrow',
@@ -148,8 +155,8 @@ void main() {
             species: 'domesticus',
             reportingRate: 65.0),
         Bird(
-            pentad: '67890',
-            spp: 2,
+            pentad: '123456',
+            spp: 1,
             commonGroup: 'Finch',
             commonSpecies: 'House Finch',
             genus: 'Haemorhous',

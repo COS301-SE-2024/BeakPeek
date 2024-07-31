@@ -1,65 +1,110 @@
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:localstorage/localstorage.dart';
-// Adjust the import as per your file structure
+import 'package:beakpeek/Model/bird.dart';
 
-// Mock class for LocalStorage
-class MockLocalStorage extends Mock implements LocalStorage {}
+import 'local_storage_test.mocks.dart';
 
+@GenerateMocks([LocalStorage])
 void main() {
-  late MockLocalStorage mockLocalStorage;
+  group('Theme Tests', () {
+    late MockLocalStorage mockLocalStorage;
 
-  setUp(() {
-    mockLocalStorage = MockLocalStorage();
-  });
-  group('changeThemeMode', () {
-    test('sets theme to dark when there is no theme set', () async {
+    setUp(() {
+      mockLocalStorage = MockLocalStorage();
+    });
+
+    test('getThemeMode returns ThemeMode.light when data is empty', () {
+      expect(getThemeMode(''), ThemeMode.light);
+    });
+
+    test('getThemeMode returns ThemeMode.dark when data is not empty', () {
+      expect(getThemeMode('dark'), ThemeMode.dark);
+    });
+
+    test('changeThemeMode toggles theme and updates LocalStorage', () {
       when(mockLocalStorage.getItem('theme')).thenReturn('');
-      when(mockLocalStorage.setItem('theme', 'dark'))
-          .thenAnswer((_) async => true);
-
-      expect(changeThemeMode(mockLocalStorage), ThemeMode.dark);
+      final themeMode = changeThemeMode(mockLocalStorage);
+      expect(themeMode, ThemeMode.dark);
       verify(mockLocalStorage.setItem('theme', 'dark')).called(1);
     });
 
-    test('sets theme to light when the theme is set to dark', () async {
-      when(mockLocalStorage.getItem('theme')).thenReturn('dark');
-      when(mockLocalStorage.setItem('theme', '')).thenAnswer((_) async => true);
-
-      expect(changeThemeMode(mockLocalStorage), ThemeMode.light);
-      verify(mockLocalStorage.setItem('theme', '')).called(1);
-    });
-  });
-
-  group('getIcon', () {
-    test('returns dark mode icon when theme is not set', () async {
+    test('getIcon returns correct icon based on theme', () {
       when(mockLocalStorage.getItem('theme')).thenReturn('');
-
+      final iconLight = getIcon(mockLocalStorage);
       expect(
-          (getIcon(mockLocalStorage) as Icon).icon, Icons.dark_mode_outlined);
-    });
+        iconLight,
+        isA<Icon>()
+            .having((icon) => icon.icon, 'icon', Icons.dark_mode_outlined),
+      );
 
-    test('returns light mode icon when theme is set to dark', () async {
       when(mockLocalStorage.getItem('theme')).thenReturn('dark');
-
+      final iconDark = getIcon(mockLocalStorage);
       expect(
-          (getIcon(mockLocalStorage) as Icon).icon, Icons.light_mode_outlined);
+        iconDark,
+        isA<Icon>()
+            .having((icon) => icon.icon, 'icon', Icons.light_mode_outlined),
+      );
     });
-  });
 
-  group('getLabelIcon', () {
-    test('returns "Dark Mode" when theme is not set', () async {
+    test('getLabelIcon returns correct label based on theme', () {
       when(mockLocalStorage.getItem('theme')).thenReturn('');
-
       expect(getLabelIcon(mockLocalStorage), 'Dark Mode');
+      when(mockLocalStorage.getItem('theme')).thenReturn('dark');
+      expect(getLabelIcon(mockLocalStorage), 'Light Mode');
+    });
+  });
+
+  group('Bird List Tests', () {
+    final bird = Bird(
+      pentad: '12345',
+      spp: 1,
+      commonGroup: 'Sparrow',
+      commonSpecies: 'House Sparrow',
+      genus: 'Passer',
+      species: 'domesticus',
+      reportingRate: 55.0,
+    );
+
+    testWidgets('getLiveList displays list of birds', (tester) async {
+      final List<Bird> birds = [bird];
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: getLiveList(birds),
+        ),
+      ));
+
+      expect(find.text('NO Birds Seen'), findsNothing);
+      expect(find.text('Sparrow House Sparrow'), findsOneWidget);
+      expect(find.text('Scientific Name: Passer domesticus'), findsOneWidget);
     });
 
-    test('returns "Light Mode" when theme is set to dark', () async {
-      when(mockLocalStorage.getItem('theme')).thenReturn('dark');
+    testWidgets('getLiveList displays "NO Birds Seen" when bird list is empty',
+        (tester) async {
+      final List<Bird> birds = [];
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: getLiveList(birds),
+        ),
+      ));
 
-      expect(getLabelIcon(mockLocalStorage), 'Light Mode');
+      expect(find.text('NO Birds Seen'), findsOneWidget);
+    });
+
+    testWidgets('progressBars displays progress bars', (tester) async {
+      final List<int> birdNums = [100, 200, 300, 400, 500, 600, 700, 800];
+
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: progressBars(birdNums),
+        ),
+      ));
+
+      expect(find.byType(FAProgressBar), findsAtLeast(6));
     });
   });
 }

@@ -69,8 +69,6 @@ class UserProfileState extends State<UserProfile> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   const SizedBox(height: 60),
-
-                  // Profile image and name section
                   Center(
                     child: Column(
                       children: [

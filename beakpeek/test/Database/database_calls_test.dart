@@ -1,25 +1,24 @@
 import 'package:beakpeek/Controller/DB/database_calls.dart';
-import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
+import 'package:http/http.dart' as http;
 
-import '../bird_test.mocks.dart';
+import 'database_calls_test.mocks.dart';
 
 @GenerateMocks([http.Client])
 void main() {
-  group(
-    'Database controller Tests',
-    () {
-      test(
-        'Featch All Birds Function Test',
-        () async {
-          final client = MockClient();
+  group('Bird API Tests', () {
+    late MockClient mockClient;
 
-          when(client.get(Uri.parse(
-                  'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
-              .thenAnswer((_) async => http.Response('''
+    setUp(() {
+      mockClient = MockClient();
+    });
+
+    test('fetchAllBirds returns unique birds on success', () async {
+      when(mockClient.get(Uri.parse(
+              'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
+          .thenAnswer((_) async => http.Response('''
           [
             {
               "pentad": "Test Pentad",
@@ -33,24 +32,36 @@ void main() {
           ]
           ''', 200));
 
-          expect(await fetchAllBirds(client), isA<List<Bird>>());
-        },
-      );
+      final birds = await fetchAllBirds(mockClient);
 
-      test(
-        'throws an exception if the http call completes with an error',
-        () {
-          final client = MockClient();
+      expect(birds.length, 1);
+      expect(birds[0].commonSpecies, 'Test Common Species');
+    });
 
-          // Use Mockito to return an unsuccessful response when it calls the
-          // provided http.Client.
-          when(client.get(Uri.parse(
-                  'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
-              .thenAnswer((_) async => http.Response('Not Found', 404));
+    test('fetchAllBirds throws an exception on non-200 response', () async {
+      when(mockClient.get(Uri.parse(
+              'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
 
-          expect(fetchAllBirds(client), throwsException);
-        },
-      );
-    },
-  );
+      expect(fetchAllBirds(mockClient), throwsException);
+    });
+
+    test('getNumberOfBirdsInProvinces returns numbers on success', () async {
+      when(mockClient.get(any))
+          .thenAnswer((_) async => http.Response('10', 200));
+
+      final numbers = await getNumberOfBirdsInProvinces(mockClient);
+
+      expect(numbers.length, provinces.length);
+      expect(numbers, List.generate(provinces.length, (index) => 10));
+    });
+
+    test('getNumberOfBirdsInProvinces throws an exception on non-200 response',
+        () async {
+      when(mockClient.get(any))
+          .thenAnswer((_) async => http.Response('Not Found', 404));
+
+      expect(getNumberOfBirdsInProvinces(mockClient), throwsException);
+    });
+  });
 }

@@ -44,7 +44,6 @@ Future<List<int>> getNumberOfBirdsInProvinces(http.Client client) async {
           'http://10.0.2.2:5000/api/Bird/GetNumBirdByProvince/$temp'));
       if (response.statusCode == 200) {
         final int jsonResponse = json.decode(response.body);
-        print('$temp: $jsonResponse');
         numbers.add(jsonResponse);
       } else {
         print('Request failed with status: ${response.statusCode}');
