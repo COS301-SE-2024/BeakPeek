@@ -20,13 +20,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    environment:
-      name: 'Production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -36,11 +29,6 @@ jobs:
         with:
           dotnet-version: '8.x'
           include-prerelease: true
-
-      - name: Get App Setting
-        run: |
-          cd ./dotnet/BeakPeekApi
-          cp ../../appsettings.json .
 
       - name: Build with dotnet
         run: dotnet build --configuration Release ./dotnet/BeakPeekApi/BeakPeekApi.csproj

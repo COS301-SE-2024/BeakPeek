@@ -211,7 +211,7 @@ namespace BeakPeekApi.Controllers
             return Ok(provinceList.Birds.Count());
         }
 
-        [HttpGet("GetNumBirds")]
+        [HttpGet("GetNumBirds/{province}")]
         public async Task<ActionResult<int>> GetNumBirds()
         {
             var numBirdsInProvince = await _context.Birds.CountAsync();
