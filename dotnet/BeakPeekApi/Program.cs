@@ -68,7 +68,10 @@ try
         {
             var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
             if (Directory.Exists("/data"))
-                csvImporter.ImportAllCsvData("/data");
+            {
+              csvImporter.ImportBirds("/species_list");
+              csvImporter.ImportAllCsvData("/data");
+            }
         }
     }
 }

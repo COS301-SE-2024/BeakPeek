@@ -13,6 +13,10 @@ namespace BeakPeekApi.Controllers
 
         public BirdController(AppDbContext context)
         {
+            // the next line below this one is used to get the province entity
+            // type by its string name
+            // var etype = _context.Model.FindEntityType("BeakPeekApi.Models." + provinceName);
+
             _context = context;
         }
 
@@ -42,6 +46,7 @@ namespace BeakPeekApi.Controllers
         {
             IQueryable<Bird> query = _context.Birds;
 
+
             if (!string.IsNullOrEmpty(genus))
             {
                 query = query.Where(b => EF.Functions.Like(b.Genus, $"%{genus}%"));
@@ -64,21 +69,32 @@ namespace BeakPeekApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Bird>> PostBirds(Bird species)
         {
-            _context.Birds.Add(species);
+            var isUnique = await _context.Birds.Where(b => b.Ref == species.Ref).AnyAsync();
+
+            if (!isUnique)
+            {
+                return BadRequest("Bird Ref already exists.");
+            }
+
+            await _context.Birds.AddAsync(species);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetBirds), new { id = species.Pentad }, species);
+            return CreatedAtAction(nameof(PostBirds), new { id = species.Ref }, species);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBird(string id, Bird species)
+        public async Task<IActionResult> PutBird(int id, Bird species)
         {
-            if (id != species.Pentad)
+            if (id != species.Ref)
             {
-                return BadRequest();
+                return BadRequest("Id and Ref don not match.");
             }
 
-            _context.Entry(species).State = EntityState.Modified;
+            var isUnique = await _context.Birds.Where(b => b.Ref == species.Ref).AnyAsync();
+            if (!isUnique)
+                return BadRequest("Bird ref already exists");
+
+            await _context.Birds.AddAsync(species);
 
             try
             {
@@ -86,11 +102,11 @@ namespace BeakPeekApi.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                var birdExists = _context.Birds.Any(e => e.Pentad == id);
+                var birdExists = _context.Birds.Where(b => b.Ref == id).Any();
 
                 if (!birdExists)
                 {
-                    return NotFound();
+                    return NotFound("Bird not found");
                 }
                 else
                 {
@@ -104,69 +120,95 @@ namespace BeakPeekApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBird(int id)
         {
-            var species = await _context.Birds.FindAsync(id);
+            var species = await _context.Birds.Where(b => b.Ref == id).FirstAsync();
             if (species == null)
             {
-                return NotFound();
+                return NotFound("No bird with found matching that Ref");
             }
 
             _context.Birds.Remove(species);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Bird deleted succesfully");
         }
 
 
         [HttpGet("{pentad}/pentad")]
-        public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInPentad(string pentad)
+        public async Task<ActionResult<IEnumerable<Province>>> GetBirdsInPentad(string pentad)
         {
 
-            var pentadBirdList = await _context.Birds
-                                            .Where(s => s.Pentad == pentad)
-                                            .ToListAsync();
+            var pentadResult = await _context.Pentads.Where(p => p.Pentad_Allocation == pentad).FirstOrDefaultAsync();
 
-            if (pentadBirdList == null || pentadBirdList.Count() == 0)
+            if (pentadResult == null)
+                return NotFound("No pentads matching that allocation were found");
+
+
+            var pentadList = new List<Province> { };
+            switch (pentadResult.Province.Name.ToLower())
             {
-                return NotFound();
+                case "easterncape":
+                    return Ok(await _context.Easterncape
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "freestate":
+                    return Ok(await _context.Freestate
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "gauteng":
+                    return Ok(await _context.Gauteng
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "kwazulunatal":
+                    return Ok(await _context.Kwazulunatal
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "limpopo":
+                    return Ok(await _context.Limpopo
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "mpumalanga":
+                    return Ok(await _context.Mpumalanga
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "northerncape":
+                    return Ok(await _context.Northerncape
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "northwest":
+                    return Ok(await _context.Northwest
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                case "westerncape":
+                    return Ok(await _context.Westerncape
+                        .Where(p => p.Pentad == pentadResult)
+                        .ToListAsync());
+                default:
+                    return NotFound("Pentad not found in province.");
             }
-
-            return Ok(pentadBirdList);
         }
 
         [HttpGet("GetBirdsInProvince/{province}")]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInProvince(string province)
         {
-            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
-            if (provinceID == null)
+            var provinceList = await _context.ProvincesList.FirstOrDefaultAsync(p => p.Name == province);
+            if (provinceList == null)
             {
                 return NotFound("Province not found");
             }
-            var provinceBirdList = await _context.Birds
-                                            .Where(b => b.ProvinceId == provinceID.Id)
-                                            .ToListAsync();
 
-            if (provinceBirdList == null || provinceBirdList.Count() == 0)
-            {
-                return NotFound();
-            }
-
-            return Ok(provinceBirdList);
-
+            return Ok(provinceList.Birds);
         }
 
         [HttpGet("GetNumBirdByProvince/{province}")]
         public async Task<ActionResult<int>> GetNumBirdsByProvince(string province)
         {
-            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
-            if (provinceID == null)
-            {
-                return NotFound("Province not found");
-            }
-            var numBirdsInProvince = await _context.Birds
-                                            .Where(b => b.ProvinceId == provinceID.Id)
-                                            .CountAsync();
+            var provinceList = await _context.ProvincesList.FirstOrDefaultAsync(p => p.Name == province);
 
-            return Ok(numBirdsInProvince);
+            if (provinceList == null)
+                return NotFound("Province not found");
+
+
+            return Ok(provinceList.Birds.Count());
         }
 
         [HttpGet("GetNumBirds")]
@@ -179,22 +221,43 @@ namespace BeakPeekApi.Controllers
         [HttpGet("GetBirdProvinces/{common_species}/{common_group}")]
         public async Task<ActionResult<IEnumerable<string>>> GetBirdProvinces(string common_species, string common_group)
         {
-            var birds = await _context.Birds
+            var bird = await _context.Birds
                 .Where(b => b.Common_species == common_species && b.Common_group == common_group)
-                .ToListAsync<Bird>();
+                .FirstOrDefaultAsync();
 
-            if (birds == null || birds.Count() == 0)
+            if (bird == null)
             {
-                return NotFound("No birds found that match the common species or common group");
+                return NotFound("No birds found that match the given common species or common group");
             }
 
-            HashSet<string> provinces = new HashSet<string>();
-            foreach (Bird bird in birds)
-            {
-                provinces.Add(bird.Province.Name);
-            }
+            return Ok(bird.Provinces.Count());
+        }
 
-            return Ok(provinces.ToList<string>());
+        private Type? GetProvinceTypeByName(string provinceName)
+        {
+            switch (provinceName.ToLower())
+            {
+                case "easterncape":
+                    return _context.Easterncape.GetType();
+                case "freestate":
+                    return _context.Freestate.GetType();
+                case "gauteng":
+                    return _context.Gauteng.GetType();
+                case "kwazulunatal":
+                    return _context.Kwazulunatal.GetType();
+                case "limpopo":
+                    return _context.Limpopo.GetType();
+                case "mpumalanga":
+                    return _context.Mpumalanga.GetType();
+                case "northerncape":
+                    return _context.Northerncape.GetType();
+                case "northwest":
+                    return _context.Northwest.GetType();
+                case "westerncape":
+                    return _context.Westerncape.GetType();
+                default:
+                    return null;
+            }
         }
     }
 }

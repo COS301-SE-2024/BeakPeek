@@ -48,7 +48,7 @@ namespace BeakPeekApi.Controllers
                 await file.CopyToAsync(stream);
             }
 
-            _csvImporter.ReplaceProvinceData(filePath, province);
+            // _csvImporter.ReplaceProvinceData(filePath, province);
 
             return Ok();
         }
@@ -56,7 +56,7 @@ namespace BeakPeekApi.Controllers
         [HttpPost("clear")]
         public IActionResult ClearData([FromQuery] string province)
         {
-            _csvImporter.ClearProvinceData(province);
+            // _csvImporter.ClearProvinceData(province);
             return Ok();
         }
 
