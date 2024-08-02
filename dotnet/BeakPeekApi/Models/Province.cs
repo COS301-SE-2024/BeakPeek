@@ -1,15 +1,18 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace BeakPeekApi.Models
 {
-    public abstract class Province
+    [Index(nameof(Pentad), nameof(Bird))]
+    public class Province
     {
         public int Id { get; set; }
-        public string Name { get; set; }
 
         [ForeignKey("Id")]
-        public Pentad pentad { get; set; }
-        public Bird bird { get; set; }
+        public required Pentad Pentad { get; set; }
+
+        [ForeignKey("Ref")]
+        public required Bird Bird { get; set; }
 
         public double? Jan { get; set; }
         public double? Feb { get; set; }
@@ -26,7 +29,6 @@ namespace BeakPeekApi.Models
 
 
         public int Total_Records { get; set; }
-        public int Total_Cards { get; set; }
 
         public double ReportingRate { get; set; }
     }

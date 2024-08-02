@@ -33,3 +33,4 @@ services:
       - ConnectionStrings__DefaultConnection=Server=db;Database=BeakPeek;User=sa;Password=Your_password123;TrustServerCertificate=true;
     volumes:
       - ./res/testData:/data
+      - ./res/species_list:/species_list

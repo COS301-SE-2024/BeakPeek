@@ -26,9 +26,12 @@ namespace BeakPeekApi.Models
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
+
         }
 
-
+        // each province has many pentads
+        // each pentad has many birds
+        //
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -36,25 +39,6 @@ namespace BeakPeekApi.Models
             modelBuilder
                 .Entity<Province>()
                 .UseTpcMappingStrategy();
-
-
-            modelBuilder.Entity<Province>()
-                .HasKey(p => p.Id);
-
-            modelBuilder.Entity<Province>()
-                .HasIndex(p => p.Name)
-                .IsUnique();
-
-            modelBuilder.Entity<Province>()
-                .HasMany(p => p.Birds)
-                .WithOne(b => b.Province)
-                .HasForeignKey(b => b.ProvinceId);
-
-            modelBuilder.Entity<Bird>()
-                .HasKey(b => b.Id);
-
-            modelBuilder.Entity<Bird>()
-                .HasIndex(b => b.ProvinceId);
         }
 
     }

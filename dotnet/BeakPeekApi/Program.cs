@@ -29,7 +29,7 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-if (builder.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment())
 {
     var envConnection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
     if (!string.IsNullOrEmpty(envConnection))
@@ -38,7 +38,7 @@ if (builder.Environment.IsDevelopment())
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found. poo");
+        throw new InvalidOperationException("Connection string not found.");
     }
 }
 else
@@ -74,6 +74,7 @@ try
         var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
         if (builder.Environment.IsDevelopment())
         {
+            csvImporter.ImportBirds("/species_list");
             csvImporter.ImportAllCsvData("/data");
         }
         else
