@@ -99,7 +99,7 @@ void main() {
     });
 
     testWidgets('progressBars displays progress bars', (tester) async {
-      final List<int> birdNums = [100, 200, 300, 400, 500, 600, 700, 800];
+      final List<int> birdNums = [100, 200, 300, 400, 500, 600, 700, 800, 900];
 
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
@@ -107,7 +107,7 @@ void main() {
         ),
       ));
 
-      expect(find.byType(FAProgressBar), findsAtLeast(1));
+      expect(find.byType(FAProgressBar), findsAtLeast(4));
     });
 
     test('sortAlphabetically sorts birds correctly', () {
