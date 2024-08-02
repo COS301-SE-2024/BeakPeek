@@ -29,7 +29,7 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-if (builder.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment())
 {
     var envConnection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
     if (!string.IsNullOrEmpty(envConnection))
@@ -38,12 +38,12 @@ if (builder.Environment.IsDevelopment())
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found. poo");
+        throw new InvalidOperationException("Connection string not found.");
     }
 }
 else
 {
-    connection = builder.Configuration.GetConnectionString("DefaultConnection");
+    connection = builder.Configuration.GetConnectionString("DefaultConnection_2");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
@@ -52,38 +52,23 @@ builder.Services.AddTransient<BirdInfoHelper>();
 
 var app = builder.Build();
 
+
 try
 {
-
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        if (builder.Environment.IsDevelopment())
+        if (dbContext.Database.GetPendingMigrations().Any())
         {
             dbContext.Database.Migrate();
         }
-        else
-        {
-            if (dbContext.Database.GetPendingMigrations().Any())
-            {
-                dbContext.Database.Migrate();
-            }
-        }
 
-        var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
         if (builder.Environment.IsDevelopment())
         {
-            csvImporter.ImportAllCsvData("/data");
-        }
-        else
-        {
-            var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
-            if (!Directory.Exists(csvDirectoryPath))
-            {
-                throw new DriveNotFoundException($"CSV directory not found: {csvDirectoryPath}");
-            }
-            csvImporter.ImportAllCsvData(csvDirectoryPath);
+            var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+            if (Directory.Exists("/data"))
+                csvImporter.ImportAllCsvData("/data");
         }
     }
 }
@@ -93,7 +78,6 @@ catch (Exception ex)
     Console.WriteLine(ex.StackTrace);
     throw;
 }
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

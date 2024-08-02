@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: "mcr.microsoft.com/mssql/server:2022-latest"
+    image: "mcr.microsoft.com/mssql/server:2022-CU13-ubuntu-22.04"
     container_name: sql_server2022
     ports:
     - "1433:1433"
