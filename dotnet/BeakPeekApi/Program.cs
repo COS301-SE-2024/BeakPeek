@@ -43,7 +43,7 @@ if (!builder.Environment.IsDevelopment())
 }
 else
 {
-    connection = builder.Configuration.GetConnectionString("DefaultConnection");
+    connection = builder.Configuration.GetConnectionString("DefaultConnection_2");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
@@ -52,39 +52,26 @@ builder.Services.AddTransient<BirdInfoHelper>();
 
 var app = builder.Build();
 
+
 try
 {
-
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        if (builder.Environment.IsDevelopment())
+        if (dbContext.Database.GetPendingMigrations().Any())
         {
             dbContext.Database.Migrate();
         }
-        else
-        {
-            if (dbContext.Database.GetPendingMigrations().Any())
-            {
-                dbContext.Database.Migrate();
-            }
-        }
 
-        var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
         if (builder.Environment.IsDevelopment())
         {
-            csvImporter.ImportBirds("/species_list");
-            csvImporter.ImportAllCsvData("/data");
-        }
-        else
-        {
-            var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
-            if (!Directory.Exists(csvDirectoryPath))
+            var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+            if (Directory.Exists("/data"))
             {
-                throw new DriveNotFoundException($"CSV directory not found: {csvDirectoryPath}");
+              csvImporter.ImportBirds("/species_list");
+              csvImporter.ImportAllCsvData("/data");
             }
-            csvImporter.ImportAllCsvData(csvDirectoryPath);
         }
     }
 }
@@ -94,7 +81,6 @@ catch (Exception ex)
     Console.WriteLine(ex.StackTrace);
     throw;
 }
-
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
