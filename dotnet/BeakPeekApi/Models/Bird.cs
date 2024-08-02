@@ -1,5 +1,4 @@
-
-
+using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
 namespace BeakPeekApi.Models
@@ -7,26 +6,21 @@ namespace BeakPeekApi.Models
     public class Bird
     {
         public int Id { get; set; }
-        public string Pentad { get; set; }
-        public int Spp { get; set; }
-        public string Common_group { get; set; }
+
+        [Key]
+        public int Ref { get; set; }
+
+        public string? Common_group { get; set; }
+
+        [Required]
         public string Common_species { get; set; }
+
+        [Required]
         public string Genus { get; set; }
+
+        [Required]
         public string Species { get; set; }
-        public double ReportingRate { get; set; }
-        public int Total_Records { get; set; }
-        public int Total_Cards { get; set; }
-        public int ProvinceId { get; set; }
-
-        [JsonIgnore]
-        public Province Province { get; set; }
 
     }
 
-    public class Province
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-        public ICollection<Bird> Birds { get; set; }
-    }
 }

@@ -136,7 +136,7 @@ namespace BeakPeekApi.Controllers
         [HttpGet("GetBirdsInProvince/{province}")]
         public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInProvince(string province)
         {
-            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
+            var provinceID = _context.ProvincesList.FirstOrDefault(p => p.Name == province);
             if (provinceID == null)
             {
                 return NotFound("Province not found");
@@ -157,7 +157,7 @@ namespace BeakPeekApi.Controllers
         [HttpGet("GetNumBirdByProvince/{province}")]
         public async Task<ActionResult<int>> GetNumBirdsByProvince(string province)
         {
-            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
+            var provinceID = _context.ProvincesList.FirstOrDefault(p => p.Name == province);
             if (provinceID == null)
             {
                 return NotFound("Province not found");

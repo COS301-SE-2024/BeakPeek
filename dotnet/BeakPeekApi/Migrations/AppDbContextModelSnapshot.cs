@@ -23,6 +23,7 @@ namespace BeakPeekApi.Migrations
 
             modelBuilder.Entity("BeakPeekApi.Models.Bird", b =>
                 {
+
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
