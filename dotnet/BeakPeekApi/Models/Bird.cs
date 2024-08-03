@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace BeakPeekApi.Models
 {
-    [Index(nameof(Ref), nameof(Common_species), nameof(Common_species))]
+    [Index(nameof(Ref), nameof(Common_species), nameof(Common_group))]
     public class Bird
     {
 
@@ -30,7 +30,7 @@ namespace BeakPeekApi.Models
 
         [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
-        public DateTime Latest_FP { get; set; }
+        public DateTime? Latest_FP { get; set; }
 
         [JsonIgnore]
         public ICollection<ProvinceList> Bird_Provinces { get; set; }

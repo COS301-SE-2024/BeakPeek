@@ -8,7 +8,7 @@ namespace BeakPeekApi.Models
         public int BirdId { get; set; }
         public int ProvinceId { get; set; }
 
-        public required Bird Bird { get; set; }
-        public required ProvinceList Province { get; set; }
+        // public required Bird Bird { get; set; }
+        // public required ProvinceList Province { get; set; }
     }
 }

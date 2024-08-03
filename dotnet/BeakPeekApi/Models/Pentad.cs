@@ -8,7 +8,8 @@ namespace BeakPeekApi.Models
     [Index(nameof(Pentad_Longitude))]
     public class Pentad
     {
-        [Key]
+        public int Id { get; set; }
+
         public required string Pentad_Allocation { get; set; }
 
         // Number before the underscore
@@ -17,7 +18,7 @@ namespace BeakPeekApi.Models
         // Number after the underscore
         public int Pentad_Latitude { get; set; }
 
-        [ForeignKey("Id")]
+        [ForeignKey("ProvinceId")]
         public required ProvinceList Province { get; set; }
 
         public int Total_Cards { get; set; }

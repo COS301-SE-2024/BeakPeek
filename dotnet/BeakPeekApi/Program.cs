@@ -43,7 +43,7 @@ if (!builder.Environment.IsDevelopment())
 }
 else
 {
-    connection = builder.Configuration.GetConnectionString("DefaultConnection_2");
+    connection = builder.Configuration.GetConnectionString("DefaultConnection");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
@@ -67,11 +67,16 @@ try
         if (builder.Environment.IsDevelopment())
         {
             var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
-            if (Directory.Exists("/data"))
+            if (File.Exists("/species_list/south_africa.csv"))
             {
-              csvImporter.ImportBirds("/species_list");
-              csvImporter.ImportAllCsvData("/data");
+                if (Directory.Exists("/data"))
+                {
+                    csvImporter.ImportBirds("/species_list/south_africa.csv");
+                    csvImporter.ImportAllCsvData("/data");
+                }
             }
+            else
+                throw new Exception("No species list found.");
         }
     }
 }

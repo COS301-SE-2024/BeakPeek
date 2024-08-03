@@ -3,16 +3,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BeakPeekApi.Models
 {
-    [Index(nameof(Pentad), nameof(Bird))]
+    // [Index("PentadId", "Bird")]
     public class Province
     {
         public int Id { get; set; }
 
-        [ForeignKey("Id")]
-        public required Pentad Pentad { get; set; }
+        // public int PentadId { get; set; }
+        // [ForeignKey("Pentad_Allocation")]
+        public Pentad? Pentad { get; set; }
 
-        [ForeignKey("Ref")]
-        public required Bird Bird { get; set; }
+        // public int BirdId { get; set; }
+
+        // [ForeignKey("Ref")]
+        public int BirdId { get; set; }
+        public Bird? Bird { get; set; }
 
         public double? Jan { get; set; }
         public double? Feb { get; set; }
