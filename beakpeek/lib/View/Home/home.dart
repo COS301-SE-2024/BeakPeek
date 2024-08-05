@@ -5,9 +5,13 @@ import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Model/help_icon_model_functions.dart';
 import 'package:go_router/go_router.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({super.key});
+  @override
+  State<Home> createState() => HomeState();
+}
 
+class HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -29,7 +33,7 @@ class Home extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: screenHeight * 0.05),
-                        const SearchbarContainer(),
+                        const SearchbarContainer(province: 'gauteng'),
                         SizedBox(height: screenHeight * 0.01),
                         RichText(
                           text: const TextSpan(

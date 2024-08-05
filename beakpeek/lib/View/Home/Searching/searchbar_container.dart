@@ -6,8 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class SearchbarContainer extends StatefulWidget {
-  const SearchbarContainer({super.key});
-
+  const SearchbarContainer({required this.province, super.key});
+  final String province;
   @override
   State<SearchbarContainer> createState() => _SearchcarContainerState();
 }
@@ -19,7 +19,7 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
   @override
   void initState() {
     super.initState();
-    birds = db.fetchAllBirds(Client());
+    birds = db.fetchAllBirds(widget.province, Client());
   }
 
   @override

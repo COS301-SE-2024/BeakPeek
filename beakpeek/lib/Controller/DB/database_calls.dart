@@ -13,13 +13,13 @@ const List<String> provinces = [
   'mpumalanga',
   'northerncape',
   'northwest',
-  //'westerncape'
+  'westerncape'
 ];
 
-Future<List<Bird>> fetchAllBirds(http.Client client) async {
+Future<List<Bird>> fetchAllBirds(String prov, http.Client client) async {
   try {
     final response = await client.get(
-        Uri.parse('http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng'));
+        Uri.parse('http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/$prov'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
       final List<Bird> birds =

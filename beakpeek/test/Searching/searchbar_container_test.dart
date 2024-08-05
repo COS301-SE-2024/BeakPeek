@@ -20,7 +20,7 @@ void main() {
           await tester.pumpWidget(
             const MaterialApp(
               home: Scaffold(
-                body: SearchbarContainer(),
+                body: SearchbarContainer(province: 'gauteng'),
               ),
             ),
           );
@@ -44,7 +44,7 @@ void main() {
           await tester.pumpWidget(
             const MaterialApp(
               home: Scaffold(
-                body: SearchbarContainer(),
+                body: SearchbarContainer(province: 'gauteng'),
               ),
             ),
           );
