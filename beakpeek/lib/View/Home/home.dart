@@ -44,7 +44,7 @@ class Home extends StatelessWidget {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Navigator.pushNamed(context, '/bird');
+                                context.go('/bird');
                               },
                               child: Container(
                                 decoration: BoxDecoration(

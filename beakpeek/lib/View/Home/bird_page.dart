@@ -2,6 +2,7 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/bird_page_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:go_router/go_router.dart';
 
 class BirdPage extends StatelessWidget {
   const BirdPage({super.key});
@@ -33,7 +34,7 @@ class BirdPage extends StatelessWidget {
                               icon: const Icon(Icons.arrow_back),
                               color: GlobalStyles.primaryColor,
                               onPressed: () {
-                                Navigator.pop(context);
+                                context.go('/home');
                               },
                             ),
                             const Spacer(),

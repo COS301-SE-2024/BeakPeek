@@ -30,7 +30,10 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
           future: birds,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(
+                  child: CircularProgressIndicator(
+                color: Color.fromARGB(188, 3, 58, 48),
+              ));
             } else if (snapshot.hasError) {
               return Center(child: Text('Error: ${snapshot.error}'));
             }
