@@ -15,8 +15,6 @@ namespace BeakPeekApi.Controllers
             _birdInfoHelper = birdInfoHelper;
         }
 
-        // Existing methods here...
-
         [HttpGet("{birdName}")]
         public async Task<ActionResult<BirdInfoModels>> GetBirdInfo(string birdName)
         {

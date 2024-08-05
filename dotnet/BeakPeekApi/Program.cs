@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
 using BeakPeekApi.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,42 +50,39 @@ else
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 builder.Services.AddTransient<CsvImporter>();
 builder.Services.AddTransient<BirdInfoHelper>();
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
 var app = builder.Build();
 
 try
 {
-
     using (var scope = app.Services.CreateScope())
     {
         var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
 
-        if (builder.Environment.IsDevelopment())
+        if (dbContext.Database.GetPendingMigrations().Any())
         {
             dbContext.Database.Migrate();
-        }
-        else
-        {
-            if (dbContext.Database.GetPendingMigrations().Any())
+
+            if (builder.Environment.IsDevelopment())
             {
-                dbContext.Database.Migrate();
+                var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+                if (File.Exists("/species_list/south_africa.csv"))
+                {
+                    if (Directory.Exists("/data"))
+                    {
+                        csvImporter.ImportBirds("/species_list/south_africa.csv");
+                        csvImporter.ImportAllCsvData("/data");
+                    }
+                }
+                else
+                    throw new Exception("No species list found.");
             }
         }
 
-        var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
-        if (builder.Environment.IsDevelopment())
-        {
-            csvImporter.ImportAllCsvData("/data");
-        }
-        else
-        {
-            var csvDirectoryPath = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
-            if (!Directory.Exists(csvDirectoryPath))
-            {
-                throw new DriveNotFoundException($"CSV directory not found: {csvDirectoryPath}");
-            }
-            csvImporter.ImportAllCsvData(csvDirectoryPath);
-        }
     }
 }
 catch (Exception ex)
