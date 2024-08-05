@@ -153,8 +153,8 @@ class UserProfileState extends State<UserProfile> {
                   ),
                   const SizedBox(height: 10),
                   const Text(
-                    'Achivements',
-                    style: TextStyle(color: Colors.black),
+                    'Achievements',
+                    style: GlobalStyles.subheadingLight,
                   ),
                   FutureBuilder<List<int>>(
                     future: numBirds,
@@ -188,7 +188,7 @@ class UserProfileState extends State<UserProfile> {
               padding: const EdgeInsets.all(20.0),
               color: Colors.white, // White background for the container
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   // Home button
                   ElevatedButton(

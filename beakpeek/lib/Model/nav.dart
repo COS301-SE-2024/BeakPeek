@@ -11,7 +11,7 @@ class BottomNavigation extends StatelessWidget {
       children: [
         BottomNavItem('Home', 'home.png'),
         BottomNavItem('Map', 'map.png'),
-        BottomNavItem('Add Sighting', 'addSighting.png'),
+        BottomNavItem('Bird', 'addSighting.png'),
         BottomNavItem('Sightings', 'sightings.png'),
         BottomNavItem('Profile', 'profile.png'),
       ],

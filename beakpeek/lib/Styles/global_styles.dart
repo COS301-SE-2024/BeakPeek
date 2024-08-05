@@ -39,6 +39,13 @@ abstract class GlobalStyles {
     height: 0,
   );
 
+  static const TextStyle smallHeadingDark = TextStyle(
+    color: primaryColor,
+    fontSize: 20,
+    fontFamily: 'SF Pro Display',
+    fontWeight: FontWeight.bold,
+  );
+
   static const TextStyle subheadingLight = TextStyle(
     color: secondaryColor,
     fontSize: 20,
@@ -48,13 +55,32 @@ abstract class GlobalStyles {
 
   static const TextStyle content = TextStyle(
     color: Colors.black87,
+    fontSize: 16,
+    fontFamily: 'SF Pro Display',
+  );
+
+  static const TextStyle boldContent = TextStyle(
+    color: secondaryColor,
     fontSize: 18,
+    fontFamily: 'SF Pro Display',
+    fontWeight: FontWeight.bold,
+  );
+
+  static const TextStyle secondaryContent = TextStyle(
+    color: Color.fromARGB(255, 201, 138, 12),
+    fontSize: 16,
+    fontFamily: 'SF Pro Display',
+  );
+
+  static const TextStyle greyContent = TextStyle(
+    color: Color.fromARGB(255, 119, 119, 119),
+    fontSize: 16,
     fontFamily: 'SF Pro Display',
   );
 
   static const TextStyle smallContent = TextStyle(
     color: Colors.black38,
-    fontSize: 18,
+    fontSize: 16,
     fontFamily: 'SF Pro Display',
   );
 

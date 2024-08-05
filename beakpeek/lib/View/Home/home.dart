@@ -1,9 +1,10 @@
-import 'package:beakpeek/Styles/home_page_styles.dart';
-import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
-import 'package:beakpeek/Model/help_icon_model_functions.dart';
-import 'package:go_router/go_router.dart';
+import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
+
+// import 'package:beakpeek/Model/help_icon_model_functions.dart';
+// import 'package:go_router/go_router.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -16,6 +17,7 @@ class HomeState extends State<Home> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final sectionWidth = screenWidth * 0.92;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F1ED),
@@ -35,138 +37,182 @@ class HomeState extends State<Home> {
                         SizedBox(height: screenHeight * 0.05),
                         const SearchbarContainer(province: 'gauteng'),
                         SizedBox(height: screenHeight * 0.01),
-                        RichText(
-                          text: const TextSpan(
-                            text: 'Bird of the Day',
-                            style: HomePageStyles.homeGreenHeading,
+
+                        // Quiz Section
+                        Container(
+                          width: sectionWidth,
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
                           ),
-                          textAlign: TextAlign.left,
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
-                        Stack(
-                          alignment: Alignment.center,
-                          children: [
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.pushNamed(context, '/bird');
-                              },
-                              child: Container(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Test Your Knowledge!',
+                                style: GlobalStyles.smallHeadingDark,
+                              ),
+                              const SizedBox(height: 10),
+                              const Text(
+                                'Guess the bird from the picture...',
+                                style: GlobalStyles.greyContent,
+                              ),
+                              const SizedBox(height: 10),
+                              Container(
+                                height: screenHeight * 0.25,
                                 decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
-                                      spreadRadius: 2,
-                                      blurRadius: 5,
-                                      offset: const Offset(0, 3),
-                                    ),
-                                  ],
-                                  borderRadius: BorderRadius.circular(20.0),
-                                ),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(
-                                      20.0), // Adjust radius as needed
-                                  child: Image.asset(
-                                    'assets/images/home.png',
-                                    width: screenWidth *
-                                        0.92, // 92% of screen width
+                                  color: Colors.grey[200],
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/quiz_placeholder.png'),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              left: 0,
-                              right: 0,
-                              child: ClipRRect(
-                                borderRadius: const BorderRadius.only(
-                                  bottomLeft: Radius.circular(20.0),
-                                  bottomRight: Radius.circular(20.0),
-                                ),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                    color: Colors.black.withOpacity(0.5),
-                                    borderRadius: const BorderRadius.only(
-                                      bottomLeft: Radius.circular(20.0),
-                                      bottomRight: Radius.circular(20.0),
-                                    ),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0, vertical: 8.0),
-                                  child: RichText(
-                                    text: const TextSpan(
-                                      text: 'Black Fronted Bushshrike',
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 18.0,
-                                        fontWeight: FontWeight.bold,
-                                        fontFamily: 'SF Pro Display',
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      bottom: 8.0,
+                                      right: 16.0,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          // Go to quiz
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16.0, vertical: 8.0),
+                                        ),
+                                        child: const Text(
+                                          'Start Quiz',
+                                          style: GlobalStyles.greyContent,
+                                        ),
                                       ),
                                     ),
-                                  ),
+                                  ],
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
-                        RichText(
-                          text: const TextSpan(
-                            text: 'Your Area Map',
-                            style: HomePageStyles.homeGreenHeading,
-                          ),
-                          textAlign: TextAlign.left,
-                        ),
-                        const SizedBox(width: 8), // Spacing between text
-                        GestureDetector(
-                          key: const Key('helpLogo'),
-                          onTap: () {
-                            const content =
-                                '''This map shows you your current location. 
-                                Click anywhere and you will see all the birds in that area! 
-                                You can use the filters to customise what you see. 
-                                You can use the search bar to see the heat map of a specific bird!''';
-                            showHelpPopup(context, content);
-                          },
-                          child: const Icon(
-                            IconData(0xe309,
-                                fontFamily: 'MaterialIcons',
-                                matchTextDirection: true),
-                            size: 20.0, // Adjust size as needed
-                            color: Colors
-                                .green, // Optional: Set color to match theme
+                            ],
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.01),
-                        Image.asset(
-                          'assets/images/map.png',
-                          width: screenWidth * 0.92,
-                          fit: BoxFit.cover,
-                        ),
-                        SizedBox(height: screenHeight * 0.01),
-                        SizedBox(height: screenHeight * 0.01),
-                        Center(
-                          child: FilledButton(
-                            onPressed: () {
-                              context.go('/map');
-                            },
-                            style: FilledButton.styleFrom(
-                              backgroundColor: const Color(0xFF033A30),
-                              minimumSize: const Size(350, 50),
-                              shadowColor: Colors.black,
-                            ),
-                            child: const Text(
-                              'View Map',
-                              style: TextStyle(
-                                color: Color.fromARGB(255, 0, 0, 0),
-                                fontFamily: 'SF Pro Display',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18,
+                        SizedBox(height: screenHeight * 0.02),
+
+                        // Achievements Section
+                        Container(
+                          width: sectionWidth,
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
                               ),
-                            ),
+                            ],
+                          ),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Tracked Achievements',
+                                style: GlobalStyles.smallHeadingDark,
+                              ),
+                              SizedBox(height: 10),
+                              ListTile(
+                                title: Text('Achievement 1',
+                                    style: GlobalStyles.boldContent),
+                                subtitle: Text('75% complete',
+                                    style: GlobalStyles.greyContent),
+                                trailing: Icon(Icons.star, color: Colors.amber),
+                              ),
+                              ListTile(
+                                title: Text('Achievement 2',
+                                    style: GlobalStyles.boldContent),
+                                subtitle: Text('50% complete',
+                                    style: GlobalStyles.greyContent),
+                                trailing: Icon(Icons.star, color: Colors.amber),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.01),
+                        SizedBox(height: screenHeight * 0.02),
+
+                        // Bird Wishlist Section
+                        Container(
+                          width: sectionWidth,
+                          padding: const EdgeInsets.all(16.0),
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10.0),
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.grey.withOpacity(0.5),
+                                spreadRadius: 2,
+                                blurRadius: 5,
+                                offset: const Offset(0, 3),
+                              ),
+                            ],
+                          ),
+                          child: const Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Birds You Want to See',
+                                style: GlobalStyles.smallHeadingDark,
+                              ),
+                              SizedBox(height: 16),
+                              // Use Column for vertical layout
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      Text('Brown-Headed Parrot',
+                                          style: GlobalStyles.greyContent),
+                                      Spacer(),
+                                      Icon(Icons.star, color: Colors.amber),
+                                    ],
+                                  ),
+                                  SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text('Cape Vulture',
+                                          style: GlobalStyles.greyContent),
+                                      Spacer(),
+                                      Icon(Icons.star, color: Colors.amber),
+                                    ],
+                                  ),
+                                  SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text('Honeyguide',
+                                          style: GlobalStyles.greyContent),
+                                      Spacer(),
+                                      Icon(Icons.star, color: Colors.amber),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+
+                        SizedBox(height: screenHeight * 0.02),
                       ],
                     ),
                   ),
