@@ -42,14 +42,22 @@ class LandingTab2 extends StatelessWidget {
                     alignment: const Alignment(-0.5, 0.0),
                     child: RichText(
                       text: const TextSpan(
-                        style: GlobalStyles.content,
+                        style: TextStyle(
+                          color: Colors.black87,
+                          fontSize: 18,
+                          fontFamily: 'SF Pro Display',
+                        ),
                         children: <TextSpan>[
                           TextSpan(
                             text: 'Create an account or sign in \nto join the',
                           ),
                           TextSpan(
                             text: ' BeakPeak',
-                            style: GlobalStyles.secondaryContent,
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 219, 76, 20),
+                              fontSize: 18,
+                              fontFamily: 'SF Pro Display',
+                            ),
                           ),
                           TextSpan(
                             text: ' community.',
