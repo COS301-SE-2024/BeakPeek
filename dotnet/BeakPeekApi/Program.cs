@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
 using BeakPeekApi.Helpers;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -49,6 +50,10 @@ else
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
 builder.Services.AddTransient<CsvImporter>();
 builder.Services.AddTransient<BirdInfoHelper>();
+builder.Services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
 var app = builder.Build();
 
@@ -62,22 +67,23 @@ try
         if (dbContext.Database.GetPendingMigrations().Any())
         {
             dbContext.Database.Migrate();
+
+            if (builder.Environment.IsDevelopment())
+            {
+                var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
+                if (File.Exists("/species_list/south_africa.csv"))
+                {
+                    if (Directory.Exists("/data"))
+                    {
+                        csvImporter.ImportBirds("/species_list/south_africa.csv");
+                        csvImporter.ImportAllCsvData("/data");
+                    }
+                }
+                else
+                    throw new Exception("No species list found.");
+            }
         }
 
-        if (builder.Environment.IsDevelopment())
-        {
-            var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
-            if (File.Exists("/species_list/south_africa.csv"))
-            {
-                if (Directory.Exists("/data"))
-                {
-                    csvImporter.ImportBirds("/species_list/south_africa.csv");
-                    csvImporter.ImportAllCsvData("/data");
-                }
-            }
-            else
-                throw new Exception("No species list found.");
-        }
     }
 }
 catch (Exception ex)

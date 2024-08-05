@@ -1,4 +1,3 @@
-using System.Text;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeakPeekApi.Models
@@ -31,9 +30,6 @@ namespace BeakPeekApi.Models
 
         }
 
-        // each province has many pentads
-        // each pentad has many birds
-        //
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -56,18 +52,11 @@ namespace BeakPeekApi.Models
                 .UseTpcMappingStrategy();
 
             modelBuilder
-                .Entity<Province>()
-                .HasOne<Bird>()
+                .Entity<Pentad>()
+                .HasOne(p => p.Province)
                 .WithMany()
-                .HasForeignKey(b => b.BirdId);
-
-            modelBuilder
-                .Entity<Province>()
-                .HasOne(p => p.Pentad)
-                .WithOne()
-                .HasForeignKey<Pentad>(p => p.Id)
+                .HasForeignKey("ProvinceId")
                 .IsRequired();
-
 
 
             modelBuilder

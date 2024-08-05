@@ -37,21 +37,9 @@ namespace BeakPeekApi.Helpers
                     if (bird_already_exists)
                         continue;
 
-
                     bool bird_already_tracked = birds_to_be_added.Any(b => b.Ref == record.Ref);
                     if (bird_already_tracked)
                         continue;
-
-
-                    // if (record.Common_species == null)
-                    //     continue;
-
-                    // if (record.Genus == null)
-                    //     continue;
-
-                    // if (record.Species == null)
-                    //     continue;
-
 
                     Console.WriteLine(record.ToString());
 
@@ -102,15 +90,17 @@ namespace BeakPeekApi.Helpers
                 HashSet<string> pentads = new HashSet<string>(_context.Pentads.Select(p => p.Pentad_Allocation));
                 HashSet<int> birds_in_province = new HashSet<int>(_context.Bird_Provinces.Where(p => p.ProvinceId == province.Id).Select(b => b.BirdId));
                 HashSet<int> existing_birds = new HashSet<int>(_context.Birds.Select(b => b.Ref));
-                while (csv.Read())
+
+                List<Province_Pentad_CSV> provinces_from_csv = csv.GetRecords<Province_Pentad_CSV>().ToList();
+                foreach (var record in provinces_from_csv)
                 {
-                    var record = csv.GetRecord<Province_Pentad_CSV>();
+                    // var record = csv.GetRecord<Province_Pentad_CSV>();
                     if (record.Pentad != pentad_allocation)
                     {
                         pentad_allocation = record.Pentad;
                         bool does_pentad_exist = pentads.Contains(record.Pentad);
                         Pentad? new_pentad = tmp_pentad;
-                        if (does_pentad_exist)
+                        if (!does_pentad_exist)
                         {
                             var long_lat = pentad_allocation.Split("_")?.Select(Int32.Parse)?.ToList();
 
@@ -169,47 +159,47 @@ namespace BeakPeekApi.Helpers
 
                 }
 
-                /* switch (provinceName)
+                switch (provinceName)
                 {
                     case "easterncape":
-                        List<Easterncape> Easterncape_list_to_add = (List<Easterncape>)records_to_be_add.Cast<Easterncape>().ToList();
-                        _context.Easterncape.AddRange(Easterncape_list_to_add);
+                        // List<Easterncape> Easterncape_list_to_add = (List<Easterncape>)records_to_be_add.Cast<Easterncape>().ToList();
+                        _context.Easterncape.AddRange((IEnumerable<Easterncape>)records_to_be_add);
                         break;
                     case "freestate":
-                        List<Freestate> Freestate_list_to_add = (List<Freestate>)records_to_be_add.Cast<Freestate>().ToList();
-                        _context.Freestate.AddRange(Freestate_list_to_add);
+                        // List<Freestate> Freestate_list_to_add = (List<Freestate>)records_to_be_add.Cast<Freestate>().ToList();
+                        _context.Freestate.AddRange((IEnumerable<Freestate>)records_to_be_add);
                         break;
                     case "gauteng":
-                        List<Gauteng> Gauteng_list_to_add = (List<Gauteng>)records_to_be_add.Cast<Gauteng>();
-                        _context.Gauteng.AddRange(Gauteng_list_to_add);
+                        // List<Gauteng> Gauteng_list_to_add = (List<Gauteng>)records_to_be_add.Cast<Gauteng>();
+                        _context.Gauteng.AddRange((IEnumerable<Gauteng>)records_to_be_add);
                         break;
                     case "kwazulunatal":
-                        List<Kwazulunatal> Kwazulunatal_list_to_add = (List<Kwazulunatal>)records_to_be_add.Cast<Kwazulunatal>();
-                        _context.Kwazulunatal.AddRange(Kwazulunatal_list_to_add);
+                        // List<Kwazulunatal> Kwazulunatal_list_to_add = (List<Kwazulunatal>)records_to_be_add.Cast<Kwazulunatal>();
+                        _context.Kwazulunatal.AddRange((IEnumerable<Kwazulunatal>)records_to_be_add);
                         break;
                     case "limpopo":
-                        List<Limpopo> Limpopo_list_to_add = (List<Limpopo>)records_to_be_add.Cast<Limpopo>();
-                        _context.Limpopo.AddRange(Limpopo_list_to_add);
+                        // List<Limpopo> Limpopo_list_to_add = (List<Limpopo>)records_to_be_add.Cast<Limpopo>();
+                        _context.Limpopo.AddRange((IEnumerable<Limpopo>)records_to_be_add);
                         break;
                     case "mpumalanga":
-                        List<Mpumalanga> Mpumalanga_list_to_add = (List<Mpumalanga>)records_to_be_add.Cast<Mpumalanga>();
-                        _context.Mpumalanga.AddRange(Mpumalanga_list_to_add);
+                        // List<Mpumalanga> Mpumalanga_list_to_add = (List<Mpumalanga>)records_to_be_add.Cast<Mpumalanga>();
+                        _context.Mpumalanga.AddRange((IEnumerable<Mpumalanga>)records_to_be_add);
                         break;
                     case "northerncape":
-                        List<Northerncape> Northerncape_list_to_add = (List<Northerncape>)records_to_be_add.Cast<Northerncape>();
-                        _context.Northerncape.AddRange(Northerncape_list_to_add);
+                        // List<Northerncape> Northerncape_list_to_add = (List<Northerncape>)records_to_be_add.Cast<Northerncape>();
+                        _context.Northerncape.AddRange((IEnumerable<Northerncape>)records_to_be_add);
                         break;
                     case "northwest":
-                        List<Northwest> Northwest_list_to_add = (List<Northwest>)records_to_be_add.Cast<Northwest>();
-                        _context.Northwest.AddRange(Northwest_list_to_add);
+                        // List<Northwest> Northwest_list_to_add = (List<Northwest>)records_to_be_add.Cast<Northwest>();
+                        _context.Northwest.AddRange((IEnumerable<Northwest>)records_to_be_add);
                         break;
                     case "westerncape":
-                        List<Westerncape> Westerncape_list_to_add = (List<Westerncape>)records_to_be_add.Cast<Westerncape>();
-                        _context.Westerncape.AddRange(Westerncape_list_to_add);
+                        // List<Westerncape> Westerncape_list_to_add = (List<Westerncape>)records_to_be_add.Cast<Westerncape>();
+                        _context.Westerncape.AddRange((IEnumerable<Westerncape>)records_to_be_add);
                         break;
                     default:
                         throw new Exception("No province found that matches the province name given.");
-                } */
+                }
 
                 _context.SaveChanges();
             }
@@ -250,161 +240,7 @@ namespace BeakPeekApi.Helpers
                 default:
                     throw new Exception("No province found that matches the province name given.");
             }
-            /* var province = _context.ProvincesList.FirstOrDefault(p => p.Name == provinceName);
-
-            if (province == null)
-            {
-                throw new Exception("province for import does not exist");
-            }
-
-
-            using (var reader = new StreamReader(filepath))
-            using (var csv = new CsvReader(reader, CultureInfo.InvariantCulture))
-            {
-                csv.Context.RegisterClassMap<Province_Pentad_CSV_Map>();
-
-                string pentad_allocation = String.Empty;
-
-                Pentad? tmp_pentad = null;
-                List<Province> records_to_be_add = new List<Province> { };
-                HashSet<string> pentads = new HashSet<string>(_context.Pentads.Select(p => p.Pentad_Allocation));
-                HashSet<int> birds_in_province = new HashSet<int>(_context.Bird_Provinces.Where(p => p.ProvinceId == province.Id).Select(b => b.BirdId));
-                HashSet<int> existing_birds = new HashSet<int>(_context.Birds.Select(b => b.Ref));
-                while (csv.Read())
-                {
-                    var record = csv.GetRecord<Province_Pentad_CSV>();
-                    if (record.Pentad != pentad_allocation)
-                    {
-                        pentad_allocation = record.Pentad;
-                        bool does_pentad_exist = pentads.Contains(record.Pentad);
-                        Pentad? new_pentad = tmp_pentad;
-                        if (does_pentad_exist)
-                        {
-                            var long_lat = pentad_allocation.Split("_")?.Select(Int32.Parse)?.ToList();
-
-                            new_pentad = new Pentad
-                            {
-                                Province = province,
-                                Pentad_Allocation = pentad_allocation,
-                                Total_Cards = record.Total_Cards,
-                                Pentad_Longitude = long_lat[0],
-                                Pentad_Latitude = long_lat[1]
-                            };
-
-                            _context.Pentads.Add(new_pentad);
-                            _context.SaveChanges();
-                        }
-                        tmp_pentad = new_pentad;
-                    }
-
-                    bool does_bird_exist = existing_birds.Contains(record.Spp);
-                    if (!does_bird_exist)
-                    {
-                        throw new Exception($"No birds found matching that SPP: {record.Spp}");
-                    }
-
-                    var does_bird_have_province = birds_in_province.Contains(record.Spp);
-
-                    if (!does_bird_have_province)
-                    {
-                        _context.Birds.Find(record.Spp)?.Bird_Provinces.Add(province);
-                        _context.SaveChanges();
-                    }
-
-                    var bird_record = _context.Birds.Find(record.Spp);
-
-                    Province new_province_entry = new Province
-                    {
-                        Pentad = tmp_pentad,
-                        Bird = bird_record,
-                        Jan = record.Jan,
-                        Feb = record.Feb,
-                        Mar = record.Mar,
-                        Apr = record.Apr,
-                        May = record.May,
-                        Jun = record.Jun,
-                        Jul = record.Jul,
-                        Aug = record.Aug,
-                        Sep = record.Sep,
-                        Oct = record.Oct,
-                        Nov = record.Nov,
-                        Dec = record.Dec,
-                        ReportingRate = record.ReportingRate,
-                        Total_Records = record.Total_Records,
-                    };
-
-                    records_to_be_add.Add(new_province_entry);
-
-                }
-
-                switch (provinceName)
-                {
-                    case "easterncape":
-                        List<Easterncape> Easterncape_list_to_add = (List<Easterncape>)records_to_be_add.Cast<Easterncape>().ToList();
-                        _context.Easterncape.AddRange(Easterncape_list_to_add);
-                        break;
-                    case "freestate":
-                        List<Freestate> Freestate_list_to_add = (List<Freestate>)records_to_be_add.Cast<Freestate>().ToList();
-                        _context.Freestate.AddRange(Freestate_list_to_add);
-                        break;
-                    case "gauteng":
-                        List<Gauteng> Gauteng_list_to_add = (List<Gauteng>)records_to_be_add.Cast<Gauteng>();
-                        _context.Gauteng.AddRange(Gauteng_list_to_add);
-                        break;
-                    case "kwazulunatal":
-                        List<Kwazulunatal> Kwazulunatal_list_to_add = (List<Kwazulunatal>)records_to_be_add.Cast<Kwazulunatal>();
-                        _context.Kwazulunatal.AddRange(Kwazulunatal_list_to_add);
-                        break;
-                    case "limpopo":
-                        List<Limpopo> Limpopo_list_to_add = (List<Limpopo>)records_to_be_add.Cast<Limpopo>();
-                        _context.Limpopo.AddRange(Limpopo_list_to_add);
-                        break;
-                    case "mpumalanga":
-                        List<Mpumalanga> Mpumalanga_list_to_add = (List<Mpumalanga>)records_to_be_add.Cast<Mpumalanga>();
-                        _context.Mpumalanga.AddRange(Mpumalanga_list_to_add);
-                        break;
-                    case "northerncape":
-                        List<Northerncape> Northerncape_list_to_add = (List<Northerncape>)records_to_be_add.Cast<Northerncape>();
-                        _context.Northerncape.AddRange(Northerncape_list_to_add);
-                        break;
-                    case "northwest":
-                        List<Northwest> Northwest_list_to_add = (List<Northwest>)records_to_be_add.Cast<Northwest>();
-                        _context.Northwest.AddRange(Northwest_list_to_add);
-                        break;
-                    case "westerncape":
-                        List<Westerncape> Westerncape_list_to_add = (List<Westerncape>)records_to_be_add.Cast<Westerncape>();
-                        _context.Westerncape.AddRange(Westerncape_list_to_add);
-                        break;
-                    default:
-                        throw new Exception("No province found that matches the province name given.");
-                }
-
-                _context.SaveChanges(); */
-            // }
         }
-
-        // public virtual void ClearProvinceData(string provinceName)
-        // {
-        //     var province = _context.Provinces.FirstOrDefault(p => p.Name == provinceName);
-        //     if (province != null)
-        //     {
-        //         var records = _context.Birds.Where(r => r.ProvinceId == province.Id).ToList();
-        //         // Console.WriteLine($"Found {records.Count} records to remove for province: {provinceName}");
-        //         _context.Birds.RemoveRange(records);
-        //         _context.SaveChanges();
-        //         // Console.WriteLine("Records removed and changes saved.");
-        //     }
-        //     else
-        //     {
-        //         // Console.WriteLine($"No province found with name: {provinceName}");
-        //     }
-        // }
-
-        // public virtual void ReplaceProvinceData(string filepath, string provinceName)
-        // {
-        //     ClearProvinceData(provinceName);
-        //     ImportCsvData(filepath, provinceName);
-        // }
 
         public void ImportAllCsvData(string directoryPath)
         {
@@ -499,6 +335,18 @@ namespace BeakPeekApi.Helpers
             Map(m => m.Common_species).Index(3);
             Map(m => m.Genus).Index(4);
             Map(m => m.Species).Index(5);
+            Map(m => m.Jan).Index(6);
+            Map(m => m.Feb).Index(7);
+            Map(m => m.Mar).Index(8);
+            Map(m => m.Apr).Index(9);
+            Map(m => m.May).Index(10);
+            Map(m => m.Jun).Index(11);
+            Map(m => m.Jul).Index(12);
+            Map(m => m.Aug).Index(13);
+            Map(m => m.Sep).Index(14);
+            Map(m => m.Oct).Index(15);
+            Map(m => m.Nov).Index(16);
+            Map(m => m.Dec).Index(17);
             Map(m => m.Total_Records).Index(18).TypeConverter<Int32WithCommaConverter>();
             Map(m => m.Total_Cards).Index(19).TypeConverter<Int32WithCommaConverter>();
             Map(m => m.ReportingRate).Index(20);
