@@ -67,9 +67,9 @@ try
         {
             dbContext.Database.Migrate();
 
+            var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
             if (builder.Environment.IsDevelopment())
             {
-                var csvImporter = scope.ServiceProvider.GetRequiredService<CsvImporter>();
                 if (File.Exists("/species_list/south_africa.csv"))
                 {
                     if (Directory.Exists("/data"))
@@ -80,6 +80,20 @@ try
                 }
                 else
                     throw new Exception("No species list found.");
+            }
+            else
+            {
+                var csv_species_list = Path.Combine(Directory.GetCurrentDirectory(), "res", "species_list", "south_africa.csv");
+                if (File.Exists(csv_species_list))
+                {
+                    csvImporter.ImportBirds(csv_species_list);
+                }
+
+                var csv_pentad_dir = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
+                if (Directory.Exists(csv_pentad_dir))
+                {
+                    csvImporter.ImportAllCsvData(csv_pentad_dir);
+                }
             }
         }
 
