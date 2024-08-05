@@ -39,7 +39,7 @@ if (!builder.Environment.IsDevelopment())
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found.");
+        throw new InvalidOperationException("Connection string not found. poo");
     }
 }
 else
@@ -57,7 +57,16 @@ builder.Services.AddControllersWithViews()
 
 var app = builder.Build();
 
+try
+{
 
+    using (var scope = app.Services.CreateScope())
+    {
+        var dbContext = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+        if (builder.Environment.IsDevelopment())
+        {
+            dbContext.Database.Migrate();
 try
 {
     using (var scope = app.Services.CreateScope())
@@ -92,6 +101,7 @@ catch (Exception ex)
     Console.WriteLine(ex.StackTrace);
     throw;
 }
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {

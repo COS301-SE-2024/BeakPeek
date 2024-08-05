@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:beakpeek/Model/bird.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';

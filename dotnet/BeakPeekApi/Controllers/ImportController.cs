@@ -37,6 +37,7 @@ namespace BeakPeekApi.Controllers
         public IActionResult ImportAll([FromQuery] string path)
         {
             _csvImporter.ImportAllCsvData(path);
+
             return Ok();
         }
     }
