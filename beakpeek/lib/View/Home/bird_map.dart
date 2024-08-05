@@ -1,11 +1,10 @@
-// bird_map.dart
-
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/View/Home/bird_sheet.dart';
-import 'package:flutter/foundation.dart';
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:geolocator/geolocator.dart';
 
 class BirdMap extends StatefulWidget {
   const BirdMap({super.key, this.testController});
@@ -18,19 +17,73 @@ class BirdMap extends StatefulWidget {
 
 class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
-  final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
+  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593); // Default location
   String _selectedProvince = 'gauteng'; // Default selected province
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
+  bool _isLocationFetched = false;
 
   @override
   void initState() {
     super.initState();
     _cameraPosition = CameraPosition(
-      target: _defaultCenter,
+      target: _currentLocation,
       zoom: 11.0,
     );
+    _getCurrentLocation();
     _loadKmlData();
+  }
+
+  Future<void> _getCurrentLocation() async {
+    bool serviceEnabled;
+    LocationPermission permission;
+
+    // Check if location services are enabled
+    serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    print('Location services enabled: $serviceEnabled');
+    if (!serviceEnabled) {
+      print('Location services are disabled.');
+      return;
+    }
+
+    // Check location permissions
+    permission = await Geolocator.checkPermission();
+    print('Location permission status: $permission');
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      print('Location permission requested: $permission');
+      if (permission == LocationPermission.denied) {
+        print('Location permissions are denied.');
+        return;
+      }
+    }
+
+    if (permission == LocationPermission.deniedForever) {
+      print('Location permissions are permanently denied.');
+      return;
+    }
+
+    // Fetch current location
+    try {
+      Position position = await Geolocator.getCurrentPosition();
+      print('Current location: Latitude ${position.latitude}, Longitude ${position.longitude}');
+
+      setState(() {
+        _currentLocation = LatLng(position.latitude, position.longitude);
+        _cameraPosition = CameraPosition(
+          target: _currentLocation,
+          zoom: 11.0,
+        );
+        _isLocationFetched = true;
+      });
+
+      // Update map camera if mapController is initialized
+      if (_isLocationFetched && mapController != null) {
+        mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+      }
+    } catch (e) {
+      print('Error getting current location: $e');
+    }
   }
 
   @override
@@ -40,9 +93,16 @@ class BirdMapState extends State<BirdMap> {
         _buildProvinceDropdown(),
         Expanded(
           child: GoogleMap(
-            onMapCreated: _onMapCreated,
+            onMapCreated: (controller) {
+              mapController = controller;
+              if (_isLocationFetched) {
+                mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+              }
+            },
             initialCameraPosition: _cameraPosition,
             polygons: _polygons,
+            myLocationEnabled: true, // Enable the blue dot marker
+            myLocationButtonEnabled: true, // Enable the "My Location" button
           ),
         ),
       ],
@@ -60,8 +120,11 @@ class BirdMapState extends State<BirdMap> {
         });
 
         // Move the camera to the new position
-        mapController
-            .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+        if (mapController != null) {
+          mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+        } else {
+          print('mapController is not initialized.');
+        }
       },
       items: <String>[
         'gauteng',
@@ -82,21 +145,17 @@ class BirdMapState extends State<BirdMap> {
     switch (province) {
       case 'gauteng':
         return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593));
+            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
       case 'westerncape':
         return const CameraPosition(
-            target: LatLng(-33.9249, 18.4241), zoom: 2.0);
+            target: LatLng(-33.9249, 18.4241), zoom: 11.0);
       case 'Eastern Cape':
         return const CameraPosition(
-            target: LatLng(-32.2968, 26.4194), zoom: 2.0);
+            target: LatLng(-32.2968, 26.4194), zoom: 11.0);
       default:
         return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593));
+            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
     }
-  }
-
-  void _onMapCreated(GoogleMapController controller) {
-    mapController = widget.testController ?? controller;
   }
 
   Future<void> _loadKmlData() async {
@@ -126,17 +185,12 @@ class BirdMapState extends State<BirdMap> {
         }).toSet();
       });
     } catch (e) {
-      if (kDebugMode) {
-        print('Error loading KML data: $e');
-      }
+      print('Error loading KML data: $e');
     }
   }
 
   void _onPolygonTapped(String id) {
-    if (kDebugMode) {
-      print('Polygon with ID: $id tapped');
-    }
-    // Show the draggable bottom sheet
+    print('Polygon with ID: $id tapped');
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -145,5 +199,4 @@ class BirdMapState extends State<BirdMap> {
       },
     );
   }
-
 }
