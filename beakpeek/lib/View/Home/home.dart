@@ -164,7 +164,7 @@ class Home extends StatelessWidget {
                                         style: GlobalStyles.greyContent),
                                   ),
                                   Chip(
-                                    label: const Text('Honeyguide',
+                                    label: Text('Honeyguide',
                                         style: GlobalStyles.greyContent),
                                   ),
                                 ],

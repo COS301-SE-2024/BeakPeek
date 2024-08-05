@@ -107,6 +107,7 @@ flutter:
     - assets/country_southafrica.kml
     - assets/province_westerncape.kml
     - assets/images/map.png
+    - assets/images/quiz_placeholder.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
