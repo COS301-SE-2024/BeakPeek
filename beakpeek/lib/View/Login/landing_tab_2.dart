@@ -49,7 +49,7 @@ class LandingTab2 extends StatelessWidget {
                           ),
                           TextSpan(
                             text: ' BeakPeak',
-                            style: GlobalStyles.mainHeadingYellow,
+                            style: GlobalStyles.secondaryContent,
                           ),
                           TextSpan(
                             text: ' community.',

@@ -52,6 +52,12 @@ abstract class GlobalStyles {
     fontFamily: 'SF Pro Display',
   );
 
+  static const TextStyle secondaryContent = TextStyle(
+    color: Color.fromARGB(255, 201, 138, 12),
+    fontSize: 18,
+    fontFamily: 'SF Pro Display',
+  );
+
   static const TextStyle smallContent = TextStyle(
     color: Colors.black38,
     fontSize: 18,
