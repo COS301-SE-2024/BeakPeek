@@ -39,8 +39,13 @@ class BirdPage extends StatelessWidget {
                             ),
                             const Spacer(),
                             const Text(
-                              'Bird Information',
-                              style: BirdPageStyles.heading,
+                              'Black Fronted Bushshrike',
+                              style: TextStyle(
+                                color: GlobalStyles.primaryColor,
+                                fontSize: 22,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const Spacer(flex: 2),
                           ],
@@ -48,7 +53,7 @@ class BirdPage extends StatelessWidget {
                         SizedBox(height: screenHeight * 0.01),
                         Center(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(10.0),
                             child: Container(
                               decoration: BoxDecoration(
                                 boxShadow: [
@@ -67,15 +72,6 @@ class BirdPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-
-                        // Bird name
-                        const ProfileField(
-                          icon: Icons.info,
-                          label: 'Name',
-                          content: 'Black Fronted Bushshrike',
-                          prominent: true,
                         ),
                         SizedBox(height: screenHeight * 0.02),
 

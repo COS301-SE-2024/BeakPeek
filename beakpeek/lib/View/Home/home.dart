@@ -73,11 +73,30 @@ class Home extends StatelessWidget {
                                     fit: BoxFit.cover,
                                   ),
                                 ),
-                                child: const Center(
-                                  child: Text(
-                                    'Start Quiz',
-                                    style: GlobalStyles.smallContent,
-                                  ),
+                                child: Stack(
+                                  children: [
+                                    Positioned(
+                                      bottom: 8.0,
+                                      right: 16.0,
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          // Go to quiz
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16.0, vertical: 8.0),
+                                        ),
+                                        child: const Text(
+                                          'Start Quiz',
+                                          style: GlobalStyles.greyContent,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
                             ],
@@ -151,27 +170,43 @@ class Home extends StatelessWidget {
                                 'Birds You Want to See',
                                 style: GlobalStyles.smallHeadingDark,
                               ),
-                              SizedBox(height: 10),
+                              SizedBox(height: 16),
+                              // Use Column for vertical layout
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Chip(
-                                    label: Text('Brown-Headed Parrot',
-                                        style: GlobalStyles.greyContent),
+                                  Row(
+                                    children: [
+                                      Text('Brown-Headed Parrot',
+                                          style: GlobalStyles.greyContent),
+                                      Spacer(),
+                                      Icon(Icons.star, color: Colors.amber),
+                                    ],
                                   ),
-                                  Chip(
-                                    label: Text('Cape Vulture',
-                                        style: GlobalStyles.greyContent),
+                                  SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text('Cape Vulture',
+                                          style: GlobalStyles.greyContent),
+                                      Spacer(),
+                                      Icon(Icons.star, color: Colors.amber),
+                                    ],
                                   ),
-                                  Chip(
-                                    label: Text('Honeyguide',
-                                        style: GlobalStyles.greyContent),
+                                  SizedBox(height: 16),
+                                  Row(
+                                    children: [
+                                      Text('Honeyguide',
+                                          style: GlobalStyles.greyContent),
+                                      Spacer(),
+                                      Icon(Icons.star, color: Colors.amber),
+                                    ],
                                   ),
                                 ],
                               ),
                             ],
                           ),
                         ),
+
                         SizedBox(height: screenHeight * 0.02),
                       ],
                     ),

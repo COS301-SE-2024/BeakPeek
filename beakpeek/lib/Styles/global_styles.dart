@@ -73,7 +73,7 @@ abstract class GlobalStyles {
   );
 
   static const TextStyle greyContent = TextStyle(
-    color: Colors.grey,
+    color: Color.fromARGB(255, 119, 119, 119),
     fontSize: 16,
     fontFamily: 'SF Pro Display',
   );
