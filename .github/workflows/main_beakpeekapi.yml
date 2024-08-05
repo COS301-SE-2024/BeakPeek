@@ -40,6 +40,8 @@ jobs:
         run: |
           mkdir -p ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species
           cp -r ./res/species/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species/
+          mkdir -p ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species_list/
+          cp -r ./res/species_list/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species_list/
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
