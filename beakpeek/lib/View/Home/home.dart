@@ -2,7 +2,6 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
-import 'package:beakpeek/Styles/home_page_styles.dart';
 import 'package:beakpeek/Model/help_icon_model_functions.dart';
 import 'package:go_router/go_router.dart';
 
@@ -13,15 +12,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
-    // Define text style for chip labels
-    final chipTextStyle = TextStyle(
-      color: Colors.grey[700], // Match the color used in achievements
-      fontSize: 16,
-    );
-
-    // Define a constant width for the sections
-    final sectionWidth = screenWidth * 0.92; // 92% of screen width
+    final sectionWidth = screenWidth * 0.92;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F1ED),
@@ -161,8 +152,6 @@ class Home extends StatelessWidget {
                                 style: GlobalStyles.smallHeadingDark,
                               ),
                               SizedBox(height: 10),
-
-                              // Use Column for vertical layout
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
