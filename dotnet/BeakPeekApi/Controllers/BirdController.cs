@@ -30,11 +30,14 @@ namespace BeakPeekApi.Controllers
 
             var birdDtos = birds.Select(b => b.ToDto()).ToList();
 
+            if (birdDtos.Count() == 0)
+                return BadRequest("No Birds Found");
+
             return Ok(birdDtos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bird>> GetBird(int id)
+        public async Task<ActionResult<BirdDto>> GetBird(int id)
         {
             var bird = await _context.Birds
                 .Include(b => b.Bird_Provinces)
@@ -76,9 +79,9 @@ namespace BeakPeekApi.Controllers
         [HttpPost]
         public async Task<ActionResult<Bird>> PostBirds(Bird species)
         {
-            var isUnique = await _context.Birds.Where(b => b.Ref == species.Ref).AnyAsync();
+            var isUnique = await _context.Birds.FindAsync(species.Ref);
 
-            if (!isUnique)
+            if (isUnique != null)
             {
                 return BadRequest("Bird Ref already exists.");
             }
@@ -101,11 +104,12 @@ namespace BeakPeekApi.Controllers
             if (!isUnique)
                 return BadRequest("Bird ref already exists");
 
-            await _context.Birds.AddAsync(species);
-
             try
             {
-                await _context.SaveChangesAsync();
+                var is_successful = await _context.SaveChangesAsync();
+
+                if (is_successful > 0)
+                    return Ok("Updated Bird Successfully");
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -127,7 +131,7 @@ namespace BeakPeekApi.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBird(int id)
         {
-            var species = await _context.Birds.Where(b => b.Ref == id).FirstAsync();
+            var species = await _context.Birds.FindAsync(id);
             if (species == null)
             {
                 return NotFound("No bird with found matching that Ref");
@@ -141,7 +145,7 @@ namespace BeakPeekApi.Controllers
 
 
         [HttpGet("{pentad}/pentad")]
-        public async Task<ActionResult<IEnumerable<Province>>> GetBirdsInPentad(string pentad)
+        public async Task<ActionResult<IEnumerable<ProvinceDto>>> GetBirdsInPentad(string pentad)
         {
 
             var pentadResult = await _context
@@ -237,7 +241,7 @@ namespace BeakPeekApi.Controllers
                 return NotFound("Province not found");
             }
 
-            return Ok(provinceList.ToDto());
+            return Ok(provinceList.ToDto().Birds);
         }
 
         [HttpGet("GetNumBirdByProvince/{province}")]

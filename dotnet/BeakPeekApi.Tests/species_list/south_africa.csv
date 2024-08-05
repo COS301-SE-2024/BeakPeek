@@ -1,0 +1,873 @@
+Ref,Common_group,Common_species,Genus,Species,fp,fpn,fp_last,ad,adn,ad_last
+151,,Bateleur,Terathopius,ecaudatus,5.4125,18034,2024-07-28,2.8867,8959,2024-07-28
+722,,Bokmakierie,Telophorus,zeylonus,28.9165,96348,2024-07-31,5.0117,15554,2024-09-08
+731,,Brubru,Nilaus,afer,9.9278,33079,2024-07-31,1.5096,4685,2024-07-27
+1102,,Budgerigar,Melopsittacus,undulatus,0.0048,16,2023-12-23,0.0013,4,2023-11-07
+273,,Crab-plover,Dromas,ardeola,0.0090,30,2022-12-31,0.0023,7,2023-01-21
+885,,Garganey,Spatula,querquedula,0.0003,1,2008-10-31,0.0000,0,-
+72,,Hamerkop,Scopus,umbretta,13.1881,43942,2024-07-31,2.5526,7922,2024-07-27
+10015,,"Hybrid Mallard",Anas,hybrid,0.4724,1574,2024-07-23,0.0474,147,2024-05-18
+1016,,Mallard,Anas,platyrhynchos,2.2380,7457,2024-07-31,0.1965,610,2024-06-30
+637,,Neddicky,Cisticola,fulvicapilla,31.1731,103867,2024-07-31,4.5197,14027,2024-07-30
+844,,Quailfinch,Ortygospiza,atricollis,8.1100,27022,2024-07-30,1.1529,3578,2024-07-27
+256,,Ruff,Calidris,pugnax,4.6132,15371,2024-07-28,0.7488,2324,2024-07-07
+255,,Sanderling,Calidris,alba,1.3614,4536,2024-07-16,0.2265,703,2024-07-25
+105,,Secretarybird,Sagittarius,serpentarius,3.4154,11380,2024-07-31,1.6781,5208,2024-07-28
+161,,Shikra,Accipiter,badius,0.6585,2194,2024-07-20,0.1405,436,2024-06-24
+577,,Whinchat,Saxicola,rubetra,0.0027,9,2024-05-10,0.0010,3,2024-05-12
+10,Albatross,"Atlantic Yellow-nosed",Thalassarche,chlororhynchos,0.0003,1,2016-05-14,0.0000,0,-
+4151,Albatross,"Atlantic Yellow-nosed",Thalassarche,chlororhynchos,0.0012,4,2021-10-16,0.0006,2,2020-09-29
+8,Albatross,Black-browed,Thalassarche,melanophris,0.0315,105,2024-07-28,0.0081,25,2024-06-08
+9,Albatross,Grey-headed,Thalassarche,chrysostoma,0.0003,1,2020-06-11,0.0000,0,-
+1079,Albatross,"Indian Yellow-nosed",Thalassarche,carteri,0.0342,114,2024-07-15,0.0106,33,2024-07-28
+4150,Albatross,Shy,Thalassarche,cauta,0.0747,249,2024-07-28,0.0261,81,2024-06-20
+11,Albatross,Shy,Thalassarche,cauta,0.0129,43,2016-09-24,0.0029,9,2016-09-04
+622,Apalis,Bar-throated,Apalis,thoracica,22.8735,76213,2024-07-31,3.3446,10380,2024-07-28
+624,Apalis,Rudd's,Apalis,ruddi,0.9358,3118,2024-07-28,0.1740,540,2024-07-30
+625,Apalis,Yellow-breasted,Apalis,flavida,8.0155,26707,2024-07-31,1.0958,3401,2024-07-29
+269,Avocet,Pied,Recurvirostra,avosetta,4.7033,15671,2024-07-31,0.9557,2966,2024-07-29
+533,Babbler,Arrow-marked,Turdoides,jardineii,16.0870,53601,2024-07-31,3.6906,11454,2024-07-28
+536,Babbler,"Southern Pied",Turdoides,bicolor,1.8236,6076,2024-07-27,0.4476,1389,2024-07-28
+432,Barbet,"Acacia Pied",Tricholaema,leucomelas,19.0394,63438,2024-07-31,2.9511,9159,2024-07-29
+431,Barbet,Black-collared,Lybius,torquatus,34.8464,116106,2024-07-31,5.6091,17408,2024-07-28
+439,Barbet,Crested,Trachyphonus,vaillantii,33.2743,110868,2024-07-31,5.6506,17537,2024-07-30
+435,Barbet,Green,Stactolaema,olivacea,0.0486,162,2024-06-22,0.0348,108,2024-01-19
+433,Barbet,White-eared,Stactolaema,leucotis,2.8818,9602,2024-07-28,0.5867,1821,2024-07-28
+672,Batis,Cape,Batis,capensis,8.8720,29561,2024-07-28,1.1548,3584,2024-07-28
+673,Batis,Chinspot,Batis,molitor,19.4409,64776,2024-07-29,3.6787,11417,2024-07-30
+674,Batis,Pririt,Batis,pririt,4.3299,14427,2024-07-31,0.5442,1689,2024-07-27
+676,Batis,Woodward's,Batis,fratrum,0.1639,546,2024-07-24,0.0290,90,2024-03-16
+405,Bee-eater,Blue-cheeked,Merops,persicus,1.3188,4394,2024-04-28,0.4827,1498,2024-04-30
+404,Bee-eater,European,Merops,apiaster,16.4769,54900,2024-04-30,3.5182,10919,2024-04-13
+410,Bee-eater,Little,Merops,pusillus,6.1490,20488,2024-07-29,1.2802,3973,2024-07-27
+406,Bee-eater,Olive,Merops,superciliosus,0.0003,1,2021-12-28,0.0000,0,-
+407,Bee-eater,"Southern Carmine",Merops,nubicoides,1.1054,3683,2024-03-27,0.5803,1801,2024-03-23
+411,Bee-eater,Swallow-tailed,Merops,hirundineus,1.7260,5751,2024-07-28,0.5516,1712,2024-07-27
+409,Bee-eater,White-fronted,Merops,bullockoides,9.5227,31729,2024-07-31,1.8614,5777,2024-07-30
+1034,Bee-eater,White-throated,Merops,albicollis,0.0033,11,2023-02-23,0.0013,4,2023-12-17
+808,Bishop,"Southern Red",Euplectes,orix,39.6946,132260,2024-07-31,7.7302,23991,2024-07-30
+810,Bishop,Yellow,Euplectes,capensis,7.7925,25964,2024-07-28,1.3646,4235,2024-07-29
+812,Bishop,Yellow-crowned,Euplectes,afer,5.9569,19848,2024-07-30,1.2354,3834,2024-07-13
+66,Bittern,Dwarf,Ixobrychus,sturmii,0.3493,1164,2024-07-22,0.1002,311,2024-03-28
+71,Bittern,Eurasian,Botaurus,stellaris,0.0030,10,2022-01-10,0.0006,2,2021-11-27
+67,Bittern,Little,Ixobrychus,minutus,1.7593,5862,2024-07-26,0.2133,662,2024-05-18
+969,Blackcap,Blackcap,Sylvia,atricapilla,0.0024,8,2017-07-20,0.0019,6,2017-07-20
+542,Blackcap,Bush,Sylvia,nigricapillus,0.4844,1614,2024-07-24,0.0796,247,2024-05-05
+46,Booby,Brown,Sula,leucogaster,0.0018,6,2024-03-05,0.0003,1,2024-01-20
+1027,Booby,Red-footed,Sula,sula,0.0000,0,-,0.0003,1,2015-04-06
+977,Boubou,"Ethiopian ",Laniarius,aethiopicus,0.5858,1952,2022-09-29,0.0454,141,2019-04-26
+709,Boubou,Southern,Laniarius,ferrugineus,35.6489,118780,2024-07-31,5.9100,18342,2024-07-31
+7866,Boubou,Tropical,Laniarius,major,0.6525,2174,2024-07-28,0.0735,228,2024-06-29
+454,Broadbill,African,Smithornis,capensis,0.1288,429,2024-05-28,0.0219,68,2024-05-05
+546,Brownbul,Terrestrial,Phyllastrephus,terrestris,7.8279,26082,2024-07-28,0.7862,2440,2024-07-28
+544,Bulbul,"African Red-eyed",Pycnonotus,nigricans,12.6620,42189,2024-07-31,2.0554,6379,2024-07-29
+543,Bulbul,Cape,Pycnonotus,capensis,14.6134,48691,2024-07-31,2.9357,9111,2024-07-31
+545,Bulbul,Dark-capped,Pycnonotus,tricolor,48.0858,160219,2024-07-31,12.0482,37392,2024-07-30
+3036,Bulbul,Dark-capped,Pycnonotus,tricolor,0.0003,1,2014-09-21,0.0000,0,-
+10013,Bulbul,"Hybrid Red-eyed/Dark-capped",Pycnonotus,nigricans/tricolor,0.0219,73,2024-07-24,0.0003,1,2020-07-23
+873,Bunting,Cape,Emberiza,capensis,9.7334,32431,2024-07-31,1.7512,5435,2024-07-27
+872,Bunting,Cinnamon-breasted,Emberiza,tahapisi,8.8900,29621,2024-07-30,1.7731,5503,2024-07-27
+874,Bunting,Golden-breasted,Emberiza,flaviventris,10.8747,36234,2024-07-28,2.0770,6446,2024-07-28
+871,Bunting,Lark-like,Emberiza,impetuani,4.2165,14049,2024-07-30,1.0021,3110,2024-07-23
+720,Bushshrike,Black-fronted,Chlorophoneus,nigrifrons,0.0897,299,2024-07-13,0.0277,86,2024-04-20
+721,Bushshrike,Gorgeous,Telophorus,viridis,3.3854,11280,2024-07-28,0.5194,1612,2024-07-13
+723,Bushshrike,Grey-headed,Malaconotus,blanchoti,8.7249,29071,2024-07-29,1.3700,4252,2024-07-28
+717,Bushshrike,Olive,Chlorophoneus,olivaceus,5.4374,18117,2024-07-27,0.5661,1757,2024-07-16
+719,Bushshrike,Orange-breasted,Chlorophoneus,sulfureopectus,11.9198,39716,2024-07-27,2.1002,6518,2024-07-27
+227,Bustard,Black-bellied,Lissotis,melanogaster,0.6228,2075,2024-07-24,0.2642,820,2024-07-12
+219,Bustard,Denham's,Neotis,denhami,2.0919,6970,2024-07-27,0.6032,1872,2024-07-28
+217,Bustard,Kori,Ardeotis,kori,1.5360,5118,2024-07-27,0.9798,3041,2024-07-26
+218,Bustard,Ludwig's,Neotis,ludwigii,1.4784,4926,2024-07-30,0.4772,1481,2024-07-27
+222,Bustard,White-bellied,Eupodotis,senegalensis,0.5837,1945,2024-07-11,0.1601,497,2024-07-17
+4128,Buttonquail,Black-rumped,Turnix,nanus,0.0417,139,2024-01-17,0.0084,26,2023-12-07
+196,Buttonquail,Common,Turnix,sylvaticus,1.0564,3520,2024-07-14,0.2452,761,2024-07-14
+1346,Buttonquail,"Fynbos ",Turnix,hottentottus,0.0324,108,2024-07-23,0.0168,52,2024-05-02
+153,Buzzard,Augur,Buteo,augur,0.0000,0,-,0.0003,1,2011-10-09
+154,Buzzard,Common,Buteo,buteo,12.5557,41835,2024-07-05,3.9104,12136,2024-07-28
+2140,Buzzard,"Crested Honey",Pernis,ptilorhynchus,0.0015,5,2022-03-30,0.0023,7,2021-02-23
+155,Buzzard,Forest,Buteo,trizonatus,1.5586,5193,2024-07-28,0.3341,1037,2024-06-29
+152,Buzzard,Jackal,Buteo,rufofuscus,15.6515,52150,2024-07-31,4.4307,13751,2024-07-28
+144,Buzzard,Lizard,Kaupifalco,monogrammicus,1.1150,3715,2024-07-31,0.2394,743,2024-07-15
+2104,Buzzard,Red-necked,Buteo,auguralis,0.0057,19,2017-02-04,0.0055,17,2017-02-09
+627,Camaroptera,Green-backed,Camaroptera,brachyura,13.6821,45588,2024-07-29,2.3087,7165,2024-07-27
+628,Camaroptera,Grey-backed,Camaroptera,brevicaudata,4.6790,15590,2024-07-29,0.7147,2218,2024-07-25
+861,Canary,Black-headed,Serinus,alario,1.6222,5405,2024-07-31,0.3084,957,2024-07-26
+4102,Canary,"Black-headed (Damara sub-sp)",Serinus,"alario leucolaema",0.0177,59,2024-05-25,0.0026,8,2023-12-02
+860,Canary,Black-throated,Crithagra,atrogularis,17.0849,56926,2024-07-30,2.0457,6349,2024-07-29
+863,Canary,Brimstone,Crithagra,sulphurata,7.7306,25758,2024-07-31,0.8877,2755,2024-07-31
+857,Canary,Cape,Serinus,canicollis,14.5804,48581,2024-07-31,2.5877,8031,2024-07-31
+858,Canary,Forest,Crithagra,scotops,2.7281,9090,2024-07-27,0.4202,1304,2024-07-28
+921,Canary,Lemon-breasted,Crithagra,citrinipectus,0.3875,1291,2024-07-28,0.0738,229,2024-03-20
+869,Canary,"Protea ",Crithagra,leucoptera,0.2113,704,2024-07-14,0.0564,175,2024-06-29
+865,Canary,White-throated,Crithagra,albogularis,6.9413,23128,2024-07-31,1.0137,3146,2024-07-27
+866,Canary,Yellow,Crithagra,flaviventris,14.8568,49502,2024-07-31,2.6212,8135,2024-07-29
+859,Canary,Yellow-fronted,Crithagra,mozambica,25.6013,85302,2024-07-31,4.1714,12946,2024-07-30
+870,Chaffinch,Common,Fringilla,coelebs,0.3980,1326,2024-07-20,0.1038,322,2024-05-28
+575,Chat,"Ant-eating ",Myrmecocichla,formicivora,14.7944,49294,2024-07-31,4.3144,13390,2024-07-30
+574,Chat,Arnot's,Myrmecocichla,arnotti,0.0894,298,2024-07-23,0.0316,98,2024-06-20
+538,Chat,Boulder,Pinarornis,plumosus,0.0024,8,2021-08-22,0.0013,4,2022-10-27
+569,Chat,Buff-streaked,Campicoloides,bifasciatus,1.8248,6080,2024-07-27,0.4337,1346,2024-07-28
+570,Chat,Familiar,Oenanthe,familiaris,18.8758,62893,2024-07-31,3.5137,10905,2024-09-08
+566,Chat,Karoo,Emarginata,schlegelii,2.8176,9388,2024-07-31,0.9583,2974,2024-07-29
+573,Chat,"Mocking Cliff",Thamnolaea,cinnamomeiventris,3.6444,12143,2024-07-31,0.7530,2337,2024-07-27
+572,Chat,Sickle-winged,Emarginata,sinuata,1.7791,5928,2024-07-31,0.4108,1275,2024-07-29
+571,Chat,Tractrac,Emarginata,tractrac,0.7071,2356,2024-07-21,0.2040,633,2024-07-20
+631,Cisticola,Cloud,Cisticola,textrix,5.9848,19941,2024-07-31,0.9737,3022,2024-07-16
+647,Cisticola,Croaking,Cisticola,natalensis,2.4316,8102,2024-07-31,0.3925,1218,2024-07-22
+630,Cisticola,Desert,Cisticola,aridulus,5.9125,19700,2024-07-30,0.8655,2686,2024-07-19
+638,Cisticola,Grey-backed,Cisticola,subruficapilla,8.9560,29841,2024-07-31,1.2669,3932,2024-07-27
+648,Cisticola,Lazy,Cisticola,aberrans,4.7147,15709,2024-07-29,0.5777,1793,2024-07-08
+646,Cisticola,Levaillant's,Cisticola,tinniens,27.7958,92614,2024-07-31,3.6855,11438,2024-07-29
+635,Cisticola,Pale-crowned,Cisticola,cinnamomeus,0.6171,2056,2024-07-04,0.1511,469,2024-06-22
+642,Cisticola,Rattling,Cisticola,chiniana,17.0111,56680,2024-07-29,5.4032,16769,2024-07-30
+644,Cisticola,Red-faced,Cisticola,erythrops,4.4683,14888,2024-07-28,0.6393,1984,2024-07-27
+4138,Cisticola,Rufous-winged,Cisticola,galactotes,0.8202,2733,2024-07-27,0.1328,412,2024-06-30
+641,Cisticola,Tinkling,Cisticola,rufilatus,0.1594,531,2024-06-15,0.0335,104,2024-06-15
+639,Cisticola,Wailing,Cisticola,lais,3.1234,10407,2024-07-27,0.4814,1494,2024-07-19
+634,Cisticola,Wing-snapping,Cisticola,ayresii,3.9917,13300,2024-07-24,0.7665,2379,2024-07-28
+629,Cisticola,Zitting,Cisticola,juncidis,19.6756,65558,2024-07-31,3.7170,11536,2024-07-28
+212,Coot,Red-knobbed,Fulica,cristata,29.7445,99107,2024-07-31,5.7157,17739,2024-07-30
+49,Cormorant,Bank,Phalacrocorax,neglectus,0.4523,1507,2024-07-30,0.1331,413,2024-07-21
+48,Cormorant,Cape,Phalacrocorax,capensis,5.0043,16674,2024-07-30,1.0472,3250,2024-07-27
+51,Cormorant,Crowned,Microcarbo,coronatus,1.1384,3793,2024-07-30,0.2597,806,2024-07-20
+50,Cormorant,Reed,Microcarbo,africanus,37.1129,123658,2024-07-31,6.0054,18638,2024-09-08
+47,Cormorant,"White-breasted ",Phalacrocorax,lucidus,23.1067,76990,2024-07-31,4.0115,12450,2024-09-08
+353,Coucal,Black,Centropus,grillii,0.0528,176,2024-03-13,0.0251,78,2024-02-19
+356,Coucal,Burchell's,Centropus,burchellii,0.0000,0,-,0.0006,2,2018-07-13
+4131,Coucal,Burchell's,Centropus,burchellii,18.5736,61886,2024-07-28,3.0736,9539,2024-07-28
+355,Coucal,Senegal,Centropus,senegalensis,0.0822,274,2024-07-12,0.0209,65,2024-02-26
+280,Courser,Bronze-winged,Rhinoptilus,chalcopterus,0.6294,2097,2024-07-06,0.1231,382,2024-07-15
+276,Courser,Burchell's,Cursorius,rufus,0.1531,510,2024-07-11,0.0422,131,2024-06-08
+278,Courser,Double-banded,Rhinoptilus,africanus,0.9577,3191,2024-07-27,0.2272,705,2024-07-25
+277,Courser,Temminck's,Cursorius,temminckii,0.7917,2638,2024-07-20,0.2839,881,2024-07-02
+279,Courser,Three-banded,Rhinoptilus,cinctus,0.1807,602,2024-07-28,0.0074,23,2024-02-25
+199,Crake,African,Crecopsis,egregia,0.2998,999,2024-03-31,0.0880,273,2024-07-07
+202,Crake,Baillon's,Zapornia,pusilla,0.1116,372,2024-03-03,0.0197,61,2024-02-29
+203,Crake,Black,Zapornia,flavirostra,11.6308,38753,2024-07-31,1.6439,5102,2024-07-29
+198,Crake,Corn,Crex,crex,0.0429,143,2024-01-26,0.0097,30,2022-12-20
+1934,Crake,Little,Zapornia,parva,0.0006,2,2012-03-24,0.0000,0,-
+201,Crake,Spotted,Porzana,porzana,0.0543,181,2022-04-06,0.0129,40,2022-03-24
+200,Crake,Striped,Aenigmatolimnas,marginalis,0.0186,62,2024-02-10,0.0019,6,2024-01-05
+216,Crane,Blue,Grus,paradisea,7.4371,24780,2024-07-31,2.7059,8398,2024-07-30
+214,Crane,"Grey Crowned",Balearica,regulorum,2.7074,9021,2024-07-28,0.8552,2654,2024-07-28
+215,Crane,Wattled,Grus,carunculata,0.3160,1053,2024-07-28,0.1421,441,2024-07-28
+621,Crombec,Long-billed,Sylvietta,rufescens,18.7662,62528,2024-07-29,3.4586,10734,2024-07-31
+523,Crow,Cape,Corvus,capensis,12.9768,43238,2024-07-31,4.7446,14725,2024-07-28
+989,Crow,House,Corvus,splendens,0.2398,799,2024-07-25,0.1257,390,2024-07-21
+522,Crow,Pied,Corvus,albus,41.1589,137139,2024-07-31,12.9472,40182,2024-09-08
+341,Cuckoo,African,Cuculus,gularis,0.9331,3109,2024-04-23,0.1975,613,2024-03-25
+350,Cuckoo,"African Emerald",Chrysococcyx,cupreus,1.3683,4559,2024-07-10,0.2175,675,2024-02-18
+344,Cuckoo,Black,Cuculus,clamosus,5.9299,19758,2024-04-20,0.8803,2732,2024-04-13
+340,Cuckoo,Common,Cuculus,canorus,0.1429,476,2024-03-25,0.0503,156,2024-02-26
+352,Cuckoo,Diederik,Chrysococcyx,caprius,21.0235,70049,2024-06-17,3.9055,12121,2024-07-22
+346,Cuckoo,"Great Spotted",Clamator,glandarius,0.8548,2848,2024-05-01,0.2404,746,2024-05-13
+348,Cuckoo,Jacobin,Clamator,jacobinus,3.7711,12565,2024-04-19,0.7707,2392,2024-04-19
+351,Cuckoo,Klaas's,Chrysococcyx,klaas,8.8921,29628,2024-07-27,1.3623,4228,2024-07-31
+347,Cuckoo,Levaillant's,Clamator,levaillantii,2.1759,7250,2024-06-17,0.4685,1454,2024-06-29
+1620,Cuckoo,Madagascan,Cuculus,rochii,0.0267,89,2022-12-17,0.0077,24,2023-10-11
+343,Cuckoo,Red-chested,Cuculus,solitarius,12.6689,42212,2024-05-22,2.5091,7787,2024-03-22
+345,Cuckoo,Thick-billed,Pachycoccyx,audeberti,0.0765,255,2024-03-02,0.0090,28,2024-01-04
+127,Cuckoo-Hawk,African,Aviceda,cuculoides,0.3415,1138,2024-07-27,0.0854,265,2024-07-13
+513,Cuckooshrike,Black,Campephaga,flava,4.9116,16365,2024-07-27,0.5713,1773,2024-07-25
+516,Cuckooshrike,"Grey ",Ceblepyris,caesius,1.2479,4158,2024-07-28,0.1988,617,2024-07-06
+515,Cuckooshrike,"White-breasted ",Ceblepyris,pectoralis,0.0354,118,2024-06-10,0.0087,27,2024-06-15
+267,Curlew,Eurasian,Numenius,arquata,0.3256,1085,2024-07-06,0.0551,171,2024-05-14
+52,Darter,African,Anhinga,rufa,18.2650,60858,2024-07-31,2.7536,8546,2024-07-28
+320,Dove,"Blue-spotted Wood",Turtur,afer,0.0240,80,2024-06-24,0.0216,67,2024-02-18
+316,Dove,"Cape Turtle",Streptopelia,capicola,67.9853,226523,2024-07-31,16.7966,52129,2024-07-30
+321,Dove,"Emerald-spotted Wood",Turtur,chalcospilos,14.2181,47374,2024-07-31,3.3642,10441,2024-07-29
+317,Dove,Laughing,Spilopelia,senegalensis,61.3096,204280,2024-07-31,15.6170,48468,2024-09-08
+322,Dove,Lemon,Columba,larvata,1.2002,3999,2024-07-28,0.1804,560,2024-06-23
+315,Dove,"Mourning Collared",Streptopelia,decipiens,1.5153,5049,2024-07-28,0.2945,914,2024-07-16
+318,Dove,Namaqua,Oena,capensis,13.5306,45083,2024-07-31,3.6036,11184,2024-07-27
+314,Dove,Red-eyed,Streptopelia,semitorquata,62.0542,206761,2024-07-31,12.3859,38440,2024-07-31
+940,Dove,Rock,Columba,livia,19.0250,63390,2024-07-30,4.2384,13154,2024-07-29
+319,Dove,Tambourine,Turtur,tympanistria,6.2702,20892,2024-07-28,0.7588,2355,2024-07-27
+518,Drongo,"Common Square-tailed",Dicrurus,ludwigii,2.3332,7774,2024-07-28,0.3860,1198,2024-07-14
+517,Drongo,Fork-tailed,Dicrurus,adsimilis,43.4642,144820,2024-07-31,2.7037,8391,2024-07-29
+10989,Drongo,Glossy-backed,Dicrurus,divaricatus,0.0000,0,-,0.0003,1,2022-03-28
+95,Duck,"African Black",Anas,sparsa,10.1779,33912,2024-07-28,1.1870,3684,2024-07-30
+10006,Duck,Domestic,Anas,platyrhynchos,0.4403,1467,2024-07-11,0.0477,148,2024-01-20
+101,Duck,"Fulvous Whistling",Dendrocygna,bicolor,1.1966,3987,2024-07-23,0.2226,691,2024-07-06
+1338,Duck,Hartlaub's,Pteronetta,hartlaubii,0.0003,1,2019-01-30,0.0000,0,-
+10005,Duck,Hybrid,Anas,hybrid,0.0825,275,2024-07-17,0.0029,9,2020-10-22
+974,Duck,"Hybrid Red/Yellow-billed",Anas,erythroryncha/undulata,0.0039,13,2024-06-10,0.0016,5,2024-01-13
+10034,Duck,"Hyrbid Mallard/Yellow-billed",Anas,"platyrhynchos x undulata",0.0009,3,2021-08-21,0.0003,1,2020-08-15
+91,Duck,Knob-billed,Sarkidiornis,melanotos,2.0264,6752,2024-07-28,0.6319,1961,2024-07-03
+103,Duck,Maccoa,Oxyura,maccoa,1.4598,4864,2024-07-24,0.3786,1175,2024-07-28
+1017,Duck,Mandarin,Aix,galericulata,0.2668,889,2024-06-07,0.0106,33,2023-08-04
+10003,Duck,Muscovy,Cairina,moschata,0.0660,220,2024-07-13,0.0087,27,2023-11-01
+1334,Duck,Ruddy,Oxyura,jamaicensis,0.0006,2,2022-08-02,0.0000,0,-
+1298,Duck,Tufted,Aythya,fuligula,0.0009,3,2017-11-03,0.0000,0,-
+10014,Duck,Unidentified,N/A,N/A,0.0063,21,2017-10-21,0.0003,1,2014-09-28
+104,Duck,White-backed,Thalassornis,leuconotus,1.5805,5266,2024-07-28,0.4108,1275,2024-07-27
+100,Duck,"White-faced Whistling",Dendrocygna,viduata,13.5225,45056,2024-07-31,2.6802,8318,2024-07-30
+10020,Duck,Wood,Aix,sponsa,0.0885,295,2024-03-17,0.0081,25,2023-12-28
+96,Duck,Yellow-billed,Anas,undulata,34.6750,115535,2024-07-31,5.8813,18253,2024-09-08
+149,Eagle,"African Fish",Haliaeetus,vocifer,19.5454,65124,2024-07-31,4.1746,12956,2024-07-29
+146,Eagle,"Black-chested Snake",Circaetus,pectoralis,3.1789,10592,2024-07-29,0.9850,3057,2024-07-26
+139,Eagle,Booted,Hieraaetus,pennatus,2.2050,7347,2024-07-21,0.5346,1659,2024-07-25
+145,Eagle,"Brown Snake ",Circaetus,cinereus,3.4628,11538,2024-07-28,1.4722,4569,2024-07-21
+143,Eagle,"Crowned ",Stephanoaetus,coronatus,2.1762,7251,2024-07-27,0.3899,1210,2024-07-29
+136,Eagle,"Lesser Spotted",Clanga,pomarina,0.5696,1898,2024-05-12,0.2613,811,2024-02-27
+138,Eagle,Long-crested,Lophaetus,occipitalis,5.3731,17903,2024-07-31,1.4226,4415,2024-07-29
+142,Eagle,Martial,Polemaetus,bellicosus,2.6594,8861,2024-07-27,1.1210,3479,2024-07-27
+147,Eagle,"Southern Banded Snake ",Circaetus,fasciolatus,0.1861,620,2024-07-22,0.0586,182,2024-04-27
+135,Eagle,Steppe,Aquila,nipalensis,0.1717,572,2024-04-22,0.0754,234,2024-02-19
+134,Eagle,Tawny,Aquila,rapax,2.7095,9028,2024-07-27,1.3153,4082,2024-07-28
+133,Eagle,Verreaux's,Aquila,verreauxii,3.6981,12322,2024-07-31,0.8796,2730,2024-07-30
+137,Eagle,Wahlberg's,Hieraaetus,wahlbergi,4.0826,13603,2024-06-29,1.3169,4087,2024-07-29
+367,Eagle-Owl,Cape,Bubo,capensis,0.2704,901,2024-07-21,0.0625,194,2024-06-15
+368,Eagle-Owl,Spotted,Bubo,africanus,6.9344,23105,2024-07-27,1.2550,3895,2024-07-26
+369,Eagle-Owl,Verreaux's,Bubo,lacteus,1.3836,4610,2024-07-28,0.2665,827,2024-07-12
+58,Egret,Great,Ardea,alba,5.7099,19025,2024-07-29,1.5070,4677,2024-07-30
+60,Egret,Intermediate,Ardea,intermedia,3.6813,12266,2024-07-28,0.7807,2423,2024-07-27
+59,Egret,Little,Egretta,garzetta,15.6873,52269,2024-07-30,2.9602,9187,2024-09-08
+982,Egret,Slaty,Egretta,vinaceigula,0.0324,108,2023-12-06,0.0155,48,2023-09-16
+2192,Egret,Snowy,Egretta,thula,0.0048,16,2015-06-27,0.0026,8,2015-06-20
+61,Egret,"Western Cattle",Bubulcus,ibis,36.5244,121697,2024-07-31,8.9288,27711,2024-09-08
+601,Eremomela,Burnt-necked,Eremomela,usticollis,3.3251,11079,2024-07-28,0.4459,1384,2024-07-19
+602,Eremomela,Green-capped,Eremomela,scotops,0.5447,1815,2024-07-23,0.0902,280,2024-06-10
+626,Eremomela,Karoo,Eremomela,gregalis,0.4058,1352,2024-07-22,0.1263,392,2024-06-28
+600,Eremomela,Yellow-bellied,Eremomela,icteropygialis,3.4923,11636,2024-07-30,0.4327,1343,2024-07-29
+119,Falcon,Amur,Falco,amurensis,5.6379,18785,2024-05-11,2.0602,6394,2024-05-22
+114,Falcon,Lanner,Falco,biarmicus,4.1405,13796,2024-07-28,1.1055,3431,2024-07-27
+113,Falcon,Peregrine,Falco,peregrinus,2.2194,7395,2024-07-24,0.4424,1373,2024-07-27
+126,Falcon,Pygmy,Polihierax,semitorquatus,0.6486,2161,2024-07-12,0.1920,596,2024-07-22
+120,Falcon,Red-footed,Falco,vespertinus,0.1567,522,2024-03-23,0.0638,198,2024-04-01
+117,Falcon,Red-necked,Falco,chicquera,0.0822,274,2024-04-25,0.0441,137,2024-01-29
+888,Falcon,Sooty,Falco,concolor,0.0354,118,2024-03-22,0.0219,68,2024-06-21
+887,Falcon,Taita,Falco,fasciinucha,0.0087,29,2020-10-24,0.0190,59,2021-11-15
+854,Finch,Cuckoo,Anomalospiza,imberbis,0.2677,892,2024-03-22,0.0541,168,2024-03-22
+821,Finch,Cut-throat,Amadina,fasciata,3.0286,10091,2024-07-26,0.5033,1562,2024-07-18
+10021,Finch,"Hybrid Cut-throat/Red-headed",Amadina,fasciata/erythrocephala,0.0006,2,2024-06-14,0.0000,0,-
+10078,Finch,"Hybrid Cut-throat/Red-headed",Amadina,fasciata/erythrocephala,0.0003,1,2022-05-29,0.0000,0,-
+820,Finch,Red-headed,Amadina,erythrocephala,8.4110,28025,2024-07-30,1.4171,4398,2024-07-28
+213,Finfoot,African,Podica,senegalensis,0.3427,1142,2024-07-20,0.0786,244,2024-07-20
+833,Firefinch,African,Lagonosticta,rubricata,7.1301,23757,2024-07-28,0.8439,2619,2024-07-21
+835,Firefinch,Jameson's,Lagonosticta,rhodopareia,5.1805,17261,2024-07-29,0.7585,2354,2024-07-27
+837,Firefinch,Red-billed,Lagonosticta,senegala,7.0313,23428,2024-07-28,1.0259,3184,2024-07-27
+707,Fiscal,"Southern ",Lanius,collaris,60.3513,201087,2024-07-31,14.4351,44800,2024-09-08
+86,Flamingo,"Greater ",Phoenicopterus,roseus,5.9095,19690,2024-07-30,1.6291,5056,2024-07-30
+87,Flamingo,Lesser,Phoeniconaias,minor,2.5856,8615,2024-07-28,0.7182,2229,2024-07-28
+206,Flufftail,Buff-spotted,Sarothrura,elegans,0.6177,2058,2024-07-20,0.1079,335,2024-06-25
+205,Flufftail,Red-chested,Sarothrura,rufa,1.5159,5051,2024-07-28,0.1888,586,2024-06-29
+892,Flufftail,Streaky-breasted,Sarothrura,boehmi,0.0039,13,2021-02-27,0.0010,3,2021-02-28
+207,Flufftail,Striped,Sarothrura,affinis,0.0705,235,2024-06-14,0.0229,71,2024-01-12
+204,Flufftail,White-winged,Sarothrura,ayresi,0.0051,17,2019-05-02,0.0003,1,2019-05-02
+655,Flycatcher,"African Dusky",Muscicapa,adusta,8.7586,29183,2024-07-29,1.2325,3825,2024-07-28
+682,Flycatcher,"African Paradise",Terpsiphone,viridis,17.2536,57488,2024-07-28,2.6015,8074,2024-07-29
+656,Flycatcher,Ashy,Muscicapa,caerulescens,3.4643,11543,2024-07-29,0.3786,1175,2024-07-28
+680,Flycatcher,"Blue-mantled Crested",Trochocercus,cyanomelas,2.1723,7238,2024-07-24,0.2806,871,2024-07-04
+663,Flycatcher,Chat,Melaenornis,infuscatus,2.1471,7154,2024-07-27,0.5803,1801,2024-07-22
+917,Flycatcher,Collared,Ficedula,albicollis,0.0015,5,2021-01-23,0.0000,0,-
+1022,Flycatcher,"European Pied",Ficedula,hypoleuca,0.0003,1,2016-12-20,0.0003,1,2016-12-18
+678,Flycatcher,Fairy,Stenostira,scita,3.8140,12708,2024-07-31,0.4704,1460,2024-07-27
+665,Flycatcher,Fiscal,Melaenornis,silens,28.8511,96130,2024-07-31,4.2181,13091,2024-07-31
+661,Flycatcher,Marico,Melaenornis,mariquensis,5.0364,16781,2024-07-27,1.3420,4165,2024-07-28
+662,Flycatcher,Pale,Melaenornis,pallidus,1.1444,3813,2024-07-27,0.2020,627,2024-07-21
+664,Flycatcher,"Southern Black",Melaenornis,pammelaina,12.3096,41015,2024-07-31,2.0222,6276,2024-07-28
+654,Flycatcher,Spotted,Muscicapa,striata,8.5974,28646,2024-05-31,1.2744,3955,2024-05-25
+173,Francolin,Coqui,Peliperdix,coqui,1.8203,6065,2024-07-27,0.3180,987,2024-07-17
+174,Francolin,Crested,Dendroperdix,sephaena,11.5137,38363,2024-07-29,2.8116,8726,2024-07-23
+176,Francolin,Grey-winged,Scleroptila,afra,1.9487,6493,2024-07-31,0.3606,1119,2024-07-27
+179,Francolin,"Orange River",Scleroptila,gutturalis,2.8719,9569,2024-07-30,0.4685,1454,2024-07-30
+178,Francolin,Red-winged,Scleroptila,levaillantii,1.2914,4303,2024-07-28,0.1998,620,2024-06-26
+177,Francolin,Shelley's,Scleroptila,shelleyi,0.6609,2202,2024-07-23,0.1170,363,2024-06-20
+53,Frigatebird,"Great ",Fregata,minor,0.0009,3,2019-02-18,0.0003,1,2019-02-18
+1013,Frigatebird,Lesser,Fregata,ariel,0.0063,21,2019-06-10,0.0023,7,2024-02-06
+15,Fulmar,Southern,Fulmarus,glacialoides,0.0015,5,2024-07-15,0.0000,0,-
+209,Gallinule,Allen's,Porphyrio,alleni,0.1435,478,2024-06-21,0.0525,163,2024-04-13
+893,Gallinule,Purple,Porphyrio,martinica,0.0006,2,2023-07-08,0.0016,5,2023-07-08
+43,Gannet,Australasian,Morus,serrator,0.0045,15,2024-03-02,0.0010,3,2024-03-12
+44,Gannet,Cape,Morus,capensis,2.5727,8572,2024-07-28,0.4543,1410,2024-07-28
+339,Go-away-bird,Grey,Crinifer,concolor,25.1676,83857,2024-07-29,7.0436,21860,2024-07-29
+266,Godwit,Bar-tailed,Limosa,lapponica,0.6747,2248,2024-07-16,0.1257,390,2024-06-29
+265,Godwit,Black-tailed,Limosa,limosa,0.0309,103,2020-12-21,0.0026,8,2018-12-26
+1009,Godwit,Hudsonian,Limosa,haemastica,0.0042,14,2014-03-19,0.0006,2,2014-02-21
+92,Goose,"African Pygmy",Nettapus,auritus,0.2743,914,2024-07-27,0.1302,404,2024-07-15
+1308,Goose,Barnacle,Branta,leucopsis,0.0015,5,2016-06-19,0.0003,1,2009-07-27
+10004,Goose,Domestic,Anser,anser,1.3094,4363,2024-07-27,0.1621,503,2024-07-23
+89,Goose,Egyptian,Alopochen,aegyptiaca,60.2994,200914,2024-07-31,14.7625,45816,2024-09-08
+1286,Goose,Greylag,Anser,anser,0.0021,7,2015-02-02,0.0000,0,-
+88,Goose,Spur-winged,Plectropterus,gambensis,20.9109,69674,2024-07-31,4.2648,13236,2024-07-29
+160,Goshawk,African,Accipiter,tachiro,4.6150,15377,2024-07-29,0.5558,1725,2024-07-28
+163,Goshawk,"Dark Chanting",Melierax,metabates,0.7695,2564,2024-07-29,0.2910,903,2024-07-16
+162,Goshawk,Gabar,Micronisus,gabar,3.2858,10948,2024-07-27,0.7411,2300,2024-07-27
+165,Goshawk,"Pale Chanting",Melierax,canorus,6.9611,23194,2024-07-31,3.0652,9513,2024-07-28
+618,Grassbird,Cape,Sphenoeacus,afer,11.2850,37601,2024-07-31,1.5347,4763,2024-07-28
+616,Grassbird,Fan-tailed,Catriscus,brevirostris,0.3641,1213,2024-07-20,0.0590,183,2024-07-27
+5,Grebe,Black-necked,Podiceps,nigricollis,1.5375,5123,2024-07-27,0.3560,1105,2024-07-23
+4,Grebe,"Great Crested",Podiceps,cristatus,2.9130,9706,2024-07-26,0.4366,1355,2024-07-19
+6,Grebe,Little,Tachybaptus,ruficollis,25.5905,85266,2024-07-31,4.1230,12796,2024-07-30
+551,Greenbul,Sombre,Andropadus,importunus,24.7673,82523,2024-07-31,5.3465,16593,2024-07-30
+550,Greenbul,Yellow-bellied,Chlorocichla,flaviventris,5.4359,18112,2024-07-29,0.8339,2588,2024-07-29
+547,Greenbul,Yellow-streaked,Phyllastrephus,flavostriatus,0.2929,976,2024-07-20,0.0970,301,2024-05-02
+263,Greenshank,Common,Tringa,nebularia,7.5926,25298,2024-07-28,1.2901,4004,2024-07-23
+193,Guineafowl,Crested,Guttera,pucherani,1.2680,4225,2024-07-27,0.2626,815,2024-07-13
+192,Guineafowl,Helmeted,Numida,meleagris,49.5165,164986,2024-07-31,10.5463,32731,2024-07-30
+933,Gull,Black-headed,Chroicocephalus,ridibundus,0.0012,4,2009-11-26,0.0000,0,-
+932,Gull,Franklin's,Leucophaeus,pipixcan,0.0243,81,2024-05-23,0.0081,25,2021-12-06
+288,Gull,Grey-headed,Chroicocephalus,cirrocephalus,9.2535,30832,2024-07-31,2.0483,6357,2024-07-28
+289,Gull,Hartlaub's,Chroicocephalus,hartlaubii,5.2888,17622,2024-07-30,1.5283,4743,2024-07-31
+287,Gull,Kelp,Larus,dominicanus,11.6674,38875,2024-07-31,3.2086,9958,2024-07-28
+2046,Gull,Laughing,Leucophaeus,atricilla,0.0036,12,2022-02-12,0.0058,18,2022-02-12
+4136,Gull,"Lesser Black-backed",Larus,fuscus,0.0312,104,2023-09-19,0.0074,23,2021-06-16
+901,Gull,Sabine's,Xema,sabini,0.0243,81,2024-03-29,0.0142,44,2023-12-26
+2058,Gull,Sooty,Ichthyaetus,hemprichii,0.0132,44,2021-04-28,0.0061,19,2021-04-06
+167,Harrier,"African Marsh",Circus,ranivorus,3.3962,11316,2024-07-28,0.6602,2049,2024-07-28
+169,Harrier,Black,Circus,maurus,1.5282,5092,2024-07-31,0.5230,1623,2024-07-27
+170,Harrier,Montagu's,Circus,pygargus,0.1582,527,2024-02-14,0.0545,169,2024-03-16
+168,Harrier,Pallid,Circus,macrourus,0.1252,417,2024-02-21,0.0438,136,2024-02-21
+166,Harrier,"Western Marsh",Circus,aeruginosus,0.0561,187,2024-03-27,0.0129,40,2023-12-06
+171,Harrier-Hawk,African,Polyboroides,typus,6.6214,22062,2024-07-31,1.3365,4148,2024-07-28
+131,Hawk,Bat,Macheiramphus,alcinus,0.0849,283,2024-07-15,0.0480,149,2024-03-23
+141,Hawk-eagle,African,Aquila,spilogaster,1.9490,6494,2024-07-29,0.5610,1741,2024-07-27
+140,Hawk-Eagle,Ayre's,Hieraaetus,ayresii,0.0681,227,2024-05-28,0.0222,69,2024-01-13
+728,Helmetshrike,Retz's,Prionops,retzii,1.5108,5034,2024-07-27,0.2961,919,2024-07-27
+727,Helmetshrike,White-crested,Prionops,plumatus,4.4584,14855,2024-07-27,1.1123,3452,2024-07-28
+64,Heron,Black,Egretta,ardesiaca,1.9034,6342,2024-07-27,0.4060,1260,2024-07-15
+69,Heron,"Black-crowned Night",Nycticorax,nycticorax,4.1720,13901,2024-07-31,0.5494,1705,2024-07-31
+55,Heron,Black-headed,Ardea,melanocephala,32.7704,109189,2024-07-31,6.6534,20649,2024-07-29
+56,Heron,Goliath,Ardea,goliath,6.6355,22109,2024-07-28,1.2624,3918,2024-07-28
+54,Heron,Grey,Ardea,cinerea,27.3994,91293,2024-07-31,5.5346,17177,2024-07-30
+1015,Heron,"Little Blue",Egretta,caerulea,0.0003,1,2008-07-29,0.0000,0,-
+883,Heron,"Malagasy Pond",Ardeola,idae,0.0069,23,2018-07-04,0.0016,5,2018-06-26
+57,Heron,Purple,Ardea,purpurea,7.5614,25194,2024-07-31,1.0633,3300,2024-07-25
+65,Heron,Rufous-bellied,Ardeola,rufiventris,0.0501,167,2024-01-01,0.0222,69,2023-12-31
+62,Heron,Squacco,Ardeola,ralloides,4.5439,15140,2024-07-27,0.8426,2615,2024-07-28
+63,Heron,Striated,Butorides,striata,6.2171,20715,2024-07-27,1.0733,3331,2024-07-27
+70,Heron,"White-backed Night",Gorsachius,leuconotus,0.1182,394,2024-06-24,0.0287,89,2024-02-22
+116,Hobby,African,Falco,cuvierii,0.0009,3,2020-01-11,0.0000,0,-
+115,Hobby,Eurasian,Falco,subbuteo,0.4721,1573,2024-03-27,0.0957,297,2024-03-28
+132,Honey-buzzard,European,Pernis,apivorus,0.5033,1677,2024-04-04,0.1224,380,2024-04-13
+443,Honeybird,Brown-backed,Prodotiscus,regulus,2.1528,7173,2024-07-25,0.2159,670,2024-07-26
+440,Honeyguide,Greater,Indicator,indicator,4.3329,14437,2024-07-27,0.6563,2037,2024-07-28
+442,Honeyguide,Lesser,Indicator,minor,7.1127,23699,2024-07-31,0.8136,2525,2024-07-27
+441,Honeyguide,Scaly-throated,Indicator,variegatus,1.4589,4861,2024-07-28,0.1734,538,2024-07-05
+418,Hoopoe,African,Upupa,africana,29.1662,97180,2024-07-31,4.6776,14517,2024-07-29
+424,Hornbill,"African Grey",Lophoceros,nasutus,13.3868,44604,2024-07-29,3.6052,11189,2024-07-28
+427,Hornbill,Crowned,Lophoceros,alboterminatus,3.4938,11641,2024-07-28,0.5581,1732,2024-07-24
+1185,Hornbill,"Damara Red-billed",Tockus,damarensis,0.0003,1,2021-08-22,0.0000,0,-
+10002,Hornbill,"Hybrid Damara/Red-billed",Tockus,damarensis/erythrorhynchus,0.0000,0,-,0.0003,1,2019-04-20
+430,Hornbill,"Southern Ground ",Bucorvus,leadbeateri,1.5237,5077,2024-07-27,2.9885,9275,2024-07-27
+4129,Hornbill,"Southern Red-billed",Tockus,rufirostris,8.5260,28408,2024-07-29,2.8451,8830,2024-07-28
+426,Hornbill,"Southern Yellow-billed",Tockus,leucomelas,12.1959,40636,2024-07-29,4.4939,13947,2024-07-28
+422,Hornbill,Trumpeter,Bycanistes,bucinator,4.3413,14465,2024-07-28,0.7356,2283,2024-07-25
+668,Hyliota,Southern,Hyliota,australis,0.0018,6,2019-05-18,0.0000,0,-
+81,Ibis,"African Sacred",Threskiornis,aethiopicus,32.8037,109300,2024-07-31,7.4956,23263,2024-09-08
+83,Ibis,Glossy,Plegadis,falcinellus,9.0644,30202,2024-07-29,1.9223,5966,2024-07-24
+84,Ibis,"Hadada ",Bostrychia,hagedash,68.6684,228799,2024-07-31,16.6526,51682,2024-07-30
+82,Ibis,"Southern Bald",Geronticus,calvus,2.6054,8681,2024-07-28,1.0478,3252,2024-07-28
+849,Indigobird,Dusky,Vidua,funerea,1.8869,6287,2024-05-31,0.2984,926,2024-06-28
+850,Indigobird,Purple,Vidua,purpurascens,0.9028,3008,2024-07-23,0.1659,515,2024-06-10
+851,Indigobird,Village,Vidua,chalybeata,2.5502,8497,2024-07-23,0.5465,1696,2024-07-14
+228,Jacana,African,Actophilornis,africanus,7.4797,24922,2024-07-31,1.8315,5684,2024-07-27
+229,Jacana,Lesser,Microparra,capensis,0.0894,298,2024-06-26,0.0303,94,2024-07-15
+930,Jaeger,Long-tailed,Stercorarius,longicaudus,0.0006,2,2023-04-22,0.0000,0,-
+284,Jaeger,Parasitic,Stercorarius,parasiticus,0.1023,341,2024-06-12,0.0287,89,2024-04-20
+285,Jaeger,Pomarine,Stercorarius,pomarinus,0.0120,40,2024-04-06,0.0023,7,2023-04-23
+121,Kestrel,Dickinson's,Falco,dickinsoni,0.0894,298,2024-07-23,0.0222,69,2024-07-03
+122,Kestrel,Greater,Falco,rupicoloides,2.4568,8186,2024-07-30,1.0710,3324,2024-07-27
+125,Kestrel,Lesser,Falco,naumanni,1.7887,5960,2024-05-29,0.6157,1911,2024-07-12
+123,Kestrel,Rock,Falco,rupicolus,10.0839,33599,2024-07-31,2.3621,7331,2024-07-29
+398,Kingfisher,"African Pygmy",Ispidina,picta,1.0880,3625,2024-06-03,0.1711,531,2024-03-20
+402,Kingfisher,Brown-hooded,Halcyon,albiventris,26.8525,89471,2024-07-31,4.3708,13565,2024-07-29
+395,Kingfisher,Giant,Megaceryle,maxima,9.4726,31562,2024-07-29,1.3990,4342,2024-07-29
+401,Kingfisher,Grey-headed,Halcyon,leucocephala,0.2995,998,2024-04-13,0.0690,214,2024-03-22
+396,Kingfisher,Half-collared,Alcedo,semitorquata,1.3395,4463,2024-07-27,0.2110,655,2024-07-27
+397,Kingfisher,Malachite,Corythornis,cristatus,10.3549,34502,2024-07-28,1.5092,4684,2024-07-25
+400,Kingfisher,Mangrove,Halcyon,senegaloides,0.1258,419,2024-07-27,0.0216,67,2024-06-30
+394,Kingfisher,Pied,Ceryle,rudis,17.9691,59872,2024-07-31,3.0639,9509,2024-07-30
+403,Kingfisher,Striped,Halcyon,chelicuti,2.7431,9140,2024-07-27,0.5922,1838,2024-07-27
+399,Kingfisher,Woodland,Halcyon,senegalensis,6.9551,23174,2024-05-14,2.6199,8131,2024-06-19
+128,Kite,Black,Milvus,migrans,0.1795,598,2024-03-07,0.0503,156,2024-03-05
+130,Kite,"Black-winged ",Elanus,caeruleus,27.0989,90292,2024-07-31,7.3245,22732,2024-07-30
+129,Kite,Yellow-billed,Milvus,aegyptius,12.3409,41119,2024-06-29,3.8669,12001,2024-07-27
+254,Knot,Red,Calidris,canutus,0.1540,513,2024-05-11,0.0329,102,2024-04-20
+223,Korhaan,Blue,Eupodotis,caerulescens,1.7482,5825,2024-07-29,0.4376,1358,2024-07-30
+220,Korhaan,Karoo,Eupodotis,vigorsii,2.2389,7460,2024-07-27,0.5452,1692,2024-07-27
+1035,Korhaan,"Northern Black",Afrotis,afraoides,10.0890,33616,2024-07-30,1.9552,6068,2024-07-30
+224,Korhaan,Red-crested,Lophotis,ruficrista,5.1186,17055,2024-07-29,1.6494,5119,2024-07-27
+4134,Korhaan,"Southern Black",Afrotis,afra,1.4877,4957,2024-07-31,0.3944,1224,2024-07-15
+247,Lapwing,"African Wattled",Vanellus,senegallus,14.5621,48520,2024-07-28,2.5706,7978,2024-07-28
+243,Lapwing,Black-winged,Vanellus,melanopterus,1.6270,5421,2024-07-27,0.4024,1249,2024-07-21
+245,Lapwing,Blacksmith,Vanellus,armatus,54.1129,180301,2024-07-31,12.8457,39867,2024-09-08
+242,Lapwing,Crowned,Vanellus,coronatus,36.6369,122072,2024-07-31,7.7956,24194,2024-07-30
+10033,Lapwing,"Hybrid Blacksmith/White-crowned",,,0.0006,2,2016-08-04,0.0000,0,-
+248,Lapwing,Long-toed,Vanellus,crassirostris,0.0018,6,2020-09-23,0.0023,7,2020-09-25
+244,Lapwing,Senegal,Vanellus,lugubris,0.5789,1929,2024-07-27,0.2156,669,2024-07-27
+1031,Lapwing,Spur-winged,Vanellus,spinosus,0.0012,4,2020-06-23,0.0074,23,2020-05-31
+246,Lapwing,White-crowned,Vanellus,albiceps,1.1090,3695,2024-07-27,0.3064,951,2024-07-14
+4123,Lark,"Agulhas Long-billed",Certhilauda,brevirostris,0.8647,2881,2024-07-31,0.1850,574,2024-07-27
+1037,Lark,Barlow's,Calendulauda,barlowi,0.0435,145,2022-12-19,0.0139,43,2024-06-22
+472,Lark,Botha's,Spizocorys,fringillaris,0.0183,61,2023-03-13,0.0280,87,2022-03-20
+4140,Lark,"Cape Clapper",Mirafra,apiata,1.2515,4170,2024-07-25,0.1975,613,2024-07-20
+4125,Lark,"Cape Long-billed",Certhilauda,curvirostris,0.3085,1028,2024-07-28,0.0777,241,2024-06-17
+466,Lark,Clapper,Mirafra,apiata,0.0003,1,2009-08-30,0.0000,0,-
+464,Lark,Dusky,Pinarocorys,nigricans,0.3475,1158,2024-06-29,0.1324,411,2024-04-10
+1183,Lark,"Eastern Clapper",Mirafra,fasciolata,5.2816,17598,2024-07-30,0.8523,2645,2024-07-30
+4126,Lark,"Eastern Long-billed",Certhilauda,semitorquata,0.9061,3019,2024-07-17,0.2275,706,2024-07-20
+459,Lark,Fawn-colored,Calendulauda,africanoides,2.1897,7296,2024-07-27,0.5181,1608,2024-07-27
+468,Lark,Flappet,Mirafra,rufocinnamomea,0.7059,2352,2024-06-25,0.1695,526,2024-05-12
+4155,Lark,Karoo,Calendulauda,albescens,0.0000,0,-,0.0003,1,2018-03-12
+461,Lark,Karoo,Calendulauda,albescens,1.3560,4518,2024-07-31,0.3293,1022,2024-07-29
+4127,Lark,"Karoo Long-billed",Certhilauda,subcoronata,1.9604,6532,2024-07-27,0.4827,1498,2024-07-16
+463,Lark,Large-billed,Galerida,magnirostris,5.7783,19253,2024-07-31,1.1306,3509,2024-07-30
+456,Lark,Melodious,Mirafra,cheniana,0.6258,2085,2024-05-26,0.1350,419,2024-03-21
+457,Lark,Monotonous,Mirafra,passerina,0.6873,2290,2024-05-17,0.3309,1027,2024-03-22
+490,Lark,Pink-billed,Spizocorys,conirostris,0.8358,2785,2024-07-21,0.1727,536,2024-07-27
+479,Lark,Red,Calendulauda,burra,0.1182,394,2024-07-16,0.0490,152,2024-06-06
+488,Lark,Red-capped,Calandrella,cinerea,10.1677,33878,2024-07-31,2.1414,6646,2024-07-28
+473,Lark,Rudd's,Heteromirafra,ruddi,0.0582,194,2023-12-06,0.0364,113,2024-01-13
+458,Lark,Rufous-naped,Mirafra,africana,17.1300,57076,2024-07-28,3.4644,10752,2024-07-27
+460,Lark,Sabota,Calendulauda,sabota,8.5293,28419,2024-07-30,2.3041,7151,2024-07-27
+491,Lark,Sclater's,Spizocorys,sclateri,0.0981,327,2024-06-22,0.0264,82,2024-06-07
+465,Lark,Short-clawed,Certhilauda,chuana,0.2440,813,2024-05-31,0.0574,178,2024-06-21
+474,Lark,Spike-heeled,Chersomanes,albofasciata,6.2021,20665,2024-07-31,1.3765,4272,2024-07-30
+492,Lark,Stark's,Spizocorys,starki,0.2212,737,2024-04-01,0.0464,144,2024-03-30
+703,Longclaw,Cape,Macronyx,capensis,21.2981,70964,2024-07-30,3.9684,12316,2024-07-30
+705,Longclaw,Rosy-throated,Macronyx,ameliae,0.0372,124,2024-07-24,0.0129,40,2023-10-25
+704,Longclaw,Yellow-throated,Macronyx,croceus,4.3575,14519,2024-07-31,0.7079,2197,2024-07-27
+331,Lovebird,Black-cheeked,Agapornis,nigrigenis,0.0843,281,2024-04-23,0.0158,49,2024-04-23
+1636,Lovebird,Fischer's,Agapornis,fischeri,0.0003,1,2019-04-19,0.0003,1,2022-07-03
+20004,Lovebird,Hybrid,Agapornis,hybrid,0.2458,819,2024-07-26,0.0905,281,2024-07-20
+332,Lovebird,Lilian's,Agapornis,lilianae,0.0009,3,2023-07-13,0.0006,2,2021-11-26
+330,Lovebird,Rosy-faced,Agapornis,roseicollis,0.6909,2302,2024-07-25,0.1324,411,2024-07-19
+1638,Lovebird,Yellow-collared,Agapornis,personatus,0.1987,662,2024-07-05,0.0155,48,2024-03-20
+358,Malkoha,Green,Ceuthmochares,australis,0.3785,1261,2024-07-25,0.0728,226,2024-06-30
+823,Mannikin,Bronze,Spermestes,cucullata,15.2143,50693,2024-07-31,2.5671,7967,2024-07-28
+822,Mannikin,Magpie,Spermestes,fringilloides,0.1261,420,2024-06-15,0.0461,143,2024-02-25
+824,Mannikin,Red-backed,Spermestes,nigriceps,1.6588,5527,2024-07-27,0.2181,677,2024-07-28
+510,Martin,Banded,Riparia,cincta,4.5097,15026,2024-07-20,0.9421,2924,2024-07-16
+509,Martin,Brown-throated,Riparia,paludicola,19.8863,66260,2024-07-31,2.6547,8239,2024-07-30
+507,Martin,"Common House",Delichon,urbicum,2.8689,9559,2024-07-20,0.4321,1341,2024-06-08
+506,Martin,Rock,Ptyonoprogne,fuligula,23.2306,77403,2024-07-31,3.5862,11130,2024-09-08
+508,Martin,Sand,Riparia,riparia,0.5156,1718,2024-05-20,0.1012,314,2024-06-21
+210,Moorhen,Common,Gallinula,chloropus,25.9554,86482,2024-07-31,3.6065,11193,2024-07-31
+211,Moorhen,Lesser,Paragallinula,angulata,0.3830,1276,2024-07-20,0.1247,387,2024-04-23
+392,Mousebird,Red-faced,Urocolius,indicus,33.9652,113170,2024-07-31,5.6004,17381,2024-07-30
+390,Mousebird,Speckled,Colius,striatus,41.2669,137499,2024-07-31,6.6231,20555,2024-07-28
+391,Mousebird,White-backed,Colius,colius,10.6130,35362,2024-07-31,1.6791,5211,2024-09-08
+734,Myna,Common,Acridotheres,tristis,30.7920,102597,2024-07-30,8.2789,25694,2024-07-30
+725,Nicator,Eastern,Nicator,gularis,1.4601,4865,2024-07-27,0.2417,750,2024-07-17
+592,Nightingale,Thrush,Luscinia,luscinia,0.1020,340,2024-03-21,0.0229,71,2024-03-17
+371,Nightjar,European,Caprimulgus,europaeus,0.3199,1066,2024-06-10,0.0731,227,2024-05-02
+373,Nightjar,Fiery-necked,Caprimulgus,pectoralis,6.5941,21971,2024-07-28,1.1271,3498,2024-07-27
+374,Nightjar,Freckled,Caprimulgus,tristigma,1.2722,4239,2024-07-25,0.2104,653,2024-07-17
+377,Nightjar,Pennant-winged,Caprimulgus,vexillarius,0.0414,138,2023-12-02,0.0193,60,2023-12-23
+372,Nightjar,Rufous-cheeked,Caprimulgus,rufigena,1.0853,3616,2024-06-28,0.1634,507,2024-05-05
+376,Nightjar,Square-tailed,Caprimulgus,fossii,1.0300,3432,2024-07-28,0.1479,459,2024-07-15
+375,Nightjar,Swamp,Caprimulgus,natalensis,0.0555,185,2024-07-04,0.0203,63,2024-05-10
+303,Noddy,Brown,Anous,stolidus,0.0003,1,2019-01-19,0.0000,0,-
+939,Noddy,Lesser,Anous,tenuirostris,0.0057,19,2024-02-12,0.0068,21,2023-03-25
+74,Openbill,African,Anastomus,lamelligerus,1.1591,3862,2024-07-26,0.4028,1250,2024-07-23
+520,Oriole,"African Golden",Oriolus,auratus,0.0321,107,2024-02-09,0.0103,32,2023-12-28
+521,Oriole,Black-headed,Oriolus,larvatus,23.8753,79551,2024-07-31,4.3096,13375,2024-07-28
+519,Oriole,"Eurasian Golden",Oriolus,oriolus,0.5357,1785,2024-04-20,0.1653,513,2024-03-14
+172,Osprey,Western,Pandion,haliaetus,1.4736,4910,2024-07-28,0.3067,952,2024-07-26
+1,Ostrich,Common,Struthio,camelus,10.3009,34322,2024-07-31,3.2669,10139,2024-07-30
+360,Owl,"African Grass",Tyto,capensis,0.1483,494,2024-07-19,0.0557,173,2024-07-06
+363,Owl,"African Scops",Otus,senegalensis,1.8809,6267,2024-07-27,0.2890,897,2024-07-27
+362,Owl,"African Wood",Strix,woodfordii,1.1681,3892,2024-07-27,0.1698,527,2024-06-29
+361,Owl,Marsh,Asio,capensis,1.5586,5193,2024-07-27,0.3512,1090,2024-07-08
+370,Owl,"Pel's Fishing",Scotopelia,peli,0.1216,405,2024-07-23,0.0135,42,2023-12-02
+364,Owl,"Southern White-faced Scops",Ptilopsis,granti,0.7044,2347,2024-07-12,0.1589,493,2024-07-15
+359,Owl,"Western Barn ",Tyto,alba,4.5436,15139,2024-07-27,0.7549,2343,2024-07-26
+366,Owlet,"African Barred",Glaucidium,capense,0.6627,2208,2024-07-27,0.1112,345,2024-07-20
+365,Owlet,Pearl-spotted,Glaucidium,perlatum,4.9608,16529,2024-07-28,0.8526,2646,2024-07-27
+748,Oxpecker,Red-billed,Buphagus,erythrorynchus,9.9771,33243,2024-07-29,3.1477,9769,2024-07-28
+747,Oxpecker,Yellow-billed,Buphagus,africanus,1.4154,4716,2024-07-23,0.4965,1541,2024-07-20
+231,Oystercatcher,African,Haematopus,moquini,6.2030,20668,2024-07-30,1.3839,4295,2024-07-24
+894,Oystercatcher,Eurasian,Haematopus,ostralegus,0.0435,145,2024-07-01,0.0193,60,2024-06-29
+230,Painted-snipe,Greater,Rostratula,benghalensis,0.5654,1884,2024-07-26,0.1653,513,2024-07-13
+593,"Palm Thrush",Collared,Cichladusa,arquata,0.0039,13,2024-07-12,0.0010,3,2015-07-25
+1024,Parakeet,"Plum-headed ",Psittacula,cyanocephala,0.0009,3,2011-08-02,0.0000,0,-
+941,Parakeet,Rose-ringed,Psittacula,krameri,3.6558,12181,2024-07-28,0.8787,2727,2024-07-28
+328,Parrot,Brown-headed,Poicephalus,cryptoxanthus,3.2612,10866,2024-07-27,0.9695,3009,2024-07-28
+1650,Parrot,Brown-necked,Poicephalus,fuscicollis,0.3890,1296,2024-07-27,0.0519,161,2024-06-21
+10019,Parrot,Budgerigar,Melopsittacus,undulatus,0.0003,1,2012-04-08,0.0000,0,-
+4132,Parrot,"Cape ",Poicephalus,robustus,0.5078,1692,2024-07-20,0.0851,264,2024-04-20
+1664,Parrot,Grey,Psittacus,erithacus,0.0003,1,2019-09-03,0.0000,0,-
+327,Parrot,Meyer's,Poicephalus,meyeri,0.4532,1510,2024-07-22,0.0744,231,2024-03-23
+1660,Parrot,Senegal,Poicephalus,senegalus,0.0075,25,2020-01-25,0.0000,0,-
+980,Partridge,Chukar,Alectoris,chukar,0.0531,177,2024-07-22,0.0039,12,2024-05-09
+1021,Peafowl,"Indian ",Pavo,cristatus,1.4091,4695,2024-07-27,0.2259,701,2024-07-16
+42,Pelican,"Great White",Pelecanus,onocrotalus,2.3206,7732,2024-07-26,0.4256,1321,2024-07-21
+41,Pelican,Pink-backed,Pelecanus,rufescens,0.6753,2250,2024-07-27,0.1869,580,2024-07-21
+2,Penguin,African,Spheniscus,demersus,0.3752,1250,2024-07-22,0.1502,466,2024-07-18
+987,Penguin,King,Aptenodytes,patagonicus,0.0015,5,2019-11-01,0.0029,9,2020-02-01
+983,Penguin,Macaroni,Eudyptes,chrysolophus,0.0000,0,-,0.0003,1,2009-03-02
+13203,Penguin,"Nothern Rockhopper",Eudyptes,moseleyi,0.0006,2,2023-01-12,0.0003,1,2023-01-24
+20,Petrel,Blue,Halobaena,caerulea,0.0000,0,-,0.0003,1,2024-06-08
+14,Petrel,Cape,Daption,capense,0.0012,4,2024-06-17,0.0006,2,2023-08-26
+16,Petrel,Great-winged,Pterodroma,macroptera,0.0072,24,2023-05-13,0.0023,7,2022-01-30
+984,Petrel,"Northern Giant",Macronectes,halli,0.0294,98,2024-07-15,0.0106,33,2024-06-20
+19,Petrel,Soft-plumaged,Pterodroma,mollis,0.0042,14,2024-07-28,0.0019,6,2022-07-15
+13,Petrel,"Southern Giant",Macronectes,giganteus,0.0255,85,2024-07-15,0.0100,31,2024-06-08
+4137,Petrel,White-chinned,Procellaria,aequinoctialis,0.2764,921,2024-07-28,0.0754,234,2024-07-28
+271,Phalarope,Red,Phalaropus,fulicarius,0.0276,92,2023-09-23,0.0113,35,2024-02-17
+272,Phalarope,Red-necked,Phalaropus,lobatus,0.1591,530,2024-05-05,0.0287,89,2024-02-11
+929,Phalarope,Wilson's,Phalaropus,tricolor,0.0072,24,2020-03-12,0.0016,5,2020-01-12
+323,Pigeon,"African Green",Treron,calvus,6.9362,23111,2024-07-31,1.1928,3702,2024-07-27
+312,Pigeon,"African Olive",Columba,arquatrix,8.1409,27125,2024-07-27,1.3549,4205,2024-07-28
+313,Pigeon,"Eastern Bronze-naped",Columba,delegorguei,0.0579,193,2024-06-22,0.0171,53,2023-12-09
+311,Pigeon,Speckled,Columba,guinea,46.2313,154040,2024-07-31,9.1615,28433,2024-07-31
+692,Pipit,African,Anthus,cinnamomeus,29.0254,96711,2024-07-31,5.3162,16499,2024-07-29
+697,Pipit,"African Rock",Anthus,crenatus,0.9811,3269,2024-07-30,0.1224,380,2024-07-10
+695,Pipit,Buffy,Anthus,vaalensis,1.4775,4923,2024-07-27,0.2926,908,2024-07-14
+699,Pipit,Bushveld,Anthus,caffer,0.7077,2358,2024-07-27,0.1218,378,2024-07-11
+702,Pipit,Golden,Tmetothylacus,tenellus,0.0147,49,2021-12-20,0.0100,31,2021-12-20
+3706,Pipit,Kimberley,Anthus,pseudosimilis,0.0216,72,2013-07-10,0.0016,5,2015-03-03
+10876,Pipit,Long-billed,Anthus,similis,0.0003,1,2018-12-31,0.0000,0,-
+693,Pipit,Long-billed,Anthus,similis,0.1366,455,2024-04-25,0.0441,137,2022-11-25
+1059,Pipit,Long-tailed,Anthus,longicaudatus,0.0015,5,2012-07-21,0.0000,0,-
+928,Pipit,Mountain,Anthus,hoeschi,0.0327,109,2024-04-13,0.0116,36,2024-05-16
+10877,Pipit,Nicholson's,Anthus,nicholsoni,3.0277,10088,2024-07-31,0.3957,1228,2024-07-06
+694,Pipit,Plain-backed,Anthus,leucophrys,3.3110,11032,2024-07-30,0.5165,1603,2024-07-27
+700,Pipit,Short-tailed,Anthus,brachyurus,0.0489,163,2024-01-10,0.0142,44,2023-12-09
+696,Pipit,Striped,Anthus,lineiventris,1.1765,3920,2024-07-26,0.1543,479,2024-07-05
+698,Pipit,Tree,Anthus,trivialis,0.0267,89,2024-01-13,0.0048,15,2022-02-20
+701,Pipit,Yellow-breasted,Anthus,chloris,0.2059,686,2024-04-27,0.0744,231,2024-02-28
+922,Plover,"American Golden",Pluvialis,dominica,0.0363,121,2024-02-24,0.0103,32,2024-01-28
+240,Plover,Caspian,Charadrius,asiaticus,0.0702,234,2024-02-17,0.0190,59,2024-02-15
+236,Plover,Chestnut-banded,Charadrius,pallidus,0.4898,1632,2024-07-28,0.0586,182,2024-07-28
+233,Plover,"Common Ringed",Charadrius,hiaticula,3.3716,11234,2024-07-22,0.6406,1988,2024-07-04
+239,Plover,"Greater Sand",Charadrius,leschenaultii,0.1213,404,2024-03-22,0.0155,48,2024-03-22
+241,Plover,Grey,Pluvialis,squatarola,2.2476,7489,2024-07-25,0.3647,1132,2024-07-12
+237,Plover,Kittlitz's,Charadrius,pecuarius,6.2126,20700,2024-07-29,1.1529,3578,2024-07-29
+234,Plover,"Lesser Sand",Charadrius,mongolus,0.0459,153,2024-01-09,0.0068,21,2023-12-15
+955,Plover,"Little Ringed",Charadrius,dubius,0.0033,11,2017-09-12,0.0026,8,2019-03-20
+1039,Plover,"Pacific Golden",Pluvialis,fulva,0.0165,55,2024-04-13,0.0045,14,2021-01-17
+238,Plover,Three-banded,Charadrius,tricollaris,24.1529,80476,2024-07-31,4.0960,12712,2024-07-30
+235,Plover,White-fronted,Charadrius,marginatus,4.9452,16477,2024-07-28,0.8452,2623,2024-07-25
+1332,Pochard,Red-crested,Netta,rufina,0.0297,99,2024-07-19,0.0026,8,2023-01-15
+102,Pochard,Southern,Netta,erythrophthalma,4.3176,14386,2024-07-30,0.7214,2239,2024-07-28
+282,Pratincole,Black-winged,Glareola,nordmanni,0.6132,2043,2024-03-30,0.2362,733,2024-05-14
+281,Pratincole,Collared,Glareola,pratincola,0.5015,1671,2024-07-27,0.1698,527,2024-03-28
+650,Prinia,Black-chested,Prinia,flavicans,17.2677,57535,2024-07-30,2.5155,7807,2024-07-30
+14210,Prinia,"Black-chested (Hybrid flavicens/maculosa)",Prinia,flavicans/maculosa,0.0003,1,2018-11-22,0.0000,0,-
+1049,Prinia,Drakensberg,Prinia,hypoxantha,3.3095,11027,2024-07-28,0.4952,1537,2024-07-28
+4139,Prinia,Karoo,Prinia,maculosa,19.7882,65933,2024-07-31,3.6184,11230,2024-07-31
+651,Prinia,Spotted,Prinia,hypoxantha,0.0000,0,-,0.0006,2,2017-01-06
+649,Prinia,Tawny-flanked,Prinia,subflava,31.8709,106192,2024-07-31,5.3784,16692,2024-07-28
+22,Prion,Antarctic,Pachyptila,desolata,0.0072,24,2024-07-28,0.0026,8,2024-06-08
+712,Puffback,Black-backed,Dryoscopus,cubla,23.0427,76777,2024-07-31,4.3595,13530,2024-07-30
+830,Pytilia,Green-winged,Pytilia,melba,6.7273,22415,2024-07-30,1.3417,4164,2024-07-27
+829,Pytilia,Orange-winged,Pytilia,afra,0.0234,78,2024-06-10,0.0058,18,2023-12-17
+189,Quail,Common,Coturnix,coturnix,3.4037,11341,2024-07-31,0.6473,2009,2024-07-27
+190,Quail,Harlequin,Coturnix,delegorguei,0.4274,1424,2024-03-23,0.1808,561,2024-02-09
+805,Quelea,Red-billed,Quelea,quelea,22.3575,74494,2024-07-31,4.7787,14831,2024-07-29
+806,Quelea,Red-headed,Quelea,erythrops,0.2389,796,2024-07-27,0.0351,109,2024-06-22
+197,Rail,African,Rallus,caerulescens,2.2149,7380,2024-07-28,0.2681,832,2024-07-28
+524,Raven,White-necked,Corvus,albicollis,12.3685,41211,2024-07-31,2.6644,8269,2024-07-28
+261,Redshank,Common,Tringa,totanus,0.0189,63,2024-07-25,0.0026,8,2024-04-29
+589,Robin,White-starred,Pogonocichla,stellata,0.7599,2532,2024-07-20,0.1150,357,2024-06-30
+581,Robin-Chat,Cape,Cossypha,caffra,45.8709,152839,2024-07-31,7.9200,24580,2024-09-08
+578,Robin-Chat,"Chorister Robin-Chat",Cossypha,dichroa,2.6414,8801,2024-07-24,0.3676,1141,2024-06-27
+579,Robin-Chat,Red-capped,Cossypha,natalensis,6.0802,20259,2024-07-29,0.8120,2520,2024-07-28
+580,Robin-Chat,White-browed,Cossypha,heuglini,4.0853,13612,2024-07-29,0.5371,1667,2024-07-28
+582,Robin-Chat,White-throated,Cossypha,humeralis,5.8266,19414,2024-07-29,0.6496,2016,2024-07-25
+540,Rockjumper,Cape,Chaetops,frenatus,0.2257,752,2024-07-23,0.0918,285,2024-07-06
+1038,Rockjumper,"Drakensberg ",Chaetops,aurantius,0.0858,286,2024-04-06,0.0277,86,2024-07-20
+416,Roller,Broad-billed,Eurystomus,glaucurus,1.0702,3566,2024-03-20,0.2458,763,2024-07-03
+412,Roller,European,Coracias,garrulus,3.0859,10282,2024-04-08,2.0000,6207,2024-04-06
+413,Roller,Lilac-breasted,Coracias,caudatus,10.3216,34391,2024-07-29,5.1638,16026,2024-07-28
+415,Roller,Purple,Coracias,naevius,2.2119,7370,2024-07-27,0.8790,2728,2024-07-25
+414,Roller,Racket-tailed,Coracias,spatulatus,0.0942,314,2024-07-23,0.0219,68,2024-04-05
+308,Sandgrouse,Burchell's,Pterocles,burchelli,0.4619,1539,2024-07-18,0.1147,356,2024-07-24
+310,Sandgrouse,Double-banded,Pterocles,bicinctus,2.0084,6692,2024-07-28,0.5242,1627,2024-07-11
+307,Sandgrouse,Namaqua,Pterocles,namaqua,2.6585,8858,2024-07-28,0.5951,1847,2024-07-27
+309,Sandgrouse,Yellow-throated,Pterocles,gutturalis,0.1237,412,2024-05-08,0.0541,168,2024-07-25
+252,Sandpiper,Baird's,Calidris,bairdii,0.0171,57,2022-01-11,0.0116,36,2022-03-12
+981,Sandpiper,Broad-billed,Calidris,falcinellus,0.0192,64,2022-10-30,0.0026,8,2021-04-08
+926,Sandpiper,Buff-breasted,Calidris,subruficollis,0.0093,31,2023-12-13,0.0045,14,2021-12-30
+258,Sandpiper,Common,Actitis,hypoleucos,5.2390,17456,2024-07-28,0.9109,2827,2024-07-09
+251,Sandpiper,Curlew,Calidris,ferruginea,2.5550,8513,2024-07-28,0.3577,1110,2024-07-21
+259,Sandpiper,Green,Tringa,ochropus,0.0924,308,2024-02-04,0.0158,49,2024-03-30
+262,Sandpiper,Marsh,Tringa,stagnatilis,2.0745,6912,2024-06-22,0.3683,1143,2024-06-22
+895,Sandpiper,Pectoral,Calidris,melanotos,0.1092,364,2024-02-10,0.0255,79,2024-02-11
+257,Sandpiper,Terek,Xenus,cinereus,0.2734,911,2024-07-14,0.0509,158,2024-04-13
+997,Sandpiper,White-rumped,Calidris,fuscicollis,0.0132,44,2024-02-03,0.0035,11,2021-11-29
+264,Sandpiper,Wood,Tringa,glareola,7.0680,23550,2024-07-06,1.4390,4466,2024-04-21
+511,Saw-wing,"Black (Southern Africa)",Psalidoprocne,"pristoptera holomelas",9.4807,31589,2024-07-28,1.2930,4013,2024-07-23
+512,Saw-wing,Eastern,Psalidoprocne,orientalis,0.0009,3,2018-12-29,0.0000,0,-
+421,Scimitarbill,Common,Rhinopomastus,cyanomelas,7.5884,25284,2024-07-28,1.3391,4156,2024-07-28
+585,"Scrub Robin",Bearded,Cercotrichas,quadrivirgata,1.5372,5122,2024-07-29,0.2152,668,2024-07-24
+584,"Scrub Robin","Brown Scrub",Cercotrichas,signata,1.2737,4244,2024-07-27,0.1514,470,2024-06-13
+586,"Scrub Robin",Kalahari,Cercotrichas,paena,7.0271,23414,2024-07-30,1.3095,4064,2024-07-27
+583,"Scrub Robin",Karoo,Cercotrichas,coryphoeus,12.4837,41595,2024-07-31,1.9919,6182,2024-07-27
+567,"Scrub Robin",Rufous-tailed,Cercotrichas,galactotes,0.0117,39,2016-09-11,0.0045,14,2016-08-27
+588,"Scrub Robin",White-browed,Cercotrichas,leucophrys,17.9556,59827,2024-07-31,3.2102,9963,2024-07-29
+867,Seedeater,Streaky-headed,Crithagra,gularis,16.1470,53801,2024-07-31,1.9449,6036,2024-07-28
+10702,Shearwater,Cory's,Calonectris,borealis,0.0267,89,2024-05-01,0.0068,21,2024-05-01
+26,Shearwater,Cory's,Calonectris,borealis,0.0195,65,2022-01-14,0.0010,3,2016-03-20
+881,Shearwater,Flesh-footed,Ardenna,carneipes,0.0033,11,2019-10-31,0.0013,4,2022-12-30
+25,Shearwater,Great,Ardenna,gravis,0.0138,46,2024-06-08,0.0055,17,2024-05-08
+4153,Shearwater,Manx,Puffinus,puffinus,0.0099,33,2024-07-28,0.0023,7,2024-06-08
+29,Shearwater,Sooty,Ardenna,grisea,0.1738,579,2024-07-28,0.0557,173,2024-07-21
+28,Shearwater,Tropical,Puffinus,bailloni,0.0003,1,2014-04-18,0.0000,0,-
+864,Sheathbill,"Snowy ",Chionis,albus,0.0021,7,2022-10-04,0.0035,11,2022-10-01
+1342,Shelduck,Common,Tadorna,tadorna,0.0177,59,2024-07-28,0.0122,38,2023-10-27
+1340,Shelduck,Ruddy,Tadorna,ferruginea,0.0087,29,2023-09-13,0.0000,0,-
+90,Shelduck,"South African",Tadorna,cana,10.8162,36039,2024-07-31,2.1956,6814,2024-07-30
+94,Shoveler,Cape,Spatula,smithii,10.5650,35202,2024-07-31,1.8311,5683,2024-07-29
+93,Shoveler,Northern,Spatula,clypeata,0.0021,7,2017-04-30,0.0013,4,2017-04-30
+711,Shrike,Crimson-breasted,Laniarius,atrococcineus,7.4506,24825,2024-07-28,1.3984,4340,2024-07-28
+706,Shrike,"Lesser Grey",Lanius,minor,3.7315,12433,2024-04-22,1.2872,3995,2024-07-17
+724,Shrike,Magpie,Urolestes,melanoleucus,8.7517,29160,2024-07-27,4.2619,13227,2024-07-28
+2300,Shrike,Magpie,Urolestes,melanoleucus,0.0003,1,2023-11-17,0.0000,0,-
+708,Shrike,Red-backed,Lanius,collurio,9.2748,30903,2024-05-30,2.6341,8175,2024-05-14
+7878,Shrike,Red-tailed,Lanius,phoenicuroides,0.0003,1,2023-03-18,0.0003,1,2023-03-19
+730,Shrike,"Southern White-crowned",Eurocephalus,anguitimens,2.6084,8691,2024-07-29,0.9341,2899,2024-07-25
+855,Siskin,Cape,Crithagra,totta,1.1342,3779,2024-07-31,0.2310,717,2024-07-25
+856,Siskin,Drakensberg,Crithagra,symonsi,0.0471,157,2024-03-22,0.0184,57,2024-04-21
+306,Skimmer,African,Rynchops,flavirostris,0.0618,206,2024-07-17,0.0309,96,2024-07-10
+11763,Skimmer,Black,Rynchops,niger,0.0009,3,2012-10-05,0.0000,0,-
+286,Skua,Brown,Stercorarius,antarcticus,0.2650,883,2024-07-28,0.0612,190,2024-07-13
+250,Snipe,African,Gallinago,nigripennis,4.0550,13511,2024-07-28,0.5780,1794,2024-07-28
+249,Snipe,Great,Gallinago,media,0.0012,4,2021-11-04,0.0006,2,2021-11-06
+786,Sparrow,Cape,Passer,melanurus,46.6611,155472,2024-07-31,10.7294,33299,2024-09-08
+785,Sparrow,Great,Passer,motitensis,0.7860,2619,2024-07-27,0.1605,498,2024-07-08
+787,Sparrow,Grey-headed,Passer,diffusus,0.0006,2,2014-10-06,0.0000,0,-
+784,Sparrow,House,Passer,domesticus,35.3041,117631,2024-07-31,6.8051,21120,2024-09-08
+3852,Sparrow,"Northern Grey-headed",Passer,griseus,0.0003,1,2008-07-24,0.0003,1,2021-02-20
+4142,Sparrow,"Southern Grey-headed",Passer,diffusus,41.3642,137823,2024-07-31,6.5229,20244,2024-07-29
+788,Sparrow,"Yellow-throated Bush",Gymnoris,superciliaris,4.6306,15429,2024-07-27,0.7540,2340,2024-07-21
+486,Sparrow-Lark,Black-eared,Eremopterix,australis,0.4016,1338,2024-07-24,0.1447,449,2024-07-14
+484,Sparrow-Lark,"Chestnut-backed ",Eremopterix,leucotis,1.3443,4479,2024-07-28,0.5068,1573,2024-07-14
+485,Sparrow-Lark,Grey-backed,Eremopterix,verticalis,2.1819,7270,2024-07-30,0.6161,1912,2024-07-27
+780,Sparrow-Weaver,"White-browed ",Plocepasser,mahali,15.3478,51138,2024-07-30,3.6719,11396,2024-07-30
+159,Sparrowhawk,Black,Accipiter,melanoleucus,5.6487,18821,2024-07-29,0.9592,2977,2024-07-28
+158,Sparrowhawk,Little,Accipiter,minullus,2.4988,8326,2024-07-29,0.3850,1195,2024-07-21
+157,Sparrowhawk,Ovambo,Accipiter,ovampensis,1.5060,5018,2024-07-27,0.1743,541,2024-07-07
+156,Sparrowhawk,Rufous-breasted,Accipiter,rufiventris,0.6267,2088,2024-07-21,0.1373,426,2024-07-15
+389,Spinetail,Böhm's,Neafrapus,boehmi,0.1849,616,2024-07-17,0.0219,68,2024-02-10
+388,Spinetail,Mottled,Telacanthura,ussheri,0.1303,434,2024-07-23,0.0116,36,2024-03-16
+85,Spoonbill,African,Platalea,alba,11.7238,39063,2024-07-31,2.4791,7694,2024-07-28
+181,Spurfowl,Cape,Pternistis,capensis,9.2241,30734,2024-07-31,1.6742,5196,2024-07-31
+183,Spurfowl,Natal,Pternistis,natalensis,17.7227,59051,2024-07-31,3.5962,11161,2024-07-28
+182,Spurfowl,Red-billed,Pternistis,adspersus,0.1768,589,2024-05-16,0.0525,163,2024-04-10
+188,Spurfowl,Red-necked,Pternistis,afer,3.8248,12744,2024-07-27,0.4943,1534,2024-07-20
+185,Spurfowl,Swainson's,Pternistis,swainsonii,22.5169,75025,2024-07-30,4.7130,14627,2024-07-30
+1236,Spurfowl,Yellow-necked,Pternistis,leucoscepus,0.0003,1,2020-03-05,0.0000,0,-
+740,Starling,Black-bellied,Notopholia,corusca,6.0616,20197,2024-07-28,0.9128,2833,2024-07-28
+743,Starling,Burchell's,Lamprotornis,australis,5.3389,17789,2024-07-27,2.9972,9302,2024-07-28
+737,Starling,Cape,Lamprotornis,nitens,40.6181,135337,2024-07-31,9.5646,29684,2024-07-30
+733,Starling,Common,Sturnus,vulgaris,17.1840,57256,2024-07-31,4.0499,12569,2024-07-31
+738,Starling,"Greater Blue-eared",Lamprotornis,chalybaeus,3.5523,11836,2024-07-27,1.4976,4648,2024-07-27
+742,Starling,Meves's,Lamprotornis,mevesii,1.4676,4890,2024-07-28,0.2336,725,2024-07-03
+739,Starling,"Miombo Blue-eared",Lamprotornis,elisabeth,0.0009,3,2015-08-16,0.0003,1,2021-12-27
+744,Starling,Pale-winged,Onychognathus,nabouroup,1.7677,5890,2024-07-31,0.4263,1323,2024-06-23
+746,Starling,Pied,Lamprotornis,bicolor,17.5369,58432,2024-07-31,4.5068,13987,2024-07-29
+745,Starling,Red-winged,Onychognathus,morio,28.8511,96130,2024-07-31,6.2094,19271,2024-07-29
+736,Starling,Violet-backed,Cinnyricinclus,leucogaster,7.0160,23377,2024-07-19,1.3101,4066,2024-06-05
+735,Starling,Wattled,Creatophora,cinerea,8.0200,26722,2024-07-30,1.5621,4848,2024-07-30
+270,Stilt,Black-winged,Himantopus,himantopus,12.9576,43174,2024-07-31,2.8081,8715,2024-09-08
+253,Stint,Little,Calidris,minuta,4.9539,16506,2024-07-25,0.8255,2562,2024-05-18
+985,Stint,Temminck's,Calidris,temminckii,0.0276,92,2017-02-05,0.0061,19,2017-02-01
+576,Stonechat,African,Saxicola,torquatus,33.8388,112749,2024-07-31,7.2288,22435,2024-07-30
+78,Stork,Abdim's,Ciconia,abdimii,0.6162,2053,2024-05-22,0.3493,1084,2024-05-26
+79,Stork,Black,Ciconia,nigra,0.9817,3271,2024-07-18,0.3683,1143,2024-07-16
+73,Stork,Marabou,Leptoptilos,crumenifer,2.0580,6857,2024-07-27,0.6847,2125,2024-07-27
+75,Stork,Saddle-billed,Ephippiorhynchus,senegalensis,1.8824,6272,2024-07-28,0.8397,2606,2024-07-21
+80,Stork,White,Ciconia,ciconia,3.2660,10882,2024-07-16,1.3597,4220,2024-07-27
+77,Stork,Woolly-necked,Ciconia,episcopus,4.1985,13989,2024-07-28,1.2064,3744,2024-07-28
+76,Stork,Yellow-billed,Mycteria,ibis,3.2233,10740,2024-07-29,1.1368,3528,2024-07-23
+30,Storm-petrel,European,Hydrobates,pelagicus,0.0063,21,2023-12-29,0.0035,11,2023-12-31
+33,Storm-petrel,Wilson's,Oceanites,oceanicus,0.0084,28,2024-01-01,0.0039,12,2023-12-31
+749,Sugarbird,Cape,Promerops,cafer,3.8503,12829,2024-07-31,0.7756,2407,2024-07-25
+750,Sugarbird,Gurney's,Promerops,gurneyi,0.4928,1642,2024-07-26,0.1105,343,2024-06-27
+772,Sunbird,Amethyst,Chalcomitra,amethystina,24.5404,81767,2024-07-31,3.6539,11340,2024-07-27
+771,Sunbird,Collared,Hedydipna,collaris,7.6550,25506,2024-07-28,0.9122,2831,2024-07-28
+764,Sunbird,Dusky,Cinnyris,fuscus,2.3899,7963,2024-07-27,0.4008,1244,2024-07-27
+758,Sunbird,"Greater Double-collared",Cinnyris,afer,11.0488,36814,2024-07-31,1.6588,5148,2024-07-27
+765,Sunbird,Grey,Cyanomitra,veroxii,3.6033,12006,2024-07-27,0.4440,1378,2024-07-28
+751,Sunbird,Malachite,Nectarinia,famosa,12.3676,41208,2024-07-31,2.0757,6442,2024-07-31
+755,Sunbird,Marico,Cinnyris,mariquensis,5.3068,17682,2024-07-28,0.8616,2674,2024-07-27
+761,Sunbird,Neergaard's,Cinnyris,neergaardi,0.1083,361,2024-05-01,0.0264,82,2024-04-29
+766,Sunbird,Olive,Cyanomitra,olivacea,4.3272,14418,2024-07-28,0.6380,1980,2024-07-28
+753,Sunbird,Orange-breasted,Anthobaphes,violacea,2.4100,8030,2024-07-31,0.5790,1797,2024-07-22
+769,Sunbird,Plain-backed,Anthreptes,reichenowi,0.0129,43,2024-05-01,0.0045,14,2023-12-14
+756,Sunbird,Purple-banded,Cinnyris,bifasciatus,1.5042,5012,2024-07-27,0.2581,801,2024-07-27
+774,Sunbird,Scarlet-chested,Chalcomitra,senegalensis,4.1267,13750,2024-07-31,0.6515,2022,2024-07-27
+760,Sunbird,"Southern Double-collared",Cinnyris,chalybeus,15.4307,51414,2024-07-31,2.8029,8699,2024-07-31
+763,Sunbird,White-bellied,Cinnyris,talatala,25.4542,84812,2024-07-31,4.3956,13642,2024-07-30
+493,Swallow,Barn,Hirundo,rustica,34.9976,116610,2024-07-23,9.5423,29615,2024-06-24
+497,Swallow,Blue,Hirundo,atrocaerulea,0.0489,163,2024-02-23,0.0229,71,2024-02-18
+502,Swallow,"Greater Striped",Cecropis,cucullata,32.6407,108757,2024-06-17,6.3283,19640,2024-06-23
+499,Swallow,Grey-rumped,Pseudhirundo,griseopyga,0.9793,3263,2024-07-27,0.1524,473,2024-07-27
+503,Swallow,"Lesser Striped",Cecropis,abyssinica,19.6615,65511,2024-07-29,3.7596,11668,2024-07-30
+500,Swallow,Mosque,Cecropis,senegalensis,0.9946,3314,2024-07-26,0.1833,569,2024-07-20
+498,Swallow,Pearl-breasted,Hirundo,dimidiata,5.6244,18740,2024-07-31,0.8948,2777,2024-07-20
+501,Swallow,Red-breasted,Cecropis,semirufa,5.3209,17729,2024-07-27,1.3855,4300,2024-07-05
+962,Swallow,Red-rumped,Cecropis,daurica,0.0003,1,2022-10-30,0.0000,0,-
+504,Swallow,"South African Cliff ",Petrochelidon,spilodera,5.2252,17410,2024-07-13,1.3140,4078,2024-06-15
+495,Swallow,White-throated,Hirundo,albigularis,24.2057,80652,2024-07-27,3.5704,11081,2024-09-08
+496,Swallow,Wire-tailed,Hirundo,smithii,4.8302,16094,2024-07-29,0.9747,3025,2024-07-28
+208,Swamphen,African,Porphyrio,madagascariensis,5.9149,19708,2024-07-31,0.8777,2724,2024-07-28
+10007,Swan,"Black ",Cygnus,atratus,0.0927,309,2024-07-18,0.0106,33,2023-12-02
+884,Swan,Mute,Cygnus,olor,0.0063,21,2022-08-12,0.0003,1,2021-08-01
+380,Swift,"African Black",Apus,barbatus,6.2810,20928,2024-07-31,1.0472,3250,2024-07-26
+387,Swift,"African Palm",Cypsiurus,parvus,25.7415,85769,2024-07-31,4.6022,14283,2024-07-28
+386,Swift,Alpine,Tachymarptis,melba,5.8984,19653,2024-07-27,0.9972,3095,2024-07-31
+381,Swift,Bradfield's,Apus,bradfieldi,0.1540,513,2024-03-28,0.0467,145,2024-03-30
+378,Swift,Common,Apus,apus,1.6285,5426,2024-07-10,0.3374,1047,2024-04-01
+384,Swift,Horus,Apus,horus,1.6423,5472,2024-07-28,0.2842,882,2024-06-17
+385,Swift,Little,Apus,affinis,26.2787,87559,2024-07-28,5.6213,17446,2024-07-21
+383,Swift,White-rumped,Apus,caffer,25.9768,86553,2024-06-26,4.3357,13456,2024-06-26
+715,Tchagra,Black-crowned,Tchagra,senegalus,11.5407,38453,2024-07-31,2.3815,7391,2024-07-30
+714,Tchagra,Brown-crowned,Tchagra,australis,12.0257,40069,2024-07-29,1.8508,5744,2024-07-27
+713,Tchagra,Southern,Tchagra,tchagra,3.7954,12646,2024-07-31,0.4105,1274,2024-06-29
+99,Teal,Blue-billed,Spatula,hottentota,3.1072,10353,2024-07-28,0.5255,1631,2024-07-29
+1276,Teal,Blue-winged,Spatula,discors,0.0018,6,2013-11-27,0.0000,0,-
+98,Teal,Cape,Anas,capensis,7.0782,23584,2024-07-31,1.2267,3807,2024-09-08
+97,Teal,Red-billed,Anas,erythrorhyncha,14.8415,49451,2024-07-31,2.6486,8220,2024-07-30
+5271,Teal,Ringed,Callonetta,leucophrys,0.0090,30,2022-08-14,0.0013,4,2023-02-01
+292,Tern,Antarctic,Sterna,vittata,0.1243,414,2024-07-16,0.0306,95,2024-07-20
+294,Tern,Arctic,Sterna,paradisaea,0.0522,174,2024-07-14,0.0093,29,2023-09-25
+903,Tern,Black,Chlidonias,niger,0.0051,17,2022-08-13,0.0016,5,2022-08-23
+936,Tern,Bridled,Onychoprion,anaethetus,0.0060,20,2021-02-06,0.0003,1,2016-08-09
+290,Tern,Caspian,Hydroprogne,caspia,4.1585,13856,2024-07-26,0.7334,2276,2024-07-30
+291,Tern,Common,Sterna,hirundo,3.1018,10335,2024-07-27,0.5993,1860,2024-07-21
+300,Tern,Damara,Sternula,balaenarum,0.1510,503,2024-02-27,0.0332,103,2024-01-26
+4143,Tern,Elegant,Thalasseus,elegans,0.0069,23,2024-02-12,0.0052,16,2024-02-12
+298,Tern,"Greater Crested",Thalasseus,bergii,5.9059,19678,2024-07-28,1.1667,3621,2024-07-28
+902,Tern,Gull-billed,Gelochelidon,nilotica,0.0156,52,2022-06-19,0.0045,14,2022-05-13
+297,Tern,"Lesser Crested",Thalasseus,bengalensis,0.1417,472,2024-06-01,0.0483,150,2024-05-09
+299,Tern,Little,Sternula,albifrons,0.7113,2370,2024-06-24,0.1444,448,2024-06-30
+293,Tern,Roseate,Sterna,dougallii,0.1567,522,2024-07-14,0.0200,62,2024-06-10
+296,Tern,Sandwich,Thalasseus,sandvicensis,2.9160,9716,2024-07-26,0.5584,1733,2024-07-28
+2070,Tern,Saunders's,Sternula,saundersi,0.0003,1,2023-11-04,0.0000,0,-
+295,Tern,Sooty,Onychoprion,fuscatus,0.0261,87,2024-01-04,0.0093,29,2023-12-30
+305,Tern,Whiskered,Chlidonias,hybrida,4.6808,15596,2024-07-27,1.0198,3165,2024-07-15
+938,Tern,White-cheeked,Sterna,repressa,0.0015,5,2021-02-03,0.0013,4,2021-02-02
+304,Tern,White-winged,Chlidonias,leucopterus,2.1588,7193,2024-07-27,0.3828,1188,2024-07-02
+275,Thick-knee,Spotted,Burhinus,capensis,18.8236,62719,2024-07-31,2.9966,9300,2024-07-31
+274,Thick-knee,Water,Burhinus,vermiculatus,8.0052,26673,2024-07-31,1.7564,5451,2024-07-31
+559,Thrush,"Cape Rock ",Monticola,rupestris,4.0304,13429,2024-07-27,0.7472,2319,2024-07-28
+557,Thrush,Groundscraper,Turdus,litsitsirupa,7.6145,25371,2024-07-31,1.2911,4007,2024-07-28
+1104,Thrush,Karoo,Turdus,smithi,18.5763,61895,2024-07-29,3.5656,11066,2024-07-29
+552,Thrush,Kurrichane,Turdus,libonyana,12.6497,42148,2024-07-31,1.7068,5297,2024-07-29
+1105,Thrush,Olive,Turdus,olivaceus,10.6893,35616,2024-07-28,1.8724,5811,2024-07-31
+556,Thrush,"Orange Ground",Geokichla,gurneyi,0.2296,765,2024-06-23,0.0464,144,2024-01-07
+560,Thrush,"Sentinel Rock ",Monticola,explorator,0.5921,1973,2024-07-27,0.2078,645,2024-07-29
+561,Thrush,"Short-toed Rock ",Monticola,brevipes,0.8124,2707,2024-07-27,0.1560,484,2024-07-27
+558,Thrush,"Spotted Ground",Geokichla,guttata,0.1789,596,2024-07-25,0.0374,116,2024-06-01
+436,Tinkerbird,Red-fronted,Pogoniulus,pusillus,4.3425,14469,2024-07-28,0.5739,1781,2024-07-28
+437,Tinkerbird,Yellow-fronted,Pogoniulus,chrysoconus,6.4881,21618,2024-07-29,0.8922,2769,2024-07-23
+438,Tinkerbird,Yellow-rumped,Pogoniulus,bilineatus,4.5649,15210,2024-07-28,0.8094,2512,2024-07-28
+514,Tit,Ashy,Melaniparus,cinerascens,2.6828,8939,2024-07-23,0.3406,1057,2024-07-28
+531,Tit,"Cape Penduline",Anthoscopus,minutus,2.0027,6673,2024-07-31,0.2533,786,2024-07-20
+525,Tit,Grey,Melaniparus,afer,1.9439,6477,2024-07-26,0.2810,872,2024-07-25
+530,Tit,"Grey Penduline",Anthoscopus,caroli,0.7911,2636,2024-07-27,0.0870,270,2024-07-22
+527,Tit,"Southern Black",Melaniparus,niger,12.8598,42848,2024-07-29,2.1620,6710,2024-07-29
+657,Tit-Flycatcher,Grey,Myioparus,plumbeus,2.9106,9698,2024-07-27,0.3863,1199,2024-07-27
+393,Trogon,Narina,Apaloderma,narina,1.7413,5802,2024-07-20,0.2852,885,2024-06-24
+953,Tropicbird,Red-billed,Phaethon,aethereus,0.0000,0,-,0.0003,1,2021-11-27
+39,Tropicbird,Red-tailed,Phaethon,rubricauda,0.0012,4,2022-06-06,0.0010,3,2023-11-06
+4133,Turaco,Knysna,Tauraco,corythaix,5.4194,18057,2024-07-28,0.8584,2664,2024-07-28
+1710,Turaco,Livingstone's,Tauraco,livingstonii,0.5465,1821,2024-07-24,0.1347,418,2024-07-03
+337,Turaco,Purple-crested,Gallirex,porphyreolophus,9.6094,32018,2024-07-31,1.8334,5690,2024-07-27
+232,Turnstone,Ruddy,Arenaria,interpres,1.4430,4808,2024-07-22,0.2194,681,2024-07-06
+827,Twinspot,Green,Mandingoa,nitidula,0.7008,2335,2024-07-24,0.1154,358,2024-07-10
+831,Twinspot,Pink-throated,Hypargos,margaritatus,0.4352,1450,2024-07-28,0.0793,246,2024-06-18
+0,Unknown,Unknown,Unknown,Unknown,0.0255,85,2023-10-13,0.0055,17,2021-03-14
+150,Vulture,Bearded,Gypaetus,barbatus,0.2134,711,2024-07-27,0.0625,194,2024-06-19
+106,Vulture,Cape,Gyps,coprotheres,3.3119,11035,2024-07-29,1.1110,3448,2024-07-30
+111,Vulture,Egyptian,Neophron,percnopterus,0.0009,3,2018-06-15,0.0006,2,2018-06-11
+110,Vulture,Hooded,Necrosyrtes,monachus,1.2518,4171,2024-07-22,0.5114,1587,2024-07-28
+108,Vulture,Lappet-faced,Torgos,tracheliotos,1.2893,4296,2024-07-17,0.6219,1930,2024-07-22
+112,Vulture,Palm-nut,Gypohierax,angolensis,0.3893,1297,2024-07-27,0.1308,406,2024-07-06
+1029,Vulture,Rüppell's,Gyps,rueppelli,0.0045,15,2016-09-10,0.0003,1,2015-10-10
+107,Vulture,White-backed,Gyps,africanus,6.4335,21436,2024-07-29,2.7037,8391,2024-07-28
+109,Vulture,White-headed,Trigonoceps,occipitalis,0.6177,2058,2024-07-18,0.3171,984,2024-07-15
+685,Wagtail,"African Pied",Motacilla,aguimp,9.2613,30858,2024-07-29,2.0103,6239,2024-07-29
+686,Wagtail,Cape,Motacilla,capensis,51.0744,170177,2024-07-31,9.6667,30001,2024-07-31
+1053,Wagtail,Citrine,Motacilla,citreola,0.0066,22,2018-04-18,0.0006,2,2015-04-26
+690,Wagtail,Grey,Motacilla,cinerea,0.0276,92,2023-05-16,0.0116,36,2023-05-09
+688,Wagtail,Mountain,Motacilla,clara,1.0351,3449,2024-07-25,0.1614,501,2024-07-20
+689,Wagtail,"Western Yellow",Motacilla,flava,0.3073,1024,2024-07-25,0.0603,187,2024-03-21
+3816,Wagtail,White,Motacilla,alba,0.0036,12,2022-11-29,0.0010,3,2022-11-29
+606,Warbler,"African Reed (Old, Use Common Reed Warbler)",Acrocephalus,baeticatus,6.4614,21529,2024-06-16,0.5800,1800,2023-04-02
+666,Warbler,"African Yellow ",Iduna,natalensis,2.1756,7249,2024-07-27,0.2033,631,2024-07-27
+610,Warbler,Barratt's,Bradypterus,barratti,0.8650,2882,2024-07-24,0.1324,411,2024-05-12
+949,Warbler,"Basra Reed ",Acrocephalus,griseldis,0.0003,1,2017-03-24,0.0000,0,-
+658,Warbler,Chestnut-vented,Curruca,subcoerulea,17.7341,59089,2024-07-31,2.5477,7907,2024-07-29
+613,Warbler,Cinnamon-breasted,Euryptila,subcinnamomea,0.2188,729,2024-07-26,0.0435,135,2024-04-01
+14242,Warbler,"Common Reed",Acrocephalus,scirpaceus,0.5120,1706,2024-07-27,0.0728,226,2024-07-18
+911,Warbler,"Eurasian Reed (Old, Use Common Reed Warbler)",Acrocephalus,scirpaceus,0.0006,2,2013-12-15,0.0000,0,-
+595,Warbler,Garden,Sylvia,borin,0.5942,1980,2024-04-07,0.0860,267,2024-04-19
+603,Warbler,"Great Reed ",Acrocephalus,arundinaceus,1.1924,3973,2024-05-14,0.1147,356,2024-03-12
+596,Warbler,Icterine,Hippolais,icterina,0.5267,1755,2024-04-16,0.0731,227,2024-03-17
+611,Warbler,Knysna,Bradypterus,sylvaticus,0.7800,2599,2024-07-23,0.1179,366,2024-06-29
+659,Warbler,"Layard's ",Curruca,layardi,2.1477,7156,2024-07-31,0.2926,908,2024-07-25
+604,Warbler,"Lesser Swamp ",Acrocephalus,gracilirostris,17.7686,59204,2024-07-31,1.9201,5959,2024-07-31
+609,Warbler,"Little Rush",Bradypterus,baboecala,14.4294,48078,2024-07-30,1.5921,4941,2024-07-29
+607,Warbler,Marsh,Acrocephalus,palustris,1.7668,5887,2024-06-17,0.1653,513,2024-06-12
+653,Warbler,Namaqua,Phragmacia,substriata,1.7914,5969,2024-07-29,0.2336,725,2024-07-30
+597,Warbler,Olive-tree,Hippolais,olivetorum,0.3100,1033,2024-03-27,0.0590,183,2024-03-17
+598,Warbler,River,Locustella,fluviatilis,0.0522,174,2024-03-17,0.0119,37,2024-03-17
+619,Warbler,Rufous-eared,Malcorus,pectoralis,5.1487,17155,2024-07-31,0.9711,3014,2024-07-29
+608,Warbler,Sedge,Acrocephalus,schoenobaenus,0.4532,1510,2024-04-07,0.0619,192,2024-03-21
+3276,Warbler,Upcher's,Hippolais,languida,0.0030,10,2018-03-29,0.0000,0,-
+612,Warbler,Victorin's,Cryptillas,victorini,0.7566,2521,2024-07-23,0.1437,446,2024-07-22
+599,Warbler,Willow,Phylloscopus,trochilus,8.3426,27797,2024-06-17,0.9315,2891,2024-06-09
+947,Warbler,Wood,Phylloscopus,sibilatrix,0.0093,31,2022-08-07,0.0016,5,2022-07-18
+671,Warbler,"Yellow-throated Woodland",Phylloscopus,ruficapilla,1.5736,5243,2024-07-24,0.1801,559,2024-07-20
+4483,Waterhen,"White-breasted ",Amaurornis,phoenicurus,0.0012,4,2023-08-09,0.0000,0,-
+677,Wattle-eye,Black-throated,Platysteira,peltata,0.6636,2211,2024-07-24,0.0870,270,2024-07-28
+841,Waxbill,Black-faced,Brunhilda,erythronotos,2.5130,8373,2024-07-25,0.3599,1117,2024-07-25
+839,Waxbill,Blue,Uraeginthus,angolensis,20.2768,67561,2024-07-30,5.0768,15756,2024-07-29
+843,Waxbill,Common,Estrilda,astrild,28.7511,95797,2024-07-31,3.9777,12345,2024-07-30
+842,Waxbill,Grey,Glaucestrilda,perreini,0.4391,1463,2024-07-28,0.0657,204,2024-07-28
+838,Waxbill,Orange-breasted,Amandava,subflava,2.2308,7433,2024-07-28,0.2903,901,2024-07-27
+825,Waxbill,Swee,Coccopygia,melanotis,3.4271,11419,2024-07-27,0.5735,1780,2024-07-28
+840,Waxbill,Violet-eared,Granatina,granatina,3.1627,10538,2024-07-27,0.5578,1731,2024-07-28
+799,Weaver,Cape,Ploceus,capensis,24.1940,80613,2024-07-31,4.3054,13362,2024-07-31
+796,Weaver,Chestnut,Ploceus,rubiginosus,0.0009,3,2014-03-20,0.0000,0,-
+790,Weaver,Dark-backed,Ploceus,bicolor,3.3635,11207,2024-07-28,0.4298,1334,2024-07-14
+801,Weaver,Golden,Ploceus,xanthops,1.5171,5055,2024-07-31,0.1637,508,2024-07-27
+792,Weaver,"Lesser Masked",Ploceus,intermedius,3.4767,11584,2024-07-28,0.6647,2063,2024-07-23
+779,Weaver,"Red-billed Buffalo",Bubalornis,niger,4.4260,14747,2024-07-29,1.6610,5155,2024-07-27
+793,Weaver,Red-headed,Anaplectes,rubriceps,2.7846,9278,2024-07-27,0.5671,1760,2024-07-20
+789,Weaver,"Scaly-feathered ",Sporopipes,squamifrons,7.6616,25528,2024-07-30,1.9771,6136,2024-07-28
+783,Weaver,Sociable,Philetairus,socius,2.0406,6799,2024-07-18,0.9760,3029,2024-07-20
+802,Weaver,"Southern Brown-throated",Ploceus,xanthopterus,0.3409,1136,2024-06-28,0.0644,200,2023-12-22
+803,Weaver,"Southern Masked ",Ploceus,velatus,49.4043,164612,2024-07-31,10.4745,32508,2024-09-08
+791,Weaver,Spectacled,Ploceus,ocularis,13.6767,45570,2024-07-29,1.7786,5520,2024-07-28
+804,Weaver,Thick-billed,Amblyospiza,albifrons,14.8907,49615,2024-07-28,2.0415,6336,2024-07-28
+797,Weaver,Village,Ploceus,cucullatus,14.0327,46756,2024-07-31,2.5648,7960,2024-07-29
+800,Weaver,Yellow,Ploceus,subaureus,3.2630,10872,2024-07-28,0.3925,1218,2024-06-27
+568,Wheatear,Capped,Oenanthe,pileata,7.9347,26438,2024-07-31,2.1134,6559,2024-07-28
+564,Wheatear,Mountain,Myrmecocichla,monticola,7.0403,23458,2024-07-30,1.4393,4467,2024-07-28
+563,Wheatear,Northern,Oenanthe,oenanthe,0.0021,7,2023-02-20,0.0013,4,2021-01-17
+268,Whimbrel,"Eurasian ",Numenius,phaeopus,3.3842,11276,2024-07-25,0.5626,1746,2024-07-25
+1172,White-eye,Cape,Zosterops,virens,46.4369,154725,2024-07-31,8.2103,25481,2024-07-31
+1171,White-eye,"Orange River",Zosterops,pallidus,4.0523,13502,2024-07-30,0.5275,1637,2024-07-28
+13633,White-eye,"Southern Yellow",Zosterops,anderssoni,0.3827,1275,2024-07-28,0.0387,120,2024-06-29
+777,White-eye,"Yellow (Pre-split)",Zosterops,senegalensis,0.0087,29,2022-11-03,0.0013,4,2021-06-18
+594,Whitethroat,Common,Curruca,communis,0.3052,1017,2024-03-30,0.0622,193,2024-03-17
+3400,Whitethroat,Lesser,Curruca,curruca,0.0099,33,2024-07-06,0.0042,13,2024-07-03
+853,Whydah,"Broad-tailed Paradise ",Vidua,obtusa,0.0003,1,2017-11-11,0.0000,0,-
+3984,Whydah,"Exclamatory Paradise ",Vidua,interjecta,0.0003,1,2018-03-13,0.0000,0,-
+852,Whydah,"Long-tailed Paradise ",Vidua,paradisaea,3.3920,11302,2024-07-26,0.9615,2984,2024-06-28
+846,Whydah,Pin-tailed,Vidua,macroura,24.5395,81764,2024-07-31,4.0299,12507,2024-07-21
+847,Whydah,Shaft-tailed,Vidua,regia,1.7731,5908,2024-07-16,0.4221,1310,2024-05-24
+816,Widowbird,Fan-tailed,Euplectes,axillaris,8.2105,27357,2024-07-28,1.6298,5058,2024-07-27
+818,Widowbird,Long-tailed,Euplectes,progne,14.3133,47691,2024-07-30,3.7367,11597,2024-07-30
+813,Widowbird,Red-collared,Euplectes,ardens,9.7388,32449,2024-07-27,1.4271,4429,2024-07-28
+814,Widowbird,White-winged,Euplectes,albonotatus,9.2376,30779,2024-07-28,1.8666,5793,2024-07-27
+419,"Wood Hoopoe","Green ",Phoeniculus,purpureus,21.7165,72358,2024-07-31,3.6610,11362,2024-07-28
+451,Woodpecker,Bearded,Chloropicus,namaquus,4.2858,14280,2024-07-28,0.5900,1831,2024-07-28
+446,Woodpecker,Bennett's,Campethera,bennettii,1.1228,3741,2024-07-26,0.2046,635,2024-07-04
+450,Woodpecker,Cardinal,Dendropicos,fuscescens,14.3130,47690,2024-07-31,1.7280,5363,2024-07-27
+447,Woodpecker,Golden-tailed,Campethera,abingoni,12.6767,42238,2024-07-31,1.6130,5006,2024-07-28
+449,Woodpecker,Green-backed,Campethera,cailliautii,0.0003,1,2021-09-17,0.0000,0,-
+445,Woodpecker,Ground,Geocolaptes,olivaceus,1.2938,4311,2024-07-15,0.2652,823,2024-07-20
+448,Woodpecker,Knysna,Campethera,notata,2.3545,7845,2024-07-27,0.2549,791,2024-06-29
+452,Woodpecker,Olive,Dendropicos,griseocephalus,4.1726,13903,2024-07-27,0.5375,1668,2024-07-21
+614,Wren-Warbler,Barred,Calamonastes,fasciolatus,1.3145,4380,2024-07-18,0.2484,771,2024-07-09
+615,Wren-Warbler,Stierling's,Calamonastes,stierlingi,1.2962,4319,2024-07-26,0.2955,917,2024-07-02
+453,Wryneck,Red-throated,Jynx,ruficollis,7.8972,26313,2024-07-31,1.0501,3259,2024-07-30
+1014,Yellowlegs,Lesser,Tringa,flavipes,0.0036,12,2018-03-23,0.0013,4,2018-03-14

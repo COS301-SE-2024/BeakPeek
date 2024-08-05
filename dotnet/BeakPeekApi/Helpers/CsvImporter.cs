@@ -27,12 +27,8 @@ namespace BeakPeekApi.Helpers
 
                 var bird_list = csv.GetRecords<Bird_CSV>().ToList<Bird_CSV>();
 
-                // while (csv.Read())
                 foreach (var record in bird_list)
                 {
-
-                    // var record = csv.GetRecord<Bird_CSV>();
-
                     bool bird_already_exists = existingBirdRefs.Contains(record.Ref);
                     if (bird_already_exists)
                         continue;
@@ -40,8 +36,6 @@ namespace BeakPeekApi.Helpers
                     bool bird_already_tracked = birds_to_be_added.Any(b => b.Ref == record.Ref);
                     if (bird_already_tracked)
                         continue;
-
-                    Console.WriteLine(record.ToString());
 
                     Bird new_bird = new Bird
                     {
@@ -58,11 +52,6 @@ namespace BeakPeekApi.Helpers
                     };
                     birds_to_be_added.Add(new_bird);
                 }
-                Console.WriteLine("Birds to be added:");
-                foreach (var bird in birds_to_be_added)
-                {
-                    Console.WriteLine($"Ref: {bird.Ref}, Common_species: {bird.Common_species}, Genus: {bird.Genus}, Species: {bird.Species}");
-                }
                 _context.Birds.AddRange(birds_to_be_added);
                 _context.SaveChanges();
             }
@@ -74,7 +63,7 @@ namespace BeakPeekApi.Helpers
 
             if (province == null)
             {
-                throw new Exception("province for import does not exist");
+                throw new Exception($"province for import does not exist {provinceName}");
             }
 
 
@@ -113,6 +102,8 @@ namespace BeakPeekApi.Helpers
                                 Pentad_Latitude = long_lat[1]
                             };
 
+                            pentads.Add(pentad_allocation);
+
                             _context.Pentads.Add(new_pentad);
                             _context.SaveChanges();
                         }
@@ -125,12 +116,13 @@ namespace BeakPeekApi.Helpers
                         throw new Exception($"No birds found matching that SPP: {record.Spp}");
                     }
 
-                    var does_bird_have_province = birds_in_province.Contains(record.Spp);
+                    bool does_bird_have_province = birds_in_province.Contains(record.Spp);
 
                     if (!does_bird_have_province)
                     {
                         _context.Birds.Find(record.Spp)?.Bird_Provinces.Add(province);
                         _context.SaveChanges();
+                        birds_in_province.Add(record.Spp);
                     }
 
                     var bird_record = _context.Birds.Find(record.Spp);
@@ -198,7 +190,7 @@ namespace BeakPeekApi.Helpers
                         _context.Westerncape.AddRange((IEnumerable<Westerncape>)records_to_be_add);
                         break;
                     default:
-                        throw new Exception("No province found that matches the province name given.");
+                        throw new Exception($"No province found that matches the province name given. {provinceName}");
                 }
 
                 _context.SaveChanges();
