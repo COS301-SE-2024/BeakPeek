@@ -1,7 +1,6 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
-import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
