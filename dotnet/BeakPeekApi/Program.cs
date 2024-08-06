@@ -92,7 +92,7 @@ try
                 var csv_pentad_dir = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
                 if (Directory.Exists(csv_pentad_dir))
                 {
-                    csvImporter.ImportAllCsvData(csv_pentad_dir);
+                    //csvImporter.ImportAllCsvData(csv_pentad_dir);
                 }
             }
         }
