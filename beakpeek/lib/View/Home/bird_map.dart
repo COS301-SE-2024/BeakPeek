@@ -40,33 +40,26 @@ class BirdMapState extends State<BirdMap> {
 
     // Check if location services are enabled
     serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    print('Location services enabled: $serviceEnabled');
     if (!serviceEnabled) {
-      print('Location services are disabled.');
       return;
     }
 
     // Check location permissions
     permission = await Geolocator.checkPermission();
-    print('Location permission status: $permission');
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
-      print('Location permission requested: $permission');
       if (permission == LocationPermission.denied) {
-        print('Location permissions are denied.');
         return;
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
-      print('Location permissions are permanently denied.');
       return;
     }
 
     // Fetch current location
     try {
       Position position = await Geolocator.getCurrentPosition();
-      print('Current location: Latitude ${position.latitude}, Longitude ${position.longitude}');
 
       setState(() {
         _currentLocation = LatLng(position.latitude, position.longitude);
@@ -78,19 +71,17 @@ class BirdMapState extends State<BirdMap> {
       });
 
       // Update map camera if mapController is initialized
-      if (_isLocationFetched && mapController != null) {
+      if (_isLocationFetched) {
         mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
       }
-    } catch (e) {
-      print('Error getting current location: $e');
-    }
+    } catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildProvinceDropdown(),
+        buildProvinceDropdown(),
         Expanded(
           child: GoogleMap(
             onMapCreated: (controller) {
@@ -109,7 +100,7 @@ class BirdMapState extends State<BirdMap> {
     );
   }
 
-  Widget _buildProvinceDropdown() {
+  Widget buildProvinceDropdown() {
     return DropdownButton<String>(
       value: _selectedProvince,
       onChanged: (newValue) {
@@ -120,12 +111,8 @@ class BirdMapState extends State<BirdMap> {
         });
 
         // Move the camera to the new position
-        if (mapController != null) {
-          mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-        } else {
-          print('mapController is not initialized.');
-        }
-      },
+        mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+            },
       items: <String>[
         'gauteng',
         'westerncape',
@@ -185,12 +172,10 @@ class BirdMapState extends State<BirdMap> {
         }).toSet();
       });
     } catch (e) {
-      print('Error loading KML data: $e');
     }
   }
 
   void _onPolygonTapped(String id) {
-    print('Polygon with ID: $id tapped');
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
