@@ -1,5 +1,4 @@
 using BeakPeekApi.Helpers;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BeakPeekApi.Controllers
@@ -34,29 +33,11 @@ namespace BeakPeekApi.Controllers
             return Ok();
         }
 
-        [HttpPost("replace")]
-        public async Task<IActionResult> ReplaceData(IFormFile file, [FromQuery] string province)
+        [HttpPost("importAll")]
+        public IActionResult ImportAll([FromQuery] string path)
         {
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest("File is empty.");
-            }
+            _csvImporter.ImportAllCsvData(path);
 
-            var filePath = Path.GetTempFileName();
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-
-            // _csvImporter.ReplaceProvinceData(filePath, province);
-
-            return Ok();
-        }
-
-        [HttpPost("clear")]
-        public IActionResult ClearData([FromQuery] string province)
-        {
-            // _csvImporter.ClearProvinceData(province);
             return Ok();
         }
     }

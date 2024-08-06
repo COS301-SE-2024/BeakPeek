@@ -32,7 +32,7 @@ void main() {
           ]
           ''', 200));
 
-      final birds = await fetchAllBirds(mockClient);
+      final birds = await fetchAllBirds('gauteng', mockClient);
 
       expect(birds.length, 1);
       expect(birds[0].commonSpecies, 'Test Common Species');
@@ -43,7 +43,7 @@ void main() {
               'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
-      expect(fetchAllBirds(mockClient), throwsException);
+      expect(fetchAllBirds('gauteng', mockClient), throwsException);
     });
 
     test('getNumberOfBirdsInProvinces returns numbers on success', () async {

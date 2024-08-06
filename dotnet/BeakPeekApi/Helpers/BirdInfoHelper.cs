@@ -57,7 +57,6 @@ namespace BeakPeekApi.Helpers
 
             var tasks = flickrResponse.Photos.Photo.Select(async p =>
             {
-                // Console.WriteLine(p);
                 var ownerInfo = p.ownername;
                 return new BirdImageModel
                 {

@@ -2,6 +2,7 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/bird_page_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:go_router/go_router.dart';
 
 class BirdPage extends StatelessWidget {
   const BirdPage({super.key});
@@ -33,13 +34,18 @@ class BirdPage extends StatelessWidget {
                               icon: const Icon(Icons.arrow_back),
                               color: GlobalStyles.primaryColor,
                               onPressed: () {
-                                Navigator.pop(context);
+                                context.go('/home');
                               },
                             ),
                             const Spacer(),
                             const Text(
-                              'Bird Information',
-                              style: BirdPageStyles.heading,
+                              'Black Fronted Bushshrike',
+                              style: TextStyle(
+                                color: GlobalStyles.primaryColor,
+                                fontSize: 22,
+                                fontFamily: 'SF Pro Display',
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                             const Spacer(flex: 2),
                           ],
@@ -47,7 +53,7 @@ class BirdPage extends StatelessWidget {
                         SizedBox(height: screenHeight * 0.01),
                         Center(
                           child: ClipRRect(
-                            borderRadius: BorderRadius.circular(20.0),
+                            borderRadius: BorderRadius.circular(10.0),
                             child: Container(
                               decoration: BoxDecoration(
                                 boxShadow: [
@@ -66,15 +72,6 @@ class BirdPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
-                        SizedBox(height: screenHeight * 0.02),
-
-                        // Bird name
-                        const ProfileField(
-                          icon: Icons.info,
-                          label: 'Name',
-                          content: 'Black Fronted Bushshrike',
-                          prominent: true,
                         ),
                         SizedBox(height: screenHeight * 0.02),
 

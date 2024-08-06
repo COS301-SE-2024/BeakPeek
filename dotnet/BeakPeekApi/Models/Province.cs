@@ -3,16 +3,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BeakPeekApi.Models
 {
-    [Index(nameof(Pentad), nameof(Bird))]
     public class Province
     {
         public int Id { get; set; }
 
-        [ForeignKey("Id")]
-        public required Pentad Pentad { get; set; }
+        public Pentad? Pentad { get; set; }
 
-        [ForeignKey("Ref")]
-        public required Bird Bird { get; set; }
+        public Bird? Bird { get; set; }
 
         public double? Jan { get; set; }
         public double? Feb { get; set; }
@@ -31,6 +28,30 @@ namespace BeakPeekApi.Models
         public int Total_Records { get; set; }
 
         public double ReportingRate { get; set; }
+
+        public ProvinceDto ToDto()
+        {
+            return new ProvinceDto
+            {
+                Id = this.Id,
+                Pentad = this.Pentad?.ToDto(),
+                Bird = this.Bird?.ToDto(),
+                Jan = this.Jan,
+                Feb = this.Feb,
+                Mar = this.Mar,
+                Apr = this.Apr,
+                May = this.May,
+                Jun = this.Jun,
+                Jul = this.Jul,
+                Aug = this.Aug,
+                Sep = this.Sep,
+                Oct = this.Oct,
+                Nov = this.Nov,
+                Dec = this.Dec,
+                Total_Records = this.Total_Records,
+                ReportingRate = this.ReportingRate
+            };
+        }
     }
 
     [Table("Easterncape")]

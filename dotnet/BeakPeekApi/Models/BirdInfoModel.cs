@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace BeakPeekApi.Models
 {
     public class BirdInfoModels
@@ -17,7 +15,6 @@ namespace BeakPeekApi.Models
 
     public class WikipediaResponse
     {
-        // [JsonProperty("extract")]
         public string? Extract { get; set; }
     }
 
@@ -41,7 +38,7 @@ namespace BeakPeekApi.Models
 
         public string Owner { get; set; }
 
-        public string ownername {get; set; }
+        public string ownername { get; set; }
     }
 
     public class FlickrOwnerResponse

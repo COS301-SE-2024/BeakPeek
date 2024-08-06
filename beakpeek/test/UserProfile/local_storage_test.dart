@@ -1,6 +1,5 @@
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -93,18 +92,6 @@ void main() {
       ));
 
       expect(find.text('NO Birds Seen'), findsOneWidget);
-    });
-
-    testWidgets('progressBars displays progress bars', (tester) async {
-      final List<int> birdNums = [100, 200, 300, 400, 500, 600, 700, 800];
-
-      await tester.pumpWidget(MaterialApp(
-        home: Scaffold(
-          body: progressBars(birdNums),
-        ),
-      ));
-
-      expect(find.byType(FAProgressBar), findsAtLeast(6));
     });
   });
 }

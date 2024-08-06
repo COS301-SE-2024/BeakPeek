@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 
 namespace BeakPeekApi.Models
 {
-    [Index(nameof(Ref), nameof(Common_species), nameof(Common_species))]
+    [Index(nameof(Ref), nameof(Common_species), nameof(Common_group))]
     public class Bird
     {
 
@@ -30,20 +30,26 @@ namespace BeakPeekApi.Models
 
         [DataType(DataType.DateTime)]
         [Column(TypeName = "Date")]
-        public DateTime Latest_FP { get; set; }
+        public DateTime? Latest_FP { get; set; }
 
         [JsonIgnore]
         public ICollection<ProvinceList> Bird_Provinces { get; set; }
 
-        [NotMapped]
-        [JsonProperty(
-                ObjectCreationHandling = ObjectCreationHandling.Replace
-                )]
-        public IEnumerable<string> Provinces
+        public BirdDto ToDto()
         {
-            get => Bird_Provinces.Select(p => p.Name);
+            return new BirdDto
+            {
+                Ref = this.Ref,
+                Common_group = this.Common_group,
+                Common_species = this.Common_species,
+                Genus = this.Genus,
+                Species = this.Species,
+                Full_Protocol_RR = this.Full_Protocol_RR,
+                Full_Protocol_Number = this.Full_Protocol_Number,
+                Latest_FP = this.Latest_FP,
+                Provinces = this.Bird_Provinces?.Select(bp => bp.Name).ToList()
+            };
         }
-
     }
 
 }
