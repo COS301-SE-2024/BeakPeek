@@ -30,6 +30,11 @@ jobs:
           dotnet-version: '8.x'
           include-prerelease: true
 
+      - name: Get App Setting
+        run: |
+          cd ./dotnet/BeakPeekApi
+          cp ../../appsettings.json .
+
       - name: Build with dotnet
         run: dotnet build --configuration Release ./dotnet/BeakPeekApi/BeakPeekApi.csproj
 
