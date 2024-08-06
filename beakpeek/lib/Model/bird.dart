@@ -11,13 +11,14 @@ class Bird {
 
   factory Bird.fromJson(Map<String, dynamic> json) {
     return Bird(
-      pentad: json['pentad'],
-      spp: json['spp'],
+      pentad: json['pentad'] ?? '',
+      spp: json['spp'] ?? 0,
       commonGroup: json['common_group'],
       commonSpecies: json['common_species'],
-      genus: json['genus'],
-      species: json['species'],
-      reportingRate: json['reportingRate'].toDouble(),
+      genus: json['genus'] ?? '',
+      species: json['species'] ?? '',
+      reportingRate: json['reportingRate'] != null ? json['reportingRate'].toDouble() : 0.0,
+
     );
   }
 
