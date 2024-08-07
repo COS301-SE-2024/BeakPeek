@@ -40,7 +40,7 @@ if (!builder.Environment.IsDevelopment())
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found.");
+        throw new InvalidOperationException($"Connection string not found. \n {builder.Configuration.ToString()}");
     }
 }
 else
