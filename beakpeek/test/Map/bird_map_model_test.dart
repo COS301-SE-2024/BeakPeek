@@ -49,64 +49,6 @@ void main() {
   });
 
   group('BirdMapFunctions', () {
-    // final MockClient client = MockClient();
-    // final BirdMapFunctions birdMapFunctions = BirdMapFunctions();
-
-    //broken
-    // test(
-    //     'fetchBirdsByGroupAndSpecies returns list of Birds if the http call completes successfully',
-    //     () async {
-    //   const commonGroup = 'Test Common Group';
-    //   const commonSpecies = 'Test Common Species';
-
-    //   when(
-    //     client.get(
-    //       Uri.http(
-    //         '10.0.2.2:5000',
-    //         '/api/Bird/search',
-    //         {'commonGroup': commonGroup, 'commonSpecies': commonSpecies},
-    //       ),
-    //     ),
-    //   ).thenAnswer(
-    //     (_) async => http.Response('''
-    //       [
-    //         {
-    //           "pentad": "Test Pentad",
-    //           "spp": 1,
-    //           "common_group": "Test Common Group",
-    //           "common_species": "Test Common Species",
-    //           "genus": "Test Genus",
-    //           "species": "Test Species",
-    //           "reportingRate": 1.0
-    //         }
-    //       ]
-    //       ''', 200),
-    //   );
-
-    //   final birds = await birdMapFunctions.fetchBirdsByGroupAndSpecies(
-    //       commonGroup, commonSpecies);
-
-    //   expect(birds, isA<List<Bird>>());
-    //   expect(birds.length, 1);
-    //   //expect(birds.first, 'Test Bird');
-    // });
-
-    // test(
-    //     'fetchBirdsByGroupAndSpecies throws an exception if the http call completes with an error',
-    //     () async {
-    //   const commonGroup = 'group';
-    //   const commonSpecies = 'species';
-
-    //   when(client.get(Uri.http('10.0.2.2:5000', '/api/Bird/search', {
-    //     'commonGroup': commonGroup,
-    //     'commonSpecies': commonSpecies
-    //   }))).thenAnswer((_) async => http.Response('Not Found', 404));
-
-    //   expect(
-    //     birdMapFunctions.fetchBirdsByGroupAndSpecies(
-    //         commonGroup, commonSpecies),
-    //     throwsException,
-    //   );
-    // });
+    
   });
 }

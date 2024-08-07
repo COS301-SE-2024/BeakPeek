@@ -32,14 +32,23 @@ builder.Configuration
 
 if (!builder.Environment.IsDevelopment())
 {
-    var envConnection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
+    // var envConnection = Environment.GetEnvironmentVariable("SQLCONNSTR_AZURE_SQL_CONNECTIONSTRING");
+    var envConnection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
     if (!string.IsNullOrEmpty(envConnection))
     {
         connection = envConnection;
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found. poo");
+        var second_backup = builder.Configuration.GetConnectionString("SQLCONNSTR_AZURE_SQL_CONNECTIONSTRING");
+        if (!string.IsNullOrEmpty(second_backup))
+        {
+            connection = second_backup;
+        }
+        else
+        {
+            throw new FileNotFoundException($"Connection string not found. \n {builder.Configuration.ToString()}");
+        }
     }
 }
 else
@@ -92,7 +101,7 @@ try
                 var csv_pentad_dir = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
                 if (Directory.Exists(csv_pentad_dir))
                 {
-                    csvImporter.ImportAllCsvData(csv_pentad_dir);
+                    // csvImporter.ImportAllCsvData(csv_pentad_dir);
                 }
             }
         }

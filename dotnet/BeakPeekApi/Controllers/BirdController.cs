@@ -281,5 +281,21 @@ namespace BeakPeekApi.Controllers
 
             return Ok(bird.ToDto().Provinces);
         }
+
+        [HttpGet("GetBirdPentads/{id}")]
+        public async Task<ActionResult<IEnumerable<ProvinceDto>>> GetBirdsByRef(int id)
+        {
+            var birds = await _context.Provinces
+                .Include(p => p.Bird)
+                .Include(p => p.Pentad.Pentad_Allocation)
+                .Where(p => p.Bird.Ref == id)
+                .ToListAsync();
+
+            if (birds == null || birds.Count == 0)
+                return NotFound("No birds matching that reference were found");
+
+            return Ok(birds);
+        }
+
     }
 }

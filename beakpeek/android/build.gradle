@@ -1,3 +1,16 @@
+buildscript {
+    ext.kotlin_version = '1.7.10' // Update if necessary
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.9.25"
+        // classpath 'dev.flutter:flutter-gradle-plugin:1.0.0' // Ensure this is the correct version
+    }
+}
+
 allprojects {
     repositories {
         google()

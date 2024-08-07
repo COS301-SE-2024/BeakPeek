@@ -26,7 +26,6 @@ class LifeListProvider {
           '''CREATE TABLE birds(
           id INTEGER PRIMARY KEY, 
           pentad TEXT, 
-          spp INTEGER, 
           commonGroup TEXT, 
           commonSpecies TEXT, 
           genus TEXT, 
@@ -50,33 +49,51 @@ class LifeListProvider {
   }
 
   Future<List<Bird>> fetchLifeList() async {
-    final db = await instance.database;
+  final db = await instance.database;
 
-    final List<Map<String, Object?>> birdMap = await db.query(
-      'birds',
-      orderBy: 'commonGroup DESC, commonSpecies DESC',
-    );
-    return [
-      for (final {
-            'pentad': pentad as String,
-            'spp': spp as int,
-            'commonGroup': commonGroup as String,
-            'commonSpecies': commonSpecies as String,
-            'genus': genus as String,
-            'species': species as String,
-            'reportingRate': reportingRate as double,
-          } in birdMap)
-        Bird(
-          pentad: pentad,
-          spp: spp,
-          commonGroup: commonGroup,
-          commonSpecies: commonSpecies,
-          genus: genus,
-          species: species,
-          reportingRate: reportingRate,
+  final List<Map<String, Object?>> birdMap = await db.query(
+    'birds',
+    orderBy: 'commonGroup DESC, commonSpecies DESC',
+  );
+  
+  return birdMap.map((map) {
+    return Bird(
+      id: map['id'] as int,
+      commonGroup: map['commonGroup'] as String,
+      commonSpecies: map['commonSpecies'] as String,
+      fullProtocolRR: map['fullProtocolRR'] != null ? map['fullProtocolRR'] as double : 0.0,
+      fullProtocolNumber: map['fullProtocolNumber'] != null ? map['fullProtocolNumber'] as int : 0,
+      latestFP: map['latestFP'] as String,
+      reportingRate: map['reportingRate'] != null ? map['reportingRate'] as double : 0.0,
+      genus: map['genus'] as String,
+      species: map['species'] as String,
+      pentad: Pentad(
+        pentadAllocation: map['pentad'] as String,
+        pentadLongitude: map['pentadLongitude'] != null ? map['pentadLongitude'] as double : 0.0,
+        pentadLatitude: map['pentadLatitude'] != null ? map['pentadLatitude'] as double : 0.0,
+        province: Province(
+          id: map['provinceId'] as int,
+          name: map['provinceName'] as String,
+          birds: null, // Adjust this according to your needs
         ),
-    ];
-  }
+        totalCards: map['totalCards'] != null ? map['totalCards'] as int : 0,
+      ),
+      jan: map['jan'] != null ? map['jan'] as double : 0.0,
+      feb: map['feb'] != null ? map['feb'] as double : 0.0,
+      mar: map['mar'] != null ? map['mar'] as double : 0.0,
+      apr: map['apr'] != null ? map['apr'] as double : 0.0,
+      may: map['may'] != null ? map['may'] as double : 0.0,
+      jun: map['jun'] != null ? map['jun'] as double : 0.0,
+      jul: map['jul'] != null ? map['jul'] as double : 0.0,
+      aug: map['aug'] != null ? map['aug'] as double : 0.0,
+      sep: map['sep'] != null ? map['sep'] as double : 0.0,
+      oct: map['oct'] != null ? map['oct'] as double : 0.0,
+      nov: map['nov'] != null ? map['nov'] as double : 0.0,
+      dec: map['dec'] != null ? map['dec'] as double : 0.0,
+      totalRecords: map['totalRecords'] != null ? map['totalRecords'] as int : 0,
+    );
+  }).toList();
+}
 
   Future close() async {
     final db = await instance.database;

@@ -25,7 +25,6 @@ void main() {
       final bird = Bird.fromJson(json);
 
       expect(bird.pentad, 'Test Pentad');
-      expect(bird.spp, 1);
       expect(bird.commonGroup, 'Test Common Group');
       expect(bird.commonSpecies, 'Test Common Species');
       expect(bird.genus, 'Test Genus');

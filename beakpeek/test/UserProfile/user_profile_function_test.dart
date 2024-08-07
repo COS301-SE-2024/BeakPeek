@@ -100,10 +100,10 @@ void main() {
 
     testWidgets('progressBars displays progress bars', (tester) async {
       final List<int> birdNums = [100, 200, 300, 400, 500, 600, 700, 800, 900];
-
+      final List<int> birdNumK = [100, 200, 300, 400, 500, 600, 700, 800, 900];
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: progressBars(birdNums),
+          body: progressBars(birdNums, birdNumK),
         ),
       ));
 

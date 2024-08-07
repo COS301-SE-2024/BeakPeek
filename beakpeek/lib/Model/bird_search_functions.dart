@@ -10,11 +10,11 @@ final colorArray = [
 ];
 
 int getColorForReportingRate(double reportingRate) {
-  if (reportingRate < 40) {
+  if (reportingRate < 40.0) {
     return 0;
-  } else if (reportingRate < 60) {
+  } else if (reportingRate < 60.0) {
     return 1;
-  } else if (reportingRate < 80) {
+  } else if (reportingRate < 80.0) {
     return 2;
   } else {
     return 3;
