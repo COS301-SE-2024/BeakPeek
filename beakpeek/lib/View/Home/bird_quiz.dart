@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/View/Home/bird_page.dart';
 // import 'package:beakpeek/View/Home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -34,8 +35,8 @@ class _BirdQuizState extends State<BirdQuiz> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Congratulations!'),
-          content: Text('You selected the correct bird!'),
+          title: const Text('Congratulations!'),
+          content: const Text('You selected the correct bird!'),
           actions: [
             TextButton(
               onPressed: () {
@@ -44,17 +45,17 @@ class _BirdQuizState extends State<BirdQuiz> {
                   startQuiz(birds);
                 });
               },
-              child: Text('Play Again'),
+              child: const Text('Play Again'),
             ),
             TextButton(
               onPressed: () {
-                // Navigator.of(context).pop(); // Close the dialog
-                // // Navigate to bird's page - adjust according to your app's routing
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) =>,
-                // ));
+                Navigator.of(context).pop(); // Close the dialog
+                // Navigate to bird's page - adjust according to your app's routing
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => BirdPage(commonGroup: correctBird.commonGroup, commonSpecies: correctBird.commonSpecies, id: correctBird.id ),
+                ));
               },
-              child: Text('Go to Bird Page'),
+              child: const Text('Go to Bird Page'),
             ),
           ],
         );
@@ -65,16 +66,16 @@ class _BirdQuizState extends State<BirdQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Bird Quiz')),
+      appBar: AppBar(title: const Text('Bird Quiz')),
       body: FutureBuilder<List<Bird>>(
         future: futureBirds,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No birds found'));
+            return const Center(child: Text('No birds found'));
           } else {
             startQuiz(snapshot.data!);
             return Column(
@@ -83,7 +84,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                   future: birdImages,
                   builder: (context, imageSnapshot) {
                     if (imageSnapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                      return const Center(child: CircularProgressIndicator());
                     } else if (imageSnapshot.hasError) {
                       return Center(child: Text('Error: ${imageSnapshot.error}'));
                     } else {
@@ -104,7 +105,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                       showWinDialog(snapshot.data!); // Show popup dialog
                     } else {
                       // Incorrect answer
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text('Incorrect!'),
                         backgroundColor: Colors.red,
                       ));
@@ -127,12 +128,13 @@ Future<List<Bird>> fetchBirds(http.Client client) async {
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
+      print(jsonResponse);
       return jsonResponse.map((data) => Bird.fromJson(data)).toList();
     } else {
       throw Exception('Failed to load birds');
     }
   } catch (error) {
-    throw Exception('Error fetching birds: $error');
+    throw Exception('Error fetching birdsYelllaosd: $error');
   }
 }
 

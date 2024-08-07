@@ -1,3 +1,4 @@
+import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/View/Home/bird_page.dart';
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Home/map_info.dart';
@@ -21,12 +22,13 @@ class RoutingData {
           return const UserProfile();
         },
       ),
-      GoRoute(
-        path: '/bird',
-        builder: (context, state) {
-          return const BirdPage();
-        },
-      ),
+      // GoRoute(
+      //   path: '/bird/:bird',
+      //   builder: (context, state) {
+      //     final Bird id = state.pathParameters['bird'];
+      //     return BirdPage(bird: id);
+      //   },
+      // ),
       GoRoute(
         path: '/',
         builder: (context, state) {
