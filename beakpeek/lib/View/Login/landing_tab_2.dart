@@ -7,6 +7,8 @@ class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xffF0EDE6),
       body: SafeArea(
@@ -15,7 +17,7 @@ class LandingTab2 extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  const Spacer(flex: 5),
+                  Spacer(flex: (screenHeight * 0.05).toInt()),
                   Align(
                     alignment: const Alignment(-0.7, 0.0),
                     child: RichText(
@@ -37,7 +39,7 @@ class LandingTab2 extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   Align(
                     alignment: const Alignment(-0.5, 0.0),
                     child: RichText(
@@ -66,7 +68,7 @@ class LandingTab2 extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Spacer(flex: 3),
+                  Spacer(flex: (screenHeight * 0.03).toInt()),
                   OutlinedButton(
                     style: GlobalStyles.secondaryButton,
                     child: const Text('Sign Up / Sign In',
@@ -75,7 +77,7 @@ class LandingTab2 extends StatelessWidget {
                       loginFunction(context);
                     },
                   ),
-                  const SizedBox(height: 20),
+                  SizedBox(height: screenHeight * 0.02),
                   FilledButton(
                     style: GlobalStyles.primaryButton,
                     child: const Text('Sign In as Guest',
@@ -89,7 +91,7 @@ class LandingTab2 extends StatelessWidget {
             ),
             Image.asset(
               'assets/images/landing2.png',
-              height: 450,
+              height: screenHeight * 0.45,
               width: double.infinity,
               fit: BoxFit.contain,
             ),
