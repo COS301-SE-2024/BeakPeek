@@ -39,7 +39,7 @@ if (!builder.Environment.IsDevelopment())
     }
     else
     {
-        throw new InvalidOperationException("Connection string not found. poo");
+        throw new InvalidOperationException("Connection string not found.");
     }
 }
 else
