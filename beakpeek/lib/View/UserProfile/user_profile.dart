@@ -3,7 +3,6 @@ import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:beakpeek/Styles/profile_page_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
