@@ -29,7 +29,9 @@ class Bird {
     final birdJson = json['bird'] ?? json;
     return Bird(
       id: birdJson['ref'] ?? 0, // default value for id
-      pentad: birdJson['pentad'] != null ? Pentad.fromJson(birdJson['pentad']) : null,
+      pentad: birdJson['pentad'] != null
+          ? Pentad.fromJson(birdJson['pentad'])
+          : null,
       commonGroup: birdJson['common_group'] ?? 'None',
       commonSpecies: birdJson['common_species'] ?? '',
       genus: birdJson['genus'] ?? '',
@@ -37,20 +39,21 @@ class Bird {
       fullProtocolRR: birdJson['full_Protocol_RR']?.toDouble() ?? 0.0,
       fullProtocolNumber: birdJson['full_Protocol_Number'] ?? 0,
       latestFP: birdJson['latest_FP'] ?? '',
-      jan: birdJson['jan']?.toDouble() ?? 0.0,
-      feb: birdJson['feb']?.toDouble() ?? 0.0,
-      mar: birdJson['mar']?.toDouble() ?? 0.0,
-      apr: birdJson['apr']?.toDouble() ?? 0.0,
-      may: birdJson['may']?.toDouble() ?? 0.0,
-      jun: birdJson['jun']?.toDouble() ?? 0.0,
-      jul: birdJson['jul']?.toDouble() ?? 0.0,
-      aug: birdJson['aug']?.toDouble() ?? 0.0,
-      sep: birdJson['sep']?.toDouble() ?? 0.0,
-      oct: birdJson['oct']?.toDouble() ?? 0.0,
-      nov: birdJson['nov']?.toDouble() ?? 0.0,
-      dec: birdJson['dec']?.toDouble() ?? 0.0,
+      jan: json['jan'] ?? 0.0,
+      feb: json['feb'] ?? 0.0,
+      mar: json['mar'] ?? 0.0,
+      apr: json['apr'] ?? 0.0,
+      may: json['may'] ?? 0.0,
+      jun: json['jun'] ?? 0.0,
+      jul: json['jul'] ?? 0.0,
+      aug: json['aug'] ?? 0.0,
+      sep: json['sep'] ?? 0.0,
+      oct: json['oct'] ?? 0.0,
+      nov: json['nov'] ?? 0.0,
+      dec: json['dec'] ?? 0.0,
       totalRecords: birdJson['total_Records'] ?? 0,
-      reportingRate: birdJson['reportingRate']?.toDouble() ?? json['reportingRate'] ?? 0.0,
+      reportingRate:
+          birdJson['reportingRate']?.toDouble() ?? json['reportingRate'] ?? 0.0,
     );
   }
 
