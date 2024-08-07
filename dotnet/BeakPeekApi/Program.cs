@@ -40,7 +40,15 @@ if (!builder.Environment.IsDevelopment())
     }
     else
     {
-        throw new InvalidOperationException($"Connection string not found. \n {builder.Configuration.ToString()}");
+        var second_backup = builder.Configuration.GetConnectionString("SQLCONNSTR_AZURE_SQL_CONNECTIONSTRING");
+        if (!string.IsNullOrEmpty(second_backup))
+        {
+            connection = second_backup;
+        }
+        else
+        {
+            throw new FileNotFoundException($"Connection string not found. \n {builder.Configuration.ToString()}");
+        }
     }
 }
 else

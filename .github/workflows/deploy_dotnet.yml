@@ -6,6 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - BeakPeekApi
 env:
   # DOTNET_ROOT: ./dotnet/BeakPeekApi/
   DOTNET_ROOT: .
+  AZURE_SQL_CONNECTIONSTRING: ${{ sectrets.AZURE_SQL_CONNECTIONSTRING }}
 on:
   push:
     branches:
