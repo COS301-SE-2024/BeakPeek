@@ -1,3 +1,6 @@
+// ignore_for_file: library_private_types_in_public_api,
+// unnecessary_to_list_in_spreads
+
 import 'dart:convert';
 import 'dart:math';
 
@@ -7,6 +10,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BirdQuiz extends StatefulWidget {
+  const BirdQuiz({super.key});
+
   @override
   _BirdQuizState createState() => _BirdQuizState();
 }
@@ -32,10 +37,10 @@ class _BirdQuizState extends State<BirdQuiz> {
   void showWinDialog(List<Bird> birds) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
-          title: Text('Congratulations!'),
-          content: Text('You selected the correct bird!'),
+          title: const Text('Congratulations!'),
+          content: const Text('You selected the correct bird!'),
           actions: [
             TextButton(
               onPressed: () {
@@ -44,7 +49,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                   startQuiz(birds);
                 });
               },
-              child: Text('Play Again'),
+              child: const Text('Play Again'),
             ),
             TextButton(
               onPressed: () {
@@ -54,7 +59,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                 //   builder: (context) =>,
                 // ));
               },
-              child: Text('Go to Bird Page'),
+              child: const Text('Go to Bird Page'),
             ),
           ],
         );
@@ -65,16 +70,16 @@ class _BirdQuizState extends State<BirdQuiz> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Bird Quiz')),
+      appBar: AppBar(title: const Text('Bird Quiz')),
       body: FutureBuilder<List<Bird>>(
         future: futureBirds,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No birds found'));
+            return const Center(child: Text('No birds found'));
           } else {
             startQuiz(snapshot.data!);
             return Column(
@@ -82,10 +87,12 @@ class _BirdQuizState extends State<BirdQuiz> {
                 FutureBuilder<List<String>>(
                   future: birdImages,
                   builder: (context, imageSnapshot) {
-                    if (imageSnapshot.connectionState == ConnectionState.waiting) {
-                      return Center(child: CircularProgressIndicator());
+                    if (imageSnapshot.connectionState ==
+                        ConnectionState.waiting) {
+                      return const Center(child: CircularProgressIndicator());
                     } else if (imageSnapshot.hasError) {
-                      return Center(child: Text('Error: ${imageSnapshot.error}'));
+                      return Center(
+                          child: Text('Error: ${imageSnapshot.error}'));
                     } else {
                       return Expanded(
                         child: PageView(
@@ -97,21 +104,28 @@ class _BirdQuizState extends State<BirdQuiz> {
                     }
                   },
                 ),
-                ...selectedBirds.map((bird) => ElevatedButton(
-                  onPressed: () {
-                    if (bird.commonSpecies == correctBird.commonSpecies &&
-                        bird.commonGroup == correctBird.commonGroup) {
-                      showWinDialog(snapshot.data!); // Show popup dialog
-                    } else {
-                      // Incorrect answer
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        content: Text('Incorrect!'),
-                        backgroundColor: Colors.red,
-                      ));
-                    }
-                  },
-                  child: Text('${bird.commonSpecies} ${bird.commonGroup}'),
-                )).toList(),
+                ...selectedBirds
+                    .map((bird) => ElevatedButton(
+                          onPressed: () {
+                            if (bird.commonSpecies ==
+                                    correctBird.commonSpecies &&
+                                bird.commonGroup == correctBird.commonGroup) {
+                              showWinDialog(
+                                  snapshot.data!); // Show popup dialog
+                            } else {
+                              // Incorrect answer
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(const SnackBar(
+                                content: Text('Incorrect!'),
+                                backgroundColor: Colors.red,
+                              ));
+                            }
+                          },
+                          child:
+                              Text('${bird.commonSpecies} ${bird.commonGroup}'),
+                        ))
+                    // ignore: unnecessary_to_list_in_spreads
+                    .toList(),
               ],
             );
           }
@@ -123,7 +137,8 @@ class _BirdQuizState extends State<BirdQuiz> {
 
 Future<List<Bird>> fetchBirds(http.Client client) async {
   try {
-    final response = await client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/'));
+    final response =
+        await client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
@@ -144,7 +159,8 @@ List<Bird> selectRandomBirds(List<Bird> birds, int count) {
 Future<List<String>> getImages(http.Client client, Bird bird) async {
   try {
     final String birdName = '${bird.commonSpecies} ${bird.commonGroup}';
-    final response = await client.get(Uri.parse('http://10.0.2.2:5000/api/BirdInfo/$birdName'));
+    final response = await client
+        .get(Uri.parse('http://10.0.2.2:5000/api/BirdInfo/$birdName'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);

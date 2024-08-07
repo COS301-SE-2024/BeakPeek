@@ -29,7 +29,7 @@ class Bird {
     return Bird(
       id: json['bird']['ref'],
       pentad: Pentad.fromJson(json['pentad']),
-      commonGroup: json['bird']['common_group']??'None',
+      commonGroup: json['bird']['common_group'] ?? 'None',
       commonSpecies: json['bird']['common_species'],
       genus: json['bird']['genus'],
       species: json['bird']['species'],
@@ -107,7 +107,8 @@ class Bird {
 
   @override
   String toString() {
-    return 'Bird{id: $id, commonGroup: $commonGroup, commonSpecies: $commonSpecies, reportingRate: $reportingRate}';
+    return '''Bird{id: $id, commonGroup: $commonGroup, 
+    commonSpecies: $commonSpecies, reportingRate: $reportingRate}''';
   }
 }
 
@@ -176,9 +177,6 @@ class Province {
 }
 
 class BirdPentad {
-  final String pentadAllocation;
-  final double reportingRate;
-
   BirdPentad({required this.pentadAllocation, required this.reportingRate});
 
   factory BirdPentad.fromJson(Map<String, dynamic> json) {
@@ -187,4 +185,6 @@ class BirdPentad {
       reportingRate: json['reportingRate']?.toDouble() ?? 0.0,
     );
   }
+  final String pentadAllocation;
+  final double reportingRate;
 }

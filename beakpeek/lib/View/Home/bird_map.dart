@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values, empty_catches
+
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Home/bird_sheet.dart';
@@ -18,7 +20,8 @@ class BirdMap extends StatefulWidget {
 
 class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
-  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593); // Default location
+  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593);
+  // Default location
   String _selectedProvince = 'gauteng'; // Default selected province
   String _selectedMonth = 'January'; // Default selected month
   late CameraPosition _cameraPosition;
@@ -61,7 +64,7 @@ class BirdMapState extends State<BirdMap> {
 
     // Fetch current location
     try {
-      Position position = await Geolocator.getCurrentPosition();
+      final Position position = await Geolocator.getCurrentPosition();
 
       setState(() {
         _currentLocation = LatLng(position.latitude, position.longitude);
@@ -74,7 +77,8 @@ class BirdMapState extends State<BirdMap> {
 
       // Update map camera if mapController is initialized
       if (_isLocationFetched) {
-        mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+        mapController
+            .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
       }
     } catch (e) {}
   }
@@ -84,13 +88,13 @@ class BirdMapState extends State<BirdMap> {
     return Column(
       children: [
         _buildFiltersRow(),
-
         Expanded(
           child: GoogleMap(
             onMapCreated: (controller) {
               mapController = controller;
               if (_isLocationFetched) {
-                mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+                mapController.animateCamera(
+                    CameraUpdate.newCameraPosition(_cameraPosition));
               }
             },
             initialCameraPosition: _cameraPosition,
@@ -241,7 +245,6 @@ class BirdMapState extends State<BirdMap> {
   CameraPosition _getCameraPositionForProvince(String province) {
     switch (province) {
       case 'gauteng':
-
         return const CameraPosition(
             target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
 
@@ -283,8 +286,7 @@ class BirdMapState extends State<BirdMap> {
           );
         }).toSet();
       });
-    } catch (e) {
-    }
+    } catch (e) {}
   }
 
   void _onPolygonTapped(String id) {

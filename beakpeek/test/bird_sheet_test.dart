@@ -48,14 +48,37 @@ void main() {
       // Define your JSON response
       final List<Map<String, dynamic>> jsonResponse = [
         {
-          'pentad': 'Test Pentad',
-          'spp': 1,
-          'common_group': 'Test Common Group',
-          'common_species': 'Test Common Species',
-          'genus': 'Test Genus',
-          'species': 'Test Species',
-          'reportingRate': 1.0,
-
+          'bird': {
+            'ref': 1,
+            'common_group': 'Group A',
+            'common_species': 'Species A',
+            'genus': 'Genus A',
+            'species': 'Species A',
+            'full_Protocol_RR': 10.0,
+            'full_Protocol_Number': 5,
+            'latest_FP': 'FP A',
+          },
+          'pentad': {
+            'pentad_Allocation': 'Allocation A',
+            'pentad_Longitude': 20.0,
+            'pentad_Latitude': 30.0,
+            'province': {'id': 1, 'name': 'Province A'},
+            'total_Cards': 50,
+          },
+          'jan': 1.0,
+          'feb': 2.0,
+          'mar': 3.0,
+          'apr': 4.0,
+          'may': 5.0,
+          'jun': 6.0,
+          'jul': 7.0,
+          'aug': 8.0,
+          'sep': 9.0,
+          'oct': 10.0,
+          'nov': 11.0,
+          'dec': 12.0,
+          'total_Records': 100,
+          'reportingRate': 50.0,
         }
       ];
 
@@ -73,9 +96,7 @@ void main() {
       // debugDumpApp();
 
       // Verify the widget's initial state
-      expect(
-          find.text('Test Common Group Test Common Species'), findsOneWidget);
+      expect(find.text('Group A Species A'), findsOneWidget);
     });
-
   });
 }

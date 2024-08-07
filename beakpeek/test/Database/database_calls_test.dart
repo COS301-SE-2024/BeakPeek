@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:beakpeek/Controller/DB/database_calls.dart';
+import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -16,26 +19,53 @@ void main() {
     });
 
     test('fetchAllBirds returns unique birds on success', () async {
-      when(mockClient.get(Uri.parse(
-              'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
-          .thenAnswer((_) async => http.Response('''
-          [
-            {
-              "pentad": "Test Pentad",
-              "spp": 1,
-              "common_group": "Test Common Group",
-              "common_species": "Test Common Species",
-              "genus": "Test Genus",
-              "species": "Test Species",
-              "reportingRate": 1.0
-            }
-          ]
-          ''', 200));
+      when(
+        mockClient.get(
+          Uri.parse('http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng'),
+        ),
+      ).thenAnswer((_) async {
+        final jsonResponse = [
+          {
+            'bird': {
+              'ref': 1,
+              'common_group': 'Group A',
+              'common_species': 'Species A',
+              'genus': 'Genus A',
+              'species': 'Species A',
+              'full_Protocol_RR': 10.0,
+              'full_Protocol_Number': 5,
+              'latest_FP': 'FP A',
+            },
+            'pentad': {
+              'pentad_Allocation': 'Allocation A',
+              'pentad_Longitude': 20.0,
+              'pentad_Latitude': 30.0,
+              'province': {'id': 1, 'name': 'Province A'},
+              'total_Cards': 50,
+            },
+            'jan': 1.0,
+            'feb': 2.0,
+            'mar': 3.0,
+            'apr': 4.0,
+            'may': 5.0,
+            'jun': 6.0,
+            'jul': 7.0,
+            'aug': 8.0,
+            'sep': 9.0,
+            'oct': 10.0,
+            'nov': 11.0,
+            'dec': 12.0,
+            'total_Records': 100,
+            'reportingRate': 50.0,
+          },
+        ];
+        return http.Response(jsonEncode(jsonResponse), 200);
+      });
 
-      final birds = await fetchAllBirds('gauteng', mockClient);
+      final List<Bird> birds = await fetchAllBirds('gauteng', mockClient);
 
       expect(birds.length, 1);
-      expect(birds[0].commonSpecies, 'Test Common Species');
+      expect(birds[0].commonSpecies, 'Species A');
     });
 
     test('fetchAllBirds throws an exception on non-200 response', () async {
@@ -50,7 +80,7 @@ void main() {
       when(mockClient.get(any))
           .thenAnswer((_) async => http.Response('10', 200));
 
-      final numbers = await getNumberOfBirdsInProvinces(mockClient);
+      final List<int> numbers = await getNumberOfBirdsInProvinces(mockClient);
 
       expect(numbers.length, provinces.length);
       expect(numbers, List.generate(provinces.length, (index) => 10));
