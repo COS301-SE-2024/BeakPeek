@@ -8,7 +8,7 @@ abstract class ProfilePageStyles {
   static ButtonStyle elevatedButtonStyle() {
     return ElevatedButton.styleFrom(
       backgroundColor: GlobalStyles.primaryColor,
-      minimumSize: const Size(250, 50),
+      minimumSize: const Size(300, 50),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(30.0),
       ),
