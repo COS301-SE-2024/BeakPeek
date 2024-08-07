@@ -1,13 +1,17 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
+import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class SearchbarContainer extends StatefulWidget {
-  const SearchbarContainer({required this.province, super.key});
+  const SearchbarContainer(
+      {required this.province, required this.helpContent, super.key});
   final String province;
+  final String helpContent;
+
   @override
   State<SearchbarContainer> createState() => _SearchbarContainerState();
 }
@@ -27,7 +31,6 @@ class _SearchbarContainerState extends State<SearchbarContainer> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        // Row containing logo and search bar
         Row(
           children: [
             Padding(
@@ -97,16 +100,20 @@ class _SearchbarContainerState extends State<SearchbarContainer> {
                 ],
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: HelpIcon(content: widget.helpContent),
+            ),
           ],
         ),
-        // The FutureBuilder for handling API state
         FutureBuilder<List<Bird>>(
           future: birds,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const SizedBox.shrink(); // Hide when loading
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              // return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(child: Text('')); // Removed error message for now
             }
             return FilterableSearchbar(sort: sort, birds: snapshot.data!);
           },

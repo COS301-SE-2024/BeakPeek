@@ -35,7 +35,10 @@ class HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: screenHeight * 0.05),
-                        const SearchbarContainer(province: 'gauteng'),
+                        const SearchbarContainer(
+                          province: 'gauteng',
+                          helpContent: 'Help for home page',
+                        ),
                         SizedBox(height: screenHeight * 0.01),
 
                         // Quiz Section

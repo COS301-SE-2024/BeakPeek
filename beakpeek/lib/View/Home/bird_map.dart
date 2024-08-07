@@ -1,4 +1,5 @@
 import 'package:beakpeek/Model/bird_map.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Home/bird_sheet.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +20,7 @@ class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
   LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593); // Default location
   String _selectedProvince = 'gauteng'; // Default selected province
+  String _selectedMonth = 'January'; // Default selected month
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
   bool _isLocationFetched = false;
@@ -81,7 +83,8 @@ class BirdMapState extends State<BirdMap> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        buildProvinceDropdown(),
+        _buildFiltersRow(),
+
         Expanded(
           child: GoogleMap(
             onMapCreated: (controller) {
@@ -100,39 +103,148 @@ class BirdMapState extends State<BirdMap> {
     );
   }
 
-  Widget buildProvinceDropdown() {
-    return DropdownButton<String>(
-      value: _selectedProvince,
-      onChanged: (newValue) {
-        setState(() {
-          _selectedProvince = newValue!;
-          _cameraPosition = _getCameraPositionForProvince(newValue);
-          _loadKmlData();
-        });
+  Widget _buildFiltersRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          icon:
+              const Icon(Icons.filter_list, color: GlobalStyles.secondaryColor),
+          onPressed: () {
+            _showFilterDialog();
+          },
+        ),
+      ],
+    );
+  }
 
-        // Move the camera to the new position
-        mapController.animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-            },
-      items: <String>[
-        'gauteng',
-        'westerncape',
-        'Eastern Cape'
-      ] // Add more provinces as needed
-          .map<DropdownMenuItem<String>>((value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Filters'),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Province Dropdown
+              DropdownButtonFormField<String>(
+                value: _selectedProvince,
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedProvince = newValue!;
+                    _cameraPosition = _getCameraPositionForProvince(newValue);
+                    _loadKmlData();
+                  });
+
+                  // Move the camera to the new position
+                  mapController.animateCamera(
+                      CameraUpdate.newCameraPosition(_cameraPosition));
+                },
+                items: <String>['gauteng', 'westerncape', 'Eastern Cape']
+                    .map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: const TextStyle(fontSize: 14.0),
+                    ),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12.0, vertical: 8.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                style: const TextStyle(color: Colors.black, fontSize: 14.0),
+                dropdownColor: Colors.white,
+                iconEnabledColor: GlobalStyles.secondaryColor,
+              ),
+              const SizedBox(height: 10.0),
+
+              // Month Dropdown
+              DropdownButtonFormField<String>(
+                value: _selectedMonth,
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedMonth = newValue!;
+                  });
+                },
+                items: <String>[
+                  'January',
+                  'February',
+                  'March',
+                  'April',
+                  'May',
+                  'June',
+                  'July',
+                  'August',
+                  'September',
+                  'October',
+                  'November',
+                  'December'
+                ].map<DropdownMenuItem<String>>((value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(
+                      value,
+                      style: const TextStyle(fontSize: 14.0),
+                    ),
+                  );
+                }).toList(),
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  filled: true,
+                  contentPadding: const EdgeInsets.symmetric(
+                      horizontal: 12.0, vertical: 8.0),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: const BorderSide(
+                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                style: const TextStyle(color: Colors.black, fontSize: 14.0),
+                dropdownColor: Colors.white,
+                iconEnabledColor: GlobalStyles.secondaryColor,
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('Close'),
+            ),
+          ],
         );
-      }).toList(),
+      },
     );
   }
 
   CameraPosition _getCameraPositionForProvince(String province) {
-    // Set camera positions for different provinces
     switch (province) {
       case 'gauteng':
+
         return const CameraPosition(
             target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
+
       case 'westerncape':
         return const CameraPosition(
             target: LatLng(-33.9249, 18.4241), zoom: 11.0);
