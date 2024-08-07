@@ -1,3 +1,6 @@
+// ignore_for_file: library_private_types_in_public_api,
+// unnecessary_to_list_in_spreads
+
 import 'dart:convert';
 import 'dart:math';
 
@@ -8,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class BirdQuiz extends StatefulWidget {
+  const BirdQuiz({super.key});
+
   @override
   _BirdQuizState createState() => _BirdQuizState();
 }
@@ -33,7 +38,7 @@ class _BirdQuizState extends State<BirdQuiz> {
   void showWinDialog(List<Bird> birds) {
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           title: const Text('Congratulations!'),
           content: const Text('You selected the correct bird!'),
@@ -86,7 +91,8 @@ class _BirdQuizState extends State<BirdQuiz> {
                     if (imageSnapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (imageSnapshot.hasError) {
-                      return Center(child: Text('Error: ${imageSnapshot.error}'));
+                      return Center(
+                          child: Text('Error: ${imageSnapshot.error}'));
                     } else {
                       return Expanded(
                         child: PageView(
@@ -124,7 +130,8 @@ class _BirdQuizState extends State<BirdQuiz> {
 
 Future<List<Bird>> fetchBirds(http.Client client) async {
   try {
-    final response = await client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/'));
+    final response =
+        await client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
@@ -146,7 +153,8 @@ List<Bird> selectRandomBirds(List<Bird> birds, int count) {
 Future<List<String>> getImages(http.Client client, Bird bird) async {
   try {
     final String birdName = '${bird.commonSpecies} ${bird.commonGroup}';
-    final response = await client.get(Uri.parse('http://10.0.2.2:5000/api/BirdInfo/$birdName'));
+    final response = await client
+        .get(Uri.parse('http://10.0.2.2:5000/api/BirdInfo/$birdName'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);

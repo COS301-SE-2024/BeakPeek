@@ -113,7 +113,7 @@ class _SearchbarContainerState extends State<SearchbarContainer> {
               return const SizedBox.shrink(); // Hide when loading
             } else if (snapshot.hasError) {
               // return Center(child: Text('Error: ${snapshot.error}'));
-              return Center(child: Text('')); // Removed error message for now
+              return const Center(child: Text('')); // Removed error message for
             }
             return FilterableSearchbar(sort: sort, birds: snapshot.data!);
           },

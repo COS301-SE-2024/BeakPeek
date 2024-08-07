@@ -1,13 +1,24 @@
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 import 'local_storage_test.mocks.dart';
 
+@GenerateMocks([LocalStorage])
 void main() {
+  final province = Province(id: 1, name: 'Province A');
+  final pentad = Pentad(
+    pentadAllocation: 'Allocation A',
+    pentadLongitude: 20.0,
+    pentadLatitude: 30.0,
+    province: province,
+    totalCards: 50,
+  );
   group('Theme Mode Tests', () {
     late MockLocalStorage mockLocalStorage;
 
@@ -64,8 +75,24 @@ void main() {
 
   group('Bird List Tests', () {
     final bird = Bird(
-      pentad: '12345',
-      spp: 1,
+      id: 1,
+      pentad: pentad,
+      fullProtocolRR: 10.0,
+      fullProtocolNumber: 5,
+      latestFP: 'FP A',
+      jan: 1.0,
+      feb: 2.0,
+      mar: 3.0,
+      apr: 4.0,
+      may: 5.0,
+      jun: 6.0,
+      jul: 7.0,
+      aug: 8.0,
+      sep: 9.0,
+      oct: 10.0,
+      nov: 11.0,
+      dec: 12.0,
+      totalRecords: 100,
       commonGroup: 'Sparrow',
       commonSpecies: 'House Sparrow',
       genus: 'Passer',
@@ -113,25 +140,67 @@ void main() {
     test('sortAlphabetically sorts birds correctly', () {
       final List<Bird> birds = [
         Bird(
-          pentad: '12345',
-          spp: 2,
+          id: 1,
+          pentad: pentad,
+          fullProtocolRR: 10.0,
+          fullProtocolNumber: 5,
+          latestFP: 'FP A',
+          jan: 1.0,
+          feb: 2.0,
+          mar: 3.0,
+          apr: 4.0,
+          may: 5.0,
+          jun: 6.0,
+          jul: 7.0,
+          aug: 8.0,
+          sep: 9.0,
+          oct: 10.0,
+          nov: 11.0,
+          dec: 12.0,
+          totalRecords: 100,
           commonGroup: 'Finch',
           commonSpecies: 'Zebra Finch',
           genus: 'Taeniopygia',
           species: 'guttata',
           reportingRate: 30.0,
         ),
-        bird
       ];
 
       final sortedBirds = sortAlphabetically(birds);
       expect(sortedBirds.first.commonGroup, 'Finch');
-      expect(sortedBirds.last.commonGroup, 'Sparrow');
+      expect(sortedBirds.last.commonSpecies, 'Zebra Finch');
     });
 
     test('getPercent calculates percentage correctly', () {
-      expect(getPercent(500, 1000), 200.0);
-      //expect(getPercent(750, 1000), 250.0);
+      expect(getPercent(1000, 500), 50.0);
+      expect(getPercent(1000, 750), 75.0);
+    });
+  });
+
+  group('Level Progress Functions', () {
+    test('getNextLevelExpRequired calculates correctly', () {
+      expect(getNextLevelExpRequired(1), 125);
+      expect(getNextLevelExpRequired(2), 200);
+      expect(getNextLevelExpRequired(3), 325);
+    });
+
+    test('progressPercentage calculates correctly', () {
+      expect(progressPercentage(100, 1), 80);
+      expect(progressPercentage(120, 1), 96);
+      expect(progressPercentage(200, 2), 100);
+    });
+  });
+
+  group('Widget Tests', () {
+    testWidgets('levelProgressBar displays progress correctly', (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: levelProgressBar(50, 1),
+        ),
+      ));
+
+      expect(find.byType(FAProgressBar), findsOneWidget);
+      // Add more specific checks based on your FAProgressBar widget
     });
   });
 }

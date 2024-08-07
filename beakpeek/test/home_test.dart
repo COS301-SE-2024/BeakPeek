@@ -5,8 +5,8 @@ import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/Model/nav.dart';
 
 void main() {
-  testWidgets('Home widget displays all sections correctly', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: Home()));
+  testWidgets('Home widget displays all sections correctly', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: Home()));
 
     // Verify that the SearchbarContainer is present
     expect(find.byType(SearchbarContainer), findsOneWidget);
@@ -31,14 +31,15 @@ void main() {
     expect(find.byType(BottomNavigation), findsOneWidget);
   });
 
-  testWidgets('Start Quiz button can be tapped', (WidgetTester tester) async {
-    await tester.pumpWidget(MaterialApp(home: Home()));
+  testWidgets('Start Quiz button can be tapped', (tester) async {
+    await tester.pumpWidget(const MaterialApp(home: Home()));
 
     // Tap the "Start Quiz" button
     await tester.tap(find.text('Start Quiz'));
     await tester.pump();
 
-    // Verify some expected behavior here, e.g., navigation or showing a quiz screen
+    // Verify some expected behavior here, e.g., navigation or showing a quiz
+    // screen
     // This part is dependent on the actual functionality you want to test
   });
 }
