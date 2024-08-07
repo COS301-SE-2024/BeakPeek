@@ -10,6 +10,14 @@ import 'local_storage_test.mocks.dart';
 
 @GenerateMocks([LocalStorage])
 void main() {
+  final province = Province(id: 1, name: 'Province A');
+  final pentad = Pentad(
+    pentadAllocation: 'Allocation A',
+    pentadLongitude: 20.0,
+    pentadLatitude: 30.0,
+    province: province,
+    totalCards: 50,
+  );
   group('Theme Tests', () {
     late MockLocalStorage mockLocalStorage;
 
@@ -60,13 +68,29 @@ void main() {
 
   group('Bird List Tests', () {
     final bird = Bird(
-      pentad: '12345',
-      spp: 1,
-      commonGroup: 'Sparrow',
-      commonSpecies: 'House Sparrow',
-      genus: 'Passer',
-      species: 'domesticus',
-      reportingRate: 55.0,
+      id: 1,
+      pentad: pentad,
+      commonGroup: 'Group A',
+      commonSpecies: 'Species A',
+      genus: 'Genus A',
+      species: 'Species A',
+      fullProtocolRR: 10.0,
+      fullProtocolNumber: 5,
+      latestFP: 'FP A',
+      jan: 1.0,
+      feb: 2.0,
+      mar: 3.0,
+      apr: 4.0,
+      may: 5.0,
+      jun: 6.0,
+      jul: 7.0,
+      aug: 8.0,
+      sep: 9.0,
+      oct: 10.0,
+      nov: 11.0,
+      dec: 12.0,
+      totalRecords: 100,
+      reportingRate: 50.0,
     );
 
     testWidgets('getLiveList displays list of birds', (tester) async {
@@ -78,8 +102,8 @@ void main() {
       ));
 
       expect(find.text('NO Birds Seen'), findsNothing);
-      expect(find.text('Sparrow House Sparrow'), findsOneWidget);
-      expect(find.text('Scientific Name: Passer domesticus'), findsOneWidget);
+      expect(find.text('Group A Species A'), findsOneWidget);
+      expect(find.text('Scientific Name: Genus A Species A'), findsOneWidget);
     });
 
     testWidgets('getLiveList displays "NO Birds Seen" when bird list is empty',
