@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       home: Scaffold(
         backgroundColor: Color(0xFFF3F1ED),
-        body: MapInfo(commonGroup: '', commonSpecies:'',),
+        body: MapInfo(id: 0),
       ),
     );
   }
@@ -23,9 +23,8 @@ class MyApp extends StatelessWidget {
 class MapInfo extends StatelessWidget {
 
 
-  const MapInfo({super.key, required this.commonGroup, required this.commonSpecies});
-  final String commonSpecies;
-  final String commonGroup;
+  const MapInfo({super.key, required this.id});
+  final int id;
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +54,7 @@ class MapInfo extends StatelessWidget {
                         ),
                         const SizedBox(height: 10),
                         Expanded(
-                          child: HeatMap(commonGroup: commonGroup, commonSpecies: commonSpecies,),
+                          child: HeatMap(id: id),
                         )
                       ],
                     )),
