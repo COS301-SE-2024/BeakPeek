@@ -30,9 +30,9 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
-if (builder.Environment.IsDevelopment())
+if (!builder.Environment.IsDevelopment())
 {
-    var envConnection = Environment.GetEnvironmentVariable("AZURE_SQL_CONNECTIONSTRING");
+    var envConnection = Environment.GetEnvironmentVariable("SQLCONNSTR_AZURE_SQL_CONNECTIONSTRING");
     if (!string.IsNullOrEmpty(envConnection))
     {
         connection = envConnection;
