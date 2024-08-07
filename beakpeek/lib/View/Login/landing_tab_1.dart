@@ -6,6 +6,9 @@ class LandingTab1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xffF0EDE6),
       body: SafeArea(
@@ -16,8 +19,8 @@ class LandingTab1 extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
-                      height: 100,
+                    SizedBox(
+                      height: screenHeight * 0.1,
                     ),
                     RichText(
                       textAlign: TextAlign.center,
@@ -34,14 +37,17 @@ class LandingTab1 extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 170),
-                      child: Image.asset(
-                        'assets/images/landing1.png',
-                      ),
-                    ),
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: screenHeight * 0.00),
+              child: Image.asset(
+                'assets/images/landing1.png',
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.5,
+                fit: BoxFit.contain,
               ),
             ),
           ],
