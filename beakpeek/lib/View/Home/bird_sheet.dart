@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Home/bird_page.dart';
 import 'package:beakpeek/View/Home/heat_map.dart';
 import 'package:http/http.dart' as http;
@@ -76,6 +77,7 @@ class _BirdSheetState extends State<BirdSheet> {
         alignment: Alignment.bottomCenter,
         heightFactor: _heightFactor,
         child: Material(
+          color: Colors.white, // Set the background color for better visibility
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -95,8 +97,8 @@ class _BirdSheetState extends State<BirdSheet> {
               const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
-                  'Birds in this area',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  'Birds in This Area',
+                  style: GlobalStyles.smallHeadingDark,
                 ),
               ),
               Row(
@@ -114,7 +116,10 @@ class _BirdSheetState extends State<BirdSheet> {
                       ].map((value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(
+                            value,
+                            style: GlobalStyles.greenContent,
+                          ),
                         );
                       }).toList(),
                       onChanged: (newValue) {
@@ -135,7 +140,10 @@ class _BirdSheetState extends State<BirdSheet> {
                       ].map((value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(
+                            value,
+                            style: GlobalStyles.greenContent,
+                          ),
                         );
                       }).toList(),
                       onChanged: (newValue) {
@@ -172,8 +180,8 @@ class _BirdSheetState extends State<BirdSheet> {
 Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
   try {
     // print(pentadId);
-    final response = await client.get(Uri.parse(
-        'http://10.0.2.2:5000/api/Bird/$pentadId/pentad'));
+    final response = await client
+        .get(Uri.parse('http://10.0.2.2:5000/api/Bird/$pentadId/pentad'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
@@ -207,38 +215,54 @@ class BirdList extends StatelessWidget {
               MaterialPageRoute(
                 builder: (context) => Scaffold(
                   body: BirdPage(id: bird.id, commonGroup: bird.commonGroup, commonSpecies: bird.commonSpecies,
-                    
                   ),
+                ),
+              );
+            },
+            child: ListTile(
+              tileColor: index % 2 == 0
+                  ? Colors.grey.shade100
+                  : Colors.white, // Alternate row color
+              title: Text(
+                bird.commonGroup != 'None'
+                    ? '${bird.commonGroup} ${bird.commonSpecies}'
+                    : bird.commonSpecies,
+                style: const TextStyle(
+                  color: Colors.black, // Dark color for text
                 ),
               ),
-            );
-          },
-          child: ListTile(
-            title: Text(bird.commonGroup != 'None'
-                ? '${bird.commonGroup} ${bird.commonSpecies}'
-                : bird.commonSpecies),
-            subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('${bird.reportingRate}%'),
-                const SizedBox(width: 8),
-                Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _getColorForReportingRate(bird.reportingRate),
-                  ),
+              subtitle: Text(
+                'Scientific Name: ${bird.genus} ${bird.species}',
+                style: const TextStyle(
+                  color: Colors.black54, // Semi-dark color for subtitle
                 ),
-              ],
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '${bird.reportingRate}%',
+                    style: const TextStyle(
+                      color: Colors.black87, // Dark color for text
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _getColorForReportingRate(bird.reportingRate),
+                    ),
+                  ),
+                ],
+              ),
             ),
-          ),
-        );
-      },
-    ),
-  );
-}
+          );
+        },
+      ),
+    );
+  }
 
   Color _getColorForReportingRate(double reportingRate) {
     if (reportingRate < 40) {

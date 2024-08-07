@@ -61,6 +61,13 @@ abstract class GlobalStyles {
     fontWeight: FontWeight.w400,
   );
 
+  static const TextStyle greenContent = TextStyle(
+    color: primaryColor,
+    fontSize: 17,
+    fontFamily: 'SF Pro Display',
+    fontWeight: FontWeight.w500,
+  );
+
   static const TextStyle boldContent = TextStyle(
     color: secondaryColor,
     fontSize: 18,
