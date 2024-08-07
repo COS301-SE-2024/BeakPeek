@@ -29,7 +29,9 @@ class Bird {
     final birdJson = json['bird'] ?? json;
     return Bird(
       id: birdJson['ref'] ?? 0, // default value for id
-      pentad: birdJson['pentad'] != null ? Pentad.fromJson(birdJson['pentad']) : null,
+      pentad: birdJson['pentad'] != null
+          ? Pentad.fromJson(birdJson['pentad'])
+          : null,
       commonGroup: birdJson['common_group'] ?? 'None',
       commonSpecies: birdJson['common_species'] ?? '',
       genus: birdJson['genus'] ?? '',
@@ -50,7 +52,8 @@ class Bird {
       nov: birdJson['nov']?.toDouble() ?? 0.0,
       dec: birdJson['dec']?.toDouble() ?? 0.0,
       totalRecords: birdJson['total_Records'] ?? 0,
-      reportingRate: birdJson['reportingRate']?.toDouble() ?? json['reportingRate'] ?? 0.0,
+      reportingRate:
+          birdJson['reportingRate']?.toDouble() ?? json['reportingRate'] ?? 0.0,
     );
   }
 

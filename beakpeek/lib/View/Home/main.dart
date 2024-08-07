@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 // Adjust the import to the correct file path
 
 void main() {
-  runApp(BirdQuizApp());
+  runApp(const BirdQuizApp());
 }
 
 class BirdQuizApp extends StatelessWidget {
+  const BirdQuizApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,7 +16,7 @@ class BirdQuizApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: BirdQuiz(),
+      home: const BirdQuiz(),
     );
   }
 }

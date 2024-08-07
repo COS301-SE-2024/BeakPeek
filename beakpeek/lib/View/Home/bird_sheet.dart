@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/View/Home/bird_page.dart';
+// ignore: unused_import
 import 'package:beakpeek/View/Home/heat_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -172,8 +173,8 @@ class _BirdSheetState extends State<BirdSheet> {
 Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
   try {
     // print(pentadId);
-    final response = await client.get(Uri.parse(
-        'http://10.0.2.2:5000/api/Bird/$pentadId/pentad'));
+    final response = await client
+        .get(Uri.parse('http://10.0.2.2:5000/api/Bird/$pentadId/pentad'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
@@ -195,50 +196,52 @@ class BirdList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-  return Material(
-    child: ListView.builder(
-      itemCount: birds.length,
-      itemBuilder: (context, index) {
-        final bird = birds[index];
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  body: BirdPage(id: bird.id, commonGroup: bird.commonGroup, commonSpecies: bird.commonSpecies,
-                    
+    return Material(
+      child: ListView.builder(
+        itemCount: birds.length,
+        itemBuilder: (context, index) {
+          final bird = birds[index];
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    body: BirdPage(
+                      id: bird.id,
+                      commonGroup: bird.commonGroup,
+                      commonSpecies: bird.commonSpecies,
+                    ),
                   ),
                 ),
+              );
+            },
+            child: ListTile(
+              title: Text(bird.commonGroup != 'None'
+                  ? '${bird.commonGroup} ${bird.commonSpecies}'
+                  : bird.commonSpecies),
+              subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text('${bird.reportingRate}%'),
+                  const SizedBox(width: 8),
+                  Container(
+                    width: 20,
+                    height: 20,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: _getColorForReportingRate(bird.reportingRate),
+                    ),
+                  ),
+                ],
               ),
-            );
-          },
-          child: ListTile(
-            title: Text(bird.commonGroup != 'None'
-                ? '${bird.commonGroup} ${bird.commonSpecies}'
-                : bird.commonSpecies),
-            subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
-            trailing: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text('${bird.reportingRate}%'),
-                const SizedBox(width: 8),
-                Container(
-                  width: 20,
-                  height: 20,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: _getColorForReportingRate(bird.reportingRate),
-                  ),
-                ),
-              ],
             ),
-          ),
-        );
-      },
-    ),
-  );
-}
+          );
+        },
+      ),
+    );
+  }
 
   Color _getColorForReportingRate(double reportingRate) {
     if (reportingRate < 40) {
