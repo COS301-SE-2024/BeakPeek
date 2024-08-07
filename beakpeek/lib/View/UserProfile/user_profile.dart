@@ -21,17 +21,12 @@ class UserProfileState extends State<UserProfile> {
   late LifeListProvider lifeList = LifeListProvider.instance;
   late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
-  Widget iconDisplay = getIcon(localStorage);
-  String iconLabel = getLabelIcon(localStorage);
-  String name = localStorage.getItem('fullName') ?? '';
   late Future<List<int>> numBirds;
+
+  String name = localStorage.getItem('fullName') ?? '';
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
   String email = localStorage.getItem('email') ?? 'example@mail.com';
-
-  // Added variables
   String phone = localStorage.getItem('phone') ?? '+123456789';
-  String website = localStorage.getItem('website') ?? 'https://example.com';
-  String location = localStorage.getItem('location') ?? 'Unknown Location';
 
   //level variables
   String levelStore = localStorage.getItem('level') ?? '0';
@@ -53,8 +48,6 @@ class UserProfileState extends State<UserProfile> {
     if (email.isEmpty) {
       email = 'example@mail.com';
     }
-    iconDisplay = getIcon(localStorage);
-    iconLabel = getLabelIcon(localStorage);
     birds = lifeList.fetchLifeList();
     numBirds = db.getNumberOfBirdsInProvinces(Client());
     level = int.parse(levelStore);
@@ -72,13 +65,6 @@ class UserProfileState extends State<UserProfile> {
     super.initState();
   }
 
-  void editName(String data) {
-    localStorage.setItem('fullName', data);
-    setState(() {
-      name = data;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,7 +80,7 @@ class UserProfileState extends State<UserProfile> {
                   Center(
                     child: Column(
                       children: [
-                        //Level
+                        // Profile picture
                         CircleAvatar(
                           radius: 75,
                           backgroundColor: GlobalStyles.primaryColor,
@@ -110,38 +96,45 @@ class UserProfileState extends State<UserProfile> {
                             ),
                           ),
                         ),
-                        // Divider between the list and buttons
-                        const Divider(height: 1, thickness: 1),
+
                         // Username
                         Text(name, style: GlobalStyles.subHeadingDark),
 
                         // Active since
+                        const SizedBox(height: 6),
                         const Text('Active since - June 2024',
                             style: GlobalStyles.smallContent),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 6),
                       ],
                     ),
                   ),
 
-                  const Divider(height: 1, thickness: 1),
-
+                  // Level indicator
                   Column(
                     children: [
                       Text(
                         'Level $level',
-                        style: const TextStyle(color: Colors.black),
+                        style: GlobalStyles.greyContent,
                       ),
                       SizedBox(
-                        height: 50,
+                        height: 30,
                         child: levelProgressBar(userExp, level),
                       ),
                     ],
                   ),
 
+                  // Personal information
                   const SizedBox(height: 10),
                   const Text('Personal Information',
                       style: GlobalStyles.subheadingLight),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
+
+                  // Bio Field with Subheading
+                  ProfileField(
+                    icon: Icons.info,
+                    label: 'Bio',
+                    content: bio,
+                  ),
 
                   const SizedBox(height: 10),
 
@@ -156,37 +149,15 @@ class UserProfileState extends State<UserProfile> {
 
                   // Location Field
                   ProfileField(
-                    icon: Icons.location_on,
-                    label: 'Location',
-                    content: location,
+                    icon: Icons.email,
+                    label: 'Email',
+                    content: email,
                   ),
 
                   const SizedBox(height: 10),
-
-                  // Bio Field with Subheading
-                  ProfileField(
-                    icon: Icons.info,
-                    label: 'Bio',
-                    content: bio,
-                  ),
-
-                  // Subheading for Life List
-                  const SizedBox(height: 20),
-                  const Divider(height: 1, thickness: 1),
-                  const SizedBox(height: 20),
-                  const Text('Life List', style: GlobalStyles.subheadingLight),
-                  FutureBuilder<List<Bird>>(
-                    future: birds,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      }
-                      return getLiveList(snapshot.data!);
-                    },
-                  ),
                   const SizedBox(height: 10),
+
+                  // Achievements section
                   const Text(
                     'Achievements',
                     style: GlobalStyles.subheadingLight,
@@ -215,7 +186,8 @@ class UserProfileState extends State<UserProfile> {
               ),
             ),
           ),
-          // Container for buttons at the bottom
+
+          // Container for button at the bottom
           Positioned(
             bottom: 0,
             left: 0,
@@ -233,31 +205,6 @@ class UserProfileState extends State<UserProfile> {
                     },
                     style: ProfilePageStyles.elevatedButtonStyle(),
                     child: const Text('Home'),
-                  ),
-
-                  // Dark mode switch
-                  Row(
-                    children: [
-                      Icon(
-                        Theme.of(context).brightness == Brightness.dark
-                            ? Icons.wb_sunny
-                            : Icons.nightlight_round,
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? ProfilePageStyles.iconColorDarkMode
-                            : ProfilePageStyles.iconColorLightMode,
-                      ),
-                      const SizedBox(width: 2),
-                      Switch(
-                        value: Theme.of(context).brightness == Brightness.dark,
-                        onChanged: (value) {
-                          setState(() {
-                            iconDisplay = getIcon(localStorage);
-                            iconLabel = getLabelIcon(localStorage);
-                          });
-                        },
-                        activeColor: GlobalStyles.primaryColor,
-                      ),
-                    ],
                   ),
                 ],
               ),
