@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Styles/bird_page_styles.dart';
@@ -6,7 +8,12 @@ import 'package:beakpeek/View/Home/heat_map.dart';
 import 'package:flutter/material.dart';
 
 class BirdPage extends StatefulWidget {
-  const BirdPage({Key? key, required this.commonGroup, required this.commonSpecies, required this.id}) : super(key: key);
+  // ignore: lines_longer_than_80_chars
+  const BirdPage(
+      {super.key,
+      required this.commonGroup,
+      required this.commonSpecies,
+      required this.id});
 
   final String commonGroup;
   final String commonSpecies;
@@ -22,7 +29,8 @@ class _BirdPageState extends State<BirdPage> {
   @override
   void initState() {
     super.initState();
-    birdFuture = ApiService().fetchBirdInfo(widget.commonGroup, widget.commonSpecies);
+    birdFuture =
+        ApiService().fetchBirdInfo(widget.commonGroup, widget.commonSpecies);
   }
 
   @override
@@ -45,12 +53,16 @@ class _BirdPageState extends State<BirdPage> {
                     child: FutureBuilder<Map<String, dynamic>?>(
                       future: birdFuture,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
-                          return const Center(child: CircularProgressIndicator());
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
-                          return const Center(child: Text('Failed to load bird info'));
+                          return const Center(
+                              child: Text('Failed to load bird info'));
                         } else if (!snapshot.hasData) {
-                          return const Center(child: Text('No bird info found'));
+                          return const Center(
+                              child: Text('No bird info found'));
                         }
 
                         final birdData = snapshot.data!;
@@ -90,7 +102,9 @@ class _BirdPageState extends State<BirdPage> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Image.network(
-                                    birdData['images'][1]['url'], // Assuming you have an imageUrl in your data
+                                    birdData['images'][1][
+                                        'url'], // Assuming you have an imageUrl
+                                    //in your data
                                     width: screenWidth * 0.92,
                                     fit: BoxFit.cover,
                                   ),
@@ -130,8 +144,11 @@ class _BirdPageState extends State<BirdPage> {
                                   ),
                                   const SizedBox(height: 8),
                                   Text(
-                                    birdData['description'], // Assuming you have a description in your data
-                                    style: GlobalStyles.content.copyWith(fontSize: 18),
+                                    birdData['description'],
+                                    // Assuming you have a
+                                    //description in your data
+                                    style: GlobalStyles.content
+                                        .copyWith(fontSize: 18),
                                     textAlign: TextAlign.left,
                                   ),
                                 ],
@@ -147,15 +164,15 @@ class _BirdPageState extends State<BirdPage> {
               ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  body: HeatMap(id: widget.id,
-                    
-                  ),
-                ),
-              ),
-            );
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Scaffold(
+                        body: HeatMap(
+                          id: widget.id,
+                        ),
+                      ),
+                    ),
+                  );
                 },
                 style: BirdPageStyles.elevatedButtonStyle(),
                 child: const Text('Show Heat Map'),

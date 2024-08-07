@@ -91,7 +91,8 @@ class HomeState extends State<Home> {
                                         onPressed: () {
                                           Navigator.of(context).push(
                                             MaterialPageRoute(
-                                              builder: (context) => BirdQuiz(),
+                                              builder: (context) =>
+                                                  const BirdQuiz(),
                                             ),
                                           );
                                         },

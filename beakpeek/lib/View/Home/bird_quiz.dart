@@ -55,7 +55,8 @@ class _BirdQuizState extends State<BirdQuiz> {
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(); // Close the dialog
-                // Navigate to bird's page - adjust according to your app's routing
+                // Navigate to bird's page - adjust according to your
+                //app's routing
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => BirdPage(
                       commonGroup: correctBird.commonGroup,
@@ -128,6 +129,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                           child:
                               Text('${bird.commonSpecies} ${bird.commonGroup}'),
                         ))
+                    // ignore: unnecessary_to_list_in_spreads
                     .toList(),
               ],
             );
