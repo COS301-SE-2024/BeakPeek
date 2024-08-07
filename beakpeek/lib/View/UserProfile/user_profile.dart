@@ -1,3 +1,4 @@
+import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
@@ -18,6 +19,7 @@ class UserProfile extends StatefulWidget {
 
 class UserProfileState extends State<UserProfile> {
   late LifeListProvider lifeList = LifeListProvider.instance;
+  late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
   Widget iconDisplay = getIcon(localStorage);
   String iconLabel = getLabelIcon(localStorage);
@@ -31,6 +33,14 @@ class UserProfileState extends State<UserProfile> {
   String website = localStorage.getItem('website') ?? 'https://example.com';
   String location = localStorage.getItem('location') ?? 'Unknown Location';
 
+  //level variables
+  String levelStore = localStorage.getItem('level') ?? '0';
+  String userProgress = localStorage.getItem('userExp') ?? '0';
+  late int level;
+  late int userExp;
+  late int levelProgress;
+
+  late List<int> numberOfBirdsPerProvince;
   @override
   void initState() {
     super.initState();
@@ -47,6 +57,20 @@ class UserProfileState extends State<UserProfile> {
     iconLabel = getLabelIcon(localStorage);
     birds = lifeList.fetchLifeList();
     numBirds = db.getNumberOfBirdsInProvinces(Client());
+    level = int.parse(levelStore);
+    userExp = int.parse(userProgress);
+    levelProgress = getLevelExp();
+    countProv().then((count) {
+      setState(() {
+        numberOfBirdsPerProvince = count;
+      });
+    });
+    // if (levelStore.compareTo(localStorage.getItem('level') ?? '0') != 0) {
+    //   levelStore = localStorage.getItem('level') ?? '0';
+    //   userProgress = localStorage.getItem('userExp') ?? '0';
+    //   level = int.parse(levelStore);
+    //   userExp = int.parse(userProgress);
+    // }
     super.initState();
   }
 
@@ -72,6 +96,7 @@ class UserProfileState extends State<UserProfile> {
                   Center(
                     child: Column(
                       children: [
+                        //Level
                         CircleAvatar(
                           radius: 75,
                           backgroundColor: GlobalStyles.primaryColor,
@@ -87,7 +112,6 @@ class UserProfileState extends State<UserProfile> {
                             ),
                           ),
                         ),
-
                         // Divider between the list and buttons
                         const Divider(height: 1, thickness: 1),
                         // Username
@@ -102,6 +126,19 @@ class UserProfileState extends State<UserProfile> {
                   ),
 
                   const Divider(height: 1, thickness: 1),
+
+                  Column(
+                    children: [
+                      Text(
+                        'Level $level',
+                        style: const TextStyle(color: Colors.black),
+                      ),
+                      SizedBox(
+                        height: 50,
+                        child: levelProgressBar(userExp, level),
+                      ),
+                    ],
+                  ),
 
                   const SizedBox(height: 10),
                   const Text('Personal Information',
@@ -169,10 +206,11 @@ class UserProfileState extends State<UserProfile> {
                           ),
                         );
                       }
-                      return progressBars(snapshot.data!);
+                      return progressBars(
+                          snapshot.data!, numberOfBirdsPerProvince);
                     },
                   ),
-
+                  //
                   // Padding to prevent overlap with the bottom fixed container
                   const SizedBox(height: 100),
                 ],
