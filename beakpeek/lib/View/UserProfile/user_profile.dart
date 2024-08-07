@@ -60,17 +60,15 @@ class UserProfileState extends State<UserProfile> {
     level = int.parse(levelStore);
     userExp = int.parse(userProgress);
     levelProgress = getLevelExp();
-    countProv().then((count) {
-      setState(() {
-        numberOfBirdsPerProvince = count;
-      });
-    });
-    // if (levelStore.compareTo(localStorage.getItem('level') ?? '0') != 0) {
-    //   levelStore = localStorage.getItem('level') ?? '0';
-    //   userProgress = localStorage.getItem('userExp') ?? '0';
-    //   level = int.parse(levelStore);
-    //   userExp = int.parse(userProgress);
-    // }
+    countProv().then(
+      (count) {
+        setState(
+          () {
+            numberOfBirdsPerProvince = count;
+          },
+        );
+      },
+    );
     super.initState();
   }
 
