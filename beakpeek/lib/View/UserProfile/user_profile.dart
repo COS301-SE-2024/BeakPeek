@@ -3,7 +3,6 @@ import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:beakpeek/Styles/profile_page_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
@@ -21,17 +20,13 @@ class UserProfileState extends State<UserProfile> {
   late LifeListProvider lifeList = LifeListProvider.instance;
   late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
-  Widget iconDisplay = getIcon(localStorage);
-  String iconLabel = getLabelIcon(localStorage);
-  String name = localStorage.getItem('fullName') ?? '';
   late Future<List<int>> numBirds;
+
+  String name = localStorage.getItem('fullName') ?? '';
+  String username = localStorage.getItem('username') ?? 'Username';
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
   String email = localStorage.getItem('email') ?? 'example@mail.com';
-
-  // Added variables
   String phone = localStorage.getItem('phone') ?? '+123456789';
-  String website = localStorage.getItem('website') ?? 'https://example.com';
-  String location = localStorage.getItem('location') ?? 'Unknown Location';
 
   //level variables
   String levelStore = localStorage.getItem('level') ?? '0';
@@ -41,6 +36,7 @@ class UserProfileState extends State<UserProfile> {
   late int levelProgress;
 
   late List<int> numberOfBirdsPerProvince;
+
   @override
   void initState() {
     super.initState();
@@ -53,8 +49,6 @@ class UserProfileState extends State<UserProfile> {
     if (email.isEmpty) {
       email = 'example@mail.com';
     }
-    iconDisplay = getIcon(localStorage);
-    iconLabel = getLabelIcon(localStorage);
     birds = lifeList.fetchLifeList();
     numBirds = db.getNumberOfBirdsInProvinces(Client());
     level = int.parse(levelStore);
@@ -72,34 +66,51 @@ class UserProfileState extends State<UserProfile> {
     super.initState();
   }
 
-  void editName(String data) {
-    localStorage.setItem('fullName', data);
-    setState(() {
-      name = data;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final verticalPadding = screenHeight * 0.01;
+    final horizontalPadding = screenWidth * 0.05;
+
     return Scaffold(
       body: Stack(
         children: [
           SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20.0),
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  const SizedBox(height: 60),
+                  SizedBox(height: verticalPadding * 6),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      IconButton(
+                        icon: const Icon(Icons.arrow_back,
+                            color: GlobalStyles.primaryColor),
+                        onPressed: () {
+                          context.go('/home');
+                        },
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.settings,
+                            color: GlobalStyles.primaryColor),
+                        onPressed: () {
+                          // Navigate to settings page or handle settings action
+                        },
+                      ),
+                    ],
+                  ),
                   Center(
                     child: Column(
                       children: [
-                        //Level
+                        // Profile picture
                         CircleAvatar(
-                          radius: 75,
+                          radius: screenWidth * 0.20,
                           backgroundColor: GlobalStyles.primaryColor,
                           child: CircleAvatar(
-                            radius: 75,
+                            radius: screenWidth * 0.19,
                             backgroundImage: const AssetImage(
                               'assets/images/profileImages/images.jpg',
                             ),
@@ -110,58 +121,52 @@ class UserProfileState extends State<UserProfile> {
                             ),
                           ),
                         ),
-                        // Divider between the list and buttons
-                        const Divider(height: 1, thickness: 1),
+
                         // Username
+                        SizedBox(height: verticalPadding),
                         Text(name, style: GlobalStyles.subHeadingDark),
 
                         // Active since
+                        SizedBox(height: verticalPadding),
                         const Text('Active since - June 2024',
                             style: GlobalStyles.smallContent),
-                        const SizedBox(height: 10),
+                        SizedBox(height: verticalPadding),
                       ],
                     ),
                   ),
 
-                  const Divider(height: 1, thickness: 1),
-
+                  // Level indicator
                   Column(
                     children: [
                       Text(
                         'Level $level',
-                        style: const TextStyle(color: Colors.black),
+                        style: GlobalStyles.greyContent,
                       ),
                       SizedBox(
-                        height: 50,
+                        height: verticalPadding * 3,
                         child: levelProgressBar(userExp, level),
                       ),
                     ],
                   ),
 
-                  const SizedBox(height: 10),
+                  Divider(
+                    color: Colors.grey.shade300,
+                    thickness: 1,
+                  ),
+
+                  // Personal information
+                  SizedBox(height: verticalPadding),
                   const Text('Personal Information',
                       style: GlobalStyles.subheadingLight),
-                  const SizedBox(height: 20),
+                  SizedBox(height: verticalPadding),
 
-                  const SizedBox(height: 10),
-
-                  // Phone Field
+                  // Username Field
                   ProfileField(
-                    icon: Icons.phone,
-                    label: 'Phone',
-                    content: phone,
+                    icon: Icons.person,
+                    label: 'Username',
+                    content: username,
                   ),
-
-                  const SizedBox(height: 10),
-
-                  // Location Field
-                  ProfileField(
-                    icon: Icons.location_on,
-                    label: 'Location',
-                    content: location,
-                  ),
-
-                  const SizedBox(height: 10),
+                  SizedBox(height: verticalPadding),
 
                   // Bio Field with Subheading
                   ProfileField(
@@ -170,25 +175,25 @@ class UserProfileState extends State<UserProfile> {
                     content: bio,
                   ),
 
-                  // Subheading for Life List
-                  const SizedBox(height: 20),
-                  const Divider(height: 1, thickness: 1),
-                  const SizedBox(height: 20),
-                  const Text('Life List', style: GlobalStyles.subheadingLight),
-                  FutureBuilder<List<Bird>>(
-                    future: birds,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (snapshot.hasError) {
-                        return Center(child: Text('Error: ${snapshot.error}'));
-                      }
-                      return getLiveList(snapshot.data!);
-                    },
+                  SizedBox(height: verticalPadding),
+
+                  // Email Field
+                  ProfileField(
+                    icon: Icons.email,
+                    label: 'Email',
+                    content: email,
                   ),
-                  const SizedBox(height: 10),
+
+                  SizedBox(height: verticalPadding),
+
+                  Divider(
+                    color: Colors.grey.shade300,
+                    thickness: 1,
+                  ),
+
+                  // Progress section
                   const Text(
-                    'Achievements',
+                    'Sighting Progress',
                     style: GlobalStyles.subheadingLight,
                   ),
                   FutureBuilder<List<int>>(
@@ -207,57 +212,6 @@ class UserProfileState extends State<UserProfile> {
                       return progressBars(
                           snapshot.data!, numberOfBirdsPerProvince);
                     },
-                  ),
-                  //
-                  // Padding to prevent overlap with the bottom fixed container
-                  const SizedBox(height: 100),
-                ],
-              ),
-            ),
-          ),
-          // Container for buttons at the bottom
-          Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: Container(
-              padding: const EdgeInsets.all(20.0),
-              color: Colors.white, // White background for the container
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  // Home button
-                  ElevatedButton(
-                    onPressed: () {
-                      context.go('/home');
-                    },
-                    style: ProfilePageStyles.elevatedButtonStyle(),
-                    child: const Text('Home'),
-                  ),
-
-                  // Dark mode switch
-                  Row(
-                    children: [
-                      Icon(
-                        Theme.of(context).brightness == Brightness.dark
-                            ? Icons.wb_sunny
-                            : Icons.nightlight_round,
-                        color: Theme.of(context).brightness == Brightness.dark
-                            ? ProfilePageStyles.iconColorDarkMode
-                            : ProfilePageStyles.iconColorLightMode,
-                      ),
-                      const SizedBox(width: 2),
-                      Switch(
-                        value: Theme.of(context).brightness == Brightness.dark,
-                        onChanged: (value) {
-                          setState(() {
-                            iconDisplay = getIcon(localStorage);
-                            iconLabel = getLabelIcon(localStorage);
-                          });
-                        },
-                        activeColor: GlobalStyles.primaryColor,
-                      ),
-                    ],
                   ),
                 ],
               ),
@@ -288,11 +242,14 @@ class ProfileField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final fieldPadding = EdgeInsets.all(screenWidth * 0.03);
+
     return Container(
-      padding: padding ?? const EdgeInsets.all(12.0),
+      padding: padding ?? fieldPadding,
       decoration: BoxDecoration(
         color: backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
-        borderRadius: BorderRadius.circular(20.0),
+        borderRadius: BorderRadius.circular(screenWidth * 0.05),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -303,7 +260,7 @@ class ProfileField extends StatelessWidget {
                 icon,
                 color: GlobalStyles.primaryColor,
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: screenWidth * 0.02),
               Text(label, style: GlobalStyles.smallContent),
             ],
           ),
