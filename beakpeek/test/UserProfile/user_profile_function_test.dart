@@ -1,12 +1,15 @@
 import 'package:beakpeek/Model/user_profile_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 import 'local_storage_test.mocks.dart';
 
+@GenerateMocks([LocalStorage])
 void main() {
   final province = Province(id: 1, name: 'Province A');
   final pentad = Pentad(
@@ -171,6 +174,33 @@ void main() {
     test('getPercent calculates percentage correctly', () {
       expect(getPercent(1000, 500), 50.0);
       expect(getPercent(1000, 750), 75.0);
+    });
+  });
+
+  group('Level Progress Functions', () {
+    test('getNextLevelExpRequired calculates correctly', () {
+      expect(getNextLevelExpRequired(1), 125);
+      expect(getNextLevelExpRequired(2), 200);
+      expect(getNextLevelExpRequired(3), 325);
+    });
+
+    test('progressPercentage calculates correctly', () {
+      expect(progressPercentage(100, 1), 80);
+      expect(progressPercentage(120, 1), 96);
+      expect(progressPercentage(200, 2), 100);
+    });
+  });
+
+  group('Widget Tests', () {
+    testWidgets('levelProgressBar displays progress correctly', (tester) async {
+      await tester.pumpWidget(MaterialApp(
+        home: Scaffold(
+          body: levelProgressBar(50, 1),
+        ),
+      ));
+
+      expect(find.byType(FAProgressBar), findsOneWidget);
+      // Add more specific checks based on your FAProgressBar widget
     });
   });
 }

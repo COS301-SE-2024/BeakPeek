@@ -167,7 +167,7 @@ int getLevelExp() {
 }
 
 int getNextLevelExpRequired(int level) {
-  final double number = pow(0.1 * level, 2) + 100;
+  final double number = pow((5 * level), 2) + 100;
   return ((number / 1000.0) * 1000).ceil();
 }
 

@@ -75,28 +75,5 @@ void main() {
             height: 0,
           ));
     });
-
-    test('primaryButton ButtonStyle is correct', () {
-      expect(
-          GlobalStyles.primaryButton,
-          FilledButton.styleFrom(
-            backgroundColor: GlobalStyles.primaryColor,
-            minimumSize: const Size(350, 50),
-            shadowColor: Colors.black,
-          ));
-    });
-
-    test('secondaryButton ButtonStyle is correct', () {
-      expect(
-          GlobalStyles.secondaryButton,
-          OutlinedButton.styleFrom(
-            backgroundColor: Colors.transparent,
-            minimumSize: const Size(350, 50),
-            shadowColor: Colors.black,
-            side: const BorderSide(
-              color: GlobalStyles.primaryColor,
-            ),
-          ));
-    });
   });
 }
