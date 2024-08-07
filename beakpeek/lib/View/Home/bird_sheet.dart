@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:beakpeek/Model/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Home/bird_page.dart';
+// ignore: unused_import
 import 'package:beakpeek/View/Home/heat_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -220,6 +221,7 @@ class BirdList extends StatelessWidget {
               );
             },
             child: ListTile(
+
               tileColor: index % 2 == 0
                   ? Colors.grey.shade100
                   : Colors.white, // Alternate row color

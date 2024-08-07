@@ -1,5 +1,3 @@
-import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/View/Home/bird_page.dart';
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Home/map_info.dart';
 import 'package:beakpeek/View/Login/landing_page.dart';
