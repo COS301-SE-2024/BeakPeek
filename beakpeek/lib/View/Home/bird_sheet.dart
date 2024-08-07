@@ -176,6 +176,7 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
+      print(jsonResponse);
       return jsonResponse.map((data) => Bird.fromJson(data)).toList();
     } else {
       print('Request failed with status: ${response.statusCode}');
@@ -204,9 +205,8 @@ class BirdList extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => Scaffold(
-                  body: HeatMap(
-                    commonGroup: bird.commonGroup,
-                    commonSpecies: bird.commonSpecies,
+                  body: HeatMap(id: bird.id,
+                    
                   ),
                 ),
               ),

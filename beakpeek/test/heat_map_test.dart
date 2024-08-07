@@ -13,8 +13,7 @@ void main() {
       const MaterialApp(
         home: Scaffold(
           body: HeatMap(
-            commonGroup: 'Dove',
-            commonSpecies: 'Laughing',
+            id: 1,
           ),
         ),
       ),
@@ -66,14 +65,16 @@ void main() {
       expect(
         heatMapState.getCameraPositionForProvince('westerncape'),
         equals(
-            const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 2.0)),
+          const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 2.0),
+        ),
       );
 
       // Test for Eastern Cape
       expect(
         heatMapState.getCameraPositionForProvince('Eastern Cape'),
         equals(
-            const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 2.0)),
+          const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 2.0),
+        ),
       );
 
       // Test for an unknown province (default case)

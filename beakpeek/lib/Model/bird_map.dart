@@ -50,24 +50,32 @@ class KmlParser {
 }
 
 class BirdMapFunctions {
-  Future<List<Bird>> fetchBirdsByGroupAndSpecies(
-      String commonGroup, String commonSpecies) async {
-    final Uri uri = Uri.http('10.0.2.2:5000', '/api/Bird/search',
-        {'commonGroup': commonGroup, 'commonSpecies': commonSpecies});
+  Future<List<dynamic>> fetchBirdsByGroupAndSpecies(int id) async {
+    final Uri uri = Uri.http(
+      '10.0.2.2:5000',
+      '/api/Bird/getBirdPentads/$id'
+    );
 
     try {
       final response = await http.get(uri);
 
       if (response.statusCode == 200) {
-        final List<dynamic> jsonResponse = json.decode(response.body);
-        return jsonResponse.map((data) => Bird.fromJson(data)).toList();
+        // Decode the JSON response
+        final List<dynamic> data = json.decode(response.body);
+
+        // Map the data to a list of BirdPentad objects
+        final List<BirdPentad> birdPentads = data.map((item) {
+          return BirdPentad.fromJson(item);
+        }).toList();
+
+        return birdPentads;
       } else {
-        print('Request failed with status: ${response.statusCode}');
-        throw Exception('Failed to load birds');
+        print('Failed to load data: ${response.statusCode}');
+        return [];
       }
-    } catch (error) {
-      print('Error fetching birds: $error');
-      throw Exception('Failed to load birds: $error');
+    } catch (e) {
+      print('Error fetching data: $e');
+      return [];
     }
   }
 }
