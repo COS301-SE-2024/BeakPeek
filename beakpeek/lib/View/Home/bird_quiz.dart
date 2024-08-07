@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/View/Home/bird_page.dart';
 // import 'package:beakpeek/View/Home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -53,11 +54,11 @@ class _BirdQuizState extends State<BirdQuiz> {
             ),
             TextButton(
               onPressed: () {
-                // Navigator.of(context).pop(); // Close the dialog
-                // // Navigate to bird's page - adjust according to your app's routing
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (context) =>,
-                // ));
+                Navigator.of(context).pop(); // Close the dialog
+                // Navigate to bird's page - adjust according to your app's routing
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => BirdPage(commonGroup: correctBird.commonGroup, commonSpecies: correctBird.commonSpecies, id: correctBird.id ),
+                ));
               },
               child: const Text('Go to Bird Page'),
             ),
@@ -87,8 +88,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                 FutureBuilder<List<String>>(
                   future: birdImages,
                   builder: (context, imageSnapshot) {
-                    if (imageSnapshot.connectionState ==
-                        ConnectionState.waiting) {
+                    if (imageSnapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (imageSnapshot.hasError) {
                       return Center(
@@ -104,28 +104,21 @@ class _BirdQuizState extends State<BirdQuiz> {
                     }
                   },
                 ),
-                ...selectedBirds
-                    .map((bird) => ElevatedButton(
-                          onPressed: () {
-                            if (bird.commonSpecies ==
-                                    correctBird.commonSpecies &&
-                                bird.commonGroup == correctBird.commonGroup) {
-                              showWinDialog(
-                                  snapshot.data!); // Show popup dialog
-                            } else {
-                              // Incorrect answer
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('Incorrect!'),
-                                backgroundColor: Colors.red,
-                              ));
-                            }
-                          },
-                          child:
-                              Text('${bird.commonSpecies} ${bird.commonGroup}'),
-                        ))
-                    // ignore: unnecessary_to_list_in_spreads
-                    .toList(),
+                ...selectedBirds.map((bird) => ElevatedButton(
+                  onPressed: () {
+                    if (bird.commonSpecies == correctBird.commonSpecies &&
+                        bird.commonGroup == correctBird.commonGroup) {
+                      showWinDialog(snapshot.data!); // Show popup dialog
+                    } else {
+                      // Incorrect answer
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: Text('Incorrect!'),
+                        backgroundColor: Colors.red,
+                      ));
+                    }
+                  },
+                  child: Text('${bird.commonSpecies} ${bird.commonGroup}'),
+                )).toList(),
               ],
             );
           }
@@ -142,12 +135,13 @@ Future<List<Bird>> fetchBirds(http.Client client) async {
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
+      print(jsonResponse);
       return jsonResponse.map((data) => Bird.fromJson(data)).toList();
     } else {
       throw Exception('Failed to load birds');
     }
   } catch (error) {
-    throw Exception('Error fetching birds: $error');
+    throw Exception('Error fetching birdsYelllaosd: $error');
   }
 }
 
