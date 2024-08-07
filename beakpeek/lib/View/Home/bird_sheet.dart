@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/View/Home/bird_page.dart';
 import 'package:beakpeek/View/Home/heat_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
@@ -205,7 +206,7 @@ class BirdList extends StatelessWidget {
               context,
               MaterialPageRoute(
                 builder: (context) => Scaffold(
-                  body: HeatMap(id: bird.id,
+                  body: BirdPage(id: bird.id, commonGroup: bird.commonGroup, commonSpecies: bird.commonSpecies,
                     
                   ),
                 ),

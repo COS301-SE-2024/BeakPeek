@@ -1,7 +1,7 @@
 class Bird {
   Bird({
     required this.id,
-    required this.pentad,
+    this.pentad,
     required this.commonGroup,
     required this.commonSpecies,
     required this.genus,
@@ -26,35 +26,36 @@ class Bird {
   });
 
   factory Bird.fromJson(Map<String, dynamic> json) {
+    final birdJson = json['bird'] ?? json;
     return Bird(
-      id: json['bird']['ref'],
-      pentad: Pentad.fromJson(json['pentad']),
-      commonGroup: json['bird']['common_group']??'None',
-      commonSpecies: json['bird']['common_species'],
-      genus: json['bird']['genus'],
-      species: json['bird']['species'],
-      fullProtocolRR: json['bird']['full_Protocol_RR'] ?? 0.0,
-      fullProtocolNumber: json['bird']['full_Protocol_Number'] ?? 0,
-      latestFP: json['bird']['latest_FP'] ?? '',
-      jan: json['jan']?.toDouble() ?? 0.0,
-      feb: json['feb']?.toDouble() ?? 0.0,
-      mar: json['mar']?.toDouble() ?? 0.0,
-      apr: json['apr']?.toDouble() ?? 0.0,
-      may: json['may']?.toDouble() ?? 0.0,
-      jun: json['jun']?.toDouble() ?? 0.0,
-      jul: json['jul']?.toDouble() ?? 0.0,
-      aug: json['aug']?.toDouble() ?? 0.0,
-      sep: json['sep']?.toDouble() ?? 0.0,
-      oct: json['oct']?.toDouble() ?? 0.0,
-      nov: json['nov']?.toDouble() ?? 0.0,
-      dec: json['dec']?.toDouble() ?? 0.0,
-      totalRecords: json['total_Records'] ?? 0,
-      reportingRate: json['reportingRate']?.toDouble() ?? 0.0,
+      id: birdJson['ref'] ?? 0, // default value for id
+      pentad: birdJson['pentad'] != null ? Pentad.fromJson(birdJson['pentad']) : null,
+      commonGroup: birdJson['common_group'] ?? 'None',
+      commonSpecies: birdJson['common_species'] ?? '',
+      genus: birdJson['genus'] ?? '',
+      species: birdJson['species'] ?? '',
+      fullProtocolRR: birdJson['full_Protocol_RR']?.toDouble() ?? 0.0,
+      fullProtocolNumber: birdJson['full_Protocol_Number'] ?? 0,
+      latestFP: birdJson['latest_FP'] ?? '',
+      jan: birdJson['jan']?.toDouble() ?? 0.0,
+      feb: birdJson['feb']?.toDouble() ?? 0.0,
+      mar: birdJson['mar']?.toDouble() ?? 0.0,
+      apr: birdJson['apr']?.toDouble() ?? 0.0,
+      may: birdJson['may']?.toDouble() ?? 0.0,
+      jun: birdJson['jun']?.toDouble() ?? 0.0,
+      jul: birdJson['jul']?.toDouble() ?? 0.0,
+      aug: birdJson['aug']?.toDouble() ?? 0.0,
+      sep: birdJson['sep']?.toDouble() ?? 0.0,
+      oct: birdJson['oct']?.toDouble() ?? 0.0,
+      nov: birdJson['nov']?.toDouble() ?? 0.0,
+      dec: birdJson['dec']?.toDouble() ?? 0.0,
+      totalRecords: birdJson['total_Records'] ?? 0,
+      reportingRate: birdJson['reportingRate']?.toDouble() ?? json['reportingRate'] ?? 0.0,
     );
   }
 
   final int id;
-  final Pentad pentad;
+  final Pentad? pentad;
   final String commonGroup;
   final String commonSpecies;
   final String genus;
@@ -80,7 +81,7 @@ class Bird {
   Map<String, Object?> toMap() {
     return {
       'id': id,
-      'pentad': pentad.toMap(),
+      'pentad': pentad?.toMap(),
       'commonGroup': commonGroup,
       'commonSpecies': commonSpecies,
       'genus': genus,
