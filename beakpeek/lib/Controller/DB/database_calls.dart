@@ -8,7 +8,7 @@ const List<String> provinces = [
   'easterncape',
   'freestate',
   'gauteng',
-  'kwazulu-natal',
+  'kwazulunatal',
   'limpopo',
   'mpumalanga',
   'northerncape',
@@ -51,6 +51,30 @@ Future<List<int>> getNumberOfBirdsInProvinces(http.Client client) async {
       }
     }
     return numbers;
+  } catch (error) {
+    print('Error fetching amount of birds: $error');
+    throw Exception('Failed to load number of birds: $error, ');
+  }
+}
+
+Future<List> getProvincesBirdIsIn(
+    http.Client client, String commonSpecies, String commonGroup) async {
+  late final List isIn;
+  try {
+    final response = await client.get(
+      Uri.parse(
+          'http://10.0.2.2:5000/api/Bird/GetBirdProvinces/$commonSpecies/$commonGroup'),
+    );
+    if (response.statusCode == 200) {
+      final List jsonResponse = json.decode(response.body);
+      //print(json.decode(response.body));
+      isIn = jsonResponse;
+    } else {
+      print('Request failed with status: ${response.statusCode}');
+      throw Exception(
+          'Failed to load provinces for $commonSpecies, $commonGroup');
+    }
+    return isIn;
   } catch (error) {
     print('Error fetching amount of birds: $error');
     throw Exception('Failed to load number of birds: $error, ');
