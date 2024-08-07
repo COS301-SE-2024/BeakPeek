@@ -76,7 +76,7 @@ public class BirdInfoControllerTest
             .Protected()
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
-                ItExpr.Is<HttpRequestMessage>(m => m.RequestUri!.AbsoluteUri.EndsWith($"&extras=owner_name")),
+                ItExpr.Is<HttpRequestMessage>(m => m.RequestUri!.AbsoluteUri.EndsWith($"&sort=relevance")),
                 ItExpr.IsAny<CancellationToken>())
             .ReturnsAsync(flickrResponseMessage);
 
@@ -132,7 +132,7 @@ public class BirdInfoControllerTest
             .Protected()
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
-                ItExpr.Is<HttpRequestMessage>(m => m.RequestUri!.AbsoluteUri.EndsWith($"&extras=owner_name")),
+                ItExpr.Is<HttpRequestMessage>(m => m.RequestUri!.AbsoluteUri.EndsWith($"&sort=relevance")),
                 ItExpr.IsAny<CancellationToken>())
             .ReturnsAsync(flickrResponseMessage);
 
@@ -165,7 +165,7 @@ public class BirdInfoControllerTest
             .Protected()
             .Setup<Task<HttpResponseMessage>>(
                 "SendAsync",
-                ItExpr.Is<HttpRequestMessage>(m => m.RequestUri!.AbsoluteUri.EndsWith($"&extras=owner_name")),
+                ItExpr.Is<HttpRequestMessage>(m => m.RequestUri!.AbsoluteUri.EndsWith($"&sort=relevance")),
                 ItExpr.IsAny<CancellationToken>())
             .ReturnsAsync(flickrResponseMessage);
 
