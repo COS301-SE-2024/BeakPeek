@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 abstract class GlobalStyles {
   static const Color primaryColor = Color(0xFF033A30);
   static const Color secondaryColor = Color.fromARGB(188, 3, 58, 48);
+  static const Color tertiaryColor = Color.fromARGB(255, 197, 140, 35);
   static const Color iconColorDarkMode = Color.fromARGB(255, 180, 180, 180);
   static const Color iconColorLightMode = Color.fromARGB(255, 58, 58, 58);
   static const double borderRadius = 30.0;
@@ -55,8 +56,9 @@ abstract class GlobalStyles {
 
   static const TextStyle content = TextStyle(
     color: Colors.black87,
-    fontSize: 16,
+    fontSize: 17,
     fontFamily: 'SF Pro Display',
+    fontWeight: FontWeight.w400,
   );
 
   static const TextStyle boldContent = TextStyle(
