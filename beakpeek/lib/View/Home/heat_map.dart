@@ -6,15 +6,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 class HeatMap extends StatefulWidget {
-  const HeatMap(
-      {super.key,
-      this.testController,
-      required this.commonGroup,
-      required this.commonSpecies});
+  const HeatMap({super.key, this.testController, required this.id});
 
   final GoogleMapController? testController;
-  final String commonGroup;
-  final String commonSpecies;
+  final int id;
 
   @override
   State<HeatMap> createState() => HeatMapState();
@@ -118,8 +113,8 @@ class HeatMapState extends State<HeatMap> {
       final kmlString =
           await rootBundle.loadString('assets/province_$_selectedProvince.kml');
       final polygonsData = KmlParser.parseKml(kmlString);
-      final birdData = await BirdMapFunctions().fetchBirdsByGroupAndSpecies(
-          widget.commonGroup, widget.commonSpecies);
+      final birdData =
+          await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
       setState(() {
         _polygons = polygonsData.map((polygonData) {
           final id = polygonData['id'];
@@ -128,15 +123,8 @@ class HeatMapState extends State<HeatMap> {
               .map((coord) => LatLng(coord['latitude']!, coord['longitude']!))
               .toList();
           final bird = birdData.firstWhere(
-            (b) => b.pentad == id,
-            orElse: () => Bird(
-                pentad: '',
-                reportingRate: 0.0,
-                spp: 0,
-                commonGroup: '',
-                commonSpecies: '',
-                genus: '',
-                species: ''),
+            (b) => b.pentadAllocation == id,
+            orElse: () => BirdPentad(pentadAllocation: '', reportingRate: 0.0),
           );
           final color = getColorForReportingRate(bird.reportingRate);
           return Polygon(

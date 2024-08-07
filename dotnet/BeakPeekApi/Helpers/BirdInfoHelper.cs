@@ -37,7 +37,7 @@ namespace BeakPeekApi.Helpers
 
         public async Task<List<BirdImageModel>?> FetchBirdImagesFromFlickr(string birdName)
         {
-            var url = $"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={_flickrApiKey}&text={birdName}&format=json&nojsoncallback=1&per_page=5&extras=owner_name";
+            var url = $"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={_flickrApiKey}&text={birdName}&format=json&nojsoncallback=1&per_page=5&extras=owner_name&tags=bird&sort=relevance";
             var response = await _httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
