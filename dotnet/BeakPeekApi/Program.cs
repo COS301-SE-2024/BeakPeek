@@ -86,13 +86,13 @@ try
                 var csv_species_list = Path.Combine(Directory.GetCurrentDirectory(), "res", "species_list", "south_africa.csv");
                 if (File.Exists(csv_species_list))
                 {
-                    //csvImporter.ImportBirds(csv_species_list);
+                    csvImporter.ImportBirds(csv_species_list);
                 }
 
                 var csv_pentad_dir = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
                 if (Directory.Exists(csv_pentad_dir))
                 {
-                    //csvImporter.ImportAllCsvData(csv_pentad_dir);
+                    // csvImporter.ImportAllCsvData(csv_pentad_dir);
                 }
             }
         }
