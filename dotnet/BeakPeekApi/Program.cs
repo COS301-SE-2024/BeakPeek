@@ -32,7 +32,8 @@ builder.Configuration
 
 if (!builder.Environment.IsDevelopment())
 {
-    var envConnection = Environment.GetEnvironmentVariable("SQLCONNSTR_AZURE_SQL_CONNECTIONSTRING");
+    // var envConnection = Environment.GetEnvironmentVariable("SQLCONNSTR_AZURE_SQL_CONNECTIONSTRING");
+    var envConnection = builder.Configuration.GetConnectionString("AZURE_SQL_CONNECTIONSTRING");
     if (!string.IsNullOrEmpty(envConnection))
     {
         connection = envConnection;
