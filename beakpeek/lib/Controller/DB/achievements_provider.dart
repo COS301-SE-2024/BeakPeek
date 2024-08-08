@@ -1,4 +1,4 @@
-import 'package:beakpeek/Model/achievement.dart';
+import 'package:beakpeek/Model/UserProfile/achievement.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 

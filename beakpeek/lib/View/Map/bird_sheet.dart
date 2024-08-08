@@ -1,11 +1,11 @@
 // ignore_for_file: avoid_print, library_private_types_in_public_api
 
 import 'dart:convert';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:beakpeek/View/Home/bird_page.dart';
+import 'package:beakpeek/View/Bird/bird_page.dart';
 // ignore: unused_import
-import 'package:beakpeek/View/Home/heat_map.dart';
+import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 

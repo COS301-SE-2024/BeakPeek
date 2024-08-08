@@ -1,10 +1,13 @@
-import 'package:beakpeek/Model/user_profile_function.dart';
+import 'package:beakpeek/Model/BirdInfo/pentad.dart';
+import 'package:beakpeek/Model/BirdInfo/province.dart';
+import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
+import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 
 import 'local_storage_test.mocks.dart';

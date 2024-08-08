@@ -1,5 +1,5 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
 import 'package:flutter/material.dart';
 

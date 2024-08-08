@@ -1,4 +1,4 @@
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';

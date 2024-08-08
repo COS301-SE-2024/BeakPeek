@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 
@@ -51,10 +51,7 @@ class KmlParser {
 
 class BirdMapFunctions {
   Future<List<dynamic>> fetchBirdsByGroupAndSpecies(int id) async {
-    final Uri uri = Uri.http(
-      '10.0.2.2:5000',
-      '/api/Bird/getBirdPentads/$id'
-    );
+    final Uri uri = Uri.http('10.0.2.2:5000', '/api/Bird/getBirdPentads/$id');
 
     try {
       final response = await http.get(uri);
