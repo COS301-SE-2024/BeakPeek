@@ -26,11 +26,17 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
     title: Text(bird.commonGroup != 'None'
         ? '${bird.commonGroup} ${bird.commonSpecies}'
         : bird.commonSpecies),
-    subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
+    subtitle: Text(
+      'Scientific Name: ${bird.genus} ${bird.species}',
+      style: const TextStyle(color: Colors.black),
+    ),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('${bird.reportingRate}%'),
+        Text(
+          '${bird.reportingRate}%',
+          style: const TextStyle(color: Colors.black),
+        ),
         const SizedBox(width: 8),
         Container(
           width: 20,
@@ -58,7 +64,10 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
                 onPressed: () => {
                   lifeList.insertBird(bird),
                 },
-                child: const Text('Add To Life list'),
+                child: const Text(
+                  'Add To Life list',
+                  style: TextStyle(color: Colors.black),
+                ),
               );
             }
           },
