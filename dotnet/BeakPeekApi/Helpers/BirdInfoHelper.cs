@@ -16,6 +16,10 @@ namespace BeakPeekApi.Helpers
             {
                 throw new Exception("flickr API key environment variable not set");
             }
+            else
+            {
+                _flickrApiKey = Environment.GetEnvironmentVariable("FLICKR_API_KEY");
+            }
             _httpClient = httpClient;
         }
 
