@@ -141,8 +141,8 @@ class _BirdQuizState extends State<BirdQuiz> {
 
 Future<List<Bird>> fetchBirds(http.Client client) async {
   try {
-    final response =
-        await client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/'));
+    final response = await client
+        .get(Uri.parse('https://beakpeekbirdapi.azurewebsites.net/api/Bird/'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
@@ -163,8 +163,8 @@ List<Bird> selectRandomBirds(List<Bird> birds, int count) {
 Future<List<String>> getImages(http.Client client, Bird bird) async {
   try {
     final String birdName = '${bird.commonSpecies} ${bird.commonGroup}';
-    final response = await client
-        .get(Uri.parse('http://10.0.2.2:5000/api/BirdInfo/$birdName'));
+    final response = await client.get(Uri.parse(
+        'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/$birdName'));
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> jsonResponse = json.decode(response.body);

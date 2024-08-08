@@ -33,6 +33,7 @@ class HeatMapState extends State<HeatMap> {
   }
 
   Color getColorForReportingRate(double reportingRate) {
+    //print(reportingRate);
     if (reportingRate < 40) {
       return Colors.red.withOpacity(0.4);
     } else if (reportingRate < 60) {
@@ -115,6 +116,7 @@ class HeatMapState extends State<HeatMap> {
       final polygonsData = KmlParser.parseKml(kmlString);
       final birdData =
           await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
+      //print(birdData);
       setState(() {
         _polygons = polygonsData.map((polygonData) {
           final id = polygonData['id'];
@@ -123,8 +125,8 @@ class HeatMapState extends State<HeatMap> {
               .map((coord) => LatLng(coord['latitude']!, coord['longitude']!))
               .toList();
           final bird = birdData.firstWhere(
-            (b) => b.pentadAllocation == id,
-            orElse: () => BirdPentad(pentadAllocation: '', reportingRate: 0.0),
+            (b) => b.pentad.pentadAllocation == id,
+            orElse: () => BirdPentad(pentadAllocation: '', reportingRate: 60.0),
           );
           final color = getColorForReportingRate(bird.reportingRate);
           return Polygon(

@@ -51,15 +51,17 @@ class KmlParser {
 
 class BirdMapFunctions {
   Future<List<dynamic>> fetchBirdsByGroupAndSpecies(int id) async {
-    final Uri uri = Uri.http('10.0.2.2:5000', '/api/Bird/getBirdPentads/$id');
+    print(id);
+    final Uri uri = Uri.http(
+        'beakpeekbirdapi.azurewebsites.net', 'api/bird/GetBirdPentads/$id');
 
     try {
       final response = await http.get(uri);
-
+      print(response.body);
       if (response.statusCode == 200) {
         // Decode the JSON response
         final List<dynamic> data = json.decode(response.body);
-
+        print(data);
         // Map the data to a list of BirdPentad objects
         final List<BirdPentad> birdPentads = data.map((item) {
           return BirdPentad.fromJson(item);

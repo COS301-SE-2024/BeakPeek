@@ -17,7 +17,8 @@ void main() {
       test('returns a list of birds if the http call completes successfully',
           () async {
         final client = MockClient();
-        when(client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/')))
+        when(client.get(Uri.parse(
+                'https://beakpeekbirdapi.azurewebsites.net/api/Bird/')))
             .thenAnswer(
           (_) async => http.Response(
               '''[{ "bird": {"ref": 1, "common_group": "Heron", "common_species": "Black-headed Heron", "genus": "Ardea", "species": "melanocephala", "full_Protocol_RR": 10.0, "full_Protocol_Number": 1, "latest_FP": "2022-01-01T00:00:00Z"}, 
@@ -38,7 +39,7 @@ void main() {
           final client = MockClient();
           when(
             client.get(
-              Uri.parse('http://10.0.2.2:5000/api/Bird/'),
+              Uri.parse('https://beakpeekbirdapi.azurewebsites.net/api/Bird/'),
             ),
           ).thenAnswer(
             (_) async => http.Response('Not Found', 404),
@@ -64,7 +65,7 @@ void main() {
           totalCards: 1,
         ),
         commonGroup: 'Heron',
-        commonSpecies: 'Black-headed Heron',
+        commonSpecies: 'Black-headed',
         genus: 'Ardea',
         species: 'melanocephala',
         fullProtocolRR: 10.0,
@@ -87,7 +88,7 @@ void main() {
       );
 
       when(client.get(Uri.parse(
-              'http://10.0.2.2:5000/api/BirdInfo/Black-headed Heron Heron')))
+              'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/Black-headed Heron')))
           .thenAnswer((_) async => http.Response(
               '{"images": [{"url": "https://example.com/image1.jpg"}, {"url": "https://example.com/image2.jpg"}]}',
               200));
@@ -111,7 +112,7 @@ void main() {
           totalCards: 1,
         ),
         commonGroup: 'Heron',
-        commonSpecies: 'Black-headed Heron',
+        commonSpecies: 'Black-headed',
         genus: 'Ardea',
         species: 'melanocephala',
         fullProtocolRR: 10.0,
@@ -134,7 +135,7 @@ void main() {
       );
 
       when(client.get(Uri.parse(
-              'http://10.0.2.2:5000/api/BirdInfo/Black-headed Heron Heron')))
+              'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/Black-headed Heron')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(getImages(client, bird), throwsException);
