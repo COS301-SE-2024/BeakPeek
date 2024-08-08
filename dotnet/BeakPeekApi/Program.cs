@@ -130,3 +130,4 @@ app.UseAuthentication();
 app.MapControllers();
 
 app.Run();
+// Azure run
