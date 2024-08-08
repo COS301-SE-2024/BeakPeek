@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 
 class ApiService {
   static const String baseUrl =
-      '10.0.2.2:5000'; // Replace with your actual API base URL
+      'beakpeekbirdapi.azurewebsites.net'; // Replace with your actual API base URL
 
   Future<Map<String, dynamic>?> fetchBirdInfo(
       String commonGroup, String commonSpecies) async {
