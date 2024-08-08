@@ -41,7 +41,11 @@ class BottomNavItem extends StatelessWidget {
               if (config.loggedIN) {
                 context.go('/${label.toLowerCase()}');
               } else {
-                context.go('/');
+                if (label.contains('Profile')) {
+                  context.go('/');
+                } else {
+                  context.go('/${label.toLowerCase()}');
+                }
               }
             },
             child: Image.asset(
