@@ -23,7 +23,7 @@ class BirdMapState extends State<BirdMap> {
   LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593);
   // Default location
   String _selectedProvince = 'gauteng'; // Default selected province
-  String _selectedMonth = 'January'; // Default selected month
+  String _selectedMonth = 'Year-Round'; // Default selected month
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
   bool _isLocationFetched = false;
@@ -186,6 +186,7 @@ class BirdMapState extends State<BirdMap> {
                   });
                 },
                 items: <String>[
+                  'Year-Round',
                   'January',
                   'February',
                   'March',
@@ -294,7 +295,7 @@ class BirdMapState extends State<BirdMap> {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return BirdSheet(pentadId: id);
+        return BirdSheet(pentadId: id, month: _selectedMonth);
       },
     );
   }

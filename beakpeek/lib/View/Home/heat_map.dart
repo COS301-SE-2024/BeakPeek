@@ -130,9 +130,9 @@ class HeatMapState extends State<HeatMap> {
           return Polygon(
             polygonId: PolygonId(id),
             points: coordinates,
-            strokeColor: Colors.transparent,
+            strokeColor: Colors.black38,
             fillColor: color,
-            strokeWidth: 2,
+            strokeWidth: 1,
             consumeTapEvents: true,
           );
         }).toSet();

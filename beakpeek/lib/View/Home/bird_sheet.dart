@@ -10,8 +10,9 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class BirdSheet extends StatefulWidget {
-  const BirdSheet({super.key, required this.pentadId});
+  const BirdSheet({super.key, required this.pentadId, required this.month});
   final String pentadId;
+  final String month;
 
   @override
   _BirdSheetState createState() => _BirdSheetState();
@@ -19,6 +20,7 @@ class BirdSheet extends StatefulWidget {
 
 class _BirdSheetState extends State<BirdSheet> {
   double _heightFactor = 0.5; // Initial height factor
+  double rate = 0.0;
   String _selectedSortOption = 'Sort';
   String _selectedFilterOption = 'All';
   late Future<List<Bird>> _birdList;
@@ -166,7 +168,7 @@ class _BirdSheetState extends State<BirdSheet> {
                     } else if (snapshot.hasError) {
                       return const Center(child: Text('No birds found.'));
                     }
-                    return BirdList(birds: snapshot.data!);
+                    return BirdList(birds: snapshot.data!, month: widget.month);
                   },
                 ),
               ),
@@ -186,7 +188,7 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
-      print(jsonResponse);
+      print('HELLO $jsonResponse');
       return jsonResponse.map((data) => Bird.fromJson(data)).toList();
     } else {
       print('Request failed with status: ${response.statusCode}');
@@ -199,29 +201,68 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
 }
 
 class BirdList extends StatelessWidget {
-  const BirdList({super.key, required this.birds});
+  const BirdList({super.key, required this.birds, required this.month});
   final List<Bird> birds;
+  final String month;
+
+  double _getReportingRateForMonth(Bird bird) {
+    switch (month) {
+      case 'January':
+        return bird.jan;
+      case 'February':
+        return bird.feb;
+      case 'March':
+        return bird.mar;
+      case 'April':
+        return bird.apr;
+      case 'May':
+        return bird.may;
+      case 'June':
+        return bird.jun;
+      case 'July':
+        return bird.jul;
+      case 'August':
+        return bird.aug;
+      case 'September':
+        return bird.sep;
+      case 'October':
+        return bird.oct;
+      case 'November':
+        return bird.nov;
+      case 'December':
+        return bird.dec;
+      case 'Year-Round':
+      default:
+        return bird.reportingRate;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-  return Material(
-    child: ListView.builder(
-      itemCount: birds.length,
-      itemBuilder: (context, index) {
-        final bird = birds[index];
-        return InkWell(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => Scaffold(
-                  body: BirdPage(id: bird.id, commonGroup: bird.commonGroup, commonSpecies: bird.commonSpecies,
+    print('HELLO $month');
+    return Material(
+      child: ListView.builder(
+        itemCount: birds.length,
+        itemBuilder: (context, index) {
+          final bird = birds[index];
+          final reportingRate = _getReportingRateForMonth(bird);
+          print('HELLO $reportingRate');
+          return InkWell(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Scaffold(
+                    body: BirdPage(
+                      id: bird.id,
+                      commonGroup: bird.commonGroup,
+                      commonSpecies: bird.commonSpecies,
+                    ),
                   ),
                 ),
               );
             },
             child: ListTile(
-
               tileColor: index % 2 == 0
                   ? Colors.grey.shade100
                   : Colors.white, // Alternate row color
@@ -230,22 +271,22 @@ class BirdList extends StatelessWidget {
                     ? '${bird.commonGroup} ${bird.commonSpecies}'
                     : bird.commonSpecies,
                 style: const TextStyle(
-                  color: Colors.black, // Dark color for text
+                  color: Colors.black,
                 ),
               ),
               subtitle: Text(
                 'Scientific Name: ${bird.genus} ${bird.species}',
                 style: const TextStyle(
-                  color: Colors.black54, // Semi-dark color for subtitle
+                  color: Colors.black54,
                 ),
               ),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '${bird.reportingRate}%',
+                    '${reportingRate.toStringAsFixed(2)}%',
                     style: const TextStyle(
-                      color: Colors.black87, // Dark color for text
+                      color: Colors.black87,
                     ),
                   ),
                   const SizedBox(width: 8),
@@ -254,7 +295,7 @@ class BirdList extends StatelessWidget {
                     height: 20,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: _getColorForReportingRate(bird.reportingRate),
+                      color: _getColorForReportingRate(reportingRate),
                     ),
                   ),
                 ],
