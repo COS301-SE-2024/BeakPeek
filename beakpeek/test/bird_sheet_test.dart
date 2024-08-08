@@ -15,6 +15,7 @@ void main() {
       // Mock http client
       final mockClient = MockClient();
       const pentadId = 'testId';
+      const month = 'January';
 
       // Provide mock response for fetchBirds
       when(mockClient.get(Uri.parse(
@@ -24,7 +25,10 @@ void main() {
       // Build our widget and trigger a frame.
       await tester.pumpWidget(const MaterialApp(
         home: Scaffold(
-          body: BirdSheet(pentadId: pentadId),
+          body: BirdSheet(
+            pentadId: pentadId,
+            month: month,
+          ),
         ),
       ));
 
@@ -87,9 +91,11 @@ void main() {
           jsonResponse.map((json) => Bird.fromJson(json)).toList();
 
       // Pump the BirdList widget into the test environment
+      const month = 'January';
       await tester.pumpWidget(MaterialApp(
         home: BirdList(
           birds: birds,
+          month: month,
         ),
       ));
 
