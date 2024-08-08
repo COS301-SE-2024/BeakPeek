@@ -6,7 +6,7 @@
 import 'dart:async' as _i4;
 
 import 'package:beakpeek/Controller/DB/life_list_provider.dart' as _i3;
-import 'package:beakpeek/Model/bird.dart' as _i5;
+import 'package:beakpeek/Model/BirdInfo/bird.dart' as _i5;
 import 'package:mockito/mockito.dart' as _i1;
 import 'package:sqflite/sqflite.dart' as _i2;
 

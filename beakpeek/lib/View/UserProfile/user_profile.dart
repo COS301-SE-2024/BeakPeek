@@ -1,7 +1,7 @@
 import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/Model/user_profile_function.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';

@@ -1,5 +1,5 @@
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
-import 'package:beakpeek/View/Home/bird_map.dart';
+import 'package:beakpeek/View/Map/bird_map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 

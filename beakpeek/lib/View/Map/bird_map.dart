@@ -2,7 +2,7 @@
 
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:beakpeek/View/Home/bird_sheet.dart';
+import 'package:beakpeek/View/Map/bird_sheet.dart';
 // import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';

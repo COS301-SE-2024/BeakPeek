@@ -1,7 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'package:beakpeek/Model/top_search_bar.dart';
-import 'package:beakpeek/View/Home/heat_map.dart';
+import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/map_page_styles.dart';
@@ -21,8 +21,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MapInfo extends StatelessWidget {
-
-
   const MapInfo({super.key, required this.id});
   final int id;
 

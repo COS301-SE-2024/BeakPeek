@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:beakpeek/View/Home/bird_map.dart';
+import 'package:beakpeek/View/Map/bird_map.dart';
 import 'package:beakpeek/Model/nav.dart';
-import 'package:beakpeek/View/Home/map_info.dart';
+import 'package:beakpeek/View/Map/map_info.dart';
 
 void main() {
   testWidgets('MapInfo widget test', (tester) async {

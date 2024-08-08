@@ -1,4 +1,6 @@
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/pentad.dart';
+import 'package:beakpeek/Model/BirdInfo/province.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -52,19 +54,19 @@ void main() {
       expect(bird.fullProtocolRR, 10.0);
       expect(bird.fullProtocolNumber, 5);
       expect(bird.latestFP, 'FP A');
-      expect(bird.jan, 0.0);
-      expect(bird.feb, 0.0);
-      expect(bird.mar, 0.0);
-      expect(bird.apr, 0.0);
-      expect(bird.may, 0.0);
-      expect(bird.jun, 0.0);
-      expect(bird.jul, 0.0);
-      expect(bird.aug, 0.0);
-      expect(bird.sep, 0.0);
-      expect(bird.oct, 0.0);
-      expect(bird.nov, 0.0);
-      expect(bird.dec, 0.0);
-      expect(bird.totalRecords, 0);
+      expect(bird.jan, 1.0);
+      expect(bird.feb, 2.0);
+      expect(bird.mar, 3.0);
+      expect(bird.apr, 4.0);
+      expect(bird.may, 5.0);
+      expect(bird.jun, 6.0);
+      expect(bird.jul, 7.0);
+      expect(bird.aug, 8.0);
+      expect(bird.sep, 9.0);
+      expect(bird.oct, 10.0);
+      expect(bird.nov, 11.0);
+      expect(bird.dec, 12.0);
+      expect(bird.totalRecords, 100);
       expect(bird.reportingRate, 50.0);
     });
 

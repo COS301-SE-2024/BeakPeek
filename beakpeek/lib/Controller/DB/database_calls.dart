@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:http/http.dart' as http;
 
@@ -18,8 +18,8 @@ const List<String> provinces = [
 
 Future<List<Bird>> fetchAllBirds(String prov, http.Client client) async {
   try {
-    final response = await client.get(
-        Uri.parse('http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/$prov'));
+    final response = await client.get(Uri.parse(
+        'https://beakpeekbirdapi.azurewebsites.net/api/Bird/GetBirdsInProvince/$prov'));
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
       final List<Bird> birds =
@@ -41,7 +41,7 @@ Future<List<int>> getNumberOfBirdsInProvinces(http.Client client) async {
     for (var i = 0; i < provinces.length; i++) {
       final String temp = provinces[i];
       final response = await client.get(Uri.parse(
-          'http://10.0.2.2:5000/api/Bird/GetNumBirdByProvince/$temp'));
+          'https://beakpeekbirdapi.azurewebsites.net/api/Bird/GetNumBirdByProvince/$temp'));
       if (response.statusCode == 200) {
         final int jsonResponse = json.decode(response.body);
         numbers.add(jsonResponse);
@@ -63,7 +63,7 @@ Future<List> getProvincesBirdIsIn(
   try {
     final response = await client.get(
       Uri.parse(
-          'http://10.0.2.2:5000/api/Bird/GetBirdProvinces/$commonSpecies/$commonGroup'),
+          'https://beakpeekbirdapi.azurewebsites.net/api/Bird/GetBirdProvinces/$commonSpecies/$commonGroup'),
     );
     if (response.statusCode == 200) {
       final List jsonResponse = json.decode(response.body);

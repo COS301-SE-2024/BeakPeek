@@ -1,8 +1,8 @@
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:beakpeek/View/Home/bird_quiz.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
+import 'package:go_router/go_router.dart';
 
 // import 'package:beakpeek/Model/help_icon_model_functions.dart';
 // import 'package:go_router/go_router.dart';
@@ -89,12 +89,7 @@ class HomeState extends State<Home> {
                                       right: 16.0,
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          Navigator.of(context).push(
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  const BirdQuiz(),
-                                            ),
-                                          );
+                                          context.go('/quiz');
                                         },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(

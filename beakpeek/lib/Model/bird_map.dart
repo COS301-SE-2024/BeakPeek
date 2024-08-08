@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 
@@ -51,18 +51,17 @@ class KmlParser {
 
 class BirdMapFunctions {
   Future<List<dynamic>> fetchBirdsByGroupAndSpecies(int id) async {
+    print(id);
     final Uri uri = Uri.http(
-      '10.0.2.2:5000',
-      '/api/Bird/getBirdPentads/$id'
-    );
+        'beakpeekbirdapi.azurewebsites.net', 'api/bird/GetBirdPentads/$id');
 
     try {
       final response = await http.get(uri);
-
+      print(response.body);
       if (response.statusCode == 200) {
         // Decode the JSON response
         final List<dynamic> data = json.decode(response.body);
-
+        print(data);
         // Map the data to a list of BirdPentad objects
         final List<BirdPentad> birdPentads = data.map((item) {
           return BirdPentad.fromJson(item);
