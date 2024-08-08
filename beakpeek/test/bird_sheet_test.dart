@@ -86,7 +86,8 @@ void main() {
       final client = MockClient();
 
       // Mock the response to return a successful status with sample data
-      when(client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/123/pentad')))
+      when(client.get(Uri.parse(
+              'https://beakpeekbirdapi.azurewebsites.net/api/Bird/123/pentad')))
           .thenAnswer((_) async => http.Response(
               jsonEncode([
                 {
@@ -129,7 +130,8 @@ void main() {
       final client = MockClient();
 
       // Mock the response to return an error status
-      when(client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/123/pentad')))
+      when(client.get(Uri.parse(
+              'https://beakpeekbirdapi.azurewebsites.net/api/Bird/123/pentad')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(fetchBirds('123', client), throwsException);
