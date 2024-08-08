@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:beakpeek/config_azure.dart' as config;
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -37,7 +38,11 @@ class BottomNavItem extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              context.go('/${label.toLowerCase()}');
+              if (config.loggedIN) {
+                context.go('/${label.toLowerCase()}');
+              } else {
+                context.go('/');
+              }
             },
             child: Image.asset(
               'assets/icons/$file',
