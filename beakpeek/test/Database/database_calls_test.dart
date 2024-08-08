@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:beakpeek/Controller/DB/database_calls.dart';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';

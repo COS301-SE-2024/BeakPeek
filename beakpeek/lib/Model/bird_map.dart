@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 

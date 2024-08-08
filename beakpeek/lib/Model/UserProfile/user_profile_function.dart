@@ -4,8 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/Model/bird_search_functions.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 
@@ -54,60 +53,6 @@ String getLabelIcon(LocalStorage localStorage) {
     return 'Dark Mode';
   }
   return 'Light Mode';
-}
-
-Widget getLiveList(List<Bird> birds) {
-  final List<Widget> items = getWidgetLifeList(birds);
-  if (items.isEmpty) {
-    return const Text(
-      'NO Birds Seen',
-      style: TextStyle(color: Colors.black),
-    );
-  }
-  return SizedBox(
-    height: 200,
-    child: ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return items[index];
-      },
-    ),
-  );
-}
-
-List<Widget> getWidgetLifeList(List<Bird> birds) {
-  final List<Widget> listOfBirdWidgets = [];
-  for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getLifeListData(birds[i]));
-  }
-  return listOfBirdWidgets;
-}
-
-Widget getLifeListData(Bird bird) {
-  return ListTile(
-    title: Text(
-      bird.commonGroup != 'None'
-          ? '${bird.commonGroup} ${bird.commonSpecies}'
-          : bird.commonSpecies,
-      style: const TextStyle(color: Color.fromARGB(255, 177, 88, 88)),
-    ),
-    subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
-    trailing: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text('${bird.reportingRate}%'),
-        const SizedBox(width: 8),
-        Container(
-          width: 20,
-          height: 20,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: colorArray[getColorForReportingRate(bird.reportingRate)],
-          ),
-        ),
-      ],
-    ),
-  );
 }
 
 List<Bird> sortAlphabetically(List<Bird> birds) {

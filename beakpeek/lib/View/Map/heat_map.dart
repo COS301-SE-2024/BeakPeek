@@ -1,4 +1,4 @@
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +33,7 @@ class HeatMapState extends State<HeatMap> {
   }
 
   Color getColorForReportingRate(double reportingRate) {
-    print(reportingRate);
+    //print(reportingRate);
     if (reportingRate < 40) {
       return Colors.red.withOpacity(0.4);
     } else if (reportingRate < 60) {
@@ -116,7 +116,7 @@ class HeatMapState extends State<HeatMap> {
       final polygonsData = KmlParser.parseKml(kmlString);
       final birdData =
           await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
-      print(birdData);
+      //print(birdData);
       setState(() {
         _polygons = polygonsData.map((polygonData) {
           final id = polygonData['id'];

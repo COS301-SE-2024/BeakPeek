@@ -4,7 +4,7 @@ import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Styles/bird_page_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
-import 'package:beakpeek/View/Home/heat_map.dart';
+import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 
 class BirdPage extends StatefulWidget {

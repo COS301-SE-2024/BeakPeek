@@ -1,3 +1,5 @@
+import 'package:beakpeek/Model/BirdInfo/pentad.dart';
+
 class Bird {
   Bird({
     required this.id,
@@ -39,19 +41,19 @@ class Bird {
       fullProtocolRR: birdJson['full_Protocol_RR']?.toDouble() ?? 0.0,
       fullProtocolNumber: birdJson['full_Protocol_Number'] ?? 0,
       latestFP: birdJson['latest_FP'] ?? '',
-      jan: json['jan'] ?? 0.0,
-      feb: json['feb'] ?? 0.0,
-      mar: json['mar'] ?? 0.0,
-      apr: json['apr'] ?? 0.0,
-      may: json['may'] ?? 0.0,
-      jun: json['jun'] ?? 0.0,
-      jul: json['jul'] ?? 0.0,
-      aug: json['aug'] ?? 0.0,
-      sep: json['sep'] ?? 0.0,
-      oct: json['oct'] ?? 0.0,
-      nov: json['nov'] ?? 0.0,
-      dec: json['dec'] ?? 0.0,
-      totalRecords: birdJson['total_Records'] ?? 0,
+      jan: json['jan']?.toDouble() ?? 0.0,
+      feb: json['feb']?.toDouble() ?? 0.0,
+      mar: json['mar']?.toDouble() ?? 0.0,
+      apr: json['apr']?.toDouble() ?? 0.0,
+      may: json['may']?.toDouble() ?? 0.0,
+      jun: json['jun']?.toDouble() ?? 0.0,
+      jul: json['jul']?.toDouble() ?? 0.0,
+      aug: json['aug']?.toDouble() ?? 0.0,
+      sep: json['sep']?.toDouble() ?? 0.0,
+      oct: json['oct']?.toDouble() ?? 0.0,
+      nov: json['nov']?.toDouble() ?? 0.0,
+      dec: json['dec']?.toDouble() ?? 0.0,
+      totalRecords: birdJson['total_Records'] ?? json['total_Records'] ?? 0,
       reportingRate:
           birdJson['reportingRate']?.toDouble() ?? json['reportingRate'] ?? 0.0,
     );
@@ -114,81 +116,4 @@ class Bird {
     return '''Bird{id: $id, commonGroup: $commonGroup, 
     commonSpecies: $commonSpecies, reportingRate: $reportingRate}''';
   }
-}
-
-class Pentad {
-  Pentad({
-    required this.pentadAllocation,
-    required this.pentadLongitude,
-    required this.pentadLatitude,
-    required this.province,
-    required this.totalCards,
-  });
-
-  factory Pentad.fromJson(Map<String, dynamic> json) {
-    return Pentad(
-      pentadAllocation: json['pentad_Allocation'],
-      pentadLongitude: json['pentad_Longitude']?.toDouble() ?? 0.0,
-      pentadLatitude: json['pentad_Latitude']?.toDouble() ?? 0.0,
-      province: Province.fromJson(json['province']),
-      totalCards: json['total_Cards'],
-    );
-  }
-
-  final String pentadAllocation;
-  final double pentadLongitude;
-  final double pentadLatitude;
-  final Province province;
-  final int totalCards;
-
-  Map<String, Object?> toMap() {
-    return {
-      'pentadAllocation': pentadAllocation,
-      'pentadLongitude': pentadLongitude,
-      'pentadLatitude': pentadLatitude,
-      'province': province.toMap(),
-      'totalCards': totalCards,
-    };
-  }
-}
-
-class Province {
-  Province({
-    required this.id,
-    required this.name,
-    this.birds,
-  });
-
-  factory Province.fromJson(Map<String, dynamic> json) {
-    return Province(
-      id: json['id'],
-      name: json['name'],
-      birds: json['birds'],
-    );
-  }
-
-  final int id;
-  final String name;
-  final dynamic birds;
-
-  Map<String, Object?> toMap() {
-    return {
-      'id': id,
-      'name': name,
-      'birds': birds,
-    };
-  }
-}
-
-class BirdPentad {
-  BirdPentad({required this.pentadAllocation, required this.reportingRate});
-
-  factory BirdPentad.fromJson(Map<String, dynamic> json) {
-    return BirdPentad(
-      pentadAllocation: json['pentad']['pentad_Allocation'] ?? '',
-      reportingRate: json['reportingRate']?.toDouble() ?? 0.0,
-    );
-  }
-  final String pentadAllocation;
-  final double reportingRate;
 }

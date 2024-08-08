@@ -1,6 +1,6 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:http/http.dart' as http;
 

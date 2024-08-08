@@ -4,10 +4,9 @@
 import 'dart:convert';
 import 'dart:math';
 
-import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/View/Home/bird_page.dart';
-// import 'package:beakpeek/View/Home/home.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 
 class BirdQuiz extends StatefulWidget {
@@ -54,15 +53,15 @@ class _BirdQuizState extends State<BirdQuiz> {
             ),
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-                // Navigate to bird's page - adjust according to your
-                //app's routing
-                Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => BirdPage(
-                      commonGroup: correctBird.commonGroup,
-                      commonSpecies: correctBird.commonSpecies,
-                      id: correctBird.id),
-                ));
+                context.pop();
+                context.goNamed(
+                  'birdInfo',
+                  pathParameters: {
+                    'group': correctBird.commonGroup,
+                    'species': correctBird.commonSpecies,
+                    'id': correctBird.id.toString(),
+                  },
+                );
               },
               child: const Text('Go to Bird Page'),
             ),
