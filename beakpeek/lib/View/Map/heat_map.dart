@@ -125,7 +125,7 @@ class HeatMapState extends State<HeatMap> {
               .map((coord) => LatLng(coord['latitude']!, coord['longitude']!))
               .toList();
           final bird = birdData.firstWhere(
-            (b) => b.pentad.pentadAllocation == id,
+            (b) => b.pentadAllocation == id,
             orElse: () => BirdPentad(pentadAllocation: '', reportingRate: 60.0),
           );
           final color = getColorForReportingRate(bird.reportingRate);

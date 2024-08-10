@@ -14,11 +14,14 @@ class KmlParser {
     for (var placemark in document.findAllElements('Placemark')) {
       final idElement = placemark.findElements('name').firstOrNull;
       final coordinatesElements = placemark.findAllElements('coordinates');
-      // print(coordinatesElements);
+      // Log the id and coordinates elements
+      // print('Placemark ID: ${idElement?.text}');
+      // print('Coordinates Elements: ${coordinatesElements.toList()}');
+
       if (idElement != null && coordinatesElements.isNotEmpty) {
         final pentadId = idElement.text.trim();
-
         final List<Map<String, double>> polygonCoordinates = [];
+
         for (var coordinatesElement in coordinatesElements) {
           final coordinateText = coordinatesElement.text.trim();
           final coordinateParts = coordinateText.split(' ');
@@ -29,10 +32,13 @@ class KmlParser {
               final latitude = double.tryParse(latLng[1]);
               final longitude = double.tryParse(latLng[0]);
               if (latitude != null && longitude != null) {
+                // print('Latitude: $latitude, Longitude: $longitude');
                 polygonCoordinates.add({
                   'latitude': latitude,
                   'longitude': longitude,
                 });
+              } else {
+                print('Invalid coordinates: $part');
               }
             }
           }
@@ -42,6 +48,8 @@ class KmlParser {
           'id': pentadId,
           'coordinates': polygonCoordinates,
         });
+      } else {
+        print('Failed to parse placemark or coordinates');
       }
     }
 
@@ -51,29 +59,31 @@ class KmlParser {
 
 class BirdMapFunctions {
   Future<List<dynamic>> fetchBirdsByGroupAndSpecies(int id) async {
-    print(id);
+    // print('Fetching birds for group ID: $id');
     final Uri uri = Uri.http(
         'beakpeekbirdapi.azurewebsites.net', 'api/bird/GetBirdPentads/$id');
 
     try {
       final response = await http.get(uri);
-      print(response.body);
+      // print('API Response: ${response.body}');
       if (response.statusCode == 200) {
         // Decode the JSON response
         final List<dynamic> data = json.decode(response.body);
-        print(data);
+        print('Decoded Data: $data');
         // Map the data to a list of BirdPentad objects
         final List<BirdPentad> birdPentads = data.map((item) {
+
           return BirdPentad.fromJson(item);
         }).toList();
 
+        print('BirdPentads: $birdPentads');
         return birdPentads;
       } else {
         print('Failed to load data: ${response.statusCode}');
         return [];
       }
     } catch (e) {
-      print('Error fetching data: $e');
+      print('Error fetching datadjgasjdg: $e');
       return [];
     }
   }
