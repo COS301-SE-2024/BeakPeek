@@ -116,7 +116,6 @@ class HeatMapState extends State<HeatMap> {
       final polygonsData = KmlParser.parseKml(kmlString);
       final birdData =
           await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
-      //print(birdData);
       setState(() {
         _polygons = polygonsData.map((polygonData) {
           final id = polygonData['id'];
