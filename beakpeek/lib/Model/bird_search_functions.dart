@@ -1,5 +1,5 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:flutter/material.dart';
 
 final colorArray = [
@@ -52,7 +52,12 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
+              return Center(
+                child: Text(
+                  'Error: ${snapshot.error}',
+                  style: const TextStyle(color: Colors.black),
+                ),
+              );
             }
             if (snapshot.data!) {
               return FilledButton(

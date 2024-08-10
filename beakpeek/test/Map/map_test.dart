@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:beakpeek/View/Home/bird_map.dart'; // Adjust the import based on your structure
+import 'package:beakpeek/View/Map/bird_map.dart'; // Adjust the import based on your structure
 import 'package:mockito/mockito.dart';
 
 // Mock GoogleMapController

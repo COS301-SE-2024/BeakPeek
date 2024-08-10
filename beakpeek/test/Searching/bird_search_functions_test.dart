@@ -1,10 +1,12 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/BirdInfo/pentad.dart';
+import 'package:beakpeek/Model/BirdInfo/province.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 
 import 'life_list_provider_test.mocks.dart';
 

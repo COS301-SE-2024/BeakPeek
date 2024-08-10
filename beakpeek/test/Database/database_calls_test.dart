@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:beakpeek/Controller/DB/database_calls.dart';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -21,7 +21,8 @@ void main() {
     test('fetchAllBirds returns unique birds on success', () async {
       when(
         mockClient.get(
-          Uri.parse('http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng'),
+          Uri.parse(
+              'https://beakpeekbirdapi.azurewebsites.net/api/Bird/GetBirdsInProvince/gauteng'),
         ),
       ).thenAnswer((_) async {
         final jsonResponse = [
@@ -70,7 +71,7 @@ void main() {
 
     test('fetchAllBirds throws an exception on non-200 response', () async {
       when(mockClient.get(Uri.parse(
-              'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
+              'https://beakpeekbirdapi.azurewebsites.net/api/Bird/GetBirdsInProvince/gauteng')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(fetchAllBirds('gauteng', mockClient), throwsException);

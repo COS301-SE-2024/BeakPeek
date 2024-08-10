@@ -1,9 +1,11 @@
-import 'package:beakpeek/View/Home/bird_quiz.dart';
+import 'package:beakpeek/Model/BirdInfo/pentad.dart';
+import 'package:beakpeek/Model/BirdInfo/province.dart';
+import 'package:beakpeek/View/Quiz/bird_quiz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 
 import 'bird_sheet_test.mocks.dart';
 
@@ -15,14 +17,15 @@ void main() {
       test('returns a list of birds if the http call completes successfully',
           () async {
         final client = MockClient();
-        when(client.get(Uri.parse('http://10.0.2.2:5000/api/Bird/')))
+        when(client.get(Uri.parse(
+                'https://beakpeekbirdapi.azurewebsites.net/api/Bird/')))
             .thenAnswer(
           (_) async => http.Response(
               '''[{ "bird": {"ref": 1, "common_group": "Heron", "common_species": "Black-headed Heron", "genus": "Ardea", "species": "melanocephala", "full_Protocol_RR": 10.0, "full_Protocol_Number": 1, "latest_FP": "2022-01-01T00:00:00Z"}, 
               "pentad": {"pentad_Allocation": "12345", "pentad_Longitude": 30.0, "pentad_Latitude": -25.0, 
               "province": {"id": 1, "name": "TestProvince"}, "total_Cards": 1},
-               "jan": 1.0, "feb": 1.0, "mar": 1.0, "apr": 1.0, "may": 1.0, "jun": 1.0, "jul": 1.0, "aug": 1.0, "sep": 1.0, "oct": 1.0, "nov": 1.0, "dec": 1.0, 
-               "total_Records": 12, "reportingRate": 10.0}]''', 200),
+              "jan": 1.0, "feb": 1.0, "mar": 1.0, "apr": 1.0, "may": 1.0, "jun": 1.0, "jul": 1.0, "aug": 1.0, "sep": 1.0, "oct": 1.0, "nov": 1.0, "dec": 1.0, 
+              "total_Records": 12, "reportingRate": 10.0}]''', 200),
         );
 
         final birds = await fetchBirds(client);
@@ -36,7 +39,7 @@ void main() {
           final client = MockClient();
           when(
             client.get(
-              Uri.parse('http://10.0.2.2:5000/api/Bird/'),
+              Uri.parse('https://beakpeekbirdapi.azurewebsites.net/api/Bird/'),
             ),
           ).thenAnswer(
             (_) async => http.Response('Not Found', 404),
@@ -62,7 +65,7 @@ void main() {
           totalCards: 1,
         ),
         commonGroup: 'Heron',
-        commonSpecies: 'Black-headed Heron',
+        commonSpecies: 'Black-headed',
         genus: 'Ardea',
         species: 'melanocephala',
         fullProtocolRR: 10.0,
@@ -85,7 +88,7 @@ void main() {
       );
 
       when(client.get(Uri.parse(
-              'http://10.0.2.2:5000/api/BirdInfo/Black-headed Heron Heron')))
+              'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/Black-headed Heron')))
           .thenAnswer((_) async => http.Response(
               '{"images": [{"url": "https://example.com/image1.jpg"}, {"url": "https://example.com/image2.jpg"}]}',
               200));
@@ -109,7 +112,7 @@ void main() {
           totalCards: 1,
         ),
         commonGroup: 'Heron',
-        commonSpecies: 'Black-headed Heron',
+        commonSpecies: 'Black-headed',
         genus: 'Ardea',
         species: 'melanocephala',
         fullProtocolRR: 10.0,
@@ -132,7 +135,7 @@ void main() {
       );
 
       when(client.get(Uri.parse(
-              'http://10.0.2.2:5000/api/BirdInfo/Black-headed Heron Heron')))
+              'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/Black-headed Heron')))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
       expect(getImages(client, bird), throwsException);

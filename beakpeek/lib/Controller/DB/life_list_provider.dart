@@ -1,4 +1,6 @@
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/pentad.dart';
+import 'package:beakpeek/Model/BirdInfo/province.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -54,44 +56,49 @@ class LifeListProvider {
       'birds',
       orderBy: 'commonGroup DESC, commonSpecies DESC',
     );
-
-    return birdMap.map((map) {
-      return Bird(
-        id: map['id'] as int,
-        commonGroup: map['commonGroup'] as String,
-        commonSpecies: map['commonSpecies'] as String,
-        fullProtocolRR: 0.0,
-        fullProtocolNumber: 0,
-        latestFP: map['latestFP'] as String,
-        reportingRate:
-            map['reportingRate'] != null ? map['reportingRate'] as double : 0.0,
-        genus: map['genus'] as String,
-        species: map['species'] as String,
-        pentad: Pentad(
-          pentadAllocation: map['pentad'].toString(),
-          pentadLongitude: 0.0,
-          pentadLatitude: 0.0,
-          province: Province(
-            id: 0,
-            name: ' ',
+    return birdMap.map(
+      (map) {
+        return Bird(
+          id: map['id'] as int,
+          commonGroup:
+              map['commonGroup'] != null ? map['commonGroup'] as String : '',
+          commonSpecies: map['commonSpecies'] != null
+              ? map['commonSpecies'] as String
+              : '',
+          fullProtocolRR: 0.0,
+          fullProtocolNumber: 0,
+          latestFP: map['latestFP'] != null ? map['latestFP'] as String : '',
+          reportingRate: map['reportingRate'] != null
+              ? map['reportingRate'] as double
+              : 0.0,
+          genus: map['genus'] as String,
+          species: map['species'] as String,
+          pentad: Pentad(
+            pentadAllocation: map['pentad'].toString(),
+            pentadLongitude: 0.0,
+            pentadLatitude: 0.0,
+            province: Province(
+              id: 0,
+              name: ' ',
+            ),
+            totalCards: 0,
           ),
-          totalCards: 0,
-        ),
-        jan: 0.0,
-        feb: 0.0,
-        mar: 0.0,
-        apr: 0.0,
-        may: 0.0,
-        jun: 0.0,
-        jul: 0.0,
-        aug: 0.0,
-        sep: 0.0,
-        oct: 0.0,
-        nov: 0.0,
-        dec: 0.0,
-        totalRecords: 0,
-      );
-    }).toList();
+          jan: 0.0,
+          feb: 0.0,
+          mar: 0.0,
+          apr: 0.0,
+          may: 0.0,
+          jun: 0.0,
+          jul: 0.0,
+          aug: 0.0,
+          sep: 0.0,
+          oct: 0.0,
+          nov: 0.0,
+          dec: 0.0,
+          totalRecords: 0,
+        );
+      },
+    ).toList();
   }
 
   Future close() async {
