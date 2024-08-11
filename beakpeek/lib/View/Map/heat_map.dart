@@ -21,6 +21,7 @@ class HeatMapState extends State<HeatMap> {
   String _selectedProvince = 'gauteng'; // Default selected province
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
+  bool _isLoading = true;
 
   @override
   void initState() {
@@ -29,11 +30,10 @@ class HeatMapState extends State<HeatMap> {
       target: _defaultCenter,
       zoom: 11.0,
     );
-    loadKmlData();
+    loadPentadData(); // Use this instead of KML loading
   }
 
   Color getColorForReportingRate(double reportingRate) {
-    //print(reportingRate);
     if (reportingRate < 40) {
       return Colors.red.withOpacity(0.4);
     } else if (reportingRate < 60) {
@@ -50,6 +50,7 @@ class HeatMapState extends State<HeatMap> {
     return Column(
       children: [
         _buildProvinceDropdown(),
+        _isLoading ? CircularProgressIndicator() : Container(),
         Expanded(
           child: GoogleMap(
             onMapCreated: _onMapCreated,
@@ -68,7 +69,7 @@ class HeatMapState extends State<HeatMap> {
         setState(() {
           _selectedProvince = newValue!;
           _cameraPosition = getCameraPositionForProvince(newValue);
-          loadKmlData();
+          loadPentadData();
         });
 
         // Move the camera to the new position
@@ -90,18 +91,19 @@ class HeatMapState extends State<HeatMap> {
   }
 
   CameraPosition getCameraPositionForProvince(String province) {
-    // Set camera positions for different provinces
     switch (province) {
       case 'gauteng':
-        return const CameraPosition(target: LatLng(-25.7559141, 28.2330593));
+        return const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0);
       case 'westerncape':
         return const CameraPosition(
-            target: LatLng(-33.9249, 18.4241), zoom: 2.0);
+            target: LatLng(-33.9249, 18.4241), zoom: 8.0);
       case 'Eastern Cape':
         return const CameraPosition(
-            target: LatLng(-32.2968, 26.4194), zoom: 2.0);
+            target: LatLng(-32.2968, 26.4194), zoom: 8.0);
       default:
-        return const CameraPosition(target: LatLng(-25.7559141, 28.2330593));
+        return const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0);
     }
   }
 
@@ -109,39 +111,85 @@ class HeatMapState extends State<HeatMap> {
     mapController = widget.testController ?? controller;
   }
 
-  Future<void> loadKmlData() async {
+  LatLng _calculateCoordinatesFromPentad(String lonPart, String latPart) {
+    // Parse latitude and longitude components from the name
+    // final latPart = parts[0];
+    // final lonPart = parts[1];
+
+    // Extract degrees and minutes from the parts
+    final latDegrees = int.parse(latPart.substring(0, 2));
+    final latMinutes = int.parse(latPart.substring(2, 4));
+
+    final lonDegrees = int.parse(lonPart.substring(0, 2));
+    final lonMinutes = int.parse(lonPart.substring(2, 4));
+
+    // Convert to decimal degrees
+    final latitude = -(latDegrees + (latMinutes / 60.0));
+    final longitude = lonDegrees + (lonMinutes / 60.0);
+
+    return LatLng(latitude, longitude);
+  }
+
+  Future<void> loadPentadData() async {
+    setState(() {
+      _isLoading = true;
+    });
+
     try {
-      final kmlString =
-          await rootBundle.loadString('assets/province_$_selectedProvince.kml');
-      final polygonsData = KmlParser.parseKml(kmlString);
       final birdData =
           await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
-      setState(() {
-        _polygons = polygonsData.map((polygonData) {
-          final id = polygonData['id'];
-          final coordinates = (polygonData['coordinates']
-                  as List<Map<String, double>>)
-              .map((coord) => LatLng(coord['latitude']!, coord['longitude']!))
-              .toList();
-          final bird = birdData.firstWhere(
-            (b) => b.pentadAllocation == id,
-            orElse: () => BirdPentad(pentadAllocation: '', reportingRate: 60.0),
-          );
+
+      // Process data and create polygons in chunks
+      final List<Polygon> polygons = [];
+      for (var bird in birdData) {
+        final id = bird.pentadAllocation;
+        if (id != '') {
+          final coordinates = [
+            _calculateCoordinatesFromPentad(bird.pentadLatitude.toString(),
+                bird.pentadLongitude.toString()),
+            _calculateCoordinatesFromPentad(
+                (bird.pentadLatitude + 5).toString(),
+                bird.pentadLongitude.toString()),
+            _calculateCoordinatesFromPentad(
+                (bird.pentadLatitude + 5).toString(),
+                (bird.pentadLongitude + 5).toString()),
+            _calculateCoordinatesFromPentad(bird.pentadLatitude.toString(),
+                (bird.pentadLongitude + 5).toString()),
+            // Simplified example, you may need to adjust this
+          ];
+
           final color = getColorForReportingRate(bird.reportingRate);
-          return Polygon(
-            polygonId: PolygonId(id),
-            points: coordinates,
-            strokeColor: Colors.black38,
-            fillColor: color,
-            strokeWidth: 1,
-            consumeTapEvents: true,
+          polygons.add(
+            Polygon(
+              polygonId: PolygonId(id),
+              points: coordinates,
+              strokeColor: Colors.black38,
+              fillColor: color,
+              strokeWidth: 1,
+              consumeTapEvents: true,
+            ),
           );
-        }).toSet();
+        }
+
+        // // Update the UI in chunks
+        if (polygons.length % 100 == 0) {
+          setState(() {
+            _polygons.addAll(polygons);
+          });
+        }
+      }
+
+      setState(() {
+        _polygons.addAll(polygons);
+        _isLoading = false;
       });
     } catch (e) {
       if (kDebugMode) {
-        print('Error loading KML data: $e');
+        print('Error loading Pentad data: $e');
       }
+      setState(() {
+        _isLoading = false;
+      });
     }
   }
 }

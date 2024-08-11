@@ -14,9 +14,6 @@ class KmlParser {
     for (var placemark in document.findAllElements('Placemark')) {
       final idElement = placemark.findElements('name').firstOrNull;
       final coordinatesElements = placemark.findAllElements('coordinates');
-      // Log the id and coordinates elements
-      // print('Placemark ID: ${idElement?.text}');
-      // print('Coordinates Elements: ${coordinatesElements.toList()}');
 
       if (idElement != null && coordinatesElements.isNotEmpty) {
         final pentadId = idElement.text.trim();
@@ -32,7 +29,6 @@ class KmlParser {
               final latitude = double.tryParse(latLng[1]);
               final longitude = double.tryParse(latLng[0]);
               if (latitude != null && longitude != null) {
-                // print('Latitude: $latitude, Longitude: $longitude');
                 polygonCoordinates.add({
                   'latitude': latitude,
                   'longitude': longitude,
