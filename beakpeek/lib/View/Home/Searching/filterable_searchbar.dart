@@ -1,7 +1,9 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:beakpeek/Model/help_icon.dart';
 
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar({
@@ -56,48 +58,111 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final logoSize = screenWidth * 0.18;
+    final searchBarHeight = screenHeight * 0.06;
+    final buttonHeight = screenHeight * 0.04;
+    final buttonWidth = screenWidth * 0.32;
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+              child: Image.asset(
+                'assets/icons/Logo.png',
+                width: logoSize,
+                height: logoSize,
+              ),
+            ),
             Expanded(
-              child: SearchAnchor(
-                searchController: controller,
-                viewHintText: 'Search Bird...',
-                viewOnChanged: searchBarTyping,
-                builder: (context, controller) {
-                  return const Row(
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(width: 5),
-                      Text('Search'),
-                    ],
-                  );
-                },
-                suggestionsBuilder: (context, controller) {
-                  return items;
-                },
+              child: Container(
+                height: searchBarHeight,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: GlobalStyles.primaryColor,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                child: SearchAnchor(
+                  searchController: controller,
+                  viewHintText: 'Search Bird...',
+                  viewOnChanged: searchBarTyping,
+                  builder: (context, controller) {
+                    return Row(
+                      children: [
+                        const Icon(Icons.search,
+                            color: Color.fromARGB(255, 119, 119, 119)),
+                        SizedBox(width: screenWidth * 0.02),
+                        const Text('Search for birds...',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 119, 119, 119),
+                              fontSize: 16,
+                            )),
+                      ],
+                    );
+                  },
+                  suggestionsBuilder: (context, controller) {
+                    return items;
+                  },
+                ),
               ),
             ),
-            const SizedBox(width: 10),
-            FilledButton(
-              onPressed: sortAlphabetically,
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
-                minimumSize: const Size(60, 30),
-                shadowColor: Colors.black,
-              ),
-              child: const Text('A-Z'),
+            Padding(
+              padding: EdgeInsets.only(left: screenWidth * 0.02),
+              child: const HelpIcon(content: 'Help content goes here'),
             ),
-            const SizedBox(width: 10),
-            FilledButton(
-              onPressed: sortByReportingRate,
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
-                minimumSize: const Size(100, 30),
-                shadowColor: Colors.black,
+          ],
+        ),
+        SizedBox(height: screenHeight * 0.01),
+        Row(
+          children: [
+            const Text(
+              'Search Filters',
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+                color: GlobalStyles.secondaryColor,
               ),
-              child: const Text('Report Rate'),
+            ),
+            SizedBox(width: screenWidth * 0.01),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: buttonWidth * 0.6,
+                    child: FilledButton(
+                      onPressed: sortAlphabetically,
+                      style: FilledButton.styleFrom(
+                        backgroundColor: GlobalStyles.secondaryColor,
+                        minimumSize: Size(buttonWidth * 0.8, buttonHeight),
+                        shadowColor: Colors.black,
+                      ),
+                      child: const Text('A-Z'),
+                    ),
+                  ),
+                  SizedBox(width: screenWidth * 0.02),
+                  SizedBox(
+                    width: buttonWidth, // Adjusted width for narrower buttons
+                    child: FilledButton(
+                      onPressed: sortByReportingRate,
+                      style: FilledButton.styleFrom(
+                        backgroundColor: GlobalStyles.secondaryColor,
+                        minimumSize: Size(buttonWidth, buttonHeight),
+                        shadowColor: Colors.black,
+                      ),
+                      child: const Text('Report Rate'),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
