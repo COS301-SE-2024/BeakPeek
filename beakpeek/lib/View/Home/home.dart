@@ -1,3 +1,5 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Bird/bird_page.dart';
@@ -156,31 +158,48 @@ class HomeState extends State<Home> {
                               ),
                             ],
                           ),
-                          child: const Column(
+                          child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Tracked Achievements',
                                 style: GlobalStyles.smallHeadingDark,
                               ),
-                              SizedBox(height: 10),
-                              ListTile(
-                                title: Text('Achievement 1',
-                                    style: GlobalStyles.boldContent),
-                                subtitle: Text('75% complete',
-                                    style: GlobalStyles.greyContent),
+                              const SizedBox(height: 10),
+                              // List of achievements
+                              const ListTile(
+                                contentPadding:
+                                    EdgeInsets.zero, // Remove default padding
+                                title: Text(
+                                  'Master Spotter',
+                                  style: GlobalStyles.boldContent,
+                                ),
+                                subtitle: Text(
+                                  '24% complete',
+                                  style: GlobalStyles.greyContent,
+                                ),
                                 trailing: Icon(Icons.star, color: Colors.amber),
                               ),
-                              ListTile(
-                                title: Text('Achievement 2',
-                                    style: GlobalStyles.boldContent),
-                                subtitle: Text('50% complete',
-                                    style: GlobalStyles.greyContent),
+                              const Divider(color: Colors.grey),
+                              const ListTile(
+                                contentPadding:
+                                    EdgeInsets.zero, // Remove default padding
+                                title: Text(
+                                  'Duck Specialist',
+                                  style: GlobalStyles.boldContent,
+                                ),
+                                subtitle: Text(
+                                  '56% complete',
+                                  style: GlobalStyles.greyContent,
+                                ),
                                 trailing: Icon(Icons.star, color: Colors.amber),
                               ),
+                              // Ensure there is space before the next section
+                              SizedBox(height: screenHeight * 0.02),
                             ],
                           ),
                         ),
+
                         SizedBox(height: screenHeight * 0.02),
 
                         // Birds Near You Section
@@ -224,8 +243,6 @@ class HomeState extends State<Home> {
                                       'Birds Near You',
                                       style: GlobalStyles.smallHeadingDark,
                                     ),
-                                    SizedBox(height: 16),
-                                    // ListView.builder within a fixed height container
                                     Expanded(
                                       child: ListView.builder(
                                         itemCount: birdsList.length,
@@ -251,8 +268,7 @@ class HomeState extends State<Home> {
                                             },
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 2.0),
+                                                  const EdgeInsets.symmetric(),
                                               child: Column(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -262,7 +278,7 @@ class HomeState extends State<Home> {
                                                       Text(
                                                         bird.commonGroup !=
                                                                 'None'
-                                                            ? '${bird.commonGroup} ${bird.commonSpecies}'
+                                                            ? '${bird.commonSpecies} ${bird.commonGroup}'
                                                             : bird
                                                                 .commonSpecies,
                                                         style: GlobalStyles
@@ -277,7 +293,8 @@ class HomeState extends State<Home> {
                                                       color: Colors.black54,
                                                     ),
                                                   ),
-                                                  const Divider(),
+                                                  const Divider(
+                                                      color: Colors.grey),
                                                 ],
                                               ),
                                             ),
@@ -317,7 +334,6 @@ Future<String> getPentadId() async {
   // Convert decimal part to minutes
   final latMinutes = ((latDecimal * 60) - (latDecimal * 60) % 5).toInt();
   final lonMinutes = ((lonDecimal * 60) - (lonDecimal * 60) % 5).toInt();
-  print(latDecimal);
 
   // Format the result
   final formattedLat =
