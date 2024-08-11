@@ -102,9 +102,7 @@ class _BirdPageState extends State<BirdPage> {
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(10.0),
                                   child: Image.network(
-                                    birdData['images'][1][
-                                        'url'], // Assuming you have an imageUrl
-                                    //in your data
+                                    birdData['images'][1]['url'],
                                     width: screenWidth * 0.92,
                                     fit: BoxFit.cover,
                                   ),
