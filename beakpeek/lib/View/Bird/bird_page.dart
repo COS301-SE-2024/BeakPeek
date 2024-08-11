@@ -49,7 +49,9 @@ class _BirdPageState extends State<BirdPage> {
             Icons.arrow_back,
             color: GlobalStyles.primaryColor,
           ),
-          onPressed: () => context.go('/home'),
+          onPressed: () {
+            context.go('/home');
+          },
         ),
         title: const Text(
           'Bird Information',
