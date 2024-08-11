@@ -1,11 +1,13 @@
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/Bird/bird_page.dart';
+import 'package:beakpeek/View/Map/bird_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
-
-// import 'package:beakpeek/Model/help_icon_model_functions.dart';
-// import 'package:go_router/go_router.dart';
+import 'package:http/http.dart' as http;
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -14,6 +16,31 @@ class Home extends StatefulWidget {
 }
 
 class HomeState extends State<Home> {
+  late Future<String> pentadId;
+
+  @override
+  void initState() {
+    super.initState();
+    pentadId = getPentadId(); // Initialize pentadId
+  }
+
+  Color _getColorForReportingRate(double reportingRate) {
+    if (reportingRate < 40) {
+      return Colors.red.withOpacity(0.4);
+    } else if (reportingRate < 60) {
+      return Colors.orange.withOpacity(0.4);
+    } else if (reportingRate < 80) {
+      return Colors.yellow.withOpacity(0.4);
+    } else {
+      return Colors.green.withOpacity(0.4);
+    }
+  }
+
+  Future<List<Bird>> _fetchBirds() async {
+    final id = await pentadId;
+    return fetchBirds(id, http.Client()); // Fetch birds based on pentadId
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -156,66 +183,114 @@ class HomeState extends State<Home> {
                         ),
                         SizedBox(height: screenHeight * 0.02),
 
-                        // Bird Wishlist Section
-                        Container(
-                          width: sectionWidth,
-                          padding: const EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: const Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Birds You Want to See',
-                                style: GlobalStyles.smallHeadingDark,
-                              ),
-                              SizedBox(height: 16),
-                              // Use Column for vertical layout
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      Text('Brown-Headed Parrot',
-                                          style: GlobalStyles.greyContent),
-                                      Spacer(),
-                                      Icon(Icons.star, color: Colors.amber),
-                                    ],
-                                  ),
-                                  SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text('Cape Vulture',
-                                          style: GlobalStyles.greyContent),
-                                      Spacer(),
-                                      Icon(Icons.star, color: Colors.amber),
-                                    ],
-                                  ),
-                                  SizedBox(height: 16),
-                                  Row(
-                                    children: [
-                                      Text('Honeyguide',
-                                          style: GlobalStyles.greyContent),
-                                      Spacer(),
-                                      Icon(Icons.star, color: Colors.amber),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                        // Birds Near You Section
+                        FutureBuilder<List<Bird>>(
+                          future: _fetchBirds(),
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState ==
+                                ConnectionState.waiting) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(
+                                  child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData ||
+                                snapshot.data!.isEmpty) {
+                              return const Center(
+                                  child: Text('No birds found.'));
+                            } else {
+                              final birdsList = snapshot.data!;
+                              return Container(
+                                width: sectionWidth,
+                                height: screenHeight *
+                                    0.4, // Fixed height for the container
+                                padding: const EdgeInsets.all(16.0),
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(10.0),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.grey.withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 5,
+                                      offset: const Offset(0, 3),
+                                    ),
+                                  ],
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'Birds Near You',
+                                      style: GlobalStyles.smallHeadingDark,
+                                    ),
+                                    SizedBox(height: 16),
+                                    // ListView.builder within a fixed height container
+                                    Expanded(
+                                      child: ListView.builder(
+                                        itemCount: birdsList.length,
+                                        itemBuilder: (context, index) {
+                                          final bird = birdsList[index];
+                                          return InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      Scaffold(
+                                                    body: BirdPage(
+                                                      id: bird.id,
+                                                      commonGroup:
+                                                          bird.commonGroup,
+                                                      commonSpecies:
+                                                          bird.commonSpecies,
+                                                    ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 2.0),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      Text(
+                                                        bird.commonGroup !=
+                                                                'None'
+                                                            ? '${bird.commonGroup} ${bird.commonSpecies}'
+                                                            : bird
+                                                                .commonSpecies,
+                                                        style: GlobalStyles
+                                                            .boldContent,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 16),
+                                                  Text(
+                                                    'Scientific Name: ${bird.genus} ${bird.species}',
+                                                    style: const TextStyle(
+                                                      color: Colors.black54,
+                                                    ),
+                                                  ),
+                                                  const Divider(),
+                                                ],
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }
+                          },
                         ),
-
                         SizedBox(height: screenHeight * 0.02),
                       ],
                     ),
@@ -229,4 +304,26 @@ class HomeState extends State<Home> {
       ),
     );
   }
+}
+
+Future<String> getPentadId() async {
+  final Position position = await Geolocator.getCurrentPosition();
+  final latDegrees = position.latitude.ceil();
+  final lonDegrees = position.longitude.floor();
+
+  final latDecimal = (position.latitude - latDegrees).abs();
+  final lonDecimal = position.longitude - lonDegrees;
+
+  // Convert decimal part to minutes
+  final latMinutes = ((latDecimal * 60) - (latDecimal * 60) % 5).toInt();
+  final lonMinutes = ((lonDecimal * 60) - (lonDecimal * 60) % 5).toInt();
+  print(latDecimal);
+
+  // Format the result
+  final formattedLat =
+      '${latDegrees.abs()}${latMinutes.toString().padLeft(2, "0")}';
+  final formattedLon =
+      '${lonDegrees.abs()}${lonMinutes.toString().padLeft(2, "0")}';
+  // Combine with underscore
+  return '${formattedLat}_${formattedLon}';
 }
