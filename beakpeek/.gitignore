@@ -46,6 +46,5 @@ app.*.map.json
 /lib/config_azure.dart
 /test/home_test.dart
 /test/bird_sheet_test.dart
-/test/map_test.dart
 /test/Map/map_info_test.dart
 /test/Map/map_test.dart

@@ -1,7 +1,11 @@
+// ignore_for_file: library_prefixes
+
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
+    as upFunc;
 
 final colorArray = [
   Colors.red,
@@ -61,6 +65,7 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
                 if (snapshot.data!) {
                   // Handle 'Seen' button action
                 } else {
+                  upFunc.addExp(20);
                   lifeList.insertBird(bird);
                 }
               },

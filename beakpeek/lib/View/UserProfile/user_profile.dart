@@ -142,6 +142,9 @@ class UserProfileState extends State<UserProfile> {
                         'Level $level',
                         style: GlobalStyles.greyContent,
                       ),
+                      const SizedBox(
+                        height: 6,
+                      ),
                       SizedBox(
                         height: verticalPadding * 3,
                         child: levelProgressBar(userExp, level),
