@@ -26,7 +26,9 @@ class MapInfo extends StatelessWidget {
                     children: [
                       SizedBox(height: screenHeight * 0.05),
                       Padding(
-                        padding: EdgeInsets.only(right: screenWidth * 0.04),
+                        padding: EdgeInsets.only(
+                            right: screenWidth * 0.04,
+                            left: screenHeight * 0.02),
                         child: const SearchbarContainer(
                           province: 'Gauteng',
                           helpContent:
