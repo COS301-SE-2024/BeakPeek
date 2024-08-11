@@ -97,10 +97,11 @@ void main() {
     );
 
     testWidgets('getLiveList displays list of birds', (tester) async {
+      void test(Bird temp) {}
       final List<Bird> birds = [bird];
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: getLiveList(birds),
+          body: getLiveList(birds, test),
         ),
       ));
 
@@ -111,10 +112,11 @@ void main() {
 
     testWidgets('getLiveList displays "NO Birds Seen" when bird list is empty',
         (tester) async {
+      void test(Bird temp) {}
       final List<Bird> birds = [];
       await tester.pumpWidget(MaterialApp(
         home: Scaffold(
-          body: getLiveList(birds),
+          body: getLiveList(birds, test),
         ),
       ));
 

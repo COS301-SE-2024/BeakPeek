@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars
+// ignore_for_file: lines_longer_than_80_chars, unnecessary_brace_in_string_interps
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -24,18 +24,6 @@ class HomeState extends State<Home> {
   void initState() {
     super.initState();
     pentadId = getPentadId(); // Initialize pentadId
-  }
-
-  Color _getColorForReportingRate(double reportingRate) {
-    if (reportingRate < 40) {
-      return Colors.red.withOpacity(0.4);
-    } else if (reportingRate < 60) {
-      return Colors.orange.withOpacity(0.4);
-    } else if (reportingRate < 80) {
-      return Colors.yellow.withOpacity(0.4);
-    } else {
-      return Colors.green.withOpacity(0.4);
-    }
   }
 
   Future<List<Bird>> _fetchBirds() async {
@@ -243,6 +231,9 @@ class HomeState extends State<Home> {
                                       'Birds Near You',
                                       style: GlobalStyles.smallHeadingDark,
                                     ),
+                                    const SizedBox(height: 16),
+                                    // ListView.builder
+
                                     Expanded(
                                       child: ListView.builder(
                                         itemCount: birdsList.length,

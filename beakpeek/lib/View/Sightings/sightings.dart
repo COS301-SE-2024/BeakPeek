@@ -24,6 +24,17 @@ class _SightingsState extends State<Sightings> {
     super.initState();
   }
 
+  void goBird(Bird bird) {
+    context.goNamed(
+      'birdInfo',
+      pathParameters: {
+        'group': bird.commonGroup,
+        'species': bird.commonSpecies,
+        'id': bird.id.toString(),
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -90,7 +101,7 @@ class _SightingsState extends State<Sightings> {
               ),
             );
           }
-          return getLiveList(snapshot.data!);
+          return getLiveList(snapshot.data!, goBird);
         },
       ),
     );

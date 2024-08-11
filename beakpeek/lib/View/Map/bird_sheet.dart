@@ -219,7 +219,7 @@ class BirdList extends StatelessWidget {
 
           // Return an empty widget if the reporting rate is 0.0
           if (reportingRate == 0.0) {
-            return SizedBox.shrink();
+            return const SizedBox.shrink();
           }
 
           return InkWell(

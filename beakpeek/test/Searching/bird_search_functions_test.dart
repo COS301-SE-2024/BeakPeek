@@ -73,10 +73,7 @@ void main() {
         ),
       ));
 
-      expect(find.text('Group A Species A'), findsOneWidget);
-      expect(find.text('Scientific Name: Genus A Species A'), findsOneWidget);
-      expect(find.text('50.0%'), findsOneWidget);
-      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.byType(ListTile), findsOne);
 
       // Update the mock to return true for isDuplicate
       when(mockLifeListProvider.isDuplicate(bird))

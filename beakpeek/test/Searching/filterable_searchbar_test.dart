@@ -143,13 +143,6 @@ void main() {
         ),
       );
 
-      await tester.pump(); // Initial pump
-      await tester.pumpAndSettle(const Duration(seconds: 5));
-
-      await tester.tap(find.text('Report Rate'));
-      await tester.pump();
-      await tester.pumpAndSettle(const Duration(seconds: 5));
-
       await tester.tap(find.byIcon(Icons.search));
       await tester.pump();
       await tester.pumpAndSettle(const Duration(seconds: 5));

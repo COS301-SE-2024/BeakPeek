@@ -1,9 +1,7 @@
-import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:flutter/services.dart' show rootBundle;
 
 class HeatMap extends StatefulWidget {
   const HeatMap({super.key, this.testController, required this.id});
@@ -20,7 +18,7 @@ class HeatMapState extends State<HeatMap> {
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
   String _selectedProvince = 'gauteng'; // Default selected province
   late CameraPosition _cameraPosition;
-  Set<Polygon> _polygons = {};
+  final Set<Polygon> _polygons = {};
   bool _isLoading = true;
 
   @override
@@ -50,7 +48,7 @@ class HeatMapState extends State<HeatMap> {
     return Column(
       children: [
         _buildProvinceDropdown(),
-        _isLoading ? CircularProgressIndicator() : Container(),
+        _isLoading ? const CircularProgressIndicator() : Container(),
         Expanded(
           child: GoogleMap(
             onMapCreated: _onMapCreated,

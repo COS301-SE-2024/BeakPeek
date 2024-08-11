@@ -58,14 +58,15 @@ void main() {
       // Test for gauteng
       expect(
         heatMapState.getCameraPositionForProvince('gauteng'),
-        equals(const CameraPosition(target: LatLng(-25.7559141, 28.2330593))),
+        equals(const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0)),
       );
 
       // Test for westerncape
       expect(
         heatMapState.getCameraPositionForProvince('westerncape'),
         equals(
-          const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 2.0),
+          const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 8.0),
         ),
       );
 
@@ -73,14 +74,15 @@ void main() {
       expect(
         heatMapState.getCameraPositionForProvince('Eastern Cape'),
         equals(
-          const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 2.0),
+          const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 8.0),
         ),
       );
 
       // Test for an unknown province (default case)
       expect(
         heatMapState.getCameraPositionForProvince('unknown'),
-        equals(const CameraPosition(target: LatLng(-25.7559141, 28.2330593))),
+        equals(const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0)),
       );
     });
   });

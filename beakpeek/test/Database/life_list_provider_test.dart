@@ -86,7 +86,7 @@ void main() {
           when(
             mockDatabase.insert(
               'birds',
-              testBird.toMap(),
+              testBird.toMapLIfe(),
               conflictAlgorithm: ConflictAlgorithm.replace,
             ),
           ).thenAnswer((_) async => 1);
@@ -96,7 +96,7 @@ void main() {
           verify(
             mockDatabase.insert(
               'birds',
-              testBird.toMap(),
+              testBird.toMapLIfe(),
               conflictAlgorithm: ConflictAlgorithm.replace,
             ),
           ).called(1);

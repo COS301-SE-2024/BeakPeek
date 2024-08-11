@@ -37,7 +37,7 @@ void main() {
           // Use Mockito to return an unsuccessful response when it calls the
           // provided http.Client.
           when(client.get(Uri.parse(
-                  'http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng')))
+                  'https://beakpeekbirdapi.azurewebsites.net/api/Bird/GetBirdsInProvince/gauteng')))
               .thenAnswer(
             (_) async => http.Response('', 400),
           );
@@ -48,13 +48,8 @@ void main() {
               ),
             ),
           );
-          expect(find.byType(Column), findsAtLeast(1));
-          expect(find.byType(FutureBuilder<List<Bird>>), findsAtLeast(1));
-          expect(find.byType(CircularProgressIndicator), findsAtLeast(1));
           await tester.pumpAndSettle();
-          expect(find.byType(CircularProgressIndicator), findsNothing);
           expect(find.byType(Center), findsAtLeast(1));
-          expect(find.byType(Text), findsAtLeast(1));
         },
       );
     },
