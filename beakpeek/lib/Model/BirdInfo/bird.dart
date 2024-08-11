@@ -111,6 +111,17 @@ class Bird {
     };
   }
 
+  Map<String, Object?> toMapLIfe() {
+    return {
+      'id': id,
+      'commonGroup': commonGroup,
+      'commonSpecies': commonSpecies,
+      'genus': genus,
+      'species': species,
+      'reportingRate': reportingRate,
+    };
+  }
+
   @override
   String toString() {
     return '''Bird{id: $id, commonGroup: $commonGroup, 

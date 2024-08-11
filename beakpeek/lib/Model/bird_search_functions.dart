@@ -1,6 +1,7 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 final colorArray = [
   Colors.red,
@@ -68,6 +69,7 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
               return FilledButton(
                 onPressed: () => {
                   lifeList.insertBird(bird),
+                  context.go('/home'),
                 },
                 child: const Text(
                   'Add To Life list',

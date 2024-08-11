@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 import 'package:beakpeek/Model/BirdInfo/province.dart';
@@ -39,11 +41,12 @@ class LifeListProvider {
   }
 
   Future<void> insertBird(Bird bird) async {
+    print('inserting');
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
       await db.insert(
         'birds',
-        bird.toMap(),
+        bird.toMapLIfe(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       );
     }
@@ -122,8 +125,10 @@ class LifeListProvider {
     );
 
     if (maps.isNotEmpty) {
+      print('true');
       return true;
     } else {
+      print('false');
       return false;
     }
   }
