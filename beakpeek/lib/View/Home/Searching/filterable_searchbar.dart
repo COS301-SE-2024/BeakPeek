@@ -62,8 +62,6 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
     final screenHeight = MediaQuery.of(context).size.height;
     final logoSize = screenWidth * 0.18;
     final searchBarHeight = screenHeight * 0.06;
-    final buttonHeight = screenHeight * 0.04;
-    final buttonWidth = screenWidth * 0.32;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -117,52 +115,6 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
             Padding(
               padding: EdgeInsets.only(left: screenWidth * 0.02),
               child: const HelpIcon(content: 'Help content goes here'),
-            ),
-          ],
-        ),
-        SizedBox(height: screenHeight * 0.01),
-        Row(
-          children: [
-            const Text(
-              'Search Filters',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                color: GlobalStyles.secondaryColor,
-              ),
-            ),
-            SizedBox(width: screenWidth * 0.01),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: buttonWidth * 0.6,
-                    child: FilledButton(
-                      onPressed: sortAlphabetically,
-                      style: FilledButton.styleFrom(
-                        backgroundColor: GlobalStyles.secondaryColor,
-                        minimumSize: Size(buttonWidth * 0.8, buttonHeight),
-                        shadowColor: Colors.black,
-                      ),
-                      child: const Text('A-Z'),
-                    ),
-                  ),
-                  SizedBox(width: screenWidth * 0.02),
-                  SizedBox(
-                    width: buttonWidth, // Adjusted width for narrower buttons
-                    child: FilledButton(
-                      onPressed: sortByReportingRate,
-                      style: FilledButton.styleFrom(
-                        backgroundColor: GlobalStyles.secondaryColor,
-                        minimumSize: Size(buttonWidth, buttonHeight),
-                        shadowColor: Colors.black,
-                      ),
-                      child: const Text('Report Rate'),
-                    ),
-                  ),
-                ],
-              ),
             ),
           ],
         ),

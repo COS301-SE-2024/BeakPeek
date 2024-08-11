@@ -1,5 +1,6 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
 final colorArray = [
@@ -23,29 +24,25 @@ int getColorForReportingRate(double reportingRate) {
 
 Widget getData(Bird bird, LifeListProvider lifeList) {
   return ListTile(
-    title: Text(bird.commonGroup != 'None'
-        ? '${bird.commonGroup} ${bird.commonSpecies}'
-        : bird.commonSpecies),
+    title: Text(
+      bird.commonGroup != 'None'
+          ? '${bird.commonGroup} ${bird.commonSpecies}'
+          : bird.commonSpecies,
+      style: const TextStyle(
+        color: GlobalStyles.primaryColor,
+        fontSize: 16,
+      ),
+    ),
     subtitle: Text(
-      'Scientific Name: ${bird.genus} ${bird.species}',
-      style: const TextStyle(color: Colors.black),
+      '${bird.genus} ${bird.species}',
+      style: TextStyle(
+        color: Colors.grey[600],
+        fontSize: 14,
+      ),
     ),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          '${bird.reportingRate}%',
-          style: const TextStyle(color: Colors.black),
-        ),
-        const SizedBox(width: 8),
-        Container(
-          width: 20,
-          height: 20,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: colorArray[getColorForReportingRate(bird.reportingRate)],
-          ),
-        ),
         FutureBuilder(
           future: lifeList.isDuplicate(bird),
           builder: (context, snapshot) {
@@ -55,26 +52,35 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
               return Center(
                 child: Text(
                   'Error: ${snapshot.error}',
-                  style: const TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.red),
                 ),
               );
             }
-            if (snapshot.data!) {
-              return FilledButton(
-                onPressed: () => {},
-                child: const Text('Seen'),
-              );
-            } else {
-              return FilledButton(
-                onPressed: () => {
-                  lifeList.insertBird(bird),
-                },
-                child: const Text(
-                  'Add To Life list',
-                  style: TextStyle(color: Colors.black),
+            return FilledButton(
+              onPressed: () {
+                if (snapshot.data!) {
+                  // Handle 'Seen' button action
+                } else {
+                  lifeList.insertBird(bird);
+                }
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: GlobalStyles.secondaryColor,
+                minimumSize: const Size(10, 30),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
                 ),
-              );
-            }
+                shadowColor: Colors.black.withOpacity(0.5),
+              ),
+              child: Text(
+                snapshot.data! ? 'Seen' : 'Add to Life List',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                ),
+              ),
+            );
           },
         ),
       ],
