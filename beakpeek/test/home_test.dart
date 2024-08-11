@@ -29,8 +29,8 @@ void main() {
 
       // Verify the presence of the achievements section
       expect(find.text('Tracked Achievements'), findsOneWidget);
-      expect(find.text('Achievement 1'), findsOneWidget);
-      expect(find.text('Achievement 2'), findsOneWidget);
+      expect(find.text('Duck Specialist'), findsOneWidget);
+      expect(find.text('Master Spotter'), findsOneWidget);
 
       // Verify the presence of the bird wishlist section
       // expect(find.text('Birds You Want to See'), findsOneWidget);
