@@ -4,6 +4,7 @@ import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/help_icon.dart';
+import 'package:go_router/go_router.dart';
 
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar({
@@ -92,6 +93,19 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                   searchController: controller,
                   viewHintText: 'Search Bird...',
                   viewOnChanged: searchBarTyping,
+                  dividerColor: GlobalStyles.secondaryColor,
+                  viewLeading: IconButton(
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.grey,
+                      )),
+                  headerTextStyle:
+                      const TextStyle(color: GlobalStyles.secondaryColor),
+                  headerHintStyle:
+                      const TextStyle(color: GlobalStyles.secondaryColor),
                   builder: (context, controller) {
                     return Row(
                       children: [
