@@ -48,3 +48,4 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 BeakPeek/lib/config_azure.dart
+beakpeek/android/app/src/main/AndroidManifest.xml

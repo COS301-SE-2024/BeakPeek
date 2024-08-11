@@ -1,24 +1,29 @@
-import 'package:beakpeek/Model/bird.dart';
-import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
 class SearchbarContainer extends StatefulWidget {
-  const SearchbarContainer({super.key});
+  const SearchbarContainer(
+      {required this.province, required this.helpContent, super.key});
+  final String province;
+  final String helpContent;
 
   @override
-  State<SearchbarContainer> createState() => _SearchcarContainerState();
+  State<SearchbarContainer> createState() => _SearchbarContainerState();
 }
 
-class _SearchcarContainerState extends State<SearchbarContainer> {
+class _SearchbarContainerState extends State<SearchbarContainer> {
+  late LifeListProvider lifeList = LifeListProvider.instance;
   late Future<List<Bird>> birds;
   int sort = 0;
+
   @override
   void initState() {
     super.initState();
-    birds = bsf
-        .fetchAllBirds(Client()); // Fetch and sort birds from the API initially
+    birds = db.fetchAllBirds(widget.province, Client());
   }
 
   @override
@@ -29,13 +34,11 @@ class _SearchcarContainerState extends State<SearchbarContainer> {
           future: birds,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const SizedBox.shrink(); // Hide when loading
             } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No birds found.'));
+              // return Center(child: Text('Error: ${snapshot.error}'));
+              return const Center(child: Text('')); // Removed error message for
             }
-            //print(snapshot.data!);
             return FilterableSearchbar(sort: sort, birds: snapshot.data!);
           },
         ),
