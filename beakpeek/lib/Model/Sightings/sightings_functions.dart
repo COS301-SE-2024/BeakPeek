@@ -16,16 +16,6 @@ Widget getLifeListData(Bird bird, Function(Bird) goBird) {
       'Scientific Name: ${bird.genus} ${bird.species}',
       style: const TextStyle(color: Colors.black),
     ),
-    trailing: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Text(
-          '${bird.reportingRate}%',
-          style: const TextStyle(color: Colors.black),
-        ),
-        const SizedBox(width: 8),
-      ],
-    ),
   );
 }
 
@@ -45,13 +35,10 @@ Widget getLiveList(List<Bird> birds, Function(Bird) goBird) {
       style: TextStyle(color: Colors.black),
     );
   }
-  return SizedBox(
-    height: 200,
-    child: ListView.builder(
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return items[index];
-      },
-    ),
+  return ListView.builder(
+    itemCount: items.length,
+    itemBuilder: (context, index) {
+      return items[index];
+    },
   );
 }

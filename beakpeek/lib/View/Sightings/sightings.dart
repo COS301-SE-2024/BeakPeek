@@ -101,7 +101,10 @@ class _SightingsState extends State<Sightings> {
               ),
             );
           }
-          return getLiveList(snapshot.data!, goBird);
+          return SizedBox(
+            height: screenHeight * 1,
+            child: getLiveList(snapshot.data!, goBird),
+          );
         },
       ),
     );
