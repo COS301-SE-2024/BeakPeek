@@ -26,37 +26,72 @@ class _SightingsState extends State<Sightings> {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xFFF3F1ED),
-      body: Column(
-        children: [
-          const Text('Life List', style: GlobalStyles.subheadingLight),
-          FutureBuilder<List<Bird>>(
-            future: birds,
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(
-                  child: Text(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            context.go('/home');
+          },
+        ),
+        title: const Text('Life List', style: GlobalStyles.subheadingLight),
+        centerTitle: true,
+      ),
+      body: FutureBuilder<List<Bird>>(
+        future: birds,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
                     'Error: ${snapshot.error}',
                     style: const TextStyle(color: Colors.black),
+                    textAlign: TextAlign.center,
                   ),
-                );
-              }
-              return getLiveList(snapshot.data!);
-            },
-          ),
-          ElevatedButton(
-            onPressed: () {
-              context.go('/home');
-            },
-            child: const Text(
-              'Home',
-              style: TextStyle(color: Colors.black),
-            ),
-          ),
-        ],
+                  SizedBox(height: screenHeight * 0.02),
+                  ElevatedButton(
+                    style: GlobalStyles.elevatedButtonStyle(),
+                    onPressed: () {
+                      context.go('/home');
+                    },
+                    child: const Text('Home'),
+                  ),
+                ],
+              ),
+            );
+          } else if (snapshot.data == null || snapshot.data!.isEmpty) {
+            return Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    'No birds seen',
+                    style: GlobalStyles.content,
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(height: screenHeight * 0.02),
+                  ElevatedButton(
+                    style: GlobalStyles.elevatedButtonStyle(),
+                    onPressed: () {
+                      context.go('/home');
+                    },
+                    child: const Text('Home'),
+                  ),
+                ],
+              ),
+            );
+          }
+          return getLiveList(snapshot.data!);
+        },
       ),
     );
   }

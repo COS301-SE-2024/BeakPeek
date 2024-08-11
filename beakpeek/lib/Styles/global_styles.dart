@@ -121,4 +121,19 @@ abstract class GlobalStyles {
     fontWeight: FontWeight.w500,
     fontSize: 18,
   );
+
+  static ButtonStyle elevatedButtonStyle() {
+    return ElevatedButton.styleFrom(
+      backgroundColor: GlobalStyles.primaryColor,
+      minimumSize: const Size(150, 50),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      shadowColor: Colors.black,
+    ).copyWith(
+      foregroundColor:
+          WidgetStateProperty.all(GlobalStyles.primaryButtonText.color),
+      textStyle: WidgetStateProperty.all(GlobalStyles.primaryButtonText),
+    );
+  }
 }
