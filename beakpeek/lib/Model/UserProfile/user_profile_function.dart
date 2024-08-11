@@ -80,7 +80,7 @@ Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLIfe) {
               FAProgressBar(
                 currentValue:
                     getPercent(birdNumsTotal[index], numbirdsInLIfe[index]),
-                displayText: '%',
+                // displayText: '%',
                 size: 10,
               ),
             ],
@@ -101,7 +101,7 @@ double getPercent(int numTotalBirds, int birdsInLife) {
 Widget levelProgressBar(int progress, int level) {
   return FAProgressBar(
     currentValue: progressPercentage(progress, level),
-    displayText: '%',
+    // displayText: '%',
     size: 15,
   );
 }

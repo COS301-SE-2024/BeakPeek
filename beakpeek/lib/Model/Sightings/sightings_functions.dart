@@ -1,4 +1,5 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
 Widget getLifeListData(Bird bird, Function(Bird) goBird) {
@@ -7,7 +8,7 @@ Widget getLifeListData(Bird bird, Function(Bird) goBird) {
       bird.commonGroup.isNotEmpty
           ? '${bird.commonGroup} ${bird.commonSpecies}'
           : bird.commonSpecies,
-      style: const TextStyle(color: Color.fromARGB(255, 177, 88, 88)),
+      style: const TextStyle(color: GlobalStyles.secondaryColor),
     ),
     onTap: () {
       goBird(bird);

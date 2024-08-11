@@ -50,7 +50,7 @@ class _SightingsState extends State<Sightings> {
             context.go('/home');
           },
         ),
-        title: const Text('Life List', style: GlobalStyles.subheadingLight),
+        title: const Text('Life List', style: GlobalStyles.subHeadingDark),
         centerTitle: true,
       ),
       body: FutureBuilder<List<Bird>>(
