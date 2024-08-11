@@ -96,13 +96,14 @@ abstract class GlobalStyles {
   static final ButtonStyle primaryButton = FilledButton.styleFrom(
     backgroundColor: primaryColor,
     minimumSize: const Size(350, 50),
-    shadowColor: Colors.black,
+    shadowColor: Colors.grey, // Changed to grey
+    elevation: 5, // Added elevation
   );
 
   static final ButtonStyle secondaryButton = OutlinedButton.styleFrom(
     backgroundColor: Colors.transparent,
     minimumSize: const Size(350, 50),
-    shadowColor: Colors.black,
+    shadowColor: Colors.grey, // Changed to grey
     side: const BorderSide(
       color: primaryColor,
     ),
@@ -121,4 +122,19 @@ abstract class GlobalStyles {
     fontWeight: FontWeight.w500,
     fontSize: 18,
   );
+
+  static ButtonStyle elevatedButtonStyle() {
+    return ElevatedButton.styleFrom(
+      backgroundColor: GlobalStyles.primaryColor,
+      minimumSize: const Size(150, 50),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30.0),
+      ),
+      shadowColor: Colors.grey,
+    ).copyWith(
+      foregroundColor:
+          WidgetStateProperty.all(GlobalStyles.primaryButtonText.color),
+      textStyle: WidgetStateProperty.all(GlobalStyles.primaryButtonText),
+    );
+  }
 }

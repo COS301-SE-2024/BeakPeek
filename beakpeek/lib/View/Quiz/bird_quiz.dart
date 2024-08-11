@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
@@ -39,31 +40,62 @@ class _BirdQuizState extends State<BirdQuiz> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Congratulations!'),
-          content: const Text('You selected the correct bird!'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(); // Close the dialog
-                setState(() {
-                  startQuiz(birds);
-                });
-              },
-              child: const Text('Play Again'),
+          backgroundColor: Colors.white,
+          title: const Center(
+            child: Text(
+              'Congratulations!',
+              style: TextStyle(
+                color: GlobalStyles.secondaryColor,
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+              ),
             ),
-            TextButton(
-              onPressed: () {
-                context.pop();
-                context.goNamed(
-                  'birdInfo',
-                  pathParameters: {
-                    'group': correctBird.commonGroup,
-                    'species': correctBird.commonSpecies,
-                    'id': correctBird.id.toString(),
+          ),
+          content: const Text(
+            'You selected the correct bird!',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 16,
+            ),
+          ),
+          actions: [
+            ButtonBar(
+              alignment: MainAxisAlignment.center,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    setState(() {
+                      startQuiz(birds);
+                    });
                   },
-                );
-              },
-              child: const Text('Go to Bird Page'),
+                  child: const Text(
+                    'Next Bird',
+                    style: TextStyle(
+                      color: GlobalStyles.secondaryColor,
+                    ),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    context.pop();
+                    context.goNamed(
+                      'birdInfo',
+                      pathParameters: {
+                        'group': correctBird.commonGroup,
+                        'species': correctBird.commonSpecies,
+                        'id': correctBird.id.toString(),
+                      },
+                    );
+                  },
+                  child: const Text(
+                    'View Bird',
+                    style: TextStyle(
+                      color: GlobalStyles.secondaryColor,
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         );
@@ -73,67 +105,146 @@ class _BirdQuizState extends State<BirdQuiz> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final padding = EdgeInsets.symmetric(
+      horizontal: screenWidth * 0.05,
+      vertical: screenHeight * 0.02,
+    );
+
     return Scaffold(
-      appBar: AppBar(title: const Text('Bird Quiz')),
-      body: FutureBuilder<List<Bird>>(
-        future: futureBirds,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return const Center(child: Text('No birds found'));
-          } else {
-            startQuiz(snapshot.data!);
-            return Column(
-              children: [
-                FutureBuilder<List<String>>(
-                  future: birdImages,
-                  builder: (context, imageSnapshot) {
-                    if (imageSnapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (imageSnapshot.hasError) {
-                      return Center(
-                          child: Text('Error: ${imageSnapshot.error}'));
-                    } else {
-                      return Expanded(
-                        child: PageView(
-                          children: imageSnapshot.data!
-                              .map((url) => Image.network(url))
-                              .toList(),
-                        ),
-                      );
-                    }
-                  },
+      backgroundColor: const Color(0xFFF3F1ED),
+      appBar: AppBar(
+        backgroundColor: const Color(0xFFF3F1ED),
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: GlobalStyles.primaryColor,
+          ),
+          onPressed: () => context.go('/home'),
+        ),
+        title: const Text(
+          'Bird Quiz',
+          style: GlobalStyles.smallHeadingDark,
+          textAlign: TextAlign.center,
+        ),
+        centerTitle: true,
+      ),
+      body: Padding(
+        padding: padding,
+        child: FutureBuilder<List<Bird>>(
+          future: futureBirds,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CircularProgressIndicator(
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                      GlobalStyles.secondaryColor),
                 ),
-                ...selectedBirds
-                    .map((bird) => ElevatedButton(
-                          onPressed: () {
-                            if (bird.commonSpecies ==
-                                    correctBird.commonSpecies &&
-                                bird.commonGroup == correctBird.commonGroup) {
-                              showWinDialog(
-                                  snapshot.data!); // Show popup dialog
-                            } else {
-                              // Incorrect answer
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(const SnackBar(
-                                content: Text('Incorrect!'),
-                                backgroundColor: Colors.red,
-                              ));
-                            }
-                          },
-                          child:
-                              Text('${bird.commonSpecies} ${bird.commonGroup}'),
-                        ))
-                    // ignore: unnecessary_to_list_in_spreads
-                    .toList(),
-              ],
-            );
-          }
-        },
+              );
+            } else if (snapshot.hasError) {
+              return Center(child: Text('Error: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              return const Center(child: Text('No birds found'));
+            } else {
+              startQuiz(snapshot.data!);
+              return Column(
+                children: [
+                  Expanded(
+                    child: FutureBuilder<List<String>>(
+                      future: birdImages,
+                      builder: (context, imageSnapshot) {
+                        if (imageSnapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                  GlobalStyles.secondaryColor),
+                            ),
+                          );
+                        } else if (imageSnapshot.hasError) {
+                          return Center(
+                              child: Text('Error: ${imageSnapshot.error}'));
+                        } else if (imageSnapshot.data == null ||
+                            imageSnapshot.data!.isEmpty) {
+                          return const Center(
+                              child: Text('No images available'));
+                        } else {
+                          return PageView(
+                            children: imageSnapshot.data!
+                                .map((url) => SizedBox(
+                                      width: screenWidth * 0.9,
+                                      child: Image.network(
+                                        url,
+                                        width: screenWidth * 0.9,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ))
+                                .toList(),
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  const Text(
+                    'Select the correct bird:',
+                    style: GlobalStyles.smallHeadingDark,
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 8.0),
+                  Column(
+                    children: selectedBirds
+                        .map((bird) => Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 6.0),
+                              child: SizedBox(
+                                width: min(screenWidth * 0.75, 320),
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: GlobalStyles.primaryColor,
+                                    minimumSize: const Size(320, 50),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30.0),
+                                    ),
+                                    shadowColor: Colors.grey,
+                                    elevation: 5,
+                                  ),
+                                  onPressed: () {
+                                    if (bird == correctBird) {
+                                      showWinDialog(snapshot.data!);
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text('Try again!'),
+                                          backgroundColor: Colors.red,
+                                          duration: Duration(seconds: 1),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  child: Text(
+                                    '${bird.commonSpecies} ${bird.commonGroup}',
+                                    style: const TextStyle(
+                                      color: Color(0xFFFFFFFF),
+                                      fontFamily: 'SF Pro Display',
+                                      fontWeight: FontWeight.w400,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ))
+                        .toList(),
+                  ),
+                  const SizedBox(height: 16.0),
+                ],
+              );
+            }
+          },
+        ),
       ),
     );
   }

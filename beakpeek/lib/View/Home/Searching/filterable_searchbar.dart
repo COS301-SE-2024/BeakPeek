@@ -1,7 +1,10 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:beakpeek/Model/help_icon.dart';
+import 'package:go_router/go_router.dart';
 
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar({
@@ -56,48 +59,76 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final logoSize = screenWidth * 0.18;
+    final searchBarHeight = screenHeight * 0.06;
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+              child: Image.asset(
+                'assets/icons/Logo.png',
+                width: logoSize,
+                height: logoSize,
+              ),
+            ),
             Expanded(
-              child: SearchAnchor(
-                searchController: controller,
-                viewHintText: 'Search Bird...',
-                viewOnChanged: searchBarTyping,
-                builder: (context, controller) {
-                  return const Row(
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(width: 5),
-                      Text('Search'),
-                    ],
-                  );
-                },
-                suggestionsBuilder: (context, controller) {
-                  return items;
-                },
+              child: Container(
+                height: searchBarHeight,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: GlobalStyles.primaryColor,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                child: SearchAnchor(
+                  searchController: controller,
+                  viewHintText: 'Search Bird...',
+                  viewOnChanged: searchBarTyping,
+                  dividerColor: GlobalStyles.secondaryColor,
+                  viewLeading: IconButton(
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.grey,
+                      )),
+                  headerTextStyle:
+                      const TextStyle(color: GlobalStyles.secondaryColor),
+                  headerHintStyle:
+                      const TextStyle(color: GlobalStyles.secondaryColor),
+                  builder: (context, controller) {
+                    return Row(
+                      children: [
+                        const Icon(Icons.search,
+                            color: Color.fromARGB(255, 119, 119, 119)),
+                        SizedBox(width: screenWidth * 0.02),
+                        const Text('Search for birds...',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 119, 119, 119),
+                              fontSize: 16,
+                            )),
+                      ],
+                    );
+                  },
+                  suggestionsBuilder: (context, controller) {
+                    return items;
+                  },
+                ),
               ),
             ),
-            const SizedBox(width: 10),
-            FilledButton(
-              onPressed: sortAlphabetically,
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
-                minimumSize: const Size(60, 30),
-                shadowColor: Colors.black,
-              ),
-              child: const Text('A-Z'),
-            ),
-            const SizedBox(width: 10),
-            FilledButton(
-              onPressed: sortByReportingRate,
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
-                minimumSize: const Size(100, 30),
-                shadowColor: Colors.black,
-              ),
-              child: const Text('Report Rate'),
+            Padding(
+              padding: EdgeInsets.only(left: screenWidth * 0.02),
+              child: const HelpIcon(content: 'Help content goes here'),
             ),
           ],
         ),
