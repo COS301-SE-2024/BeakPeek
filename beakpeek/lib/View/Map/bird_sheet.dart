@@ -47,10 +47,12 @@ class _BirdSheetState extends State<BirdSheet> {
     // Sorting logic based on the selected sort option
     switch (sortOption) {
       case 'Rarity Asc':
-        birds.sort((a, b) => a.reportingRate.compareTo(b.reportingRate));
+        birds.sort((a, b) => getReportingRateForMonth(a, widget.month)
+            .compareTo(getReportingRateForMonth(b, widget.month)));
         break;
       case 'Rarity Desc':
-        birds.sort((a, b) => b.reportingRate.compareTo(a.reportingRate));
+        birds.sort((a, b) => getReportingRateForMonth(b, widget.month)
+            .compareTo(getReportingRateForMonth(a, widget.month)));
         break;
       case 'Alphabetically Asc':
         birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
@@ -205,48 +207,21 @@ class BirdList extends StatelessWidget {
   final List<Bird> birds;
   final String month;
 
-  double _getReportingRateForMonth(Bird bird) {
-    switch (month) {
-      case 'January':
-        return bird.jan;
-      case 'February':
-        return bird.feb;
-      case 'March':
-        return bird.mar;
-      case 'April':
-        return bird.apr;
-      case 'May':
-        return bird.may;
-      case 'June':
-        return bird.jun;
-      case 'July':
-        return bird.jul;
-      case 'August':
-        return bird.aug;
-      case 'September':
-        return bird.sep;
-      case 'October':
-        return bird.oct;
-      case 'November':
-        return bird.nov;
-      case 'December':
-        return bird.dec;
-      case 'Year-Round':
-      default:
-        return bird.reportingRate;
-    }
-  }
-
+  @override
   @override
   Widget build(BuildContext context) {
-    // print('HELLO $month');
     return Material(
       child: ListView.builder(
         itemCount: birds.length,
         itemBuilder: (context, index) {
           final bird = birds[index];
-          final reportingRate = _getReportingRateForMonth(bird);
-          // print('HELLO $reportingRate');
+          final reportingRate = getReportingRateForMonth(bird, month);
+
+          // Return an empty widget if the reporting rate is 0.0
+          if (reportingRate == 0.0) {
+            return SizedBox.shrink();
+          }
+
           return InkWell(
             onTap: () {
               Navigator.push(
@@ -317,5 +292,37 @@ class BirdList extends StatelessWidget {
     } else {
       return Colors.green;
     }
+  }
+}
+
+double getReportingRateForMonth(Bird bird, String month) {
+  switch (month) {
+    case 'January':
+      return bird.jan;
+    case 'February':
+      return bird.feb;
+    case 'March':
+      return bird.mar;
+    case 'April':
+      return bird.apr;
+    case 'May':
+      return bird.may;
+    case 'June':
+      return bird.jun;
+    case 'July':
+      return bird.jul;
+    case 'August':
+      return bird.aug;
+    case 'September':
+      return bird.sep;
+    case 'October':
+      return bird.oct;
+    case 'November':
+      return bird.nov;
+    case 'December':
+      return bird.dec;
+    case 'Year-Round':
+    default:
+      return bird.reportingRate;
   }
 }
