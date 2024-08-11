@@ -89,7 +89,6 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
 }
 
 bool isSeen(Bird bird, LifeListProvider lifeList) {
-  // ignore: prefer_const_declarations
   late bool seen = false;
   lifeList.isDuplicate(bird).then(
     (value) {

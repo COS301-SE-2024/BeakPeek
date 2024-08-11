@@ -50,6 +50,12 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
     });
   }
 
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
   void sortByReportingRate() {
     setState(() {
       filteredBirds = bsf.sortRepotRateDESC(filteredBirds);
