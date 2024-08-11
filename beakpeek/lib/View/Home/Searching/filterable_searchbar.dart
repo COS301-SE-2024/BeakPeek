@@ -134,7 +134,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
             ),
             Padding(
               padding: EdgeInsets.only(left: screenWidth * 0.02),
-              child: const HelpIcon(content: 'Help content goes here'),
+              child: const HelpIcon(content: 'Type in the common name, group or genus of a bird and see all the results'),
             ),
           ],
         ),
