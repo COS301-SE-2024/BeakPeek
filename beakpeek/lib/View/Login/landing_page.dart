@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});
-
   @override
   State<LandingPage> createState() {
     return _LandingPageState();

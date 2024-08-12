@@ -22,63 +22,94 @@ namespace BeakPeekApi.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.HasSequence("ProvinceSequence");
+
             modelBuilder.Entity("BeakPeekApi.Models.Bird", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<int>("Ref")
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
                     b.Property<string>("Common_group")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Common_species")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Full_Protocol_Number")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Full_Protocol_RR")
+                        .HasColumnType("float");
 
                     b.Property<string>("Genus")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Pentad")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ProvinceId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ReportingRate")
-                        .HasColumnType("float");
+                    b.Property<DateTime?>("Latest_FP")
+                        .HasColumnType("Date");
 
                     b.Property<string>("Species")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Spp")
+                    b.HasKey("Ref");
+
+                    b.HasIndex("Ref", "Common_species", "Common_group");
+
+                    b.ToTable("Birds");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Bird_Province", b =>
+                {
+                    b.Property<int>("BirdId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProvinceId")
+                        .HasColumnType("int");
+
+                    b.HasKey("BirdId", "ProvinceId");
+
+                    b.HasIndex("ProvinceId");
+
+                    b.ToTable("Bird_Provinces");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Pentad", b =>
+                {
+                    b.Property<string>("Pentad_Allocation")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<int>("Pentad_Latitude")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Pentad_Longitude")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProvinceId")
                         .HasColumnType("int");
 
                     b.Property<int>("Total_Cards")
                         .HasColumnType("int");
 
-                    b.Property<int>("Total_Records")
-                        .HasColumnType("int");
+                    b.HasKey("Pentad_Allocation");
 
-                    b.HasKey("Id");
+                    b.HasIndex("Pentad_Allocation")
+                        .IsUnique();
 
                     b.HasIndex("ProvinceId");
 
-                    b.ToTable("Birds");
+                    b.ToTable("Pentads");
                 });
 
-            modelBuilder.Entity("BeakPeekApi.Models.GautengBirdSpecies", b =>
+            modelBuilder.Entity("BeakPeekApi.Models.Province", b =>
                 {
-                    b.Property<int>("id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasDefaultValueSql("NEXT VALUE FOR [ProvinceSequence]");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"));
+                    SqlServerPropertyBuilderExtensions.UseSequence(b.Property<int>("Id"));
 
                     b.Property<double?>("Apr")
                         .HasColumnType("float");
@@ -86,20 +117,14 @@ namespace BeakPeekApi.Migrations
                     b.Property<double?>("Aug")
                         .HasColumnType("float");
 
-                    b.Property<string>("Common_group")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Common_species")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("BirdRef")
+                        .HasColumnType("int");
 
                     b.Property<double?>("Dec")
                         .HasColumnType("float");
 
                     b.Property<double?>("Feb")
                         .HasColumnType("float");
-
-                    b.Property<string>("Genus")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<double?>("Jan")
                         .HasColumnType("float");
@@ -122,33 +147,30 @@ namespace BeakPeekApi.Migrations
                     b.Property<double?>("Oct")
                         .HasColumnType("float");
 
-                    b.Property<string>("Pentad")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<string>("Pentad_Allocation")
+                        .HasColumnType("nvarchar(450)");
 
-                    b.Property<double?>("ReportingRate")
+                    b.Property<double>("ReportingRate")
                         .HasColumnType("float");
 
                     b.Property<double?>("Sep")
                         .HasColumnType("float");
 
-                    b.Property<string>("Species")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Spp")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Total_Cards")
-                        .HasColumnType("int");
-
                     b.Property<int>("Total_Records")
                         .HasColumnType("int");
 
-                    b.HasKey("id");
+                    b.HasKey("Id");
 
-                    b.ToTable("GautengBirdSpecies");
+                    b.HasIndex("BirdRef");
+
+                    b.HasIndex("Pentad_Allocation");
+
+                    b.ToTable("Provinces");
+
+                    b.UseTpcMappingStrategy();
                 });
 
-            modelBuilder.Entity("BeakPeekApi.Models.Province", b =>
+            modelBuilder.Entity("BeakPeekApi.Models.ProvinceList", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -165,13 +187,138 @@ namespace BeakPeekApi.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Provinces");
+                    b.ToTable("ProvincesList");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "easterncape"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "freestate"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "gauteng"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "kwazulunatal"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "limpopo"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "mpumalanga"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "northerncape"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            Name = "northwest"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            Name = "westerncape"
+                        });
                 });
 
-            modelBuilder.Entity("BeakPeekApi.Models.Bird", b =>
+            modelBuilder.Entity("BeakPeekApi.Models.Easterncape", b =>
                 {
-                    b.HasOne("BeakPeekApi.Models.Province", "Province")
-                        .WithMany("Birds")
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Easterncape");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Freestate", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Freestate");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Gauteng", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Gauteng");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Kwazulunatal", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Kwazulunatal");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Limpopo", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Limpopo");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Mpumalanga", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Mpumalanga");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Northerncape", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Northerncape");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Northwest", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Northwest");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Westerncape", b =>
+                {
+                    b.HasBaseType("BeakPeekApi.Models.Province");
+
+                    b.ToTable("Westerncape");
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Bird_Province", b =>
+                {
+                    b.HasOne("BeakPeekApi.Models.Bird", null)
+                        .WithMany()
+                        .HasForeignKey("BirdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("BeakPeekApi.Models.ProvinceList", null)
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("BeakPeekApi.Models.Pentad", b =>
+                {
+                    b.HasOne("BeakPeekApi.Models.ProvinceList", "Province")
+                        .WithMany()
                         .HasForeignKey("ProvinceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -181,7 +328,17 @@ namespace BeakPeekApi.Migrations
 
             modelBuilder.Entity("BeakPeekApi.Models.Province", b =>
                 {
-                    b.Navigation("Birds");
+                    b.HasOne("BeakPeekApi.Models.Bird", "Bird")
+                        .WithMany()
+                        .HasForeignKey("BirdRef");
+
+                    b.HasOne("BeakPeekApi.Models.Pentad", "Pentad")
+                        .WithMany()
+                        .HasForeignKey("Pentad_Allocation");
+
+                    b.Navigation("Bird");
+
+                    b.Navigation("Pentad");
                 });
 #pragma warning restore 612, 618
         }

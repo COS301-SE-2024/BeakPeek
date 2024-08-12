@@ -1,0 +1,103 @@
+\documentclass{article}
+
+\title{
+
+\\
+{Coding Standards}
+}
+
+\author{Millenium}
+
+\begin{document}
+
+\tableofcontents
+
+\newpage
+
+\section{Tools we Use}
+
+\begin{itemize}
+    \item Linting through Flutter
+    \item Automated tests using GitHub actions
+    \item GitGaurdian for secret scanning
+    \item Codecov for code coverage
+    \item Unit testing using Flutters built in tools
+    \item Unit testing using XUnit with .Net
+\end{itemize}
+
+\section{File Structure}
+
+BeakPeek is made using the MVC architecture as well as the domain driven design and for this reason on 
+top of that we use flutter for our frontend and .Net for our backend we have separated our files 
+into two directories those being `beakpeek` (due to how flutters project naming works) and `dotnet`
+to make it descriptive of the software bein used. For these reasons all future sections will be refered
+to under subsections for `Frontend` for all of the flutter related topics and `Backend` for all of the 
+dotnet related topics.
+
+\subsection{Frontend}
+
+For the `beakpeek` directory the only directories that are of importence are the `lib` and the `test` 
+directories.
+
+\subsubsection{Lib}
+The `lib` directory contains all of the actual logic and styling of the frontend this is also split up
+int appropriate subdirectories. These being `Controller`, `Model` and `View` to match the MVC pattern. 
+There are other directories as well that have uses for styling.
+
+\subsubsection{Test}
+
+The `test` direcotry is for the unit tests that are written for testing the flutter frontend and logic.
+
+\subsection{Backend}
+
+For the `dotnet` directory this is split up into two direcoties, one for the actual logic of the api
+this being called `BeakPeekApi` and then another for the unit tests of the api is this being called `BeakPeekApi.Tests`. 
+
+\subsubsection{BeakPeekApi}
+
+This directory also follows the MVC pattern however it does not have any views so there are only directories for model and
+controller.
+
+\subsubsection{BeakPeekApi.Tests}
+
+This direcotry mirrors the directory structure of BeakPeekApi exactly as for each file in BeakPeekApi there
+is also a unit test.
+
+\subsubsection{Entire Project}
+
+The rest of the direcoties should be self explanatory however here is a quick rundown
+
+\begin{itemize}
+    \item `doc` is for all documentation for this BeakPeek.
+    \item `res` is for all resources and contains all of the csv's needed to run the api and load all of the birds
+    \item `scripts` is for any scripts that are used for automation.
+\end{itemize}
+
+\section{Formatting}
+
+\subsection{Frontend}
+
+For formatting we use the built in tools and linting that flutter provides and is enforced by the flutter language server
+which we all use either through vscode or through neovim.
+
+\subsection{Backend}
+
+For formatting the backend we use the omnisharp C-sharp langauge server which has its own linting rules that are enforced on save
+either in vscode or in neovim.
+
+\section{Unit Testing}
+
+To ensure that all of our code is of a good standard and to make the development cycle faster we use unit tests written
+in either flutter or dotnet C-sharp. We aim for atleast a 70-80 percent coverage for the code.
+
+\section{Pull Request Restrictions}
+
+To ensure that the our code standards are maintained we have set up branch rules and pull request rules. The branch rules 
+are that only the DevOps engineer is able to push to the main branch and that any pull requests into the main branch require
+atleast one approval from someone else to push it. 
+
+To ensure that all pull requests adhere to our standards we have made it so that only the DevOps engineer should be allowed to 
+approve pull requests into or from development and also for any pull requests into or from main. Any pull requests going into 
+main have to first pass all workflows and tests.
+
+\end{document}

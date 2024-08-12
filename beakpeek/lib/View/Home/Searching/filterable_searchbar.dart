@@ -1,98 +1,140 @@
-import 'package:beakpeek/Model/bird.dart';
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:beakpeek/Model/help_icon.dart';
+import 'package:go_router/go_router.dart';
 
 class FilterableSearchbar extends StatefulWidget {
-  const FilterableSearchbar(
-      {super.key, required this.birds, required this.sort});
-  // codecov:ignore:next
-  const FilterableSearchbar.list(this.birds, this.sort, {super.key});
+  const FilterableSearchbar({
+    super.key,
+    required this.birds,
+    required this.sort,
+  });
+
   final List<Bird> birds;
   final int sort;
 
   @override
   State<FilterableSearchbar> createState() {
-    return FilterableSearchbarState();
+    return _FilterableSearchbarState();
   }
 }
 
-class FilterableSearchbarState extends State<FilterableSearchbar> {
+class _FilterableSearchbarState extends State<FilterableSearchbar> {
+  late final LifeListProvider lifeList = LifeListProvider.instance;
   List<Widget> items = [];
   final SearchController controller = SearchController();
-  List<Bird> temp = [];
+  late List<Bird> filteredBirds;
+
   @override
   void initState() {
     super.initState();
-    items = bsf.getWidgetListOfBirds(widget.birds);
+    filteredBirds = widget.birds;
+    items = bsf.getWidgetListOfBirds(filteredBirds);
   }
 
   void searchBarTyping(String data) {
-    if (data.isEmpty) {
-      items = bsf.getWidgetListOfBirds(widget.birds);
-    } else {
-      temp = bsf.searchForBird(widget.birds, data);
-      items = bsf.getWidgetListOfBirds(temp);
-    }
+    setState(() {
+      filteredBirds =
+          data.isEmpty ? widget.birds : bsf.searchForBird(widget.birds, data);
+      items = bsf.getWidgetListOfBirds(filteredBirds);
+    });
+  }
+
+  void sortAlphabetically() {
+    setState(() {
+      filteredBirds = bsf.sortAlphabetically(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds);
+    });
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void sortByReportingRate() {
+    setState(() {
+      filteredBirds = bsf.sortRepotRateDESC(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds);
+    });
   }
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final logoSize = screenWidth * 0.18;
+    final searchBarHeight = screenHeight * 0.06;
+
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Row(
           children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+              child: Image.asset(
+                'assets/icons/Logo.png',
+                width: logoSize,
+                height: logoSize,
+              ),
+            ),
             Expanded(
-              child: SearchAnchor(
-                viewHintText: 'Search Bird...',
-                viewOnChanged: (value) {
-                  searchBarTyping(value);
-                },
-                builder: (context, controller) {
-                  return const Row(
-                    children: [
-                      Icon(Icons.search),
-                      SizedBox(width: 5),
-                      Text('Search'),
-                    ],
-                  );
-                },
-                suggestionsBuilder: (context, controller) {
-                  return items;
-                },
+              child: Container(
+                height: searchBarHeight,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: GlobalStyles.primaryColor,
+                    width: 2.0,
+                  ),
+                  borderRadius: BorderRadius.circular(30.0),
+                  color: Colors.white,
+                ),
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                child: SearchAnchor(
+                  searchController: controller,
+                  viewHintText: 'Search Bird...',
+                  viewOnChanged: searchBarTyping,
+                  dividerColor: GlobalStyles.secondaryColor,
+                  viewLeading: IconButton(
+                      onPressed: () {
+                        GoRouter.of(context).pop();
+                      },
+                      icon: const Icon(
+                        Icons.arrow_back,
+                        color: Colors.grey,
+                      )),
+                  headerTextStyle:
+                      const TextStyle(color: GlobalStyles.secondaryColor),
+                  headerHintStyle:
+                      const TextStyle(color: GlobalStyles.secondaryColor),
+                  builder: (context, controller) {
+                    return Row(
+                      children: [
+                        const Icon(Icons.search,
+                            color: Color.fromARGB(255, 119, 119, 119)),
+                        SizedBox(width: screenWidth * 0.02),
+                        const Text('Search for birds...',
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 119, 119, 119),
+                              fontSize: 16,
+                            )),
+                      ],
+                    );
+                  },
+                  suggestionsBuilder: (context, controller) {
+                    return items;
+                  },
+                ),
               ),
             ),
-            FilledButton(
-              onPressed: () {
-                setState(() {
-                  temp = bsf.sortAlphabetically(widget.birds);
-                  items = bsf.getWidgetListOfBirds(temp);
-                });
-              },
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
-                minimumSize: const Size(60, 30),
-                shadowColor: Colors.black,
-              ),
-              child: const Text(
-                'A-Z',
-              ),
-            ),
-            const SizedBox(width: 5),
-            FilledButton(
-              onPressed: () {
-                setState(() {
-                  temp = bsf.sortRepotRateDESC(widget.birds);
-                  items = bsf.getWidgetListOfBirds(temp);
-                });
-              },
-              style: FilledButton.styleFrom(
-                backgroundColor: const Color.fromARGB(178, 3, 58, 48),
-                minimumSize: const Size(60, 30),
-                shadowColor: Colors.black,
-              ),
-              child: const Text(
-                'Report Rate',
-              ),
+            Padding(
+              padding: EdgeInsets.only(left: screenWidth * 0.02),
+              child: const HelpIcon(content: 'Type in the common name, group or genus of a bird and see all the results. You can tap on a result to see all of that birds information.'),
             ),
           ],
         ),

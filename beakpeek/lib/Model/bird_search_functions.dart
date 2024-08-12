@@ -1,27 +1,11 @@
-// ignore_for_file: avoid_print, unused_element
-import 'dart:convert';
-import 'package:beakpeek/Model/bird.dart';
-import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
+// ignore_for_file: library_prefixes
 
-Future<List<Bird>> fetchAllBirds(http.Client client) async {
-  try {
-    final response = await client.get(
-        Uri.parse('http://10.0.2.2:5000/api/Bird/GetBirdsInProvince/gauteng'));
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(response.body);
-      final List<Bird> birds =
-          jsonResponse.map((data) => Bird.fromJson(data)).toList();
-      return getUniqueBirds(birds);
-    } else {
-      print('Request failed with status: ${response.statusCode}');
-      throw Exception('Failed to load birds');
-    }
-  } catch (error) {
-    print('Error fetching birds: $error');
-    throw Exception('Failed to load birds: $error, ');
-  }
-}
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:flutter/material.dart';
+import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
+    as upFunc;
 
 final colorArray = [
   Colors.red,
@@ -31,46 +15,100 @@ final colorArray = [
 ];
 
 int getColorForReportingRate(double reportingRate) {
-  if (reportingRate < 40) {
+  if (reportingRate < 40.0) {
     return 0;
-  } else if (reportingRate < 60) {
+  } else if (reportingRate < 60.0) {
     return 1;
-  } else if (reportingRate < 80) {
+  } else if (reportingRate < 80.0) {
     return 2;
   } else {
     return 3;
   }
 }
 
-Widget getData(Bird bird) {
+Widget getData(Bird bird, LifeListProvider lifeList) {
   return ListTile(
-    title: Text(bird.commonGroup != 'None'
-        ? '${bird.commonGroup} ${bird.commonSpecies}'
-        : bird.commonSpecies),
-    subtitle: Text('Scientific Name: ${bird.genus} ${bird.species}'),
+    title: Text(
+      bird.commonGroup != 'None'
+          ? '${bird.commonGroup} ${bird.commonSpecies}'
+          : bird.commonSpecies,
+      style: const TextStyle(
+        color: GlobalStyles.primaryColor,
+        fontSize: 16,
+      ),
+    ),
+    subtitle: Text(
+      '${bird.genus} ${bird.species}',
+      style: TextStyle(
+        color: Colors.grey[600],
+        fontSize: 14,
+      ),
+    ),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('${bird.reportingRate}%'),
-        const SizedBox(width: 8),
-        Container(
-          width: 20,
-          height: 20,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: colorArray[getColorForReportingRate(bird.reportingRate)],
-          ),
+        FutureBuilder(
+          future: lifeList.isDuplicate(bird),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text(
+                  'Error: ${snapshot.error}',
+                  style: const TextStyle(color: Colors.red),
+                ),
+              );
+            }
+            return FilledButton(
+              onPressed: () {
+                if (snapshot.data!) {
+                  // Handle 'Seen' button action
+                } else {
+                  upFunc.addExp(20);
+                  lifeList.insertBird(bird);
+                }
+              },
+              style: FilledButton.styleFrom(
+                backgroundColor: GlobalStyles.secondaryColor,
+                minimumSize: const Size(10, 30),
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                shadowColor: Colors.black.withOpacity(0.5),
+              ),
+              child: Text(
+                snapshot.data! ? 'Seen' : 'Add to Life List',
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 14,
+                ),
+              ),
+            );
+          },
         ),
       ],
     ),
   );
 }
 
+bool isSeen(Bird bird, LifeListProvider lifeList) {
+  late bool seen = false;
+  lifeList.isDuplicate(bird).then(
+    (value) {
+      seen = value;
+    },
+  );
+  return seen;
+}
+
 List<Widget> getWidgetListOfBirds(List<Bird> birds) {
   final List<Widget> listOfBirdWidgets = [];
+  late final LifeListProvider lifeList = LifeListProvider.instance;
 
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getData(birds[i]));
+    listOfBirdWidgets.add(getData(birds[i], lifeList));
   }
   return listOfBirdWidgets;
 }

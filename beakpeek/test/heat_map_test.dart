@@ -1,4 +1,4 @@
-import 'package:beakpeek/View/Home/heat_map.dart';
+import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -13,8 +13,7 @@ void main() {
       const MaterialApp(
         home: Scaffold(
           body: HeatMap(
-            commonGroup: 'Dove',
-            commonSpecies: 'Laughing',
+            id: 1,
           ),
         ),
       ),
@@ -59,27 +58,31 @@ void main() {
       // Test for gauteng
       expect(
         heatMapState.getCameraPositionForProvince('gauteng'),
-        equals(const CameraPosition(target: LatLng(-25.7559141, 28.2330593))),
+        equals(const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0)),
       );
 
       // Test for westerncape
       expect(
         heatMapState.getCameraPositionForProvince('westerncape'),
         equals(
-            const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 2.0)),
+          const CameraPosition(target: LatLng(-33.9249, 18.4241), zoom: 8.0),
+        ),
       );
 
       // Test for Eastern Cape
       expect(
         heatMapState.getCameraPositionForProvince('Eastern Cape'),
         equals(
-            const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 2.0)),
+          const CameraPosition(target: LatLng(-32.2968, 26.4194), zoom: 8.0),
+        ),
       );
 
       // Test for an unknown province (default case)
       expect(
         heatMapState.getCameraPositionForProvince('unknown'),
-        equals(const CameraPosition(target: LatLng(-25.7559141, 28.2330593))),
+        equals(const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0)),
       );
     });
   });
