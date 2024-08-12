@@ -54,8 +54,18 @@
 
 [![Demo 1](https://img.youtube.com/vi/Rbq9yniwfl0/0.jpg)](https://youtu.be/Rbq9yniwfl0)
 
-  <h2 href="">System Requirement Specification</h1>
+  <h2 href="">System Requirement Specification</h2>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v1" > SRSv1 </a>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v2" > SRSv2 </a>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v3" > SRSv3 </a>
+
+  <h2 href="">Code Quality</h2>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/blob/6b13fc126aa241cd3e50f84d11b0c21caabdf59f/doc/Installation/Installation_Manual.pdf" > Code Quality </a>
+
+
+  <h2 href=""> Installation Manual </h2>
+  
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/blob/6b13fc126aa241cd3e50f84d11b0c21caabdf59f/doc/Installation/Installation_Manual.pdf" > Code Quality </a>
 </div>
 
 <h2>🤝Team</h2>
