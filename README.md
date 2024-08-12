@@ -9,12 +9,10 @@
   <img src="https://img.shields.io/github/issues/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   <img src="https://img.shields.io/github/issues-closed/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   </br>
-  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/dotnet.yml?style=for-the-badge" alt=".NET Tests">
-  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/flutter.yml?style=for-the-badge" alt="Flutter Tests">
-  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/main_beakpeekapi.yml?style=for-the-badge" alt=".Net Deploy">
-
-  </br>
-  ![.Net Tests](https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/main_beakpeekapi.yml/badge.svg)
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/main_beakpeekapi.yml/badge.svg" alt="dotnet deploy">
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/flutter.yml/badge.svg" alt="dotnet deploy">
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/dotnet.yml/badge.svg" alt="dotnet deploy">
+  
 </p>
 
 <h2>☁️About</h2>
