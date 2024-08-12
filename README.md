@@ -12,6 +12,9 @@
   <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/dotnet.yml?style=for-the-badge" alt=".NET Tests">
   <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/flutter.yml?style=for-the-badge" alt="Flutter Tests">
   <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/main_beakpeekapi.yml?style=for-the-badge" alt=".Net Deploy">
+
+  </br>
+  ![.Net Tests](https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/main_beakpeekapi.yml/badge.svg)
 </p>
 
 <h2>☁️About</h2>
@@ -60,12 +63,11 @@
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v3" > SRSv3 </a>
 
   <h2 href="">Code Quality</h2>
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/blob/6b13fc126aa241cd3e50f84d11b0c21caabdf59f/doc/Installation/Installation_Manual.pdf" > Code Quality </a>
-
+  <a href="doc/Installation/Installation_Manual.pdf" > Code Quality </a>
 
   <h2 href=""> Installation Manual </h2>
   
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/blob/6b13fc126aa241cd3e50f84d11b0c21caabdf59f/doc/Installation/Installation_Manual.pdf" > Code Quality </a>
+  <a href="doc/Code_Qaulity/CodeQaulity.pdf" > Installation Manual </a>
 </div>
 
 <h2>🤝Team</h2>
