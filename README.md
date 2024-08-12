@@ -9,9 +9,10 @@
   <img src="https://img.shields.io/github/issues/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   <img src="https://img.shields.io/github/issues-closed/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   </br>
-  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/dotnet.yml?style=for-the-badge" alt=".NET Tests">
-  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/flutter.yml?style=for-the-badge" alt="Flutter Tests">
-  <img src="https://img.shields.io/github/actions/workflow/status/COS301-SE-2024/BeakPeek/main_beakpeekapi.yml?style=for-the-badge" alt=".Net Deploy">
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/main_beakpeekapi.yml/badge.svg" alt="dotnet deploy">
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/flutter.yml/badge.svg" alt="dotnet deploy">
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/dotnet.yml/badge.svg" alt="dotnet deploy">
+  
 </p>
 
 <h2>☁️About</h2>
@@ -54,8 +55,20 @@
 
 [![Demo 2](https://img.youtube.com/vi/LUgWIDLSAU8/0.jpg)](https://youtu.be/LUgWIDLSAU8)
 
-  <h2 href="">System Requirement Specification</h1>
+  <h2 href="">System Requirement Specification</h2>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v1" > SRSv1 </a>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v2" > SRSv2 </a>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v3" > SRSv3 </a>
+
+  <h2 href="">Code Quality</h2>
+  <a href="doc/Installation/Installation_Manual.pdf" > Code Quality </a>
+
+  <h2 href=""> Installation Manual </h2>
+  
+  <a href="doc/Code_Qaulity/CodeQaulity.pdf" > Installation Manual </a>
+  
+  <h2 href=""> SRS </h2>
+
   <a href="doc/SRS_SoftwareRequirementSpecification/SRS v2.pdf" > SRSv2 pdf</a>
 </div>
 
