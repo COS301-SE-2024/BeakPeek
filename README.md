@@ -53,7 +53,7 @@
 
 <h2 id="demos"> Demos</h2>
 
-[![Demo 1](https://img.youtube.com/vi/Rbq9yniwfl0/0.jpg)](https://youtu.be/Rbq9yniwfl0)
+[![Demo 2](https://img.youtube.com/vi/LUgWIDLSAU8/0.jpg)](https://youtu.be/LUgWIDLSAU8)
 
   <h2 href="">System Requirement Specification</h2>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v1" > SRSv1 </a>
@@ -66,6 +66,10 @@
   <h2 href=""> Installation Manual </h2>
   
   <a href="doc/Code_Qaulity/CodeQaulity.pdf" > Installation Manual </a>
+  
+  <h2 href=""> SRS </h2>
+
+  <a href="doc/SRS_SoftwareRequirementSpecification/SRS v2.pdf" > SRSv2 pdf</a>
 </div>
 
 <h2>🤝Team</h2>

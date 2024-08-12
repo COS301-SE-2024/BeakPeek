@@ -1,10 +1,7 @@
-
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using BeakPeekApi.Helpers;
 
 namespace BeakPeekApi.Controllers
 {
@@ -20,28 +17,45 @@ namespace BeakPeekApi.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Bird>>> GetBirds()
+        public async Task<ActionResult<IEnumerable<BirdDto>>> GetBirds()
         {
-            return await _context.Birds.ToListAsync();
+            var birds = await _context.Birds
+                .Include(b => b.Bird_Provinces)
+                .ToListAsync();
+
+            if (birds == null)
+            {
+                return NotFound("No birds were found");
+            }
+
+            var birdDtos = birds.Select(b => b.ToDto()).ToList();
+
+            if (birdDtos.Count() == 0)
+                return BadRequest("No Birds Found");
+
+            return Ok(birdDtos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<Bird>> GetBird(int id)
+        public async Task<ActionResult<BirdDto>> GetBird(int id)
         {
-            var species = await _context.Birds.FindAsync(id);
+            var bird = await _context.Birds
+                .Include(b => b.Bird_Provinces)
+                .FirstOrDefaultAsync(b => b.Ref == id);
 
-            if (species == null)
+            if (bird == null)
             {
-                return NotFound();
+                return NotFound("No birds found matching that id.");
             }
 
-            return species;
+            return Ok(bird.ToDto());
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<Bird>>> SearchBirdSpecies(string genus = null, string commonSpecies = null)
+        public async Task<ActionResult<IEnumerable<BirdDto>>> SearchBirdSpecies(string genus = null, string commonSpecies = null)
         {
             IQueryable<Bird> query = _context.Birds;
+
 
             if (!string.IsNullOrEmpty(genus))
             {
@@ -53,43 +67,57 @@ namespace BeakPeekApi.Controllers
                 query = query.Where(b => EF.Functions.Like(b.Common_species, $"%{commonSpecies}%"));
             }
 
-            var results = await query.ToListAsync();
+            var results = await query.Select(b => b.ToDto()).ToListAsync();
 
             if (!results.Any())
             {
                 return NotFound();
             }
-            return results;
+            return Ok(results);
         }
 
         [HttpPost]
         public async Task<ActionResult<Bird>> PostBirds(Bird species)
         {
-            _context.Birds.Add(species);
+            var isUnique = await _context.Birds.FindAsync(species.Ref);
+
+            if (isUnique != null)
+            {
+                return BadRequest("Bird Ref already exists.");
+            }
+
+            await _context.Birds.AddAsync(species);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetBirds), new { id = species.Pentad }, species);
+            return CreatedAtAction(nameof(PostBirds), new { id = species.Ref }, species);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBird(string id, Bird species)
+        public async Task<IActionResult> PutBird(int id, Bird species)
         {
-            if (id != species.Pentad)
+            if (id != species.Ref)
             {
-                return BadRequest();
+                return BadRequest("Id and Ref don not match.");
             }
 
-            _context.Entry(species).State = EntityState.Modified;
+            var isUnique = await _context.Birds.Where(b => b.Ref == species.Ref).AnyAsync();
+            if (!isUnique)
+                return BadRequest("Bird ref already exists");
 
             try
             {
-                await _context.SaveChangesAsync();
+                var is_successful = await _context.SaveChangesAsync();
+
+                if (is_successful > 0)
+                    return Ok("Updated Bird Successfully");
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!BirdExists(id))
+                var birdExists = _context.Birds.Where(b => b.Ref == id).Any();
+
+                if (!birdExists)
                 {
-                    return NotFound();
+                    return NotFound("Bird not found");
                 }
                 else
                 {
@@ -106,55 +134,168 @@ namespace BeakPeekApi.Controllers
             var species = await _context.Birds.FindAsync(id);
             if (species == null)
             {
-                return NotFound();
+                return NotFound("No bird with found matching that Ref");
             }
 
             _context.Birds.Remove(species);
             await _context.SaveChangesAsync();
 
-            return NoContent();
+            return Ok("Bird deleted succesfully");
         }
 
-        private bool BirdExists(string id)
-        {
-            return _context.Birds.Any(e => e.Pentad == id);
-        }
 
         [HttpGet("{pentad}/pentad")]
-        public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInPentad(string pentad)
+        public async Task<ActionResult<IEnumerable<ProvinceDto>>> GetBirdsInPentad(string pentad)
         {
 
-            var pentadBirdList = await _context.Birds
-                                            .Where(s => s.Pentad == pentad)
-                                            .ToListAsync();
+            var pentadResult = await _context
+                .Pentads
+                .Include(p => p.Province)
+                .Where(p => p.Pentad_Allocation == pentad)
+                .FirstOrDefaultAsync();
 
-            if (pentadBirdList == null || pentadBirdList.Count() == 0)
+            if (pentadResult == null)
+                return NotFound("No pentads matching that allocation were found");
+
+            var pentadList = new List<Province> { };
+            switch (pentadResult.Province.Name.ToLower())
             {
-                return NotFound();
+                case "easterncape":
+                    return Ok(await _context.Easterncape
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "freestate":
+                    return Ok(await _context.Freestate
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "gauteng":
+                    return Ok(await _context.Gauteng
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "kwazulunatal":
+                    return Ok(await _context.Kwazulunatal
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "limpopo":
+                    return Ok(await _context.Limpopo
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "mpumalanga":
+                    return Ok(await _context.Mpumalanga
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "northerncape":
+                    return Ok(await _context.Northerncape
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "northwest":
+                    return Ok(await _context.Northwest
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                case "westerncape":
+                    return Ok(await _context.Westerncape
+                        .Include(p => p.Bird)
+                        .Include(p => p.Pentad)
+                        .Where(p => p.Pentad == pentadResult)
+                        .Select(p => p.ToDto())
+                        .ToListAsync());
+                default:
+                    return NotFound("Pentad not found in province.");
             }
-
-            return Ok(pentadBirdList);
         }
 
         [HttpGet("GetBirdsInProvince/{province}")]
-        public async Task<ActionResult<IEnumerable<Bird>>> GetBirdsInProvince(string province)
+        public async Task<ActionResult<IEnumerable<BirdDto>>> GetBirdsInProvince(string province)
         {
-            var provinceID = _context.Provinces.FirstOrDefault(p => p.Name == province);
-            if (provinceID == null)
+            var provinceList = await _context
+                .ProvincesList
+                .Include(p => p.Province_Birds)
+                .FirstOrDefaultAsync(p => p.Name == province);
+
+            if (provinceList == null)
             {
                 return NotFound("Province not found");
             }
-            var provinceBirdList = await _context.Birds
-                                            .Where(b => b.ProvinceId == provinceID.Id)
-                                            .ToListAsync();
 
-            if (provinceBirdList == null || provinceBirdList.Count() == 0)
+            return Ok(provinceList.ToDto().Birds);
+        }
+
+        [HttpGet("GetNumBirdByProvince/{province}")]
+        public async Task<ActionResult<int>> GetNumBirdsByProvince(string province)
+        {
+            var provinceList = await _context
+                .ProvincesList
+                .Include(p => p.Province_Birds)
+                .FirstOrDefaultAsync(p => p.Name == province);
+
+            if (provinceList == null)
+                return NotFound("Province not found");
+
+
+            return Ok(provinceList.ToDto().Birds.Count());
+        }
+
+        [HttpGet("GetNumBirds/{province}")]
+        public async Task<ActionResult<int>> GetNumBirds()
+        {
+            var numBirdsInProvince = await _context.Birds.CountAsync();
+            return Ok(numBirdsInProvince);
+        }
+
+        [HttpGet("GetBirdProvinces/{common_species}/{common_group}")]
+        public async Task<ActionResult<IEnumerable<string>>> GetBirdProvinces(string common_species, string common_group)
+        {
+            var bird = await _context.Birds
+                .Where(b => b.Common_species == common_species && b.Common_group == common_group)
+                .Include(b => b.Bird_Provinces)
+                .FirstOrDefaultAsync();
+
+            if (bird == null)
             {
-                return NotFound();
+                return NotFound("No birds found that match the given common species or common group");
             }
 
-            return Ok(provinceBirdList);
-
+            return Ok(bird.ToDto().Provinces);
         }
+
+        [HttpGet("GetBirdPentads/{id}")]
+        public async Task<ActionResult<IEnumerable<ProvinceDto>>> GetBirdsByRef(int id)
+        {
+            var birds = await _context.Provinces
+                .Include(p => p.Bird)
+                .Include(p => p.Pentad)
+                .Where(p => p.Bird.Ref == id)
+                .ToListAsync();
+
+            if (birds == null || birds.Count == 0)
+                return NotFound("No birds matching that reference were found");
+
+            return Ok(birds);
+        }
+
     }
 }

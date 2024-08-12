@@ -1,13 +1,14 @@
-// ignore_for_file: lines_longer_than_80_chars
-
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Styles/landing_page_styles.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 
 class LandingTab1 extends StatelessWidget {
   const LandingTab1({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: const Color(0xffF0EDE6),
       body: SafeArea(
@@ -18,32 +19,35 @@ class LandingTab1 extends StatelessWidget {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(
-                      height: 100,
+                    SizedBox(
+                      height: screenHeight * 0.1,
                     ),
                     RichText(
                       textAlign: TextAlign.center,
                       text: const TextSpan(
-                        style: LandingStyles.loginHeadingDark,
+                        style: GlobalStyles.mainHeadingDark,
                         children: [
                           TextSpan(text: 'Your Ultimate\n'),
                           TextSpan(
                               text: 'Bird-Watching\n',
-                              style: LandingStyles.loginHeadingYellow),
+                              style: GlobalStyles.mainHeadingYellow),
                           TextSpan(
                             text: 'Companion',
                           ),
                         ],
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 170),
-                      child: Image.asset(
-                        'assets/images/landing1.png',
-                      ),
-                    ),
                   ],
                 ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: screenHeight * 0.00),
+              child: Image.asset(
+                'assets/images/landing1.png',
+                width: screenWidth * 0.9,
+                height: screenHeight * 0.5,
+                fit: BoxFit.contain,
               ),
             ),
           ],
