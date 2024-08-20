@@ -18,20 +18,11 @@ class Main extends StatefulWidget {
 }
 
 class MainState extends State<Main> {
-  ThemeMode darkLight = ThemeMode.system;
-
-  void changeTheme() {
-    setState(
-      () {
-        darkLight = changeThemeMode(localStorage);
-      },
-    );
-  }
-
   @override
   void initState() {
-    darkLight = getThemeMode(localStorage.getItem('theme') ?? '');
     super.initState();
+    final themeProvider = ThemeProvider();
+    themeProvider.setInitialTheme(localStorage.getItem('theme') ?? '');
   }
 
   @override

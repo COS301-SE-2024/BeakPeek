@@ -1,28 +1,63 @@
 import 'package:flutter/material.dart';
 
 abstract class GlobalStyles {
+  // Light mode colors
   static const Color primaryColor = Color(0xFF033A30);
   static const Color secondaryColor = Color.fromARGB(188, 3, 58, 48);
-  static const Color tertiaryColor = Color.fromARGB(255, 197, 140, 35);
+
+  // Dark mode colors
+  static const Color primaryColorDark = Color(0xFF1A1A1A);
+  static const Color secondaryColorDark = Color(0xFF4F4F4F);
+
+  // Icon colors
   static const Color iconColorDarkMode = Color.fromARGB(255, 180, 180, 180);
   static const Color iconColorLightMode = Color.fromARGB(255, 58, 58, 58);
-  static const double borderRadius = 30.0;
+
+  // Light and dark mode text styles
+  static const TextStyle mainHeadingLight = TextStyle(
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: primaryColor,
+  );
 
   static const TextStyle mainHeadingDark = TextStyle(
-    color: primaryColor,
-    fontSize: 44,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w700,
-    height: 0,
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: primaryColorDark,
   );
 
-  static const TextStyle mainHeadingLight = TextStyle(
-    color: Color(0xFFFFFFFF),
-    fontSize: 44,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w700,
-    height: 0,
-  );
+  // Getter for text styles based on theme
+  static TextStyle mainHeading(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? mainHeadingDark
+        : mainHeadingLight;
+  }
+
+  // You can add similar methods for other text styles
+  static TextStyle bodyText(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? TextStyle(color: secondaryColorDark, fontSize: 16)
+        : TextStyle(color: secondaryColor, fontSize: 16);
+  }
+
+  static const Color tertiaryColor = Color.fromARGB(255, 197, 140, 35);
+  static const double borderRadius = 30.0;
+
+  // static const TextStyle mainHeadingDark = TextStyle(
+  //   color: primaryColor,
+  //   fontSize: 44,
+  //   fontFamily: 'SF Pro Display',
+  //   fontWeight: FontWeight.w700,
+  //   height: 0,
+  // );
+
+  // static const TextStyle mainHeadingLight = TextStyle(
+  //   color: Color(0xFFFFFFFF),
+  //   fontSize: 44,
+  //   fontFamily: 'SF Pro Display',
+  //   fontWeight: FontWeight.w700,
+  //   height: 0,
+  // );
 
   static const TextStyle mainHeadingYellow = TextStyle(
     color: Color(0xFFECAD31),

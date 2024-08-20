@@ -27,17 +27,17 @@ ThemeMode getThemeMode(String data) {
   return ThemeMode.dark;
 }
 
-ThemeMode changeThemeMode(LocalStorage localStorage) {
-  final check = localStorage.getItem('theme') ?? '';
-  if (check.isEmpty) {
-    localStorage.setItem('theme', 'dark');
-    ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
-    return ThemeMode.dark;
-  }
-  localStorage.setItem('theme', '');
-  ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
-  return ThemeMode.light;
-}
+// ThemeMode changeThemeMode(LocalStorage localStorage) {
+//   final check = localStorage.getItem('theme') ?? '';
+//   if (check.isEmpty) {
+//     localStorage.setItem('theme', 'dark');
+//     ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
+//     return ThemeMode.dark;
+//   }
+//   localStorage.setItem('theme', '');
+//   ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
+//   return ThemeMode.light;
+// }
 
 Widget getIcon(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';

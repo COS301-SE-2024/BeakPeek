@@ -8,6 +8,8 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
+import 'package:provider/provider.dart';
+import 'package:beakpeek/Controller/Main/theme_provider.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -73,6 +75,9 @@ class UserProfileState extends State<UserProfile> {
     final verticalPadding = screenHeight * 0.01;
     final horizontalPadding = screenWidth * 0.05;
 
+    bool isDarkMode =
+        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
+
     return Scaffold(
       body: Stack(
         children: [
@@ -93,12 +98,31 @@ class UserProfileState extends State<UserProfile> {
                           context.go('/home');
                         },
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.settings,
-                            color: GlobalStyles.primaryColor),
-                        onPressed: () {
-                          // Navigate to settings page or handle settings action
-                        },
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              isDarkMode
+                                  ? Icons.wb_sunny_outlined
+                                  : Icons.nights_stay_outlined,
+                              color: GlobalStyles.primaryColor,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                isDarkMode = !isDarkMode;
+                              });
+                              Provider.of<ThemeProvider>(context, listen: false)
+                                  .toggleTheme(isDarkMode);
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.settings,
+                                color: GlobalStyles.primaryColor),
+                            onPressed: () {
+                              // Navigate to settings page or handle settings action
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
