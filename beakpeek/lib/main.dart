@@ -1,3 +1,4 @@
+import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:localstorage/localstorage.dart';
@@ -18,9 +19,11 @@ class Main extends StatefulWidget {
 }
 
 class MainState extends State<Main> {
+  final Globals globel = global;
   @override
   void initState() {
     super.initState();
+    globel.init();
     final themeProvider = ThemeProvider();
     themeProvider.setInitialTheme(localStorage.getItem('theme') ?? '');
   }

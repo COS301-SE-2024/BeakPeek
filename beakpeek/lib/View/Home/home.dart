@@ -20,9 +20,11 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   late Future<String> pentadId;
+  //final Globals globel = global;
 
   @override
   void initState() {
+    //globel.init();
     super.initState();
     pentadId = getPentadId(); // Initialize pentadId
   }
