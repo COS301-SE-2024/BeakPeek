@@ -18,11 +18,14 @@ class Sightings extends StatefulWidget {
 class _SightingsState extends State<Sightings> {
   late LifeListProvider lifeList = LifeListProvider.instance;
   late Future<List<Bird>> birds;
-  late List<Bird> loaded;
+  late List<Bird> loaded = [];
 
   @override
   void initState() {
     birds = lifeList.fetchLifeList();
+    lifeList.fetchLifeList().then((value) {
+      setLoaded(value);
+    });
     super.initState();
   }
 
@@ -69,61 +72,62 @@ class _SightingsState extends State<Sightings> {
         title: const Text('Life List', style: GlobalStyles.subHeadingDark),
         centerTitle: true,
       ),
-      body: FutureBuilder<List<Bird>>(
-        future: birds,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            if (loaded.isEmpty) {
-              setLoaded(snapshot.data!);
-            }
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FilledButton(onPressed: () {}, child: const Text('here')),
-                  SizedBox(height: screenHeight * 0.02),
-                  ElevatedButton(
-                    style: GlobalStyles.elevatedButtonStyle(),
-                    onPressed: () {
-                      context.go('/home');
-                    },
-                    child: const Text('Home'),
+      body: Column(
+        children: [
+          FilledButton(
+            onPressed: reportRateASC,
+            child: const Text('Ascending'),
+          ),
+          FilledButton(
+            onPressed: reportRateDESC,
+            child: const Text('Decending'),
+          ),
+          FutureBuilder<List<Bird>>(
+            future: birds,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      FilledButton(onPressed: () {}, child: const Text('here')),
+                      SizedBox(height: screenHeight * 0.02),
+                      ElevatedButton(
+                        style: GlobalStyles.elevatedButtonStyle(),
+                        onPressed: () {
+                          context.go('/home');
+                        },
+                        child: const Text('Home'),
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            );
-          } else if (snapshot.data == null || snapshot.data!.isEmpty) {
-            return Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  FilledButton(
-                    onPressed: reportRateASC,
-                    child: const Text('Ascending'),
+                );
+              } else if (snapshot.data == null || snapshot.data!.isEmpty) {
+                return Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SizedBox(height: screenHeight * 0.02),
+                      ElevatedButton(
+                        style: GlobalStyles.elevatedButtonStyle(),
+                        onPressed: () {
+                          context.go('/home');
+                        },
+                        child: const Text('Home'),
+                      ),
+                    ],
                   ),
-                  FilledButton(
-                    onPressed: reportRateDESC,
-                    child: const Text('Decending'),
-                  ),
-                  SizedBox(height: screenHeight * 0.02),
-                  ElevatedButton(
-                    style: GlobalStyles.elevatedButtonStyle(),
-                    onPressed: () {
-                      context.go('/home');
-                    },
-                    child: const Text('Home'),
-                  ),
-                ],
-              ),
-            );
-          }
-          return SizedBox(
-            height: screenHeight * 1,
-            child: getLiveList(loaded, goBird),
-          );
-        },
+                );
+              }
+              return SizedBox(
+                height: screenHeight * 1,
+                child: getLiveList(loaded, goBird),
+              );
+            },
+          ),
+        ],
       ),
     );
   }
