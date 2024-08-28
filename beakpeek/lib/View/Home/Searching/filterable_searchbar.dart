@@ -2,6 +2,7 @@ import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/search.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/help_icon.dart';
@@ -101,7 +102,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                 height: searchBarHeight,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: GlobalStyles.primaryColor,
+                    color: AppColors.secondaryColor(context),
                     width: 2.0,
                   ),
                   borderRadius: BorderRadius.circular(30.0),
@@ -112,7 +113,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                   searchController: controller,
                   viewHintText: 'Search Bird...',
                   viewOnChanged: searchBarTyping,
-                  dividerColor: GlobalStyles.secondaryColor,
+                  dividerColor: AppColors.secondaryColor(context),
                   viewLeading: IconButton(
                       onPressed: () {
                         GoRouter.of(context).pop();
@@ -122,20 +123,16 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                         color: Colors.grey,
                       )),
                   headerTextStyle:
-                      const TextStyle(color: GlobalStyles.secondaryColor),
+                      TextStyle(color: AppColors.secondaryColor(context)),
                   headerHintStyle:
-                      const TextStyle(color: GlobalStyles.secondaryColor),
+                      TextStyle(color: AppColors.secondaryColor(context)),
                   builder: (context, controller) {
                     return Row(
                       children: [
-                        const Icon(Icons.search,
-                            color: Color.fromARGB(255, 119, 119, 119)),
+                        Icon(Icons.search, color: AppColors.iconColor(context)),
                         SizedBox(width: screenWidth * 0.02),
-                        const Text('Search for birds...',
-                            style: TextStyle(
-                              color: Color.fromARGB(255, 119, 119, 119),
-                              fontSize: 16,
-                            )),
+                        Text('Search for birds...',
+                            style: GlobalStyles.contentSecondary(context)),
                       ],
                     );
                   },

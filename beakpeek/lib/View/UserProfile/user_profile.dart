@@ -2,12 +2,15 @@ import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
+import 'package:provider/provider.dart';
+import 'package:beakpeek/Controller/Main/theme_provider.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -74,6 +77,7 @@ class UserProfileState extends State<UserProfile> {
     final horizontalPadding = screenWidth * 0.05;
 
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor(context),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -87,18 +91,41 @@ class UserProfileState extends State<UserProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.arrow_back,
-                            color: GlobalStyles.primaryColor),
+                        icon: const Icon(Icons.arrow_back),
+                        color: AppColors.iconColor(context),
                         onPressed: () {
                           context.go('/home');
                         },
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.settings,
-                            color: GlobalStyles.primaryColor),
-                        onPressed: () {
-                          // Navigate to settings page or handle settings action
-                        },
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      ThemeMode.dark
+                                  ? Icons.wb_sunny_outlined
+                                  : Icons.nights_stay_outlined,
+                              color: AppColors.iconColor(context),
+                            ),
+                            onPressed: () {
+                              final isDarkMode = Provider.of<ThemeProvider>(
+                                          context,
+                                          listen: false)
+                                      .themeMode ==
+                                  ThemeMode.dark;
+                              Provider.of<ThemeProvider>(context, listen: false)
+                                  .toggleTheme(!isDarkMode);
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.settings),
+                            color: AppColors.iconColor(context),
+                            onPressed: () {
+                              // Navigate to settings page
+                              //or handle settings action
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -108,7 +135,7 @@ class UserProfileState extends State<UserProfile> {
                         // Profile picture
                         CircleAvatar(
                           radius: screenWidth * 0.20,
-                          backgroundColor: GlobalStyles.primaryColor,
+                          backgroundColor: AppColors.iconColor(context),
                           child: CircleAvatar(
                             radius: screenWidth * 0.19,
                             backgroundImage: const AssetImage(
@@ -124,12 +151,13 @@ class UserProfileState extends State<UserProfile> {
 
                         // Username
                         SizedBox(height: verticalPadding),
-                        Text(name, style: GlobalStyles.subHeadingDark),
+                        Text(name,
+                            style: GlobalStyles.subHeadingPrimary(context)),
 
                         // Active since
                         SizedBox(height: verticalPadding),
-                        const Text('Active since - June 2024',
-                            style: GlobalStyles.smallContent),
+                        Text('Active since - June 2024',
+                            style: GlobalStyles.smallContent(context)),
                         SizedBox(height: verticalPadding),
                       ],
                     ),
@@ -140,11 +168,9 @@ class UserProfileState extends State<UserProfile> {
                     children: [
                       Text(
                         'Level $level',
-                        style: GlobalStyles.greyContent,
+                        style: GlobalStyles.smallContent(context),
                       ),
-                      const SizedBox(
-                        height: 6,
-                      ),
+                      const SizedBox(height: 6),
                       SizedBox(
                         height: verticalPadding * 3,
                         child: levelProgressBar(userExp, level),
@@ -159,8 +185,8 @@ class UserProfileState extends State<UserProfile> {
 
                   // Personal information
                   SizedBox(height: verticalPadding),
-                  const Text('Personal Information',
-                      style: GlobalStyles.subheadingLight),
+                  Text('Personal Information',
+                      style: GlobalStyles.smallHeadingSecondary(context)),
                   SizedBox(height: verticalPadding),
 
                   // Username Field
@@ -168,6 +194,7 @@ class UserProfileState extends State<UserProfile> {
                     icon: Icons.person,
                     label: 'Username',
                     content: username,
+                    backgroundColor: AppColors.popupColor(context),
                   ),
                   SizedBox(height: verticalPadding),
 
@@ -176,8 +203,8 @@ class UserProfileState extends State<UserProfile> {
                     icon: Icons.info,
                     label: 'Bio',
                     content: bio,
+                    backgroundColor: AppColors.popupColor(context),
                   ),
-
                   SizedBox(height: verticalPadding),
 
                   // Email Field
@@ -185,8 +212,8 @@ class UserProfileState extends State<UserProfile> {
                     icon: Icons.email,
                     label: 'Email',
                     content: email,
+                    backgroundColor: AppColors.popupColor(context),
                   ),
-
                   SizedBox(height: verticalPadding),
 
                   Divider(
@@ -195,9 +222,9 @@ class UserProfileState extends State<UserProfile> {
                   ),
 
                   // Progress section
-                  const Text(
+                  Text(
                     'Sighting Progress',
-                    style: GlobalStyles.subheadingLight,
+                    style: GlobalStyles.smallHeadingPrimary(context),
                   ),
                   FutureBuilder<List<int>>(
                     future: numBirds,
@@ -206,11 +233,8 @@ class UserProfileState extends State<UserProfile> {
                         return const Center(child: CircularProgressIndicator());
                       } else if (snapshot.hasError) {
                         return Center(
-                          child: Text(
-                            'Error: ${snapshot.error}',
-                            style: const TextStyle(color: Colors.black),
-                          ),
-                        );
+                            child: Text('Error: ${snapshot.error}',
+                                style: GlobalStyles.contentPrimary(context)));
                       }
                       return progressBars(
                           snapshot.data!, numberOfBirdsPerProvince);
@@ -261,16 +285,16 @@ class ProfileField extends StatelessWidget {
             children: [
               Icon(
                 icon,
-                color: GlobalStyles.primaryColor,
+                color: AppColors.iconColor(context),
               ),
               SizedBox(width: screenWidth * 0.02),
-              Text(label, style: GlobalStyles.smallContent),
+              // Text(label, style: GlobalStyles.smallContent),
             ],
           ),
           Expanded(
             child: Text(
               content,
-              style: GlobalStyles.content,
+              style: GlobalStyles.contentPrimary(context),
               textAlign: TextAlign.right,
               overflow: TextOverflow.ellipsis,
             ),

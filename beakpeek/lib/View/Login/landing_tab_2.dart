@@ -1,40 +1,42 @@
 import 'package:beakpeek/Controller/Azure/login.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:go_router/go_router.dart';
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xffF0EDE6),
+      backgroundColor: AppColors.backgroundColor(context),
       body: SafeArea(
         child: Column(
           children: [
             Expanded(
               child: Column(
                 children: [
-                  Spacer(flex: (screenHeight * 0.05).toInt()),
+                  Spacer(flex: (screenHeight * 0.02).toInt()),
                   Align(
-                    alignment: const Alignment(-0.7, 0.0),
+                    alignment: const Alignment(-0.6, 0.7),
                     child: RichText(
                       textAlign: TextAlign.left,
-                      text: const TextSpan(
-                        style: GlobalStyles.mainHeadingDark,
+                      text: TextSpan(
+                        style: GlobalStyles.mainHeadingPrimary(context),
                         children: [
                           TextSpan(
-                            text: 'Explore,\n',
-                          ),
+                              text: 'Explore,\n',
+                              style: GlobalStyles.mainHeadingPrimary(context)),
                           TextSpan(
                             text: 'Discover,\n',
-                            style: GlobalStyles.mainHeadingYellow,
+                            style: GlobalStyles.mainHeadingTertiary(context),
                           ),
                           TextSpan(
-                            text: 'and Share',
-                          ),
+                              text: 'and Share',
+                              style: GlobalStyles.mainHeadingPrimary(context)),
                         ],
                       ),
                     ),
@@ -43,20 +45,16 @@ class LandingTab2 extends StatelessWidget {
                   Align(
                     alignment: const Alignment(-0.5, 0.0),
                     child: RichText(
-                      text: const TextSpan(
-                        style: TextStyle(
-                          color: Colors.black87,
-                          fontSize: 18,
-                          fontFamily: 'SF Pro Display',
-                        ),
-                        children: <TextSpan>[
+                      text: TextSpan(
+                        style: GlobalStyles.contentPrimary(context),
+                        children: const <TextSpan>[
                           TextSpan(
                             text: 'Create an account or sign in \nto join the',
                           ),
                           TextSpan(
                             text: ' BeakPeak',
                             style: TextStyle(
-                              color: Color.fromARGB(255, 219, 76, 20),
+                              color: Color.fromARGB(255, 216, 96, 48),
                               fontSize: 18,
                               fontFamily: 'SF Pro Display',
                             ),
@@ -70,18 +68,18 @@ class LandingTab2 extends StatelessWidget {
                   ),
                   Spacer(flex: (screenHeight * 0.03).toInt()),
                   OutlinedButton(
-                    style: GlobalStyles.secondaryButton,
-                    child: const Text('Sign Up / Sign In',
-                        style: GlobalStyles.secondaryButtonText),
+                    style: GlobalStyles.buttonPrimaryFilled(context),
+                    child: Text('Sign Up / Sign In',
+                        style: GlobalStyles.primaryButtonText(context)),
                     onPressed: () {
                       loginFunction(context);
                     },
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   FilledButton(
-                    style: GlobalStyles.primaryButton,
-                    child: const Text('Sign In as Guest',
-                        style: GlobalStyles.primaryButtonText),
+                    style: GlobalStyles.buttonPrimaryOutlined(context),
+                    child: Text('Sign In as Guest',
+                        style: GlobalStyles.secondaryButtonText(context)),
                     onPressed: () {
                       context.go('/home');
                     },

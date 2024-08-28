@@ -2,6 +2,7 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
@@ -64,12 +65,13 @@ class _SightingsState extends State<Sightings> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
           onPressed: () {
             context.go('/home');
           },
         ),
-        title: const Text('Life List', style: GlobalStyles.subHeadingDark),
+        title:
+            Text('Life List', style: GlobalStyles.smallHeadingPrimary(context)),
         centerTitle: true,
       ),
       body: Column(
@@ -95,11 +97,12 @@ class _SightingsState extends State<Sightings> {
                       FilledButton(onPressed: () {}, child: const Text('here')),
                       SizedBox(height: screenHeight * 0.02),
                       ElevatedButton(
-                        style: GlobalStyles.elevatedButtonStyle(),
+                        style: GlobalStyles.buttonPrimaryFilled(context),
                         onPressed: () {
                           context.go('/home');
                         },
-                        child: const Text('Home'),
+                        child: Text('Home',
+                            style: GlobalStyles.primaryButtonText(context)),
                       ),
                     ],
                   ),
@@ -111,11 +114,12 @@ class _SightingsState extends State<Sightings> {
                     children: [
                       SizedBox(height: screenHeight * 0.02),
                       ElevatedButton(
-                        style: GlobalStyles.elevatedButtonStyle(),
+                        style: GlobalStyles.buttonPrimaryFilled(context),
                         onPressed: () {
                           context.go('/home');
                         },
-                        child: const Text('Home'),
+                        child: Text('Home',
+                            style: GlobalStyles.primaryButtonText(context)),
                       ),
                     ],
                   ),
@@ -123,7 +127,7 @@ class _SightingsState extends State<Sightings> {
               }
               return SizedBox(
                 height: screenHeight * 1,
-                child: getLiveList(loaded, goBird),
+                child: getLiveList(loaded, goBird, context),
               );
             },
           ),

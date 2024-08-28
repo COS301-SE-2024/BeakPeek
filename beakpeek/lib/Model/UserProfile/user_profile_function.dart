@@ -5,7 +5,6 @@ import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 
 const List<String> provinces = [
@@ -27,17 +26,17 @@ ThemeMode getThemeMode(String data) {
   return ThemeMode.dark;
 }
 
-ThemeMode changeThemeMode(LocalStorage localStorage) {
-  final check = localStorage.getItem('theme') ?? '';
-  if (check.isEmpty) {
-    localStorage.setItem('theme', 'dark');
-    ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
-    return ThemeMode.dark;
-  }
-  localStorage.setItem('theme', '');
-  ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
-  return ThemeMode.light;
-}
+// ThemeMode changeThemeMode(LocalStorage localStorage) {
+//   final check = localStorage.getItem('theme') ?? '';
+//   if (check.isEmpty) {
+//     localStorage.setItem('theme', 'dark');
+//     ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
+//     return ThemeMode.dark;
+//   }
+//   localStorage.setItem('theme', '');
+//   ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
+//   return ThemeMode.light;
+// }
 
 Widget getIcon(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';

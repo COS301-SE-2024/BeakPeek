@@ -1,7 +1,7 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
-import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/help_icon.dart';
 import 'package:go_router/go_router.dart';
@@ -99,7 +99,7 @@ class _LocalSearchState extends State<LocalSearch> {
                 height: searchBarHeight,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: GlobalStyles.primaryColor,
+                    color: AppColors.secondaryColor(context),
                     width: 2.0,
                   ),
                   borderRadius: BorderRadius.circular(30.0),
@@ -110,7 +110,7 @@ class _LocalSearchState extends State<LocalSearch> {
                   searchController: controller,
                   viewHintText: 'Search Bird...',
                   viewOnChanged: searchBarTyping,
-                  dividerColor: GlobalStyles.secondaryColor,
+                  dividerColor: AppColors.secondaryColor(context),
                   viewLeading: IconButton(
                       onPressed: () {
                         GoRouter.of(context).pop();
@@ -120,9 +120,9 @@ class _LocalSearchState extends State<LocalSearch> {
                         color: Colors.grey,
                       )),
                   headerTextStyle:
-                      const TextStyle(color: GlobalStyles.secondaryColor),
+                      TextStyle(color: AppColors.secondaryColor(context)),
                   headerHintStyle:
-                      const TextStyle(color: GlobalStyles.secondaryColor),
+                      TextStyle(color: AppColors.secondaryColor(context)),
                   builder: (context, controller) {
                     return Row(
                       children: [

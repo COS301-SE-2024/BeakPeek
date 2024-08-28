@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:beakpeek/Model/bird_page_functions.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Styles/bird_page_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
@@ -45,17 +46,17 @@ class _BirdPageState extends State<BirdPage> {
         backgroundColor: const Color(0xFFF3F1ED),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: GlobalStyles.primaryColor,
+            color: AppColors.iconColor(context),
           ),
           onPressed: () {
             context.go('/home');
           },
         ),
-        title: const Text(
+        title: Text(
           'Bird Information',
-          style: GlobalStyles.smallHeadingDark,
+          style: GlobalStyles.smallHeadingPrimary(context),
         ),
         centerTitle: true,
       ),
@@ -95,8 +96,8 @@ class _BirdPageState extends State<BirdPage> {
                                   const SizedBox(width: 16.0),
                                   Text(
                                     birdData['name'],
-                                    style: const TextStyle(
-                                      color: GlobalStyles.primaryColor,
+                                    style: TextStyle(
+                                      color: AppColors.secondaryColor(context),
                                       fontSize: 22,
                                       fontFamily: 'SF Pro Display',
                                       fontWeight: FontWeight.bold,
@@ -148,26 +149,26 @@ class _BirdPageState extends State<BirdPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Row(
+                                    Row(
                                       children: [
                                         Icon(
                                           Icons.description,
-                                          color: BirdPageStyles.primaryColor,
+                                          color: AppColors.iconColor(context),
                                           size: 20,
                                         ),
-                                        SizedBox(width: 8),
-                                        Text(
-                                          'Description',
-                                          style: GlobalStyles.smallHeadingDark,
-                                        ),
+                                        const SizedBox(width: 8),
+                                        Text('Description',
+                                            style: GlobalStyles
+                                                .smallHeadingPrimary(context)),
                                       ],
                                     ),
                                     const SizedBox(height: 8),
                                     Text(
                                       birdData['description'] ??
                                           'No description available',
-                                      style: GlobalStyles.content
-                                          .copyWith(fontSize: 18),
+                                      style:
+                                          GlobalStyles.contentPrimary(context)
+                                              .copyWith(fontSize: 18),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
