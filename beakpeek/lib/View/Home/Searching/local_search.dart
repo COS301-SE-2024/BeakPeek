@@ -32,21 +32,32 @@ class _LocalSearchState extends State<LocalSearch> {
   void initState() {
     super.initState();
     filteredBirds = widget.birds;
-    items = bsf.getWidgetListOfBirds(filteredBirds);
+    items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
+  }
+
+  void goBird(Bird bird) {
+    context.goNamed(
+      'birdInfo',
+      pathParameters: {
+        'group': bird.commonGroup,
+        'species': bird.commonSpecies,
+        'id': bird.id.toString(),
+      },
+    );
   }
 
   void searchBarTyping(String data) {
     setState(() {
       filteredBirds =
           data.isEmpty ? widget.birds : bsf.searchForBird(widget.birds, data);
-      items = bsf.getWidgetListOfBirds(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
     });
   }
 
   void sortAlphabetically() {
     setState(() {
       filteredBirds = bsf.sortAlphabetically(filteredBirds);
-      items = bsf.getWidgetListOfBirds(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
     });
   }
 
@@ -59,7 +70,7 @@ class _LocalSearchState extends State<LocalSearch> {
   void sortByReportingRate() {
     setState(() {
       filteredBirds = bsf.sortRepotRateDESC(filteredBirds);
-      items = bsf.getWidgetListOfBirds(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
     });
   }
 

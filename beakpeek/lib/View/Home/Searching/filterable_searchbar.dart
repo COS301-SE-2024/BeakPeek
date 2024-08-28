@@ -33,7 +33,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
       setState(() {
         filteredBirds = value;
         birds = value;
-        items = bsf.getWidgetListOfBirds(filteredBirds);
+        items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
       });
     });
   }
@@ -41,15 +41,26 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   void searchBarTyping(String data) {
     setState(() {
       filteredBirds = data.isEmpty ? birds : bsf.searchForBird(birds, data);
-      items = bsf.getWidgetListOfBirds(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
     });
   }
 
   void sortAlphabetically() {
     setState(() {
       filteredBirds = bsf.sortAlphabetically(filteredBirds);
-      items = bsf.getWidgetListOfBirds(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
     });
+  }
+
+  void goBird(Bird bird) {
+    context.goNamed(
+      'birdInfo',
+      pathParameters: {
+        'group': bird.commonGroup,
+        'species': bird.commonSpecies,
+        'id': bird.id.toString(),
+      },
+    );
   }
 
   @override
@@ -61,7 +72,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   void sortByReportingRate() {
     setState(() {
       filteredBirds = bsf.sortRepotRateDESC(filteredBirds);
-      items = bsf.getWidgetListOfBirds(filteredBirds);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
     });
   }
 

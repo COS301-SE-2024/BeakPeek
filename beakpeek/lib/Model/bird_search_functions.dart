@@ -24,7 +24,7 @@ int getColorForReportingRate(double reportingRate) {
   }
 }
 
-Widget getData(Bird bird, LifeListProvider lifeList) {
+Widget getData(Bird bird, LifeListProvider lifeList, Function goBird) {
   return ListTile(
     tileColor: colorArray[getColorForReportingRate(bird.reportingRate)],
     title: Text(
@@ -89,6 +89,9 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
         ),
       ],
     ),
+    onTap: () {
+      goBird(bird);
+    },
   );
 }
 
@@ -102,12 +105,12 @@ bool isSeen(Bird bird, LifeListProvider lifeList) {
   return seen;
 }
 
-List<Widget> getWidgetListOfBirds(List<Bird> birds) {
+List<Widget> getWidgetListOfBirds(List<Bird> birds, Function goBird) {
   final List<Widget> listOfBirdWidgets = [];
   late final LifeListProvider lifeList = LifeListProvider.instance;
 
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getData(birds[i], lifeList));
+    listOfBirdWidgets.add(getData(birds[i], lifeList, goBird));
   }
   return listOfBirdWidgets;
 }
