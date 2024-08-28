@@ -155,6 +155,5 @@ List<Bird> getUniqueBirds(List<Bird> birds) {
       }
     }
   }
-
   return uniqueBirds;
 }
