@@ -1,6 +1,7 @@
 // import 'package:beakpeek/View/Login/landing_tab_1.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/bird_search_functions.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
@@ -17,6 +18,7 @@ class Sightings extends StatefulWidget {
 class _SightingsState extends State<Sightings> {
   late LifeListProvider lifeList = LifeListProvider.instance;
   late Future<List<Bird>> birds;
+  late List<Bird> loaded;
 
   @override
   void initState() {
@@ -33,6 +35,20 @@ class _SightingsState extends State<Sightings> {
         'id': bird.id.toString(),
       },
     );
+  }
+
+  void setLoaded(List<Bird> temp) {
+    setState(() {
+      loaded = temp;
+    });
+  }
+
+  void reportRateDESC() {
+    setLoaded(sortRepotRateDESC(loaded));
+  }
+
+  void reportRateASC() {
+    setLoaded(sortRepotRateASC(loaded));
   }
 
   @override
@@ -59,15 +75,14 @@ class _SightingsState extends State<Sightings> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
+            if (loaded.isEmpty) {
+              setLoaded(snapshot.data!);
+            }
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    'Error: ${snapshot.error}',
-                    style: const TextStyle(color: Colors.black),
-                    textAlign: TextAlign.center,
-                  ),
+                  FilledButton(onPressed: () {}, child: const Text('here')),
                   SizedBox(height: screenHeight * 0.02),
                   ElevatedButton(
                     style: GlobalStyles.elevatedButtonStyle(),
@@ -84,10 +99,13 @@ class _SightingsState extends State<Sightings> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text(
-                    'No birds seen',
-                    style: GlobalStyles.content,
-                    textAlign: TextAlign.center,
+                  FilledButton(
+                    onPressed: reportRateASC,
+                    child: const Text('Ascending'),
+                  ),
+                  FilledButton(
+                    onPressed: reportRateDESC,
+                    child: const Text('Decending'),
                   ),
                   SizedBox(height: screenHeight * 0.02),
                   ElevatedButton(
@@ -103,7 +121,7 @@ class _SightingsState extends State<Sightings> {
           }
           return SizedBox(
             height: screenHeight * 1,
-            child: getLiveList(snapshot.data!, goBird),
+            child: getLiveList(loaded, goBird),
           );
         },
       ),

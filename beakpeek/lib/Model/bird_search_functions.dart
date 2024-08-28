@@ -125,6 +125,11 @@ List<Bird> sortRepotRateDESC(List<Bird> birds) {
   return birds;
 }
 
+List<Bird> sortRepotRateASC(List<Bird> birds) {
+  birds.sort((a, b) => a.reportingRate.compareTo(b.reportingRate));
+  return birds;
+}
+
 List<Bird> searchForBird(List<Bird> birds, String value) {
   final List<Bird> results = birds
       .where((bird) =>
