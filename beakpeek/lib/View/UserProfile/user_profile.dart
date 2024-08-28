@@ -121,7 +121,8 @@ class UserProfileState extends State<UserProfile> {
                             icon: const Icon(Icons.settings),
                             color: AppColors.iconColor(context),
                             onPressed: () {
-                              // Navigate to settings page or handle settings action
+                              // Navigate to settings page
+                              //or handle settings action
                             },
                           ),
                         ],

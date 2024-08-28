@@ -1,11 +1,9 @@
-// ignore_for_file: library_prefixes
-
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
-    as upFunc;
+    as up_func;
 
 final colorArray = [
   Colors.red,
@@ -26,8 +24,9 @@ int getColorForReportingRate(double reportingRate) {
   }
 }
 
-Widget getData(Bird bird, LifeListProvider lifeList) {
+Widget getData(Bird bird, LifeListProvider lifeList, Function goBird) {
   return ListTile(
+    tileColor: colorArray[getColorForReportingRate(bird.reportingRate)],
     title: Text(
       bird.commonGroup != 'None'
           ? '${bird.commonGroup} ${bird.commonSpecies}'
@@ -39,8 +38,8 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
     ),
     subtitle: Text(
       '${bird.genus} ${bird.species}',
-      style: TextStyle(
-        color: Colors.grey[600],
+      style: const TextStyle(
+        color: Color.fromARGB(255, 0, 0, 0),
         fontSize: 14,
       ),
     ),
@@ -65,7 +64,7 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
                 if (snapshot.data!) {
                   // Handle 'Seen' button action
                 } else {
-                  upFunc.addExp(20);
+                  up_func.addExp(20);
                   lifeList.insertBird(bird);
                 }
               },
@@ -90,6 +89,9 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
         ),
       ],
     ),
+    onTap: () {
+      goBird(bird);
+    },
   );
 }
 
@@ -103,12 +105,12 @@ bool isSeen(Bird bird, LifeListProvider lifeList) {
   return seen;
 }
 
-List<Widget> getWidgetListOfBirds(List<Bird> birds) {
+List<Widget> getWidgetListOfBirds(List<Bird> birds, Function goBird) {
   final List<Widget> listOfBirdWidgets = [];
   late final LifeListProvider lifeList = LifeListProvider.instance;
 
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getData(birds[i], lifeList));
+    listOfBirdWidgets.add(getData(birds[i], lifeList, goBird));
   }
   return listOfBirdWidgets;
 }
@@ -120,6 +122,11 @@ List<Bird> sortAlphabetically(List<Bird> birds) {
 
 List<Bird> sortRepotRateDESC(List<Bird> birds) {
   birds.sort((a, b) => b.reportingRate.compareTo(a.reportingRate));
+  return birds;
+}
+
+List<Bird> sortRepotRateASC(List<Bird> birds) {
+  birds.sort((a, b) => a.reportingRate.compareTo(b.reportingRate));
   return birds;
 }
 
