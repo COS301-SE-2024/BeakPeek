@@ -84,7 +84,7 @@ abstract class GlobalStyles {
 
   static TextStyle contentPrimary(BuildContext context) {
     return TextStyle(
-        fontSize: 16,
+        fontSize: 17,
         fontFamily: 'SF Pro Display',
         fontWeight: FontWeight.w500,
         color: AppColors.textColor(context));
@@ -92,7 +92,7 @@ abstract class GlobalStyles {
 
   static TextStyle contentSecondary(BuildContext context) {
     return TextStyle(
-        fontSize: 16,
+        fontSize: 17,
         fontFamily: 'SF Pro Display',
         fontWeight: FontWeight.w500,
         color: AppColors.secondaryColor(context));
@@ -100,7 +100,7 @@ abstract class GlobalStyles {
 
   static TextStyle contentTertiary(BuildContext context) {
     return TextStyle(
-        fontSize: 16,
+        fontSize: 17,
         fontFamily: 'SF Pro Display',
         fontWeight: FontWeight.w500,
         color: AppColors.tertiaryColor(context));
@@ -108,7 +108,7 @@ abstract class GlobalStyles {
 
   static TextStyle smallContent(BuildContext context) {
     return TextStyle(
-        fontSize: 14,
+        fontSize: 15,
         fontFamily: 'SF Pro Display',
         fontWeight: FontWeight.w500,
         color: AppColors.greyColor(context));
@@ -116,7 +116,7 @@ abstract class GlobalStyles {
 
   static TextStyle contentBold(BuildContext context) {
     return TextStyle(
-        fontSize: 16,
+        fontSize: 17,
         fontFamily: 'SF Pro Display',
         fontWeight: FontWeight.bold,
         color: AppColors.textColor(context));
@@ -126,15 +126,16 @@ abstract class GlobalStyles {
 
   static ButtonStyle buttonPrimaryFilled(BuildContext context) {
     return FilledButton.styleFrom(
-      backgroundColor: AppColors.primaryColor(context),
+      side: BorderSide(color: AppColors.primaryButtonColor(context)),
+      backgroundColor: AppColors.primaryButtonColor(context),
       minimumSize: const Size(350, 50),
-      elevation: 10,
+      elevation: 20,
     );
   }
 
   static ButtonStyle buttonPrimaryOutlined(BuildContext context) {
     return OutlinedButton.styleFrom(
-      side: BorderSide(color: AppColors.primaryColor(context)),
+      side: BorderSide(color: AppColors.primaryButtonColor(context)),
       backgroundColor: Colors.transparent,
       minimumSize: const Size(350, 50),
     );

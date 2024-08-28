@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
+
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
@@ -18,9 +19,9 @@ class LandingTab2 extends StatelessWidget {
             Expanded(
               child: Column(
                 children: [
-                  Spacer(flex: (screenHeight * 0.05).toInt()),
+                  Spacer(flex: (screenHeight * 0.02).toInt()),
                   Align(
-                    alignment: const Alignment(-0.7, 0.0),
+                    alignment: const Alignment(-0.6, 0.7),
                     child: RichText(
                       textAlign: TextAlign.left,
                       text: TextSpan(
@@ -53,7 +54,7 @@ class LandingTab2 extends StatelessWidget {
                           TextSpan(
                             text: ' BeakPeak',
                             style: TextStyle(
-                              color: Color.fromARGB(255, 219, 76, 20),
+                              color: Color.fromARGB(255, 216, 96, 48),
                               fontSize: 18,
                               fontFamily: 'SF Pro Display',
                             ),
