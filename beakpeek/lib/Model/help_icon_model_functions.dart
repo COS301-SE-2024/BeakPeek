@@ -1,5 +1,4 @@
 import 'package:beakpeek/Styles/colors.dart';
-import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
 void showHelpPopup(BuildContext context, String content) {

@@ -1,7 +1,6 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 
 // Added BuildContext
 Widget getLifeListData(Bird bird, Function(Bird) goBird, BuildContext context) {

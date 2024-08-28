@@ -8,7 +8,6 @@ import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:path/path.dart';
 
 class BirdPage extends StatefulWidget {
   // ignore: lines_longer_than_80_chars
