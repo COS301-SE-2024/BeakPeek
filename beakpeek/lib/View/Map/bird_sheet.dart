@@ -99,11 +99,12 @@ class _BirdSheetState extends State<BirdSheet> {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                 child: Text(
                   'Birds in This Area',
-                  style: GlobalStyles.smallHeadingDark,
+                  style: GlobalStyles.smallHeadingPrimary(context),
                 ),
               ),
               Row(
@@ -123,7 +124,7 @@ class _BirdSheetState extends State<BirdSheet> {
                           value: value,
                           child: Text(
                             value,
-                            style: GlobalStyles.greenContent,
+                            style: GlobalStyles.contentSecondary(context),
                           ),
                         );
                       }).toList(),
@@ -147,7 +148,7 @@ class _BirdSheetState extends State<BirdSheet> {
                           value: value,
                           child: Text(
                             value,
-                            style: GlobalStyles.greenContent,
+                            style: GlobalStyles.contentSecondary(context),
                           ),
                         );
                       }).toList(),

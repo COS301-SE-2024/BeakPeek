@@ -1,6 +1,7 @@
 // ignore_for_file: lines_longer_than_80_chars, unnecessary_brace_in_string_interps
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Bird/bird_page.dart';
 import 'package:beakpeek/View/Map/bird_sheet.dart';
@@ -38,7 +39,7 @@ class HomeState extends State<Home> {
     final sectionWidth = screenWidth * 0.92;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F1ED),
+      backgroundColor: AppColors.backgroundColor(context),
       body: Center(
         child: Align(
           alignment: Alignment.bottomCenter,
@@ -64,11 +65,11 @@ class HomeState extends State<Home> {
                           width: sectionWidth,
                           padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.popupColor(context),
                             borderRadius: BorderRadius.circular(10.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
+                                color: Colors.black.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset: const Offset(0, 3),
@@ -78,20 +79,21 @@ class HomeState extends State<Home> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'Test Your Knowledge!',
-                                style: GlobalStyles.smallHeadingDark,
+                                style:
+                                    GlobalStyles.smallHeadingPrimary(context),
                               ),
                               const SizedBox(height: 10),
-                              const Text(
+                              Text(
                                 'Guess the bird from the picture...',
-                                style: GlobalStyles.greyContent,
+                                style: GlobalStyles.contentSecondary(context),
                               ),
                               const SizedBox(height: 10),
                               Container(
                                 height: screenHeight * 0.25,
                                 decoration: BoxDecoration(
-                                  color: Colors.grey[200],
+                                  color: AppColors.popupColor(context),
                                   borderRadius: BorderRadius.circular(10.0),
                                   image: const DecorationImage(
                                     image: AssetImage(
@@ -116,9 +118,10 @@ class HomeState extends State<Home> {
                                           padding: const EdgeInsets.symmetric(
                                               horizontal: 16.0, vertical: 8.0),
                                         ),
-                                        child: const Text(
+                                        child: Text(
                                           'Start Quiz',
-                                          style: GlobalStyles.greyContent,
+                                          style: GlobalStyles.contentSecondary(
+                                              context),
                                         ),
                                       ),
                                     ),
@@ -135,11 +138,11 @@ class HomeState extends State<Home> {
                           width: sectionWidth,
                           padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.popupColor(context),
                             borderRadius: BorderRadius.circular(10.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
+                                color: Colors.black.withOpacity(0.5),
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset: const Offset(0, 3),
@@ -149,40 +152,40 @@ class HomeState extends State<Home> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              const Text(
+                              Text(
                                 'Tracked Achievements',
-                                style: GlobalStyles.smallHeadingDark,
+                                style:
+                                    GlobalStyles.smallHeadingPrimary(context),
                               ),
                               const SizedBox(height: 10),
                               // List of achievements
-                              const ListTile(
-                                contentPadding:
-                                    EdgeInsets.zero, // Remove default padding
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
                                 title: Text(
                                   'Master Spotter',
-                                  style: GlobalStyles.boldContent,
+                                  style: GlobalStyles.contentBold(context),
                                 ),
                                 subtitle: Text(
                                   '24% complete',
-                                  style: GlobalStyles.greyContent,
+                                  style: GlobalStyles.contentSecondary(context),
                                 ),
-                                trailing: Icon(Icons.star, color: Colors.amber),
+                                trailing: Icon(Icons.star,
+                                    color: AppColors.tertiaryColor(context)),
                               ),
                               const Divider(color: Colors.grey),
-                              const ListTile(
-                                contentPadding:
-                                    EdgeInsets.zero, // Remove default padding
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
                                 title: Text(
                                   'Duck Specialist',
-                                  style: GlobalStyles.boldContent,
+                                  style: GlobalStyles.contentBold(context),
                                 ),
                                 subtitle: Text(
                                   '56% complete',
-                                  style: GlobalStyles.greyContent,
+                                  style: GlobalStyles.contentSecondary(context),
                                 ),
-                                trailing: Icon(Icons.star, color: Colors.amber),
+                                trailing: Icon(Icons.star,
+                                    color: AppColors.tertiaryColor(context)),
                               ),
-                              // Ensure there is space before the next section
                               SizedBox(height: screenHeight * 0.02),
                             ],
                           ),
@@ -227,13 +230,12 @@ class HomeState extends State<Home> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text(
+                                    Text(
                                       'Birds Near You',
-                                      style: GlobalStyles.smallHeadingDark,
+                                      style: GlobalStyles.smallHeadingPrimary(
+                                          context),
                                     ),
                                     const SizedBox(height: 16),
-                                    // ListView.builder
-
                                     Expanded(
                                       child: ListView.builder(
                                         itemCount: birdsList.length,
@@ -273,7 +275,8 @@ class HomeState extends State<Home> {
                                                             : bird
                                                                 .commonSpecies,
                                                         style: GlobalStyles
-                                                            .boldContent,
+                                                            .contentBold(
+                                                                context),
                                                       ),
                                                     ],
                                                   ),

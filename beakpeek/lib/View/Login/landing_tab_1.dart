@@ -1,3 +1,4 @@
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 
@@ -10,7 +11,7 @@ class LandingTab1 extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xffF0EDE6),
+      backgroundColor: AppColors.backgroundColor(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -24,16 +25,18 @@ class LandingTab1 extends StatelessWidget {
                     ),
                     RichText(
                       textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        style: GlobalStyles.mainHeadingDark,
+                      text: TextSpan(
+                        style: GlobalStyles.mainHeadingPrimary(context),
                         children: [
-                          TextSpan(text: 'Your Ultimate\n'),
+                          TextSpan(
+                              text: 'Your Ultimate\n',
+                              style: GlobalStyles.mainHeadingPrimary(context)),
                           TextSpan(
                               text: 'Bird-Watching\n',
-                              style: GlobalStyles.mainHeadingYellow),
+                              style: GlobalStyles.mainHeadingTertiary(context)),
                           TextSpan(
-                            text: 'Companion',
-                          ),
+                              text: 'Companion',
+                              style: GlobalStyles.mainHeadingPrimary(context)),
                         ],
                       ),
                     ),

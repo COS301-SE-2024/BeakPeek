@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_redundant_argument_values, empty_catches
 
 import 'package:beakpeek/Model/bird_map.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Map/bird_sheet.dart';
 // import 'package:flutter/foundation.dart';
@@ -112,8 +113,7 @@ class BirdMapState extends State<BirdMap> {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         IconButton(
-          icon:
-              const Icon(Icons.filter_list, color: GlobalStyles.secondaryColor),
+          icon: Icon(Icons.filter_list, color: AppColors.iconColor(context)),
           onPressed: () {
             _showFilterDialog();
           },
@@ -161,19 +161,19 @@ class BirdMapState extends State<BirdMap> {
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderSide: BorderSide(
+                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderSide: BorderSide(
+                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                style: const TextStyle(color: Colors.black, fontSize: 14.0),
-                dropdownColor: Colors.white,
-                iconEnabledColor: GlobalStyles.secondaryColor,
+                style: GlobalStyles.contentPrimary(context),
+                dropdownColor: AppColors.popupColor(context),
+                iconEnabledColor: AppColors.secondaryColor(context),
               ),
               const SizedBox(height: 10.0),
 
@@ -214,19 +214,19 @@ class BirdMapState extends State<BirdMap> {
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderSide: BorderSide(
+                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
+                    borderSide: BorderSide(
+                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
-                style: const TextStyle(color: Colors.black, fontSize: 14.0),
+                style: GlobalStyles.contentPrimary(context),
                 dropdownColor: Colors.white,
-                iconEnabledColor: GlobalStyles.secondaryColor,
+                iconEnabledColor: AppColors.secondaryColor(context),
               ),
             ],
           ),

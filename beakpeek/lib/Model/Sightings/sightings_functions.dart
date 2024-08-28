@@ -1,14 +1,16 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 
-Widget getLifeListData(Bird bird, Function(Bird) goBird) {
+// Added BuildContext
+Widget getLifeListData(Bird bird, Function(Bird) goBird, BuildContext context) {
   return ListTile(
     title: Text(
       bird.commonGroup.isNotEmpty
           ? '${bird.commonGroup} ${bird.commonSpecies}'
           : bird.commonSpecies,
-      style: const TextStyle(color: GlobalStyles.secondaryColor),
+      style: TextStyle(color: AppColors.primaryColor(context)),
     ),
     onTap: () {
       goBird(bird);
@@ -20,19 +22,23 @@ Widget getLifeListData(Bird bird, Function(Bird) goBird) {
   );
 }
 
-List<Widget> getWidgetLifeList(List<Bird> birds, Function(Bird) goBird) {
+// Added BuildContext
+List<Widget> getWidgetLifeList(
+    List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> listOfBirdWidgets = [];
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getLifeListData(birds[i], goBird));
+    listOfBirdWidgets.add(getLifeListData(birds[i], goBird, context));
   }
   return listOfBirdWidgets;
 }
 
-Widget getLiveList(List<Bird> birds, Function(Bird) goBird) {
-  final List<Widget> items = getWidgetLifeList(birds, goBird);
+// Added BuildContext
+Widget getLiveList(
+    List<Bird> birds, Function(Bird) goBird, BuildContext context) {
+  final List<Widget> items = getWidgetLifeList(birds, goBird, context);
   if (items.isEmpty) {
     return const Text(
-      'NO Birds Seen',
+      'No birds seen...',
       style: TextStyle(color: Colors.black),
     );
   }

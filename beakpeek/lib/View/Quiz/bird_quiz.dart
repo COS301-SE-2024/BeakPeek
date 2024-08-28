@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -41,22 +42,15 @@ class _BirdQuizState extends State<BirdQuiz> {
       builder: (context) {
         return AlertDialog(
           backgroundColor: Colors.white,
-          title: const Center(
+          title: Center(
             child: Text(
               'Congratulations!',
-              style: TextStyle(
-                color: GlobalStyles.secondaryColor,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: GlobalStyles.smallHeadingPrimary(context),
             ),
           ),
-          content: const Text(
+          content: Text(
             'You selected the correct bird!',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            ),
+            style: GlobalStyles.contentPrimary(context),
           ),
           actions: [
             ButtonBar(
@@ -69,11 +63,9 @@ class _BirdQuizState extends State<BirdQuiz> {
                       startQuiz(birds);
                     });
                   },
-                  child: const Text(
+                  child: Text(
                     'Next Bird',
-                    style: TextStyle(
-                      color: GlobalStyles.secondaryColor,
-                    ),
+                    style: GlobalStyles.contentPrimary(context),
                   ),
                 ),
                 TextButton(
@@ -88,11 +80,9 @@ class _BirdQuizState extends State<BirdQuiz> {
                       },
                     );
                   },
-                  child: const Text(
+                  child: Text(
                     'View Bird',
-                    style: TextStyle(
-                      color: GlobalStyles.secondaryColor,
-                    ),
+                    style: GlobalStyles.contentPrimary(context),
                   ),
                 ),
               ],
@@ -118,15 +108,15 @@ class _BirdQuizState extends State<BirdQuiz> {
         backgroundColor: const Color(0xFFF3F1ED),
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(
+          icon: Icon(
             Icons.arrow_back,
-            color: GlobalStyles.primaryColor,
+            color: AppColors.iconColor(context),
           ),
           onPressed: () => context.go('/home'),
         ),
-        title: const Text(
+        title: Text(
           'Bird Quiz',
-          style: GlobalStyles.smallHeadingDark,
+          style: GlobalStyles.smallHeadingPrimary(context),
           textAlign: TextAlign.center,
         ),
         centerTitle: true,
@@ -137,10 +127,10 @@ class _BirdQuizState extends State<BirdQuiz> {
           future: futureBirds,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
+              return Center(
                 child: CircularProgressIndicator(
                   valueColor: AlwaysStoppedAnimation<Color>(
-                      GlobalStyles.secondaryColor),
+                      AppColors.primaryColor(context)),
                 ),
               );
             } else if (snapshot.hasError) {
@@ -157,10 +147,10 @@ class _BirdQuizState extends State<BirdQuiz> {
                       builder: (context, imageSnapshot) {
                         if (imageSnapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
+                          return Center(
                             child: CircularProgressIndicator(
                               valueColor: AlwaysStoppedAnimation<Color>(
-                                  GlobalStyles.secondaryColor),
+                                  AppColors.primaryColor(context)),
                             ),
                           );
                         } else if (imageSnapshot.hasError) {
@@ -188,9 +178,9 @@ class _BirdQuizState extends State<BirdQuiz> {
                     ),
                   ),
                   const SizedBox(height: 16.0),
-                  const Text(
+                  Text(
                     'Select the correct bird:',
-                    style: GlobalStyles.smallHeadingDark,
+                    style: GlobalStyles.smallHeadingPrimary(context),
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 8.0),
@@ -203,7 +193,8 @@ class _BirdQuizState extends State<BirdQuiz> {
                                 width: min(screenWidth * 0.75, 320),
                                 child: ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    backgroundColor: GlobalStyles.primaryColor,
+                                    backgroundColor:
+                                        AppColors.primaryColor(context),
                                     minimumSize: const Size(320, 50),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(30.0),

@@ -1,9 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Controller/Main/routing_data.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
-import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
-import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
-import 'package:provider/provider.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,6 +12,7 @@ Future<void> main() async {
 
 class Main extends StatefulWidget {
   const Main({super.key});
+
   @override
   State<Main> createState() => MainState();
 }
@@ -38,6 +38,7 @@ class MainState extends State<Main> {
                 useMaterial3: true, colorScheme: themeProvider.darkScheme),
             themeMode: themeProvider.themeMode,
             routerConfig: RoutingData().router,
+            debugShowCheckedModeBanner: false,
           );
         },
       ),

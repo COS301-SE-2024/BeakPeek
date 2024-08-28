@@ -1,3 +1,4 @@
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ Widget buildHelpDialog(BuildContext context, String content) {
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)),
     title: const Text(
       'Help',
-      style: TextStyle(color: GlobalStyles.tertiaryColor),
+      style: TextStyle(color: AppColors.tertiaryColorLight),
     ),
     content: Text(
       content,
@@ -24,7 +25,7 @@ Widget buildHelpDialog(BuildContext context, String content) {
       TextButton(
         child: const Text(
           'Close',
-          style: TextStyle(color: GlobalStyles.tertiaryColor),
+          style: TextStyle(color: AppColors.tertiaryColorLight),
         ),
         onPressed: () {
           Navigator.of(context).pop();

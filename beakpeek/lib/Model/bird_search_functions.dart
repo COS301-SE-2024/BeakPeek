@@ -2,7 +2,7 @@
 
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
     as upFunc;
@@ -33,7 +33,7 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
           ? '${bird.commonGroup} ${bird.commonSpecies}'
           : bird.commonSpecies,
       style: const TextStyle(
-        color: GlobalStyles.primaryColor,
+        color: AppColors.primaryColorLight,
         fontSize: 16,
       ),
     ),
@@ -70,7 +70,7 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
                 }
               },
               style: FilledButton.styleFrom(
-                backgroundColor: GlobalStyles.secondaryColor,
+                backgroundColor: AppColors.secondaryColorLight,
                 minimumSize: const Size(10, 30),
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 shape: RoundedRectangleBorder(

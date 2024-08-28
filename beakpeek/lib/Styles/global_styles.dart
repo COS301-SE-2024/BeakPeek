@@ -1,175 +1,178 @@
 import 'package:flutter/material.dart';
+import 'package:beakpeek/Styles/colors.dart';
 
 abstract class GlobalStyles {
-  // Light mode colors
-  static const Color primaryColor = Color(0xFF033A30);
-  static const Color secondaryColor = Color.fromARGB(188, 3, 58, 48);
+  // -------------------------- Large heading styles -------------------------- //
 
-  // Dark mode colors
-  static const Color primaryColorDark = Color(0xFF1A1A1A);
-  static const Color secondaryColorDark = Color(0xFF4F4F4F);
-
-  // Icon colors
-  static const Color iconColorDarkMode = Color.fromARGB(255, 180, 180, 180);
-  static const Color iconColorLightMode = Color.fromARGB(255, 58, 58, 58);
-
-  // Light and dark mode text styles
-  static const TextStyle mainHeadingLight = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: primaryColor,
-  );
-
-  static const TextStyle mainHeadingDark = TextStyle(
-    fontSize: 24,
-    fontWeight: FontWeight.bold,
-    color: primaryColorDark,
-  );
-
-  // Getter for text styles based on theme
-  static TextStyle mainHeading(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark
-        ? mainHeadingDark
-        : mainHeadingLight;
+  static TextStyle mainHeadingPrimary(BuildContext context) {
+    return TextStyle(
+        fontSize: 44,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'SF Pro Display',
+        color: AppColors.primaryColor(context));
   }
 
-  // You can add similar methods for other text styles
-  static TextStyle bodyText(BuildContext context) {
-    return Theme.of(context).brightness == Brightness.dark
-        ? TextStyle(color: secondaryColorDark, fontSize: 16)
-        : TextStyle(color: secondaryColor, fontSize: 16);
+  static TextStyle mainHeadingSecondary(BuildContext context) {
+    return TextStyle(
+        fontSize: 44,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'SF Pro Display',
+        color: AppColors.secondaryColor(context));
   }
 
-  static const Color tertiaryColor = Color.fromARGB(255, 197, 140, 35);
-  static const double borderRadius = 30.0;
+  static TextStyle mainHeadingTertiary(BuildContext context) {
+    return TextStyle(
+        fontSize: 44,
+        fontWeight: FontWeight.w700,
+        fontFamily: 'SF Pro Display',
+        color: AppColors.tertiaryColor(context));
+  }
 
-  // static const TextStyle mainHeadingDark = TextStyle(
-  //   color: primaryColor,
-  //   fontSize: 44,
-  //   fontFamily: 'SF Pro Display',
-  //   fontWeight: FontWeight.w700,
-  //   height: 0,
-  // );
+  // -------------------------- Medium heading styles -------------------------- //
 
-  // static const TextStyle mainHeadingLight = TextStyle(
-  //   color: Color(0xFFFFFFFF),
-  //   fontSize: 44,
-  //   fontFamily: 'SF Pro Display',
-  //   fontWeight: FontWeight.w700,
-  //   height: 0,
-  // );
+  static TextStyle subHeadingPrimary(BuildContext context) {
+    return TextStyle(
+        fontSize: 32,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w700,
+        color: AppColors.primaryColor(context));
+  }
 
-  static const TextStyle mainHeadingYellow = TextStyle(
-    color: Color(0xFFECAD31),
-    fontSize: 44,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w700,
-    height: 0,
-  );
+  static TextStyle subHeadingSecondary(BuildContext context) {
+    return TextStyle(
+        fontSize: 32,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w700,
+        color: AppColors.secondaryColor(context));
+  }
 
-  static const TextStyle subHeadingDark = TextStyle(
-    color: primaryColor,
-    fontSize: 32,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w700,
-    height: 0,
-  );
+  static TextStyle subHeadingTertiary(BuildContext context) {
+    return TextStyle(
+        fontSize: 32,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w700,
+        color: AppColors.tertiaryColor(context));
+  }
 
-  static const TextStyle smallHeadingDark = TextStyle(
-    color: primaryColor,
-    fontSize: 20,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.bold,
-  );
+  // -------------------------- Small heading styles -------------------------- //
 
-  static const TextStyle subheadingLight = TextStyle(
-    color: secondaryColor,
-    fontSize: 20,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.bold,
-  );
+  static TextStyle smallHeadingPrimary(BuildContext context) {
+    return TextStyle(
+        fontSize: 20,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w600,
+        color: AppColors.primaryColor(context));
+  }
 
-  static const TextStyle content = TextStyle(
-    color: Colors.black87,
-    fontSize: 17,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w400,
-  );
+  static TextStyle smallHeadingSecondary(BuildContext context) {
+    return TextStyle(
+        fontSize: 20,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w600,
+        color: AppColors.secondaryColor(context));
+  }
 
-  static const TextStyle greenContent = TextStyle(
-    color: primaryColor,
-    fontSize: 17,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w500,
-  );
+  static TextStyle smallHeadingTertiary(BuildContext context) {
+    return TextStyle(
+        fontSize: 20,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w600,
+        color: AppColors.secondaryColor(context));
+  }
 
-  static const TextStyle boldContent = TextStyle(
-    color: secondaryColor,
-    fontSize: 18,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.bold,
-  );
+  // -------------------------- Small content styles -------------------------- //
 
-  static const TextStyle secondaryContent = TextStyle(
-    color: Color.fromARGB(255, 201, 138, 12),
-    fontSize: 16,
-    fontFamily: 'SF Pro Display',
-  );
+  static TextStyle contentPrimary(BuildContext context) {
+    return TextStyle(
+        fontSize: 16,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w500,
+        color: AppColors.textColor(context));
+  }
 
-  static const TextStyle greyContent = TextStyle(
-    color: Color.fromARGB(255, 119, 119, 119),
-    fontSize: 16,
-    fontFamily: 'SF Pro Display',
-  );
+  static TextStyle contentSecondary(BuildContext context) {
+    return TextStyle(
+        fontSize: 16,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w500,
+        color: AppColors.secondaryColor(context));
+  }
 
-  static const TextStyle smallContent = TextStyle(
-    color: Colors.black38,
-    fontSize: 16,
-    fontFamily: 'SF Pro Display',
-  );
+  static TextStyle contentTertiary(BuildContext context) {
+    return TextStyle(
+        fontSize: 16,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w500,
+        color: AppColors.tertiaryColor(context));
+  }
 
-  static final ButtonStyle primaryButton = FilledButton.styleFrom(
-    backgroundColor: primaryColor,
-    minimumSize: const Size(350, 50),
-    shadowColor: Colors.grey, // Changed to grey
-    elevation: 5, // Added elevation
-  );
+  static TextStyle smallContent(BuildContext context) {
+    return TextStyle(
+        fontSize: 14,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w500,
+        color: AppColors.greyColor(context));
+  }
 
-  static final ButtonStyle secondaryButton = OutlinedButton.styleFrom(
-    backgroundColor: Colors.transparent,
-    minimumSize: const Size(350, 50),
-    shadowColor: Colors.grey, // Changed to grey
-    side: const BorderSide(
-      color: primaryColor,
-    ),
-  );
+  static TextStyle contentBold(BuildContext context) {
+    return TextStyle(
+        fontSize: 16,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.bold,
+        color: AppColors.textColor(context));
+  }
 
-  static const TextStyle primaryButtonText = TextStyle(
-    color: Color(0xFFFFFFFF),
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w500,
-    fontSize: 18,
-  );
+  // -------------------------- Button styles -------------------------- //
 
-  static const TextStyle secondaryButtonText = TextStyle(
-    color: primaryColor,
-    fontFamily: 'SF Pro Display',
-    fontWeight: FontWeight.w500,
-    fontSize: 18,
-  );
+  static ButtonStyle buttonPrimaryFilled(BuildContext context) {
+    return FilledButton.styleFrom(
+      backgroundColor: AppColors.primaryColor(context),
+      minimumSize: const Size(350, 50),
+      elevation: 10,
+    );
+  }
 
-  static ButtonStyle elevatedButtonStyle() {
-    return ElevatedButton.styleFrom(
-      backgroundColor: GlobalStyles.primaryColor,
-      minimumSize: const Size(150, 50),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(30.0),
-      ),
-      shadowColor: Colors.grey,
-    ).copyWith(
-      foregroundColor:
-          WidgetStateProperty.all(GlobalStyles.primaryButtonText.color),
-      textStyle: WidgetStateProperty.all(GlobalStyles.primaryButtonText),
+  static ButtonStyle buttonPrimaryOutlined(BuildContext context) {
+    return OutlinedButton.styleFrom(
+      side: BorderSide(color: AppColors.primaryColor(context)),
+      backgroundColor: Colors.transparent,
+      minimumSize: const Size(350, 50),
+    );
+  }
+
+  static ButtonStyle buttonSecondaryFilled(BuildContext context) {
+    return FilledButton.styleFrom(
+      backgroundColor: AppColors.secondaryColor(context),
+      minimumSize: const Size(350, 50),
+      elevation: 10,
+    );
+  }
+
+  static ButtonStyle buttonSecondaryOutlined(BuildContext context) {
+    return OutlinedButton.styleFrom(
+      side: BorderSide(color: AppColors.secondaryColor(context)),
+      backgroundColor: Colors.transparent,
+      minimumSize: const Size(350, 50),
+    );
+  }
+
+  // -------------------------- Button text styles -------------------------- //
+
+  static TextStyle primaryButtonText(BuildContext context) {
+    return TextStyle(
+      fontSize: 18,
+      fontFamily: 'SF Pro Display',
+      fontWeight: FontWeight.w500,
+      color: AppColors.primaryButtonTextColor(context),
+    );
+  }
+
+  static TextStyle secondaryButtonText(BuildContext context) {
+    return TextStyle(
+      fontSize: 18,
+      fontFamily: 'SF Pro Display',
+      fontWeight: FontWeight.w500,
+      color: AppColors.secondaryButtonTextColor(context),
     );
   }
 }

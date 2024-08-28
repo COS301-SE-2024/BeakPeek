@@ -5,7 +5,6 @@ import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.da
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 
 const List<String> provinces = [
