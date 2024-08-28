@@ -37,14 +37,12 @@ void loginFunction(BuildContext context) async {
     },
   );
 
-  if (response.statusCode == 400) {
-    context.go('/');
-    return;
-  }
-
   final accessToken = jsonDecode(response.body)['id_token'] as String;
-
-  config.accessToken = accessToken;
-  config.loggedIN = true;
-  context.go('/home');
+  if (accessToken.isEmpty) {
+    context.go('/');
+  } else {
+    config.accessToken = accessToken;
+    config.loggedIN = true;
+    context.go('/home');
+  }
 }

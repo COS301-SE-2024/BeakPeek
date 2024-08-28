@@ -1,7 +1,6 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
-import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -39,7 +38,8 @@ class _SearchbarContainerState extends State<SearchbarContainer> {
               // return Center(child: Text('Error: ${snapshot.error}'));
               return const Center(child: Text('')); // Removed error message for
             }
-            return FilterableSearchbar(sort: sort, birds: snapshot.data!);
+            return const Text('here');
+            //FilterableSearchbar(sort: sort, birds: snapshot.data!);
           },
         ),
       ],

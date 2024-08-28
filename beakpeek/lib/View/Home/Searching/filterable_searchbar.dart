@@ -1,4 +1,5 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Controller/Home/search.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -9,12 +10,9 @@ import 'package:go_router/go_router.dart';
 class FilterableSearchbar extends StatefulWidget {
   const FilterableSearchbar({
     super.key,
-    required this.birds,
-    required this.sort,
+    required this.helpContent,
   });
-
-  final List<Bird> birds;
-  final int sort;
+  final String helpContent;
 
   @override
   State<FilterableSearchbar> createState() {
@@ -26,19 +24,23 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   late final LifeListProvider lifeList = LifeListProvider.instance;
   List<Widget> items = [];
   final SearchController controller = SearchController();
-  late List<Bird> filteredBirds;
-
+  late List<Bird> filteredBirds = [];
+  late List<Bird> birds;
   @override
   void initState() {
     super.initState();
-    filteredBirds = widget.birds;
-    items = bsf.getWidgetListOfBirds(filteredBirds);
+    listBirdFromAssets().then((value) {
+      setState(() {
+        filteredBirds = value;
+        birds = value;
+        items = bsf.getWidgetListOfBirds(filteredBirds);
+      });
+    });
   }
 
   void searchBarTyping(String data) {
     setState(() {
-      filteredBirds =
-          data.isEmpty ? widget.birds : bsf.searchForBird(widget.birds, data);
+      filteredBirds = data.isEmpty ? birds : bsf.searchForBird(birds, data);
       items = bsf.getWidgetListOfBirds(filteredBirds);
     });
   }
@@ -134,7 +136,9 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
             ),
             Padding(
               padding: EdgeInsets.only(left: screenWidth * 0.02),
-              child: const HelpIcon(content: 'Type in the common name, group or genus of a bird and see all the results. You can tap on a result to see all of that birds information.'),
+              child: const HelpIcon(
+                  content: '''Type in the common name, group or genus of a bird 
+              and see all the results. You can tap on a result to see all of that birds information.'''),
             ),
           ],
         ),

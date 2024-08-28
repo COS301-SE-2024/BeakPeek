@@ -1,11 +1,9 @@
-// ignore_for_file: library_prefixes
-
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
-    as upFunc;
+    as up_func;
 
 final colorArray = [
   Colors.red,
@@ -28,19 +26,20 @@ int getColorForReportingRate(double reportingRate) {
 
 Widget getData(Bird bird, LifeListProvider lifeList) {
   return ListTile(
+    tileColor: colorArray[getColorForReportingRate(bird.reportingRate)],
     title: Text(
       bird.commonGroup != 'None'
           ? '${bird.commonGroup} ${bird.commonSpecies}'
           : bird.commonSpecies,
       style: const TextStyle(
-        color: GlobalStyles.primaryColor,
+        color: Color.fromARGB(255, 1, 22, 18),
         fontSize: 16,
       ),
     ),
     subtitle: Text(
       '${bird.genus} ${bird.species}',
-      style: TextStyle(
-        color: Colors.grey[600],
+      style: const TextStyle(
+        color: Color.fromARGB(255, 0, 0, 0),
         fontSize: 14,
       ),
     ),
@@ -65,7 +64,7 @@ Widget getData(Bird bird, LifeListProvider lifeList) {
                 if (snapshot.data!) {
                   // Handle 'Seen' button action
                 } else {
-                  upFunc.addExp(20);
+                  up_func.addExp(20);
                   lifeList.insertBird(bird);
                 }
               },

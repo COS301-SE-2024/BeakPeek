@@ -3,10 +3,10 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Bird/bird_page.dart';
+import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
 import 'package:beakpeek/View/Map/bird_sheet.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
-import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
@@ -53,8 +53,7 @@ class HomeState extends State<Home> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: screenHeight * 0.05),
-                        const SearchbarContainer(
-                          province: 'gauteng',
+                        const FilterableSearchbar(
                           helpContent: 'Help for home page',
                         ),
                         SizedBox(height: screenHeight * 0.01),
