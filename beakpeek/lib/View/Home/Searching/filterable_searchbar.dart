@@ -1,6 +1,6 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Controller/Home/search.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -23,20 +23,16 @@ class FilterableSearchbar extends StatefulWidget {
 
 class _FilterableSearchbarState extends State<FilterableSearchbar> {
   late final LifeListProvider lifeList = LifeListProvider.instance;
-  List<Widget> items = [];
+  final Globals globel = global;
+
   final SearchController controller = SearchController();
-  late List<Bird> filteredBirds = [];
-  late List<Bird> birds;
+  late List<Bird> filteredBirds = globel.allBirdsList;
+  late List<Bird> birds = globel.allBirdsList;
+  List<Widget> items = [];
   @override
   void initState() {
     super.initState();
-    listBirdFromAssets().then((value) {
-      setState(() {
-        filteredBirds = value;
-        birds = value;
-        items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
-      });
-    });
+    items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
   }
 
   void searchBarTyping(String data) {

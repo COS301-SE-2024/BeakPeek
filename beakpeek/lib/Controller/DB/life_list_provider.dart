@@ -125,10 +125,8 @@ class LifeListProvider {
     );
 
     if (maps.isNotEmpty) {
-      print('true');
       return true;
     } else {
-      print('false');
       return false;
     }
   }
