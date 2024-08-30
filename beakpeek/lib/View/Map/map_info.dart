@@ -1,5 +1,5 @@
+import 'package:beakpeek/View/Home/Searching/local_search_container.dart';
 import 'package:beakpeek/Styles/colors.dart';
-import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
 import 'package:beakpeek/View/Map/bird_map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
@@ -30,7 +30,7 @@ class MapInfo extends StatelessWidget {
                         padding: EdgeInsets.only(
                             right: screenWidth * 0.04,
                             left: screenHeight * 0.02),
-                        child: const SearchbarContainer(
+                        child: const LocalSearchContainer(
                           province: 'Gauteng',
                           helpContent:
                               '''This map shows you your current location. 

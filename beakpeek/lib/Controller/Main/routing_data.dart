@@ -5,10 +5,19 @@ import 'package:beakpeek/View/Login/landing_page.dart';
 import 'package:beakpeek/View/Quiz/bird_quiz.dart';
 import 'package:beakpeek/View/Sightings/sightings.dart';
 import 'package:beakpeek/View/UserProfile/user_profile.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class RoutingData {
   final GoRouter router = GoRouter(
+    errorBuilder: ((context, state) => Scaffold(
+          body: Center(
+            child: FilledButton(
+              onPressed: () => context.go('/home'),
+              child: const Text('Home'),
+            ),
+          ),
+        )),
     initialLocation: '/',
     routes: <RouteBase>[
       GoRoute(
