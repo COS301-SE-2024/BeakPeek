@@ -112,13 +112,15 @@ class HomeState extends State<Home> {
                                           context.go('/quiz');
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                          ),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 16.0, vertical: 8.0),
-                                        ),
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                            ),
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16.0,
+                                                vertical: 8.0),
+                                            backgroundColor:
+                                                AppColors.popupColor(context)),
                                         child: Text(
                                           'Start Quiz',
                                           style: GlobalStyles.contentSecondary(

@@ -99,6 +99,10 @@ flutter:
     - assets/icons/addSighting.png
     - assets/icons/sightings.png
     - assets/icons/profile.png
+    - assets/icons/homeDark.png
+    - assets/icons/mapDark.png
+    - assets/icons/sightingsDark.png
+    - assets/icons/profileDark.png
     - assets/images/home.png
     - assets/icons/Logo.png
     - assets/icons/search.png
