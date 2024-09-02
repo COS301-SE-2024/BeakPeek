@@ -168,7 +168,8 @@ class HomeState extends State<Home> {
                                 ),
                                 subtitle: Text(
                                   '24% complete',
-                                  style: GlobalStyles.contentSecondary(context),
+                                  style:
+                                      GlobalStyles.smallContentPrimary(context),
                                 ),
                                 trailing: Icon(Icons.star,
                                     color: AppColors.tertiaryColor(context)),
@@ -182,7 +183,8 @@ class HomeState extends State<Home> {
                                 ),
                                 subtitle: Text(
                                   '56% complete',
-                                  style: GlobalStyles.contentSecondary(context),
+                                  style:
+                                      GlobalStyles.smallContentPrimary(context),
                                 ),
                                 trailing: Icon(Icons.star,
                                     color: AppColors.tertiaryColor(context)),
@@ -217,11 +219,11 @@ class HomeState extends State<Home> {
                                     0.4, // Fixed height for the container
                                 padding: const EdgeInsets.all(16.0),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: AppColors.popupColor(context),
                                   borderRadius: BorderRadius.circular(10.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.grey.withOpacity(0.5),
+                                      color: Colors.black.withOpacity(0.5),
                                       spreadRadius: 2,
                                       blurRadius: 5,
                                       offset: const Offset(0, 3),
@@ -284,12 +286,14 @@ class HomeState extends State<Home> {
                                                   const SizedBox(height: 16),
                                                   Text(
                                                     'Scientific Name: ${bird.genus} ${bird.species}',
-                                                    style: const TextStyle(
-                                                      color: Colors.black54,
-                                                    ),
+                                                    style: GlobalStyles
+                                                        .smallContentPrimary(
+                                                            context),
                                                   ),
-                                                  const Divider(
-                                                      color: Colors.grey),
+                                                  Divider(
+                                                      color:
+                                                          AppColors.greyColor(
+                                                              context)),
                                                 ],
                                               ),
                                             ),

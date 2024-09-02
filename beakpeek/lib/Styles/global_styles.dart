@@ -90,6 +90,14 @@ abstract class GlobalStyles {
         color: AppColors.textColor(context));
   }
 
+  static TextStyle smallContentPrimary(BuildContext context) {
+    return TextStyle(
+        fontSize: 15,
+        fontFamily: 'SF Pro Display',
+        fontWeight: FontWeight.w400,
+        color: AppColors.textColor(context));
+  }
+
   static TextStyle contentSecondary(BuildContext context) {
     return TextStyle(
         fontSize: 17,
@@ -108,7 +116,7 @@ abstract class GlobalStyles {
 
   static TextStyle smallContent(BuildContext context) {
     return TextStyle(
-        fontSize: 15,
+        fontSize: 17,
         fontFamily: 'SF Pro Display',
         fontWeight: FontWeight.w500,
         color: AppColors.greyColor(context));

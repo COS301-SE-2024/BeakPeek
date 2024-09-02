@@ -98,7 +98,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                 height: searchBarHeight,
                 decoration: BoxDecoration(
                   border: Border.all(
-                    color: AppColors.secondaryColor(context),
+                    color: AppColors.primaryColor(context),
                     width: 2.0,
                   ),
                   borderRadius: BorderRadius.circular(30.0),
@@ -107,16 +107,16 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                 padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                 child: SearchAnchor(
                   searchController: controller,
-                  viewHintText: 'Search Bird...',
+                  viewHintText: 'Search for birds...',
                   viewOnChanged: searchBarTyping,
                   dividerColor: AppColors.secondaryColor(context),
                   viewLeading: IconButton(
                       onPressed: () {
                         GoRouter.of(context).pop();
                       },
-                      icon: const Icon(
+                      icon: Icon(
                         Icons.arrow_back,
-                        color: Colors.grey,
+                        color: AppColors.iconColor(context),
                       )),
                   headerTextStyle:
                       TextStyle(color: AppColors.secondaryColor(context)),
@@ -125,10 +125,10 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                   builder: (context, controller) {
                     return Row(
                       children: [
-                        Icon(Icons.search, color: AppColors.iconColor(context)),
+                        Icon(Icons.search, color: AppColors.greyColor(context)),
                         SizedBox(width: screenWidth * 0.02),
                         Text('Search for birds...',
-                            style: GlobalStyles.contentSecondary(context)),
+                            style: GlobalStyles.smallContent(context)),
                       ],
                     );
                   },
