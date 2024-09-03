@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars, unnecessary_brace_in_string_interps
 
+import 'package:beakpeek/Controller/Home/quiz_manager.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -20,13 +21,20 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   late Future<String> pentadId;
-  //final Globals globel = global;
+  final QuizManager _quizManager = QuizManager();
 
   @override
   void initState() {
     //globel.init();
     super.initState();
     pentadId = getPentadId(); // Initialize pentadId
+    preloadQuizzes();
+  }
+
+  Future<void> preloadQuizzes() async {
+    try {
+      await _quizManager.preloadQuizzes(3, context);
+    } catch (e) {}
   }
 
   Future<List<Bird>> _fetchBirds() async {
