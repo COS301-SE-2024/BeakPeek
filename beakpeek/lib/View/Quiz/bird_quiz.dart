@@ -1,16 +1,12 @@
 // ignore_for_file: library_private_types_in_public_api,
 // unnecessary_to_list_in_spreads
-
-import 'dart:convert';
 import 'dart:math';
-
 import 'package:beakpeek/Controller/Home/quiz_manager.dart';
-import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/quiz_instance.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
 
 class BirdQuiz extends StatefulWidget {
   const BirdQuiz({super.key});
@@ -205,56 +201,5 @@ class _BirdQuizState extends State<BirdQuiz> {
         );
       },
     );
-  }
-}
-
-class QuizInstance {
-  final List<Bird> selectedBirds;
-  final Bird correctBird;
-  final List<String> images;
-
-  QuizInstance({
-    required this.selectedBirds,
-    required this.correctBird,
-    required this.images,
-  });
-}
-
-Future<List<Bird>> fetchBirds(http.Client client) async {
-  try {
-    final response = await client
-        .get(Uri.parse('https://beakpeekbirdapi.azurewebsites.net/api/Bird/'));
-
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(response.body);
-      return jsonResponse.map((data) => Bird.fromJson(data)).toList();
-    } else {
-      throw Exception('Failed to load birds');
-    }
-  } catch (error) {
-    throw Exception('Error fetching birds: $error');
-  }
-}
-
-List<Bird> selectRandomBirds(List<Bird> birds, int count) {
-  birds.shuffle(Random());
-  return birds.take(count).toList();
-}
-
-Future<List<String>> getImages(http.Client client, Bird bird) async {
-  try {
-    final String birdName = '${bird.commonSpecies} ${bird.commonGroup}';
-    final response = await client.get(Uri.parse(
-        'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/$birdName'));
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonResponse = json.decode(response.body);
-      final List<dynamic> images = jsonResponse['images'];
-      return images.map<String>((image) => image['url'] as String).toList();
-    } else {
-      throw Exception('Failed to load bird images');
-    }
-  } catch (error) {
-    throw Exception('Error fetching bird images: $error');
   }
 }
