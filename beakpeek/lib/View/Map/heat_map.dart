@@ -32,14 +32,18 @@ class HeatMapState extends State<HeatMap> {
   }
 
   Color getColorForReportingRate(double reportingRate) {
-    if (reportingRate < 40) {
-      return Colors.red.withOpacity(0.4);
+    if (reportingRate < 20) {
+      return const Color.fromARGB(255, 255, 115, 105).withOpacity(0.8);
+    } else if (reportingRate < 40) {
+      return Colors.red.withOpacity(0.8);
     } else if (reportingRate < 60) {
-      return Colors.orange.withOpacity(0.4);
+      return Colors.orange.withOpacity(0.8);
     } else if (reportingRate < 80) {
-      return Colors.yellow.withOpacity(0.4);
+      return Colors.yellow.withOpacity(0.8);
+    } else if (reportingRate < 90) {
+      return const Color.fromARGB(255, 103, 255, 108).withOpacity(0.8);
     } else {
-      return Colors.green.withOpacity(0.4);
+      return Color.fromARGB(255, 1, 201, 34).withOpacity(0.8);
     }
   }
 
