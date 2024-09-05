@@ -57,54 +57,56 @@ class _SightingsState extends State<Sightings> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Scaffold(
-      backgroundColor: AppColors.backgroundColor(context),
-      appBar: AppBar(
+    return SafeArea(
+      child: Scaffold(
         backgroundColor: AppColors.backgroundColor(context),
-        elevation: 0,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
-          onPressed: () {
-            context.go('/home');
-          },
+        appBar: AppBar(
+          backgroundColor: AppColors.backgroundColor(context),
+          elevation: 0,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
+            onPressed: () {
+              context.go('/home');
+            },
+          ),
+          title: Text('Life List',
+              style: GlobalStyles.smallHeadingPrimary(context)),
+          centerTitle: true,
         ),
-        title:
-            Text('Life List', style: GlobalStyles.smallHeadingPrimary(context)),
-        centerTitle: true,
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                SizedBox(
-                  width: screenWidth * 0.42,
-                  child: OutlinedButton(
-                    style: GlobalStyles.buttonPrimaryFilled(context),
-                    onPressed: reportRateASC,
-                    child: Text('Ascending',
-                        style: GlobalStyles.primaryButtonText(context)),
+        body: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  SizedBox(
+                    width: screenWidth * 0.42,
+                    child: OutlinedButton(
+                      style: GlobalStyles.buttonPrimaryFilled(context),
+                      onPressed: reportRateASC,
+                      child: Text('Ascending',
+                          style: GlobalStyles.primaryButtonText(context)),
+                    ),
                   ),
-                ),
-                SizedBox(
-                  width: screenWidth * 0.42,
-                  child: OutlinedButton(
-                    style: GlobalStyles.buttonPrimaryFilled(context),
-                    onPressed: reportRateDESC,
-                    child: Text('Descending',
-                        style: GlobalStyles.primaryButtonText(context)),
+                  SizedBox(
+                    width: screenWidth * 0.42,
+                    child: OutlinedButton(
+                      style: GlobalStyles.buttonPrimaryFilled(context),
+                      onPressed: reportRateDESC,
+                      child: Text('Descending',
+                          style: GlobalStyles.primaryButtonText(context)),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(
-            height: screenHeight * 0.75,
-            child: getLiveList(loaded, goBird, context),
-          ),
-        ],
+            SizedBox(
+              height: screenHeight * 0.75,
+              child: getLiveList(loaded, goBird, context),
+            ),
+          ],
+        ),
       ),
     );
   }
