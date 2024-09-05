@@ -1,5 +1,6 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:beakpeek/Controller/Home/sound_controller.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -103,6 +104,10 @@ class _BirdPageState extends State<BirdPage> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  const SizedBox(width: 16.0),
+                                  BirdSoundPlayer(
+                                      commonGroup: widget.commonGroup,
+                                      commonSpecies: widget.commonSpecies),
                                 ],
                               ),
                               SizedBox(height: screenHeight * 0.02),
