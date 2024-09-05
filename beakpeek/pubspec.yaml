@@ -115,7 +115,13 @@ flutter:
     - assets/images/map.png
     - assets/images/quiz_placeholder.png
     - assets/BirdList/allbirds.json
-    
+    - assets/province_easterncape.kml
+    - assets/province_mpumalanga.kml
+    - assets/province_freestate.kml
+    - assets/province_kwazulu-natal.kml
+    - assets/province_limpopo.kml
+    - assets/province_northerncape.kml
+    - assets/province_northwest.kml
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -45,5 +45,13 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to show relevant information.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to provide location-based features even when the app is in the background.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>We need access to the microphone for audio playback.</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>We need access to Apple Music for audio playback.</string>
 </dict>
 </plist>

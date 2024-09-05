@@ -27,6 +27,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   }
 
   void preloadAudio() async {
+    print(fileUrl);
     if (fileUrl != null) {
       await _audioPlayer.setSourceUrl(fileUrl!);
       // This preloads the audio file so it's ready when the user presses play.
@@ -45,6 +46,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
         setState(() {
           // Set the file URL from the first recording result
           fileUrl = '${data['recordings'][0]['file']}';
+          print(fileUrl);
           isLoading = false;
         });
         preloadAudio();

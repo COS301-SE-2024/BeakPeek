@@ -4,7 +4,6 @@ import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Map/bird_sheet.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -21,21 +20,29 @@ class BirdMap extends StatefulWidget {
 
 class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
-  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593);
-  // Default location
-  String _selectedProvince = 'gauteng'; // Default selected province
+  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593); // Default location
+  String _selectedProvince = 'Gauteng'; // Capitalized default province
   String _selectedMonth = 'Year-Round'; // Default selected month
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
   bool _isLocationFetched = false;
 
+  final Map<String, LatLng> provinceCenters = {
+    'Gauteng': LatLng(-25.7559141, 28.2330593),
+    'Western Cape': LatLng(-33.9249, 18.4241),
+    'Eastern Cape': LatLng(-32.2968, 26.4194),
+    'KwaZulu-Natal': LatLng(-29.8587, 31.0218),
+    'Limpopo': LatLng(-23.8962, 29.4486),
+    'Mpumalanga': LatLng(-25.5653, 30.5276),
+    'Free State': LatLng(-29.0852, 26.1596),
+    'Northern Cape': LatLng(-28.7281, 24.7499),
+    'North West': LatLng(-25.6696, 25.9323),
+  };
+
   @override
   void initState() {
     super.initState();
-    _cameraPosition = CameraPosition(
-      target: _currentLocation,
-      zoom: 11.0,
-    );
+    _cameraPosition = CameraPosition(target: _currentLocation, zoom: 11.0);
     _getCurrentLocation();
     _loadKmlData();
   }
@@ -136,8 +143,10 @@ class BirdMapState extends State<BirdMap> {
                 value: _selectedProvince,
                 onChanged: (newValue) {
                   setState(() {
+                    _polygons = {};
                     _selectedProvince = newValue!;
-                    _cameraPosition = _getCameraPositionForProvince(newValue);
+                    _cameraPosition =
+                        CameraPosition(target: provinceCenters[newValue]!, zoom: 11.0);
                     _loadKmlData();
                   });
 
@@ -145,7 +154,7 @@ class BirdMapState extends State<BirdMap> {
                   mapController.animateCamera(
                       CameraUpdate.newCameraPosition(_cameraPosition));
                 },
-                items: <String>['gauteng', 'westerncape', 'Eastern Cape']
+                items: provinceCenters.keys
                     .map<DropdownMenuItem<String>>((value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -244,27 +253,14 @@ class BirdMapState extends State<BirdMap> {
   }
 
   CameraPosition _getCameraPositionForProvince(String province) {
-    switch (province) {
-      case 'gauteng':
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
-
-      case 'westerncape':
-        return const CameraPosition(
-            target: LatLng(-33.9249, 18.4241), zoom: 11.0);
-      case 'Eastern Cape':
-        return const CameraPosition(
-            target: LatLng(-32.2968, 26.4194), zoom: 11.0);
-      default:
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
-    }
+    return CameraPosition(target: provinceCenters[province]!, zoom: 11.0);
   }
 
   Future<void> _loadKmlData() async {
     try {
-      final kmlString =
-          await rootBundle.loadString('assets/province_$_selectedProvince.kml');
+      print(_selectedProvince);
+      final kmlString = await rootBundle.loadString(
+          'assets/province_${_selectedProvince.toLowerCase().replaceAll(" ", "")}.kml');
       final polygonsData = KmlParser.parseKml(kmlString);
 
       setState(() {
@@ -277,7 +273,7 @@ class BirdMapState extends State<BirdMap> {
           return Polygon(
             polygonId: PolygonId(id),
             points: coordinates,
-            strokeColor: Colors.transparent,
+            strokeColor: Colors.red,
             fillColor: Colors.transparent,
             strokeWidth: 2,
             consumeTapEvents: true,
