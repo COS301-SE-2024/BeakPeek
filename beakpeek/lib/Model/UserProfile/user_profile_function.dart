@@ -120,7 +120,7 @@ double getPercent(int numTotalBirds, int birdsInLife) {
 Widget levelProgressBar(int progress, int level) {
   return FAProgressBar(
     currentValue: progressPercentage(progress, level),
-    // displayText: '%',
+    progressColor: AppColors.tertiaryColorDark,
     size: 15,
   );
 }
