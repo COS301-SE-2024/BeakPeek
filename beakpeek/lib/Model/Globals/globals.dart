@@ -10,6 +10,7 @@ class Globals {
   final LifeListProvider lifeList = LifeListProvider.instance;
   late List<Bird> birdList = [];
   late List<Bird> allBirdsList = [];
+
   void init() {
     lifeList.fetchLifeList().then((result) {
       birdList = result;
@@ -25,3 +26,5 @@ class Globals {
     });
   }
 }
+
+//apk downloadable link
