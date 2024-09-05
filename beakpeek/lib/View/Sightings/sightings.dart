@@ -54,12 +54,13 @@ class _SightingsState extends State<Sightings> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F1ED),
+      backgroundColor: AppColors.backgroundColor(context),
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
+        backgroundColor: AppColors.backgroundColor(context),
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
@@ -73,16 +74,34 @@ class _SightingsState extends State<Sightings> {
       ),
       body: Column(
         children: [
-          FilledButton(
-            onPressed: reportRateASC,
-            child: const Text('Ascending'),
-          ),
-          FilledButton(
-            onPressed: reportRateDESC,
-            child: const Text('Decending'),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                SizedBox(
+                  width: screenWidth * 0.42,
+                  child: OutlinedButton(
+                    style: GlobalStyles.buttonPrimaryFilled(context),
+                    onPressed: reportRateASC,
+                    child: Text('Ascending',
+                        style: GlobalStyles.primaryButtonText(context)),
+                  ),
+                ),
+                SizedBox(
+                  width: screenWidth * 0.42,
+                  child: OutlinedButton(
+                    style: GlobalStyles.buttonPrimaryFilled(context),
+                    onPressed: reportRateDESC,
+                    child: Text('Descending',
+                        style: GlobalStyles.primaryButtonText(context)),
+                  ),
+                ),
+              ],
+            ),
           ),
           SizedBox(
-            height: screenHeight * 1,
+            height: screenHeight * 0.75,
             child: getLiveList(loaded, goBird, context),
           ),
         ],
