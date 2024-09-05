@@ -1,5 +1,5 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
 // Added BuildContext
@@ -9,14 +9,14 @@ Widget getLifeListData(Bird bird, Function(Bird) goBird, BuildContext context) {
       bird.commonGroup.isNotEmpty
           ? '${bird.commonGroup} ${bird.commonSpecies}'
           : bird.commonSpecies,
-      style: TextStyle(color: AppColors.primaryColor(context)),
+      style: GlobalStyles.contentPrimary(context),
     ),
     onTap: () {
       goBird(bird);
     },
     subtitle: Text(
       'Scientific Name: ${bird.genus} ${bird.species}',
-      style: const TextStyle(color: Colors.black),
+      style: GlobalStyles.smallContentPrimary(context),
     ),
   );
 }
@@ -36,9 +36,9 @@ Widget getLiveList(
     List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> items = getWidgetLifeList(birds, goBird, context);
   if (items.isEmpty) {
-    return const Text(
+    return Text(
       'No birds seen...',
-      style: TextStyle(color: Colors.black),
+      style: GlobalStyles.contentPrimary(context),
     );
   }
   return ListView.builder(

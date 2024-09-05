@@ -1,4 +1,3 @@
-// import 'package:beakpeek/View/Login/landing_tab_1.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
@@ -19,6 +18,7 @@ class Sightings extends StatefulWidget {
 
 class _SightingsState extends State<Sightings> {
   late List<Bird> loaded = [];
+  String? selectedFilter = 'name'; // Add a variable to store the dropdown value
 
   @override
   void initState() {
@@ -52,6 +52,15 @@ class _SightingsState extends State<Sightings> {
     setLoaded(sortRepotRateASC(loaded));
   }
 
+  void onFilterChanged(String? newValue) {
+    setState(() {
+      selectedFilter = newValue;
+    });
+
+    if (selectedFilter == 'rarity') {
+    } else if (selectedFilter == 'name') {}
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -80,8 +89,33 @@ class _SightingsState extends State<Sightings> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  // Dropdown Button
+                  DropdownButton<String>(
+                    dropdownColor: AppColors.popupColor(context),
+                    value: selectedFilter,
+                    items: [
+                      DropdownMenuItem(
+                        value: 'name',
+                        child: Text(
+                          'Name',
+                          style: GlobalStyles.contentPrimary(context),
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: 'rarity',
+                        child: Text(
+                          'Rarity',
+                          style: GlobalStyles.contentPrimary(context),
+                        ),
+                      ),
+                    ],
+                    onChanged: onFilterChanged,
+                    style: GlobalStyles.primaryButtonText(context),
+                    underline: Container(),
+                  ),
+                  // Ascending button
                   SizedBox(
-                    width: screenWidth * 0.42,
+                    width: screenWidth * 0.33,
                     child: OutlinedButton(
                       style: GlobalStyles.buttonPrimaryFilled(context),
                       onPressed: reportRateASC,
@@ -89,8 +123,9 @@ class _SightingsState extends State<Sightings> {
                           style: GlobalStyles.primaryButtonText(context)),
                     ),
                   ),
+                  // Descending button
                   SizedBox(
-                    width: screenWidth * 0.42,
+                    width: screenWidth * 0.33, // Adjusted to fit the dropdown
                     child: OutlinedButton(
                       style: GlobalStyles.buttonPrimaryFilled(context),
                       onPressed: reportRateDESC,
