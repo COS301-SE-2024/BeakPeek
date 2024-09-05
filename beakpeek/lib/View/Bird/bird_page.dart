@@ -42,9 +42,9 @@ class _BirdPageState extends State<BirdPage> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F1ED),
+      backgroundColor: AppColors.backgroundColor(context),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF3F1ED),
+        backgroundColor: AppColors.backgroundColor(context),
         elevation: 0,
         leading: IconButton(
           icon: Icon(
@@ -78,8 +78,10 @@ class _BirdPageState extends State<BirdPage> {
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return const Center(
-                                child: CircularProgressIndicator());
+                            return Center(
+                                child: CircularProgressIndicator(
+                              color: AppColors.primaryColor(context),
+                            ));
                           } else if (snapshot.hasError) {
                             return const Center(
                                 child: Text('Failed to load bird info'));
@@ -97,12 +99,8 @@ class _BirdPageState extends State<BirdPage> {
                                   const SizedBox(width: 16.0),
                                   Text(
                                     birdData['name'],
-                                    style: TextStyle(
-                                      color: AppColors.secondaryColor(context),
-                                      fontSize: 22,
-                                      fontFamily: 'SF Pro Display',
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                                    style: GlobalStyles.smallHeadingPrimary(
+                                        context),
                                   ),
                                   const SizedBox(width: 16.0),
                                   BirdSoundPlayer(
@@ -121,7 +119,7 @@ class _BirdPageState extends State<BirdPage> {
                                       BoxShadow(
                                         color: Colors.black.withOpacity(0.2),
                                         spreadRadius: 3,
-                                        blurRadius: 10,
+                                        blurRadius: 5,
                                         offset: const Offset(0, 4),
                                       ),
                                     ],
@@ -140,14 +138,14 @@ class _BirdPageState extends State<BirdPage> {
                               Container(
                                 padding: const EdgeInsets.all(12.0),
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: AppColors.popupColor(context),
                                   borderRadius: BorderRadius.circular(10.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.1),
+                                      color: Colors.black.withOpacity(0.2),
                                       spreadRadius: 3,
                                       blurRadius: 5,
-                                      offset: const Offset(0, 3),
+                                      offset: const Offset(0, 4),
                                     ),
                                   ],
                                 ),
@@ -173,7 +171,9 @@ class _BirdPageState extends State<BirdPage> {
                                           'No description available',
                                       style:
                                           GlobalStyles.contentPrimary(context)
-                                              .copyWith(fontSize: 18),
+                                              .copyWith(
+                                                  fontSize: 18,
+                                                  fontWeight: FontWeight.w400),
                                       textAlign: TextAlign.left,
                                     ),
                                   ],
