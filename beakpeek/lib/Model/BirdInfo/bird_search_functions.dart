@@ -94,7 +94,7 @@ Widget getData(Bird bird, Function goBird) {
 }
 
 bool isSeen(Bird bird) {
-  var temp = global.birdList.where((test) =>
+  final temp = global.birdList.where((test) =>
       test.commonGroup
               .toLowerCase()
               .compareTo(bird.commonGroup.toLowerCase()) ==
