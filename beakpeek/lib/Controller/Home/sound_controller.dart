@@ -26,6 +26,13 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
     fetchBirdSoundUrl();
   }
 
+  void preloadAudio() async {
+    if (fileUrl != null) {
+      await _audioPlayer.setSourceUrl(fileUrl!);
+      // This preloads the audio file so it's ready when the user presses play.
+    }
+  }
+
   Future<void> fetchBirdSoundUrl() async {
     final String query = '${widget.commonSpecies} ${widget.commonGroup}';
     final response = await http.get(
@@ -40,6 +47,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
           fileUrl = '${data['recordings'][0]['file']}';
           isLoading = false;
         });
+        preloadAudio();
       } else {
         setState(() {
           isLoading = false;

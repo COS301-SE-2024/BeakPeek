@@ -104,6 +104,7 @@ class _BirdPageState extends State<BirdPage> {
                                       fontWeight: FontWeight.bold,
                                     ),
                                   ),
+                                  const SizedBox(width: 16.0),
                                   BirdSoundPlayer(
                                       commonGroup: widget.commonGroup,
                                       commonSpecies: widget.commonSpecies),
