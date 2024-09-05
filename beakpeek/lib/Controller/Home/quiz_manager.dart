@@ -7,16 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class QuizManager {
-  QuizManager._internal();
-  static final QuizManager _instance = QuizManager._internal();
-
   factory QuizManager() {
     return _instance;
   }
-  final Globals Global = global;
-  late List<Bird> Birds = Global.allBirdsList;
+  QuizManager._internal();
+  static final QuizManager _instance = QuizManager._internal();
+  late List<Bird> birds = global.allBirdsList;
 
-  List<QuizInstance> _preloadedQuizzes = [];
+  final List<QuizInstance> _preloadedQuizzes = [];
 
   List<QuizInstance> get preloadedQuizzes => _preloadedQuizzes;
 
@@ -25,15 +23,16 @@ class QuizManager {
       final QuizInstance instance = await createQuizInstance();
       _preloadedQuizzes.add(instance);
       for (String url in instance.images) {
+        // ignore: use_build_context_synchronously
         precacheImage(NetworkImage(url), context);
       }
     }
   }
 
   Future<QuizInstance> createQuizInstance() async {
-    List<Bird> selectedBirds = selectRandomBirds(Birds, 4);
-    Bird correctBird = selectedBirds[Random().nextInt(4)];
-    List<String> images = await getImages(http.Client(), correctBird);
+    final List<Bird> selectedBirds = selectRandomBirds(birds, 4);
+    final Bird correctBird = selectedBirds[Random().nextInt(4)];
+    final List<String> images = await getImages(http.Client(), correctBird);
     return QuizInstance(
       selectedBirds: selectedBirds,
       correctBird: correctBird,

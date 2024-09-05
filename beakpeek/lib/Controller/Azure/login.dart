@@ -38,7 +38,6 @@ void loginFunction(BuildContext context) async {
   );
 
   final accessToken = jsonDecode(response.body)['id_token'] as String;
-  print(response.body);
   if (accessToken.isEmpty) {
     context.go('/');
   } else {
