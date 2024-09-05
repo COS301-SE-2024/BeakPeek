@@ -1,7 +1,7 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
-import 'package:beakpeek/Model/bird_search_functions.dart' as bsf;
+import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart' as bsf;
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';

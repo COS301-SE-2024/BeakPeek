@@ -1,7 +1,7 @@
 // import 'package:beakpeek/View/Login/landing_tab_1.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
-import 'package:beakpeek/Model/bird_search_functions.dart';
+import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
