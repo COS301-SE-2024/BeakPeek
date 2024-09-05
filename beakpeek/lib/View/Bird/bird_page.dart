@@ -4,7 +4,6 @@ import 'package:beakpeek/Controller/Home/sound_controller.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:beakpeek/Styles/bird_page_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
@@ -201,7 +200,7 @@ class _BirdPageState extends State<BirdPage> {
                         ),
                       );
                     },
-                    style: BirdPageStyles.elevatedButtonStyle(),
+                    style: GlobalStyles.buttonPrimaryFilled(context),
                     child: const Text('Show Heat Map'),
                   ),
                 ),

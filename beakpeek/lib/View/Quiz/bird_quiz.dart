@@ -129,12 +129,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                             },
                             child: Text(
                               '${bird.commonSpecies} ${bird.commonGroup}',
-                              style: const TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontFamily: 'SF Pro Display',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
+                              style: GlobalStyles.contentPrimary(context),
                             ),
                           ),
                         ),
