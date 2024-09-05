@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:http/http.dart';
@@ -73,13 +75,14 @@ Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLIfe) {
                 padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
                 child: Text(
                   prov,
-                  style: const TextStyle(color: Colors.black),
+                  style: GlobalStyles.contentPrimary(context),
                 ),
               ),
               FAProgressBar(
                 currentValue:
                     getPercent(birdNumsTotal[index], numbirdsInLIfe[index]),
-                // displayText: '%',
+                backgroundColor: AppColors.popupColor(context),
+                progressColor: AppColors.tertiaryColor(context),
                 size: 10,
               ),
             ],
