@@ -187,7 +187,10 @@ class _BirdPageState extends State<BirdPage> {
                 ),
                 SizedBox(
                   width: screenWidth * 0.8,
-                  child: ElevatedButton(
+                  child: OutlinedButton(
+                    style: GlobalStyles.buttonPrimaryFilled(context),
+                    child: Text('Show Heat Map',
+                        style: GlobalStyles.primaryButtonText(context)),
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -200,8 +203,6 @@ class _BirdPageState extends State<BirdPage> {
                         ),
                       );
                     },
-                    style: GlobalStyles.buttonPrimaryFilled(context),
-                    child: const Text('Show Heat Map'),
                   ),
                 ),
                 const BottomNavigation(),
