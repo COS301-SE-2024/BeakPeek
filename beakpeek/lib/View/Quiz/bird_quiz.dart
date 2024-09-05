@@ -56,9 +56,9 @@ class _BirdQuizState extends State<BirdQuiz> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F1ED),
+      backgroundColor: AppColors.backgroundColor(context),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF3F1ED),
+        backgroundColor: AppColors.backgroundColor(context),
         elevation: 0,
         leading: IconButton(
           icon: Icon(
@@ -107,12 +107,12 @@ class _BirdQuizState extends State<BirdQuiz> {
                           width: min(screenWidth * 0.75, 320),
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primaryColor(context),
+                              backgroundColor: AppColors.popupColor(context),
                               minimumSize: const Size(320, 50),
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(30.0),
                               ),
-                              shadowColor: Colors.grey,
+                              shadowColor: Colors.black,
                               elevation: 5,
                             ),
                             onPressed: () {
@@ -130,12 +130,7 @@ class _BirdQuizState extends State<BirdQuiz> {
                             },
                             child: Text(
                               '${bird.commonSpecies} ${bird.commonGroup}',
-                              style: const TextStyle(
-                                color: Color(0xFFFFFFFF),
-                                fontFamily: 'SF Pro Display',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 16,
-                              ),
+                              style: GlobalStyles.contentPrimary(context),
                             ),
                           ),
                         ),
@@ -154,7 +149,7 @@ class _BirdQuizState extends State<BirdQuiz> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Colors.white,
+          backgroundColor: AppColors.popupColor(context),
           title: Center(
             child: Text(
               'Congratulations!',
