@@ -92,7 +92,6 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   Widget build(BuildContext context) {
     return isLoading
         ? const CircularProgressIndicator()
-        // Show a loading indicator while fetching
         : IconButton(
             icon: Icon(isPlaying ? Icons.stop : Icons.play_arrow),
             onPressed: fileUrl != null

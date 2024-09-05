@@ -14,8 +14,8 @@ class QuizManager {
   }
   QuizManager._internal();
   static final QuizManager _instance = QuizManager._internal();
-  final Globals Global = global;
-  late List<Bird> Birds = Global.allBirdsList;
+  late List<Bird> birds = global.allBirdsList;
+
 
   final List<QuizInstance> _preloadedQuizzes = [];
 
@@ -26,13 +26,15 @@ class QuizManager {
       final QuizInstance instance = await createQuizInstance();
       _preloadedQuizzes.add(instance);
       for (String url in instance.images) {
+        // ignore: use_build_context_synchronously
         precacheImage(NetworkImage(url), context);
       }
     }
   }
 
   Future<QuizInstance> createQuizInstance() async {
-    final List<Bird> selectedBirds = selectRandomBirds(Birds, 4);
+
+    final List<Bird> selectedBirds = selectRandomBirds(birds, 4);
     final Bird correctBird = selectedBirds[Random().nextInt(4)];
     final List<String> images = await getImages(http.Client(), correctBird);
     return QuizInstance(
