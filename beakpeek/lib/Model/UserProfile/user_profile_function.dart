@@ -61,7 +61,7 @@ List<Bird> sortAlphabetically(List<Bird> birds) {
   return birds;
 }
 
-Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLIfe) {
+Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLife) {
   return SingleChildScrollView(
     child: SizedBox(
       height: 200,
@@ -69,21 +69,38 @@ Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLIfe) {
         itemCount: provinces.length,
         itemBuilder: (context, index) {
           final String prov = provinces[index];
+          final String formattedProv = formatProvinceName(prov);
+          final double percentage =
+              getPercent(birdNumsTotal[index], numbirdsInLife[index]);
+
           return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
                 child: Text(
-                  prov,
+                  formattedProv,
                   style: GlobalStyles.contentPrimary(context),
                 ),
               ),
-              FAProgressBar(
-                currentValue:
-                    getPercent(birdNumsTotal[index], numbirdsInLIfe[index]),
-                backgroundColor: AppColors.popupColor(context),
-                progressColor: AppColors.tertiaryColor(context),
-                size: 10,
+              Padding(
+                padding: const EdgeInsets.only(top: 2.0),
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    FAProgressBar(
+                      currentValue: percentage,
+                      backgroundColor: AppColors.popupColor(context),
+                      progressColor: AppColors.tertiaryColor(context),
+                    ),
+                    Text(
+                      '${percentage.toStringAsFixed(1)}%',
+                      style: GlobalStyles.contentPrimary(context).copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           );
@@ -202,4 +219,20 @@ bool checkProv(String prov) {
   } else {
     return false;
   }
+}
+
+String formatProvinceName(String province) {
+  // Split the string by camelCase or lowercase sequences
+  final RegExp regex = RegExp(r'([a-z])([A-Z])|([a-z])([A-Z][a-z])');
+  final String formatted = province.replaceAllMapped(regex, (match) {
+    return '${match.group(1)} ${match.group(2) ?? ''}';
+  });
+
+  // Capitalize each word
+  List<String> words =
+      formatted.split(RegExp(r'(?<=[a-z])(?=[A-Z])|(?<=\S)(?=\s)'));
+  words =
+      words.map((word) => word[0].toUpperCase() + word.substring(1)).toList();
+
+  return words.join(' ');
 }
