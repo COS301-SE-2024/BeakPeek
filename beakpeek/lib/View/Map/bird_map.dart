@@ -128,6 +128,7 @@ class BirdMapState extends State<BirdMap> {
       builder: (context) {
         return AlertDialog(
           title: const Text('Filters'),
+          backgroundColor: AppColors.backgroundColor(context),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -151,23 +152,19 @@ class BirdMapState extends State<BirdMap> {
                     value: value,
                     child: Text(
                       value,
-                      style: const TextStyle(fontSize: 14.0),
+                      style: GlobalStyles.contentPrimary(context),
                     ),
                   );
                 }).toList(),
                 decoration: InputDecoration(
-                  fillColor: Colors.white,
+                  fillColor: AppColors.popupColor(context),
                   filled: true,
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
@@ -204,28 +201,24 @@ class BirdMapState extends State<BirdMap> {
                     value: value,
                     child: Text(
                       value,
-                      style: const TextStyle(fontSize: 14.0),
+                      style: GlobalStyles.contentPrimary(context),
                     ),
                   );
                 }).toList(),
                 decoration: InputDecoration(
-                  fillColor: Colors.white,
+                  fillColor: AppColors.popupColor(context),
                   filled: true,
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: AppColors.secondaryColor(context), width: 2.0),
                     borderRadius: BorderRadius.circular(30.0),
                   ),
                 ),
                 style: GlobalStyles.contentPrimary(context),
-                dropdownColor: Colors.white,
+                dropdownColor: AppColors.popupColor(context),
                 iconEnabledColor: AppColors.secondaryColor(context),
               ),
             ],
@@ -235,7 +228,10 @@ class BirdMapState extends State<BirdMap> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Close'),
+              child: Text(
+                'Close',
+                style: GlobalStyles.smallContentPrimary(context),
+              ),
             ),
           ],
         );
