@@ -1,5 +1,7 @@
 library global;
 
+import 'dart:io';
+
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/search.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -25,6 +27,8 @@ class Globals {
       birdList = result;
     });
   }
+
+  late File image;
 }
 
 //apk downloadable link

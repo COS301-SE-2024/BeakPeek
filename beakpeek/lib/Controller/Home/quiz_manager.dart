@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore, use_build_context_synchronously, lines_longer_than_80_chars
+
 import 'dart:convert';
 import 'dart:math';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -13,6 +15,7 @@ class QuizManager {
   QuizManager._internal();
   static final QuizManager _instance = QuizManager._internal();
   late List<Bird> birds = global.allBirdsList;
+
 
   final List<QuizInstance> _preloadedQuizzes = [];
 
@@ -30,6 +33,7 @@ class QuizManager {
   }
 
   Future<QuizInstance> createQuizInstance() async {
+
     final List<Bird> selectedBirds = selectRandomBirds(birds, 4);
     final Bird correctBird = selectedBirds[Random().nextInt(4)];
     final List<String> images = await getImages(http.Client(), correctBird);

@@ -1,4 +1,4 @@
-// ignore_for_file: library_private_types_in_public_api,
+// ignore_for_file: library_private_types_in_public_api,, empty_catches
 // unnecessary_to_list_in_spreads
 import 'dart:math';
 import 'package:beakpeek/Controller/Home/quiz_manager.dart';
