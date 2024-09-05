@@ -1,3 +1,7 @@
+// ignore_for_file: unnecessary_null_comparison
+
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -24,6 +28,9 @@ class UserProfileState extends State<UserProfile> {
   late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
+  late File _image = File(localStorage.getItem('profilePicture') ??
+      'assets/images/profileImages/images.jpg');
+  final picker = ImagePicker();
 
   String name = localStorage.getItem('fullName') ?? '';
   String username = localStorage.getItem('username') ?? 'Username';
@@ -66,6 +73,7 @@ class UserProfileState extends State<UserProfile> {
         );
       },
     );
+    retrieveLostData();
     super.initState();
   }
 
@@ -133,18 +141,21 @@ class UserProfileState extends State<UserProfile> {
                     child: Column(
                       children: [
                         // Profile picture
-                        CircleAvatar(
-                          radius: screenWidth * 0.20,
-                          backgroundColor: AppColors.iconColor(context),
+                        GestureDetector(
+                          onTap: () {
+                            _showSelectionDialog();
+                          },
                           child: CircleAvatar(
-                            radius: screenWidth * 0.19,
-                            backgroundImage: const AssetImage(
-                              'assets/images/profileImages/images.jpg',
-                            ),
-                            onBackgroundImageError: (_, __) => const Icon(
-                              Icons.person,
-                              size: 75,
-                              color: Colors.white,
+                            radius: screenWidth * 0.20,
+                            backgroundColor: AppColors.iconColor(context),
+                            child: CircleAvatar(
+                              radius: screenWidth * 0.19,
+                              backgroundImage: FileImage(_image),
+                              onBackgroundImageError: (_, __) => const Icon(
+                                Icons.person,
+                                size: 75,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -249,6 +260,57 @@ class UserProfileState extends State<UserProfile> {
           ),
         ],
       ),
+    );
+  }
+
+  Future<void> retrieveLostData() async {
+    final LostDataResponse response = await picker.retrieveLostData();
+    if (response.isEmpty) {
+      return;
+    }
+    if (response.file != null) {
+      setState(() {
+        if (response.files != null) {
+          _image = response.file as File;
+        }
+      });
+    }
+  }
+
+  Future selectOrTakePhoto(ImageSource imageSource) async {
+    final pickedFile = await picker.pickImage(source: imageSource);
+    setState(
+      () {
+        if (pickedFile != null) {
+          _image = File(pickedFile.path);
+          localStorage.setItem('profilePicture', pickedFile.path);
+        }
+      },
+    );
+  }
+
+  Future _showSelectionDialog() async {
+    await showDialog(
+      builder: (context) => SimpleDialog(
+        title: const Text('Select photo'),
+        children: <Widget>[
+          SimpleDialogOption(
+            child: const Text('From gallery'),
+            onPressed: () {
+              selectOrTakePhoto(ImageSource.gallery);
+              Navigator.pop(context);
+            },
+          ),
+          SimpleDialogOption(
+            child: const Text('Take a photo'),
+            onPressed: () {
+              selectOrTakePhoto(ImageSource.camera);
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+      context: context,
     );
   }
 }

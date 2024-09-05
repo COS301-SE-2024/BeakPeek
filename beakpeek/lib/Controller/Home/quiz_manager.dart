@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore, use_build_context_synchronously, lines_longer_than_80_chars
+
 import 'dart:convert';
 import 'dart:math';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -7,16 +9,15 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class QuizManager {
-  QuizManager._internal();
-  static final QuizManager _instance = QuizManager._internal();
-
   factory QuizManager() {
     return _instance;
   }
+  QuizManager._internal();
+  static final QuizManager _instance = QuizManager._internal();
   final Globals Global = global;
   late List<Bird> Birds = Global.allBirdsList;
 
-  List<QuizInstance> _preloadedQuizzes = [];
+  final List<QuizInstance> _preloadedQuizzes = [];
 
   List<QuizInstance> get preloadedQuizzes => _preloadedQuizzes;
 
@@ -31,9 +32,9 @@ class QuizManager {
   }
 
   Future<QuizInstance> createQuizInstance() async {
-    List<Bird> selectedBirds = selectRandomBirds(Birds, 4);
-    Bird correctBird = selectedBirds[Random().nextInt(4)];
-    List<String> images = await getImages(http.Client(), correctBird);
+    final List<Bird> selectedBirds = selectRandomBirds(Birds, 4);
+    final Bird correctBird = selectedBirds[Random().nextInt(4)];
+    final List<String> images = await getImages(http.Client(), correctBird);
     return QuizInstance(
       selectedBirds: selectedBirds,
       correctBird: correctBird,

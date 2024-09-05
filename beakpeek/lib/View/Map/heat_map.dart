@@ -43,7 +43,7 @@ class HeatMapState extends State<HeatMap> {
     } else if (reportingRate < 90) {
       return const Color.fromARGB(255, 103, 255, 108).withOpacity(0.8);
     } else {
-      return Color.fromARGB(255, 1, 201, 34).withOpacity(0.8);
+      return const Color.fromARGB(255, 1, 201, 34).withOpacity(0.8);
     }
   }
 

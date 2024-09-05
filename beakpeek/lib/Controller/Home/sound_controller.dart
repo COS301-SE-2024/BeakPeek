@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:http/http.dart' as http;
@@ -5,7 +7,7 @@ import 'dart:convert';
 
 class BirdSoundPlayer extends StatefulWidget {
   const BirdSoundPlayer(
-      {required this.commonGroup, required this.commonSpecies});
+      {super.key, required this.commonGroup, required this.commonSpecies});
 
   final String commonGroup;
   final String commonSpecies;
@@ -89,7 +91,8 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? CircularProgressIndicator() // Show a loading indicator while fetching
+        ? const CircularProgressIndicator()
+        // Show a loading indicator while fetching
         : IconButton(
             icon: Icon(isPlaying ? Icons.stop : Icons.play_arrow),
             onPressed: fileUrl != null
