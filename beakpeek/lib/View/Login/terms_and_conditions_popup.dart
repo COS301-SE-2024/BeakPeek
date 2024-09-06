@@ -12,6 +12,8 @@ class TermsAndConditionsPopup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -19,20 +21,24 @@ class TermsAndConditionsPopup extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
-            'Terms and conditions',
-            style: GlobalStyles.contentBold(context),
+            'Terms and Conditions',
+            style: GlobalStyles.smallHeadingPrimary(context),
           ),
         ),
-        SizedBox(height: screenHeight * 0.009),
+        SizedBox(height: screenHeight * 0.01),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text(
-            '''By click accept you agree to all terms and conditions set in the documents below''',
-            style: GlobalStyles.contentSecondary(context),
+          child: SizedBox(
+            width: screenWidth * 0.8,
+            child: Text(
+              '''By clicking accept you agree to all terms and conditions set in the documents below:''',
+              style: GlobalStyles.contentPrimary(context)
+                  .copyWith(fontWeight: FontWeight.w400)
+                  .copyWith(fontSize: 14),
+            ),
           ),
         ),
-        const SizedBox(height: 8.0),
-        const Divider(),
+        SizedBox(height: screenHeight * 0.01),
         OutlinedButton(
           onPressed: () {
             localStorage.setItem('termsAndCondition', 'true');

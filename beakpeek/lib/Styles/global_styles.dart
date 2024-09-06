@@ -190,8 +190,8 @@ abstract class GlobalStyles {
     return TextStyle(
       fontSize: 15,
       fontFamily: 'SF Pro Display',
-      fontWeight: FontWeight.w400,
-      color: AppColors.tertiaryColor(context),
+      fontWeight: FontWeight.w500,
+      color: AppColors.filterColor(context),
     );
   }
 
@@ -199,7 +199,7 @@ abstract class GlobalStyles {
     return TextStyle(
       fontSize: 14,
       fontFamily: 'SF Pro Display',
-      fontWeight: FontWeight.w300,
+      fontWeight: FontWeight.w400,
       color: AppColors.greyColor(context),
     );
   }

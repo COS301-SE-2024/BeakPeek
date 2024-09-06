@@ -52,9 +52,12 @@ Widget getData(Bird bird, Function goBird, BuildContext context) {
               goBird(bird);
             }
           },
-          style: GlobalStyles.buttonFilterPrimaryFilled(context),
+          style: GlobalStyles.buttonFilterPrimaryFilled(context).copyWith(
+            elevation: WidgetStateProperty.all(2),
+          ),
           child: Text(seen ? 'Seen' : 'Add to Life List',
-              style: GlobalStyles.primaryButtonText(context)),
+              style: GlobalStyles.smallContentPrimary(context)
+                  .copyWith(color: Colors.white)),
         ),
       ],
     ),

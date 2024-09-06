@@ -86,65 +86,67 @@ class _SightingsState extends State<Sightings> {
           children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Dropdown Button
-                  DropdownButton<String>(
-                    dropdownColor: AppColors.popupColor(context),
-                    value: selectedFilter,
-                    items: [
-                      DropdownMenuItem(
-                        value: 'name',
-                        child: Text(
-                          'Name',
-                          style: GlobalStyles.contentPrimary(context),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Row(
+                  children: [
+                    // Dropdown Button
+                    DropdownButton<String>(
+                      dropdownColor: AppColors.popupColor(context),
+                      value: selectedFilter,
+                      items: [
+                        DropdownMenuItem(
+                          value: 'name',
+                          child: Text(
+                            'Name',
+                            style: GlobalStyles.contentPrimary(context),
+                          ),
                         ),
-                      ),
-                      DropdownMenuItem(
-                        value: 'rarity',
-                        child: Text(
-                          'Rarity',
-                          style: GlobalStyles.contentPrimary(context),
+                        DropdownMenuItem(
+                          value: 'rarity',
+                          child: Text(
+                            'Rarity',
+                            style: GlobalStyles.contentPrimary(context),
+                          ),
                         ),
-                      ),
-                    ],
-                    onChanged: onFilterChanged,
-                    style: GlobalStyles.primaryButtonText(context),
-                    underline: Container(),
-                  ),
-                  // Ascending button
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(right: 8.0),
-                        child: SizedBox(
-                          width: screenWidth * 0.31,
+                      ],
+                      onChanged: onFilterChanged,
+                      style: GlobalStyles.primaryButtonText(context),
+                      underline: Container(),
+                    ),
+                    const SizedBox(width: 16.0),
+                    // Ascending and Descending buttons
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 80.0,
                           height: 34.0,
                           child: OutlinedButton(
                             style: GlobalStyles.buttonPrimaryOutlined(context),
                             onPressed: reportRateASC,
-                            child: Text('Ascending',
-                                style:
-                                    GlobalStyles.smallContentPrimary(context)),
+                            child: Icon(
+                              Icons.arrow_upward,
+                              color: AppColors.iconColor(context),
+                            ),
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: screenWidth * 0.31,
-                        height: 34.0,
-                        child: OutlinedButton(
-                          style: GlobalStyles.buttonPrimaryOutlined(context),
-                          onPressed: reportRateDESC,
-                          child: Text('Descending',
-                              style: GlobalStyles.smallContentPrimary(context)),
+                        const SizedBox(width: 8.0),
+                        SizedBox(
+                          width: 80.0,
+                          height: 34.0,
+                          child: OutlinedButton(
+                            style: GlobalStyles.buttonPrimaryOutlined(context),
+                            onPressed: reportRateDESC,
+                            child: Icon(
+                              Icons.arrow_downward,
+                              color: AppColors.iconColor(context),
+                            ),
+                          ),
                         ),
-                      ),
-                    ],
-                  ),
-                  // Descending button
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
