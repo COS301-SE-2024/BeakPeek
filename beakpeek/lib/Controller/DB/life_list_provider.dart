@@ -43,11 +43,15 @@ class LifeListProvider {
   Future<void> insertBird(Bird bird) async {
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
-      await db.insert(
+      await db
+          .insert(
         'birds',
         bird.toMapLIfe(),
         conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      )
+          .then((value) {
+        print('inserted $value + $bird');
+      });
     }
   }
 

@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/sound_controller.dart';
-import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
@@ -32,21 +32,36 @@ class BirdPage extends StatefulWidget {
 
 class _BirdPageState extends State<BirdPage> {
   late Future<Map<String, dynamic>?> birdFuture;
+  late String seenText;
+  late final LifeListProvider lifeList = LifeListProvider.instance;
 
   @override
   void initState() {
+    seenText = isSeenGS(widget.commonGroup, widget.commonSpecies)
+        ? 'Seen'
+        : 'Add to Life List';
+    global.updateLife();
     super.initState();
     birdFuture =
         ApiService().fetchBirdInfo(widget.commonGroup, widget.commonSpecies);
+  }
+
+  void addToLifeList() {
+    if (!isSeenGS(widget.commonGroup, widget.commonSpecies)) {
+      setState(
+        () {
+          seenText = 'Seen';
+          up_func.addExp(20);
+          global.updateLife();
+        },
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    String seenText = isSeenGS(widget.commonGroup, widget.commonSpecies)
-        ? 'Seen'
-        : 'Add to Life List';
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
@@ -87,9 +102,7 @@ class _BirdPageState extends State<BirdPage> {
                   } else if (!snapshot.hasData) {
                     return const Center(child: Text('No bird info found'));
                   }
-
                   final birdData = snapshot.data!;
-
                   return Padding(
                     padding: EdgeInsets.all(screenWidth * 0.04),
                     child: Column(
@@ -170,9 +183,11 @@ class _BirdPageState extends State<BirdPage> {
                                       size: 20,
                                     ),
                                     const SizedBox(width: 8),
-                                    Text('Description',
-                                        style: GlobalStyles.smallHeadingPrimary(
-                                            context)),
+                                    Text(
+                                      'Description',
+                                      style: GlobalStyles.smallHeadingPrimary(
+                                          context),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 8),
@@ -207,38 +222,10 @@ class _BirdPageState extends State<BirdPage> {
                   SizedBox(
                     width: screenWidth * 0.8,
                     child: FilledButton(
-                      onPressed: () {
-                        up_func.addExp(20);
-                        global.lifeList.insertBird(Bird(
-                            id: 123,
-                            commonGroup: widget.commonGroup,
-                            commonSpecies: widget.commonSpecies,
-                            genus: 'genus',
-                            species: 'species',
-                            fullProtocolRR: 0.0,
-                            fullProtocolNumber: 0,
-                            latestFP: '',
-                            jan: 0,
-                            feb: 0,
-                            mar: 0,
-                            apr: 0,
-                            may: 0,
-                            jun: 0,
-                            jul: 0,
-                            aug: 0,
-                            sep: 0,
-                            oct: 0,
-                            nov: 0,
-                            dec: 0,
-                            totalRecords: 0,
-                            reportingRate: 0.0));
-                        global.updateLife();
-                        setState(() {
-                          seenText =
-                              isSeenGS(widget.commonGroup, widget.commonSpecies)
-                                  ? 'Seen'
-                                  : 'Add to Life List';
-                        });
+                      onPressed: () async {
+                        await lifeList
+                            .insertBird(global.getDefualtBirdData(widget.id));
+                        addToLifeList();
                       },
                       style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
                         shadowColor: WidgetStateProperty.all(

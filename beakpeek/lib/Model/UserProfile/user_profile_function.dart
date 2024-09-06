@@ -8,6 +8,7 @@ import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
+import 'package:progress_bar_chart/progress_bar_chart.dart';
 
 const List<String> provinces = [
   'easterncape',
@@ -27,18 +28,6 @@ ThemeMode getThemeMode(String data) {
   }
   return ThemeMode.dark;
 }
-
-// ThemeMode changeThemeMode(LocalStorage localStorage) {
-//   final check = localStorage.getItem('theme') ?? '';
-//   if (check.isEmpty) {
-//     localStorage.setItem('theme', 'dark');
-//     ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
-//     return ThemeMode.dark;
-//   }
-//   localStorage.setItem('theme', '');
-//   ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
-//   return ThemeMode.light;
-// }
 
 Widget getIcon(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';
@@ -118,10 +107,24 @@ double getPercent(int numTotalBirds, int birdsInLife) {
 }
 
 Widget levelProgressBar(int progress, int level) {
-  return FAProgressBar(
-    currentValue: progressPercentage(progress, level),
-    progressColor: AppColors.tertiaryColorDark,
-    size: 15,
+  final List<StatisticsItem> colors = [
+    StatisticsItem(const Color.fromARGB(255, 72, 139, 194),
+        (progress / getNextLevelExpRequired(level) * 100),
+        title: 'Exp'),
+    StatisticsItem(
+        const Color.fromARGB(255, 225, 9, 9),
+        ((getNextLevelExpRequired(level) - progress).toDouble() /
+                getNextLevelExpRequired(level) *
+                100)
+            .toDouble(),
+        title: 'Need Exp')
+  ];
+  return ProgressBarChart(
+    values: colors,
+    height: 30,
+    totalPercentage: 100,
+    borderRadius: 20,
+    unitLabel: 'Exp',
   );
 }
 
@@ -131,7 +134,7 @@ int getLevelExp() {
 }
 
 int getNextLevelExpRequired(int level) {
-  final double number = pow((5 * level), 2) + 100;
+  final double number = pow((5 * 10), -0.00005) * pow(level, 2) + 100;
   return ((number / 1000.0) * 1000).ceil();
 }
 
@@ -151,7 +154,7 @@ void updateLevelStats() {
   final String lvl = localStorage.getItem('level') ?? '0';
   int expProgress = int.parse(exp);
   int nextLevelEXP = getNextLevelExpRequired(int.parse(lvl));
-  while (nextLevelEXP <= expProgress) {
+  if (nextLevelEXP <= expProgress) {
     final int level = int.parse(lvl) + 1;
     localStorage.setItem('level', level.toString());
     expProgress = expProgress - nextLevelEXP;

@@ -2,8 +2,6 @@ import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
-    as up_func;
 
 final colorArray = [
   Colors.red,
@@ -25,7 +23,6 @@ int getColorForReportingRate(double reportingRate) {
 }
 
 Widget getData(Bird bird, Function goBird, BuildContext context) {
-  final bool seen = isSeen(bird);
   return ListTile(
     title: Text(
       bird.commonGroup.isNotEmpty
@@ -43,19 +40,12 @@ Widget getData(Bird bird, Function goBird, BuildContext context) {
         const SizedBox(width: 10),
         FilledButton(
           onPressed: () {
-            if (seen) {
-              goBird(bird);
-            } else {
-              up_func.addExp(20);
-              global.lifeList.insertBird(bird);
-              global.updateLife();
-              goBird(bird);
-            }
+            goBird(bird);
           },
           style: GlobalStyles.buttonFilterPrimaryFilled(context).copyWith(
             elevation: WidgetStateProperty.all(2),
           ),
-          child: Text(seen ? 'Seen' : 'Add to Life List',
+          child: Text('View Bird',
               style: GlobalStyles.smallContentPrimary(context)
                   .copyWith(color: Colors.white)),
         ),

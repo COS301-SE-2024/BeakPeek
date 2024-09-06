@@ -72,7 +72,7 @@ Future<List> getProvincesBirdIsIn(
     } else {
       print('Request failed with status: ${response.statusCode}');
       print('Failed to load provinces for $commonSpecies, $commonGroup');
-      return [];
+      return [true, true, true, true, true, true, true, true, true];
     }
     return isIn;
   } catch (error) {

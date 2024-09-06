@@ -27,8 +27,7 @@ class UserProfileState extends State<UserProfile> {
   late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
-  late File _image = File(localStorage.getItem('profilePicture') ??
-      'assets/images/profileImages/images.jpg');
+  late File _image = File(/*localStorage.getItem('profilePicture') ??*/ '');
   final picker = ImagePicker();
 
   String name = localStorage.getItem('fullName') ?? '';
@@ -148,10 +147,13 @@ class UserProfileState extends State<UserProfile> {
                               backgroundColor: AppColors.iconColor(context),
                               child: CircleAvatar(
                                 radius: screenWidth * 0.19,
-                                backgroundImage: FileImage(_image),
-                                onBackgroundImageError: (_, __) => const Icon(
-                                  Icons.person,
-                                  size: 75,
+                                backgroundImage: FileImage(File(
+                                    'assets/images/profileImages/images.jpg')),
+                                foregroundImage: FileImage(File(
+                                    'assets/images/profileImages/images.jpg')),
+                                onBackgroundImageError: (_, __) => Image.file(
+                                  File(
+                                      'assets/images/profileImages/images.jpg'),
                                   color: Colors.white,
                                 ),
                               ),
@@ -183,7 +185,10 @@ class UserProfileState extends State<UserProfile> {
                       const SizedBox(height: 6),
                       SizedBox(
                         height: verticalPadding * 3,
-                        child: levelProgressBar(userExp, level),
+                        width: screenWidth,
+                        child: Center(
+                          child: levelProgressBar(userExp, level),
+                        ),
                       ),
                     ],
                   ),

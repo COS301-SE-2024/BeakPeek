@@ -1,3 +1,4 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
@@ -17,13 +18,16 @@ class Sightings extends StatefulWidget {
 }
 
 class _SightingsState extends State<Sightings> {
+  // Add a variable to store the dropdown value
+  late final LifeListProvider lifeList = LifeListProvider.instance;
   late List<Bird> loaded = [];
-  String? selectedFilter = 'name'; // Add a variable to store the dropdown value
-
+  late Future<List<Bird>> listBirds;
+  String? selectedFilter = 'name';
   @override
   void initState() {
     global.updateLife();
     loaded = global.birdList;
+    listBirds = lifeList.fetchLifeList();
     super.initState();
   }
 
@@ -40,6 +44,7 @@ class _SightingsState extends State<Sightings> {
 
   void setLoaded(List<Bird> temp) {
     setState(() {
+      global.updateLife();
       loaded = temp;
     });
   }
@@ -151,7 +156,12 @@ class _SightingsState extends State<Sightings> {
             ),
             SizedBox(
               height: screenHeight * 0.75,
-              child: getLiveList(loaded, goBird, context),
+              child: getLiveList(loaded, goBird, context), //FutureBuilder(
+              //   future: listBirds,
+              //   builder: (context, snapshot) {
+
+              //   },
+              // ),
             ),
           ],
         ),
