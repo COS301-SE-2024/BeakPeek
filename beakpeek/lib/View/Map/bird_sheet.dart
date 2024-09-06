@@ -1,4 +1,5 @@
-// ignore_for_file: avoid_print, library_private_types_in_public_api
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: avoid_print, library_private_types_in_public_api, sized_box_for_whitespace
 
 import 'dart:convert';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
