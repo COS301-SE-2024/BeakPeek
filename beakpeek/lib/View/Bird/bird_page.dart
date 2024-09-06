@@ -96,16 +96,27 @@ class _BirdPageState extends State<BirdPage> {
                       children: [
                         SizedBox(height: screenHeight * 0.02),
                         Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const SizedBox(width: 16.0),
                             Text(
                               birdData['name'],
                               style: GlobalStyles.smallHeadingPrimary(context),
                             ),
-                            const SizedBox(width: 16.0),
-                            BirdSoundPlayer(
-                                commonGroup: widget.commonGroup,
-                                commonSpecies: widget.commonSpecies),
+                            Row(
+                              children: [
+                                BirdSoundPlayer(
+                                    commonGroup: widget.commonGroup,
+                                    commonSpecies: widget.commonSpecies),
+                                const SizedBox(width: 8),
+                                Text(
+                                  'Play Bird Call',
+                                  style:
+                                      GlobalStyles.smallContentPrimary(context)
+                                          .copyWith(
+                                              fontWeight: FontWeight.bold),
+                                ),
+                              ],
+                            ),
                           ],
                         ),
                         SizedBox(height: screenHeight * 0.02),
@@ -195,51 +206,58 @@ class _BirdPageState extends State<BirdPage> {
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Column(
                 children: [
-                  FilledButton(
-                    onPressed: () {
-                      up_func.addExp(20);
-                      global.lifeList.insertBird(Bird(
-                          id: 123,
-                          commonGroup: widget.commonGroup,
-                          commonSpecies: widget.commonSpecies,
-                          genus: 'genus',
-                          species: 'species',
-                          fullProtocolRR: 0.0,
-                          fullProtocolNumber: 0,
-                          latestFP: '',
-                          jan: 0,
-                          feb: 0,
-                          mar: 0,
-                          apr: 0,
-                          may: 0,
-                          jun: 0,
-                          jul: 0,
-                          aug: 0,
-                          sep: 0,
-                          oct: 0,
-                          nov: 0,
-                          dec: 0,
-                          totalRecords: 0,
-                          reportingRate: 0.0));
-                      global.updateLife();
-                      setState(() {
-                        seenText =
-                            isSeenGS(widget.commonGroup, widget.commonSpecies)
-                                ? 'Seen'
-                                : 'Add to Life List';
-                      });
-                    },
-                    style: GlobalStyles.buttonPrimaryFilled(context),
-                    child: Text(
-                      seenText,
-                      style: GlobalStyles.primaryButtonText(context),
+                  SizedBox(
+                    width: screenWidth * 0.8,
+                    child: FilledButton(
+                      onPressed: () {
+                        up_func.addExp(20);
+                        global.lifeList.insertBird(Bird(
+                            id: 123,
+                            commonGroup: widget.commonGroup,
+                            commonSpecies: widget.commonSpecies,
+                            genus: 'genus',
+                            species: 'species',
+                            fullProtocolRR: 0.0,
+                            fullProtocolNumber: 0,
+                            latestFP: '',
+                            jan: 0,
+                            feb: 0,
+                            mar: 0,
+                            apr: 0,
+                            may: 0,
+                            jun: 0,
+                            jul: 0,
+                            aug: 0,
+                            sep: 0,
+                            oct: 0,
+                            nov: 0,
+                            dec: 0,
+                            totalRecords: 0,
+                            reportingRate: 0.0));
+                        global.updateLife();
+                        setState(() {
+                          seenText =
+                              isSeenGS(widget.commonGroup, widget.commonSpecies)
+                                  ? 'Seen'
+                                  : 'Add to Life List';
+                        });
+                      },
+                      style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
+                        shadowColor: MaterialStateProperty.all(Colors.black),
+                      ),
+                      child: Text(
+                        seenText,
+                        style: GlobalStyles.primaryButtonText(context),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 8.0),
                   SizedBox(
                     width: screenWidth * 0.8,
                     child: OutlinedButton(
-                      style: GlobalStyles.buttonPrimaryFilled(context),
+                      style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
+                        shadowColor: MaterialStateProperty.all(Colors.black),
+                      ),
                       child: Text('Show Heat Map',
                           style: GlobalStyles.primaryButtonText(context)),
                       onPressed: () {
