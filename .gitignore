@@ -47,4 +47,3 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-BeakPeek/lib/config_azure.dart
