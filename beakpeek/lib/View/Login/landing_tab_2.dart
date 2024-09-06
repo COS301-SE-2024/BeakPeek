@@ -13,7 +13,6 @@ class LandingTab2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
       body: SafeArea(
@@ -79,11 +78,12 @@ class LandingTab2 extends StatelessWidget {
                         loginFunction(context);
                       } else {
                         showPopupCard(
+                          dimBackground: true,
                           context: context,
                           builder: (context) {
                             return PopupCard(
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(12.0),
                               ),
                               child: TermsAndConditionsPopup(),
                             );

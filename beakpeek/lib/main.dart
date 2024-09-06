@@ -28,6 +28,7 @@ class MainState extends State<Main> {
         ? accessToken = ''
         // ignore: avoid_print
         : print(accessToken);
+    localStorage.setItem('termsAndCondition', 'false');
     globel.init();
     final themeProvider = ThemeProvider();
     themeProvider.setInitialTheme(localStorage.getItem('theme') ?? '');
