@@ -12,6 +12,7 @@ abstract class AppColors {
   static const Color primaryButtonTextColorLight = Color(0xffffffff);
   static const Color secondaryButtonTextColorLight = Color(0xff033a30);
   static const Color iconColorLight = primaryColorLight;
+  static const Color filterColorLight = primaryColorLight;
 
   // Dark mode colors
   static const Color primaryColorDark = Color(0xffdde6e4);
@@ -24,12 +25,20 @@ abstract class AppColors {
   static const Color primaryButtonTextColorDark = Color(0xffdde6e4);
   static const Color secondaryButtonTextColorDark = Color(0xffdde6e4);
   static const Color iconColorDark = primaryColorDark;
+  static const Color filterColorDark = tertiaryColorDark;
 
   // Get primary color
   static Color primaryColor(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark
         ? primaryColorDark
         : primaryColorLight;
+  }
+
+  // Get primary color
+  static Color filterColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? filterColorDark
+        : filterColorLight;
   }
 
   // Get primary button colour
