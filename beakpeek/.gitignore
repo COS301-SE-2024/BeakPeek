@@ -41,7 +41,7 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
-/android/app/src/main/AndroidManifest.xml
+
 # Azure Config file
 /lib/config_azure.dart
 /test/home_test.dart
