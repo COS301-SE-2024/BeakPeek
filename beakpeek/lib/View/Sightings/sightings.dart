@@ -120,10 +120,10 @@ class _SightingsState extends State<Sightings> {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: SizedBox(
-                          width: screenWidth * 0.30,
+                          width: screenWidth * 0.31,
                           height: 34.0,
                           child: OutlinedButton(
-                            style: GlobalStyles.buttonPrimaryFilled(context),
+                            style: GlobalStyles.buttonPrimaryOutlined(context),
                             onPressed: reportRateASC,
                             child: Text('Ascending',
                                 style:
@@ -132,10 +132,10 @@ class _SightingsState extends State<Sightings> {
                         ),
                       ),
                       SizedBox(
-                        width: screenWidth * 0.30,
+                        width: screenWidth * 0.31,
                         height: 34.0,
                         child: OutlinedButton(
-                          style: GlobalStyles.buttonPrimaryFilled(context),
+                          style: GlobalStyles.buttonPrimaryOutlined(context),
                           onPressed: reportRateDESC,
                           child: Text('Descending',
                               style: GlobalStyles.smallContentPrimary(context)),

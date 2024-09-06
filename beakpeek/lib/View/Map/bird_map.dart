@@ -256,7 +256,7 @@ class BirdMapState extends State<BirdMap> {
 
   Future<void> _loadKmlData() async {
     try {
-      print(_selectedProvince);
+      // print(_selectedProvince);
       final kmlString = await rootBundle.loadString(
           'assets/province_${_selectedProvince.toLowerCase().replaceAll(" ", "")}.kml');
       final polygonsData = KmlParser.parseKml(kmlString);
@@ -271,7 +271,7 @@ class BirdMapState extends State<BirdMap> {
           return Polygon(
             polygonId: PolygonId(id),
             points: coordinates,
-            strokeColor: Colors.red,
+            strokeColor: Colors.grey.withOpacity(0.1),
             fillColor: Colors.transparent,
             strokeWidth: 2,
             consumeTapEvents: true,

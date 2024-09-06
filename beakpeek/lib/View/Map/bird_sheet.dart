@@ -37,6 +37,7 @@ class _BirdSheetState extends State<BirdSheet> {
   void _refreshBirdList() {
     _birdList = fetchBirds(widget.pentadId, http.Client()).then((birds) {
       // Sort the list of birds based on the selected sort option
+      print(birds[0]);
       return _sortBirds(birds, _selectedSortOption);
     }).catchError((error) {
       // Handle error fetching birds
@@ -63,7 +64,7 @@ class _BirdSheetState extends State<BirdSheet> {
         birds.sort((a, b) => b.commonGroup.compareTo(a.commonGroup));
         break;
       default:
-        // No sorting
+        birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
         break;
     }
     return birds;
@@ -86,7 +87,8 @@ class _BirdSheetState extends State<BirdSheet> {
         alignment: Alignment.bottomCenter,
         heightFactor: _heightFactor,
         child: Material(
-          color: AppColors.popupColor(context),
+          color: AppColors.backgroundColor(
+              context), // Set the background color for better visibility
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
@@ -213,14 +215,13 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
-      print('HELLO $jsonResponse');
       return jsonResponse.map((data) => Bird.fromJson(data)).toList();
     } else {
       print('Request failed with status: ${response.statusCode}');
       throw Exception('Failed to load birds');
     }
   } catch (error) {
-    print('Error fetching birds BRUH: $error');
+    print('Error fetching birds: $error');
     throw Exception(error);
   }
 }
@@ -261,16 +262,22 @@ class BirdList extends StatelessWidget {
               );
             },
             child: ListTile(
-              tileColor: AppColors.popupColor(context), // Alternate row color
+              tileColor: index % 2 == 0
+                  ? AppColors.backgroundColor(context)
+                  : AppColors.popupColor(context), // Alternate row color
               title: Text(
                 bird.commonGroup != 'None'
-                    ? '${bird.commonGroup} ${bird.commonSpecies}'
+                    ? '${bird.commonSpecies} ${bird.commonGroup}'
                     : bird.commonSpecies,
-                style: GlobalStyles.contentPrimary(context),
+                style: TextStyle(
+                  color: AppColors.primaryColor(context),
+                ),
               ),
               subtitle: Text(
                 'Scientific Name: ${bird.genus} ${bird.species}',
-                style: GlobalStyles.smallContentPrimary(context),
+                style: TextStyle(
+                  color: AppColors.secondaryColor(context),
+                ),
               ),
               trailing: Row(
                 mainAxisSize: MainAxisSize.min,
@@ -278,7 +285,7 @@ class BirdList extends StatelessWidget {
                   Text(
                     '${reportingRate.toStringAsFixed(2)}%',
                     style: TextStyle(
-                      color: AppColors.greyColor(context),
+                      color: AppColors.secondaryColor(context),
                     ),
                   ),
                   const SizedBox(width: 8),
