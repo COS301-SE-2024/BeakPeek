@@ -93,29 +93,27 @@ class _BirdPageState extends State<BirdPage> {
                   return Padding(
                     padding: EdgeInsets.all(screenWidth * 0.04),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(height: screenHeight * 0.02),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0),
+                          child: Text(
+                            birdData['name'],
+                            style: GlobalStyles.smallHeadingPrimary(context),
+                          ),
+                        ),
+                        SizedBox(height: screenHeight * 0.01),
                         Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
+                            BirdSoundPlayer(
+                                commonGroup: widget.commonGroup,
+                                commonSpecies: widget.commonSpecies),
+                            const SizedBox(width: 8),
                             Text(
-                              birdData['name'],
-                              style: GlobalStyles.smallHeadingPrimary(context),
-                            ),
-                            Row(
-                              children: [
-                                BirdSoundPlayer(
-                                    commonGroup: widget.commonGroup,
-                                    commonSpecies: widget.commonSpecies),
-                                const SizedBox(width: 8),
-                                Text(
-                                  'Play Bird Call',
-                                  style:
-                                      GlobalStyles.smallContentPrimary(context)
-                                          .copyWith(
-                                              fontWeight: FontWeight.bold),
-                                ),
-                              ],
+                              'Play Bird Call',
+                              style: GlobalStyles.smallContentPrimary(context)
+                                  .copyWith(fontWeight: FontWeight.bold),
                             ),
                           ],
                         ),
