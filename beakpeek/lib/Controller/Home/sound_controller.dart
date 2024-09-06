@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, library_private_types_in_public_api
 
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:http/http.dart' as http;
@@ -93,9 +94,19 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const CircularProgressIndicator()
+        ? SizedBox(
+            width: 24.0, // Set the desired width
+            height: 24.0, // Set the desired height
+            child: CircularProgressIndicator(
+              color: AppColors.primaryColor(context),
+              strokeWidth: 2.0, // Adjust thickness
+            ),
+          )
         : IconButton(
-            icon: Icon(isPlaying ? Icons.stop : Icons.play_arrow),
+            icon: Icon(
+              isPlaying ? Icons.stop : Icons.play_arrow,
+              color: AppColors.tertiaryColor(context),
+            ),
             onPressed: fileUrl != null
                 ? togglePlayPause
                 : null, // Disable button if no file URL
