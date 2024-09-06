@@ -49,16 +49,6 @@ class UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     super.initState();
-    if (username.isEmpty) {
-      username = 'Elm Boog';
-      name = username;
-    }
-    if (bio.isEmpty) {
-      bio = 'Tell us about yourself...';
-    }
-    if (email.isEmpty) {
-      email = 'example@mail.com';
-    }
     birds = lifeList.fetchLifeList();
     numBirds = db.getNumberOfBirdsInProvinces(Client());
     level = int.parse(levelStore);
@@ -404,7 +394,7 @@ class _StateProfileField extends State<ProfileField> {
               decoration: InputDecoration(
                 labelText: content.isEmpty ? label : content,
                 hintText: content,
-                helperText: 'supporting text',
+                helperText: label,
               ),
             ),
           ),

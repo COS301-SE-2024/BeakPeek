@@ -1,4 +1,5 @@
 import 'package:beakpeek/Model/Globals/globals.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:localstorage/localstorage.dart';
@@ -23,6 +24,10 @@ class MainState extends State<Main> {
   @override
   void initState() {
     super.initState();
+    localStorage.getItem('termsAndCondition') == null
+        ? accessToken = ''
+        // ignore: avoid_print
+        : print(accessToken);
     globel.init();
     final themeProvider = ThemeProvider();
     themeProvider.setInitialTheme(localStorage.getItem('theme') ?? '');

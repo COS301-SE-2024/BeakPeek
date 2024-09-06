@@ -184,4 +184,32 @@ abstract class GlobalStyles {
       color: AppColors.secondaryButtonTextColor(context),
     );
   }
+
+  //-----------------------Search Styles------------------//
+  static TextStyle filterTileHeading(BuildContext context) {
+    return TextStyle(
+      fontSize: 15,
+      fontFamily: 'SF Pro Display',
+      fontWeight: FontWeight.w400,
+      color: AppColors.tertiaryColor(context),
+    );
+  }
+
+  static TextStyle filterTileSubHeading(BuildContext context) {
+    return TextStyle(
+      fontSize: 14,
+      fontFamily: 'SF Pro Display',
+      fontWeight: FontWeight.w300,
+      color: AppColors.greyColor(context),
+    );
+  }
+
+  static ButtonStyle buttonFilterPrimaryFilled(BuildContext context) {
+    return FilledButton.styleFrom(
+      side: BorderSide(color: AppColors.primaryButtonColor(context)),
+      backgroundColor: AppColors.primaryButtonColor(context),
+      minimumSize: const Size(128, 30),
+      elevation: 20,
+    );
+  }
 }
