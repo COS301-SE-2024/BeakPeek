@@ -65,6 +65,7 @@ dependencies:
   image_picker: ^1.1.2
   flutter_popup_card: ^0.0.6
   flutter_media_downloader: ^1.0.6
+  flutter_svg: ^1.0.3
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
