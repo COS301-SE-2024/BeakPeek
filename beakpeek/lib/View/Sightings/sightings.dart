@@ -120,25 +120,28 @@ class _SightingsState extends State<Sightings> {
                       Padding(
                         padding: const EdgeInsets.only(right: 8.0),
                         child: SizedBox(
-                          width: screenWidth * 0.31,
+                          width: 80.0,
                           height: 34.0,
                           child: OutlinedButton(
                             style: GlobalStyles.buttonPrimaryOutlined(context),
                             onPressed: reportRateASC,
-                            child: Text('Ascending',
-                                style:
-                                    GlobalStyles.smallContentPrimary(context)),
+                            child: Icon(
+                              Icons.arrow_upward,
+                              color: AppColors.iconColor(context),
+                            ),
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: screenWidth * 0.31,
+                        width: 80.0,
                         height: 34.0,
                         child: OutlinedButton(
                           style: GlobalStyles.buttonPrimaryOutlined(context),
                           onPressed: reportRateDESC,
-                          child: Text('Descending',
-                              style: GlobalStyles.smallContentPrimary(context)),
+                          child: Icon(
+                            Icons.arrow_downward,
+                            color: AppColors.iconColor(context),
+                          ),
                         ),
                       ),
                     ],
