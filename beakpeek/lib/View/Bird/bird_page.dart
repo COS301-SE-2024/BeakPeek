@@ -243,7 +243,9 @@ class _BirdPageState extends State<BirdPage> {
                         });
                       },
                       style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
-                        shadowColor: MaterialStateProperty.all(Colors.black),
+                        shadowColor: WidgetStateProperty.all(
+                            Colors.black.withOpacity(0.15)),
+                        elevation: WidgetStateProperty.all(6.0),
                       ),
                       child: Text(
                         seenText,
@@ -256,7 +258,9 @@ class _BirdPageState extends State<BirdPage> {
                     width: screenWidth * 0.8,
                     child: OutlinedButton(
                       style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
-                        shadowColor: MaterialStateProperty.all(Colors.black),
+                        shadowColor: WidgetStateProperty.all(
+                            Colors.black.withOpacity(0.15)),
+                        elevation: WidgetStateProperty.all(6.0),
                       ),
                       child: Text('Show Heat Map',
                           style: GlobalStyles.primaryButtonText(context)),
