@@ -1,4 +1,5 @@
 import 'package:beakpeek/Controller/Azure/login.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_media_downloader/flutter_media_downloader.dart';
 import 'package:localstorage/localstorage.dart';
@@ -10,34 +11,39 @@ class TermsAndConditionsPopup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenHeight = MediaQuery.of(context).size.height;
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        const SizedBox(height: 24.0),
-        const SizedBox(height: 4.0),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
+        SizedBox(height: screenHeight * 0.05),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Text(
             'Terms and conditions',
+            style: GlobalStyles.contentBold(context),
           ),
         ),
-        const SizedBox(height: 2.0),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: Text('able.bradley@gmail.com'),
+        SizedBox(height: screenHeight * 0.009),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Text(
+            '''By click accept you agree to all terms and conditions set in the documents below''',
+            style: GlobalStyles.contentSecondary(context),
+          ),
         ),
         const SizedBox(height: 8.0),
         const Divider(),
-        TextButton(
+        OutlinedButton(
           onPressed: () {
             localStorage.setItem('termsAndCondition', 'true');
             loginFunction(context);
           },
+          style: GlobalStyles.buttonPrimaryOutlined(context),
           child: const Text('Accept'),
         ),
         const SizedBox(height: 10.0),
         Center(
-          child: ElevatedButton(
+          child: OutlinedButton(
             onPressed: () async {
               _flutterMediaDownloaderPlugin.downloadMedia(context,
                   'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekTermsOfUse.pdf');
@@ -46,9 +52,11 @@ class TermsAndConditionsPopup extends StatelessWidget {
               _flutterMediaDownloaderPlugin.downloadMedia(context,
                   'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekPrivacyPolicy.pdf');
             },
+            style: GlobalStyles.buttonSecondaryOutlined(context),
             child: const Text('Terms and conditions'),
           ),
         ),
+        SizedBox(height: screenHeight * 0.05),
       ],
     );
   }

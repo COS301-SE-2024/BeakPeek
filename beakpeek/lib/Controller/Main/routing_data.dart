@@ -19,8 +19,10 @@ class RoutingData {
             ),
           ),
         )),
-    initialLocation:
-        localStorage.getItem('accessToken') != null ? '/' : '/home',
+    initialLocation: localStorage.getItem('accessToken') == null ||
+            localStorage.getItem('termsAndCondition') == null
+        ? '/'
+        : '/home',
     routes: <RouteBase>[
       GoRoute(
         path: '/map',
