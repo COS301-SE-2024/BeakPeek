@@ -34,7 +34,6 @@ class UserProfileState extends State<UserProfile> {
   String name = localStorage.getItem('fullName') ?? '';
   String username = localStorage.getItem('username') ?? 'Username';
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
-  String email = localStorage.getItem('email') ?? 'example@mail.com';
   String phone = localStorage.getItem('phone') ?? '+123456789';
 
   //level variables
@@ -220,16 +219,6 @@ class UserProfileState extends State<UserProfile> {
                   ),
                   SizedBox(height: verticalPadding),
 
-                  // Email Field
-                  ProfileField(
-                    icon: Icons.email,
-                    label: 'Email',
-                    content: email,
-                    backgroundColor: AppColors.popupColor(context),
-                    change: setInfo,
-                  ),
-                  SizedBox(height: verticalPadding),
-
                   Divider(
                     color: Colors.grey.shade300,
                     thickness: 1,
@@ -398,6 +387,7 @@ class _StateProfileField extends State<ProfileField> {
               },
               decoration: InputDecoration(
                 labelText: content.isEmpty ? label : content,
+                labelStyle: const TextStyle(),
                 hintText: content,
                 helperText: label,
               ),

@@ -9,12 +9,6 @@ import 'package:beakpeek/config_azure.dart' as config;
 import 'package:localstorage/localstorage.dart';
 
 void loginFunction(BuildContext context) async {
-  if (localStorage.getItem('accessToken') != null) {
-    config.loggedIN = true;
-    context.go('/home');
-    return;
-  }
-
   final url = Uri.https(
     'beakpeak.b2clogin.com',
     'beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/authorize',

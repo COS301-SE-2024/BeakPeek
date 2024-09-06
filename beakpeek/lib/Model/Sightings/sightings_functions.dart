@@ -36,9 +36,12 @@ Widget getLiveList(
     List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> items = getWidgetLifeList(birds, goBird, context);
   if (items.isEmpty) {
-    return Text(
-      'No birds seen...',
-      style: GlobalStyles.contentPrimary(context),
+    return Center(
+      child: Text(
+        '''Time to go spot some birds! \n
+            None here yet.''',
+        style: GlobalStyles.contentPrimary(context),
+      ),
     );
   }
   return ListView.builder(

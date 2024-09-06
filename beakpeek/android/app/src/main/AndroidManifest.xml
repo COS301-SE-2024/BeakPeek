@@ -3,7 +3,7 @@
     package="com.example.beakpeek">
 
     <application
-        android:label="beakpeek"
+        android:label="BeakPeek"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <meta-data
