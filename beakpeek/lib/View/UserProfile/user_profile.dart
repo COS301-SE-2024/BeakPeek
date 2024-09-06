@@ -141,16 +141,20 @@ class UserProfileState extends State<UserProfile> {
                           onTap: () {
                             _showSelectionDialog();
                           },
-                          child: CircleAvatar(
-                            radius: screenWidth * 0.20,
-                            backgroundColor: AppColors.iconColor(context),
+                          child: Material(
+                            elevation: 5, // Add elevation here
+                            shape: const CircleBorder(),
                             child: CircleAvatar(
-                              radius: screenWidth * 0.19,
-                              backgroundImage: FileImage(_image),
-                              onBackgroundImageError: (_, __) => const Icon(
-                                Icons.person,
-                                size: 75,
-                                color: Colors.white,
+                              radius: screenWidth * 0.20,
+                              backgroundColor: AppColors.iconColor(context),
+                              child: CircleAvatar(
+                                radius: screenWidth * 0.19,
+                                backgroundImage: FileImage(_image),
+                                onBackgroundImageError: (_, __) => const Icon(
+                                  Icons.person,
+                                  size: 75,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                           ),
@@ -361,44 +365,46 @@ class _StateProfileField extends State<ProfileField> {
     final screenWidth = MediaQuery.of(context).size.width;
     final fieldPadding = EdgeInsets.all(screenWidth * 0.03);
 
-    return Container(
-      padding: widget.padding ?? fieldPadding,
-      decoration: BoxDecoration(
-        color:
-            widget.backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
-        borderRadius: BorderRadius.circular(screenWidth * 0.05),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(
-                widget.icon,
-                color: AppColors.iconColor(context),
-              ),
-              SizedBox(width: screenWidth * 0.02),
-            ],
-          ),
-          Expanded(
-            child: TextField(
+    return Material(
+      elevation: 5, // Add elevation here
+      borderRadius: BorderRadius.circular(screenWidth * 0.05),
+      child: Container(
+        padding: widget.padding ?? fieldPadding,
+        decoration: BoxDecoration(
+          color:
+              widget.backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
+          borderRadius: BorderRadius.circular(screenWidth * 0.05),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  widget.icon,
+                  color: AppColors.iconColor(context),
+                ),
+                SizedBox(width: screenWidth * 0.02),
+              ],
+            ),
+            Expanded(
+                child: TextField(
               controller: _controller,
               onChanged: (value) {
-                setState(
-                  () {
-                    change(label.toLowerCase(), value);
-                    content = value;
-                  },
-                );
+                setState(() {
+                  change(label.toLowerCase(), value);
+                  content = value;
+                });
               },
               decoration: InputDecoration(
                 labelText: content.isEmpty ? label : content,
                 hintText: content,
                 helperText: label,
               ),
-            ),
-          ),
-        ],
+              style: TextStyle(color: AppColors.tertiaryColor(context)),
+            )),
+          ],
+        ),
       ),
     );
   }
