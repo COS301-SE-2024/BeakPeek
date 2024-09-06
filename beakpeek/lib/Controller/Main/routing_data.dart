@@ -20,7 +20,7 @@ class RoutingData {
           ),
         )),
     initialLocation:
-        localStorage.getItem('accessToken') != null ? '/' : '/home',
+        localStorage.getItem('accessToken')!.isEmpty ? '/' : '/home',
     routes: <RouteBase>[
       GoRoute(
         path: '/map',
