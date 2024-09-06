@@ -71,8 +71,8 @@ Future<List> getProvincesBirdIsIn(
       isIn = jsonResponse;
     } else {
       print('Request failed with status: ${response.statusCode}');
-      throw Exception(
-          'Failed to load provinces for $commonSpecies, $commonGroup');
+      print('Failed to load provinces for $commonSpecies, $commonGroup');
+      return [];
     }
     return isIn;
   } catch (error) {

@@ -87,7 +87,7 @@ class _SightingsState extends State<Sightings> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   // Dropdown Button
                   DropdownButton<String>(
@@ -114,25 +114,36 @@ class _SightingsState extends State<Sightings> {
                     underline: Container(),
                   ),
                   // Ascending button
-                  SizedBox(
-                    width: screenWidth * 0.33,
-                    child: OutlinedButton(
-                      style: GlobalStyles.buttonPrimaryFilled(context),
-                      onPressed: reportRateASC,
-                      child: Text('Ascending',
-                          style: GlobalStyles.primaryButtonText(context)),
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: SizedBox(
+                          width: screenWidth * 0.30,
+                          height: 34.0,
+                          child: OutlinedButton(
+                            style: GlobalStyles.buttonPrimaryFilled(context),
+                            onPressed: reportRateASC,
+                            child: Text('Ascending',
+                                style:
+                                    GlobalStyles.smallContentPrimary(context)),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: screenWidth * 0.30,
+                        height: 34.0,
+                        child: OutlinedButton(
+                          style: GlobalStyles.buttonPrimaryFilled(context),
+                          onPressed: reportRateDESC,
+                          child: Text('Descending',
+                              style: GlobalStyles.smallContentPrimary(context)),
+                        ),
+                      ),
+                    ],
                   ),
                   // Descending button
-                  SizedBox(
-                    width: screenWidth * 0.33, // Adjusted to fit the dropdown
-                    child: OutlinedButton(
-                      style: GlobalStyles.buttonPrimaryFilled(context),
-                      onPressed: reportRateDESC,
-                      child: Text('Descending',
-                          style: GlobalStyles.primaryButtonText(context)),
-                    ),
-                  ),
                 ],
               ),
             ),

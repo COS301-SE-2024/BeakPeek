@@ -6,8 +6,15 @@ import 'package:go_router/go_router.dart';
 import 'dart:convert' show jsonDecode;
 import 'package:http/http.dart' as http;
 import 'package:beakpeek/config_azure.dart' as config;
+import 'package:localstorage/localstorage.dart';
 
 void loginFunction(BuildContext context) async {
+  if (localStorage.getItem('accessToken') != null) {
+    config.loggedIN = true;
+    context.go('/home');
+    return;
+  }
+
   final url = Uri.https(
     'beakpeak.b2clogin.com',
     'beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/authorize',
@@ -42,6 +49,7 @@ void loginFunction(BuildContext context) async {
     context.go('/');
   } else {
     config.accessToken = accessToken;
+    localStorage.setItem('accessToken', accessToken);
     config.loggedIN = true;
     context.go('/home');
   }
