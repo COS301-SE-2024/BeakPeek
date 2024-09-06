@@ -225,23 +225,13 @@ class _BirdPageState extends State<BirdPage> {
                               : 'Add to Life List';
                     });
                   },
-                  style: FilledButton.styleFrom(
-                    backgroundColor: AppColors.secondaryColorLight,
-                    minimumSize: const Size(128, 30),
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    shadowColor: Colors.black.withOpacity(0.5),
-                  ),
+                  style: GlobalStyles.buttonPrimaryFilled(context),
                   child: Text(
                     seenText,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 14,
-                    ),
+                    style: GlobalStyles.primaryButtonText(context),
                   ),
                 ),
+                const SizedBox(height: 8.0),
                 SizedBox(
                   width: screenWidth * 0.8,
                   child: OutlinedButton(
