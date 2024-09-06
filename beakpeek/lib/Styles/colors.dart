@@ -7,7 +7,7 @@ abstract class AppColors {
   static const Color tertiaryColorLight = Color(0xffecad31);
   static const Color greyColorLight = Color(0xff888888);
   static const Color backgroundColorLight = Color(0xfff3f1eD);
-  static const Color popupColorLight = Color(0xffffffff);
+  static const Color popupColorLight = Color.fromARGB(255, 240, 238, 232);
   static const Color textColorLight = Color(0xff000000);
   static const Color primaryButtonTextColorLight = Color(0xffffffff);
   static const Color secondaryButtonTextColorLight = Color(0xff033a30);
