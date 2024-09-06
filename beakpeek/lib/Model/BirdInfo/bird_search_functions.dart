@@ -1,6 +1,6 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
-import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
     as up_func;
@@ -24,38 +24,22 @@ int getColorForReportingRate(double reportingRate) {
   }
 }
 
-Widget getData(Bird bird, Function goBird) {
+Widget getData(Bird bird, Function goBird, BuildContext context) {
   final bool seen = isSeen(bird);
   return ListTile(
     title: Text(
-      bird.commonGroup != 'None'
+      bird.commonGroup.isNotEmpty
           ? '${bird.commonGroup} ${bird.commonSpecies}'
           : bird.commonSpecies,
-      style: const TextStyle(
-        color: AppColors.primaryColorLight,
-        fontSize: 16,
-      ),
+      style: GlobalStyles.filterTileHeading(context),
     ),
     subtitle: Text(
       '${bird.genus} ${bird.species}',
-      style: const TextStyle(
-        color: Color.fromARGB(255, 0, 0, 0),
-        fontSize: 14,
-      ),
+      style: GlobalStyles.filterTileSubHeading(context),
     ),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text('${bird.reportingRate}%'),
-        const SizedBox(width: 8),
-        Container(
-          width: 20,
-          height: 20,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            color: colorArray[getColorForReportingRate(bird.reportingRate)],
-          ),
-        ),
         const SizedBox(width: 10),
         FilledButton(
           onPressed: () {
@@ -68,22 +52,9 @@ Widget getData(Bird bird, Function goBird) {
               goBird(bird);
             }
           },
-          style: FilledButton.styleFrom(
-            backgroundColor: AppColors.secondaryColorLight,
-            minimumSize: const Size(128, 30),
-            padding: const EdgeInsets.symmetric(horizontal: 16),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(30.0),
-            ),
-            shadowColor: Colors.black.withOpacity(0.5),
-          ),
-          child: Text(
-            seen ? 'Seen' : 'Add to Life List',
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 14,
-            ),
-          ),
+          style: GlobalStyles.buttonFilterPrimaryFilled(context),
+          child: Text(seen ? 'Seen' : 'Add to Life List',
+              style: GlobalStyles.primaryButtonText(context)),
         ),
       ],
     ),
@@ -120,11 +91,12 @@ bool isSeenGS(String group, String species) {
   return false;
 }
 
-List<Widget> getWidgetListOfBirds(List<Bird> birds, Function goBird) {
+List<Widget> getWidgetListOfBirds(
+    List<Bird> birds, Function goBird, BuildContext context) {
   final List<Widget> listOfBirdWidgets = [];
 
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getData(birds[i], goBird));
+    listOfBirdWidgets.add(getData(birds[i], goBird, context));
   }
   return listOfBirdWidgets;
 }

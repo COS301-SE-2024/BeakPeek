@@ -23,29 +23,27 @@ class FilterableSearchbar extends StatefulWidget {
 
 class _FilterableSearchbarState extends State<FilterableSearchbar> {
   late final LifeListProvider lifeList = LifeListProvider.instance;
-  final Globals globel = global;
 
   final SearchController controller = SearchController();
-  late List<Bird> filteredBirds = globel.allBirdsList;
-  late List<Bird> birds = globel.allBirdsList;
+  late List<Bird> filteredBirds = global.allBirdsList;
+  late List<Bird> birds = global.allBirdsList;
   List<Widget> items = [];
   @override
   void initState() {
     super.initState();
-    items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
   }
 
   void searchBarTyping(String data) {
     setState(() {
       filteredBirds = data.isEmpty ? birds : bsf.searchForBird(birds, data);
-      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird, context);
     });
   }
 
   void sortAlphabetically() {
     setState(() {
       filteredBirds = bsf.sortAlphabetically(filteredBirds);
-      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird, context);
     });
   }
 
@@ -69,7 +67,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   void sortByReportingRate() {
     setState(() {
       filteredBirds = bsf.sortRepotRateDESC(filteredBirds);
-      items = bsf.getWidgetListOfBirds(filteredBirds, goBird);
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird, context);
     });
   }
 
@@ -79,6 +77,9 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
     final screenHeight = MediaQuery.of(context).size.height;
     final logoSize = screenWidth * 0.18;
     final searchBarHeight = screenHeight * 0.06;
+    if (items.isEmpty) {
+      items = bsf.getWidgetListOfBirds(filteredBirds, goBird, context);
+    }
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
