@@ -9,7 +9,6 @@ class LandingTab1 extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
       body: SafeArea(

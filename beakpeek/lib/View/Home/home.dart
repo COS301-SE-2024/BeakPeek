@@ -34,7 +34,6 @@ class HomeState extends State<Home> {
   Future<void> preloadQuizzes() async {
     try {
       await _quizManager.preloadQuizzes(3, context);
-      // ignore: empty_catches
     } catch (e) {}
   }
 

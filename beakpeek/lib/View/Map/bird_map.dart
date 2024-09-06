@@ -1,4 +1,5 @@
-// ignore_for_file: avoid_redundant_argument_values, empty_catches
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: avoid_redundant_argument_values, empty_catches, unused_element, avoid_print
 
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/colors.dart';
@@ -20,7 +21,8 @@ class BirdMap extends StatefulWidget {
 
 class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
-  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593); // Default location
+  LatLng _currentLocation =
+      const LatLng(-25.7559141, 28.2330593); // Default location
   String _selectedProvince = 'Gauteng'; // Capitalized default province
   String _selectedMonth = 'Year-Round'; // Default selected month
   late CameraPosition _cameraPosition;
@@ -28,15 +30,15 @@ class BirdMapState extends State<BirdMap> {
   bool _isLocationFetched = false;
 
   final Map<String, LatLng> provinceCenters = {
-    'Gauteng': LatLng(-25.7559141, 28.2330593),
-    'Western Cape': LatLng(-33.9249, 18.4241),
-    'Eastern Cape': LatLng(-32.2968, 26.4194),
-    'KwaZulu-Natal': LatLng(-29.8587, 31.0218),
-    'Limpopo': LatLng(-23.8962, 29.4486),
-    'Mpumalanga': LatLng(-25.5653, 30.5276),
-    'Free State': LatLng(-29.0852, 26.1596),
-    'Northern Cape': LatLng(-28.7281, 24.7499),
-    'North West': LatLng(-25.6696, 25.9323),
+    'Gauteng': const LatLng(-25.7559141, 28.2330593),
+    'Western Cape': const LatLng(-33.9249, 18.4241),
+    'Eastern Cape': const LatLng(-32.2968, 26.4194),
+    'KwaZulu-Natal': const LatLng(-29.8587, 31.0218),
+    'Limpopo': const LatLng(-23.8962, 29.4486),
+    'Mpumalanga': const LatLng(-25.5653, 30.5276),
+    'Free State': const LatLng(-29.0852, 26.1596),
+    'Northern Cape': const LatLng(-28.7281, 24.7499),
+    'North West': const LatLng(-25.6696, 25.9323),
   };
 
   @override
@@ -146,8 +148,8 @@ class BirdMapState extends State<BirdMap> {
                   setState(() {
                     _polygons = {};
                     _selectedProvince = newValue!;
-                    _cameraPosition =
-                        CameraPosition(target: provinceCenters[newValue]!, zoom: 11.0);
+                    _cameraPosition = CameraPosition(
+                        target: provinceCenters[newValue]!, zoom: 11.0);
                     _loadKmlData();
                   });
 
@@ -155,8 +157,8 @@ class BirdMapState extends State<BirdMap> {
                   mapController.animateCamera(
                       CameraUpdate.newCameraPosition(_cameraPosition));
                 },
-                items: provinceCenters.keys
-                    .map<DropdownMenuItem<String>>((value) {
+                items:
+                    provinceCenters.keys.map<DropdownMenuItem<String>>((value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(

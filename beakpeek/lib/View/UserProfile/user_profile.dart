@@ -1,5 +1,4 @@
 // ignore_for_file: unnecessary_null_comparison
-
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/achievements_provider.dart';
@@ -50,8 +49,9 @@ class UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     super.initState();
-    if (name.isEmpty) {
-      name = 'Elm Boog';
+    if (username.isEmpty) {
+      username = 'Elm Boog';
+      name = username;
     }
     if (bio.isEmpty) {
       bio = 'Tell us about yourself...';
@@ -75,6 +75,12 @@ class UserProfileState extends State<UserProfile> {
     );
     retrieveLostData();
     super.initState();
+  }
+
+  void setInfo(String key, String data) {
+    setState(() {
+      localStorage.setItem(key, data);
+    });
   }
 
   @override
@@ -162,7 +168,7 @@ class UserProfileState extends State<UserProfile> {
 
                         // Username
                         SizedBox(height: verticalPadding),
-                        Text(name,
+                        Text(username,
                             style: GlobalStyles.subHeadingPrimary(context)),
 
                         // Active since
@@ -206,6 +212,7 @@ class UserProfileState extends State<UserProfile> {
                     label: 'Username',
                     content: username,
                     backgroundColor: AppColors.popupColor(context),
+                    change: setInfo,
                   ),
                   SizedBox(height: verticalPadding),
 
@@ -215,6 +222,7 @@ class UserProfileState extends State<UserProfile> {
                     label: 'Bio',
                     content: bio,
                     backgroundColor: AppColors.popupColor(context),
+                    change: setInfo,
                   ),
                   SizedBox(height: verticalPadding),
 
@@ -224,6 +232,7 @@ class UserProfileState extends State<UserProfile> {
                     label: 'Email',
                     content: email,
                     backgroundColor: AppColors.popupColor(context),
+                    change: setInfo,
                   ),
                   SizedBox(height: verticalPadding),
 
@@ -316,7 +325,7 @@ class UserProfileState extends State<UserProfile> {
 }
 
 // Fields for user personal information
-class ProfileField extends StatelessWidget {
+class ProfileField extends StatefulWidget {
   const ProfileField({
     required this.icon,
     required this.label,
@@ -324,6 +333,7 @@ class ProfileField extends StatelessWidget {
     this.backgroundColor,
     this.padding,
     super.key,
+    required this.change,
   });
 
   final IconData icon;
@@ -331,6 +341,30 @@ class ProfileField extends StatelessWidget {
   final String content;
   final Color? backgroundColor;
   final EdgeInsets? padding;
+  final void Function(String key, String data) change;
+  @override
+  State<ProfileField> createState() => _StateProfileField();
+}
+
+class _StateProfileField extends State<ProfileField> {
+  late TextEditingController _controller;
+  late final IconData icon;
+  late final String label;
+  late final String content;
+  late final Color? backgroundColor;
+  late final EdgeInsets? padding;
+  late Function change;
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+    icon = widget.icon;
+    label = widget.label;
+    content = localStorage.getItem(label.toLowerCase()) ?? widget.content;
+    backgroundColor = widget.backgroundColor;
+    padding = widget.padding;
+    change = widget.change;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -338,9 +372,10 @@ class ProfileField extends StatelessWidget {
     final fieldPadding = EdgeInsets.all(screenWidth * 0.03);
 
     return Container(
-      padding: padding ?? fieldPadding,
+      padding: widget.padding ?? fieldPadding,
       decoration: BoxDecoration(
-        color: backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
+        color:
+            widget.backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
         borderRadius: BorderRadius.circular(screenWidth * 0.05),
       ),
       child: Row(
@@ -349,19 +384,28 @@ class ProfileField extends StatelessWidget {
           Row(
             children: [
               Icon(
-                icon,
+                widget.icon,
                 color: AppColors.iconColor(context),
               ),
               SizedBox(width: screenWidth * 0.02),
-              // Text(label, style: GlobalStyles.smallContent),
             ],
           ),
           Expanded(
-            child: Text(
-              content,
-              style: GlobalStyles.contentPrimary(context),
-              textAlign: TextAlign.right,
-              overflow: TextOverflow.ellipsis,
+            child: TextField(
+              controller: _controller,
+              onChanged: (value) {
+                setState(
+                  () {
+                    change(label.toLowerCase(), value);
+                    content = value;
+                  },
+                );
+              },
+              decoration: InputDecoration(
+                labelText: content.isEmpty ? label : content,
+                hintText: content,
+                helperText: 'supporting text',
+              ),
             ),
           ),
         ],

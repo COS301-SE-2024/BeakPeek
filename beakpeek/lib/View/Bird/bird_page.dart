@@ -1,6 +1,9 @@
 // ignore_for_file: library_private_types_in_public_api
 
 import 'package:beakpeek/Controller/Home/sound_controller.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
+import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -8,6 +11,8 @@ import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
+    as up_func;
 
 class BirdPage extends StatefulWidget {
   // ignore: lines_longer_than_80_chars
@@ -27,7 +32,6 @@ class BirdPage extends StatefulWidget {
 
 class _BirdPageState extends State<BirdPage> {
   late Future<Map<String, dynamic>?> birdFuture;
-
   @override
   void initState() {
     super.initState();
@@ -39,7 +43,9 @@ class _BirdPageState extends State<BirdPage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
+    String seenText = isSeenGS(widget.commonGroup, widget.commonSpecies)
+        ? 'Seen'
+        : 'Add to Life List';
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
       appBar: AppBar(
@@ -182,6 +188,57 @@ class _BirdPageState extends State<BirdPage> {
                           );
                         },
                       ),
+                    ),
+                  ),
+                ),
+                FilledButton(
+                  onPressed: () {
+                    up_func.addExp(20);
+                    global.lifeList.insertBird(Bird(
+                        id: 123,
+                        commonGroup: widget.commonGroup,
+                        commonSpecies: widget.commonSpecies,
+                        genus: 'genus',
+                        species: 'species',
+                        fullProtocolRR: 0.0,
+                        fullProtocolNumber: 0,
+                        latestFP: '',
+                        jan: 0,
+                        feb: 0,
+                        mar: 0,
+                        apr: 0,
+                        may: 0,
+                        jun: 0,
+                        jul: 0,
+                        aug: 0,
+                        sep: 0,
+                        oct: 0,
+                        nov: 0,
+                        dec: 0,
+                        totalRecords: 0,
+                        reportingRate: 0.0));
+                    global.updateLife();
+                    setState(() {
+                      seenText =
+                          isSeenGS(widget.commonGroup, widget.commonSpecies)
+                              ? 'Seen'
+                              : 'Add to Life List';
+                    });
+                  },
+                  style: FilledButton.styleFrom(
+                    backgroundColor: AppColors.secondaryColorLight,
+                    minimumSize: const Size(128, 30),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    shadowColor: Colors.black.withOpacity(0.5),
+                  ),
+                  child: Text(
+                    seenText,
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 14,
                     ),
                   ),
                 ),

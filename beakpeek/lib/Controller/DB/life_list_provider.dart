@@ -41,7 +41,6 @@ class LifeListProvider {
   }
 
   Future<void> insertBird(Bird bird) async {
-    print('inserting');
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
       await db.insert(

@@ -7,6 +7,7 @@ import 'package:beakpeek/View/Sightings/sightings.dart';
 import 'package:beakpeek/View/UserProfile/user_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:localstorage/localstorage.dart';
 
 class RoutingData {
   final GoRouter router = GoRouter(
@@ -18,7 +19,8 @@ class RoutingData {
             ),
           ),
         )),
-    initialLocation: '/',
+    initialLocation:
+        localStorage.getItem('accessToken') != null ? '/' : '/home',
     routes: <RouteBase>[
       GoRoute(
         path: '/map',

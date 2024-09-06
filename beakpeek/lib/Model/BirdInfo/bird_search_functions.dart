@@ -110,6 +110,16 @@ bool isSeen(Bird bird) {
   return false;
 }
 
+bool isSeenGS(String group, String species) {
+  final temp = global.birdList.where((test) =>
+      test.commonGroup.toLowerCase().compareTo(group.toLowerCase()) == 0 &&
+      test.commonSpecies.toLowerCase().compareTo(species.toLowerCase()) == 0);
+  if (temp.isNotEmpty) {
+    return true;
+  }
+  return false;
+}
+
 List<Widget> getWidgetListOfBirds(List<Bird> birds, Function goBird) {
   final List<Widget> listOfBirdWidgets = [];
 

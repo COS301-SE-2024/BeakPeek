@@ -32,7 +32,6 @@ class _BirdQuizState extends State<BirdQuiz> {
       if (_quizManager.getNextQuizInstance() == null) {
         try {
           _quizManager.preloadQuizzes(1, context);
-          // ignore: empty_catches
         } catch (e) {}
       }
     });

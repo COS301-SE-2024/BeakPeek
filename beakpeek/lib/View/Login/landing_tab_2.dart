@@ -1,8 +1,11 @@
 import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/View/Login/terms_and_conditions_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:go_router/go_router.dart';
+import 'package:flutter_popup_card/flutter_popup_card.dart';
+import 'package:localstorage/localstorage.dart';
 
 class LandingTab2 extends StatelessWidget {
   const LandingTab2({super.key});
@@ -72,7 +75,21 @@ class LandingTab2 extends StatelessWidget {
                     child: Text('Sign Up / Sign In',
                         style: GlobalStyles.primaryButtonText(context)),
                     onPressed: () {
-                      loginFunction(context);
+                      if (localStorage.getItem('termsAndCondition') == 'true') {
+                        loginFunction(context);
+                      } else {
+                        showPopupCard(
+                          context: context,
+                          builder: (context) {
+                            return PopupCard(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(8.0),
+                              ),
+                              child: TermsAndConditionsPopup(),
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                   SizedBox(height: screenHeight * 0.02),
