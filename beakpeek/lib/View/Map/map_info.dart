@@ -25,7 +25,7 @@ class MapInfo extends StatelessWidget {
                   padding: EdgeInsets.only(top: screenWidth * 0.04),
                   child: Column(
                     children: [
-                      // SizedBox(height: screenHeight * 0.05),
+                      SizedBox(height: screenHeight * 0.05),
                       Padding(
                         padding: EdgeInsets.only(
                             right: screenWidth * 0.04,
