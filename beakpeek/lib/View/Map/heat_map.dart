@@ -16,7 +16,6 @@ class HeatMap extends StatefulWidget {
 class HeatMapState extends State<HeatMap> {
   late GoogleMapController mapController;
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
-  String _selectedProvince = 'gauteng'; // Default selected province
   late CameraPosition _cameraPosition;
   final Set<Polygon> _polygons = {};
   bool _isLoading = true;
@@ -51,8 +50,6 @@ class HeatMapState extends State<HeatMap> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildProvinceDropdown(),
-        _isLoading ? const CircularProgressIndicator() : Container(),
         Expanded(
           child: GoogleMap(
             onMapCreated: _onMapCreated,
@@ -61,34 +58,6 @@ class HeatMapState extends State<HeatMap> {
           ),
         ),
       ],
-    );
-  }
-
-  Widget _buildProvinceDropdown() {
-    return DropdownButton<String>(
-      value: _selectedProvince,
-      onChanged: (newValue) {
-        setState(() {
-          _selectedProvince = newValue!;
-          _cameraPosition = getCameraPositionForProvince(newValue);
-          loadPentadData();
-        });
-
-        // Move the camera to the new position
-        mapController
-            .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-      },
-      items: <String>[
-        'gauteng',
-        'westerncape',
-        'Eastern Cape'
-      ] // Add more provinces as needed
-          .map<DropdownMenuItem<String>>((value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
-        );
-      }).toList(),
     );
   }
 
@@ -114,11 +83,6 @@ class HeatMapState extends State<HeatMap> {
   }
 
   LatLng _calculateCoordinatesFromPentad(String lonPart, String latPart) {
-    // Parse latitude and longitude components from the name
-    // final latPart = parts[0];
-    // final lonPart = parts[1];
-
-    // Extract degrees and minutes from the parts
     final latDegrees = int.parse(latPart.substring(0, 2));
     final latMinutes = int.parse(latPart.substring(2, 4));
 

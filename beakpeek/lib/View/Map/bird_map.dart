@@ -20,7 +20,8 @@ class BirdMap extends StatefulWidget {
 
 class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
-  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593); // Default location
+  LatLng _currentLocation =
+      const LatLng(-25.7559141, 28.2330593); // Default location
   String _selectedProvince = 'Gauteng'; // Capitalized default province
   String _selectedMonth = 'Year-Round'; // Default selected month
   late CameraPosition _cameraPosition;
@@ -146,8 +147,8 @@ class BirdMapState extends State<BirdMap> {
                   setState(() {
                     _polygons = {};
                     _selectedProvince = newValue!;
-                    _cameraPosition =
-                        CameraPosition(target: provinceCenters[newValue]!, zoom: 11.0);
+                    _cameraPosition = CameraPosition(
+                        target: provinceCenters[newValue]!, zoom: 11.0);
                     _loadKmlData();
                   });
 
@@ -155,8 +156,8 @@ class BirdMapState extends State<BirdMap> {
                   mapController.animateCamera(
                       CameraUpdate.newCameraPosition(_cameraPosition));
                 },
-                items: provinceCenters.keys
-                    .map<DropdownMenuItem<String>>((value) {
+                items:
+                    provinceCenters.keys.map<DropdownMenuItem<String>>((value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(
@@ -254,7 +255,7 @@ class BirdMapState extends State<BirdMap> {
 
   Future<void> _loadKmlData() async {
     try {
-      print(_selectedProvince);
+      // print(_selectedProvince);
       final kmlString = await rootBundle.loadString(
           'assets/province_${_selectedProvince.toLowerCase().replaceAll(" ", "")}.kml');
       final polygonsData = KmlParser.parseKml(kmlString);
@@ -269,7 +270,7 @@ class BirdMapState extends State<BirdMap> {
           return Polygon(
             polygonId: PolygonId(id),
             points: coordinates,
-            strokeColor: Colors.red,
+            strokeColor: Colors.grey.withOpacity(0.1),
             fillColor: Colors.transparent,
             strokeWidth: 2,
             consumeTapEvents: true,
