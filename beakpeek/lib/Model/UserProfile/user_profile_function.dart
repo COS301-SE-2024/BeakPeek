@@ -1,14 +1,10 @@
 import 'dart:math';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Styles/colors.dart';
-import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
-import 'package:progress_bar_chart/progress_bar_chart.dart';
 
 const List<String> provinces = [
   'easterncape',
@@ -50,82 +46,11 @@ List<Bird> sortAlphabetically(List<Bird> birds) {
   return birds;
 }
 
-Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLife) {
-  return SingleChildScrollView(
-    child: SizedBox(
-      height: 200,
-      child: ListView.builder(
-        itemCount: provinces.length,
-        itemBuilder: (context, index) {
-          final String prov = provinces[index];
-          final String formattedProv = formatProvinceName(prov);
-          final double percentage =
-              getPercent(birdNumsTotal[index], numbirdsInLife[index]);
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
-                child: Text(
-                  formattedProv,
-                  style: GlobalStyles.contentPrimary(context),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 2.0),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    FAProgressBar(
-                      currentValue: percentage,
-                      backgroundColor: AppColors.popupColor(context),
-                      progressColor: AppColors.tertiaryColor(context),
-                    ),
-                    Text(
-                      '${percentage.toStringAsFixed(1)}%',
-                      style: GlobalStyles.contentPrimary(context).copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    ),
-  );
-}
-
 double getPercent(int numTotalBirds, int birdsInLife) {
   if (numTotalBirds == 0) {
     return 1;
   }
   return ((birdsInLife / numTotalBirds) * 100);
-}
-
-Widget levelProgressBar(int progress, int level) {
-  final List<StatisticsItem> colors = [
-    StatisticsItem(const Color.fromARGB(255, 72, 139, 194),
-        (progress / getNextLevelExpRequired(level) * 100),
-        title: 'Exp'),
-    StatisticsItem(
-        const Color.fromARGB(255, 225, 9, 9),
-        ((getNextLevelExpRequired(level) - progress).toDouble() /
-                getNextLevelExpRequired(level) *
-                100)
-            .toDouble(),
-        title: 'Need Exp')
-  ];
-  return ProgressBarChart(
-    values: colors,
-    height: 30,
-    totalPercentage: 100,
-    borderRadius: 20,
-    unitLabel: 'Exp',
-  );
 }
 
 int getLevelExp() {
@@ -164,26 +89,6 @@ void updateLevelStats() {
     localStorage.setItem('userExp', expProgress.toString());
     nextLevelEXP = getNextLevelExpRequired(level);
   }
-}
-
-Widget getNumBirdsInProvAndLifeList(
-    List<int> birdNumsTotal, Future<List<Bird>> birds) {
-  return FutureBuilder<List<Bird>>(
-    future: birds,
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      }
-      return Column(children: [
-        Text(birdNumsTotal.toString()),
-        Text(
-          snapshot.data!.toString(),
-        )
-      ]);
-    },
-  );
 }
 
 Future<List<int>> countProv() async {

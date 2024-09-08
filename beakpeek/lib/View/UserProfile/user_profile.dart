@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:io';
+import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
@@ -27,7 +28,7 @@ class UserProfileState extends State<UserProfile> {
   late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
-  late File _image = File(/*localStorage.getItem('profilePicture') ??*/ '');
+  late File _image = File(localStorage.getItem('profilePicture') ?? '');
   final picker = ImagePicker();
 
   String name = localStorage.getItem('fullName') ?? '';
@@ -147,10 +148,14 @@ class UserProfileState extends State<UserProfile> {
                               backgroundColor: AppColors.iconColor(context),
                               child: CircleAvatar(
                                 radius: screenWidth * 0.19,
-                                backgroundImage: FileImage(File(
-                                    'assets/images/profileImages/images.jpg')),
-                                foregroundImage: FileImage(File(
-                                    'assets/images/profileImages/images.jpg')),
+                                backgroundImage: _image.path.isEmpty
+                                    ? FileImage(File(
+                                        'assets/images/profileImages/images.jpg'))
+                                    : FileImage(_image),
+                                foregroundImage: _image.path.isEmpty
+                                    ? FileImage(File(
+                                        'assets/images/profileImages/images.jpg'))
+                                    : FileImage(_image),
                                 onBackgroundImageError: (_, __) => Image.file(
                                   File(
                                       'assets/images/profileImages/images.jpg'),
