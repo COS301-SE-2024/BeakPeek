@@ -4,8 +4,8 @@ import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/Sightings/sighting_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
 import 'package:go_router/go_router.dart';
 
 class Sightings extends StatefulWidget {
