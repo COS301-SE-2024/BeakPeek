@@ -86,56 +86,52 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
       children: [
         Row(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
-              child: Image.asset(
-                'assets/icons/Logo.png',
-                width: logoSize,
-                height: logoSize,
-              ),
-            ),
             Expanded(
-              child: Container(
-                height: searchBarHeight,
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: AppColors.primaryColor(context),
-                    width: 2.0,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                  height: searchBarHeight,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: AppColors.primaryColor(context),
+                      width: 2.0,
+                    ),
+                    borderRadius: BorderRadius.circular(30.0),
+                    color: Colors.white,
                   ),
-                  borderRadius: BorderRadius.circular(30.0),
-                  color: Colors.white,
-                ),
-                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
-                child: SearchAnchor(
-                  searchController: controller,
-                  viewHintText: 'Search for birds...',
-                  viewOnChanged: searchBarTyping,
-                  dividerColor: AppColors.secondaryColor(context),
-                  viewLeading: IconButton(
-                      onPressed: () {
-                        GoRouter.of(context).pop();
-                      },
-                      icon: Icon(
-                        Icons.arrow_back,
-                        color: AppColors.iconColor(context),
-                      )),
-                  headerTextStyle:
-                      TextStyle(color: AppColors.secondaryColor(context)),
-                  headerHintStyle:
-                      TextStyle(color: AppColors.secondaryColor(context)),
-                  builder: (context, controller) {
-                    return Row(
-                      children: [
-                        Icon(Icons.search, color: AppColors.greyColor(context)),
-                        SizedBox(width: screenWidth * 0.02),
-                        Text('Search for birds...',
-                            style: GlobalStyles.smallContent(context)),
-                      ],
-                    );
-                  },
-                  suggestionsBuilder: (context, controller) {
-                    return items;
-                  },
+                  padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
+                  child: SearchAnchor(
+                    searchController: controller,
+                    viewHintText: 'Search for birds...',
+                    viewOnChanged: searchBarTyping,
+                    dividerColor: AppColors.secondaryColor(context),
+                    viewLeading: IconButton(
+                        onPressed: () {
+                          GoRouter.of(context).pop();
+                        },
+                        icon: Icon(
+                          Icons.arrow_back,
+                          color: AppColors.iconColor(context),
+                        )),
+                    headerTextStyle:
+                        TextStyle(color: AppColors.secondaryColor(context)),
+                    headerHintStyle:
+                        TextStyle(color: AppColors.secondaryColor(context)),
+                    builder: (context, controller) {
+                      return Row(
+                        children: [
+                          Icon(Icons.search,
+                              color: AppColors.greyColor(context)),
+                          SizedBox(width: screenWidth * 0.02),
+                          Text('Search for birds...',
+                              style: GlobalStyles.smallContent(context)),
+                        ],
+                      );
+                    },
+                    suggestionsBuilder: (context, controller) {
+                      return items;
+                    },
+                  ),
                 ),
               ),
             ),
