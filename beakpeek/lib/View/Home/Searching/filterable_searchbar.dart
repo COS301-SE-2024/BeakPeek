@@ -75,7 +75,6 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final logoSize = screenWidth * 0.18;
     final searchBarHeight = screenHeight * 0.06;
     if (items.isEmpty) {
       items = bsf.getWidgetListOfBirds(filteredBirds, goBird, context);
