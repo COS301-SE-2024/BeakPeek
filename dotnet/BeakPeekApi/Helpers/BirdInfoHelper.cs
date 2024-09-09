@@ -12,13 +12,14 @@ namespace BeakPeekApi.Helpers
         public BirdInfoHelper(HttpClient httpClient, IConfiguration config)
         {
             _flickrApiKey = config.GetValue<string>("FLICKR_API_KEY");
+            if (string.IsNullOrEmpty(_flickrApiKey))
+            {
+                _flickrApiKey = Environment.GetEnvironmentVariable("FLICKR_API_KEY");
+            }
+
             if (_flickrApiKey == null)
             {
                 throw new Exception("flickr API key environment variable not set");
-            }
-            else
-            {
-                _flickrApiKey = Environment.GetEnvironmentVariable("FLICKR_API_KEY");
             }
             _httpClient = httpClient;
         }
@@ -46,12 +47,16 @@ namespace BeakPeekApi.Helpers
 
             if (!response.IsSuccessStatusCode)
             {
+                Console.WriteLine("Flickr request not successful: " + response);
                 return null;
             }
 
             var content = await response.Content.ReadFromJsonAsync<FlickrResponse>();
             if (content == null)
-            { return null; }
+            {
+                Console.WriteLine("No content" + response);
+                return null;
+            }
             FlickrResponse flickrResponse = content;
 
             if (flickrResponse?.Photos?.Photo == null)
