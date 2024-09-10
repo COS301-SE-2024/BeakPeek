@@ -1,11 +1,19 @@
 using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
 using BeakPeekApi.Helpers;
-using Microsoft.Extensions.DependencyInjection;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateBootstrapLogger();
+
+builder.Host.UseSerilog((context, services, configuration) => configuration
+    .ReadFrom.Configuration(context.Configuration)
+    .ReadFrom.Services(services)
+    .Enrich.FromLogContext()
+    .WriteTo.Console());
 
 builder.Services.AddCors(options => options.AddDefaultPolicy(
                 include =>
