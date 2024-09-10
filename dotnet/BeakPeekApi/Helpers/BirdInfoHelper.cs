@@ -8,10 +8,13 @@ namespace BeakPeekApi.Helpers
 
         private readonly HttpClient _httpClient;
         private readonly string? _flickrApiKey;
+        private readonly GeneralHelper _generalHelper;
 
-        public BirdInfoHelper(HttpClient httpClient, IConfiguration config)
+        public BirdInfoHelper(HttpClient httpClient, IConfiguration config, GeneralHelper generalHelper)
         {
-            _flickrApiKey = config.GetValue<string>("FLICKR_API_KEY");
+            _generalHelper = generalHelper;
+            _flickrApiKey = _generalHelper.getVariableFromEnvOrAppsettings("FLICKR_API_KEY");
+            /* _flickrApiKey = config.GetValue<string>("FLICKR_API_KEY");
             if (string.IsNullOrEmpty(_flickrApiKey))
             {
                 _flickrApiKey = Environment.GetEnvironmentVariable("FLICKR_API_KEY");
@@ -20,7 +23,7 @@ namespace BeakPeekApi.Helpers
             if (_flickrApiKey == null)
             {
                 throw new Exception("flickr API key environment variable not set");
-            }
+            } */
             _httpClient = httpClient;
         }
 
