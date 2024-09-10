@@ -24,8 +24,8 @@ builder.Services.AddCors(options => options.AddDefaultPolicy(
                 }));
 
 
+builder.Services.AddSingleton<BlobStorageService>();
 builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddHttpClient();
@@ -38,6 +38,9 @@ builder.Configuration
     .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true)
     .AddEnvironmentVariables();
 
+/// Use the correct environment variables depending on if the environment is
+/// development or not
+/// first flow is for if the environment is not development
 if (!builder.Environment.IsDevelopment())
 {
     // var envConnection = Environment.GetEnvironmentVariable("SQLCONNSTR_AZURE_SQL_CONNECTIONSTRING");
@@ -61,12 +64,15 @@ if (!builder.Environment.IsDevelopment())
 }
 else
 {
+    /// use the default connection string in developent
     connection = builder.Configuration.GetConnectionString("DefaultConnection");
 }
 
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connection));
+builder.Services.AddTransient<GeneralHelper>();
 builder.Services.AddTransient<CsvImporter>();
 builder.Services.AddTransient<BirdInfoHelper>();
+builder.Services.AddTransient<BirdImageHelper>();
 builder.Services.AddControllersWithViews()
     .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -105,10 +111,15 @@ try
                 {
                     csvImporter.ImportBirds(csv_species_list);
                 }
-
                 var csv_pentad_dir = Path.Combine(Directory.GetCurrentDirectory(), "res", "species");
                 if (Directory.Exists(csv_pentad_dir))
                 {
+                    /// NOTE:
+                    /// only enable this for development or running it locally as
+                    /// it will import every entry which is very intensive on the
+                    /// database and the container and will probalby cause the api
+                    /// to not deploy
+
                     // csvImporter.ImportAllCsvData(csv_pentad_dir);
                 }
             }
