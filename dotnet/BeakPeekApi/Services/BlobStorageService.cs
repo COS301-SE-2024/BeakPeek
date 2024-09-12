@@ -2,20 +2,34 @@ using Azure.Storage.Blobs;
 using Azure.Storage.Blobs.Models;
 using BeakPeekApi.Helpers;
 
+namespace BeakPeekApi.Services;
 public class BlobStorageService
 {
-    private readonly string _blobContainerName;
     private readonly BlobContainerClient _blobContainerClient;
     private readonly GeneralHelper _generalHelper;
 
-    public BlobStorageService(IConfiguration configuration, GeneralHelper generalHelper)
+    public BlobStorageService(
+            GeneralHelper generalHelper,
+            BlobContainerClient? blobContainerClient = null
+            )
     {
         _generalHelper = generalHelper;
-        string storageConnectionString = _generalHelper.getVariableFromEnvOrAppsettings(
+
+        _blobContainerClient = blobContainerClient ?? MakeBlobContainerClient();
+    }
+
+    private BlobContainerClient MakeBlobContainerClient()
+    {
+        string storageConnectionString =
+            _generalHelper.getVariableFromEnvOrAppsettings(
                 "AzureBlobStorage:StorageConnectionString");
-        _blobContainerName = _generalHelper.getVariableFromEnvOrAppsettings("AzureBlobStorage:BlobContainerName");
-        _blobContainerClient = new BlobContainerClient(storageConnectionString, _blobContainerName);
-        _blobContainerClient.CreateIfNotExists(PublicAccessType.Blob);
+        string blobContainerName =
+            _generalHelper.getVariableFromEnvOrAppsettings(
+                    "AzureBlobStorage:BlobContainerName");
+
+        var blobContainerClient = new BlobContainerClient(storageConnectionString, blobContainerName);
+        blobContainerClient.CreateIfNotExists(PublicAccessType.Blob);
+        return blobContainerClient;
     }
 
     public async Task<string> UploadImageAsync(Stream imageStream, string fileName)
@@ -38,7 +52,7 @@ public class BlobStorageService
         return await blobClient.ExistsAsync();
     }
 
-    private string GetContentType(string fileName)
+    public string GetContentType(string fileName)
     {
         // Simple content type mapping. Extend as needed.
         var extension = Path.GetExtension(fileName).ToLowerInvariant();
