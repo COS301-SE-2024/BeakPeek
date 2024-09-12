@@ -10,10 +10,12 @@ namespace BeakPeekApi.Controllers
     public class BirdController : ControllerBase
     {
         private readonly AppDbContext _context;
+        private readonly BirdImageHelper _birdImageHelper;
 
-        public BirdController(AppDbContext context)
+        public BirdController(AppDbContext context, BirdImageHelper birdImageHelper)
         {
             _context = context;
+            _birdImageHelper = birdImageHelper;
         }
 
         [HttpGet]
@@ -23,21 +25,16 @@ namespace BeakPeekApi.Controllers
                 .Include(b => b.Bird_Provinces)
                 .ToListAsync();
 
-            if (birds == null)
-            {
-                return NotFound("No birds were found");
-            }
-
             var birdDtos = birds.Select(b => b.ToDto()).ToList();
 
             if (birdDtos.Count() == 0)
-                return BadRequest("No Birds Found");
+                return NotFound("No Birds were found.");
 
             return Ok(birdDtos);
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<BirdDto>> GetBird(int id)
+        public async Task<ActionResult<BirdDto>> GetBird(int id, HttpClient? httpClient = null)
         {
             var bird = await _context.Birds
                 .Include(b => b.Bird_Provinces)
@@ -48,11 +45,20 @@ namespace BeakPeekApi.Controllers
                 return NotFound("No birds found matching that id.");
             }
 
+            if (string.IsNullOrEmpty(bird.Image_url))
+            {
+                Bird? bird_with_image = await _birdImageHelper.CheckAndAddImage(bird, httpClient);
+                if (bird_with_image != null)
+                {
+                    bird = bird_with_image;
+                }
+            }
+
             return Ok(bird.ToDto());
         }
 
         [HttpGet("search")]
-        public async Task<ActionResult<IEnumerable<BirdDto>>> SearchBirdSpecies(string genus = null, string commonSpecies = null)
+        public async Task<ActionResult<IEnumerable<BirdDto>>> SearchBirdSpecies(string? genus = null, string? commonSpecies = null)
         {
             IQueryable<Bird> query = _context.Birds;
 
@@ -71,7 +77,7 @@ namespace BeakPeekApi.Controllers
 
             if (!results.Any())
             {
-                return NotFound();
+                return NotFound($"No birds found matching given genus ({genus}) or given common species ({commonSpecies})");
             }
             return Ok(results);
         }
@@ -294,7 +300,7 @@ namespace BeakPeekApi.Controllers
             if (birds == null || birds.Count == 0)
                 return NotFound("No birds matching that reference were found");
 
-            return Ok(birds);
+            return Ok(birds.Select(p => p.ToDto()).ToList());
         }
 
     }

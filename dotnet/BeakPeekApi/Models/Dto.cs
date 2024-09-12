@@ -18,6 +18,10 @@ namespace BeakPeekApi.Models
 
         public DateTime? Latest_FP { get; set; }
 
+        public string Image_Url { get; set; }
+
+        public string Info { get; set; }
+
         public List<string> Provinces { get; set; }
     }
 
@@ -35,7 +39,6 @@ namespace BeakPeekApi.Models
 
         public PentadDto? Pentad { get; set; }
 
-        // public int BirdId { get; set; }
         public BirdDto? Bird { get; set; }
 
         public double? Jan { get; set; }
