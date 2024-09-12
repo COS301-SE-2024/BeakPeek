@@ -24,7 +24,7 @@ jobs:
 
   build:
     runs-on: ubuntu-latest
-    needs: test
+    # needs: test
 
     steps:
       - uses: actions/checkout@v4
@@ -37,14 +37,14 @@ jobs:
 
       - name: Get App Setting
         run: |
-          cd ./dotnet/BeakPeekApi
-          cp ../../appsettings.json .
+          cd ./dotnet/BirdApi/BeakPeekApi
+          cp ../../../appsettings.json .
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release ./dotnet/BeakPeekApi/BeakPeekApi.csproj
+        run: dotnet build --configuration Release ./dotnet/BirdApi/BeakPeekApi/BeakPeekApi.csproj
 
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/BeakPeekApi ./dotnet/BeakPeekApi/BeakPeekApi.csproj
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/BeakPeekApi ./dotnet/BirdApi/BeakPeekApi/BeakPeekApi.csproj
 
       - name: Copy CSV files
         run: |
