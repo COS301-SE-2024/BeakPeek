@@ -22,10 +22,10 @@ public class BlobStorageService
     {
         string storageConnectionString =
             _generalHelper.getVariableFromEnvOrAppsettings(
-                "AzureBlobStorage:StorageConnectionString");
+                "StorageConnectionString");
         string blobContainerName =
             _generalHelper.getVariableFromEnvOrAppsettings(
-                    "AzureBlobStorage:BlobContainerName");
+                    "BlobContainerName");
 
         var blobContainerClient = new BlobContainerClient(storageConnectionString, blobContainerName);
         blobContainerClient.CreateIfNotExists(PublicAccessType.Blob);
