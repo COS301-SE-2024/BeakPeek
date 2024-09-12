@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using BeakPeekApi.Models;
 using BeakPeekApi.Helpers;
 using Serilog;
+using BeakPeekApi.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

@@ -1,4 +1,5 @@
 using BeakPeekApi.Models;
+using BeakPeekApi.Services;
 
 namespace BeakPeekApi.Helpers
 {
