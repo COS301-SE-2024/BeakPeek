@@ -1,5 +1,7 @@
 using BeakPeekApi.Controllers;
+using BeakPeekApi.Helpers;
 using BeakPeekApi.Models;
+using BeakPeekApi.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -50,13 +52,25 @@ public class BirdControllerTest
     }
 
     [Fact]
+    public async Task GetBirds_Returns_NotFound()
+    {
+        /// Arrange 
+        var controller = new BirdController(DbContextMock.GetEmptyContext(), _birdImageHelper);
+
+        /// Act
+        var result = await controller.GetBirds();
+
+        var actionResult = Assert.IsType<NotFoundObjectResult>(result.Result);
+    }
+
+    [Fact]
     public async Task GetBird_ReturnsBirdById()
     {
         // Arrange
         var birdId = 1;
 
         // Act
-        var result = await _controller.GetBird(birdId);
+        var result = await _controller.GetBird(birdId, _httpClient);
 
         // Assert
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
@@ -92,6 +106,16 @@ public class BirdControllerTest
     }
 
     [Fact]
+    public async Task SearchBirdSpecies_Returns_NotFound()
+    {
+        /// Act
+        var result = await _controller.SearchBirdSpecies("nonexistentGenus", "nonexistentSpecies");
+
+        /// Assert
+        var actionResult = Assert.IsType<NotFoundObjectResult>(result.Result);
+    }
+
+    [Fact]
     public async Task PostBirds_AddsBirdToContext()
     {
         // Arrange
@@ -115,11 +139,35 @@ public class BirdControllerTest
         // Assert
         var actionResult = Assert.IsType<CreatedAtActionResult>(result.Result);
         var returnValue = Assert.IsType<Bird>(actionResult.Value);
-        // var returnValue = Assert.IsType<Bird>(createdAtActionResult.Value);
         Assert.Equal(bird.Ref, returnValue.Ref);
 
         var birds = await _context.Birds.ToListAsync();
         Assert.Equal(3, birds.Count);
+    }
+
+    [Fact]
+    public async Task PostBirds_NotUniqueBird()
+    {
+        /// Arrange
+        var bird = new Bird
+        {
+            Genus = "Genus1",
+            Species = "Species1",
+            Common_group = "CommonGroup1",
+            Common_species = "CommonSpecies1",
+            Ref = 1,
+            Latest_FP = null,
+            Bird_Provinces = new List<ProvinceList> { },
+            Full_Protocol_RR = 1.1,
+            Full_Protocol_Number = 1
+        };
+
+        /// Act
+        var result = await _controller.PostBirds(bird);
+
+        /// Assert
+        var actionResult = Assert.IsType<BadRequestObjectResult>(result.Result);
+
     }
 
     [Fact]
@@ -167,13 +215,18 @@ public class BirdControllerTest
 
 
 
-    [Fact]
-    public async Task GetBirdsByPentad_ReturnsBirdsByPentad()
+    [Theory]
+    [InlineData("1_1", 1)]
+    [InlineData("2_2", 1)]
+    [InlineData("3_3", 0)]
+    [InlineData("4_4", 0)]
+    [InlineData("5_5", 0)]
+    [InlineData("6_6", 0)]
+    [InlineData("7_7", 0)]
+    [InlineData("8_8", 0)]
+    [InlineData("9_9", 0)]
+    public async Task GetBirdsByPentad_ReturnsBirdsByPentad(string pentad, int expected)
     {
-        // Arrange
-
-        var pentad = "1_1";
-
         // Act
         var result = await _controller.GetBirdsInPentad(pentad);
 
@@ -183,8 +236,9 @@ public class BirdControllerTest
         Assert.NotNull(okResult);
 
         var returnValue = Assert.IsType<List<ProvinceDto>>(okResult.Value);
-        Assert.Single(returnValue);
-        Assert.Equal(pentad, returnValue[0]?.Pentad?.Pentad_Allocation);
+        Assert.Equal(expected, returnValue.Count());
+        if (expected > 0)
+            Assert.Equal(pentad, returnValue[0]?.Pentad?.Pentad_Allocation);
     }
 
 
@@ -230,17 +284,25 @@ public class BirdControllerTest
         Assert.IsType<NotFoundObjectResult>(result.Result);
     }
 
-    [Fact]
-    public async Task GetNumBirdByProvince_ReturnsNumber()
+    [Theory]
+    [InlineData("easterncape", 1)]
+    [InlineData("freestate", 1)]
+    [InlineData("gauteng", 0)]
+    [InlineData("kwazulunatal", 0)]
+    [InlineData("limpopo", 0)]
+    [InlineData("mpumalanga", 0)]
+    [InlineData("northerncape", 0)]
+    [InlineData("northwest", 0)]
+    [InlineData("westerncape", 0)]
+    public async Task GetNumBirdByProvince_ReturnsNumber(string province, int expected)
     {
-        string province = "freestate";
 
         var result = await _controller.GetNumBirdsByProvince(province);
 
         var actionResult = Assert.IsType<OkObjectResult>(result.Result);
         var objectResult = Assert.IsType<int>(actionResult.Value);
 
-        Assert.Equal(1, objectResult);
+        Assert.Equal(expected, objectResult);
     }
 
     [Fact]
@@ -322,6 +384,33 @@ public class BirdControllerTest
 
         // Assert
         Assert.IsType<NotFoundObjectResult>(result);
+    }
+
+    [Theory]
+    [InlineData(1)]
+    [InlineData(2)]
+    public async Task GetBirdsByRef_ReturnsList(int id)
+    {
+        /// Act
+        var result = await _controller.GetBirdsByRef(id);
+
+        /// Assert
+        var actionResult = Assert.IsType<OkObjectResult>(result.Result);
+        var objectResult = Assert.IsType<List<ProvinceDto>>(actionResult.Value);
+
+        Assert.Equal(2, objectResult.Count());
+    }
+
+    [Fact]
+    public async Task GetBirdsByRef_Returns_Not_Found()
+    {
+        /// Arrange
+        int birdRef = 404;
+        /// Act
+        var result = await _controller.GetBirdsByRef(birdRef);
+
+        /// Assert
+        var actionResult = Assert.IsType<NotFoundObjectResult>(result.Result);
     }
 
 }

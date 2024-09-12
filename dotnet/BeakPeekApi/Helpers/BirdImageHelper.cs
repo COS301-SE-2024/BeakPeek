@@ -19,7 +19,7 @@ namespace BeakPeekApi.Helpers
             _blobStorageService = blobStorageService;
         }
 
-        public async Task<Bird?> CheckAndAddImage(Bird bird)
+        public async Task<Bird?> CheckAndAddImage(Bird? bird, HttpClient? httpClient = null)
         {
 
             if (bird == null)
@@ -32,14 +32,13 @@ namespace BeakPeekApi.Helpers
 
             string birdName = bird.Common_species + " " + bird.Common_group;
 
-            var description = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName);
-            var images = await _birdInfoHelper.FetchBirdImagesFromFlickr(birdName);
+            var description = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName, httpClient);
+            var images = await _birdInfoHelper.FetchBirdImagesFromFlickr(birdName, httpClient);
 
             Console.WriteLine(description);
 
             if (description == null || images == null || !images.Any())
             {
-                Console.WriteLine("Something went wrong with the images or description." + images.Any());
                 return null;
             }
 
@@ -53,19 +52,27 @@ namespace BeakPeekApi.Helpers
             string url = birdInfo.Images[0].Url;
             string info = birdInfo.Description;
 
-            using (_httpClient)
+            httpClient = httpClient ?? _httpClient;
+            using (httpClient)
             {
                 try
                 {
-                    var response = await _httpClient.GetAsync(url);
+                    var response = await httpClient.GetAsync(url);
                     response.EnsureSuccessStatusCode();
 
                     using (var stream = await response.Content.ReadAsStreamAsync())
                     {
-
+                        if (!_dbContext.Birds.Local.Any(e => e.Ref == bird.Ref))
+                        {
+                            int bird_ref = bird.Ref;
+                            bird = await _dbContext.Birds.FindAsync(bird_ref);
+                            if (bird is null)
+                            {
+                                throw new Exception($"No bird matching the given ref({bird_ref}) was found in the datatbase");
+                            }
+                        }
                         var blobUrl = await _blobStorageService.UploadImageAsync(
                                 stream, $"{bird.Ref}_{bird.Common_species}_{bird.Common_group}.jpg");
-                        Console.WriteLine(blobUrl + "\n" + description);
                         bird.Image_url = blobUrl;
                         bird.Info = description;
                         await _dbContext.SaveChangesAsync();
