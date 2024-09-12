@@ -21,7 +21,7 @@ namespace BeakPeekApi.Helpers
 
             if (variable == null)
             {
-                throw new Exception($"${variable_name} Variable not set in environment or appsettings");
+                throw new Exception($"{variable_name} Variable not set in environment or appsettings");
             }
 
             return variable;
