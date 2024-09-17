@@ -2,31 +2,53 @@ using System.Net;
 using System.Net.Http.Json;
 using BeakPeekApi.Helpers;
 using BeakPeekApi.Models;
+using Microsoft.Extensions.Configuration;
 using Moq;
+using Moq.Protected;
 
 public class BirdInfoHelperTest
 {
     private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock;
     private readonly HttpClient _httpClient;
+    private Mock<IConfigurationSection> _configSectionMock;
+    private Mock<IConfiguration> _configMock;
     private readonly BirdInfoHelper _birdInfoHelper;
-    private readonly GeneralHelper _generalHelper;
 
     public BirdInfoHelperTest()
     {
         _httpMessageHandlerMock = new Mock<HttpMessageHandler>();
         _httpClient = new HttpClient(_httpMessageHandlerMock.Object);
-        _generalHelper = new GeneralHelper(Mocks.GetConfiguration());
+        _configSectionMock = new Mock<IConfigurationSection>();
+        _configMock = new Mock<IConfiguration>();
 
-        _birdInfoHelper = new BirdInfoHelper(_httpClient, _generalHelper);
+        _configSectionMock
+            .Setup(x => x.Value)
+            .Returns("your_api_key");
+        _configMock
+            .Setup(x => x.GetSection("FLICKR_API_KEY"))
+            .Returns(_configSectionMock.Object);
+        _birdInfoHelper = new BirdInfoHelper(_httpClient, _configMock.Object);
     }
 
     [Fact]
     public async Task FetchBirdInfoFromWikipedia_ReturnsExtract_WhenResponseIsSuccessful()
     {
         var birdName = "sparrow";
+        var wikipediaResponse = new WikipediaResponse { Extract = "A small bird." };
+        var responseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = JsonContent.Create(wikipediaResponse)
+        };
+        _httpMessageHandlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(responseMessage);
 
         //Act
-        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName, Mocks.GetHttpClient());
+        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName);
         Assert.Equal("A small bird.", result);
     }
 
@@ -37,8 +59,16 @@ public class BirdInfoHelperTest
         var birdName = "sparrow";
         var responseMessage = new HttpResponseMessage(HttpStatusCode.NotFound);
 
+        _httpMessageHandlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(responseMessage);
+
         // Act
-        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName, Mocks.getHttpClientWithResponse(responseMessage));
+        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName);
 
         // Assert
         Assert.Null(result);
@@ -53,8 +83,16 @@ public class BirdInfoHelperTest
         var responseMessage = new HttpResponseMessage(HttpStatusCode.OK)
         { Content = new StringContent("null", System.Text.Encoding.UTF8, "application/json") };
 
+        _httpMessageHandlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(responseMessage);
+
         // Act
-        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName, Mocks.getHttpClientWithResponse(responseMessage));
+        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName);
 
         // Assert
         Assert.Null(result);
@@ -71,8 +109,16 @@ public class BirdInfoHelperTest
             Content = JsonContent.Create(wikipediaResponse)
         };
 
+        _httpMessageHandlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(responseMessage);
+
         // Act
-        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName, Mocks.getHttpClientWithResponse(responseMessage));
+        var result = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName);
 
         // Assert
         Assert.Null(result);
@@ -83,14 +129,36 @@ public class BirdInfoHelperTest
     {
         // Arrange
         var birdName = "sparrow";
+        var flickrResponse = new FlickrResponse
+        {
+            Photos = new Photos
+            {
+                Photo = new List<Photo>
+            {
+                new Photo { Id = "1", ownername = "owner1", Secret = "secret1", Server = "server1" },
+                new Photo { Id = "2", ownername = "owner2", Secret = "secret2", Server = "server2" }
+            }
+            }
+        };
+        var flickrResponseMessage = new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = JsonContent.Create(flickrResponse)
+        };
+
+        _httpMessageHandlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(flickrResponseMessage);
 
         // Act
-        var result = await _birdInfoHelper.FetchBirdImagesFromFlickr(birdName, Mocks.GetHttpClient());
+        var result = await _birdInfoHelper.FetchBirdImagesFromFlickr(birdName);
 
-        // Console.WriteLine(result);
+        Console.WriteLine(result);
 
         // Assert
-        Assert.NotNull(result);
         Assert.Equal(2, result.Count);
         Assert.All(result, img => Assert.Contains("https://live.staticflickr.com", img.Url));
         Assert.All(result, img => Assert.Contains("owner", img.Owner));
@@ -111,8 +179,16 @@ public class BirdInfoHelperTest
             Content = JsonContent.Create(flickrOwnerResponse)
         };
 
+        _httpMessageHandlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(responseMessage);
+
         // Act
-        var result = await _birdInfoHelper.FetchOwnerInfoFromFlickr(ownerId, Mocks.getHttpClientWithResponse(responseMessage));
+        var result = await _birdInfoHelper.FetchOwnerInfoFromFlickr(ownerId);
 
         // Assert
         Assert.Equal("OwnerName", result);
@@ -125,8 +201,16 @@ public class BirdInfoHelperTest
         var ownerId = "owner1";
         var responseMessage = new HttpResponseMessage(HttpStatusCode.NotFound);
 
+        _httpMessageHandlerMock
+            .Protected()
+            .Setup<Task<HttpResponseMessage>>(
+                "SendAsync",
+                ItExpr.IsAny<HttpRequestMessage>(),
+                ItExpr.IsAny<CancellationToken>())
+            .ReturnsAsync(responseMessage);
+
         // Act
-        var result = await _birdInfoHelper.FetchOwnerInfoFromFlickr(ownerId, Mocks.getHttpClientWithResponse(responseMessage));
+        var result = await _birdInfoHelper.FetchOwnerInfoFromFlickr(ownerId);
 
         // Assert
         Assert.Equal("Unknown", result);

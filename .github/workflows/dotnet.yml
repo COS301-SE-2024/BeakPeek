@@ -1,4 +1,4 @@
-name: Test Dotnet and Upload Code Coverage
+name: Codecov Dotnet
 
 on:
   push:
@@ -16,7 +16,6 @@ on:
     paths:
       - dotnet/**
   workflow_dispatch:
-  workflow_call:
 
 jobs:
   dotnet-codecov:
@@ -35,11 +34,6 @@ jobs:
           cache: true
           cache-dependency-path: dotnet/BeakPeekApi.Tests/packages.lock.json
 
-      - name: Remove files that do not need to be tested
-        working-directory: dotnet
-        run: |
-          rm -rf ./BeakPeekApi/Migrations
-
       - name: Restore dependencies
         working-directory: dotnet
         run: dotnet restore --locked-mode
@@ -53,7 +47,6 @@ jobs:
         run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
 
       - name: Upload Coverage
-        if: ${{ !env.ACT }}
         uses: codecov/codecov-action@v4
         with:
           directory: ./dotnet/BeakPeekApi.Tests/

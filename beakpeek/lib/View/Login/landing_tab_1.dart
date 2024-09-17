@@ -1,5 +1,10 @@
+import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:go_router/go_router.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:beakpeek/config_azure.dart' as config;
 
 class LandingTab1 extends StatelessWidget {
   const LandingTab1({super.key});
@@ -8,9 +13,8 @@ class LandingTab1 extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
     return Scaffold(
-      backgroundColor: const Color(0xffF0EDE6),
+      backgroundColor: AppColors.backgroundColor(context),
       body: SafeArea(
         child: Column(
           children: [
@@ -24,19 +28,38 @@ class LandingTab1 extends StatelessWidget {
                     ),
                     RichText(
                       textAlign: TextAlign.center,
-                      text: const TextSpan(
-                        style: GlobalStyles.mainHeadingDark,
+                      text: TextSpan(
+                        style: GlobalStyles.mainHeadingPrimary(context),
                         children: [
-                          TextSpan(text: 'Your Ultimate\n'),
+                          TextSpan(
+                              text: 'Your Ultimate\n',
+                              style: GlobalStyles.mainHeadingPrimary(context)),
                           TextSpan(
                               text: 'Bird-Watching\n',
-                              style: GlobalStyles.mainHeadingYellow),
+                              style: GlobalStyles.mainHeadingTertiary(context)),
                           TextSpan(
-                            text: 'Companion',
-                          ),
+                              text: 'Companion',
+                              style: GlobalStyles.mainHeadingPrimary(context)),
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: screenHeight * 0.05,
+                    ),
+                    if (accessToken.isNotEmpty &&
+                        localStorage.getItem('termsAndCondition') != null)
+                      Center(
+                        child: FilledButton(
+                          style: GlobalStyles.buttonPrimaryOutlined(context),
+                          child: Text(
+                              '''Welcome Back ${localStorage.getItem("username")}''',
+                              style: GlobalStyles.secondaryButtonText(context)),
+                          onPressed: () {
+                            config.loggedIN = true;
+                            context.go('/home');
+                          },
+                        ),
+                      )
                   ],
                 ),
               ),

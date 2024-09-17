@@ -46,12 +46,6 @@ namespace BeakPeekApi.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Image_url")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Info")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("Latest_FP")
                         .HasColumnType("Date");
 

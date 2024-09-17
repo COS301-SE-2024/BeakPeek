@@ -30,7 +30,7 @@ class Bird {
   factory Bird.fromJson(Map<String, dynamic> json) {
     final birdJson = json['bird'] ?? json;
     return Bird(
-      id: birdJson['ref'] ?? 0, // default value for id
+      id: birdJson['ref'] as int, // default value for id
       pentad: birdJson['pentad'] != null
           ? Pentad.fromJson(birdJson['pentad'])
           : null,
@@ -54,8 +54,9 @@ class Bird {
       nov: json['nov']?.toDouble() ?? 0.0,
       dec: json['dec']?.toDouble() ?? 0.0,
       totalRecords: birdJson['total_Records'] ?? json['total_Records'] ?? 0,
-      reportingRate:
-          birdJson['reportingRate']?.toDouble() ?? json['reportingRate'] ?? 0.0,
+      reportingRate: birdJson['reportingRate']?.toDouble() ??
+          json['reportingRate'].toDouble() ??
+          0.0,
     );
   }
 

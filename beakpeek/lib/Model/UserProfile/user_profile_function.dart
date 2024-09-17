@@ -1,11 +1,9 @@
 import 'dart:math';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 
 const List<String> provinces = [
@@ -25,18 +23,6 @@ ThemeMode getThemeMode(String data) {
     return ThemeMode.light;
   }
   return ThemeMode.dark;
-}
-
-ThemeMode changeThemeMode(LocalStorage localStorage) {
-  final check = localStorage.getItem('theme') ?? '';
-  if (check.isEmpty) {
-    localStorage.setItem('theme', 'dark');
-    ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
-    return ThemeMode.dark;
-  }
-  localStorage.setItem('theme', '');
-  ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
-  return ThemeMode.light;
 }
 
 Widget getIcon(LocalStorage localStorage) {
@@ -60,50 +46,11 @@ List<Bird> sortAlphabetically(List<Bird> birds) {
   return birds;
 }
 
-Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLIfe) {
-  return SingleChildScrollView(
-    child: SizedBox(
-      height: 200,
-      child: ListView.builder(
-        itemCount: provinces.length,
-        itemBuilder: (context, index) {
-          final String prov = provinces[index];
-          return Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
-                child: Text(
-                  prov,
-                  style: const TextStyle(color: Colors.black),
-                ),
-              ),
-              FAProgressBar(
-                currentValue:
-                    getPercent(birdNumsTotal[index], numbirdsInLIfe[index]),
-                // displayText: '%',
-                size: 10,
-              ),
-            ],
-          );
-        },
-      ),
-    ),
-  );
-}
-
 double getPercent(int numTotalBirds, int birdsInLife) {
   if (numTotalBirds == 0) {
     return 1;
   }
   return ((birdsInLife / numTotalBirds) * 100);
-}
-
-Widget levelProgressBar(int progress, int level) {
-  return FAProgressBar(
-    currentValue: progressPercentage(progress, level),
-    // displayText: '%',
-    size: 15,
-  );
 }
 
 int getLevelExp() {
@@ -112,7 +59,7 @@ int getLevelExp() {
 }
 
 int getNextLevelExpRequired(int level) {
-  final double number = pow((5 * level), 2) + 100;
+  final double number = pow((5 * 10), -0.00005) * pow(level, 2) + 100;
   return ((number / 1000.0) * 1000).ceil();
 }
 
@@ -132,7 +79,7 @@ void updateLevelStats() {
   final String lvl = localStorage.getItem('level') ?? '0';
   int expProgress = int.parse(exp);
   int nextLevelEXP = getNextLevelExpRequired(int.parse(lvl));
-  while (nextLevelEXP <= expProgress) {
+  if (nextLevelEXP <= expProgress) {
     final int level = int.parse(lvl) + 1;
     localStorage.setItem('level', level.toString());
     expProgress = expProgress - nextLevelEXP;
@@ -142,26 +89,6 @@ void updateLevelStats() {
     localStorage.setItem('userExp', expProgress.toString());
     nextLevelEXP = getNextLevelExpRequired(level);
   }
-}
-
-Widget getNumBirdsInProvAndLifeList(
-    List<int> birdNumsTotal, Future<List<Bird>> birds) {
-  return FutureBuilder<List<Bird>>(
-    future: birds,
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      }
-      return Column(children: [
-        Text(birdNumsTotal.toString()),
-        Text(
-          snapshot.data!.toString(),
-        )
-      ]);
-    },
-  );
 }
 
 Future<List<int>> countProv() async {
@@ -200,4 +127,20 @@ bool checkProv(String prov) {
   } else {
     return false;
   }
+}
+
+String formatProvinceName(String province) {
+  // Split the string by camelCase or lowercase sequences
+  final RegExp regex = RegExp(r'([a-z])([A-Z])|([a-z])([A-Z][a-z])');
+  final String formatted = province.replaceAllMapped(regex, (match) {
+    return '${match.group(1)} ${match.group(2) ?? ''}';
+  });
+
+  // Capitalize each word
+  List<String> words =
+      formatted.split(RegExp(r'(?<=[a-z])(?=[A-Z])|(?<=\S)(?=\s)'));
+  words =
+      words.map((word) => word[0].toUpperCase() + word.substring(1)).toList();
+
+  return words.join(' ');
 }
