@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:io';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
+import 'package:beakpeek/View/offline_message.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
@@ -149,13 +150,10 @@ class UserProfileState extends State<UserProfile> {
                               child: CircleAvatar(
                                 radius: screenWidth * 0.19,
                                 backgroundImage: _image.path.isEmpty
-                                    ? FileImage(File(
-                                        'assets/images/profileImages/images.jpg'))
+                                    ? const AssetImage(
+                                        'assets/images/profileImages/images.jpg')
                                     : FileImage(_image),
-                                foregroundImage: _image.path.isEmpty
-                                    ? FileImage(File(
-                                        'assets/images/profileImages/images.jpg'))
-                                    : FileImage(_image),
+                                foregroundImage: FileImage(_image),
                                 onBackgroundImageError: (_, __) => Image.file(
                                   File(
                                       'assets/images/profileImages/images.jpg'),
@@ -249,8 +247,11 @@ class UserProfileState extends State<UserProfile> {
                         ));
                       } else if (snapshot.hasError) {
                         return Center(
-                            child: Text('Error: ${snapshot.error}',
-                                style: GlobalStyles.contentPrimary(context)));
+                          child: OfflineMessage(
+                              height: screenHeight * 0.2,
+                              width: screenWidth * 0.2,
+                              message: 'Needs internet connection'),
+                        );
                       }
                       return progressBars(
                           snapshot.data!, numberOfBirdsPerProvince);

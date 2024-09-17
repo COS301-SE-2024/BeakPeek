@@ -77,8 +77,7 @@ List<Bird> sortRepotRateASC(List<Bird> birds) {
 List<Bird> searchForBird(List<Bird> birds, String value) {
   final List<Bird> results = birds
       .where((bird) =>
-          (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()) ||
-          (bird.commonGroup).toLowerCase().contains(value.toLowerCase()))
+          (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()))
       .toList();
   return results;
 }
@@ -88,7 +87,7 @@ List<Bird> getUniqueBirds(List<Bird> birds) {
   final List<Bird> uniqueBirds = [];
 
   for (var bird in birds) {
-    final birdKey = '${bird.commonGroup}-${bird.commonSpecies}';
+    final birdKey = '${bird.commonSpecies}-${bird.commonGroup}';
     if (!uniqueBirdKeys.contains(birdKey)) {
       uniqueBirdKeys.add(birdKey);
       uniqueBirds.add(bird);
