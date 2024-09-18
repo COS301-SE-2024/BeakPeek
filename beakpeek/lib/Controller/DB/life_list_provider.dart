@@ -41,14 +41,17 @@ class LifeListProvider {
   }
 
   Future<void> insertBird(Bird bird) async {
-    print('inserting');
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
-      await db.insert(
+      await db
+          .insert(
         'birds',
         bird.toMapLIfe(),
         conflictAlgorithm: ConflictAlgorithm.replace,
-      );
+      )
+          .then((value) {
+        print('inserted $value + $bird');
+      });
     }
   }
 
@@ -125,10 +128,8 @@ class LifeListProvider {
     );
 
     if (maps.isNotEmpty) {
-      print('true');
       return true;
     } else {
-      print('false');
       return false;
     }
   }
