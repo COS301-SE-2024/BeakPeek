@@ -1,7 +1,9 @@
-// ignore_for_file: avoid_print, library_private_types_in_public_api
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: avoid_print, library_private_types_in_public_api, sized_box_for_whitespace
 
 import 'dart:convert';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Bird/bird_page.dart';
 // ignore: unused_import
@@ -35,6 +37,7 @@ class _BirdSheetState extends State<BirdSheet> {
   void _refreshBirdList() {
     _birdList = fetchBirds(widget.pentadId, http.Client()).then((birds) {
       // Sort the list of birds based on the selected sort option
+      print(birds[0]);
       return _sortBirds(birds, _selectedSortOption);
     }).catchError((error) {
       // Handle error fetching birds
@@ -61,7 +64,7 @@ class _BirdSheetState extends State<BirdSheet> {
         birds.sort((a, b) => b.commonGroup.compareTo(a.commonGroup));
         break;
       default:
-        // No sorting
+        birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
         break;
     }
     return birds;
@@ -69,94 +72,116 @@ class _BirdSheetState extends State<BirdSheet> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return GestureDetector(
       onVerticalDragUpdate: (details) {
         setState(() {
           _heightFactor -=
               details.primaryDelta! / MediaQuery.of(context).size.height;
-          _heightFactor = _heightFactor.clamp(
-              0.2, 0.9); // Limit height factor between 0.2 and 1.0
+          _heightFactor = _heightFactor.clamp(0.2, 0.9);
         });
       },
       child: FractionallySizedBox(
         alignment: Alignment.bottomCenter,
         heightFactor: _heightFactor,
         child: Material(
-          color: Colors.white, // Set the background color for better visibility
+          color: AppColors.backgroundColor(
+              context), // Set the background color for better visibility
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               SizedBox(
-                height: 24.0,
+                height: screenHeight * 0.03,
                 child: Center(
                   child: Container(
-                    height: 4.0,
-                    width: 48.0,
+                    height: screenHeight * 0.005,
+                    width: screenWidth * 0.12,
                     decoration: BoxDecoration(
                       color: Colors.grey,
-                      borderRadius: BorderRadius.circular(2.0),
+                      borderRadius: BorderRadius.circular(screenHeight * 0.002),
                     ),
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              Padding(
+                padding: EdgeInsets.symmetric(
+                  horizontal: screenWidth * 0.04,
+                  vertical: screenHeight * 0.01,
+                ),
                 child: Text(
                   'Birds in This Area',
-                  style: GlobalStyles.smallHeadingDark,
+                  style: GlobalStyles.smallHeadingPrimary(context),
                 ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
+                  // Sort Dropdown
                   Flexible(
-                    child: DropdownButton<String>(
-                      value: _selectedSortOption,
-                      items: <String>[
-                        'Sort',
-                        'Rarity Asc',
-                        'Rarity Desc',
-                        'Alphabetically Asc',
-                        'Alphabetically Desc'
-                      ].map((value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: GlobalStyles.greenContent,
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedSortOption = newValue!;
-                          _refreshBirdList();
-                        });
-                      },
+                    child: Container(
+                      width: screenWidth * 0.4, // Make the dropdown narrower
+                      child: DropdownButton<String>(
+                        isExpanded:
+                            true, // Ensures the dropdown items fit inside
+                        value: _selectedSortOption,
+                        items: <String>[
+                          'Sort',
+                          'Rarity Asc',
+                          'Rarity Desc',
+                          'Alphabetically Asc',
+                          'Alphabetically Desc'
+                        ].map((value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: GlobalStyles.contentSecondary(context),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedSortOption = newValue!;
+                            _refreshBirdList();
+                          });
+                        },
+                      ),
                     ),
                   ),
+                  SizedBox(
+                      width: screenWidth *
+                          0.05), // Space between the two dropdowns
+
+                  // Filter Dropdown
                   Flexible(
-                    child: DropdownButton<String>(
-                      value: _selectedFilterOption,
-                      items: <String>[
-                        'Birds You\'ve Seen',
-                        'Birds You Haven\'t Seen',
-                        'All'
-                      ].map((value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(
-                            value,
-                            style: GlobalStyles.greenContent,
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _selectedFilterOption = newValue!;
-                          _refreshBirdList();
-                        });
-                      },
+                    child: Container(
+                      width: screenWidth * 0.4, // Make the dropdown narrower
+                      child: DropdownButton<String>(
+                        isExpanded:
+                            true, // Ensures the dropdown items fit inside
+                        value: _selectedFilterOption,
+                        items: <String>[
+                          'Birds You\'ve Seen',
+                          'Birds You Haven\'t Seen',
+                          'All'
+                        ].map((value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(
+                              value,
+                              style: GlobalStyles.contentSecondary(context),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _selectedFilterOption = newValue!;
+                            _refreshBirdList();
+                          });
+                        },
+                      ),
                     ),
                   ),
                 ],
@@ -190,14 +215,13 @@ Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
-      print('HELLO $jsonResponse');
       return jsonResponse.map((data) => Bird.fromJson(data)).toList();
     } else {
       print('Request failed with status: ${response.statusCode}');
       throw Exception('Failed to load birds');
     }
   } catch (error) {
-    print('Error fetching birds BRUH: $error');
+    print('Error fetching birds: $error');
     throw Exception(error);
   }
 }
@@ -239,20 +263,20 @@ class BirdList extends StatelessWidget {
             },
             child: ListTile(
               tileColor: index % 2 == 0
-                  ? Colors.grey.shade100
-                  : Colors.white, // Alternate row color
+                  ? AppColors.backgroundColor(context)
+                  : AppColors.popupColor(context), // Alternate row color
               title: Text(
                 bird.commonGroup != 'None'
-                    ? '${bird.commonGroup} ${bird.commonSpecies}'
+                    ? '${bird.commonSpecies} ${bird.commonGroup}'
                     : bird.commonSpecies,
-                style: const TextStyle(
-                  color: Colors.black,
+                style: TextStyle(
+                  color: AppColors.primaryColor(context),
                 ),
               ),
               subtitle: Text(
                 'Scientific Name: ${bird.genus} ${bird.species}',
-                style: const TextStyle(
-                  color: Colors.black54,
+                style: TextStyle(
+                  color: AppColors.secondaryColor(context),
                 ),
               ),
               trailing: Row(
@@ -260,8 +284,8 @@ class BirdList extends StatelessWidget {
                 children: [
                   Text(
                     '${reportingRate.toStringAsFixed(2)}%',
-                    style: const TextStyle(
-                      color: Colors.black87,
+                    style: TextStyle(
+                      color: AppColors.secondaryColor(context),
                     ),
                   ),
                   const SizedBox(width: 8),

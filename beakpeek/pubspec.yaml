@@ -1,5 +1,5 @@
 name: beakpeek
-description: "A new Flutter project."
+description: "BeakPeek strives to grow the birding community of South Africa all while helping our local conservationists."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: "none" # Remove this line if you wish to publish to pub.dev
@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+1
+version: 0.3.8+1
 
 environment:
   sdk: ">=3.4.1 <4.0.0"
@@ -61,6 +61,13 @@ dependencies:
   flutter_animation_progress_bar: ^2.3.1
   sqflite_common_ffi: ^2.3.3
   geolocator: ^12.0.0
+  audioplayers: ^6.1.0
+  image_picker: ^1.1.2
+  flutter_popup_card: ^0.0.6
+  flutter_media_downloader: ^1.0.6
+  flutter_svg: ^1.0.3
+  progress_bar_chart: ^0.0.11
+  flutter_profile_picture: ^2.0.0
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
@@ -77,8 +84,15 @@ dev_dependencies:
 
   mockito: ^5.4.4
   build_runner: ^2.4.11
+  flutter_launcher_icons: ^0.11.0
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
+
+flutter_icons:
+  android: true
+  ios: true
+  image_path_android: "android/app/src/main/res/mipmap-hdpi/ic_launcher.png"
+  image_path_ios: "ios/Runner/Assets.xcassets/AppIcon.appiconset/80.png"
 
 # The following section is specific to Flutter packages.
 flutter:
@@ -99,6 +113,18 @@ flutter:
     - assets/icons/addSighting.png
     - assets/icons/sightings.png
     - assets/icons/profile.png
+    - assets/icons/homeDark.png
+    - assets/icons/mapDark.png
+    - assets/icons/sightingsDark.png
+    - assets/icons/profileDark.png
+    - assets/icons/home.svg
+    - assets/icons/homeDark.svg
+    - assets/icons/map.svg
+    - assets/icons/mapDark.svg
+    - assets/icons/sightings.svg
+    - assets/icons/sightingsDark.svg
+    - assets/icons/profile.svg
+    - assets/icons/profileDark.svg
     - assets/images/home.png
     - assets/icons/Logo.png
     - assets/icons/search.png
@@ -109,6 +135,14 @@ flutter:
     - assets/province_westerncape.kml
     - assets/images/map.png
     - assets/images/quiz_placeholder.png
+    - assets/BirdList/allbirds.json
+    - assets/province_easterncape.kml
+    - assets/province_mpumalanga.kml
+    - assets/province_freestate.kml
+    - assets/province_kwazulu-natal.kml
+    - assets/province_limpopo.kml
+    - assets/province_northerncape.kml
+    - assets/province_northwest.kml
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

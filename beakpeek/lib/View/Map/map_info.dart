@@ -1,4 +1,5 @@
-import 'package:beakpeek/View/Home/Searching/searchbar_container.dart';
+import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/View/Map/bird_map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
@@ -12,7 +13,7 @@ class MapInfo extends StatelessWidget {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F1ED),
+      backgroundColor: AppColors.backgroundColor(context),
       body: Center(
         child: Align(
           alignment: Alignment.bottomCenter,
@@ -29,8 +30,7 @@ class MapInfo extends StatelessWidget {
                         padding: EdgeInsets.only(
                             right: screenWidth * 0.04,
                             left: screenHeight * 0.02),
-                        child: const SearchbarContainer(
-                          province: 'Gauteng',
+                        child: const FilterableSearchbar(
                           helpContent:
                               '''This map shows you your current location. 
                           Click anywhere and you will see all the birds in that area! 

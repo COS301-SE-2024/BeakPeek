@@ -6,6 +6,7 @@ import 'package:go_router/go_router.dart';
 import 'dart:convert' show jsonDecode;
 import 'package:http/http.dart' as http;
 import 'package:beakpeek/config_azure.dart' as config;
+import 'package:localstorage/localstorage.dart';
 
 void loginFunction(BuildContext context) async {
   final url = Uri.https(
@@ -37,14 +38,13 @@ void loginFunction(BuildContext context) async {
     },
   );
 
-  if (response.statusCode == 400) {
-    context.go('/');
-    return;
-  }
-
   final accessToken = jsonDecode(response.body)['id_token'] as String;
-
-  config.accessToken = accessToken;
-  config.loggedIN = true;
-  context.go('/home');
+  if (accessToken.isEmpty) {
+    context.go('/');
+  } else {
+    config.accessToken = accessToken;
+    localStorage.setItem('accessToken', accessToken);
+    config.loggedIN = true;
+    context.go('/home');
+  }
 }
