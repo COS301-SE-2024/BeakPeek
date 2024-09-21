@@ -21,6 +21,7 @@ class Main extends StatefulWidget {
 
 class MainState extends State<Main> {
   late final ThemeProvider themeProvider;
+
   @override
   void initState() {
     super.initState();

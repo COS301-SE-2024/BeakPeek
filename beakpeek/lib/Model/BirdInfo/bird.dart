@@ -9,6 +9,7 @@ class Bird {
     this.imageUrl,
     this.imageBlob,
     this.info,
+    this.provinces,
     required this.commonGroup,
     required this.commonSpecies,
     required this.genus,
@@ -62,6 +63,11 @@ class Bird {
       reportingRate: birdJson['reportingRate']?.toDouble() ??
           json['reportingRate'].toDouble() ??
           0.0,
+      info: json['info'] ?? '',
+      imageUrl: json['imageUrl'] != null
+          ? List<String>.from(json['imageUrl'] ?? [])
+          : List<String>.from([]),
+      provinces: List<String>.from(json['provinces'] ?? []),
     );
   }
 
@@ -89,8 +95,9 @@ class Bird {
   final int totalRecords;
   final double reportingRate;
   final String? info;
-  final String? imageUrl;
+  final List<String>? imageUrl;
   final Image? imageBlob;
+  final List<String>? provinces;
 
   Map<String, Object?> toMap() {
     return {
@@ -131,9 +138,52 @@ class Bird {
     };
   }
 
+  Map<String, Object?> toMapProvince() {
+    return {
+      'id': id,
+      'gauteng': provinces?.contains('gauteng'),
+      'kwazulunatal': provinces?.contains('kwazulunatal'),
+      'limpopo': provinces?.contains('limpopo'),
+      'mpumalanga': provinces?.contains('mpumalanga'),
+      'northerncape': provinces?.contains('northerncape'),
+      'northwest': provinces?.contains('northwest'),
+      'westerncape': provinces?.contains('westerncape'),
+      'freestate': provinces?.contains('freestate'),
+    };
+  }
+
+  Map<String, Object?> toAllBirdsMap() {
+    return {
+      'id': id,
+      'commonGroup': commonGroup,
+      'commonSpecies': commonSpecies,
+      'genus': genus,
+      'species': species,
+      'fullProtocolRR': fullProtocolRR,
+      'fullProtocolNumber': fullProtocolNumber,
+      'latestFP': latestFP,
+      'jan': jan,
+      'feb': feb,
+      'mar': mar,
+      'apr': apr,
+      'may': may,
+      'jun': jun,
+      'jul': jul,
+      'aug': aug,
+      'sep': sep,
+      'oct': oct,
+      'nov': nov,
+      'dec': dec,
+      'totalRecords': totalRecords,
+      'reportingRate': reportingRate,
+      'info': info,
+      'image_Url': imageUrl,
+    };
+  }
+
   @override
   String toString() {
-    return '''Bird{id: $id, commonGroup: $commonGroup, 
-    commonSpecies: $commonSpecies, reportingRate: $reportingRate}''';
+    return '''Bird id: $id, commonGroup: $commonGroup, 
+    commonSpecies: $commonSpecies, reportingRate: $reportingRate''';
   }
 }

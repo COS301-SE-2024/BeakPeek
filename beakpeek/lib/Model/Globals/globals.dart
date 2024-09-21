@@ -19,6 +19,7 @@ class Globals {
     });
     listBirdFromAssets().then((result) {
       allBirdsList = result;
+      lifeList.initialInsert(result);
     });
   }
 

@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_print
 
+import 'dart:async';
+
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 import 'package:beakpeek/Model/BirdInfo/province.dart';
@@ -25,19 +27,69 @@ class LifeListProvider {
     return await openDatabase(
       join(await getDatabasesPath(), 'life_list.db'),
       version: 1,
-      onCreate: (db, version) {
-        return db.execute(
-          '''CREATE TABLE birds(
+      onCreate: _createDb,
+    );
+  }
+
+  Future<void> deleteDatabaseFile() async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, 'life_list.db');
+
+    // Delete the database file
+    await deleteDatabase(path);
+    print('Database deleted');
+  }
+
+  Future _createDb(Database db, version) async {
+    await db.execute('''CREATE TABLE birds(
           id INTEGER PRIMARY KEY, 
           commonGroup TEXT, 
           commonSpecies TEXT, 
           genus TEXT, 
           species TEXT, 
           reportingRate DOUBLE
-          )''',
-        );
-      },
-    );
+          )''');
+    await db.execute('''
+        CREATE TABLE allBirds(
+          id INTEGER PRIMARY KEY, 
+          commonGroup TEXT, 
+          commonSpecies TEXT, 
+          genus TEXT, 
+          species TEXT,
+          fullProtocolRR REAL,
+          fullProtocolNumber INTEGER,
+          latestFP NUMERIC,
+          jan DOUBLE,
+          feb  DOUBLE,
+          mar  DOUBLE,
+          apr  DOUBLE,
+          may  DOUBLE,
+          jun  DOUBLE,
+          jul  DOUBLE,
+          aug  DOUBLE,
+          sep  DOUBLE,
+          oct  DOUBLE,
+          nov DOUBLE,
+          dec DOUBLE,
+          image_Url TEXT,
+          image_Blob BLOB,
+          info TEXT,
+          reportingRate DOUBLE,
+          totalRecords INTEGER
+          )''');
+    await db.execute('''
+          CREATE TABLE provinces(
+            id INTEGER PRIMARY KEY,
+            easterncape NUMERIC,
+            gauteng NUMERIC,
+            kwazulunatal NUMERIC,
+            limpopo NUMERIC,
+            mpumalanga NUMERIC,
+            northerncape NUMERIC,
+            northwest NUMERIC,
+            westerncape NUMERIC,
+            freestate NUMERIC
+          )''');
   }
 
   Future<void> insertBird(Bird bird) async {
@@ -147,5 +199,31 @@ class LifeListProvider {
         bird.species
       ],
     );
+  }
+
+  Future<void> initialInsert(List<Bird> allBirds) async {
+    final db = await instance.database;
+    if (await containsData() == 0) {
+      final batch = db.batch();
+      for (Bird bird in allBirds) {
+        batch.insert('allBirds', bird.toAllBirdsMap(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+      await batch.commit();
+      // allBirds.map((bird) => insertIntoAll(db, bird));
+    }
+  }
+
+  Future<int> containsData() async {
+    final db = await instance.database;
+    final int count = Sqflite.firstIntValue(
+          await db.query(
+            'allBirds',
+            columns: ['COUNT(*)'],
+          ),
+        ) ??
+        0;
+    print(count);
+    return count;
   }
 }
