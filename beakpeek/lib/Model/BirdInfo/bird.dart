@@ -1,9 +1,14 @@
+import 'dart:ui';
+
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 
 class Bird {
   Bird({
     required this.id,
     this.pentad,
+    this.imageUrl,
+    this.imageBlob,
+    this.info,
     required this.commonGroup,
     required this.commonSpecies,
     required this.genus,
@@ -83,6 +88,9 @@ class Bird {
   final double dec;
   final int totalRecords;
   final double reportingRate;
+  final String? info;
+  final String? imageUrl;
+  final Image? imageBlob;
 
   Map<String, Object?> toMap() {
     return {

@@ -19,14 +19,14 @@ class AchievementsProvider {
 
   Future<Database> _initDatabase() async {
     return await openDatabase(
-      join(await getDatabasesPath(), 'achievements.db'),
+      join(await getDatabasesPath(), 'life_list.db'),
       version: 1,
       onCreate: (db, version) {
         return db.execute(
           '''CREATE TABLE achievement(
           id INTEGER PRIMARY KEY, 
           achievement TEXT,
-          description TEXT
+          points TEXT,
           )''',
         );
       },
