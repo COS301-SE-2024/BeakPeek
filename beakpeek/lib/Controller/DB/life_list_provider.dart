@@ -48,7 +48,8 @@ class LifeListProvider {
           commonSpecies TEXT, 
           genus TEXT, 
           species TEXT, 
-          reportingRate DOUBLE
+          reportingRate DOUBLE,
+          image_Url TEXT
           )''');
     await db.execute('''
         CREATE TABLE allBirds(
