@@ -399,10 +399,9 @@ class _StateProfileField extends State<ProfileField> {
               decoration: InputDecoration(
                 labelText: content.isEmpty ? label : content,
                 labelStyle: const TextStyle(),
-                hintText: content,
                 helperText: label,
               ),
-              style: TextStyle(color: AppColors.tertiaryColor(context)),
+              style: TextStyle(color: AppColors.textColor(context)),
             )),
           ],
         ),

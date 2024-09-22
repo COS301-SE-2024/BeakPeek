@@ -18,11 +18,11 @@ class Sightings extends StatefulWidget {
 }
 
 class _SightingsState extends State<Sightings> {
-  // Add a variable to store the dropdown value
   late final LifeListProvider lifeList = LifeListProvider.instance;
   late List<Bird> loaded = [];
   late Future<List<Bird>> listBirds;
   String? selectedFilter = 'name';
+
   @override
   void initState() {
     global.updateLife();
@@ -61,9 +61,6 @@ class _SightingsState extends State<Sightings> {
     setState(() {
       selectedFilter = newValue;
     });
-
-    if (selectedFilter == 'rarity') {
-    } else if (selectedFilter == 'name') {}
   }
 
   @override
@@ -89,12 +86,18 @@ class _SightingsState extends State<Sightings> {
         ),
         body: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: Align(
-                alignment: Alignment.centerLeft,
+            Center(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
                 child: Row(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
+                    // Text label for dropdown
+                    Text(
+                      'Filter by:',
+                      style: GlobalStyles.contentPrimary(context),
+                    ),
+                    const SizedBox(width: 8.0),
                     // Dropdown Button
                     DropdownButton<String>(
                       dropdownColor: AppColors.popupColor(context),
@@ -154,14 +157,9 @@ class _SightingsState extends State<Sightings> {
                 ),
               ),
             ),
-            SizedBox(
-              height: screenHeight * 0.75,
-              child: getLiveList(loaded, goBird, context), //FutureBuilder(
-              //   future: listBirds,
-              //   builder: (context, snapshot) {
-
-              //   },
-              // ),
+            SizedBox(height: screenHeight * 0.02),
+            Expanded(
+              child: getLiveList(loaded, goBird, context),
             ),
           ],
         ),
