@@ -8,5 +8,5 @@ class QuizInstance {
   });
   final List<Bird> selectedBirds;
   final Bird correctBird;
-  final List<String> images;
+  final String images;
 }
