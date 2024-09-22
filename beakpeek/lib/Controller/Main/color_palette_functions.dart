@@ -1,15 +1,6 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 class ColorPalette {
-  final Color low;
-  final Color mediumLow;
-  final Color medium;
-  final Color mediumHigh;
-  final Color high;
-  final Color veryHigh;
-
   ColorPalette({
     required this.low,
     required this.mediumLow,
@@ -18,6 +9,12 @@ class ColorPalette {
     required this.high,
     required this.veryHigh,
   });
+  final Color low;
+  final Color mediumLow;
+  final Color medium;
+  final Color mediumHigh;
+  final Color high;
+  final Color veryHigh;
 }
 
 // Example palettes

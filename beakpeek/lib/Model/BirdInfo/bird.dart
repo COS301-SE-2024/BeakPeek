@@ -3,9 +3,45 @@ import 'dart:ui';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 
 class Bird {
-  //population changes
-  int? population;
-
+  factory Bird.fromJson(Map<String, dynamic> json) {
+    final birdJson = json['bird'] ?? json;
+    return Bird(
+      id: birdJson['ref'] as int, // default value for id
+      pentad: birdJson['pentad'] != null
+          ? Pentad.fromJson(birdJson['pentad'])
+          : null,
+      commonGroup: birdJson['common_group'] ?? 'None',
+      commonSpecies: birdJson['common_species'] ?? '',
+      genus: birdJson['genus'] ?? '',
+      species: birdJson['species'] ?? '',
+      fullProtocolRR: birdJson['full_Protocol_RR']?.toDouble() ?? 0.0,
+      fullProtocolNumber: birdJson['full_Protocol_Number'] ?? 0,
+      latestFP: birdJson['latest_FP'] ?? '',
+      jan: json['jan']?.toDouble() ?? 0.0,
+      feb: json['feb']?.toDouble() ?? 0.0,
+      mar: json['mar']?.toDouble() ?? 0.0,
+      apr: json['apr']?.toDouble() ?? 0.0,
+      may: json['may']?.toDouble() ?? 0.0,
+      jun: json['jun']?.toDouble() ?? 0.0,
+      jul: json['jul']?.toDouble() ?? 0.0,
+      aug: json['aug']?.toDouble() ?? 0.0,
+      sep: json['sep']?.toDouble() ?? 0.0,
+      oct: json['oct']?.toDouble() ?? 0.0,
+      nov: json['nov']?.toDouble() ?? 0.0,
+      dec: json['dec']?.toDouble() ?? 0.0,
+      totalRecords: birdJson['total_Records'] ?? json['total_Records'] ?? 0,
+      reportingRate: birdJson['reportingRate']?.toDouble() ??
+          json['reportingRate']?.toDouble() ??
+          0.0,
+      info: json['info'] ?? '',
+      imageUrl: json['imageUrl'] != null
+          ? List<String>.from(json['imageUrl'] ?? [])
+          : List<String>.from([]),
+      provinces: List<String>.from(json['provinces'] ?? []),
+      //population changes below
+      population: 0,
+    );
+  }
   Bird({
     required this.id,
     this.pentad,
@@ -37,46 +73,8 @@ class Bird {
     //maybe needs to come out
     this.population,
   });
-
-  factory Bird.fromJson(Map<String, dynamic> json) {
-    final birdJson = json['bird'] ?? json;
-    return Bird(
-      id: birdJson['ref'] as int, // default value for id
-      pentad: birdJson['pentad'] != null
-          ? Pentad.fromJson(birdJson['pentad'])
-          : null,
-      commonGroup: birdJson['common_group'] ?? 'None',
-      commonSpecies: birdJson['common_species'] ?? '',
-      genus: birdJson['genus'] ?? '',
-      species: birdJson['species'] ?? '',
-      fullProtocolRR: birdJson['full_Protocol_RR']?.toDouble() ?? 0.0,
-      fullProtocolNumber: birdJson['full_Protocol_Number'] ?? 0,
-      latestFP: birdJson['latest_FP'] ?? '',
-      jan: json['jan']?.toDouble() ?? 0.0,
-      feb: json['feb']?.toDouble() ?? 0.0,
-      mar: json['mar']?.toDouble() ?? 0.0,
-      apr: json['apr']?.toDouble() ?? 0.0,
-      may: json['may']?.toDouble() ?? 0.0,
-      jun: json['jun']?.toDouble() ?? 0.0,
-      jul: json['jul']?.toDouble() ?? 0.0,
-      aug: json['aug']?.toDouble() ?? 0.0,
-      sep: json['sep']?.toDouble() ?? 0.0,
-      oct: json['oct']?.toDouble() ?? 0.0,
-      nov: json['nov']?.toDouble() ?? 0.0,
-      dec: json['dec']?.toDouble() ?? 0.0,
-      totalRecords: birdJson['total_Records'] ?? json['total_Records'] ?? 0,
-      reportingRate: birdJson['reportingRate']?.toDouble() ??
-          json['reportingRate'].toDouble() ??
-          0.0,
-      info: json['info'] ?? '',
-      imageUrl: json['imageUrl'] != null
-          ? List<String>.from(json['imageUrl'] ?? [])
-          : List<String>.from([]),
-      provinces: List<String>.from(json['provinces'] ?? []),
-      //population changes below
-      population: 0,
-    );
-  }
+  //population changes
+  int? population;
 
   final int id;
   final Pentad? pentad;
@@ -185,6 +183,7 @@ class Bird {
       'reportingRate': reportingRate,
       'info': info,
       'image_Url': imageUrl,
+      'birdPopulation': 0
     };
   }
 

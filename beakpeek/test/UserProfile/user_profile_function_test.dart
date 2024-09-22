@@ -4,6 +4,7 @@ import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 import 'package:beakpeek/Model/BirdInfo/province.dart';
 import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
+import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:localstorage/localstorage.dart';

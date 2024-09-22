@@ -1,6 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
+import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
@@ -312,6 +314,18 @@ class LifeListProvider {
     final db = await instance.database;
     final List<Map<String, Object?>> birdMap =
         await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
+    print(birdMap);
     return birdMap;
+  }
+
+  Future<void> addImage(int id, Image img) async {
+    final db = await instance.database;
+    final ByteData? image = await img.toByteData();
+    await db.rawUpdate(
+      '''UPDATE allBirds
+      SET image_Blob = ? 
+      WHERE id = ?''',
+      [image, id],
+    );
   }
 }

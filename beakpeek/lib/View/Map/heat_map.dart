@@ -88,7 +88,7 @@ class HeatMapState extends State<HeatMap> {
         return AlertDialog(
           title: const Text('Filters'),
           backgroundColor: AppColors.backgroundColor(context),
-          content: Column(
+          content: const Column(
               mainAxisSize: MainAxisSize.min, children: [PaletteSelector()]),
           actions: [
             TextButton(
