@@ -5,6 +5,7 @@ import 'dart:async';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 import 'package:beakpeek/Model/BirdInfo/province.dart';
+import 'package:beakpeek/Model/BirdInfo/province_data.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -209,8 +210,18 @@ class LifeListProvider {
         batch.insert('allBirds', bird.toAllBirdsMap(),
             conflictAlgorithm: ConflictAlgorithm.replace);
       }
-      await batch.commit();
-      // allBirds.map((bird) => insertIntoAll(db, bird));
+    }
+  }
+
+  Future<void> initialProvInsert(List<Bird> allBirds) async {
+    final db = await instance.database;
+    if (await containsProvData() == 0) {
+      final batchProv = db.batch();
+      for (Bird bird in allBirds) {
+        batchProv.insert('provinces', bird.toMapProvince(),
+            conflictAlgorithm: ConflictAlgorithm.replace);
+      }
+      await batchProv.commit();
     }
   }
 
@@ -223,7 +234,31 @@ class LifeListProvider {
           ),
         ) ??
         0;
-    print(count);
     return count;
+  }
+
+  Future<int> containsProvData() async {
+    final db = await instance.database;
+    final int count = Sqflite.firstIntValue(
+          await db.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+          ),
+        ) ??
+        0;
+    return count;
+  }
+
+  Future<ProvinceData> getBirdProvinces(int id) async {
+    final db = await instance.database;
+    late ProvinceData prov;
+    await db.query(
+      'provinces',
+      where: 'id =?',
+      whereArgs: [id],
+    ).then((result) {
+      prov = ProvinceData.fromJson(result.first);
+    });
+    return prov;
   }
 }

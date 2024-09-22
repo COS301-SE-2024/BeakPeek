@@ -1,21 +1,20 @@
 import 'dart:math';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 
 const List<String> provinces = [
   'easterncape',
-  'freestate',
   'gauteng',
   'kwazulunatal',
   'limpopo',
   'mpumalanga',
   'northerncape',
   'northwest',
-  'westerncape'
+  'westerncape',
+  'freestate',
 ];
 
 ThemeMode getThemeMode(String data) {
@@ -94,39 +93,22 @@ void updateLevelStats() {
 Future<List<int>> countProv() async {
   late final LifeListProvider lifeList = LifeListProvider.instance;
   final List<int> provCount = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-  lifeList.fetchLifeList().then(
+  await lifeList.fetchLifeList().then(
     (birds) {
       for (final bird in birds) {
-        if (bird.commonGroup.isNotEmpty && bird.commonSpecies.isNotEmpty) {
-          try {
-            db
-                .getProvincesBirdIsIn(
-                    Client(), bird.commonSpecies, bird.commonGroup)
-                .then((prov) {
-              for (int i = 0; i < provinces.length; i++) {
-                if (prov.length > i && checkProv(prov[i])) {
-                  provCount[i]++;
-                }
+        db.getProvincesForBird(bird.id).then(
+          (prov) {
+            for (int i = 0; i < prov.length; i++) {
+              if (prov[i] == true) {
+                provCount[i]++;
               }
-            });
-          } catch (error) {
-            // ignore: avoid_print
-            print('error');
-          }
-        }
+            }
+          },
+        );
       }
     },
   );
-
   return provCount;
-}
-
-bool checkProv(String prov) {
-  if (provinces.contains(prov)) {
-    return true;
-  } else {
-    return false;
-  }
 }
 
 String formatProvinceName(String province) {

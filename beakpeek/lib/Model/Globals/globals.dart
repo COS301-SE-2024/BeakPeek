@@ -20,7 +20,9 @@ class Globals {
     listBirdFromAssets().then((result) {
       allBirdsList = result;
       lifeList.initialInsert(result);
+      lifeList.initialProvInsert(result);
     });
+    //lifeList.deleteDatabaseFile();
   }
 
   void updateLife() {

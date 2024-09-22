@@ -141,14 +141,14 @@ class Bird {
   Map<String, Object?> toMapProvince() {
     return {
       'id': id,
-      'gauteng': provinces?.contains('gauteng'),
-      'kwazulunatal': provinces?.contains('kwazulunatal'),
-      'limpopo': provinces?.contains('limpopo'),
-      'mpumalanga': provinces?.contains('mpumalanga'),
-      'northerncape': provinces?.contains('northerncape'),
-      'northwest': provinces?.contains('northwest'),
-      'westerncape': provinces?.contains('westerncape'),
-      'freestate': provinces?.contains('freestate'),
+      'gauteng': provinces!.contains('gauteng') ? 1 : 0,
+      'kwazulunatal': provinces!.contains('kwazulunatal') ? 1 : 0,
+      'limpopo': provinces!.contains('limpopo') ? 1 : 0,
+      'mpumalanga': provinces!.contains('mpumalanga') ? 1 : 0,
+      'northerncape': provinces!.contains('northerncape') ? 1 : 0,
+      'northwest': provinces!.contains('northwest') ? 1 : 0,
+      'westerncape': provinces!.contains('westerncape') ? 1 : 0,
+      'freestate': provinces!.contains('freestate') ? 1 : 0,
     };
   }
 
