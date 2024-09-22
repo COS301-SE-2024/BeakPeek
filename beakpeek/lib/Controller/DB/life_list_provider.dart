@@ -302,4 +302,11 @@ class LifeListProvider {
       },
     ).toList();
   }
+
+  Future<List<Map<String, Object?>>> getBirdInByID(int id) async {
+    final db = await instance.database;
+    final List<Map<String, Object?>> birdMap =
+        await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
+    return birdMap;
+  }
 }
