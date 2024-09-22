@@ -38,8 +38,7 @@ class ApiService {
        final List<Bird> birdHolder = await lifeList.getFullBirdData();
 
        for(Bird bird in birdHolder){
-        bird.population = populationHelper(bird);
-        
+        bird.population = populationHelper(bird);        
        }
   }
 
