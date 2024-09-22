@@ -1,5 +1,7 @@
 import 'package:beakpeek/View/Bird/bird_page.dart';
 import 'package:beakpeek/View/Home/home.dart';
+import 'package:beakpeek/View/Map/heat_map_info.dart';
+
 import 'package:beakpeek/View/Map/map_info.dart';
 import 'package:beakpeek/View/Login/landing_page.dart';
 import 'package:beakpeek/View/Quiz/bird_quiz.dart';
@@ -53,6 +55,15 @@ class RoutingData {
           return BirdPage(
             commonGroup: state.pathParameters['group']!,
             commonSpecies: state.pathParameters['species']!,
+            id: int.parse(state.pathParameters['id']!),
+          );
+        },
+      ),
+      GoRoute(
+        path: '/heatmap/:id',
+        name: 'HeatMap',
+        builder: (context, state) {
+          return HeatMapInfo(
             id: int.parse(state.pathParameters['id']!),
           );
         },

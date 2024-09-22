@@ -9,7 +9,6 @@ import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
-import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
@@ -283,14 +282,7 @@ class _BirdPageState extends State<BirdPage> {
                       child: Text('Show Heat Map',
                           style: GlobalStyles.primaryButtonText(context)),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              body: HeatMap(id: widget.id),
-                            ),
-                          ),
-                        );
+                        context.go('/heatmap/${widget.id}');
                       },
                     ),
                   ),
