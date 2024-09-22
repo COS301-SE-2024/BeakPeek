@@ -1,7 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api
 
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/sound_controller.dart';
-import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
@@ -32,12 +32,30 @@ class BirdPage extends StatefulWidget {
 
 class _BirdPageState extends State<BirdPage> {
   late Future<Map<String, dynamic>?> birdFuture;
+  late String seenText;
+  late final LifeListProvider lifeList = LifeListProvider.instance;
 
   @override
   void initState() {
+    seenText = isSeenGS(widget.commonGroup, widget.commonSpecies)
+        ? 'Seen'
+        : 'Add to Life List';
+    global.updateLife();
     super.initState();
     birdFuture =
         ApiService().fetchBirdInfo(widget.commonGroup, widget.commonSpecies);
+  }
+
+  void addToLifeList() {
+    if (!isSeenGS(widget.commonGroup, widget.commonSpecies)) {
+      setState(
+        () {
+          seenText = 'Seen';
+          up_func.addExp(20);
+          global.updateLife();
+        },
+      );
+    }
   }
 
   @override
@@ -87,9 +105,7 @@ class _BirdPageState extends State<BirdPage> {
                   } else if (!snapshot.hasData) {
                     return const Center(child: Text('No bird info found'));
                   }
-
                   final birdData = snapshot.data!;
-
                   return Padding(
                     padding: EdgeInsets.all(screenWidth * 0.04),
                     child: Column(
@@ -170,9 +186,11 @@ class _BirdPageState extends State<BirdPage> {
                                       size: 20,
                                     ),
                                     const SizedBox(width: 8),
-                                    Text('Description',
-                                        style: GlobalStyles.smallHeadingPrimary(
-                                            context)),
+                                    Text(
+                                      'Description',
+                                      style: GlobalStyles.smallHeadingPrimary(
+                                          context),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 8),

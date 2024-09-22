@@ -1,10 +1,13 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:io';
+import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
+import 'package:beakpeek/View/offline_message.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
@@ -148,10 +151,14 @@ class UserProfileState extends State<UserProfile> {
                               backgroundColor: AppColors.iconColor(context),
                               child: CircleAvatar(
                                 radius: screenWidth * 0.19,
-                                backgroundImage: FileImage(_image),
-                                onBackgroundImageError: (_, __) => const Icon(
-                                  Icons.person,
-                                  size: 75,
+                                backgroundImage: _image.path.isEmpty
+                                    ? const AssetImage(
+                                        'assets/images/profileImages/images.jpg')
+                                    : FileImage(_image),
+                                foregroundImage: FileImage(_image),
+                                onBackgroundImageError: (_, __) => Image.file(
+                                  File(
+                                      'assets/images/profileImages/images.jpg'),
                                   color: Colors.white,
                                 ),
                               ),
@@ -183,7 +190,10 @@ class UserProfileState extends State<UserProfile> {
                       const SizedBox(height: 6),
                       SizedBox(
                         height: verticalPadding * 3,
-                        child: levelProgressBar(userExp, level),
+                        width: screenWidth,
+                        child: Center(
+                          child: levelProgressBar(userExp, level),
+                        ),
                       ),
                     ],
                   ),
@@ -239,8 +249,11 @@ class UserProfileState extends State<UserProfile> {
                         ));
                       } else if (snapshot.hasError) {
                         return Center(
-                            child: Text('Error: ${snapshot.error}',
-                                style: GlobalStyles.contentPrimary(context)));
+                          child: OfflineMessage(
+                              height: screenHeight * 0.2,
+                              width: screenWidth * 0.2,
+                              message: 'Needs internet connection'),
+                        );
                       }
                       return progressBars(
                           snapshot.data!, numberOfBirdsPerProvince);

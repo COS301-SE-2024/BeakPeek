@@ -8,25 +8,20 @@ namespace BeakPeekApi.Helpers
 
         private readonly HttpClient _httpClient;
         private readonly string? _flickrApiKey;
+        private readonly GeneralHelper _generalHelper;
 
-        public BirdInfoHelper(HttpClient httpClient, IConfiguration config)
+        public BirdInfoHelper(HttpClient httpClient, GeneralHelper generalHelper)
         {
-            _flickrApiKey = config.GetValue<string>("FLICKR_API_KEY");
-            if (_flickrApiKey == null)
-            {
-                throw new Exception("flickr API key environment variable not set");
-            }
-            else
-            {
-                _flickrApiKey = Environment.GetEnvironmentVariable("FLICKR_API_KEY");
-            }
+            _generalHelper = generalHelper;
+            _flickrApiKey = _generalHelper.getVariableFromEnvOrAppsettings("FLICKR_API_KEY");
             _httpClient = httpClient;
         }
 
-        public async Task<string?> FetchBirdInfoFromWikipedia(string birdName)
+        public async Task<string?> FetchBirdInfoFromWikipedia(string birdName, HttpClient? httpClient = null)
         {
             var url = $"https://en.wikipedia.org/api/rest_v1/page/summary/{birdName}";
-            var response = await _httpClient.GetAsync(url);
+            httpClient = httpClient ?? _httpClient;
+            var response = await httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
             {
@@ -39,19 +34,24 @@ namespace BeakPeekApi.Helpers
             return wikiResponse?.Extract;
         }
 
-        public async Task<List<BirdImageModel>?> FetchBirdImagesFromFlickr(string birdName)
+        public async Task<List<BirdImageModel>?> FetchBirdImagesFromFlickr(string birdName, HttpClient? httpClient = null)
         {
             var url = $"https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key={_flickrApiKey}&text={birdName}&format=json&nojsoncallback=1&per_page=5&extras=owner_name&tags=bird&sort=relevance";
-            var response = await _httpClient.GetAsync(url);
+            httpClient = httpClient ?? _httpClient;
+            var response = await httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
             {
+                Console.WriteLine("Flickr request not successful: " + response);
                 return null;
             }
 
             var content = await response.Content.ReadFromJsonAsync<FlickrResponse>();
             if (content == null)
-            { return null; }
+            {
+                Console.WriteLine("No content" + response);
+                return null;
+            }
             FlickrResponse flickrResponse = content;
 
             if (flickrResponse?.Photos?.Photo == null)
@@ -72,10 +72,11 @@ namespace BeakPeekApi.Helpers
             return (await Task.WhenAll(tasks)).ToList();
         }
 
-        public async Task<string> FetchOwnerInfoFromFlickr(string ownerId)
+        public async Task<string> FetchOwnerInfoFromFlickr(string ownerId, HttpClient? httpClient = null)
         {
             var url = $"https://www.flickr.com/services/rest/?method=flickr.people.getInfo&api_key={_flickrApiKey}&user_id={ownerId}&format=json&nojsoncallback=1";
-            var response = await _httpClient.GetAsync(url);
+            httpClient = httpClient ?? _httpClient;
+            var response = await httpClient.GetAsync(url);
 
             if (!response.IsSuccessStatusCode)
             {

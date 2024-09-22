@@ -1,9 +1,7 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
-import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/Home/Searching/filterable_searchbar_widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
-    as up_func;
 
 final colorArray = [
   Colors.red,
@@ -22,49 +20,6 @@ int getColorForReportingRate(double reportingRate) {
   } else {
     return 3;
   }
-}
-
-Widget getData(Bird bird, Function goBird, BuildContext context) {
-  final bool seen = isSeen(bird);
-  return ListTile(
-    title: Text(
-      bird.commonGroup.isNotEmpty
-          ? '${bird.commonGroup} ${bird.commonSpecies}'
-          : bird.commonSpecies,
-      style: GlobalStyles.filterTileHeading(context),
-    ),
-    subtitle: Text(
-      '${bird.genus} ${bird.species}',
-      style: GlobalStyles.filterTileSubHeading(context),
-    ),
-    trailing: Row(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        const SizedBox(width: 10),
-        FilledButton(
-          onPressed: () {
-            if (seen) {
-              goBird(bird);
-            } else {
-              up_func.addExp(20);
-              global.lifeList.insertBird(bird);
-              global.updateLife();
-              goBird(bird);
-            }
-          },
-          style: GlobalStyles.buttonFilterPrimaryFilled(context).copyWith(
-            elevation: WidgetStateProperty.all(2),
-          ),
-          child: Text(seen ? 'Seen' : 'Add to Life List',
-              style: GlobalStyles.smallContentPrimary(context)
-                  .copyWith(color: Colors.white)),
-        ),
-      ],
-    ),
-    onTap: () {
-      goBird(bird);
-    },
-  );
 }
 
 bool isSeen(Bird bird) {
@@ -122,8 +77,7 @@ List<Bird> sortRepotRateASC(List<Bird> birds) {
 List<Bird> searchForBird(List<Bird> birds, String value) {
   final List<Bird> results = birds
       .where((bird) =>
-          (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()) ||
-          (bird.commonGroup).toLowerCase().contains(value.toLowerCase()))
+          (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()))
       .toList();
   return results;
 }
@@ -133,7 +87,7 @@ List<Bird> getUniqueBirds(List<Bird> birds) {
   final List<Bird> uniqueBirds = [];
 
   for (var bird in birds) {
-    final birdKey = '${bird.commonGroup}-${bird.commonSpecies}';
+    final birdKey = '${bird.commonSpecies}-${bird.commonGroup}';
     if (!uniqueBirdKeys.contains(birdKey)) {
       uniqueBirdKeys.add(birdKey);
       uniqueBirds.add(bird);

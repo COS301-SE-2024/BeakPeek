@@ -28,7 +28,9 @@ class Globals {
     });
   }
 
+  Bird getDefualtBirdData(int id) {
+    return allBirdsList.firstWhere((bird) => bird.id == id);
+  }
+
   late File image;
 }
-
-//apk downloadable link

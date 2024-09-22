@@ -26,11 +26,11 @@ Future<List<Bird>> fetchAllBirds(String prov, http.Client client) async {
           jsonResponse.map((data) => Bird.fromJson(data)).toList();
       return getUniqueBirds(birds);
     } else {
-      print('Request failed with status: ${response.statusCode}');
+      //print('Request failed with status: ${response.statusCode}');
       throw Exception('Failed to load birds');
     }
   } catch (error) {
-    print('Error fetching birds: $error');
+    //print('Error fetching birds: $error');
     throw Exception('Failed to load birds: $error, ');
   }
 }
@@ -52,7 +52,7 @@ Future<List<int>> getNumberOfBirdsInProvinces(http.Client client) async {
     }
     return numbers;
   } catch (error) {
-    print('Error fetching amount of birds: $error');
+    //print('Error fetching amount of birds: $error');
     throw Exception('Failed to load number of birds: $error, ');
   }
 }
@@ -72,7 +72,7 @@ Future<List> getProvincesBirdIsIn(
     } else {
       print('Request failed with status: ${response.statusCode}');
       print('Failed to load provinces for $commonSpecies, $commonGroup');
-      return [];
+      return [true, true, true, true, true, true, true, true, true];
     }
     return isIn;
   } catch (error) {

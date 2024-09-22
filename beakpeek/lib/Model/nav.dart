@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:beakpeek/config_azure.dart' as config;
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -10,10 +11,15 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final itemWidth = screenWidth / 5; // Divide screen width by number of items
+    final itemWidth = screenWidth / 5; // Divide screen width by number of items
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
+        BottomNavItem('Home', 'home.svg', itemWidth),
+        BottomNavItem('Map', 'map.svg', itemWidth),
+        BottomNavItem('Sightings', 'sightings.svg', itemWidth),
+        BottomNavItem('Profile', 'profile.svg', itemWidth),
         BottomNavItem('Home', 'home.svg', itemWidth),
         BottomNavItem('Map', 'map.svg', itemWidth),
         BottomNavItem('Sightings', 'sightings.svg', itemWidth),

@@ -66,7 +66,8 @@ dependencies:
   flutter_popup_card: ^0.0.6
   flutter_media_downloader: ^1.0.6
   flutter_svg: ^1.0.3
-  smooth_page_indicator: ^1.2.0+3
+  progress_bar_chart: ^0.0.11
+  flutter_profile_picture: ^2.0.0
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:

@@ -3,7 +3,6 @@ import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -27,18 +26,6 @@ ThemeMode getThemeMode(String data) {
   }
   return ThemeMode.dark;
 }
-
-// ThemeMode changeThemeMode(LocalStorage localStorage) {
-//   final check = localStorage.getItem('theme') ?? '';
-//   if (check.isEmpty) {
-//     localStorage.setItem('theme', 'dark');
-//     ThemeProvider().setDarkScheme(ThemeProvider().darkScheme);
-//     return ThemeMode.dark;
-//   }
-//   localStorage.setItem('theme', '');
-//   ThemeProvider().setDarkScheme(ThemeProvider().lightScheme);
-//   return ThemeMode.light;
-// }
 
 Widget getIcon(LocalStorage localStorage) {
   final check = localStorage.getItem('theme') ?? '';
@@ -131,7 +118,7 @@ int getLevelExp() {
 }
 
 int getNextLevelExpRequired(int level) {
-  final double number = pow((5 * level), 2) + 100;
+  final double number = pow((5 * 10), -0.00005) * pow(level, 2) + 100;
   return ((number / 1000.0) * 1000).ceil();
 }
 
@@ -151,7 +138,7 @@ void updateLevelStats() {
   final String lvl = localStorage.getItem('level') ?? '0';
   int expProgress = int.parse(exp);
   int nextLevelEXP = getNextLevelExpRequired(int.parse(lvl));
-  while (nextLevelEXP <= expProgress) {
+  if (nextLevelEXP <= expProgress) {
     final int level = int.parse(lvl) + 1;
     localStorage.setItem('level', level.toString());
     expProgress = expProgress - nextLevelEXP;
@@ -161,26 +148,6 @@ void updateLevelStats() {
     localStorage.setItem('userExp', expProgress.toString());
     nextLevelEXP = getNextLevelExpRequired(level);
   }
-}
-
-Widget getNumBirdsInProvAndLifeList(
-    List<int> birdNumsTotal, Future<List<Bird>> birds) {
-  return FutureBuilder<List<Bird>>(
-    future: birds,
-    builder: (context, snapshot) {
-      if (snapshot.connectionState == ConnectionState.waiting) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (snapshot.hasError) {
-        return Center(child: Text('Error: ${snapshot.error}'));
-      }
-      return Column(children: [
-        Text(birdNumsTotal.toString()),
-        Text(
-          snapshot.data!.toString(),
-        )
-      ]);
-    },
-  );
 }
 
 Future<List<int>> countProv() async {

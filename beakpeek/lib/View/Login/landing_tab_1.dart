@@ -1,6 +1,10 @@
 import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:go_router/go_router.dart';
+import 'package:localstorage/localstorage.dart';
+import 'package:beakpeek/config_azure.dart' as config;
 
 class LandingTab1 extends StatelessWidget {
   const LandingTab1({super.key});
@@ -39,6 +43,23 @@ class LandingTab1 extends StatelessWidget {
                         ],
                       ),
                     ),
+                    SizedBox(
+                      height: screenHeight * 0.05,
+                    ),
+                    if (accessToken.isNotEmpty &&
+                        localStorage.getItem('termsAndCondition') != null)
+                      Center(
+                        child: FilledButton(
+                          style: GlobalStyles.buttonPrimaryOutlined(context),
+                          child: Text(
+                              '''Welcome Back ${localStorage.getItem("username")}''',
+                              style: GlobalStyles.secondaryButtonText(context)),
+                          onPressed: () {
+                            config.loggedIN = true;
+                            context.go('/home');
+                          },
+                        ),
+                      )
                   ],
                 ),
               ),

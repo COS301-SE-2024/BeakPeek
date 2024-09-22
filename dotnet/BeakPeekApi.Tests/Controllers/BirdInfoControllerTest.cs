@@ -1,10 +1,8 @@
-
 using System.Net;
 using System.Net.Http.Json;
 using BeakPeekApi.Helpers;
 using BeakPeekApi.Models;
 using BeakPeekApi.Controllers;
-using Microsoft.Extensions.Configuration;
 using Moq;
 using Moq.Protected;
 using Microsoft.AspNetCore.Mvc;
@@ -13,26 +11,18 @@ public class BirdInfoControllerTest
 {
     private readonly Mock<HttpMessageHandler> _httpMessageHandlerMock;
     private readonly HttpClient _httpClient;
-    private Mock<IConfigurationSection> _configSectionMock;
-    private Mock<IConfiguration> _configMock;
     private readonly BirdInfoHelper _birdInfoHelper;
     private readonly BirdInfoController _birdInfoController;
+    private readonly GeneralHelper _generalHelper;
 
     public BirdInfoControllerTest()
     {
 
         _httpMessageHandlerMock = new Mock<HttpMessageHandler>();
         _httpClient = new HttpClient(_httpMessageHandlerMock.Object);
-        _configSectionMock = new Mock<IConfigurationSection>();
-        _configMock = new Mock<IConfiguration>();
+        _generalHelper = new GeneralHelper(Mocks.GetConfiguration());
 
-        _configSectionMock
-            .Setup(x => x.Value)
-            .Returns("your_api_key");
-        _configMock
-            .Setup(x => x.GetSection("FLICKR_API_KEY"))
-            .Returns(_configSectionMock.Object);
-        _birdInfoHelper = new BirdInfoHelper(_httpClient, _configMock.Object);
+        _birdInfoHelper = new BirdInfoHelper(_httpClient, _generalHelper);
 
         _birdInfoController = new BirdInfoController(_birdInfoHelper);
 

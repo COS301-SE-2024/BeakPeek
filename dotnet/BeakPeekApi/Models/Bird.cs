@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using BeakPeekApi.Controllers;
 
 namespace BeakPeekApi.Models
 {
@@ -32,6 +33,10 @@ namespace BeakPeekApi.Models
         [Column(TypeName = "Date")]
         public DateTime? Latest_FP { get; set; }
 
+        public string? Image_url { get; set; }
+
+        public string? Info { get; set; }
+
         [JsonIgnore]
         public ICollection<ProvinceList> Bird_Provinces { get; set; }
 
@@ -47,6 +52,8 @@ namespace BeakPeekApi.Models
                 Full_Protocol_RR = this.Full_Protocol_RR,
                 Full_Protocol_Number = this.Full_Protocol_Number,
                 Latest_FP = this.Latest_FP,
+                Image_Url = this.Image_url,
+                Info = this.Info,
                 Provinces = this.Bird_Provinces?.Select(bp => bp.Name).ToList()
             };
         }
