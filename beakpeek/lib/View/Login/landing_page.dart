@@ -1,8 +1,8 @@
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:beakpeek/View/Login/landing_tab_1.dart';
+import 'package:beakpeek/View/Login/landing_tab_2.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-import 'landing_tab_1.dart';
-import 'landing_tab_2.dart';
 
 class LandingPage extends StatefulWidget {
   const LandingPage({super.key});

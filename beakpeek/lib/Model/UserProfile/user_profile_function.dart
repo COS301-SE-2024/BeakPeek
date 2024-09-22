@@ -48,68 +48,11 @@ List<Bird> sortAlphabetically(List<Bird> birds) {
   return birds;
 }
 
-Widget progressBars(List<int> birdNumsTotal, List<int> numbirdsInLife) {
-  return SingleChildScrollView(
-    child: SizedBox(
-      height: 200,
-      child: ListView.builder(
-        itemCount: provinces.length,
-        itemBuilder: (context, index) {
-          final String prov = provinces[index];
-          final String formattedProv = formatProvinceName(prov);
-          final double percentage =
-              getPercent(birdNumsTotal[index], numbirdsInLife[index]);
-
-          return Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
-                child: Text(
-                  formattedProv,
-                  style: GlobalStyles.contentPrimary(context),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 2.0),
-                child: Stack(
-                  alignment: Alignment.center,
-                  children: [
-                    FAProgressBar(
-                      currentValue: percentage,
-                      backgroundColor: AppColors.popupColor(context),
-                      progressColor: AppColors.tertiaryColor(context),
-                    ),
-                    Text(
-                      '${percentage.toStringAsFixed(1)}%',
-                      style: GlobalStyles.contentPrimary(context).copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
-      ),
-    ),
-  );
-}
-
 double getPercent(int numTotalBirds, int birdsInLife) {
   if (numTotalBirds == 0) {
     return 1;
   }
   return ((birdsInLife / numTotalBirds) * 100);
-}
-
-Widget levelProgressBar(int progress, int level) {
-  return FAProgressBar(
-    currentValue: progressPercentage(progress, level),
-    progressColor: AppColors.tertiaryColorDark,
-    size: 15,
-  );
 }
 
 int getLevelExp() {
