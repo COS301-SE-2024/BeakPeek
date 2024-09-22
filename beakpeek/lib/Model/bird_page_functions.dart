@@ -39,17 +39,17 @@ class ApiService {
 
        for(Bird bird in birdHolder){
         bird.population = populationHelper(bird);
+        
        }
   }
 
   int populationHelper(Bird bird){
-    int population = 0;
 
-    final double constant = 9.01; 
+    const double constant = 9.01; 
     //Calculated using a neural network to 
     //adjust function to fit known populations.
 
-    double detectionProbability = 0.3; 
+    const double detectionProbability = 0.3; 
     //attempts to average for nocturnal birds etc.
     //considered: popularity of location, flightpaths of single bird
     //Day time bias, time period (maybe a lot of cards in one day creates unfair
@@ -59,10 +59,10 @@ class ApiService {
     //https://core.ac.uk/download/pdf/9821458.pdf
 
     //MULTIPLY HERE ->
-    double viewRate = bird.fullProtocolRR*bird.fullProtocolNumber; // multiply by num pentads/16673
+   final double viewRate = bird.fullProtocolRR*bird.fullProtocolNumber; // multiply by num pentads/16673
 
 
-    population = (constant*viewRate/detectionProbability) as int;
+   final int population = (constant*viewRate/detectionProbability) as int;
 
     return population;
   }

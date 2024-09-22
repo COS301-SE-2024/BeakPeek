@@ -76,7 +76,8 @@ class LifeListProvider {
           image_Blob BLOB,
           info TEXT,
           reportingRate DOUBLE,
-          totalRecords INTEGER
+          totalRecords INTEGER,
+          birdPopulation INTEGER
           )''');
     await db.execute('''
           CREATE TABLE provinces(
