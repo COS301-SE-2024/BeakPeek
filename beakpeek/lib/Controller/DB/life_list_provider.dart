@@ -155,6 +155,8 @@ class LifeListProvider {
           nov: 0.0,
           dec: 0.0,
           totalRecords: 0,
+          //population
+          population: 0,
         );
       },
     ).toList();
@@ -298,6 +300,8 @@ class LifeListProvider {
           nov: map['nov'] as double,
           dec: map['dec'] as double,
           totalRecords: map['totalRecords'] as int,
+          //population
+          population: 0,
         );
       },
     ).toList();
