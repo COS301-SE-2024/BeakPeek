@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" version="24.7.14">
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/128.0.0.0 Safari/537.36" version="24.7.16">
   <diagram id="WI9T0HZ2pTsCkuznbFz-" name="Page-1">
-    <mxGraphModel dx="2074" dy="2301" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1434" dy="1941" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -297,18 +297,6 @@
         </mxCell>
         <mxCell id="3KVk99nGIoXz2BhHmKhw-39" value="" style="image;html=1;image=img/lib/clip_art/finance/Arrow_Up_128x128.png" parent="3KVk99nGIoXz2BhHmKhw-36" vertex="1">
           <mxGeometry x="9.5" y="7.5" width="30" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="3KVk99nGIoXz2BhHmKhw-41" value="" style="group" parent="1" vertex="1" connectable="0">
-          <mxGeometry x="611.87" y="536" width="105" height="45" as="geometry" />
-        </mxCell>
-        <mxCell id="3KVk99nGIoXz2BhHmKhw-42" value="" style="rounded=1;whiteSpace=wrap;html=1;" parent="3KVk99nGIoXz2BhHmKhw-41" vertex="1">
-          <mxGeometry width="105" height="45" as="geometry" />
-        </mxCell>
-        <mxCell id="3KVk99nGIoXz2BhHmKhw-43" value="Nest Location" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="3KVk99nGIoXz2BhHmKhw-41" vertex="1">
-          <mxGeometry x="39.360000000000014" y="7.5" width="60" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="3KVk99nGIoXz2BhHmKhw-40" value="&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; background-color: rgb(251, 251, 251);&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20value%3D%22%22%20style%3D%22group%22%20vertex%3D%221%22%20connectable%3D%220%22%20parent%3D%221%22%3E%3CmxGeometry%20x%3D%22613%22%20y%3D%22390%22%20width%3D%22105%22%20height%3D%2245%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3CmxCell%20id%3D%223%22%20value%3D%22%22%20style%3D%22rounded%3D1%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20vertex%3D%221%22%20parent%3D%222%22%3E%3CmxGeometry%20width%3D%22105%22%20height%3D%2245%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3CmxCell%20id%3D%224%22%20value%3D%22Heat%20Map%22%20style%3D%22text%3Bhtml%3D1%3Balign%3Dcenter%3BverticalAlign%3Dmiddle%3BwhiteSpace%3Dwrap%3Brounded%3D0%3B%22%20vertex%3D%221%22%20parent%3D%222%22%3E%3CmxGeometry%20x%3D%2239.360000000000014%22%20y%3D%227.5%22%20width%3D%2260%22%20height%3D%2230%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3CmxCell%20id%3D%225%22%20value%3D%22%22%20style%3D%22sketch%3D0%3BoutlineConnect%3D0%3BfontColor%3D%23232F3E%3BgradientColor%3Dnone%3BfillColor%3D%23DD344C%3BstrokeColor%3Dnone%3Bdashed%3D0%3BverticalLabelPosition%3Dbottom%3BverticalAlign%3Dtop%3Balign%3Dcenter%3Bhtml%3D1%3BfontSize%3D12%3BfontStyle%3D0%3Baspect%3Dfixed%3Bshape%3Dmxgraph.aws4.location_service_map%3B%22%20vertex%3D%221%22%20parent%3D%222%22%3E%3CmxGeometry%20x%3D%227.860000000000014%22%20y%3D%227.5%22%20width%3D%2230%22%20height%3D%2230%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" style="html=1;verticalLabelPosition=bottom;align=center;labelBackgroundColor=#ffffff;verticalAlign=top;strokeWidth=2;strokeColor=#0080F0;shadow=0;dashed=0;shape=mxgraph.ios7.icons.location;" parent="3KVk99nGIoXz2BhHmKhw-41" vertex="1">
-          <mxGeometry x="11.129999999999995" y="7.5" width="24" height="30" as="geometry" />
         </mxCell>
         <mxCell id="3KVk99nGIoXz2BhHmKhw-50" value="" style="group" parent="1" vertex="1" connectable="0">
           <mxGeometry x="106" y="476" width="105" height="45" as="geometry" />
