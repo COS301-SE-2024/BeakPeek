@@ -34,8 +34,8 @@ namespace BeakPeekApi.Models
             return new ProvinceDto
             {
                 Id = this.Id,
-                Pentad = this.Pentad?.ToDto(),
-                Bird = this.Bird?.ToDto(),
+                Pentad = this.Pentad != null ? this.Pentad?.ToDto() : null ,
+                Bird = this.Bird != null ? this.Bird?.ToDto() : null,
                 Jan = this.Jan,
                 Feb = this.Feb,
                 Mar = this.Mar,
