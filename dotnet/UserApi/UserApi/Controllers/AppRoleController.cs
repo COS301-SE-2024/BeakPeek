@@ -15,7 +15,7 @@ namespace UserApi.Controllers
     [ApiController]
     [Authorize(Roles = "SuperAdmin")]
     [Route("[controller]")]
-    public class AppRoleController : Controller
+    public class AppRoleController : BaseController
     {
         private readonly RoleManager<AppRole> _roleManager;
 
