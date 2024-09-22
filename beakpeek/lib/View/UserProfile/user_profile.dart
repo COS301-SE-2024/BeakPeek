@@ -29,7 +29,8 @@ class UserProfileState extends State<UserProfile> {
   late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
-  late File _image = File(localStorage.getItem('profilePicture') ?? '');
+  late File _image = File(localStorage.getItem('profilePicture') ??
+      'assets/images/profileImages/images.jpg');
   final picker = ImagePicker();
 
   String name = localStorage.getItem('fullName') ?? '';

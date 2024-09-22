@@ -1,5 +1,7 @@
 import 'dart:math';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';

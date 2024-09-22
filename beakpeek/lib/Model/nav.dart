@@ -1,4 +1,3 @@
-import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:beakpeek/config_azure.dart' as config;
@@ -54,16 +53,6 @@ class BottomNavItem extends StatelessWidget {
             child: SvgPicture.asset(
               'assets/icons/$iconFile',
               width: itemWidth * 0.5,
-            ),
-          ),
-          const SizedBox(height: 1),
-          Text(
-            label,
-            style: TextStyle(
-              color: AppColors.greyColor(context),
-              fontSize: 14,
-              fontFamily: 'SF Pro Display',
-              fontWeight: FontWeight.w500,
             ),
           ),
         ],
