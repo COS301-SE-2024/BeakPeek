@@ -67,7 +67,7 @@ class HomeState extends State<Home> {
                         const FilterableSearchbar(
                           helpContent: 'Help for home page',
                         ),
-                        SizedBox(height: screenHeight * 0.01),
+                        SizedBox(height: screenHeight * 0.03),
 
                         // Quiz Section
                         Container(
