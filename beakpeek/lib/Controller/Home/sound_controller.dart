@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, library_private_types_in_public_api
-
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -20,8 +18,8 @@ class BirdSoundPlayer extends StatefulWidget {
 class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   final AudioPlayer _audioPlayer = AudioPlayer();
   bool isPlaying = false;
-  String? fileUrl; // This will be set after fetching from the API
-  bool isLoading = true; // Track if data is being fetched
+  String? fileUrl;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -30,59 +28,70 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   }
 
   void preloadAudio() async {
-    print(fileUrl);
     if (fileUrl != null) {
       await _audioPlayer.setSourceUrl(fileUrl!);
-      // This preloads the audio file so it's ready when the user presses play.
     }
   }
 
   Future<void> fetchBirdSoundUrl() async {
     final String query = '${widget.commonSpecies} ${widget.commonGroup}';
-    final response = await http.get(
-      Uri.parse('https://xeno-canto.org/api/2/recordings?query=$query+q:A'),
-    );
+    try {
+      final response = await http.get(
+        Uri.parse('https://xeno-canto.org/api/2/recordings?query=$query+q:A'),
+      );
 
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      if (data['recordings'] != null && data['recordings'].isNotEmpty) {
-        setState(() {
-          // Set the file URL from the first recording result
-          fileUrl = '${data['recordings'][0]['file']}';
-          print(fileUrl);
-          isLoading = false;
-        });
-        preloadAudio();
+      if (response.statusCode == 200) {
+        final data = json.decode(response.body);
+        if (data['recordings'] != null && data['recordings'].isNotEmpty) {
+          setState(() {
+            fileUrl = '${data['recordings'][0]['file']}';
+            isLoading = false;
+          });
+          preloadAudio();
+        } else {
+          if (mounted) {
+            setState(() {
+              isLoading = false;
+            });
+          }
+          print('No recordings found for this bird.');
+        }
       } else {
+        if (mounted) {
+          setState(() {
+            isLoading = false;
+          });
+        }
+        print('Failed to load bird sound: ${response.statusCode}');
+      }
+    } catch (e) {
+      if (mounted) {
         setState(() {
           isLoading = false;
         });
-        print('No recordings found for this bird.');
       }
-    } else {
-      setState(() {
-        isLoading = false;
-      });
-      throw Exception('Failed to load bird sound');
+      print('Error fetching bird sound: $e');
     }
   }
 
   void togglePlayPause() async {
-    if (fileUrl == null) {
-      return; // Do nothing if there's no valid file URL
-    }
+    if (fileUrl == null) return;
 
-    if (isPlaying) {
-      // If sound is playing, stop it
-      await _audioPlayer.stop();
-    } else {
-      // If sound is not playing, play it
-      await _audioPlayer.play(UrlSource(fileUrl!));
+    try {
+      if (isPlaying) {
+        await _audioPlayer.stop();
+      } else {
+        await _audioPlayer.play(UrlSource(fileUrl!));
+      }
+
+      if (mounted) {
+        setState(() {
+          isPlaying = !isPlaying;
+        });
+      }
+    } catch (e) {
+      print('Error during playback: $e');
     }
-    // Toggle play/pause state
-    setState(() {
-      isPlaying = !isPlaying;
-    });
   }
 
   @override
@@ -95,11 +104,11 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   Widget build(BuildContext context) {
     return isLoading
         ? SizedBox(
-            width: 24.0, // Set the desired width
-            height: 24.0, // Set the desired height
+            width: 24.0,
+            height: 24.0,
             child: CircularProgressIndicator(
               color: AppColors.primaryColor(context),
-              strokeWidth: 2.0, // Adjust thickness
+              strokeWidth: 2.0,
             ),
           )
         : IconButton(
@@ -107,9 +116,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
               isPlaying ? Icons.stop : Icons.play_arrow,
               color: AppColors.tertiaryColor(context),
             ),
-            onPressed: fileUrl != null
-                ? togglePlayPause
-                : null, // Disable button if no file URL
+            onPressed: fileUrl != null ? togglePlayPause : null,
           );
   }
 }

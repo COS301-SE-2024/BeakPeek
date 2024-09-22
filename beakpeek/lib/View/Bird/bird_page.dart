@@ -105,7 +105,6 @@ class _BirdPageState extends State<BirdPage> {
                     return const Center(child: Text('No bird info found'));
                   }
                   final birdData = snapshot.data!;
-                  print(birdData);
                   return Padding(
                     padding: EdgeInsets.all(screenWidth * 0.04),
                     child: Column(
