@@ -37,9 +37,11 @@ class ApiService {
       LifeListProvider lifeList) async {
     final List<Bird> birdHolder = await lifeList.getFullBirdData();
 
+
     for (Bird bird in birdHolder) {
       bird.population = populationHelper(bird);
     }
+
   }
 
   int populationHelper(Bird bird) {
@@ -60,8 +62,10 @@ class ApiService {
     final double viewRate = bird.fullProtocolRR *
         bird.fullProtocolNumber; // multiply by num pentads/16673
 
-    final int population = (constant * viewRate / detectionProbability).round();
-
+   final int population = (constant*viewRate/detectionProbability).round();
+    if(population>50000){
+      return -1;
+    }
     return population;
   }
 }
