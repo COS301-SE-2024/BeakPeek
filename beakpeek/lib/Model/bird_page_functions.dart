@@ -62,7 +62,7 @@ class ApiService {
    final double viewRate = bird.fullProtocolRR*bird.fullProtocolNumber; // multiply by num pentads/16673
 
 
-   final int population = (constant*viewRate/detectionProbability) as int;
+   final int population = (constant*viewRate/detectionProbability).round();
 
     return population;
   }
