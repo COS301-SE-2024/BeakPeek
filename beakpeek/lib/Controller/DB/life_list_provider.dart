@@ -277,8 +277,8 @@ class LifeListProvider {
           commonSpecies: map['commonSpecies'] != null
               ? map['commonSpecies'] as String
               : '',
-          fullProtocolRR: 0.0,
-          fullProtocolNumber: 0,
+          fullProtocolRR: map['fullProtocolRR'] as double,
+          fullProtocolNumber: map['fullProtocolNumber'] as int,
           latestFP: map['latestFP'] != null ? map['latestFP'] as String : '',
           reportingRate: map['reportingRate'] != null
               ? map['reportingRate'] as double

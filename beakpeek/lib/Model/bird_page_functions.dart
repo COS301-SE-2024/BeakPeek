@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -29,4 +30,41 @@ class ApiService {
       LifeListProvider lifeList, int id) async {
     return await lifeList.getBirdInByID(id);
   }
+
+    void calculatePopulation(
+      //error rate of about 30% but only upwards 
+      //(can only overestimate population)
+      LifeListProvider lifeList) async {
+       final List<Bird> birdHolder = await lifeList.getFullBirdData();
+
+       for(Bird bird in birdHolder){
+        bird.population = populationHelper(bird);
+       }
+  }
+
+  int populationHelper(Bird bird){
+    int population = 0;
+
+    final double constant = 9.01; 
+    //Calculated using a neural network to 
+    //adjust function to fit known populations.
+
+    double detectionProbability = 0.3; 
+    //attempts to average for nocturnal birds etc.
+    //considered: popularity of location, flightpaths of single bird
+    //Day time bias, time period (maybe a lot of cards in one day creates unfair
+    //outliers)
+    //number obtained from literature
+    //https://www.fs.usda.gov/psw/publications/documents/psw_gtr149/psw_gtr149_pg117_124.pdf
+    //https://core.ac.uk/download/pdf/9821458.pdf
+
+    //MULTIPLY HERE ->
+    double viewRate = bird.fullProtocolRR*bird.fullProtocolNumber; // multiply by num pentads/16673
+
+
+    population = (constant*viewRate/detectionProbability) as int;
+
+    return population;
+  }
+
 }

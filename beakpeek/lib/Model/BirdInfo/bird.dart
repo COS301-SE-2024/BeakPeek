@@ -3,6 +3,9 @@ import 'dart:ui';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 
 class Bird {
+  //population changes
+  int population;
+
   Bird({
     required this.id,
     this.pentad,
@@ -31,6 +34,8 @@ class Bird {
     required this.dec,
     required this.totalRecords,
     required this.reportingRate,
+    //maybe needs to come out
+    required this.population,
   });
 
   factory Bird.fromJson(Map<String, dynamic> json) {
@@ -68,6 +73,8 @@ class Bird {
           ? List<String>.from(json['imageUrl'] ?? [])
           : List<String>.from([]),
       provinces: List<String>.from(json['provinces'] ?? []),
+      //population changes below
+      population: 0,
     );
   }
 
