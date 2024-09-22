@@ -55,7 +55,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.ProfilePicture)
+                @Html.DisplayFor(modelItem => item.ProfilePicture, "imageDisplay")
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.UserName)
