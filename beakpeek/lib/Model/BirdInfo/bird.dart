@@ -66,7 +66,7 @@ class Bird {
       dec: json['dec']?.toDouble() ?? 0.0,
       totalRecords: birdJson['total_Records'] ?? json['total_Records'] ?? 0,
       reportingRate: birdJson['reportingRate']?.toDouble() ??
-          json['reportingRate'].toDouble() ??
+          json['reportingRate']?.toDouble() ??
           0.0,
       info: json['info'] ?? '',
       imageUrl: json['imageUrl'] != null
