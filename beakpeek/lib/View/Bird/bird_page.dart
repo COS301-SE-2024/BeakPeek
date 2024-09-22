@@ -45,6 +45,7 @@ class _BirdPageState extends State<BirdPage> {
     super.initState();
     birdFuture =
         ApiService().fetchBirdInfo(widget.commonGroup, widget.commonSpecies);
+    ApiService().fetchBirdInfoOffline(lifeList, widget.id);
   }
 
   void addToLifeList() {

@@ -1,6 +1,7 @@
 // api_service.dart
 
 import 'dart:convert';
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:http/http.dart' as http;
 
 class ApiService {
@@ -14,6 +15,7 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
+      print(json.decode(response.body));
       return json.decode(response.body);
     } else {
       // Handle the error
@@ -21,5 +23,10 @@ class ApiService {
       print('Failed to load bird info');
       return null;
     }
+  }
+
+  Future<List<Map<String, Object?>>> fetchBirdInfoOffline(
+      LifeListProvider lifeList, int id) async {
+    return await lifeList.getBirdInByID(id);
   }
 }

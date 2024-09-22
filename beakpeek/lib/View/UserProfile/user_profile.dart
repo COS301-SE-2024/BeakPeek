@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
 import 'package:beakpeek/View/offline_message.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:beakpeek/Controller/DB/achievements_provider.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
@@ -26,7 +25,6 @@ class UserProfile extends StatefulWidget {
 
 class UserProfileState extends State<UserProfile> {
   late LifeListProvider lifeList = LifeListProvider.instance;
-  late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
   late File _image = File(localStorage.getItem('profilePicture') ??
