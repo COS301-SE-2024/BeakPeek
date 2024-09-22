@@ -76,7 +76,8 @@ class LifeListProvider {
           image_Blob BLOB,
           info TEXT,
           reportingRate DOUBLE,
-          totalRecords INTEGER
+          totalRecords INTEGER,
+          birdPopulation INTEGER
           )''');
     await db.execute('''
           CREATE TABLE provinces(
@@ -155,6 +156,8 @@ class LifeListProvider {
           nov: 0.0,
           dec: 0.0,
           totalRecords: 0,
+          //population
+          population: 0,
         );
       },
     ).toList();
@@ -277,8 +280,8 @@ class LifeListProvider {
           commonSpecies: map['commonSpecies'] != null
               ? map['commonSpecies'] as String
               : '',
-          fullProtocolRR: 0.0,
-          fullProtocolNumber: 0,
+          fullProtocolRR: map['fullProtocolRR'] as double,
+          fullProtocolNumber: map['fullProtocolNumber'] as int,
           latestFP: map['latestFP'] != null ? map['latestFP'] as String : '',
           reportingRate: map['reportingRate'] != null
               ? map['reportingRate'] as double
@@ -298,6 +301,8 @@ class LifeListProvider {
           nov: map['nov'] as double,
           dec: map['dec'] as double,
           totalRecords: map['totalRecords'] as int,
+          //population
+          population: 0,
         );
       },
     ).toList();
