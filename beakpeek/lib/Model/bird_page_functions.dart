@@ -62,7 +62,9 @@ class ApiService {
 
 
    final int population = (constant*viewRate/detectionProbability).round();
-
+    if(population>50000){
+      return -1;
+    }
     return population;
   }
 
