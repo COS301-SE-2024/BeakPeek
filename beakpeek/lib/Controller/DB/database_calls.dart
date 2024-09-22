@@ -96,6 +96,5 @@ Future<List<bool>> getProvincesForBird(int id) async {
     isIn.add((prov.westerncape));
     isIn.add((prov.freestate));
   });
-  //print(isIn);
   return isIn;
 }

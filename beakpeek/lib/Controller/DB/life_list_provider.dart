@@ -261,4 +261,45 @@ class LifeListProvider {
     });
     return prov;
   }
+
+  Future<List<Bird>> getFullBirdData() async {
+    final db = await instance.database;
+
+    final List<Map<String, Object?>> birdMap = await db.query(
+      'allBirds',
+    );
+    return birdMap.map(
+      (map) {
+        return Bird(
+          id: map['id'] as int,
+          commonGroup:
+              map['commonGroup'] != null ? map['commonGroup'] as String : '',
+          commonSpecies: map['commonSpecies'] != null
+              ? map['commonSpecies'] as String
+              : '',
+          fullProtocolRR: 0.0,
+          fullProtocolNumber: 0,
+          latestFP: map['latestFP'] != null ? map['latestFP'] as String : '',
+          reportingRate: map['reportingRate'] != null
+              ? map['reportingRate'] as double
+              : 0.0,
+          genus: map['genus'] as String,
+          species: map['species'] as String,
+          jan: map['jan'] as double,
+          feb: map['feb'] as double,
+          mar: map['mar'] as double,
+          apr: map['apr'] as double,
+          may: map['may'] as double,
+          jun: map['jun'] as double,
+          jul: map['jul'] as double,
+          aug: map['aug'] as double,
+          sep: map['sep'] as double,
+          oct: map['oct'] as double,
+          nov: map['nov'] as double,
+          dec: map['dec'] as double,
+          totalRecords: map['totalRecords'] as int,
+        );
+      },
+    ).toList();
+  }
 }
