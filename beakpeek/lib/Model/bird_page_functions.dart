@@ -16,7 +16,7 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      print(json.decode(response.body));
+      // print(json.decode(response.body));
       return json.decode(response.body);
     } else {
       // Handle the error
@@ -26,7 +26,7 @@ class ApiService {
     }
   }
 
-  Future<List<Map<String, Object?>>> fetchBirdInfoOffline(
+  Future<Map<String, Object?>> fetchBirdInfoOffline(
       LifeListProvider lifeList, int id) async {
     return await lifeList.getBirdInByID(id);
   }
