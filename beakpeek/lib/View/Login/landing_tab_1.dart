@@ -20,13 +20,13 @@ class LandingTab1 extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              top: screenHeight * 0.25,
+              top: screenHeight * 0.45,
               left: 0,
               right: 0,
               child: Image.asset(
                 'assets/images/landing1.png',
                 width: screenWidth,
-                height: screenHeight * 0.8,
+                height: screenHeight * 0.6,
                 fit: BoxFit.cover,
               ),
             ),
