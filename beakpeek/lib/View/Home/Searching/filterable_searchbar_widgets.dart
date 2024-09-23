@@ -6,7 +6,7 @@ Widget getData(Bird bird, Function goBird, BuildContext context) {
   return ListTile(
     title: Text(
       bird.commonGroup.isNotEmpty
-          ? '${bird.commonGroup} ${bird.commonSpecies}'
+          ? '${bird.commonSpecies} ${bird.commonGroup} '
           : bird.commonSpecies,
       style: GlobalStyles.filterTileHeading(context),
     ),
