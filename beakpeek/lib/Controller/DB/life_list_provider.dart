@@ -48,7 +48,8 @@ class LifeListProvider {
           commonSpecies TEXT, 
           genus TEXT, 
           species TEXT, 
-          reportingRate DOUBLE
+          reportingRate DOUBLE,
+          image_Url TEXT
           )''');
     await db.execute('''
         CREATE TABLE allBirds(
@@ -213,6 +214,7 @@ class LifeListProvider {
         batch.insert('allBirds', bird.toAllBirdsMap(),
             conflictAlgorithm: ConflictAlgorithm.replace);
       }
+      await batch.commit();
     }
   }
 
@@ -308,10 +310,10 @@ class LifeListProvider {
     ).toList();
   }
 
-  Future<List<Map<String, Object?>>> getBirdInByID(int id) async {
+  Future<Map<String, Object?>> getBirdInByID(int id) async {
     final db = await instance.database;
     final List<Map<String, Object?>> birdMap =
         await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
-    return birdMap;
+    return birdMap[0];
   }
 }

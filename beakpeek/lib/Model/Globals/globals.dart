@@ -22,7 +22,7 @@ class Globals {
       lifeList.initialInsert(result);
       lifeList.initialProvInsert(result);
     });
-    //lifeList.deleteDatabaseFile();
+    // lifeList.deleteDatabaseFile();
   }
 
   void updateLife() {

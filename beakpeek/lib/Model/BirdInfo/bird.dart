@@ -66,12 +66,10 @@ class Bird {
       dec: json['dec']?.toDouble() ?? 0.0,
       totalRecords: birdJson['total_Records'] ?? json['total_Records'] ?? 0,
       reportingRate: birdJson['reportingRate']?.toDouble() ??
-          json['reportingRate'].toDouble() ??
+          json['reportingRate']?.toDouble() ??
           0.0,
       info: json['info'] ?? '',
-      imageUrl: json['imageUrl'] != null
-          ? List<String>.from(json['imageUrl'] ?? [])
-          : List<String>.from([]),
+      imageUrl: json['image_Url'] ?? '',
       provinces: List<String>.from(json['provinces'] ?? []),
       //population changes below
       population: 0,
@@ -102,7 +100,7 @@ class Bird {
   final int totalRecords;
   final double reportingRate;
   final String? info;
-  final List<String>? imageUrl;
+  final String? imageUrl;
   final Image? imageBlob;
   final List<String>? provinces;
 
@@ -142,6 +140,7 @@ class Bird {
       'genus': genus,
       'species': species,
       'reportingRate': reportingRate,
+      'image_Url': imageUrl
     };
   }
 

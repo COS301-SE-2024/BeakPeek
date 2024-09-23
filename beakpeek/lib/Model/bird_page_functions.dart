@@ -16,7 +16,7 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      print(json.decode(response.body));
+      // print(json.decode(response.body));
       return json.decode(response.body);
     } else {
       // Handle the error
@@ -26,29 +26,30 @@ class ApiService {
     }
   }
 
-  Future<List<Map<String, Object?>>> fetchBirdInfoOffline(
+  Future<Map<String, Object?>> fetchBirdInfoOffline(
       LifeListProvider lifeList, int id) async {
     return await lifeList.getBirdInByID(id);
   }
 
-    void calculatePopulation(
-      //error rate of about 30% but only upwards 
+  void calculatePopulation(
+      //error rate of about 30% but only upwards
       //(can only overestimate population)
       LifeListProvider lifeList) async {
-       final List<Bird> birdHolder = await lifeList.getFullBirdData();
+    final List<Bird> birdHolder = await lifeList.getFullBirdData();
 
-       for(Bird bird in birdHolder){
-        bird.population = populationHelper(bird);        
-       }
+
+    for (Bird bird in birdHolder) {
+      bird.population = populationHelper(bird);
+    }
+
   }
 
-  int populationHelper(Bird bird){
-
-    const double constant = 9.01; 
-    //Calculated using a neural network to 
+  int populationHelper(Bird bird) {
+    const double constant = 9.01;
+    //Calculated using a neural network to
     //adjust function to fit known populations.
 
-    const double detectionProbability = 0.3; 
+    const double detectionProbability = 0.3;
     //attempts to average for nocturnal birds etc.
     //considered: popularity of location, flightpaths of single bird
     //Day time bias, time period (maybe a lot of cards in one day creates unfair
@@ -58,8 +59,8 @@ class ApiService {
     //https://core.ac.uk/download/pdf/9821458.pdf
 
     //MULTIPLY HERE ->
-   final double viewRate = bird.fullProtocolRR*bird.fullProtocolNumber; // multiply by num pentads/16673
-
+    final double viewRate = bird.fullProtocolRR *
+        bird.fullProtocolNumber; // multiply by num pentads/16673
 
    final int population = (constant*viewRate/detectionProbability).round();
     if(population>50000){
@@ -67,5 +68,4 @@ class ApiService {
     }
     return population;
   }
-
 }
