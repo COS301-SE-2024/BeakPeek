@@ -2,13 +2,13 @@
 
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/sound_controller.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
-import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
@@ -42,8 +42,7 @@ class _BirdPageState extends State<BirdPage> {
         : 'Add to Life List';
     global.updateLife();
     super.initState();
-    birdFuture =
-        ApiService().fetchBirdInfo(widget.commonGroup, widget.commonSpecies);
+    birdFuture = ApiService().fetchBirdInfoOffline(lifeList, widget.id);
   }
 
   void addToLifeList() {
@@ -62,6 +61,9 @@ class _BirdPageState extends State<BirdPage> {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    String seenText = isSeenGS(widget.commonGroup, widget.commonSpecies)
+        ? 'Seen'
+        : 'Add to Life List';
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
@@ -112,7 +114,7 @@ class _BirdPageState extends State<BirdPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
-                            birdData['name'],
+                            '${birdData['commonSpecies']} ${birdData['commonGroup']}',
                             style: GlobalStyles.smallHeadingPrimary(context),
                           ),
                         ),
@@ -149,7 +151,7 @@ class _BirdPageState extends State<BirdPage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Image.network(
-                                birdData['images'][1]['url'],
+                                birdData['image_Url'],
                                 width: screenWidth * 0.92,
                                 fit: BoxFit.cover,
                               ),
@@ -194,7 +196,7 @@ class _BirdPageState extends State<BirdPage> {
                                 Expanded(
                                   child: SingleChildScrollView(
                                     child: Text(
-                                      birdData['description'] ??
+                                      birdData['info'] ??
                                           'No description available',
                                       style:
                                           GlobalStyles.contentPrimary(context)
@@ -222,10 +224,38 @@ class _BirdPageState extends State<BirdPage> {
                   SizedBox(
                     width: screenWidth * 0.8,
                     child: FilledButton(
-                      onPressed: () async {
-                        await lifeList
-                            .insertBird(global.getDefualtBirdData(widget.id));
-                        addToLifeList();
+                      onPressed: () {
+                        up_func.addExp(20);
+                        global.lifeList.insertBird(Bird(
+                            id: 123,
+                            commonGroup: widget.commonGroup,
+                            commonSpecies: widget.commonSpecies,
+                            genus: 'genus',
+                            species: 'species',
+                            fullProtocolRR: 0.0,
+                            fullProtocolNumber: 0,
+                            latestFP: '',
+                            jan: 0,
+                            feb: 0,
+                            mar: 0,
+                            apr: 0,
+                            may: 0,
+                            jun: 0,
+                            jul: 0,
+                            aug: 0,
+                            sep: 0,
+                            oct: 0,
+                            nov: 0,
+                            dec: 0,
+                            totalRecords: 0,
+                            reportingRate: 0.0));
+                        global.updateLife();
+                        setState(() {
+                          seenText =
+                              isSeenGS(widget.commonGroup, widget.commonSpecies)
+                                  ? 'Seen'
+                                  : 'Add to Life List';
+                        });
                       },
                       style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
                         shadowColor: WidgetStateProperty.all(
@@ -250,14 +280,7 @@ class _BirdPageState extends State<BirdPage> {
                       child: Text('Show Heat Map',
                           style: GlobalStyles.primaryButtonText(context)),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Scaffold(
-                              body: HeatMap(id: widget.id),
-                            ),
-                          ),
-                        );
+                        context.go('/heatmap/${widget.id}');
                       },
                     ),
                   ),

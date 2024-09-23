@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Controller/Main/routing_data.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
+import 'package:beakpeek/config_azure.dart' as config;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,10 +22,12 @@ class Main extends StatefulWidget {
 
 class MainState extends State<Main> {
   late final ThemeProvider themeProvider;
+
   @override
   void initState() {
     super.initState();
-    localStorage.getItem('accessToken') != null
+    localStorage.getItem('termsAndCondition') == null &&
+            localStorage.getItem('accessToken') != null
         ? accessToken = localStorage.getItem('accessToken')!
         : accessToken = '';
     global.init();
@@ -35,6 +38,11 @@ class MainState extends State<Main> {
   @override
   Widget build(BuildContext context) {
     final appRouter = RoutingData().router;
+    if (accessToken.isNotEmpty) {
+      config.loggedIN = true;
+      RoutingData().router.go('/home');
+    }
+
     return ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
       child: Consumer<ThemeProvider>(

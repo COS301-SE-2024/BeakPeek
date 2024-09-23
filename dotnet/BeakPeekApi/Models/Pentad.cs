@@ -26,7 +26,7 @@ namespace BeakPeekApi.Models
                 Pentad_Allocation = this.Pentad_Allocation,
                 Pentad_Longitude = this.Pentad_Longitude,
                 Pentad_Latitude = this.Pentad_Latitude,
-                Province = this.Province.ToDto(),
+                Province = this.Province != null ? this.Province.ToDto() : null,
                 Total_Cards = this.Total_Cards
             };
         }

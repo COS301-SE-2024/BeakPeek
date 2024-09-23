@@ -55,7 +55,6 @@ class BottomNavItem extends StatelessWidget {
               width: itemWidth * 0.5,
             ),
           ),
-          const SizedBox(height: 1),
         ],
       ),
     );

@@ -294,7 +294,7 @@ namespace BeakPeekApi.Controllers
             var birds = await _context.Provinces
                 .Include(p => p.Bird)
                 .Include(p => p.Pentad)
-                .Where(p => p.Bird.Ref == id)
+                .Where(p => p.Bird != null && p.Bird.Ref == id)
                 .ToListAsync();
 
             if (birds == null || birds.Count == 0)

@@ -1,19 +1,20 @@
 // ignore_for_file: avoid_print
 import 'dart:convert';
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
 import 'package:http/http.dart' as http;
 
 const List<String> provinces = [
   'easterncape',
-  'freestate',
   'gauteng',
   'kwazulunatal',
   'limpopo',
   'mpumalanga',
   'northerncape',
   'northwest',
-  'westerncape'
+  'westerncape',
+  'freestate',
 ];
 
 Future<List<Bird>> fetchAllBirds(String prov, http.Client client) async {
@@ -79,4 +80,21 @@ Future<List> getProvincesBirdIsIn(
     print('Error fetching amount of birds: $error');
     throw Exception('Failed to load number of birds: $error, ');
   }
+}
+
+Future<List<bool>> getProvincesForBird(int id) async {
+  late final LifeListProvider lifeList = LifeListProvider.instance;
+  late final List<bool> isIn = [];
+  await lifeList.getBirdProvinces(id).then((prov) {
+    isIn.add((prov.easterncape));
+    isIn.add((prov.gauteng));
+    isIn.add((prov.kwazulunatal));
+    isIn.add((prov.limpopo));
+    isIn.add((prov.mpumalanga));
+    isIn.add((prov.northerncape));
+    isIn.add((prov.northwest));
+    isIn.add((prov.westerncape));
+    isIn.add((prov.freestate));
+  });
+  return isIn;
 }

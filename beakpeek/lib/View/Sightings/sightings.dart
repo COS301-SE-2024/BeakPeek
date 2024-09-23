@@ -158,8 +158,8 @@ class _SightingsState extends State<Sightings> {
                 ),
               ),
             ),
-            SizedBox(height: screenHeight * 0.02),
-            Expanded(
+            SizedBox(
+              height: screenHeight * 0.75,
               child: getLiveList(loaded, goBird, context),
             ),
           ],

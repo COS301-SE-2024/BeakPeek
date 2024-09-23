@@ -1,6 +1,9 @@
 // ignore_for_file: unused_field
 
 import 'package:beakpeek/Model/bird_map.dart';
+import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/UserProfile/color_palette.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -52,6 +55,7 @@ class HeatMapState extends State<HeatMap> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        _buildFiltersRow(),
         Expanded(
           child: GoogleMap(
             onMapCreated: _onMapCreated,
@@ -60,6 +64,45 @@ class HeatMapState extends State<HeatMap> {
           ),
         ),
       ],
+    );
+  }
+
+  Widget _buildFiltersRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          icon: Icon(Icons.filter_list, color: AppColors.iconColor(context)),
+          onPressed: () {
+            _showFilterDialog();
+          },
+        ),
+      ],
+    );
+  }
+
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Filters'),
+          backgroundColor: AppColors.backgroundColor(context),
+          content: Column(
+              mainAxisSize: MainAxisSize.min, children: [PaletteSelector()]),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Close',
+                style: GlobalStyles.smallContentPrimary(context),
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 

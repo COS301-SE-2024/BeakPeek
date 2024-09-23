@@ -16,7 +16,6 @@ class QuizManager {
   static final QuizManager _instance = QuizManager._internal();
   late List<Bird> birds = global.allBirdsList;
 
-
   final List<QuizInstance> _preloadedQuizzes = [];
 
   List<QuizInstance> get preloadedQuizzes => _preloadedQuizzes;
@@ -25,18 +24,15 @@ class QuizManager {
     for (int i = 0; i < count; i++) {
       final QuizInstance instance = await createQuizInstance();
       _preloadedQuizzes.add(instance);
-      for (String url in instance.images) {
-        // ignore: use_build_context_synchronously
-        precacheImage(NetworkImage(url), context);
-      }
+      precacheImage(NetworkImage(instance.images), context);
     }
   }
 
   Future<QuizInstance> createQuizInstance() async {
-
     final List<Bird> selectedBirds = selectRandomBirds(birds, 4);
+    print(selectedBirds);
     final Bird correctBird = selectedBirds[Random().nextInt(4)];
-    final List<String> images = await getImages(http.Client(), correctBird);
+    final String images = correctBird.imageUrl ?? '';
     return QuizInstance(
       selectedBirds: selectedBirds,
       correctBird: correctBird,
@@ -56,6 +52,7 @@ List<Bird> selectRandomBirds(List<Bird> birds, int count) {
 
 Future<List<String>> getImages(http.Client client, Bird bird) async {
   try {
+    print('HELLLLO: ${bird.imageUrl}');
     final String birdName = '${bird.commonSpecies} ${bird.commonGroup}';
     final response = await client.get(Uri.parse(
         'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/$birdName'));
