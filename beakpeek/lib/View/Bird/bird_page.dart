@@ -78,7 +78,7 @@ class _BirdPageState extends State<BirdPage> {
             color: AppColors.iconColor(context),
           ),
           onPressed: () {
-            context.go('/home');
+            context.pop();
           },
         ),
         title: Text(
@@ -229,7 +229,7 @@ class _BirdPageState extends State<BirdPage> {
                       onPressed: () {
                         up_func.addExp(20);
                         global.lifeList.insertBird(Bird(
-                            id: 123,
+                            id: widget.id,
                             commonGroup: widget.commonGroup,
                             commonSpecies: widget.commonSpecies,
                             genus: 'genus',

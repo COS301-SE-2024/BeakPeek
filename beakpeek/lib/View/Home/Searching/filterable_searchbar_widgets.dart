@@ -10,10 +10,6 @@ Widget getData(Bird bird, Function goBird, BuildContext context) {
           : bird.commonSpecies,
       style: GlobalStyles.filterTileHeading(context),
     ),
-    subtitle: Text(
-      '${bird.genus} ${bird.species}',
-      style: GlobalStyles.filterTileSubHeading(context),
-    ),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
       children: [

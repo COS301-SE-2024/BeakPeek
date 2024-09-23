@@ -115,7 +115,7 @@ class LifeListProvider {
 
     final List<Map<String, Object?>> birdMap = await db.query(
       'birds',
-      orderBy: 'commonGroup DESC, commonSpecies DESC',
+      orderBy: 'commonSpecies DESC',
     );
     return birdMap.map(
       (map) {
