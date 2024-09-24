@@ -1,4 +1,9 @@
+// ignore_for_file: unused_field
+
 import 'package:beakpeek/Model/bird_map.dart';
+import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/UserProfile/color_palette.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -16,7 +21,6 @@ class HeatMap extends StatefulWidget {
 class HeatMapState extends State<HeatMap> {
   late GoogleMapController mapController;
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
-  String _selectedProvince = 'gauteng'; // Default selected province
   late CameraPosition _cameraPosition;
   final Set<Polygon> _polygons = {};
   bool _isLoading = true;
@@ -32,14 +36,18 @@ class HeatMapState extends State<HeatMap> {
   }
 
   Color getColorForReportingRate(double reportingRate) {
-    if (reportingRate < 40) {
-      return Colors.red.withOpacity(0.4);
+    if (reportingRate < 20) {
+      return const Color.fromARGB(255, 255, 115, 105).withOpacity(0.8);
+    } else if (reportingRate < 40) {
+      return Colors.red.withOpacity(0.8);
     } else if (reportingRate < 60) {
-      return Colors.orange.withOpacity(0.4);
+      return Colors.orange.withOpacity(0.8);
     } else if (reportingRate < 80) {
-      return Colors.yellow.withOpacity(0.4);
+      return Colors.yellow.withOpacity(0.8);
+    } else if (reportingRate < 90) {
+      return const Color.fromARGB(255, 103, 255, 108).withOpacity(0.8);
     } else {
-      return Colors.green.withOpacity(0.4);
+      return const Color.fromARGB(255, 1, 201, 34).withOpacity(0.8);
     }
   }
 
@@ -47,8 +55,7 @@ class HeatMapState extends State<HeatMap> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        _buildProvinceDropdown(),
-        _isLoading ? const CircularProgressIndicator() : Container(),
+        _buildFiltersRow(),
         Expanded(
           child: GoogleMap(
             onMapCreated: _onMapCreated,
@@ -60,31 +67,42 @@ class HeatMapState extends State<HeatMap> {
     );
   }
 
-  Widget _buildProvinceDropdown() {
-    return DropdownButton<String>(
-      value: _selectedProvince,
-      onChanged: (newValue) {
-        setState(() {
-          _selectedProvince = newValue!;
-          _cameraPosition = getCameraPositionForProvince(newValue);
-          loadPentadData();
-        });
+  Widget _buildFiltersRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        IconButton(
+          icon: Icon(Icons.filter_list, color: AppColors.iconColor(context)),
+          onPressed: () {
+            _showFilterDialog();
+          },
+        ),
+      ],
+    );
+  }
 
-        // Move the camera to the new position
-        mapController
-            .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-      },
-      items: <String>[
-        'gauteng',
-        'westerncape',
-        'Eastern Cape'
-      ] // Add more provinces as needed
-          .map<DropdownMenuItem<String>>((value) {
-        return DropdownMenuItem<String>(
-          value: value,
-          child: Text(value),
+  void _showFilterDialog() {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Filters'),
+          backgroundColor: AppColors.backgroundColor(context),
+          content: Column(
+              mainAxisSize: MainAxisSize.min, children: [PaletteSelector()]),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                'Close',
+                style: GlobalStyles.smallContentPrimary(context),
+              ),
+            ),
+          ],
         );
-      }).toList(),
+      },
     );
   }
 
@@ -110,11 +128,6 @@ class HeatMapState extends State<HeatMap> {
   }
 
   LatLng _calculateCoordinatesFromPentad(String lonPart, String latPart) {
-    // Parse latitude and longitude components from the name
-    // final latPart = parts[0];
-    // final lonPart = parts[1];
-
-    // Extract degrees and minutes from the parts
     final latDegrees = int.parse(latPart.substring(0, 2));
     final latMinutes = int.parse(latPart.substring(2, 4));
 

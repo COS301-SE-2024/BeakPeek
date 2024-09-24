@@ -1,13 +1,20 @@
-import 'package:beakpeek/Controller/DB/achievements_provider.dart';
+// ignore_for_file: unnecessary_null_comparison
+import 'dart:io';
+import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
+import 'package:beakpeek/View/offline_message.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
+import 'package:provider/provider.dart';
+import 'package:beakpeek/Controller/Main/theme_provider.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -18,14 +25,15 @@ class UserProfile extends StatefulWidget {
 
 class UserProfileState extends State<UserProfile> {
   late LifeListProvider lifeList = LifeListProvider.instance;
-  late AchievementsProvider achievementList = AchievementsProvider.instance;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
+  late File _image = File(localStorage.getItem('profilePicture') ??
+      'assets/images/profileImages/images.jpg');
+  final picker = ImagePicker();
 
   String name = localStorage.getItem('fullName') ?? '';
   String username = localStorage.getItem('username') ?? 'Username';
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
-  String email = localStorage.getItem('email') ?? 'example@mail.com';
   String phone = localStorage.getItem('phone') ?? '+123456789';
 
   //level variables
@@ -40,15 +48,6 @@ class UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     super.initState();
-    if (name.isEmpty) {
-      name = 'Elm Boog';
-    }
-    if (bio.isEmpty) {
-      bio = 'Tell us about yourself...';
-    }
-    if (email.isEmpty) {
-      email = 'example@mail.com';
-    }
     birds = lifeList.fetchLifeList();
     numBirds = db.getNumberOfBirdsInProvinces(Client());
     level = int.parse(levelStore);
@@ -63,7 +62,14 @@ class UserProfileState extends State<UserProfile> {
         );
       },
     );
+    retrieveLostData();
     super.initState();
+  }
+
+  void setInfo(String key, String data) {
+    setState(() {
+      localStorage.setItem(key, data);
+    });
   }
 
   @override
@@ -74,6 +80,7 @@ class UserProfileState extends State<UserProfile> {
     final horizontalPadding = screenWidth * 0.05;
 
     return Scaffold(
+      backgroundColor: AppColors.backgroundColor(context),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -87,18 +94,41 @@ class UserProfileState extends State<UserProfile> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       IconButton(
-                        icon: const Icon(Icons.arrow_back,
-                            color: GlobalStyles.primaryColor),
+                        icon: const Icon(Icons.arrow_back),
+                        color: AppColors.iconColor(context),
                         onPressed: () {
                           context.go('/home');
                         },
                       ),
-                      IconButton(
-                        icon: const Icon(Icons.settings,
-                            color: GlobalStyles.primaryColor),
-                        onPressed: () {
-                          // Navigate to settings page or handle settings action
-                        },
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Provider.of<ThemeProvider>(context).themeMode ==
+                                      ThemeMode.dark
+                                  ? Icons.wb_sunny_outlined
+                                  : Icons.nights_stay_outlined,
+                              color: AppColors.iconColor(context),
+                            ),
+                            onPressed: () {
+                              final isDarkMode = Provider.of<ThemeProvider>(
+                                          context,
+                                          listen: false)
+                                      .themeMode ==
+                                  ThemeMode.dark;
+                              Provider.of<ThemeProvider>(context, listen: false)
+                                  .toggleTheme(!isDarkMode);
+                            },
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.settings),
+                            color: AppColors.iconColor(context),
+                            onPressed: () {
+                              // Navigate to settings page
+                              //or handle settings action
+                            },
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -106,30 +136,42 @@ class UserProfileState extends State<UserProfile> {
                     child: Column(
                       children: [
                         // Profile picture
-                        CircleAvatar(
-                          radius: screenWidth * 0.20,
-                          backgroundColor: GlobalStyles.primaryColor,
-                          child: CircleAvatar(
-                            radius: screenWidth * 0.19,
-                            backgroundImage: const AssetImage(
-                              'assets/images/profileImages/images.jpg',
-                            ),
-                            onBackgroundImageError: (_, __) => const Icon(
-                              Icons.person,
-                              size: 75,
-                              color: Colors.white,
+                        GestureDetector(
+                          onTap: () {
+                            _showSelectionDialog();
+                          },
+                          child: Material(
+                            elevation: 5, // Add elevation here
+                            shape: const CircleBorder(),
+                            child: CircleAvatar(
+                              radius: screenWidth * 0.20,
+                              backgroundColor: AppColors.iconColor(context),
+                              child: CircleAvatar(
+                                radius: screenWidth * 0.19,
+                                backgroundImage: _image.path.isEmpty
+                                    ? const AssetImage(
+                                        'assets/images/profileImages/images.jpg')
+                                    : FileImage(_image),
+                                foregroundImage: FileImage(_image),
+                                onBackgroundImageError: (_, __) => Image.file(
+                                  File(
+                                      'assets/images/profileImages/images.jpg'),
+                                  color: Colors.white,
+                                ),
+                              ),
                             ),
                           ),
                         ),
 
                         // Username
                         SizedBox(height: verticalPadding),
-                        Text(name, style: GlobalStyles.subHeadingDark),
+                        Text(username,
+                            style: GlobalStyles.subHeadingPrimary(context)),
 
                         // Active since
                         SizedBox(height: verticalPadding),
-                        const Text('Active since - June 2024',
-                            style: GlobalStyles.smallContent),
+                        Text('Active since - June 2024',
+                            style: GlobalStyles.smallContent(context)),
                         SizedBox(height: verticalPadding),
                       ],
                     ),
@@ -140,14 +182,15 @@ class UserProfileState extends State<UserProfile> {
                     children: [
                       Text(
                         'Level $level',
-                        style: GlobalStyles.greyContent,
+                        style: GlobalStyles.smallContent(context),
                       ),
-                      const SizedBox(
-                        height: 6,
-                      ),
+                      const SizedBox(height: 6),
                       SizedBox(
                         height: verticalPadding * 3,
-                        child: levelProgressBar(userExp, level),
+                        width: screenWidth,
+                        child: Center(
+                          child: levelProgressBar(userExp, level),
+                        ),
                       ),
                     ],
                   ),
@@ -159,8 +202,8 @@ class UserProfileState extends State<UserProfile> {
 
                   // Personal information
                   SizedBox(height: verticalPadding),
-                  const Text('Personal Information',
-                      style: GlobalStyles.subheadingLight),
+                  Text('Personal Information',
+                      style: GlobalStyles.smallHeadingSecondary(context)),
                   SizedBox(height: verticalPadding),
 
                   // Username Field
@@ -168,6 +211,8 @@ class UserProfileState extends State<UserProfile> {
                     icon: Icons.person,
                     label: 'Username',
                     content: username,
+                    backgroundColor: AppColors.popupColor(context),
+                    change: setInfo,
                   ),
                   SizedBox(height: verticalPadding),
 
@@ -176,17 +221,9 @@ class UserProfileState extends State<UserProfile> {
                     icon: Icons.info,
                     label: 'Bio',
                     content: bio,
+                    backgroundColor: AppColors.popupColor(context),
+                    change: setInfo,
                   ),
-
-                  SizedBox(height: verticalPadding),
-
-                  // Email Field
-                  ProfileField(
-                    icon: Icons.email,
-                    label: 'Email',
-                    content: email,
-                  ),
-
                   SizedBox(height: verticalPadding),
 
                   Divider(
@@ -195,21 +232,24 @@ class UserProfileState extends State<UserProfile> {
                   ),
 
                   // Progress section
-                  const Text(
+                  Text(
                     'Sighting Progress',
-                    style: GlobalStyles.subheadingLight,
+                    style: GlobalStyles.smallHeadingPrimary(context),
                   ),
                   FutureBuilder<List<int>>(
                     future: numBirds,
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Center(
+                            child: CircularProgressIndicator(
+                          color: AppColors.primaryColor(context),
+                        ));
                       } else if (snapshot.hasError) {
                         return Center(
-                          child: Text(
-                            'Error: ${snapshot.error}',
-                            style: const TextStyle(color: Colors.black),
-                          ),
+                          child: OfflineMessage(
+                              height: screenHeight * 0.2,
+                              width: screenWidth * 0.2,
+                              message: 'Needs internet connection'),
                         );
                       }
                       return progressBars(
@@ -224,10 +264,61 @@ class UserProfileState extends State<UserProfile> {
       ),
     );
   }
+
+  Future<void> retrieveLostData() async {
+    final LostDataResponse response = await picker.retrieveLostData();
+    if (response.isEmpty) {
+      return;
+    }
+    if (response.file != null) {
+      setState(() {
+        if (response.files != null) {
+          _image = response.file as File;
+        }
+      });
+    }
+  }
+
+  Future selectOrTakePhoto(ImageSource imageSource) async {
+    final pickedFile = await picker.pickImage(source: imageSource);
+    setState(
+      () {
+        if (pickedFile != null) {
+          _image = File(pickedFile.path);
+          localStorage.setItem('profilePicture', pickedFile.path);
+        }
+      },
+    );
+  }
+
+  Future _showSelectionDialog() async {
+    await showDialog(
+      builder: (context) => SimpleDialog(
+        title: const Text('Select photo'),
+        children: <Widget>[
+          SimpleDialogOption(
+            child: const Text('From gallery'),
+            onPressed: () {
+              selectOrTakePhoto(ImageSource.gallery);
+              Navigator.pop(context);
+            },
+          ),
+          SimpleDialogOption(
+            child: const Text('Take a photo'),
+            onPressed: () {
+              selectOrTakePhoto(ImageSource.camera);
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+      context: context,
+    );
+  }
 }
 
 // Fields for user personal information
-class ProfileField extends StatelessWidget {
+class ProfileField extends StatefulWidget {
   const ProfileField({
     required this.icon,
     required this.label,
@@ -235,6 +326,7 @@ class ProfileField extends StatelessWidget {
     this.backgroundColor,
     this.padding,
     super.key,
+    required this.change,
   });
 
   final IconData icon;
@@ -242,40 +334,77 @@ class ProfileField extends StatelessWidget {
   final String content;
   final Color? backgroundColor;
   final EdgeInsets? padding;
+  final void Function(String key, String data) change;
+  @override
+  State<ProfileField> createState() => _StateProfileField();
+}
+
+class _StateProfileField extends State<ProfileField> {
+  late TextEditingController _controller;
+  late final IconData icon;
+  late final String label;
+  late final String content;
+  late final Color? backgroundColor;
+  late final EdgeInsets? padding;
+  late Function change;
+  @override
+  void initState() {
+    super.initState();
+    _controller = TextEditingController();
+    icon = widget.icon;
+    label = widget.label;
+    content = localStorage.getItem(label.toLowerCase()) ?? widget.content;
+    backgroundColor = widget.backgroundColor;
+    padding = widget.padding;
+    change = widget.change;
+  }
 
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final fieldPadding = EdgeInsets.all(screenWidth * 0.03);
 
-    return Container(
-      padding: padding ?? fieldPadding,
-      decoration: BoxDecoration(
-        color: backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
-        borderRadius: BorderRadius.circular(screenWidth * 0.05),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              Icon(
-                icon,
-                color: GlobalStyles.primaryColor,
-              ),
-              SizedBox(width: screenWidth * 0.02),
-              Text(label, style: GlobalStyles.smallContent),
-            ],
-          ),
-          Expanded(
-            child: Text(
-              content,
-              style: GlobalStyles.content,
-              textAlign: TextAlign.right,
-              overflow: TextOverflow.ellipsis,
+    return Material(
+      elevation: 5, // Add elevation here
+      borderRadius: BorderRadius.circular(screenWidth * 0.05),
+      child: Container(
+        padding: widget.padding ?? fieldPadding,
+        decoration: BoxDecoration(
+          color:
+              widget.backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
+          borderRadius: BorderRadius.circular(screenWidth * 0.05),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Icon(
+                  widget.icon,
+                  color: AppColors.iconColor(context),
+                ),
+                SizedBox(width: screenWidth * 0.02),
+              ],
             ),
-          ),
-        ],
+            Expanded(
+                child: TextField(
+              controller: _controller,
+              onChanged: (value) {
+                setState(() {
+                  change(label.toLowerCase(), value);
+                  content = value;
+                });
+              },
+              decoration: InputDecoration(
+                labelText: content.isEmpty ? label : content,
+                labelStyle: const TextStyle(),
+                hintText: content,
+                helperText: label,
+              ),
+              style: TextStyle(color: AppColors.tertiaryColor(context)),
+            )),
+          ],
+        ),
       ),
     );
   }

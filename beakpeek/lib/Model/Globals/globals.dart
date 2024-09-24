@@ -1,0 +1,39 @@
+library global;
+
+import 'dart:io';
+
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Controller/Home/search.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
+
+Globals global = Globals();
+
+class Globals {
+  final LifeListProvider lifeList = LifeListProvider.instance;
+  late List<Bird> birdList = [];
+  late List<Bird> allBirdsList = [];
+
+  void init() {
+    lifeList.fetchLifeList().then((result) {
+      birdList = result;
+    });
+    listBirdFromAssets().then((result) {
+      allBirdsList = result;
+      lifeList.initialInsert(result);
+      lifeList.initialProvInsert(result);
+    });
+    // lifeList.deleteDatabaseFile();
+  }
+
+  void updateLife() {
+    lifeList.fetchLifeList().then((result) {
+      birdList = result;
+    });
+  }
+
+  Bird getDefualtBirdData(int id) {
+    return allBirdsList.firstWhere((bird) => bird.id == id);
+  }
+
+  late File image;
+}

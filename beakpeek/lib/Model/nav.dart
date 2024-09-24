@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:beakpeek/config_azure.dart' as config;
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -8,15 +9,15 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final itemWidth = screenWidth / 4; // Divide screen width by number of items
+    final itemWidth = screenWidth / 5; // Divide screen width by number of items
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        BottomNavItem('Home', 'home.png', itemWidth),
-        BottomNavItem('Map', 'map.png', itemWidth),
-        BottomNavItem('Sightings', 'sightings.png', itemWidth),
-        BottomNavItem('Profile', 'profile.png', itemWidth),
+        BottomNavItem('Home', 'home.svg', itemWidth),
+        BottomNavItem('Map', 'map.svg', itemWidth),
+        BottomNavItem('Sightings', 'sightings.svg', itemWidth),
+        BottomNavItem('Profile', 'profile.svg', itemWidth),
       ],
     );
   }
@@ -30,6 +31,8 @@ class BottomNavItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final iconFile = isDarkMode ? file.replaceAll('.svg', 'Dark.svg') : file;
     return SizedBox(
       width: itemWidth,
       child: Column(
@@ -47,19 +50,9 @@ class BottomNavItem extends StatelessWidget {
                 }
               }
             },
-            child: Image.asset(
-              'assets/icons/$file',
+            child: SvgPicture.asset(
+              'assets/icons/$iconFile',
               width: itemWidth * 0.5,
-            ),
-          ),
-          const SizedBox(height: 1),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-              fontFamily: 'SF Pro Display',
-              fontWeight: FontWeight.w500,
             ),
           ),
         ],
