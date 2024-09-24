@@ -20,7 +20,7 @@ public class UserRolesController : Controller
     }
 
     [HttpGet]
-    [Authorize(Roles = "Admin,SuperAdmin,Moderator")]
+    [Authorize(Roles = "Basic,Admin,SuperAdmin,Moderator")]
     public async Task<IActionResult> Index()
     {
         var users = await _userManager.Users.ToListAsync();
@@ -39,7 +39,7 @@ public class UserRolesController : Controller
     }
 
     [HttpGet]
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "Basic,SuperAdmin")]
     public async Task<IActionResult> Manage(string userId)
     {
         ViewBag.userId = userId;
@@ -53,6 +53,7 @@ public class UserRolesController : Controller
 
         ViewBag.UserName = user.UserName;
         var model = new List<ManageUserRolesViewModel>();
+        var userRoles = await _userManager.GetRolesAsync(user);
         foreach (var role in _roleManager.Roles)
         {
             var userRolesViewModel = new ManageUserRolesViewModel
@@ -61,7 +62,8 @@ public class UserRolesController : Controller
                 RoleName = role.Name
             };
 
-            if (await _userManager.IsInRoleAsync(user, role.Name))
+            // if (await _userManager.IsInRoleAsync(user, role.Name))
+            if (userRoles.Contains(role.Name))
             {
                 userRolesViewModel.Selected = true;
             }
@@ -75,7 +77,8 @@ public class UserRolesController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Manage(List<ManageUserRolesViewModel> model, string userId)
+    [Authorize(Roles = "Basic,SuperAdmin")]
+    public async Task<IActionResult> Manage([FromForm] List<ManageUserRolesViewModel> model, string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
         if (user == null)
