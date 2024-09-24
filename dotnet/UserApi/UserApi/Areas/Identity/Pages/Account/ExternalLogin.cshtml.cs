@@ -126,7 +126,8 @@ namespace UserApi.Areas.Identity.Pages.Account
                 /// NOTE: Begin of JWT auth generation
                 _logger.LogInformation("User logged in.");
 
-                var user = await _userManager.FindByEmailAsync(Input.Email);
+                var user = await _userManager.FindByLoginAsync(info.LoginProvider, info.ProviderKey);
+
                 var token = await _authHandler.GenerateJwtToken(user);
 
                 var isAuthenticated = User.Identity?.IsAuthenticated ?? false;

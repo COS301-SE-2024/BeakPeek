@@ -1,8 +1,8 @@
 ﻿@page
 @model IndexModel
 @{
-    ViewData["Title"] = "Profile";
-    ViewData["ActivePage"] = ManageNavPages.Index;
+ViewData["Title"] = "Profile";
+ViewData["ActivePage"] = ManageNavPages.Index;
 }
 
 <h3>@ViewData["Title"]</h3>
@@ -16,36 +16,27 @@
                 <label asp-for="Username" class="form-label"></label>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number."/>
+                <input asp-for="Input.PhoneNumber" class="form-control" placeholder="Please enter your phone number." />
                 <label asp-for="Input.PhoneNumber" class="form-label"></label>
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <button id="update-profile-button" type="submit" class="w-100 btn btn-lg btn-primary">Save</button>
-<div class="col-md-6">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.ProfilePicture" style="width: 100%;"></label>
-                @if (Model.Input.ProfilePicture != null)
-                {
-                    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model.Input.ProfilePicture))">
-                }
-                else
-                {
-                    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="">
-                }
-                <input type="file"
-                       accept=",.jpg,.jpeg,.gif,.tif"
-                       asp-for="Input.ProfilePicture"
-                       class="form-control"
-                       style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
-                       onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
-                <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
+            <div class="col-md-6">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="Input.ProfilePicture" style="width: 100%;"></label>
+                    @Html.DisplayFor(model => Model.Input.ProfilePicture, "imageDisplay")
+                    <input type="file" accept=",.jpg,.jpeg,.gif,.tif" asp-for="Input.ProfilePicture"
+                        class="form-control"
+                        style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
+                        onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                    <span asp-validation-for="Input.ProfilePicture" class="text-danger"></span>
+                </div>
             </div>
-        </div>
         </form>
     </div>
 </div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+<partial name="_ValidationScriptsPartial" />
 }
