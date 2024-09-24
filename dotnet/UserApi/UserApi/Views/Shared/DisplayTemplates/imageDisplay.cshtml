@@ -3,11 +3,9 @@
 
 @if (Model != null)
 {
-    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model))">
+    <img id="profilePicture" style="width:100%;height:100%; object-fit:cover" src="data:image/*;base64,@(Convert.ToBase64String(Model))">
 }
 else
 {
-    <img id="profilePicture" style="width:350px;height:350px; object-fit:cover" src="">
+    <img id="profilePicture" style="width:100%;height:100%; object-fit:cover" src="">
 }
-
-

@@ -71,6 +71,13 @@ public class AchievementController : BaseController
     {
         if (ModelState.IsValid)
         {
+
+            if (Request.Form.Files.Count > 0)
+            {
+                using var dataStream = new MemoryStream();
+                await Request.Form.Files.FirstOrDefault().CopyToAsync(dataStream);
+                achievement.Icon = dataStream.ToArray();
+            }
             _context.Add(achievement);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
@@ -100,7 +107,7 @@ public class AchievementController : BaseController
     // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
     [HttpPost("Edit/{id}")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int id, [Bind("Id,Name,XP")] Achievement achievement)
+    public async Task<IActionResult> Edit(int id, [FromForm] Achievement achievement)
     {
         if (id != achievement.Id)
         {
@@ -111,6 +118,12 @@ public class AchievementController : BaseController
         {
             try
             {
+                if (Request.Form.Files.Count > 0)
+                {
+                    using var dataStream = new MemoryStream();
+                    await Request.Form.Files.FirstOrDefault().CopyToAsync(dataStream);
+                    achievement.Icon = dataStream.ToArray();
+                }
                 _context.Update(achievement);
                 await _context.SaveChangesAsync();
             }

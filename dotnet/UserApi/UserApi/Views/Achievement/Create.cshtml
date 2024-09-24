@@ -1,7 +1,7 @@
 @model UserApi.Models.Achievement
 
 @{
-    ViewData["Title"] = "Create";
+ViewData["Title"] = "Create";
 }
 
 <h1>Create</h1>
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" method="post" enctype="multipart/form-data">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="Name" class="control-label"></label>
@@ -21,6 +21,19 @@
                 <label asp-for="XP" class="control-label"></label>
                 <input asp-for="XP" class="form-control" />
                 <span asp-validation-for="XP" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Icon" style="width: 100%;"></label>
+                @Html.DisplayFor(model => Model.Icon, "imageDisplay")
+                <input type="file" accept=",.jpg,.jpeg,.gif,.tif" asp-for="Icon" class="form-control"
+                    style="border:0px!important;padding: 0px;padding-top: 10px;padding-bottom: 30px;"
+                    onchange="document.getElementById('profilePicture').src = window.URL.createObjectURL(this.files[0])" />
+                <span asp-validation-for="Icon" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -34,5 +47,5 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
