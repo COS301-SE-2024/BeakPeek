@@ -18,6 +18,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using UserApi.Models;
+using UserApi.Services;
 
 namespace UserApi.Areas.Identity.Pages.Account
 {
@@ -30,13 +31,15 @@ namespace UserApi.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<AppUser> _emailStore;
         private readonly IEmailSender _emailSender;
         private readonly ILogger<ExternalLoginModel> _logger;
+        private readonly AuthHandler _authHandler;
 
         public ExternalLoginModel(
             SignInManager<AppUser> signInManager,
             UserManager<AppUser> userManager,
             IUserStore<AppUser> userStore,
             ILogger<ExternalLoginModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            AuthHandler authHandler)
         {
             _signInManager = signInManager;
             _userManager = userManager;
@@ -44,6 +47,7 @@ namespace UserApi.Areas.Identity.Pages.Account
             _emailStore = GetEmailStore();
             _logger = logger;
             _emailSender = emailSender;
+            _authHandler = authHandler;
         }
 
         /// <summary>
@@ -117,6 +121,20 @@ namespace UserApi.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("{Name} logged in with {LoginProvider} provider.", info.Principal.Identity.Name, info.LoginProvider);
+
+
+                /// NOTE: Begin of JWT auth generation
+                _logger.LogInformation("User logged in.");
+
+                var user = await _userManager.FindByEmailAsync(Input.Email);
+                var token = await _authHandler.GenerateJwtToken(user);
+
+                var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+
+                _logger.LogInformation($"User is authenticated: {isAuthenticated}");
+
+                HttpContext.Session.SetString("Token", token);
+                /// NOTE: end of JWT auth generation
                 return LocalRedirect(returnUrl);
             }
             if (result.IsLockedOut)
@@ -185,6 +203,19 @@ namespace UserApi.Areas.Identity.Pages.Account
                         }
 
                         await _signInManager.SignInAsync(user, isPersistent: false, info.LoginProvider);
+
+
+                        /// NOTE: Begin of JWT auth generation
+                        _logger.LogInformation("User logged in.");
+
+                        var token = await _authHandler.GenerateJwtToken(user);
+
+                        var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+
+                        _logger.LogInformation($"User is authenticated: {isAuthenticated}");
+
+                        HttpContext.Session.SetString("Token", token);
+                        /// NOTE: end of JWT auth generation
                         return LocalRedirect(returnUrl);
                     }
                 }

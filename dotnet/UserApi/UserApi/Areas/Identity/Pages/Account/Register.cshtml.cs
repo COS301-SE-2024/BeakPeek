@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using UserApi.Models;
+using UserApi.Services;
 
 namespace UserApi.Areas.Identity.Pages.Account
 {
@@ -30,13 +31,15 @@ namespace UserApi.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<AppUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly AuthHandler _authHandler;
 
         public RegisterModel(
             UserManager<AppUser> userManager,
             IUserStore<AppUser> userStore,
             SignInManager<AppUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            AuthHandler authHandler)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +47,7 @@ namespace UserApi.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _authHandler = authHandler;
         }
 
         /// <summary>
@@ -143,6 +147,18 @@ namespace UserApi.Areas.Identity.Pages.Account
                     else
                     {
                         await _signInManager.SignInAsync(user, isPersistent: false);
+
+                        /// NOTE: Begin of JWT auth generation
+                        _logger.LogInformation("User logged in.");
+
+                        var token = await _authHandler.GenerateJwtToken(user);
+
+                        var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+
+                        _logger.LogInformation($"User is authenticated: {isAuthenticated}");
+
+                        HttpContext.Session.SetString("Token", token);
+                        /// NOTE: end of JWT auth generation
                         return LocalRedirect(returnUrl);
                     }
                 }

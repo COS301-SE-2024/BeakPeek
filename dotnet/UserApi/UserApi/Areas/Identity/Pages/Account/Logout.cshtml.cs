@@ -30,6 +30,7 @@ namespace UserApi.Areas.Identity.Pages.Account
             _logger.LogInformation("User logged out.");
             if (returnUrl != null)
             {
+                /// WARNING: Don't Generate JWT here
                 return LocalRedirect(returnUrl);
             }
             else

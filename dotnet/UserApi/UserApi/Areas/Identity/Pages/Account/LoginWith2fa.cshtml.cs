@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using UserApi.Models;
+using UserApi.Services;
 
 namespace UserApi.Areas.Identity.Pages.Account
 {
@@ -20,15 +21,18 @@ namespace UserApi.Areas.Identity.Pages.Account
         private readonly SignInManager<AppUser> _signInManager;
         private readonly UserManager<AppUser> _userManager;
         private readonly ILogger<LoginWith2faModel> _logger;
+        private readonly AuthHandler _authHandler;
 
         public LoginWith2faModel(
             SignInManager<AppUser> signInManager,
             UserManager<AppUser> userManager,
-            ILogger<LoginWith2faModel> logger)
+            ILogger<LoginWith2faModel> logger,
+            AuthHandler authHandler)
         {
             _signInManager = signInManager;
             _userManager = userManager;
             _logger = logger;
+            _authHandler = authHandler;
         }
 
         /// <summary>
@@ -114,6 +118,18 @@ namespace UserApi.Areas.Identity.Pages.Account
             if (result.Succeeded)
             {
                 _logger.LogInformation("User with ID '{UserId}' logged in with 2fa.", user.Id);
+
+                /// NOTE: Begin of JWT auth generation
+                _logger.LogInformation("User logged in.");
+
+                var token = await _authHandler.GenerateJwtToken(user);
+
+                var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
+
+                _logger.LogInformation($"User is authenticated: {isAuthenticated}");
+
+                HttpContext.Session.SetString("Token", token);
+                /// NOTE: end of JWT auth generation
                 return LocalRedirect(returnUrl);
             }
             else if (result.IsLockedOut)

@@ -120,6 +120,7 @@ namespace UserApi.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
+                    /// NOTE: Begin of JWT auth generation
                     _logger.LogInformation("User logged in.");
 
                     var user = await _userManager.FindByEmailAsync(Input.Email);
@@ -129,8 +130,8 @@ namespace UserApi.Areas.Identity.Pages.Account
 
                     _logger.LogInformation($"User is authenticated: {isAuthenticated}");
 
-                    _logger.LogInformation(token);
                     HttpContext.Session.SetString("Token", token);
+                    /// NOTE: end of JWT auth generation
 
                     return LocalRedirect(returnUrl);
                 }
