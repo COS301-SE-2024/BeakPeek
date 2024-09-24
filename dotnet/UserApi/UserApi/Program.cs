@@ -9,6 +9,7 @@ using Microsoft.OpenApi.Models;
 using UserApi.Data;
 using UserApi.Models;
 using UserApi.Services;
+using Wangkanai.Extensions;
 
 /// NOTE: to set enviroment variables so that they can be accessed the same way
 /// that nested key value pairs are accessed in the appsetting (e.g. "ConnectionStrings:DefaultConnection")
@@ -25,8 +26,8 @@ builder.Configuration
 var configuration = builder.Configuration;
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
-if (!builder.Environment.IsDevelopment())
+string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+if (connectionString.IsNullOrEmpty())
 {
     connectionString = builder.Configuration.GetConnectionString("SQLCONNSTR_DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 }
