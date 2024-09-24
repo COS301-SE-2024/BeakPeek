@@ -16,6 +16,7 @@ on:
       - 'doc/**'
       - 'res/**'
       - 'beakpeek/**'
+      - 'dotnet/UserApi/**'
   workflow_dispatch:
 
 jobs:
