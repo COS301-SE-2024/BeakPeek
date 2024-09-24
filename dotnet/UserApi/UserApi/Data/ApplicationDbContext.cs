@@ -18,6 +18,13 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
         base.OnModelCreating(builder);
         builder.HasDefaultSchema("Identity");
+
+        builder
+            .Entity<AppUser>()
+            .HasMany(entity => entity.Achievements)
+            .WithMany();
+
+
         builder.Entity<AppUser>(entity =>
         {
             entity.ToTable(name: "User");
