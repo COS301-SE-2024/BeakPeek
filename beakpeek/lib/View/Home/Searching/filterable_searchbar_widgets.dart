@@ -1,9 +1,11 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
 Widget getData(Bird bird, Function goBird, BuildContext context) {
   return ListTile(
+    tileColor: AppColors.backgroundColor(context),
     leading: CircleAvatar(
       backgroundImage: NetworkImage(bird.imageUrl ?? ''),
     ),
@@ -11,7 +13,7 @@ Widget getData(Bird bird, Function goBird, BuildContext context) {
       bird.commonGroup.isNotEmpty
           ? '${bird.commonSpecies} ${bird.commonGroup}'
           : bird.commonSpecies,
-      style: GlobalStyles.filterTileHeading(context),
+      style: GlobalStyles.smallContentPrimary(context),
     ),
     trailing: Row(
       mainAxisSize: MainAxisSize.min,
@@ -26,7 +28,7 @@ Widget getData(Bird bird, Function goBird, BuildContext context) {
           ),
           child: Text('View Bird',
               style: GlobalStyles.smallContentPrimary(context)
-                  .copyWith(color: Colors.white)),
+                  .copyWith(color: AppColors.textColor(context))),
         ),
       ],
     ),

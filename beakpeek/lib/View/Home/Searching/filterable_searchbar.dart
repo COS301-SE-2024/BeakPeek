@@ -100,6 +100,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                   ),
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                   child: SearchAnchor(
+                    viewBackgroundColor: AppColors.backgroundColor(context),
                     searchController: controller,
                     viewHintText: 'Search for birds...',
                     viewOnChanged: searchBarTyping,
