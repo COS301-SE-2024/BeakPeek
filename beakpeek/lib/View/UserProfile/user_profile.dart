@@ -35,7 +35,7 @@ class UserProfileState extends State<UserProfile> {
   String bio = localStorage.getItem('bio') ?? 'Tell us about yourself...';
   String phone = localStorage.getItem('phone') ?? '+123456789';
 
-  //level variables
+  // Level variables
   String levelStore = localStorage.getItem('level') ?? '0';
   String userProgress = localStorage.getItem('userExp') ?? '0';
   late int level;
@@ -54,21 +54,13 @@ class UserProfileState extends State<UserProfile> {
     levelProgress = getLevelExp();
     countProv().then(
       (count) {
-        setState(
-          () {
-            numberOfBirdsPerProvince = count;
-          },
-        );
+        setState(() {
+          numberOfBirdsPerProvince = count;
+        });
       },
     );
     retrieveLostData();
     super.initState();
-  }
-
-  void setInfo(String key, String data) {
-    setState(() {
-      localStorage.setItem(key, data);
-    });
   }
 
   @override
@@ -116,42 +108,36 @@ class UserProfileState extends State<UserProfile> {
                     child: Column(
                       children: [
                         // Profile picture
-                        GestureDetector(
-                          onTap: () {
-                            _showSelectionDialog();
-                          },
-                          child: Material(
-                            elevation: 5, // Add elevation here
-                            shape: const CircleBorder(),
+                        Material(
+                          elevation: 5, // Add elevation here
+                          shape: const CircleBorder(),
+                          child: CircleAvatar(
+                            radius: screenWidth * 0.20,
+                            backgroundColor: AppColors.iconColor(context),
                             child: CircleAvatar(
-                              radius: screenWidth * 0.20,
-                              backgroundColor: AppColors.iconColor(context),
-                              child: CircleAvatar(
-                                radius: screenWidth * 0.19,
-                                backgroundImage: _image.path.isEmpty
-                                    ? const AssetImage(
-                                        'assets/images/profileImages/images.jpg')
-                                    : FileImage(_image),
-                                foregroundImage: FileImage(_image),
-                                onBackgroundImageError: (_, __) => Image.file(
-                                  File(
-                                      'assets/images/profileImages/images.jpg'),
-                                  color: Colors.white,
-                                ),
-                              ),
+                              radius: screenWidth * 0.19,
+                              backgroundImage: _image.path.isEmpty
+                                  ? const AssetImage(
+                                      'assets/images/profileImages/images.jpg')
+                                  : FileImage(_image),
+                              foregroundImage: FileImage(_image),
                             ),
                           ),
                         ),
 
                         // Username
                         SizedBox(height: verticalPadding),
-                        Text(username,
-                            style: GlobalStyles.subHeadingPrimary(context)),
+                        Text(
+                          username,
+                          style: GlobalStyles.subHeadingPrimary(context),
+                        ),
 
                         // Active since
                         SizedBox(height: verticalPadding),
-                        Text('Active since - June 2024',
-                            style: GlobalStyles.smallContent(context)),
+                        Text(
+                          'Active since - June 2024',
+                          style: GlobalStyles.smallContent(context),
+                        ),
                         SizedBox(height: verticalPadding),
                       ],
                     ),
@@ -180,29 +166,27 @@ class UserProfileState extends State<UserProfile> {
                     thickness: 1,
                   ),
 
-                  // Personal information
+                  // Personal Information Section
                   SizedBox(height: verticalPadding),
-                  Text('Personal Information',
-                      style: GlobalStyles.smallHeadingSecondary(context)),
-                  SizedBox(height: verticalPadding),
-
-                  // Username Field
-                  ProfileField(
-                    icon: Icons.person,
-                    label: 'Username',
-                    content: username,
-                    backgroundColor: AppColors.popupColor(context),
-                    change: setInfo,
+                  Text(
+                    'Personal Information',
+                    style: GlobalStyles.smallHeadingSecondary(context),
                   ),
                   SizedBox(height: verticalPadding),
 
-                  // Bio Field with Subheading
-                  ProfileField(
+                  // Display static personal info with icons
+                  _buildProfileField(
+                    icon: Icons.person,
+                    label: 'Username',
+                    content: username,
+                    context: context,
+                  ),
+                  SizedBox(height: verticalPadding),
+                  _buildProfileField(
                     icon: Icons.info,
                     label: 'Bio',
                     content: bio,
-                    backgroundColor: AppColors.popupColor(context),
-                    change: setInfo,
+                    context: context,
                   ),
                   SizedBox(height: verticalPadding),
 
@@ -221,15 +205,17 @@ class UserProfileState extends State<UserProfile> {
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(
-                            child: CircularProgressIndicator(
-                          color: AppColors.primaryColor(context),
-                        ));
+                          child: CircularProgressIndicator(
+                            color: AppColors.primaryColor(context),
+                          ),
+                        );
                       } else if (snapshot.hasError) {
                         return Center(
                           child: OfflineMessage(
-                              height: screenHeight * 0.2,
-                              width: screenWidth * 0.2,
-                              message: 'Needs internet connection'),
+                            height: screenHeight * 0.2,
+                            width: screenWidth * 0.2,
+                            message: 'Needs internet connection',
+                          ),
                         );
                       }
                       return progressBars(
@@ -246,6 +232,51 @@ class UserProfileState extends State<UserProfile> {
     );
   }
 
+  // Static profile field builder
+  Widget _buildProfileField({
+    required IconData icon,
+    required String label,
+    required String content,
+    required BuildContext context,
+  }) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final fieldPadding = EdgeInsets.all(screenWidth * 0.03);
+
+    return Material(
+      elevation: 5, // Add elevation here
+      borderRadius: BorderRadius.circular(screenWidth * 0.05),
+      child: Container(
+        padding: fieldPadding,
+        decoration: BoxDecoration(
+          color: AppColors.popupColor(context),
+          borderRadius: BorderRadius.circular(screenWidth * 0.05),
+        ),
+        child: Row(
+          children: [
+            Icon(
+              icon,
+              color: AppColors.iconColor(context),
+            ),
+            SizedBox(width: screenWidth * 0.05),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: GlobalStyles.smallHeadingPrimary(context),
+                ),
+                Text(
+                  content,
+                  style: GlobalStyles.smallContent(context),
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
   Future<void> retrieveLostData() async {
     final LostDataResponse response = await picker.retrieveLostData();
     if (response.isEmpty) {
@@ -258,134 +289,5 @@ class UserProfileState extends State<UserProfile> {
         }
       });
     }
-  }
-
-  Future selectOrTakePhoto(ImageSource imageSource) async {
-    final pickedFile = await picker.pickImage(source: imageSource);
-    setState(
-      () {
-        if (pickedFile != null) {
-          _image = File(pickedFile.path);
-          localStorage.setItem('profilePicture', pickedFile.path);
-        }
-      },
-    );
-  }
-
-  Future _showSelectionDialog() async {
-    await showDialog(
-      builder: (context) => SimpleDialog(
-        title: const Text('Select photo'),
-        children: <Widget>[
-          SimpleDialogOption(
-            child: const Text('From gallery'),
-            onPressed: () {
-              selectOrTakePhoto(ImageSource.gallery);
-              Navigator.pop(context);
-            },
-          ),
-          SimpleDialogOption(
-            child: const Text('Take a photo'),
-            onPressed: () {
-              selectOrTakePhoto(ImageSource.camera);
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-      context: context,
-    );
-  }
-}
-
-// Fields for user personal information
-class ProfileField extends StatefulWidget {
-  const ProfileField({
-    required this.icon,
-    required this.label,
-    required this.content,
-    this.backgroundColor,
-    this.padding,
-    super.key,
-    required this.change,
-  });
-
-  final IconData icon;
-  final String label;
-  final String content;
-  final Color? backgroundColor;
-  final EdgeInsets? padding;
-  final void Function(String key, String data) change;
-  @override
-  State<ProfileField> createState() => _StateProfileField();
-}
-
-class _StateProfileField extends State<ProfileField> {
-  late TextEditingController _controller;
-  late final IconData icon;
-  late final String label;
-  late final String content;
-  late final Color? backgroundColor;
-  late final EdgeInsets? padding;
-  late Function change;
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-    icon = widget.icon;
-    label = widget.label;
-    content = localStorage.getItem(label.toLowerCase()) ?? widget.content;
-    backgroundColor = widget.backgroundColor;
-    padding = widget.padding;
-    change = widget.change;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final fieldPadding = EdgeInsets.all(screenWidth * 0.03);
-
-    return Material(
-      elevation: 5, // Add elevation here
-      borderRadius: BorderRadius.circular(screenWidth * 0.05),
-      child: Container(
-        padding: widget.padding ?? fieldPadding,
-        decoration: BoxDecoration(
-          color:
-              widget.backgroundColor ?? const Color.fromARGB(83, 204, 204, 204),
-          borderRadius: BorderRadius.circular(screenWidth * 0.05),
-        ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              children: [
-                Icon(
-                  widget.icon,
-                  color: AppColors.iconColor(context),
-                ),
-                SizedBox(width: screenWidth * 0.02),
-              ],
-            ),
-            Expanded(
-                child: TextField(
-              controller: _controller,
-              onChanged: (value) {
-                setState(() {
-                  change(label.toLowerCase(), value);
-                  content = value;
-                });
-              },
-              decoration: InputDecoration(
-                labelText: content.isEmpty ? label : content,
-                labelStyle: const TextStyle(),
-                helperText: label,
-              ),
-              style: TextStyle(color: AppColors.textColor(context)),
-            )),
-          ],
-        ),
-      ),
-    );
   }
 }
