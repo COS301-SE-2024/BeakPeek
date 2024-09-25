@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 import 'dart:io';
 import 'package:beakpeek/config_azure.dart';
@@ -12,28 +14,37 @@ class UserModel {
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-        username: map['userName'] ?? map['username'],
-        email: map['email'],
-        profilepicture: map['profilePicture'] ?? map['profilepicture'] ?? '',
-        achievements: List<Achievement>.from(
-            map['achievements']?.map((x) => Achievement.fromMap(x))),
-        description: map['description'],
-        xp: map['xp']);
+      username: map['userName'] ?? map['username'],
+      email: map['email'],
+      profilepicture: map['profilePicture'] ?? map['profilepicture'] ?? '',
+      achievements: List<Achievement>.from(
+          map['achievements']?.map((x) => Achievement.fromMap(x))),
+      description: map['description'] ?? 'Tell us about yourself...',
+      level: map['level'] ?? 0,
+      xp: map['xp'],
+      lifelist: map['lifelist'],
+    );
   }
-  UserModel(
-      {this.username = '',
-      this.email = '',
-      this.profilepicture = '',
-      this.achievements = const [],
-      this.description = '',
-      this.xp = 0});
+
+  UserModel({
+    this.username = 'Unknown',
+    this.email = '',
+    this.profilepicture = '',
+    this.achievements = const [],
+    this.description = '',
+    this.xp = 0,
+    this.lifelist = '',
+    this.level = 0,
+  });
 
   String username;
   String email;
   String profilepicture;
   List<Achievement> achievements;
   String description;
+  int level;
   int xp;
+  String lifelist;
 
   Map<String, dynamic> toMap() {
     return {
@@ -42,7 +53,9 @@ class UserModel {
       'profilepicture': profilepicture,
       'achievements': achievements.map((x) => x.toMap()).toList(),
       'description': description,
-      'xp': xp
+      'xp': xp,
+      'level': level,
+      'lifelist': lifelist,
     };
   }
 
@@ -88,4 +101,10 @@ UserModel getLocalUser() {
     return UserModel();
   }
   return UserModel.fromJson(userString);
+}
+
+Future<void> updateOnline() async {
+  //TODO: user update
+
+  print('updated');
 }

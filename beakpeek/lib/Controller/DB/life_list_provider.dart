@@ -1,7 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'dart:ui';
+import 'dart:convert';
+import 'dart:io';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
@@ -105,9 +106,11 @@ class LifeListProvider {
         bird.toMapLIfe(),
         conflictAlgorithm: ConflictAlgorithm.replace,
       )
-          .then((value) {
-        print('inserted $value + $bird');
-      });
+          .then(
+        (value) {
+          print('inserted $value + $bird');
+        },
+      );
     }
   }
 
@@ -305,7 +308,7 @@ class LifeListProvider {
           nov: map['nov'] as double,
           dec: map['dec'] as double,
           totalRecords: map['totalRecords'] as int,
-          imageBlob: map['image_Blob'] as Image,
+          imageBlob: map['image_Blob'] as File,
           imageUrl: map['image_Url'] as String,
           //population
           population: map['birdPopulation'] as int,
@@ -321,14 +324,21 @@ class LifeListProvider {
     return birdMap[0];
   }
 
-  Future<void> addImage(int id, Image img) async {
+  Future<void> addImage(int id, File img) async {
     final db = await instance.database;
-    //final ByteData? image = await img.toByteData();
+    final bytes = img.readAsBytesSync();
+    final String encodedImage = base64Encode(bytes);
     await db.rawUpdate(
       '''UPDATE allBirds
       SET image_Blob = ? 
       WHERE id = ?''',
-      [img, id],
+      [encodedImage, id],
     );
+  }
+
+  Future<List<Map<String, Object?>>> getLifeListForUser() async {
+    final db = await instance.database;
+
+    return await db.query('birds');
   }
 }
