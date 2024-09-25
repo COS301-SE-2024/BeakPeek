@@ -100,6 +100,30 @@ public class UserController : ControllerBase
         return Unauthorized("Bad password or email address");
     }
 
+    [HttpGet]
+    public async Task<IActionResult> Delete()
+    {
+        var userId = GetUserId();
+        if (userId is null)
+            return Unauthorized();
+
+        var user = await GetUser(userId);
+        if (user is null)
+            return NotFound("User not found.");
+
+        string username = user.UserName!;
+
+        var result = await _userManager.DeleteAsync(user);
+
+        if (result.Succeeded)
+        {
+            return Ok($"User deleted with username: {username}");
+        }
+        return BadRequest("Something went wrong");
+    }
+
+
+
     private string? GetUserId()
     {
         return User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
