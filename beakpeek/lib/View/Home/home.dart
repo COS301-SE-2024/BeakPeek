@@ -142,67 +142,6 @@ class HomeState extends State<Home> {
                             ],
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.02),
-
-                        // Achievements Section
-                        Container(
-                          width: sectionWidth,
-                          padding: const EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            color: AppColors.popupColor(context),
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Tracked Achievements',
-                                style:
-                                    GlobalStyles.smallHeadingPrimary(context),
-                              ),
-                              const SizedBox(height: 10),
-                              // List of achievements
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'Master Spotter',
-                                  style: GlobalStyles.contentBold(context),
-                                ),
-                                subtitle: Text(
-                                  '24% complete',
-                                  style:
-                                      GlobalStyles.smallContentPrimary(context),
-                                ),
-                                trailing: Icon(Icons.star,
-                                    color: AppColors.tertiaryColor(context)),
-                              ),
-                              const Divider(color: Colors.grey),
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'Duck Specialist',
-                                  style: GlobalStyles.contentBold(context),
-                                ),
-                                subtitle: Text(
-                                  '56% complete',
-                                  style:
-                                      GlobalStyles.smallContentPrimary(context),
-                                ),
-                                trailing: Icon(Icons.star,
-                                    color: AppColors.tertiaryColor(context)),
-                              ),
-                              SizedBox(height: screenHeight * 0.02),
-                            ],
-                          ),
-                        ),
 
                         SizedBox(height: screenHeight * 0.02),
 
