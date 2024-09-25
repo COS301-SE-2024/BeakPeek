@@ -106,8 +106,8 @@ class UserProfileState extends State<UserProfile> {
                             icon: Icon(
                               Provider.of<ThemeProvider>(context).themeMode ==
                                       ThemeMode.dark
-                                  ? Icons.wb_sunny_outlined
-                                  : Icons.nights_stay_outlined,
+                                  ? Icons.nights_stay_outlined
+                                  : Icons.wb_sunny_outlined,
                               color: AppColors.iconColor(context),
                             ),
                             onPressed: () {
