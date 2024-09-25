@@ -152,9 +152,21 @@ class HomeState extends State<Home> {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return Center(
-                                  child: CircularProgressIndicator(
-                                color: AppColors.primaryColor(context),
-                              ));
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 15),
+                                    CircularProgressIndicator(
+                                      color: AppColors.primaryColor(context),
+                                    ),
+                                    const SizedBox(height: 15),
+                                    Text(
+                                      'Loading birds near you...',
+                                      style:
+                                          GlobalStyles.contentPrimary(context),
+                                    ),
+                                  ],
+                                ),
+                              );
                             } else if (snapshot.hasError) {
                               return Center(
                                   child: Text('Error: ${snapshot.error}'));
