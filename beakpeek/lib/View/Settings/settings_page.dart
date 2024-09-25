@@ -43,7 +43,7 @@ class SettingsPage extends StatelessWidget {
               _buildSectionHeader(context, 'Your Account'),
               _buildOptionTile(context, 'Edit Personal Information', Icons.edit,
                   Icons.arrow_forward_ios, () {
-                // Handle Edit Personal Information tap
+                context.go('/editprofile');
               }),
               _buildOptionTile(context, 'Delete Account', Icons.delete,
                   Icons.arrow_forward_ios, () {
