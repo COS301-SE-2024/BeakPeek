@@ -63,7 +63,7 @@ class LandingTab1 extends StatelessWidget {
                         child: FilledButton(
                           style: GlobalStyles.buttonPrimaryOutlined(context),
                           child: Text(
-                            '''Welcome Back ${localStorage.getItem("username")}''',
+                            '''Welcome Back ${user.username}''',
                             style: GlobalStyles.secondaryButtonText(context),
                           ),
                           onPressed: () {

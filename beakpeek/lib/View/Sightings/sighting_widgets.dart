@@ -1,5 +1,6 @@
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 
@@ -25,6 +26,10 @@ Widget getLiveList(
 
 Widget getLifeListData(Bird bird, Function(Bird) goBird, BuildContext context) {
   return ListTile(
+    tileColor: AppColors.backgroundColor(context),
+    leading: CircleAvatar(
+      backgroundImage: NetworkImage(bird.imageUrl ?? ''),
+    ),
     title: Text(
       bird.commonGroup.isNotEmpty
           ? '${bird.commonSpecies} ${bird.commonGroup}'
