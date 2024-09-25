@@ -14,8 +14,6 @@ import 'package:go_router/go_router.dart';
 import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
-import 'package:provider/provider.dart';
-import 'package:beakpeek/Controller/Main/theme_provider.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -103,24 +101,6 @@ class UserProfileState extends State<UserProfile> {
                       ),
                       Row(
                         children: [
-                          IconButton(
-                            icon: Icon(
-                              Provider.of<ThemeProvider>(context).themeMode ==
-                                      ThemeMode.dark
-                                  ? Icons.nights_stay_outlined
-                                  : Icons.wb_sunny_outlined,
-                              color: AppColors.iconColor(context),
-                            ),
-                            onPressed: () {
-                              final isDarkMode = Provider.of<ThemeProvider>(
-                                          context,
-                                          listen: false)
-                                      .themeMode ==
-                                  ThemeMode.dark;
-                              Provider.of<ThemeProvider>(context, listen: false)
-                                  .toggleTheme(!isDarkMode);
-                            },
-                          ),
                           IconButton(
                             icon: const Icon(Icons.settings),
                             color: AppColors.iconColor(context),
