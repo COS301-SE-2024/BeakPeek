@@ -38,23 +38,43 @@ class SettingsPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            _buildSectionHeader(context, 'Your Account'),
+            _buildOptionTile(context, 'Edit Personal Information', Icons.edit,
+                Icons.arrow_forward_ios, () {
+              // Handle Edit Personal Information tap
+            }),
+            _buildOptionTile(context, 'Delete Account', Icons.delete,
+                Icons.arrow_forward_ios, () {
+              // Handle Delete Account tap
+            }),
             const SizedBox(height: 20),
-            _buildOptionTile(
-                context, 'Edit Personal Information', Icons.arrow_forward_ios,
-                () {
-              // Handle option 1 tap
-            }),
-            const SizedBox(height: 10),
+
+            _buildSectionHeader(context, 'App Settings'),
             _buildToggleThemeTile(context), // Dark mode toggle
-            const SizedBox(height: 10),
-            _buildOptionTile(context, 'Legal Policies', Icons.arrow_forward_ios,
-                () {
-              // Handle option 2 tap
+            _buildOptionTile(context, 'Notifications', Icons.notifications,
+                Icons.arrow_forward_ios, () {
+              // Handle Notifications tap
             }),
-            const SizedBox(height: 10),
-            _buildOptionTile(context, 'Delete Account', Icons.arrow_forward_ios,
+            _buildOptionTile(context, 'Privacy Settings', Icons.lock,
+                Icons.arrow_forward_ios, () {
+              // Handle Privacy Settings tap
+            }),
+            const SizedBox(height: 20),
+
+            _buildSectionHeader(context, 'Support'),
+            _buildOptionTile(context, 'Help & Support', Icons.help_outline,
+                Icons.arrow_forward_ios, () {
+              // Handle Help & Support tap
+            }),
+            _buildOptionTile(
+                context, 'Legal Policies', Icons.gavel, Icons.arrow_forward_ios,
                 () {
-              // Handle option 2 tap
+              // Handle Legal Policies tap
+            }),
+            _buildOptionTile(
+                context, 'About', Icons.info_outline, Icons.arrow_forward_ios,
+                () {
+              // Handle About tap
             }),
             const Spacer(),
             const BottomNavigation(),
@@ -64,10 +84,22 @@ class SettingsPage extends StatelessWidget {
     );
   }
 
+  // Builds the section header text
+  Widget _buildSectionHeader(BuildContext context, String title) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 10.0, top: 20.0),
+      child: Text(
+        title,
+        style: GlobalStyles.smallHeadingPrimary(context),
+      ),
+    );
+  }
+
   // Builds the general option tiles
-  Widget _buildOptionTile(
-      BuildContext context, String title, IconData icon, VoidCallback onTap) {
+  Widget _buildOptionTile(BuildContext context, String title,
+      IconData leadingIcon, IconData trailingIcon, VoidCallback onTap) {
     return Container(
+      margin: const EdgeInsets.only(bottom: 10.0),
       decoration: BoxDecoration(
         color: AppColors.popupColor(context),
         borderRadius: BorderRadius.circular(15.0),
@@ -81,19 +113,21 @@ class SettingsPage extends StatelessWidget {
         ],
       ),
       child: ListTile(
+        leading: Icon(leadingIcon, color: AppColors.iconColor(context)),
         title: Text(title, style: GlobalStyles.contentPrimary(context)),
-        trailing: Icon(icon, color: AppColors.iconColor(context)),
+        trailing: Icon(trailingIcon, color: AppColors.iconColor(context)),
         onTap: onTap,
       ),
     );
   }
 
-  // Builds the toggle theme option with dynamic icon
+  // Builds the toggle theme option with dynamic icon on the left
   Widget _buildToggleThemeTile(BuildContext context) {
     final isDarkMode =
         Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
 
     return Container(
+      margin: const EdgeInsets.only(bottom: 10.0),
       decoration: BoxDecoration(
         color: AppColors.popupColor(context),
         borderRadius: BorderRadius.circular(15.0),
@@ -107,16 +141,23 @@ class SettingsPage extends StatelessWidget {
         ],
       ),
       child: ListTile(
-        title:
-            Text('Toggle Theme', style: GlobalStyles.contentPrimary(context)),
-        trailing: Icon(
+        leading: Icon(
           isDarkMode ? Icons.nights_stay_outlined : Icons.wb_sunny_outlined,
           color: AppColors.iconColor(context),
         ),
-        onTap: () {
-          Provider.of<ThemeProvider>(context, listen: false)
-              .toggleTheme(!isDarkMode);
-        },
+        title:
+            Text('Toggle Theme', style: GlobalStyles.contentPrimary(context)),
+        trailing: Switch(
+          value: isDarkMode,
+          onChanged: (value) {
+            Provider.of<ThemeProvider>(context, listen: false)
+                .toggleTheme(!isDarkMode);
+          },
+          activeColor: AppColors.primaryColor(context),
+          inactiveThumbColor: AppColors.primaryColor(context),
+          activeTrackColor: AppColors.backgroundColor(context),
+          inactiveTrackColor: AppColors.backgroundColor(context),
+        ),
       ),
     );
   }
