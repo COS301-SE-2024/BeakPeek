@@ -1,11 +1,27 @@
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
-class AchievementsPage extends StatelessWidget {
+class AchievementsPage extends StatefulWidget {
   const AchievementsPage({super.key});
+
+  @override
+  State<AchievementsPage> createState() => AchievementsPageState();
+}
+
+class AchievementsPageState extends State<AchievementsPage> {
+  final LifeListProvider lifeList = LifeListProvider.instance;
+  late List<double> birdPercentages = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+  @override
+  void initState() {
+    lifeList.precentLifeListBirds().then((birds) {
+      birdPercentages = birds;
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +41,10 @@ class AchievementsPage extends StatelessWidget {
         centerTitle: true,
       ),
       bottomNavigationBar: const BottomNavigation(),
-      body: const Scrollbar(
+      body: Scrollbar(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -38,25 +54,25 @@ class AchievementsPage extends StatelessWidget {
                     Achievement(
                       title: 'Gauteng Explorer',
                       description: 'Spot birds in Gauteng',
-                      progress: 0.75,
+                      progress: birdPercentages[1],
                       badge: Icons.location_on,
                     ),
                     Achievement(
                       title: 'Western Cape Wanderer',
                       description: 'Spot birds in Western Cape',
-                      progress: 0.3,
+                      progress: birdPercentages[7],
                       badge: Icons.location_on,
                     ),
                     Achievement(
                       title: 'Mpumalanga Adventurer',
                       description: 'Spot birds in Mpumalanga',
-                      progress: 0.3,
+                      progress: birdPercentages[4],
                       badge: Icons.location_on,
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                AchievementSection(
+                const SizedBox(height: 20),
+                const AchievementSection(
                   title: 'Bird Species Achievements',
                   achievements: [
                     Achievement(
@@ -79,8 +95,8 @@ class AchievementsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                SizedBox(height: 20),
-                AchievementSection(
+                const SizedBox(height: 20),
+                const AchievementSection(
                   title: 'Monthly Achievements',
                   achievements: [
                     Achievement(

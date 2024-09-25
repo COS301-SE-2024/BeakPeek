@@ -1,10 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
-import 'dart:convert';
 import 'dart:io';
-import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
-import 'package:beakpeek/config_azure.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -13,10 +10,8 @@ import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:http/http.dart';
 import 'package:localstorage/localstorage.dart';
-import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
-import 'package:beakpeek/config_azure.dart' as config;
+import 'package:beakpeek/config_azure.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({super.key});
@@ -29,14 +24,13 @@ class UserProfileState extends State<UserProfile> {
   late LifeListProvider lifeList = LifeListProvider.instance;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
-  late File _image = File('assets/images/profileImages/images.jpg');
-  ImageProvider profilePicture =
-      Image.memory(base64Decode(user.profilepicture)).image;
+  late File _image = File(localStorage.getItem('profilePicture') ??
+      'assets/images/profileImages/images.jpg');
   final picker = ImagePicker();
 
-  String name = config.user.username;
-  String username = config.user.username;
-  String bio = config.user.description;
+  String name = user.username;
+  String username = user.username;
+  String bio = user.description;
 
   // Level variables
   late int level;
@@ -49,9 +43,8 @@ class UserProfileState extends State<UserProfile> {
   void initState() {
     super.initState();
     birds = lifeList.fetchLifeList();
-    numBirds = db.getNumberOfBirdsInProvinces(Client());
-    level = config.user.level;
-    userExp = config.user.xp;
+    level = user.level;
+    userExp = user.xp;
     levelProgress = getLevelExp();
     countProv().then(
       (count) {
@@ -109,27 +102,19 @@ class UserProfileState extends State<UserProfile> {
                     child: Column(
                       children: [
                         // Profile picture
-                        GestureDetector(
-                          onTap: () {
-                            _showSelectionDialog();
-                          },
-                          child: Material(
-                            elevation: 5, // Add elevation here
-                            shape: const CircleBorder(),
+                        Material(
+                          elevation: 5, // Add elevation here
+                          shape: const CircleBorder(),
+                          child: CircleAvatar(
+                            radius: screenWidth * 0.20,
+                            backgroundColor: AppColors.iconColor(context),
                             child: CircleAvatar(
-                              radius: screenWidth * 0.20,
-                              backgroundColor: AppColors.iconColor(context),
-                              child: CircleAvatar(
-                                radius: screenWidth * 0.19,
-                                backgroundImage: const AssetImage(
-                                    'assets/images/profileImages/images.jpg'),
-                                foregroundImage: profilePicture,
-                                onBackgroundImageError: (_, __) => Image.file(
-                                  File(
-                                      'assets/images/profileImages/images.jpg'),
-                                  color: Colors.white,
-                                ),
-                              ),
+                              radius: screenWidth * 0.19,
+                              backgroundImage: _image.path.isEmpty
+                                  ? const AssetImage(
+                                      'assets/images/profileImages/images.jpg')
+                                  : FileImage(_image),
+                              foregroundImage: FileImage(_image),
                             ),
                           ),
                         ),
@@ -271,46 +256,5 @@ class UserProfileState extends State<UserProfile> {
         }
       });
     }
-  }
-
-  Future selectOrTakePhoto(ImageSource imageSource) async {
-    final pickedFile = await picker.pickImage(source: imageSource);
-    setState(
-      () {
-        if (pickedFile != null) {
-          _image = File(pickedFile.path);
-          final bytes = _image.readAsBytesSync();
-          final String encodedImage = base64Encode(bytes);
-          user.profilepicture = encodedImage;
-          storeUserLocally(user);
-          localStorage.setItem('profilePicture', pickedFile.path);
-        }
-      },
-    );
-  }
-
-  Future _showSelectionDialog() async {
-    await showDialog(
-      builder: (context) => SimpleDialog(
-        title: const Text('Select photo'),
-        children: <Widget>[
-          SimpleDialogOption(
-            child: const Text('From gallery'),
-            onPressed: () {
-              selectOrTakePhoto(ImageSource.gallery);
-              Navigator.pop(context);
-            },
-          ),
-          SimpleDialogOption(
-            child: const Text('Take a photo'),
-            onPressed: () {
-              selectOrTakePhoto(ImageSource.camera);
-              Navigator.pop(context);
-            },
-          ),
-        ],
-      ),
-      context: context,
-    );
   }
 }

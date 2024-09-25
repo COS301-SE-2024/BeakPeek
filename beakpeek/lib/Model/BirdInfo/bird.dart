@@ -185,6 +185,10 @@ class Bird {
     };
   }
 
+  int getId() {
+    return id;
+  }
+
   @override
   String toString() {
     return '''Bird id: $id, commonGroup: $commonGroup, 

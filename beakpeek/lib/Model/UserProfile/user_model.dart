@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart' as http;
 import 'package:beakpeek/Model/UserProfile/achievement.dart';
@@ -101,6 +102,13 @@ UserModel getLocalUser() {
     return UserModel();
   }
   return UserModel.fromJson(userString);
+}
+
+void deleteLocalUser() {
+  localStorage.setItem('user', '');
+  final LifeListProvider lifelist = LifeListProvider.instance;
+  lifelist.deleteDatabaseFile();
+  localStorage.setItem('accessToken', '');
 }
 
 Future<void> updateOnline() async {
