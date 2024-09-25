@@ -1,5 +1,6 @@
 // ignore_for_file: unused_field
 
+import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -23,7 +24,9 @@ class HeatMapState extends State<HeatMap> {
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
   late CameraPosition _cameraPosition;
   final Set<Polygon> _polygons = {};
+  late List<dynamic> birdData = [];
   bool _isLoading = true;
+  String _selectedMonth = 'Year-Round';
 
   @override
   void initState() {
@@ -88,12 +91,61 @@ class HeatMapState extends State<HeatMap> {
         return AlertDialog(
           title: const Text('Filters'),
           backgroundColor: AppColors.backgroundColor(context),
-          content: const Column(
-              mainAxisSize: MainAxisSize.min, children: [PaletteSelector()]),
+          content: Column(mainAxisSize: MainAxisSize.min, children: [
+            PaletteSelector(),
+            DropdownButtonFormField<String>(
+              value: _selectedMonth,
+              onChanged: (newValue) {
+                setState(() {
+                  _selectedMonth = newValue!;
+                });
+              },
+              items: <String>[
+                'Year-Round',
+                'January',
+                'February',
+                'March',
+                'April',
+                'May',
+                'June',
+                'July',
+                'August',
+                'September',
+                'October',
+                'November',
+                'December'
+              ].map<DropdownMenuItem<String>>((value) {
+                return DropdownMenuItem<String>(
+                  value: value,
+                  child: Text(
+                    value,
+                    style: GlobalStyles.contentPrimary(context),
+                  ),
+                );
+              }).toList(),
+              decoration: InputDecoration(
+                fillColor: AppColors.popupColor(context),
+                filled: true,
+                contentPadding:
+                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                ),
+              ),
+              style: GlobalStyles.contentPrimary(context),
+              dropdownColor: AppColors.popupColor(context),
+              iconEnabledColor: AppColors.secondaryColor(context),
+            ),
+          ]),
           actions: [
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
+                _polygons.clear();
+                loadPentadData();
               },
               child: Text(
                 'Close',
@@ -147,10 +199,9 @@ class HeatMapState extends State<HeatMap> {
     });
 
     try {
-      final birdData =
+      birdData =
           await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
 
-      // Process data and create polygons in chunks
       final List<Polygon> polygons = [];
       for (var bird in birdData) {
         final id = bird.pentadAllocation;
@@ -166,10 +217,10 @@ class HeatMapState extends State<HeatMap> {
                 (bird.pentadLongitude + 5).toString()),
             _calculateCoordinatesFromPentad(bird.pentadLatitude.toString(),
                 (bird.pentadLongitude + 5).toString()),
-            // Simplified example, you may need to adjust this
           ];
 
-          final color = getColorForReportingRate(bird.reportingRate);
+          final color = getColorForReportingRate(
+              getReportingRateForMonth(bird, _selectedMonth));
           polygons.add(
             Polygon(
               polygonId: PolygonId(id),
@@ -182,7 +233,6 @@ class HeatMapState extends State<HeatMap> {
           );
         }
 
-        // // Update the UI in chunks
         if (polygons.length % 100 == 0) {
           setState(() {
             _polygons.addAll(polygons);
@@ -202,5 +252,37 @@ class HeatMapState extends State<HeatMap> {
         _isLoading = false;
       });
     }
+  }
+}
+
+double getReportingRateForMonth(BirdPentad bird, String month) {
+  switch (month) {
+    case 'January':
+      return bird.jan;
+    case 'February':
+      return bird.feb;
+    case 'March':
+      return bird.mar;
+    case 'April':
+      return bird.apr;
+    case 'May':
+      return bird.may;
+    case 'June':
+      return bird.jun;
+    case 'July':
+      return bird.jul;
+    case 'August':
+      return bird.aug;
+    case 'September':
+      return bird.sep;
+    case 'October':
+      return bird.oct;
+    case 'November':
+      return bird.nov;
+    case 'December':
+      return bird.dec;
+    case 'Year-Round':
+    default:
+      return bird.reportingRate;
   }
 }
