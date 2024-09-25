@@ -1,4 +1,4 @@
-// ignore_for_file: non_constant_identifier_names, duplicate_ignore, use_build_context_synchronously, lines_longer_than_80_chars
+// ignore_for_file: non_constant_identifier_names, duplicate_ignore, use_build_context_synchronously, lines_longer_than_80_chars, avoid_print
 
 import 'dart:convert';
 import 'dart:math';

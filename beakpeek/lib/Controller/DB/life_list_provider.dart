@@ -308,7 +308,7 @@ class LifeListProvider {
           imageBlob: map['image_Blob'] as Image,
           imageUrl: map['image_Url'] as String,
           //population
-          population: 0,
+          population: map['birdPopulation'] as int,
         );
       },
     ).toList();
