@@ -12,6 +12,8 @@ class Globals {
   final LifeListProvider lifeList = LifeListProvider.instance;
   late List<Bird> birdList = [];
   late List<Bird> allBirdsList = [];
+  String? cachedPentadId;
+  List<Bird>? cachedBirds;
 
   void init() {
     lifeList.fetchLifeList().then((result) {
