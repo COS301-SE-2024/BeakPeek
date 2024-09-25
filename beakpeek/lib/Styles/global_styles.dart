@@ -206,10 +206,9 @@ abstract class GlobalStyles {
 
   static ButtonStyle buttonFilterPrimaryFilled(BuildContext context) {
     return FilledButton.styleFrom(
-      side: BorderSide(color: AppColors.primaryButtonColor(context)),
-      backgroundColor: AppColors.primaryButtonColor(context),
+      backgroundColor: AppColors.popupColor(context),
       minimumSize: const Size(128, 30),
-      elevation: 20,
+      elevation: 10,
     );
   }
 }

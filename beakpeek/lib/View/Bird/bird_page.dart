@@ -76,7 +76,7 @@ class _BirdPageState extends State<BirdPage> {
             color: AppColors.iconColor(context),
           ),
           onPressed: () {
-            context.pop();
+            GoRouter.of(context).pop();
           },
         ),
         title: Text(

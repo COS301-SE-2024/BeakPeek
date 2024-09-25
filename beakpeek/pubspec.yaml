@@ -124,6 +124,8 @@ flutter:
     - assets/icons/mapDark.svg
     - assets/icons/sightings.svg
     - assets/icons/sightingsDark.svg
+    - assets/icons/achievements.svg
+    - assets/icons/achievementsDark.svg
     - assets/icons/profile.svg
     - assets/icons/profileDark.svg
     - assets/images/home.png

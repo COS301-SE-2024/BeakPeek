@@ -100,6 +100,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                   ),
                   padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.02),
                   child: SearchAnchor(
+                    viewBackgroundColor: AppColors.backgroundColor(context),
                     searchController: controller,
                     viewHintText: 'Search for birds...',
                     viewOnChanged: searchBarTyping,
@@ -137,8 +138,8 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
             Padding(
               padding: EdgeInsets.only(left: screenWidth * 0.02),
               child: const HelpIcon(
-                  content: '''Type in the common name, group or genus of a bird 
-              and see all the results. You can tap on a result to see all of that birds information.'''),
+                  content:
+                      'Type in the common name, group or genus of a bird and see all the results. You can tap on a result to see that birds information.'),
             ),
           ],
         ),

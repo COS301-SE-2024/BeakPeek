@@ -28,11 +28,11 @@ Widget getNumBirdsInProvAndLifeList(
 
 Widget levelProgressBar(int progress, int level) {
   final List<StatisticsItem> colors = [
-    StatisticsItem(const Color.fromARGB(255, 72, 139, 194),
+    StatisticsItem(const Color.fromARGB(255, 238, 203, 135),
         (progress / getNextLevelExpRequired(level) * 100),
         title: 'Exp'),
     StatisticsItem(
-        const Color.fromARGB(255, 225, 9, 9),
+        const Color(0xffecad31),
         ((getNextLevelExpRequired(level) - progress).toDouble() /
                 getNextLevelExpRequired(level) *
                 100)
