@@ -78,7 +78,7 @@ class HomeState extends State<Home> {
                             borderRadius: BorderRadius.circular(10.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black.withOpacity(0.2),
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset: const Offset(0, 3),
@@ -174,7 +174,7 @@ class HomeState extends State<Home> {
                                   borderRadius: BorderRadius.circular(10.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.5),
+                                      color: Colors.black.withOpacity(0.2),
                                       spreadRadius: 2,
                                       blurRadius: 5,
                                       offset: const Offset(0, 3),
@@ -215,36 +215,53 @@ class HomeState extends State<Home> {
                                             },
                                             child: Padding(
                                               padding:
-                                                  const EdgeInsets.symmetric(),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 8.0),
+                                              child: Row(
                                                 children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        bird.commonGroup !=
-                                                                'None'
-                                                            ? '${bird.commonSpecies} ${bird.commonGroup}'
-                                                            : bird
-                                                                .commonSpecies,
-                                                        style: GlobalStyles
-                                                            .contentBold(
-                                                                context),
-                                                      ),
-                                                    ],
+                                                  CircleAvatar(
+                                                    backgroundImage:
+                                                        NetworkImage(
+                                                            bird.imageUrl ??
+                                                                ''),
+                                                    radius: 25,
                                                   ),
-                                                  const SizedBox(height: 16),
-                                                  Text(
-                                                    'Scientific Name: ${bird.genus} ${bird.species}',
-                                                    style: GlobalStyles
-                                                        .smallContentPrimary(
-                                                            context),
+                                                  const SizedBox(width: 10),
+                                                  Expanded(
+                                                    child: Column(
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            Text(
+                                                              bird.commonGroup !=
+                                                                      'None'
+                                                                  ? '${bird.commonSpecies} ${bird.commonGroup}'
+                                                                  : bird
+                                                                      .commonSpecies,
+                                                              style: GlobalStyles
+                                                                  .contentBold(
+                                                                      context),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        const SizedBox(
+                                                            height: 16),
+                                                        Text(
+                                                          'Scientific Name: ${bird.genus} ${bird.species}',
+                                                          style: GlobalStyles
+                                                              .smallContentPrimary(
+                                                                  context),
+                                                        ),
+                                                        Divider(
+                                                            color: AppColors
+                                                                .greyColor(
+                                                                    context)),
+                                                      ],
+                                                    ),
                                                   ),
-                                                  Divider(
-                                                      color:
-                                                          AppColors.greyColor(
-                                                              context)),
                                                 ],
                                               ),
                                             ),
