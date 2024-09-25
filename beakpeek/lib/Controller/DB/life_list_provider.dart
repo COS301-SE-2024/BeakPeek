@@ -1,6 +1,7 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
@@ -115,7 +116,7 @@ class LifeListProvider {
 
     final List<Map<String, Object?>> birdMap = await db.query(
       'birds',
-      orderBy: 'commonGroup DESC, commonSpecies DESC',
+      orderBy: 'commonSpecies DESC',
     );
     return birdMap.map(
       (map) {
@@ -275,6 +276,7 @@ class LifeListProvider {
     );
     return birdMap.map(
       (map) {
+        //image conversion and
         return Bird(
           id: map['id'] as int,
           commonGroup:
@@ -303,6 +305,8 @@ class LifeListProvider {
           nov: map['nov'] as double,
           dec: map['dec'] as double,
           totalRecords: map['totalRecords'] as int,
+          imageBlob: map['image_Blob'] as Image,
+          imageUrl: map['image_Url'] as String,
           //population
           population: 0,
         );
@@ -315,5 +319,16 @@ class LifeListProvider {
     final List<Map<String, Object?>> birdMap =
         await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
     return birdMap[0];
+  }
+
+  Future<void> addImage(int id, Image img) async {
+    final db = await instance.database;
+    //final ByteData? image = await img.toByteData();
+    await db.rawUpdate(
+      '''UPDATE allBirds
+      SET image_Blob = ? 
+      WHERE id = ?''',
+      [img, id],
+    );
   }
 }

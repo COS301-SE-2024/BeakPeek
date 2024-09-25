@@ -1,7 +1,5 @@
 import 'dart:math';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Styles/colors.dart';
-import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -10,7 +8,7 @@ import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 const List<String> provinces = [
   'easterncape',
   'gauteng',
-  'kwazulunatal',
+  'kwazulu-Natal',
   'limpopo',
   'mpumalanga',
   'northerncape',
