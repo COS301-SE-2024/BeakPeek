@@ -8,7 +8,7 @@ import 'package:beakpeek/Controller/DB/database_calls.dart' as db;
 const List<String> provinces = [
   'easterncape',
   'gauteng',
-  'kwazulunatal',
+  'kwazulu-Natal',
   'limpopo',
   'mpumalanga',
   'northerncape',

@@ -77,6 +77,7 @@ class _BirdPageState extends State<BirdPage> {
           ),
           onPressed: () {
             GoRouter.of(context).pop();
+
           },
         ),
         title: Text(
@@ -114,7 +115,7 @@ class _BirdPageState extends State<BirdPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
-                            '${birdData['commonSpecies']} ${birdData['commonGroup']}',
+                            '''${birdData['commonSpecies']} ${birdData['commonGroup']}''',
                             style: GlobalStyles.smallHeadingPrimary(context),
                           ),
                         ),

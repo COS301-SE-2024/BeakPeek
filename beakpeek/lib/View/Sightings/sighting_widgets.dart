@@ -34,9 +34,5 @@ Widget getLifeListData(Bird bird, Function(Bird) goBird, BuildContext context) {
     onTap: () {
       goBird(bird);
     },
-    subtitle: Text(
-      'Scientific Name: ${bird.genus} ${bird.species}',
-      style: GlobalStyles.smallContentPrimary(context),
-    ),
   );
 }

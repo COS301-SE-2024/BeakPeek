@@ -3,41 +3,6 @@ import 'dart:ui';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 
 class Bird {
-  //population changes
-  int? population;
-
-  Bird({
-    required this.id,
-    this.pentad,
-    this.imageUrl,
-    this.imageBlob,
-    this.info,
-    this.provinces,
-    required this.commonGroup,
-    required this.commonSpecies,
-    required this.genus,
-    required this.species,
-    required this.fullProtocolRR,
-    required this.fullProtocolNumber,
-    required this.latestFP,
-    required this.jan,
-    required this.feb,
-    required this.mar,
-    required this.apr,
-    required this.may,
-    required this.jun,
-    required this.jul,
-    required this.aug,
-    required this.sep,
-    required this.oct,
-    required this.nov,
-    required this.dec,
-    required this.totalRecords,
-    required this.reportingRate,
-    //maybe needs to come out
-    this.population,
-  });
-
   factory Bird.fromJson(Map<String, dynamic> json) {
     final birdJson = json['bird'] ?? json;
     return Bird(
@@ -69,12 +34,45 @@ class Bird {
           json['reportingRate']?.toDouble() ??
           0.0,
       info: json['info'] ?? '',
-      imageUrl: json['image_Url'] ?? '',
+      imageUrl: json['imageUrl']?.toString() ?? '',
       provinces: List<String>.from(json['provinces'] ?? []),
       //population changes below
       population: 0,
     );
   }
+  Bird({
+    required this.id,
+    this.pentad,
+    this.imageUrl,
+    this.imageBlob,
+    this.info,
+    this.provinces,
+    required this.commonGroup,
+    required this.commonSpecies,
+    required this.genus,
+    required this.species,
+    required this.fullProtocolRR,
+    required this.fullProtocolNumber,
+    required this.latestFP,
+    required this.jan,
+    required this.feb,
+    required this.mar,
+    required this.apr,
+    required this.may,
+    required this.jun,
+    required this.jul,
+    required this.aug,
+    required this.sep,
+    required this.oct,
+    required this.nov,
+    required this.dec,
+    required this.totalRecords,
+    required this.reportingRate,
+    //maybe needs to come out
+    this.population,
+  });
+  //population changes
+  int? population;
 
   final int id;
   final Pentad? pentad;
@@ -184,6 +182,7 @@ class Bird {
       'reportingRate': reportingRate,
       'info': info,
       'image_Url': imageUrl,
+      'birdPopulation': 0
     };
   }
 

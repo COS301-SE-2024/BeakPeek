@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, library_private_types_in_public_api
+
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -75,7 +77,9 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   }
 
   void togglePlayPause() async {
-    if (fileUrl == null) return;
+    if (fileUrl == null) {
+      return;
+    }
 
     try {
       if (isPlaying) {

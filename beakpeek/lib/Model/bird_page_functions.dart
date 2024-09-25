@@ -16,7 +16,6 @@ class ApiService {
     );
 
     if (response.statusCode == 200) {
-      // print(json.decode(response.body));
       return json.decode(response.body);
     } else {
       // Handle the error
@@ -61,7 +60,6 @@ class ApiService {
     //MULTIPLY HERE ->
     final double viewRate = bird.fullProtocolRR *
         bird.fullProtocolNumber; // multiply by num pentads/16673
-
    final int population = (constant*viewRate/detectionProbability).round();
     if(population>50000){
       return -1;
