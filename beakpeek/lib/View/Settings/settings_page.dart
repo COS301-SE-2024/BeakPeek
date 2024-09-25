@@ -4,12 +4,14 @@ import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/View/UserProfile/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:flutter_media_downloader/flutter_media_downloader.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
 
 class SettingsPage extends StatelessWidget {
-  const SettingsPage({super.key});
+  SettingsPage({super.key});
+  final _flutterMediaDownloaderPlugin = MediaDownload();
 
   @override
   Widget build(BuildContext context) {
@@ -43,11 +45,12 @@ class SettingsPage extends StatelessWidget {
               _buildSectionHeader(context, 'Your Account'),
               _buildOptionTile(context, 'Edit Personal Information', Icons.edit,
                   Icons.arrow_forward_ios, () {
-                // Handle Edit Personal Information tap
+                context.go('/editprofile');
               }),
               _buildOptionTile(context, 'Delete Account', Icons.delete,
                   Icons.arrow_forward_ios, () {
                 deleteLocalUser();
+                context.go('/');
               }),
               const SizedBox(height: 20),
 
@@ -57,7 +60,8 @@ class SettingsPage extends StatelessWidget {
                   Icons.arrow_forward_ios, () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PaletteSelector()),
+                  MaterialPageRoute(
+                      builder: (context) => const PaletteSelector()),
                 );
               }),
               _buildOptionTile(context, 'Privacy Settings', Icons.lock,
@@ -72,8 +76,13 @@ class SettingsPage extends StatelessWidget {
                 // Handle Help & Support tap
               }),
               _buildOptionTile(context, 'Legal Policies', Icons.gavel,
-                  Icons.arrow_forward_ios, () {
-                // Handle Legal Policies tap
+                  Icons.arrow_forward_ios, () async {
+                _flutterMediaDownloaderPlugin.downloadMedia(context,
+                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekTermsOfUse.pdf');
+                _flutterMediaDownloaderPlugin.downloadMedia(context,
+                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekCookiePolicy.pdf');
+                _flutterMediaDownloaderPlugin.downloadMedia(context,
+                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekPrivacyPolicy.pdf');
               }),
               _buildOptionTile(
                   context, 'About', Icons.info_outline, Icons.arrow_forward_ios,

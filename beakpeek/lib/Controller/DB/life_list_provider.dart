@@ -281,8 +281,10 @@ class LifeListProvider {
     if (await containsData() == 0) {
       final batch = db.batch();
       for (Bird bird in allBirds) {
-        batch.insert('allBirds', bird.toAllBirdsMap(),
-            conflictAlgorithm: ConflictAlgorithm.replace);
+        if (bird.reportingRate > 1) {
+          batch.insert('allBirds', bird.toAllBirdsMap(),
+              conflictAlgorithm: ConflictAlgorithm.replace);
+        }
       }
       await batch.commit();
     }

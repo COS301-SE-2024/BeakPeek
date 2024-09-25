@@ -137,7 +137,7 @@ abstract class GlobalStyles {
       side: BorderSide(color: AppColors.primaryButtonColor(context)),
       backgroundColor: AppColors.primaryButtonColor(context),
       minimumSize: const Size(350, 50),
-      elevation: 20,
+      elevation: 10,
     );
   }
 

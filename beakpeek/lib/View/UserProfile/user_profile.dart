@@ -148,7 +148,7 @@ class UserProfileState extends State<UserProfile> {
                         height: verticalPadding * 3,
                         width: screenWidth,
                         child: Center(
-                          child: levelProgressBar(userExp, level),
+                          child: levelProgressBar(),
                         ),
                       ),
                     ],

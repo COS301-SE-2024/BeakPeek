@@ -1,18 +1,5 @@
 [
     {
-        "ref": 0,
-        "common_group": "Unknown",
-        "common_species": "Unknown",
-        "genus": "Unknown",
-        "species": "Unknown",
-        "full_Protocol_RR": 0.0255,
-        "full_Protocol_Number": 85,
-        "latest_FP": "2023-10-13T00:00:00",
-        "image_Url": null,
-        "info": null,
-        "provinces": []
-    },
-    {
         "ref": 1,
         "common_group": "Ostrich",
         "common_species": "Common",
