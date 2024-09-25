@@ -39,6 +39,12 @@
                 <action android:name="com.example.beakpeek.HANDLE_AUTHORIZATION_RESPONSE"/>
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
+            <!-- <intent-filter android:label="beakpeek"> -->
+            <!--     <action android:name="android.intent.action.VIEW" /> -->
+            <!--     <category android:name="android.intent.category.DEFAULT" /> -->
+            <!--     <category android:name="android.intent.category.BROWSABLE" /> -->
+            <!--     <data android:scheme="beakpeek" /> -->
+            <!-- </intent-filter> -->
         </activity>
 
         <activity
@@ -48,7 +54,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="com.example.beakpeek"/>
+                <data android:scheme="beakpeek"/>
             </intent-filter>
         </activity>
 
