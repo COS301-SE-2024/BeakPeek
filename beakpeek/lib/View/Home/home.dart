@@ -124,6 +124,7 @@ class HomeState extends State<Home> {
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
+                                            elevation: 10,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 16.0,
                                                 vertical: 8.0),
@@ -200,7 +201,6 @@ class HomeState extends State<Home> {
                                       style: GlobalStyles.smallHeadingPrimary(
                                           context),
                                     ),
-                                    const SizedBox(height: 16),
                                     Expanded(
                                       child: Scrollbar(
                                         child: ListView.builder(
@@ -228,7 +228,7 @@ class HomeState extends State<Home> {
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.symmetric(
-                                                        vertical: 8.0),
+                                                        vertical: 4.0),
                                                 child: Row(
                                                   children: [
                                                     CircleAvatar(

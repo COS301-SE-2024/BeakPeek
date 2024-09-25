@@ -161,6 +161,8 @@ class UserProfileState extends State<UserProfile> {
                     ],
                   ),
 
+                  SizedBox(height: screenHeight * 0.01),
+
                   Divider(
                     color: Colors.grey.shade300,
                     thickness: 1,
@@ -193,34 +195,6 @@ class UserProfileState extends State<UserProfile> {
                   Divider(
                     color: Colors.grey.shade300,
                     thickness: 1,
-                  ),
-
-                  // Progress section
-                  Text(
-                    'Sighting Progress',
-                    style: GlobalStyles.smallHeadingPrimary(context),
-                  ),
-                  FutureBuilder<List<int>>(
-                    future: numBirds,
-                    builder: (context, snapshot) {
-                      if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Center(
-                          child: CircularProgressIndicator(
-                            color: AppColors.primaryColor(context),
-                          ),
-                        );
-                      } else if (snapshot.hasError) {
-                        return Center(
-                          child: OfflineMessage(
-                            height: screenHeight * 0.2,
-                            width: screenWidth * 0.2,
-                            message: 'Needs internet connection',
-                          ),
-                        );
-                      }
-                      return progressBars(
-                          snapshot.data!, numberOfBirdsPerProvince);
-                    },
                   ),
                 ],
               ),
