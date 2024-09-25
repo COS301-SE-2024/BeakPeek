@@ -45,11 +45,11 @@ class MapInfo extends StatelessWidget {
                   ),
                 ),
               ),
-              const BottomNavigation(),
             ],
           ),
         ),
       ),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

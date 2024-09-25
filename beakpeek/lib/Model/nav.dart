@@ -9,7 +9,7 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final itemWidth = screenWidth / 5; // Divide screen width by number of items
+    final itemWidth = screenWidth / 5;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -17,6 +17,7 @@ class BottomNavigation extends StatelessWidget {
         BottomNavItem('Home', 'home.svg', itemWidth),
         BottomNavItem('Map', 'map.svg', itemWidth),
         BottomNavItem('Sightings', 'sightings.svg', itemWidth),
+        BottomNavItem('Achievements', 'achievements.svg', itemWidth),
         BottomNavItem('Profile', 'profile.svg', itemWidth),
       ],
     );

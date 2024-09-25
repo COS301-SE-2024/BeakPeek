@@ -67,7 +67,7 @@ class HomeState extends State<Home> {
                         const FilterableSearchbar(
                           helpContent: 'Help for home page',
                         ),
-                        SizedBox(height: screenHeight * 0.01),
+                        SizedBox(height: screenHeight * 0.03),
 
                         // Quiz Section
                         Container(
@@ -78,7 +78,7 @@ class HomeState extends State<Home> {
                             borderRadius: BorderRadius.circular(10.0),
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
+                                color: Colors.black.withOpacity(0.2),
                                 spreadRadius: 2,
                                 blurRadius: 5,
                                 offset: const Offset(0, 3),
@@ -124,6 +124,7 @@ class HomeState extends State<Home> {
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                             ),
+                                            elevation: 10,
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 16.0,
                                                 vertical: 8.0),
@@ -142,67 +143,6 @@ class HomeState extends State<Home> {
                             ],
                           ),
                         ),
-                        SizedBox(height: screenHeight * 0.02),
-
-                        // Achievements Section
-                        Container(
-                          width: sectionWidth,
-                          padding: const EdgeInsets.all(16.0),
-                          decoration: BoxDecoration(
-                            color: AppColors.popupColor(context),
-                            borderRadius: BorderRadius.circular(10.0),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.5),
-                                spreadRadius: 2,
-                                blurRadius: 5,
-                                offset: const Offset(0, 3),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Tracked Achievements',
-                                style:
-                                    GlobalStyles.smallHeadingPrimary(context),
-                              ),
-                              const SizedBox(height: 10),
-                              // List of achievements
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'Master Spotter',
-                                  style: GlobalStyles.contentBold(context),
-                                ),
-                                subtitle: Text(
-                                  '24% complete',
-                                  style:
-                                      GlobalStyles.smallContentPrimary(context),
-                                ),
-                                trailing: Icon(Icons.star,
-                                    color: AppColors.tertiaryColor(context)),
-                              ),
-                              const Divider(color: Colors.grey),
-                              ListTile(
-                                contentPadding: EdgeInsets.zero,
-                                title: Text(
-                                  'Duck Specialist',
-                                  style: GlobalStyles.contentBold(context),
-                                ),
-                                subtitle: Text(
-                                  '56% complete',
-                                  style:
-                                      GlobalStyles.smallContentPrimary(context),
-                                ),
-                                trailing: Icon(Icons.star,
-                                    color: AppColors.tertiaryColor(context)),
-                              ),
-                              SizedBox(height: screenHeight * 0.02),
-                            ],
-                          ),
-                        ),
 
                         SizedBox(height: screenHeight * 0.02),
 
@@ -213,9 +153,21 @@ class HomeState extends State<Home> {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return Center(
-                                  child: CircularProgressIndicator(
-                                color: AppColors.primaryColor(context),
-                              ));
+                                child: Column(
+                                  children: [
+                                    const SizedBox(height: 15),
+                                    CircularProgressIndicator(
+                                      color: AppColors.primaryColor(context),
+                                    ),
+                                    const SizedBox(height: 15),
+                                    Text(
+                                      'Loading birds near you...',
+                                      style:
+                                          GlobalStyles.contentPrimary(context),
+                                    ),
+                                  ],
+                                ),
+                              );
                             } else if (snapshot.hasError) {
                               return Center(
                                   child: Text('Error: ${snapshot.error}'));
@@ -227,15 +179,14 @@ class HomeState extends State<Home> {
                               final birdsList = snapshot.data!;
                               return Container(
                                 width: sectionWidth,
-                                height: screenHeight *
-                                    0.4, // Fixed height for the container
+                                height: screenHeight * 0.37,
                                 padding: const EdgeInsets.all(16.0),
                                 decoration: BoxDecoration(
                                   color: AppColors.popupColor(context),
                                   borderRadius: BorderRadius.circular(10.0),
                                   boxShadow: [
                                     BoxShadow(
-                                      color: Colors.black.withOpacity(0.5),
+                                      color: Colors.black.withOpacity(0.2),
                                       spreadRadius: 2,
                                       blurRadius: 5,
                                       offset: const Offset(0, 3),
@@ -250,67 +201,85 @@ class HomeState extends State<Home> {
                                       style: GlobalStyles.smallHeadingPrimary(
                                           context),
                                     ),
-                                    const SizedBox(height: 16),
                                     Expanded(
-                                      child: ListView.builder(
-                                        itemCount: birdsList.length,
-                                        itemBuilder: (context, index) {
-                                          final bird = birdsList[index];
-                                          return InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Scaffold(
-                                                    body: BirdPage(
-                                                      id: bird.id,
-                                                      commonGroup:
-                                                          bird.commonGroup,
-                                                      commonSpecies:
-                                                          bird.commonSpecies,
+                                      child: Scrollbar(
+                                        child: ListView.builder(
+                                          itemCount: birdsList.length,
+                                          itemBuilder: (context, index) {
+                                            final bird = birdsList[index];
+                                            return InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Scaffold(
+                                                      body: BirdPage(
+                                                        id: bird.id,
+                                                        commonGroup:
+                                                            bird.commonGroup,
+                                                        commonSpecies:
+                                                            bird.commonSpecies,
+                                                      ),
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      Text(
-                                                        bird.commonGroup !=
-                                                                'None'
-                                                            ? '${bird.commonSpecies} ${bird.commonGroup}'
-                                                            : bird
-                                                                .commonSpecies,
-                                                        style: GlobalStyles
-                                                            .contentBold(
-                                                                context),
+                                                );
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 4.0),
+                                                child: Row(
+                                                  children: [
+                                                    CircleAvatar(
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                              bird.imageUrl ??
+                                                                  ''),
+                                                      radius: 25,
+                                                    ),
+                                                    const SizedBox(width: 10),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                bird.commonGroup !=
+                                                                        'None'
+                                                                    ? '${bird.commonSpecies} ${bird.commonGroup}'
+                                                                    : bird
+                                                                        .commonSpecies,
+                                                                style: GlobalStyles
+                                                                    .contentBold(
+                                                                        context),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 16),
+                                                          Text(
+                                                            'Scientific Name: ${bird.genus} ${bird.species}',
+                                                            style: GlobalStyles
+                                                                .smallContentPrimary(
+                                                                    context),
+                                                          ),
+                                                          Divider(
+                                                              color: AppColors
+                                                                  .greyColor(
+                                                                      context)),
+                                                        ],
                                                       ),
-                                                    ],
-                                                  ),
-                                                  const SizedBox(height: 16),
-                                                  Text(
-                                                    'Scientific Name: ${bird.genus} ${bird.species}',
-                                                    style: GlobalStyles
-                                                        .smallContentPrimary(
-                                                            context),
-                                                  ),
-                                                  Divider(
-                                                      color:
-                                                          AppColors.greyColor(
-                                                              context)),
-                                                ],
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          );
-                                        },
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -319,7 +288,6 @@ class HomeState extends State<Home> {
                             }
                           },
                         ),
-                        SizedBox(height: screenHeight * 0.02),
                       ],
                     ),
                   ),

@@ -13,19 +13,30 @@ class LandingTab1 extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
       body: SafeArea(
-        child: Column(
+        child: Stack(
           children: [
-            Expanded(
-              child: Center(
+            Positioned(
+              top: screenHeight * 0.45,
+              left: 0,
+              right: 0,
+              child: Image.asset(
+                'assets/images/landing1.png',
+                width: screenWidth,
+                height: screenHeight * 0.6,
+                fit: BoxFit.cover,
+              ),
+            ),
+            Align(
+              alignment: Alignment.topCenter,
+              child: Padding(
+                padding: EdgeInsets.only(top: screenHeight * 0.14),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    SizedBox(
-                      height: screenHeight * 0.1,
-                    ),
                     RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
@@ -44,7 +55,7 @@ class LandingTab1 extends StatelessWidget {
                       ),
                     ),
                     SizedBox(
-                      height: screenHeight * 0.05,
+                      height: screenHeight * 0.03,
                     ),
                     if (accessToken.isNotEmpty &&
                         localStorage.getItem('termsAndCondition') != null)
@@ -52,25 +63,17 @@ class LandingTab1 extends StatelessWidget {
                         child: FilledButton(
                           style: GlobalStyles.buttonPrimaryOutlined(context),
                           child: Text(
-                              '''Welcome Back ${localStorage.getItem("username")}''',
-                              style: GlobalStyles.secondaryButtonText(context)),
+                            '''Welcome Back ${localStorage.getItem("username")}''',
+                            style: GlobalStyles.secondaryButtonText(context),
+                          ),
                           onPressed: () {
                             config.loggedIN = true;
                             context.go('/home');
                           },
                         ),
-                      )
+                      ),
                   ],
                 ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: screenHeight * 0.00),
-              child: Image.asset(
-                'assets/images/landing1.png',
-                width: screenWidth * 0.9,
-                height: screenHeight * 0.5,
-                fit: BoxFit.contain,
               ),
             ),
           ],

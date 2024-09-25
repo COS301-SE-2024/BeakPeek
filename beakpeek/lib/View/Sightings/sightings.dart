@@ -7,6 +7,7 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Sightings/sighting_widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:beakpeek/Model/nav.dart';
 
 class Sightings extends StatefulWidget {
   const Sightings({super.key});
@@ -18,11 +19,11 @@ class Sightings extends StatefulWidget {
 }
 
 class _SightingsState extends State<Sightings> {
-  // Add a variable to store the dropdown value
   late final LifeListProvider lifeList = LifeListProvider.instance;
   late List<Bird> loaded = [];
   late Future<List<Bird>> listBirds;
   String? selectedFilter = 'name';
+
   @override
   void initState() {
     global.updateLife();
@@ -61,9 +62,6 @@ class _SightingsState extends State<Sightings> {
     setState(() {
       selectedFilter = newValue;
     });
-
-    if (selectedFilter == 'rarity') {
-    } else if (selectedFilter == 'name') {}
   }
 
   @override
@@ -71,96 +69,102 @@ class _SightingsState extends State<Sightings> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return SafeArea(
-      child: Scaffold(
+    return Scaffold(
+      backgroundColor: AppColors.backgroundColor(context),
+      appBar: AppBar(
         backgroundColor: AppColors.backgroundColor(context),
-        appBar: AppBar(
-          backgroundColor: AppColors.backgroundColor(context),
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
-            onPressed: () {
-              context.go('/home');
-            },
-          ),
-          title: Text('Life List',
-              style: GlobalStyles.smallHeadingPrimary(context)),
-          centerTitle: true,
+        elevation: 0,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
+          onPressed: () {
+            context.go('/home');
+          },
         ),
-        body: Column(
-          children: [
-            Padding(
+        title:
+            Text('Life List', style: GlobalStyles.smallHeadingPrimary(context)),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
               padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Row(
-                  children: [
-                    // Dropdown Button
-                    DropdownButton<String>(
-                      dropdownColor: AppColors.popupColor(context),
-                      value: selectedFilter,
-                      items: [
-                        DropdownMenuItem(
-                          value: 'name',
-                          child: Text(
-                            'Name',
-                            style: GlobalStyles.contentPrimary(context),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  // Text label for dropdown
+                  Text(
+                    'Filter by:',
+                    style: GlobalStyles.contentPrimary(context),
+                  ),
+                  const SizedBox(width: 8.0),
+                  // Dropdown Button
+                  DropdownButton<String>(
+                    dropdownColor: AppColors.popupColor(context),
+                    value: selectedFilter,
+                    items: [
+                      DropdownMenuItem(
+                        value: 'name',
+                        child: Text(
+                          'Name',
+                          style: GlobalStyles.contentPrimary(context),
+                        ),
+                      ),
+                      DropdownMenuItem(
+                        value: 'rarity',
+                        child: Text(
+                          'Rarity',
+                          style: GlobalStyles.contentPrimary(context),
+                        ),
+                      ),
+                    ],
+                    onChanged: onFilterChanged,
+                    style: GlobalStyles.primaryButtonText(context),
+                    underline: Container(),
+                  ),
+                  const SizedBox(width: 16.0),
+                  // Ascending and Descending buttons
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 80.0,
+                        height: 34.0,
+                        child: OutlinedButton(
+                          style: GlobalStyles.buttonPrimaryOutlined(context),
+                          onPressed: reportRateASC,
+                          child: Icon(
+                            Icons.arrow_upward,
+                            color: AppColors.iconColor(context),
                           ),
                         ),
-                        DropdownMenuItem(
-                          value: 'rarity',
-                          child: Text(
-                            'Rarity',
-                            style: GlobalStyles.contentPrimary(context),
+                      ),
+                      const SizedBox(width: 8.0),
+                      SizedBox(
+                        width: 80.0,
+                        height: 34.0,
+                        child: OutlinedButton(
+                          style: GlobalStyles.buttonPrimaryOutlined(context),
+                          onPressed: reportRateDESC,
+                          child: Icon(
+                            Icons.arrow_downward,
+                            color: AppColors.iconColor(context),
                           ),
                         ),
-                      ],
-                      onChanged: onFilterChanged,
-                      style: GlobalStyles.primaryButtonText(context),
-                      underline: Container(),
-                    ),
-                    const SizedBox(width: 16.0),
-                    // Ascending and Descending buttons
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: 80.0,
-                          height: 34.0,
-                          child: OutlinedButton(
-                            style: GlobalStyles.buttonPrimaryOutlined(context),
-                            onPressed: reportRateASC,
-                            child: Icon(
-                              Icons.arrow_upward,
-                              color: AppColors.iconColor(context),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 8.0),
-                        SizedBox(
-                          width: 80.0,
-                          height: 34.0,
-                          child: OutlinedButton(
-                            style: GlobalStyles.buttonPrimaryOutlined(context),
-                            onPressed: reportRateDESC,
-                            child: Icon(
-                              Icons.arrow_downward,
-                              color: AppColors.iconColor(context),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-            SizedBox(
-              height: screenHeight * 0.75,
-              child: getLiveList(loaded, goBird, context),
-            ),
-          ],
-        ),
+          ),
+          SizedBox(
+            height: screenHeight * 0.75,
+            child: getLiveList(loaded, goBird, context),
+          ),
+        ],
       ),
+      bottomNavigationBar:
+          const BottomNavigation(), // Add BottomNavigation widget here
     );
   }
 }
