@@ -1,4 +1,5 @@
 import 'package:beakpeek/Model/Globals/globals.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -26,10 +27,21 @@ class MainState extends State<Main> {
   @override
   void initState() {
     super.initState();
-    localStorage.getItem('termsAndCondition') == null &&
+    if (localStorage.getItem('accessToken') != null) {
+      accessToken = localStorage.getItem('accessToken')!;
+    }
+
+    // WARN: this code is genuinely one of the worst pieces of code
+    // I have ever seen its too abstract and you can't tell what it is
+    // doing. Also accessToken already has a default value that is an
+    // empty string why bother setting it like this and why check if
+    // terms and conditions is null and access token isn't
+    // access token cannot be set in local storage unless terms and
+    // conditons has already been sett
+    /* localStorage.getItem('termsAndCondition') == null &&
             localStorage.getItem('accessToken') != null
         ? accessToken = localStorage.getItem('accessToken')!
-        : accessToken = '';
+        : accessToken = ''; */
     global.init();
     themeProvider = ThemeProvider();
     themeProvider.setInitialTheme(localStorage.getItem('theme') ?? '');
@@ -40,6 +52,7 @@ class MainState extends State<Main> {
     final appRouter = RoutingData().router;
     if (accessToken.isNotEmpty) {
       config.loggedIN = true;
+      user = getLocalUser();
       RoutingData().router.go('/home');
     }
 

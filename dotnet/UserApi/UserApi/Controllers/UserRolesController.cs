@@ -20,7 +20,7 @@ public class UserRolesController : Controller
     }
 
     [HttpGet]
-    [Authorize(Roles = "Basic,Admin,SuperAdmin,Moderator")]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> Index()
     {
         var users = await _userManager.Users.ToListAsync();
@@ -39,7 +39,7 @@ public class UserRolesController : Controller
     }
 
     [HttpGet]
-    [Authorize(Roles = "Basic,SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> Manage(string userId)
     {
         ViewBag.userId = userId;
@@ -77,7 +77,7 @@ public class UserRolesController : Controller
     }
 
     [HttpPost]
-    [Authorize(Roles = "Basic,SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin")]
     public async Task<IActionResult> Manage([FromForm] List<ManageUserRolesViewModel> model, string userId)
     {
         var user = await _userManager.FindByIdAsync(userId);
