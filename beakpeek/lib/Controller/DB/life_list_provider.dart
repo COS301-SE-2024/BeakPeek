@@ -97,6 +97,72 @@ class LifeListProvider {
           )''');
   }
 
+  Future<List<int>> getNumBirdsInProvinces() async {
+    final db = await instance.database;
+    final List<int> count = [];
+    const List<String> provinces = [
+      'easterncape',
+      'gauteng',
+      'kwazulunatal',
+      'limpopo',
+      'mpumalanga',
+      'northerncape',
+      'northwest',
+      'westerncape',
+      'freestate',
+    ];
+
+    for (final prov in provinces) {
+      final int temp = Sqflite.firstIntValue(
+            await db.query('provinces',
+                columns: ['COUNT(*)'], where: '$prov = true'),
+          ) ??
+          0;
+      count.add(temp);
+    }
+    return count;
+  }
+
+  Future<List<double>> precentLifeListBirds() async {
+    final db = await instance.database;
+    final List<int> allBirds = await getNumBirdsInProvinces();
+    final List<Bird> life = await fetchLifeList();
+    const List<String> provinces = [
+      'easterncape',
+      'gauteng',
+      'kwazulunatal',
+      'limpopo',
+      'mpumalanga',
+      'northerncape',
+      'northwest',
+      'westerncape',
+      'freestate',
+    ];
+    final List<double> count = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (Bird tempB in life) {
+      final int ref = tempB.getId();
+      int i = 0;
+      for (String prov in provinces) {
+        final int temp = Sqflite.firstIntValue(
+              await db.query('provinces',
+                  columns: [prov], where: '$prov = true AND id = $ref'),
+            ) ??
+            0;
+        if (temp != 0) {
+          count[i] += 1.0;
+        }
+        i++;
+      }
+      i = 0;
+    }
+    for (int i = 0; i < provinces.length; i++) {
+      if (count[i] != 0) {
+        count[i] = (count[i] / allBirds[i]);
+      }
+    }
+    return count;
+  }
+
   Future<void> insertBird(Bird bird) async {
     final db = await instance.database;
     if (!await isDuplicate(bird)) {

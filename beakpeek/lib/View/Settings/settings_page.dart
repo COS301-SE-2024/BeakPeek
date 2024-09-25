@@ -1,3 +1,4 @@
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +46,7 @@ class SettingsPage extends StatelessWidget {
               }),
               _buildOptionTile(context, 'Delete Account', Icons.delete,
                   Icons.arrow_forward_ios, () {
-                // Handle Delete Account tap
+                deleteLocalUser();
               }),
               const SizedBox(height: 20),
 
