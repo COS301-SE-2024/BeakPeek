@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 
 Widget getData(Bird bird, Function goBird, BuildContext context) {
   return ListTile(
+    leading: CircleAvatar(
+      backgroundImage: NetworkImage(bird.imageUrl ?? ''),
+    ),
     title: Text(
       bird.commonGroup.isNotEmpty
           ? '${bird.commonSpecies} ${bird.commonGroup} '

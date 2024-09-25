@@ -25,7 +25,7 @@ class ApiService {
     }
   }
 
-  Future<List<Map<String, Object?>>> fetchBirdInfoOffline(
+  Future<Map<String, Object?>> fetchBirdInfoOffline(
       LifeListProvider lifeList, int id) async {
     return await lifeList.getBirdInByID(id);
   }
@@ -36,9 +36,11 @@ class ApiService {
       LifeListProvider lifeList) async {
     final List<Bird> birdHolder = await lifeList.getFullBirdData();
 
+
     for (Bird bird in birdHolder) {
       bird.population = populationHelper(bird);
     }
+
   }
 
   int populationHelper(Bird bird) {
@@ -58,9 +60,10 @@ class ApiService {
     //MULTIPLY HERE ->
     final double viewRate = bird.fullProtocolRR *
         bird.fullProtocolNumber; // multiply by num pentads/16673
-
-    final int population = (constant * viewRate / detectionProbability).round();
-
+   final int population = (constant*viewRate/detectionProbability).round();
+    if(population>50000){
+      return -1;
+    }
     return population;
   }
 }

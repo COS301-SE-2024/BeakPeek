@@ -42,9 +42,7 @@ class _BirdPageState extends State<BirdPage> {
         : 'Add to Life List';
     global.updateLife();
     super.initState();
-    birdFuture =
-        ApiService().fetchBirdInfo(widget.commonGroup, widget.commonSpecies);
-    ApiService().fetchBirdInfoOffline(lifeList, widget.id);
+    birdFuture = ApiService().fetchBirdInfoOffline(lifeList, widget.id);
   }
 
   void addToLifeList() {
@@ -116,7 +114,7 @@ class _BirdPageState extends State<BirdPage> {
                         Padding(
                           padding: const EdgeInsets.only(left: 16.0),
                           child: Text(
-                            birdData['name'],
+                            '${birdData['commonSpecies']} ${birdData['commonGroup']}',
                             style: GlobalStyles.smallHeadingPrimary(context),
                           ),
                         ),
@@ -153,7 +151,7 @@ class _BirdPageState extends State<BirdPage> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Image.network(
-                                birdData['images'][1]['url'],
+                                birdData['image_Url'],
                                 width: screenWidth * 0.92,
                                 fit: BoxFit.cover,
                               ),
@@ -198,7 +196,7 @@ class _BirdPageState extends State<BirdPage> {
                                 Expanded(
                                   child: SingleChildScrollView(
                                     child: Text(
-                                      birdData['description'] ??
+                                      birdData['info'] ??
                                           'No description available',
                                       style:
                                           GlobalStyles.contentPrimary(context)

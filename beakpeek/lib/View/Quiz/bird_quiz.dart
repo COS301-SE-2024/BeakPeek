@@ -78,19 +78,14 @@ class _BirdQuizState extends State<BirdQuiz> {
         child: Column(
           children: [
             Expanded(
-              child: PageView(
-                children: currentQuiz!.images
-                    .map((url) => SizedBox(
-                          width: screenWidth * 0.9,
-                          child: Image.network(
-                            url,
-                            width: screenWidth * 0.9,
-                            fit: BoxFit.cover,
-                          ),
-                        ))
-                    .toList(),
+                child: SizedBox(
+              width: screenWidth * 0.9,
+              child: Image.network(
+                currentQuiz?.images ?? '',
+                width: screenWidth * 0.9,
+                fit: BoxFit.cover,
               ),
-            ),
+            )),
             const SizedBox(height: 16.0),
             Text(
               'Select the correct bird:',

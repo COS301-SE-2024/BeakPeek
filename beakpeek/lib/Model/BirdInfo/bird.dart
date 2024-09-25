@@ -138,6 +138,7 @@ class Bird {
       'genus': genus,
       'species': species,
       'reportingRate': reportingRate,
+      'image_Url': imageUrl
     };
   }
 
