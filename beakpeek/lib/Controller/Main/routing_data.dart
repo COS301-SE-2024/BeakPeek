@@ -1,3 +1,4 @@
+import 'package:beakpeek/View/Achievements/achievements_page.dart';
 import 'package:beakpeek/View/Bird/bird_page.dart';
 import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Map/heat_map_info.dart';
@@ -88,7 +89,13 @@ class RoutingData {
         builder: (context, state) {
           return const SettingsPage();
         },
-      )
+      ),
+      GoRoute(
+        path: '/achievements',
+        builder: (context, state) {
+          return const AchievementsPage();
+        },
+      ),
     ],
   );
 }

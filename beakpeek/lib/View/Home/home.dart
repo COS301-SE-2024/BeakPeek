@@ -178,8 +178,7 @@ class HomeState extends State<Home> {
                               final birdsList = snapshot.data!;
                               return Container(
                                 width: sectionWidth,
-                                height: screenHeight *
-                                    0.4, // Fixed height for the container
+                                height: screenHeight * 0.37,
                                 padding: const EdgeInsets.all(16.0),
                                 decoration: BoxDecoration(
                                   color: AppColors.popupColor(context),
@@ -203,82 +202,84 @@ class HomeState extends State<Home> {
                                     ),
                                     const SizedBox(height: 16),
                                     Expanded(
-                                      child: ListView.builder(
-                                        itemCount: birdsList.length,
-                                        itemBuilder: (context, index) {
-                                          final bird = birdsList[index];
-                                          return InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      Scaffold(
-                                                    body: BirdPage(
-                                                      id: bird.id,
-                                                      commonGroup:
-                                                          bird.commonGroup,
-                                                      commonSpecies:
-                                                          bird.commonSpecies,
+                                      child: Scrollbar(
+                                        child: ListView.builder(
+                                          itemCount: birdsList.length,
+                                          itemBuilder: (context, index) {
+                                            final bird = birdsList[index];
+                                            return InkWell(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Scaffold(
+                                                      body: BirdPage(
+                                                        id: bird.id,
+                                                        commonGroup:
+                                                            bird.commonGroup,
+                                                        commonSpecies:
+                                                            bird.commonSpecies,
+                                                      ),
                                                     ),
                                                   ),
+                                                );
+                                              },
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 8.0),
+                                                child: Row(
+                                                  children: [
+                                                    CircleAvatar(
+                                                      backgroundImage:
+                                                          NetworkImage(
+                                                              bird.imageUrl ??
+                                                                  ''),
+                                                      radius: 25,
+                                                    ),
+                                                    const SizedBox(width: 10),
+                                                    Expanded(
+                                                      child: Column(
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .start,
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Text(
+                                                                bird.commonGroup !=
+                                                                        'None'
+                                                                    ? '${bird.commonSpecies} ${bird.commonGroup}'
+                                                                    : bird
+                                                                        .commonSpecies,
+                                                                style: GlobalStyles
+                                                                    .contentBold(
+                                                                        context),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height: 16),
+                                                          Text(
+                                                            'Scientific Name: ${bird.genus} ${bird.species}',
+                                                            style: GlobalStyles
+                                                                .smallContentPrimary(
+                                                                    context),
+                                                          ),
+                                                          Divider(
+                                                              color: AppColors
+                                                                  .greyColor(
+                                                                      context)),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
                                                 ),
-                                              );
-                                            },
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 8.0),
-                                              child: Row(
-                                                children: [
-                                                  CircleAvatar(
-                                                    backgroundImage:
-                                                        NetworkImage(
-                                                            bird.imageUrl ??
-                                                                ''),
-                                                    radius: 25,
-                                                  ),
-                                                  const SizedBox(width: 10),
-                                                  Expanded(
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: [
-                                                        Row(
-                                                          children: [
-                                                            Text(
-                                                              bird.commonGroup !=
-                                                                      'None'
-                                                                  ? '${bird.commonSpecies} ${bird.commonGroup}'
-                                                                  : bird
-                                                                      .commonSpecies,
-                                                              style: GlobalStyles
-                                                                  .contentBold(
-                                                                      context),
-                                                            ),
-                                                          ],
-                                                        ),
-                                                        const SizedBox(
-                                                            height: 16),
-                                                        Text(
-                                                          'Scientific Name: ${bird.genus} ${bird.species}',
-                                                          style: GlobalStyles
-                                                              .smallContentPrimary(
-                                                                  context),
-                                                        ),
-                                                        Divider(
-                                                            color: AppColors
-                                                                .greyColor(
-                                                                    context)),
-                                                      ],
-                                                    ),
-                                                  ),
-                                                ],
                                               ),
-                                            ),
-                                          );
-                                        },
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ),
                                   ],
@@ -287,7 +288,6 @@ class HomeState extends State<Home> {
                             }
                           },
                         ),
-                        SizedBox(height: screenHeight * 0.02),
                       ],
                     ),
                   ),

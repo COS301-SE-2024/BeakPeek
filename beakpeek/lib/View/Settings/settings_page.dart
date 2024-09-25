@@ -32,55 +32,55 @@ class SettingsPage extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.only(
           top: screenHeight * 0.02,
-          left: screenWidth * 0.03,
-          right: screenWidth * 0.03,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildSectionHeader(context, 'Your Account'),
-            _buildOptionTile(context, 'Edit Personal Information', Icons.edit,
-                Icons.arrow_forward_ios, () {
-              // Handle Edit Personal Information tap
-            }),
-            _buildOptionTile(context, 'Delete Account', Icons.delete,
-                Icons.arrow_forward_ios, () {
-              // Handle Delete Account tap
-            }),
-            const SizedBox(height: 20),
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildSectionHeader(context, 'Your Account'),
+              _buildOptionTile(context, 'Edit Personal Information', Icons.edit,
+                  Icons.arrow_forward_ios, () {
+                // Handle Edit Personal Information tap
+              }),
+              _buildOptionTile(context, 'Delete Account', Icons.delete,
+                  Icons.arrow_forward_ios, () {
+                // Handle Delete Account tap
+              }),
+              const SizedBox(height: 20),
 
-            _buildSectionHeader(context, 'App Settings'),
-            _buildToggleThemeTile(context), // Dark mode toggle
-            _buildOptionTile(context, 'Notifications', Icons.notifications,
-                Icons.arrow_forward_ios, () {
-              // Handle Notifications tap
-            }),
-            _buildOptionTile(context, 'Privacy Settings', Icons.lock,
-                Icons.arrow_forward_ios, () {
-              // Handle Privacy Settings tap
-            }),
-            const SizedBox(height: 20),
+              _buildSectionHeader(context, 'App Settings'),
+              _buildToggleThemeTile(context), // Dark mode toggle
+              _buildOptionTile(context, 'Notifications', Icons.notifications,
+                  Icons.arrow_forward_ios, () {
+                // Handle Notifications tap
+              }),
+              _buildOptionTile(context, 'Privacy Settings', Icons.lock,
+                  Icons.arrow_forward_ios, () {
+                // Handle Privacy Settings tap
+              }),
+              const SizedBox(height: 20),
 
-            _buildSectionHeader(context, 'Support'),
-            _buildOptionTile(context, 'Help & Support', Icons.help_outline,
-                Icons.arrow_forward_ios, () {
-              // Handle Help & Support tap
-            }),
-            _buildOptionTile(
-                context, 'Legal Policies', Icons.gavel, Icons.arrow_forward_ios,
-                () {
-              // Handle Legal Policies tap
-            }),
-            _buildOptionTile(
-                context, 'About', Icons.info_outline, Icons.arrow_forward_ios,
-                () {
-              // Handle About tap
-            }),
-            const Spacer(),
-            const BottomNavigation(),
-          ],
+              _buildSectionHeader(context, 'Support'),
+              _buildOptionTile(context, 'Help & Support', Icons.help_outline,
+                  Icons.arrow_forward_ios, () {
+                // Handle Help & Support tap
+              }),
+              _buildOptionTile(context, 'Legal Policies', Icons.gavel,
+                  Icons.arrow_forward_ios, () {
+                // Handle Legal Policies tap
+              }),
+              _buildOptionTile(
+                  context, 'About', Icons.info_outline, Icons.arrow_forward_ios,
+                  () {
+                // Handle About tap
+              }),
+              const Spacer(),
+            ],
+          ),
         ),
       ),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 
