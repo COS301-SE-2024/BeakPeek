@@ -39,7 +39,7 @@ final ColorPalette earthyPalette = ColorPalette(
   low: const Color.fromARGB(255, 210, 180, 140), // Light brown
   mediumLow: const Color.fromARGB(255, 139, 69, 19), // Brown
   medium: const Color.fromARGB(255, 160, 82, 45), // Saddle brown
-  mediumHigh: Color.fromARGB(255, 113, 153, 113), // Forest green
+  mediumHigh: const Color.fromARGB(255, 113, 153, 113), // Forest green
   high: const Color.fromARGB(255, 60, 179, 113), // Medium sea green
   veryHigh: const Color.fromARGB(255, 0, 128, 0), // Green
 );
@@ -49,7 +49,7 @@ final ColorPalette sunsetPalette = ColorPalette(
   mediumLow: const Color.fromARGB(255, 255, 140, 0), // Dark orange
   medium: const Color.fromARGB(255, 255, 69, 0), // Red orange
   mediumHigh: const Color.fromARGB(255, 255, 99, 71), // Tomato
-  high: Color.fromARGB(255, 243, 96, 175), // Deep pink
+  high: const Color.fromARGB(255, 243, 96, 175), // Deep pink
   veryHigh: const Color.fromARGB(255, 255, 0, 0), // Red
 );
 

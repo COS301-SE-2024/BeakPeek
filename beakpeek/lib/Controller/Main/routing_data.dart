@@ -88,7 +88,7 @@ class RoutingData {
       GoRoute(
         path: '/settings',
         builder: (context, state) {
-          return const SettingsPage();
+          return SettingsPage();
         },
       ),
       GoRoute(

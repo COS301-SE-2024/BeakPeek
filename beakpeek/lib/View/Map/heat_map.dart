@@ -87,7 +87,7 @@ class HeatMapState extends State<HeatMap> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: Text(
-              'This is an Endangered Species! Est. Population: ${population}',
+              'This is an Endangered Species! Est. Population: $population',
               style: TextStyle(
                 color: AppColors.textColor(context),
                 fontSize: 14,
@@ -130,7 +130,7 @@ class HeatMapState extends State<HeatMap> {
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               blurRadius: 4,
-              offset: Offset(2, 2),
+              offset: const Offset(2, 2),
             ),
           ],
         ),
@@ -138,7 +138,7 @@ class HeatMapState extends State<HeatMap> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Legend title
-            Text(
+            const Text(
               'Legend',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -178,7 +178,7 @@ class HeatMapState extends State<HeatMap> {
             // Use Flexible instead of Expanded
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12, // Smaller font size
                 color: Colors.black,
               ),
@@ -309,7 +309,6 @@ class HeatMapState extends State<HeatMap> {
       }
       population =
           ApiService().populationHelper(birdData[0].bird, birdData.length);
-      print(birdData.length);
       final List<Polygon> polygons = [];
       for (var bird in birdData) {
         final id = bird.pentadAllocation;

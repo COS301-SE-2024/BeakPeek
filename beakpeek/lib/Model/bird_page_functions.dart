@@ -61,7 +61,6 @@ class ApiService {
         pentads /
         16673; // multiply by num pentads/16673
     final int population = (constant * viewRate / detectionProbability).round();
-    print(population);
     if (population > 50000) {
       return -1;
     }
