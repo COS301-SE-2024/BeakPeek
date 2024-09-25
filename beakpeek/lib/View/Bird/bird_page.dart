@@ -11,6 +11,7 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:beakpeek/config_azure.dart' as config;
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart'
     as up_func;
 
@@ -34,7 +35,7 @@ class _BirdPageState extends State<BirdPage> {
   late Future<Map<String, dynamic>?> birdFuture;
   late String seenText;
   late final LifeListProvider lifeList = LifeListProvider.instance;
-
+  late final Bird bird;
   @override
   void initState() {
     seenText = isSeenGS(widget.commonGroup, widget.commonSpecies)
@@ -43,6 +44,9 @@ class _BirdPageState extends State<BirdPage> {
     global.updateLife();
     super.initState();
     birdFuture = ApiService().fetchBirdInfoOffline(lifeList, widget.id);
+    lifeList.getBirdInByID(widget.id).then((value) {
+      bird = Bird.fromJson(value);
+    });
   }
 
   void addToLifeList() {
@@ -77,7 +81,6 @@ class _BirdPageState extends State<BirdPage> {
           ),
           onPressed: () {
             GoRouter.of(context).pop();
-
           },
         ),
         title: Text(
@@ -226,31 +229,11 @@ class _BirdPageState extends State<BirdPage> {
                     width: screenWidth * 0.8,
                     child: FilledButton(
                       onPressed: () {
-                        up_func.addExp(20);
-                        global.lifeList.insertBird(Bird(
-                            id: widget.id,
-                            commonGroup: widget.commonGroup,
-                            commonSpecies: widget.commonSpecies,
-                            genus: 'genus',
-                            species: 'species',
-                            fullProtocolRR: 0.0,
-                            fullProtocolNumber: 0,
-                            latestFP: '',
-                            jan: 0,
-                            feb: 0,
-                            mar: 0,
-                            apr: 0,
-                            may: 0,
-                            jun: 0,
-                            jul: 0,
-                            aug: 0,
-                            sep: 0,
-                            oct: 0,
-                            nov: 0,
-                            dec: 0,
-                            totalRecords: 0,
-                            reportingRate: 0.0));
-                        global.updateLife();
+                        if (config.loggedIN) {
+                          up_func.addExp(up_func.birdexpByRarity(bird));
+                          global.lifeList.insertBird(bird);
+                          global.updateLife();
+                        }
                         setState(() {
                           seenText =
                               isSeenGS(widget.commonGroup, widget.commonSpecies)
