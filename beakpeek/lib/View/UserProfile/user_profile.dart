@@ -1,5 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:io';
+import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
 import 'package:beakpeek/View/offline_message.dart';
 import 'package:image_picker/image_picker.dart';
@@ -124,8 +125,7 @@ class UserProfileState extends State<UserProfile> {
                             icon: const Icon(Icons.settings),
                             color: AppColors.iconColor(context),
                             onPressed: () {
-                              // Navigate to settings page
-                              //or handle settings action
+                              context.go('/settings');
                             },
                           ),
                         ],
@@ -262,6 +262,7 @@ class UserProfileState extends State<UserProfile> {
           ),
         ],
       ),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 
