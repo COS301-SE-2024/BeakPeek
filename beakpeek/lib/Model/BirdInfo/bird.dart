@@ -34,7 +34,7 @@ class Bird {
           json['reportingRate']?.toDouble() ??
           0.0,
       info: json['info'] ?? '',
-      imageUrl: json['imageUrl']?.toString() ?? '',
+      imageUrl: birdJson['image_Url'] ?? '',
       provinces: List<String>.from(json['provinces'] ?? []),
       //population changes below
       population: 0,

@@ -2,6 +2,7 @@
 
 import 'package:beakpeek/Controller/Home/quiz_manager.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Bird/bird_page.dart';
@@ -27,7 +28,7 @@ class HomeState extends State<Home> {
   void initState() {
     //globel.init();
     super.initState();
-    pentadId = getPentadId(); // Initialize pentadId
+    pentadId = _getPentadIdWithCache(); // Initialize pentadId
     preloadQuizzes();
   }
 
@@ -37,9 +38,25 @@ class HomeState extends State<Home> {
     } catch (e) {}
   }
 
-  Future<List<Bird>> _fetchBirds() async {
+  Future<List<Bird>> _fetchBirdsWithCache() async {
+    if (global.cachedBirds != null) {
+      // Return cached birds if available
+      return global.cachedBirds!;
+    }
+
     final id = await pentadId;
-    return fetchBirds(id, http.Client()); // Fetch birds based on pentadId
+    global.cachedBirds = await fetchBirds(id, http.Client());
+    return global.cachedBirds!;
+  }
+
+  Future<String> _getPentadIdWithCache() async {
+    if (global.cachedPentadId != null) {
+      // Return cached pentadId if available
+      return global.cachedPentadId!;
+    }
+
+    global.cachedPentadId = await getPentadId(); // Cache pentadId
+    return global.cachedPentadId!;
   }
 
   @override
@@ -148,7 +165,7 @@ class HomeState extends State<Home> {
 
                         // Birds Near You Section
                         FutureBuilder<List<Bird>>(
-                          future: _fetchBirds(),
+                          future: _fetchBirdsWithCache(),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
