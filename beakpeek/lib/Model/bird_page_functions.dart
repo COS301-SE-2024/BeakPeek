@@ -62,6 +62,7 @@ final double reportRate = (bird.fullProtocolRR <= 1) ? 30 : bird.fullProtocolRR;
 final int numPentads = (pentads <= 50) ? 300 : pentads;
     final double viewRate = (reportRate) *
         bird.fullProtocolNumber *
+<<<<<<< HEAD
         (numPentads) /
         14288; // multiply by num pentads/16673
     final int population = (constant * viewRate * detectionProbability).round();
@@ -69,6 +70,12 @@ final int numPentads = (pentads <= 50) ? 300 : pentads;
 
 
     if (population > 25000) {
+=======
+        pentads /
+        16673; // multiply by num pentads/16673
+    final int population = (constant * viewRate / detectionProbability).round();
+    if (population > 50000) {
+>>>>>>> 5f654d75117352f1322ecc2f3f92371dd5966aac
       return -1;
     }
     return population;
