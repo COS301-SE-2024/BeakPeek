@@ -46,7 +46,9 @@ class ApiService {
     //Calculated using a neural network to
     //adjust function to fit known populations.
 
-    const double detectionProbability = 0.3;
+    const double detectionProbability = 0.9;
+
+
     //attempts to average for nocturnal birds etc.
     //considered: popularity of location, flightpaths of single bird
     //Day time bias, time period (maybe a lot of cards in one day creates unfair
@@ -56,13 +58,17 @@ class ApiService {
     //https://core.ac.uk/download/pdf/9821458.pdf
 
     //MULTIPLY HERE ->
-    final double viewRate = bird.fullProtocolRR *
+final double reportRate = (bird.fullProtocolRR <= 1) ? 30 : bird.fullProtocolRR;
+final int numPentads = (pentads <= 50) ? 300 : pentads;
+    final double viewRate = (reportRate) *
         bird.fullProtocolNumber *
-        pentads /
-        16673; // multiply by num pentads/16673
-    final int population = (constant * viewRate / detectionProbability).round();
+        (numPentads) /
+        14288; // multiply by num pentads/16673
+    final int population = (constant * viewRate * detectionProbability).round();
     print(population);
-    if (population > 50000) {
+
+
+    if (population > 25000) {
       return -1;
     }
     return population;

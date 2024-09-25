@@ -130,7 +130,7 @@ class HeatMapState extends State<HeatMap> {
             BoxShadow(
               color: Colors.black.withOpacity(0.2),
               blurRadius: 4,
-              offset: Offset(2, 2),
+              offset: const Offset(2, 2),
             ),
           ],
         ),
@@ -138,7 +138,7 @@ class HeatMapState extends State<HeatMap> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Legend title
-            Text(
+            const Text(
               'Legend',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
@@ -178,7 +178,7 @@ class HeatMapState extends State<HeatMap> {
             // Use Flexible instead of Expanded
             child: Text(
               label,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 12, // Smaller font size
                 color: Colors.black,
               ),
