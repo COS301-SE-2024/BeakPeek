@@ -30,18 +30,18 @@ class ApiService {
     return await lifeList.getBirdInByID(id);
   }
 
-  void calculatePopulation(
-      //error rate of about 30% but only upwards
-      //(can only overestimate population)
-      LifeListProvider lifeList) async {
-    final List<Bird> birdHolder = await lifeList.getFullBirdData();
+  // void calculatePopulation(
+  //     //error rate of about 30% but only upwards
+  //     //(can only overestimate population)
+  //     LifeListProvider lifeList) async {
+  //   final List<Bird> birdHolder = await lifeList.getFullBirdData();
 
-    for (Bird bird in birdHolder) {
-      bird.population = populationHelper(bird);
-    }
-  }
+  //   for (Bird bird in birdHolder) {
+  //     bird.population = populationHelper(bird);
+  //   }
+  // }
 
-  int populationHelper(Bird bird) {
+  int populationHelper(Bird bird, int pentads) {
     const double constant = 9.01;
     //Calculated using a neural network to
     //adjust function to fit known populations.
@@ -57,8 +57,11 @@ class ApiService {
 
     //MULTIPLY HERE ->
     final double viewRate = bird.fullProtocolRR *
-        bird.fullProtocolNumber; // multiply by num pentads/16673
+        bird.fullProtocolNumber *
+        pentads /
+        16673; // multiply by num pentads/16673
     final int population = (constant * viewRate / detectionProbability).round();
+    print(population);
     if (population > 50000) {
       return -1;
     }

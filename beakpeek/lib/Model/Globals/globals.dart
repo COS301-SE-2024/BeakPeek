@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/search.dart';
+import 'package:beakpeek/Controller/Main/color_palette_functions.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 
 Globals global = Globals();
@@ -14,6 +15,7 @@ class Globals {
   late List<Bird> allBirdsList = [];
   String? cachedPentadId;
   List<Bird>? cachedBirds;
+  ColorPalette palette = greenRedPalette;
 
   void init() {
     lifeList.fetchLifeList().then((result) {

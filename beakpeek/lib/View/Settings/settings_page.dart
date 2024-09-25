@@ -1,6 +1,7 @@
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/View/UserProfile/color_palette.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:go_router/go_router.dart';
@@ -52,9 +53,12 @@ class SettingsPage extends StatelessWidget {
 
               _buildSectionHeader(context, 'App Settings'),
               _buildToggleThemeTile(context), // Dark mode toggle
-              _buildOptionTile(context, 'Notifications', Icons.notifications,
+              _buildOptionTile(context, 'Colour Palette', Icons.notifications,
                   Icons.arrow_forward_ios, () {
-                // Handle Notifications tap
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PaletteSelector()),
+                );
               }),
               _buildOptionTile(context, 'Privacy Settings', Icons.lock,
                   Icons.arrow_forward_ios, () {

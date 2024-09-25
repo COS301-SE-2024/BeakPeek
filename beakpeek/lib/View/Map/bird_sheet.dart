@@ -3,6 +3,7 @@
 
 import 'dart:convert';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Bird/bird_page.dart';
@@ -307,14 +308,18 @@ class BirdList extends StatelessWidget {
   }
 
   Color _getColorForReportingRate(double reportingRate) {
-    if (reportingRate < 40) {
-      return Colors.red;
+    if (reportingRate < 20) {
+      return global.palette.low.withOpacity(0.8);
+    } else if (reportingRate < 40) {
+      return global.palette.mediumLow.withOpacity(0.8);
     } else if (reportingRate < 60) {
-      return Colors.orange;
+      return global.palette.medium.withOpacity(0.8);
     } else if (reportingRate < 80) {
-      return Colors.yellow;
+      return global.palette.mediumHigh.withOpacity(0.8);
+    } else if (reportingRate < 90) {
+      return global.palette.high.withOpacity(0.8);
     } else {
-      return Colors.green;
+      return global.palette.veryHigh.withOpacity(0.8);
     }
   }
 }

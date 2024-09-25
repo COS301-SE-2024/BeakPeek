@@ -1,10 +1,11 @@
 // ignore_for_file: unused_field
 
 import 'package:beakpeek/Model/BirdInfo/bird_pentad.dart';
+import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:beakpeek/View/UserProfile/color_palette.dart';
+import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -27,6 +28,7 @@ class HeatMapState extends State<HeatMap> {
   late List<dynamic> birdData = [];
   bool _isLoading = true;
   String _selectedMonth = 'Year-Round';
+  int population = 0;
 
   @override
   void initState() {
@@ -40,40 +42,70 @@ class HeatMapState extends State<HeatMap> {
 
   Color getColorForReportingRate(double reportingRate) {
     if (reportingRate < 20) {
-      return const Color.fromARGB(255, 255, 115, 105).withOpacity(0.8);
+      return global.palette.low.withOpacity(0.8);
     } else if (reportingRate < 40) {
-      return Colors.red.withOpacity(0.8);
+      return global.palette.mediumLow.withOpacity(0.8);
     } else if (reportingRate < 60) {
-      return Colors.orange.withOpacity(0.8);
+      return global.palette.medium.withOpacity(0.8);
     } else if (reportingRate < 80) {
-      return Colors.yellow.withOpacity(0.8);
+      return global.palette.mediumHigh.withOpacity(0.8);
     } else if (reportingRate < 90) {
-      return const Color.fromARGB(255, 103, 255, 108).withOpacity(0.8);
+      return global.palette.high.withOpacity(0.8);
     } else {
-      return const Color.fromARGB(255, 1, 201, 34).withOpacity(0.8);
+      return global.palette.veryHigh.withOpacity(0.8);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        _buildFiltersRow(),
-        Expanded(
-          child: GoogleMap(
-            onMapCreated: _onMapCreated,
-            initialCameraPosition: _cameraPosition,
-            polygons: _polygons,
-          ),
+        Column(
+          children: [
+            _buildFiltersRow(),
+            Expanded(
+              child: GoogleMap(
+                onMapCreated: _onMapCreated,
+                initialCameraPosition: _cameraPosition,
+                polygons: _polygons,
+              ),
+            ),
+          ],
         ),
+        const SizedBox(),
+        _buildLegend(context),
       ],
     );
   }
 
   Widget _buildFiltersRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment:
+          MainAxisAlignment.spaceBetween, // Ensure space between elements
       children: [
+        if (population > 0) ...[
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Text(
+              'This is an Endangered Species! Est. Population: ${population}',
+              style: TextStyle(
+                color: AppColors.textColor(context),
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ] else if (population < 0) ...[
+          Padding(
+            padding: const EdgeInsets.only(right: 8.0),
+            child: Text(
+              'This is not an Endangered Species!',
+              style: TextStyle(
+                color: AppColors.textColor(context),
+                fontSize: 14,
+              ),
+            ),
+          ),
+        ],
         IconButton(
           icon: Icon(Icons.filter_list, color: AppColors.iconColor(context)),
           onPressed: () {
@@ -81,6 +113,79 @@ class HeatMapState extends State<HeatMap> {
           },
         ),
       ],
+    );
+  }
+
+  Widget _buildLegend(BuildContext context) {
+    return Positioned(
+      top: 50,
+      right: 10,
+      child: Container(
+        padding: const EdgeInsets.all(8.0),
+        decoration: BoxDecoration(
+          color: Colors.white
+              .withOpacity(0.9), // Slightly more opaque for better visibility
+          borderRadius: BorderRadius.circular(10), // Rounded corners
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 4,
+              offset: Offset(2, 2),
+            ),
+          ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            // Legend title
+            Text(
+              'Legend',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                color: Colors.black,
+              ),
+            ),
+            const SizedBox(height: 8), // Space between title and items
+            // Create legend items
+            _buildLegendItem(global.palette.low, '0-19%'),
+            _buildLegendItem(global.palette.mediumLow, '20-39%'),
+            _buildLegendItem(global.palette.medium, '40-59%'),
+            _buildLegendItem(global.palette.mediumHigh, '60-79%'),
+            _buildLegendItem(global.palette.high, '80-89%'),
+            _buildLegendItem(global.palette.veryHigh, '90-100%'),
+          ],
+        ),
+      ),
+    );
+  }
+
+// Helper method to create individual legend items
+  Widget _buildLegendItem(Color color, String label) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+          vertical: 4.0), // Vertical padding for each item
+      child: Row(
+        mainAxisSize: MainAxisSize.min, // Set to min to avoid stretching
+        children: [
+          Container(
+            width: 30, // Smaller width for the color box
+            height: 15, // Smaller height for the color box
+            color: color,
+          ),
+          const SizedBox(width: 8),
+          Flexible(
+            // Use Flexible instead of Expanded
+            child: Text(
+              label,
+              style: TextStyle(
+                fontSize: 12, // Smaller font size
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
@@ -92,7 +197,6 @@ class HeatMapState extends State<HeatMap> {
           title: const Text('Filters'),
           backgroundColor: AppColors.backgroundColor(context),
           content: Column(mainAxisSize: MainAxisSize.min, children: [
-            PaletteSelector(),
             DropdownButtonFormField<String>(
               value: _selectedMonth,
               onChanged: (newValue) {
@@ -199,9 +303,13 @@ class HeatMapState extends State<HeatMap> {
     });
 
     try {
-      birdData =
-          await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
-
+      if (birdData.isEmpty) {
+        birdData =
+            await BirdMapFunctions().fetchBirdsByGroupAndSpecies(widget.id);
+      }
+      population =
+          ApiService().populationHelper(birdData[0].bird, birdData.length);
+      print(birdData.length);
       final List<Polygon> polygons = [];
       for (var bird in birdData) {
         final id = bird.pentadAllocation;
