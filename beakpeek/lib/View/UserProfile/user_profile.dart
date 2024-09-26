@@ -1,4 +1,5 @@
 // ignore_for_file: unnecessary_null_comparison
+import 'dart:convert';
 import 'dart:io';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
@@ -10,6 +11,7 @@ import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+// ignore: unused_import
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/config_azure.dart';
 
@@ -22,10 +24,11 @@ class UserProfile extends StatefulWidget {
 
 class UserProfileState extends State<UserProfile> {
   late LifeListProvider lifeList = LifeListProvider.instance;
+  ImageProvider profilePicture =
+      Image.memory(base64Decode(user.profilepicture)).image;
   late Future<List<Bird>> birds;
   late Future<List<int>> numBirds;
-  late File _image = File(localStorage.getItem('profilePicture') ??
-      'assets/images/profileImages/images.jpg');
+  late File _image = File('assets/images/profileImages/images.jpg');
   final picker = ImagePicker();
 
   String name = user.username;
@@ -114,7 +117,7 @@ class UserProfileState extends State<UserProfile> {
                                   ? const AssetImage(
                                       'assets/images/profileImages/images.jpg')
                                   : FileImage(_image),
-                              foregroundImage: FileImage(_image),
+                              foregroundImage: profilePicture,
                             ),
                           ),
                         ),

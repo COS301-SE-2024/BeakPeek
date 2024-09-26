@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
@@ -25,10 +27,12 @@ Widget getLiveList(
 }
 
 Widget getLifeListData(Bird bird, Function(Bird) goBird, BuildContext context) {
+  final ImageProvider birdImg =
+      Image.memory(base64Decode(bird.imageBlob.toString())).image;
   return ListTile(
     tileColor: AppColors.backgroundColor(context),
     leading: CircleAvatar(
-      backgroundImage: NetworkImage(bird.imageUrl ?? ''),
+      backgroundImage: birdImg,
     ),
     title: Text(
       bird.commonGroup.isNotEmpty

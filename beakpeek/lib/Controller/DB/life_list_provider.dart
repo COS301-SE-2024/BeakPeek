@@ -1,8 +1,8 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
+import 'dart:typed_data';
+import 'dart:ui';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
@@ -376,7 +376,7 @@ class LifeListProvider {
           nov: map['nov'] as double,
           dec: map['dec'] as double,
           totalRecords: map['totalRecords'] as int,
-          imageBlob: map['image_Blob'] as File,
+          imageBlob: map['image_Blob'] as Uint8List,
           imageUrl: map['image_Url'] as String,
           //population
           population: map['birdPopulation'] as int,
@@ -392,16 +392,23 @@ class LifeListProvider {
     return birdMap[0];
   }
 
-  Future<void> addImage(int id, File img) async {
-    final db = await instance.database;
-    final bytes = img.readAsBytesSync();
-    final String encodedImage = base64Encode(bytes);
-    await db.rawUpdate(
-      '''UPDATE allBirds
-      SET image_Blob = ? 
-      WHERE id = ?''',
-      [encodedImage, id],
-    );
+  Future<void> addImage(int id, Image img) async {
+    // final db = await instance.database;
+    //  final dir = await getTemporaryDirectory();
+
+    // // Create an image name
+    // var filename = '${dir.path}/image.png';
+    // final file = File(filename);
+    // await file.writeAsBytes(img.bodyBytes);
+    // File imgFile = new File
+    // final bytes = img.readAsBytesSync();
+    // final String encodedImage = base64Encode(bytes);
+    // await db.rawUpdate(
+    //   '''UPDATE allBirds
+    //   SET image_Blob = ?
+    //   WHERE id = ?''',
+    //   [encodedImage, id],
+    // );
   }
 
   Future<List<Map<String, Object?>>> getLifeListForUser() async {

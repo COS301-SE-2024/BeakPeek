@@ -1,4 +1,4 @@
-package com.example.beakpeek
+package com.millennium.beakpeek
 
 import android.Manifest
 import android.content.pm.PackageManager

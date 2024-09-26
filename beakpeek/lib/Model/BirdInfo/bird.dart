@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 
 class Bird {
@@ -98,7 +98,7 @@ class Bird {
   final double reportingRate;
   final String? info;
   final String? imageUrl;
-  final File? imageBlob;
+  final Uint8List? imageBlob;
   final List<String>? provinces;
 
   Map<String, Object?> toMap() {
@@ -137,7 +137,8 @@ class Bird {
       'genus': genus,
       'species': species,
       'reportingRate': reportingRate,
-      'image_Url': imageUrl
+      'image_Url': imageUrl,
+      'image_Blob': imageBlob
     };
   }
 

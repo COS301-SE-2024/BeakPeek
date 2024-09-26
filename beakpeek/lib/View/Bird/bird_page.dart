@@ -36,6 +36,7 @@ class _BirdPageState extends State<BirdPage> {
   late String seenText;
   late final LifeListProvider lifeList = LifeListProvider.instance;
   late final Bird bird;
+  late Image tempImage;
   @override
   void initState() {
     seenText = isSeenGS(widget.commonGroup, widget.commonSpecies)
@@ -109,6 +110,7 @@ class _BirdPageState extends State<BirdPage> {
                     return const Center(child: Text('No bird info found'));
                   }
                   final birdData = snapshot.data!;
+                  tempImage = Image.network(birdData['image_Url']);
                   return Padding(
                     padding: EdgeInsets.all(screenWidth * 0.04),
                     child: Column(
@@ -232,6 +234,7 @@ class _BirdPageState extends State<BirdPage> {
                         if (config.loggedIN) {
                           up_func.addExp(up_func.birdexpByRarity(bird));
                           global.lifeList.insertBird(bird);
+                          //lifeList.addImage(widget.id, tempImage);
                           global.updateLife();
                         }
                         setState(() {
