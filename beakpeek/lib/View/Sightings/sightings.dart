@@ -182,7 +182,7 @@ class _SightingsState extends State<Sightings> {
               future: lifeList.fetchLifeList(),
               builder: (context, snapshot) {
                 loaded = snapshot.data ?? [];
-                print('Loaded: ${loaded.toString()}');
+                //print('Loaded: ${loaded.toString()}');
                 return getLiveList(loaded, goBird, context);
               },
             ),

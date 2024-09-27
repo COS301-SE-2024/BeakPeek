@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
@@ -9,8 +7,8 @@ import 'package:flutter/material.dart';
 Widget getLiveList(
     List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> items = getWidgetLifeList(birds, goBird, context);
-  print('GetLiveList');
-  print(birds.toString());
+  // print('GetLiveList');
+  // print(birds.toString());
   if (items.isEmpty) {
     return Center(
       child: Text(
@@ -30,7 +28,7 @@ Widget getLiveList(
 
 Widget getLifeListData(
     Bird bird, Function(Bird) goBird, BuildContext context, int index) {
-  print('Blob ${bird.imageBlob.toString()}');
+  //print('Blob ${bird.imageBlob.toString()}');
   late final ImageProvider birdImage = Image.network(bird.imageUrl!).image;
 
   return Container(
