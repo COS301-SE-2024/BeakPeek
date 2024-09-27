@@ -27,7 +27,6 @@ class _SightingsState extends State<Sightings> {
   @override
   void initState() {
     global.updateLife();
-    listBirds = lifeList.fetchLifeList();
 
     super.initState();
   }
@@ -180,10 +179,10 @@ class _SightingsState extends State<Sightings> {
           SizedBox(
             height: screenHeight * 0.75,
             child: FutureBuilder<List<Bird>>(
-              future: listBirds,
+              future: lifeList.fetchLifeList(),
               builder: (context, snapshot) {
-                loaded = snapshot.data!;
-                return getLiveList(snapshot.data!, goBird, context);
+                loaded = snapshot.data ?? [];
+                return getLiveList(loaded, goBird, context);
               },
             ),
           ),
