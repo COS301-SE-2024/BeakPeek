@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:convert';
 import 'dart:io';
+import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
 import 'package:image_picker/image_picker.dart';
@@ -89,6 +90,7 @@ class UserProfileState extends State<UserProfile> {
                         },
                       ),
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           IconButton(
                             icon: const Icon(Icons.settings),
@@ -97,6 +99,15 @@ class UserProfileState extends State<UserProfile> {
                               context.go('/settings');
                             },
                           ),
+                          IconButton(
+                            icon: const Icon(Icons.edit),
+                            color: AppColors.iconColor(context),
+                            onPressed: () {
+                              context.go('/editprofile');
+                            },
+                          ),
+                          const HelpIcon(
+                              content: '*implement profile page help*'),
                         ],
                       ),
                     ],

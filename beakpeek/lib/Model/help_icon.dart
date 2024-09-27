@@ -15,7 +15,7 @@ class HelpIcon extends StatelessWidget {
       },
       child: Icon(
         Icons.help_outline,
-        size: 30.0,
+        size: 28.0,
         color: AppColors.iconColor(context),
       ),
     );
