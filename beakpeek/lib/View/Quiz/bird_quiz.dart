@@ -7,7 +7,6 @@ import 'package:beakpeek/Model/quiz_instance.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class BirdQuiz extends StatefulWidget {
   const BirdQuiz({super.key});
@@ -92,34 +91,77 @@ class _BirdQuizState extends State<BirdQuiz>
   }
 
   void showGameOverPopup() {
-    _controller.stop(); // Stop the timer when game over
+    _controller.stop();
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
           backgroundColor: AppColors.popupColor(context),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
           title: Center(
             child: Text(
               'Game Over!',
               style: GlobalStyles.smallHeadingPrimary(context),
             ),
           ),
-          content: Text(
-            'Correct answers in a row: $correctAnswersInRow\nHigh score: $highScore',
-            style: GlobalStyles.contentPrimary(context),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RichText(
+                text: TextSpan(
+                  style: GlobalStyles.contentPrimary(context),
+                  children: [
+                    const TextSpan(text: 'Correct answers in a row: '),
+                    TextSpan(
+                      text: '$correctAnswersInRow',
+                      style: GlobalStyles.contentTertiary(context)
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GlobalStyles.contentPrimary(context),
+                  children: [
+                    const TextSpan(text: 'High score: '),
+                    TextSpan(
+                      text: '$highScore',
+                      style: GlobalStyles.contentTertiary(context)
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           actions: [
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  correctAnswersInRow = 0;
-                });
-                Navigator.of(context).pop();
-                loadNextQuiz();
-              },
-              child: Text(
-                'Try Again',
-                style: GlobalStyles.contentPrimary(context),
+            Align(
+              child: TextButton(
+                onPressed: () {
+                  setState(() {
+                    correctAnswersInRow = 0;
+                  });
+                  Navigator.of(context).pop();
+                  loadNextQuiz();
+                },
+                style: TextButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 24.0),
+                  backgroundColor: AppColors.primaryButtonColor(context),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                ),
+                child: Text(
+                  'Try Again',
+                  style: GlobalStyles.primaryButtonText(context),
+                ),
               ),
             ),
           ],
@@ -131,7 +173,6 @@ class _BirdQuizState extends State<BirdQuiz>
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
 
     if (currentQuiz == null) {
       return const Scaffold(
@@ -164,7 +205,7 @@ class _BirdQuizState extends State<BirdQuiz>
                     value: 1.0 -
                         _controller.value, // Inverted so it shrinks over time
                     backgroundColor: Colors.grey[300],
-                    color: Colors.blue, // Customize color
+                    color: AppColors.tertiaryColor(context), // Customize color
                   ),
                 ),
               ),
@@ -192,10 +233,13 @@ class _BirdQuizState extends State<BirdQuiz>
           const SizedBox(height: 16),
 
           Expanded(
-            child: Image.network(
-              currentQuiz?.images ?? '',
-              fit: BoxFit.cover,
-              width: screenWidth * 0.9,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.0), // Add border radius
+              child: Image.network(
+                currentQuiz?.images ?? '', // The image URL
+                fit: BoxFit.cover, // Adjust image to cover the container
+                width: screenWidth * 0.9,
+              ),
             ),
           ),
           const SizedBox(height: 16),
@@ -216,10 +260,11 @@ class _BirdQuizState extends State<BirdQuiz>
                     style: ElevatedButton.styleFrom(
                       backgroundColor: isSelectedBird
                           ? (isCorrectBird
-                              ? Colors.green
-                              : Colors.red) // Red for wrong, green for correct
+                              ? const Color.fromARGB(255, 105, 189, 108)
+                              : const Color.fromARGB(255, 219, 89,
+                                  79)) // Red for wrong, green for correct
                           : (isCorrectBird && isAnswered)
-                              ? Colors.green
+                              ? const Color.fromARGB(255, 105, 189, 108)
                               : AppColors.popupColor(
                                   context), // Green if it’s correct and answered
                       minimumSize: const Size(320, 50),

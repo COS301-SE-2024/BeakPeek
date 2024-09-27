@@ -31,14 +31,24 @@ class HeatMapInfo extends StatelessWidget {
                       SizedBox(height: screenHeight * 0.05),
                       Padding(
                         padding: EdgeInsets.only(
-                            right: screenWidth * 0.04,
-                            left: screenHeight * 0.02),
-                        child: const FilterableSearchbar(
-                          helpContent:
-                              '''This map shows you your current location. 
+                          right: screenWidth * 0.04,
+                          left: screenHeight * 0.02,
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            const Icon(Icons.arrow_back),
+                            SizedBox(
+                              width: screenWidth * 0.8,
+                              child: const FilterableSearchbar(
+                                helpContent:
+                                    '''This map shows you your current location. 
                           Click anywhere and you will see all the birds in that area! 
                           You can use the filters to customise what you see. 
                           You can use the search bar to see the heat map of a specific bird!''',
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       Expanded(

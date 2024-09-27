@@ -193,16 +193,19 @@ class _BirdPageState extends State<BirdPage> {
                                 ),
                                 const SizedBox(height: 8),
                                 Expanded(
-                                  child: SingleChildScrollView(
-                                    child: Text(
-                                      birdData.info ??
-                                          'No description available',
-                                      style:
-                                          GlobalStyles.contentPrimary(context)
-                                              .copyWith(
-                                                  fontSize: 18,
-                                                  fontWeight: FontWeight.w400),
-                                      textAlign: TextAlign.left,
+                                  child: Scrollbar(
+                                    child: SingleChildScrollView(
+                                      child: Text(
+                                        birdData.info ??
+                                            'No description available',
+                                        style:
+                                            GlobalStyles.contentPrimary(context)
+                                                .copyWith(
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.w400),
+                                        textAlign: TextAlign.left,
+                                      ),
                                     ),
                                   ),
                                 ),
