@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 List<Widget> getWidgetLifeList(
     List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> listOfBirdWidgets = [];
-  for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getLifeListData(birds[i], goBird, context));
+  int i = 0;
+  for (Bird temp in birds) {
+    listOfBirdWidgets.add(getLifeListData(temp, goBird, context, i));
+    i++;
   }
   return listOfBirdWidgets;
 }

@@ -30,7 +30,6 @@ class QuizManager {
 
   Future<QuizInstance> createQuizInstance() async {
     final List<Bird> selectedBirds = selectRandomBirds(birds, 4);
-    print(selectedBirds);
     final Bird correctBird = selectedBirds[Random().nextInt(4)];
     final String images = correctBird.imageUrl ?? '';
     return QuizInstance(

@@ -122,17 +122,16 @@ class _BirdSheetState extends State<BirdSheet> {
                   // Sort Dropdown
                   Flexible(
                     child: Container(
-                      width: screenWidth * 0.4, // Make the dropdown narrower
+                      width: screenWidth * 0.4,
                       child: DropdownButton<String>(
-                        isExpanded:
-                            true, // Ensures the dropdown items fit inside
+                        isExpanded: true,
                         value: _selectedSortOption,
                         items: <String>[
                           'Sort',
-                          'Rarity Asc',
-                          'Rarity Desc',
-                          'Alphabetically Asc',
-                          'Alphabetically Desc'
+                          'Rarity Asc.',
+                          'Rarity Desc.',
+                          'Alphabetically Asc.',
+                          'Alphabetically Desc.'
                         ].map((value) {
                           return DropdownMenuItem<String>(
                             value: value,

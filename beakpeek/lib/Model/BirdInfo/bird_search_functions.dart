@@ -1,3 +1,5 @@
+// ignore: unused_import
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/View/Home/Searching/filterable_searchbar_widgets.dart';
@@ -60,7 +62,12 @@ List<Widget> getWidgetListOfBirds(
 }
 
 List<Bird> sortAlphabetically(List<Bird> birds) {
-  birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
+  birds.sort((a, b) => a.commonSpecies.compareTo(b.commonSpecies));
+  return birds;
+}
+
+List<Bird> sortAlphabeticallyDesc(List<Bird> birds) {
+  birds.sort((a, b) => b.commonSpecies.compareTo(a.commonSpecies));
   return birds;
 }
 
