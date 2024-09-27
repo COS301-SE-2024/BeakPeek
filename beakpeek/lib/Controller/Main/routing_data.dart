@@ -21,7 +21,7 @@ class RoutingData {
           body: Center(
             child: FilledButton(
               onPressed: () => context.go('/home'),
-              child: const Text('Home'),
+              child: Text('Home ${ModalRoute.of(context)?.settings.name}'),
             ),
           ),
         )),
@@ -42,7 +42,7 @@ class RoutingData {
             routes: <RouteBase>[
               GoRoute(
                 path: 'heatmap/:id',
-                name: 'HeatMap',
+                name: 'heatmap',
                 builder: (context, state) {
                   return HeatMapInfo(
                     id: int.parse(state.pathParameters['id']!),
@@ -80,13 +80,15 @@ class RoutingData {
                     builder: (context, state) {
                       return SettingsPage();
                     },
-                  ),
-                  GoRoute(
-                    path: 'editprofile',
-                    name: 'editprofile',
-                    builder: (context, state) {
-                      return const EditUserProfile();
-                    },
+                    routes: <RouteBase>[
+                      GoRoute(
+                        path: 'editprofile',
+                        name: 'editprofile',
+                        builder: (context, state) {
+                          return const EditUserProfile();
+                        },
+                      ),
+                    ],
                   ),
                 ],
               ),
