@@ -62,7 +62,35 @@ class HeatMapState extends State<HeatMap> {
       children: [
         Column(
           children: [
-            _buildFiltersRow(),
+            if (population > 0) ...[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'This is an Endangered Species! Est. Population: $population',
+                  style: GlobalStyles.contentPrimary(context).copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: const Color.fromARGB(255, 202, 110, 104),
+                    fontSize: 12,
+                  ),
+                  textAlign: TextAlign.left, // Align the text to the right
+                  overflow: TextOverflow.ellipsis, // Prevent overflow
+                ),
+              ),
+            ] else if (population < 0) ...[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'This is not an Endangered Species!',
+                  style: GlobalStyles.contentPrimary(context).copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: const Color.fromARGB(255, 119, 189, 121),
+                    fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left, // Align the text to the right
+                  overflow: TextOverflow.ellipsis, // Prevent overflow
+                ),
+              ),
+            ],
             Expanded(
               child: GoogleMap(
                 onMapCreated: _onMapCreated,
@@ -72,47 +100,54 @@ class HeatMapState extends State<HeatMap> {
             ),
           ],
         ),
-        const SizedBox(),
-        _buildLegend(context),
+        Padding(
+          padding: const EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildFiltersRow(),
+              _buildLegend(context),
+            ],
+          ),
+        )
       ],
     );
   }
 
   Widget _buildFiltersRow() {
-    return Row(
-      mainAxisAlignment:
-          MainAxisAlignment.spaceBetween, // Ensure space between elements
-      children: [
-        if (population > 0) ...[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Text(
-              'This is an Endangered Species! Est. Population: $population',
-              style: TextStyle(
-                color: AppColors.textColor(context),
-                fontSize: 14,
-              ),
-            ),
-          ),
-        ] else if (population < 0) ...[
-          Padding(
-            padding: const EdgeInsets.only(right: 8.0),
-            child: Text(
-              'This is not an Endangered Species!',
-              style: TextStyle(
-                color: AppColors.textColor(context),
-                fontSize: 14,
-              ),
-            ),
+    return Container(
+      width: 150,
+      decoration: BoxDecoration(
+        color: AppColors.backgroundColor(context).withOpacity(0.9),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 4,
+            offset: const Offset(2, 2),
           ),
         ],
-        IconButton(
-          icon: Icon(Icons.filter_list, color: AppColors.iconColor(context)),
-          onPressed: () {
-            _showFilterDialog();
-          },
-        ),
-      ],
+      ),
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.filter_alt,
+                color: AppColors.primaryColorLight),
+            onPressed: () {
+              _showFilterDialog();
+            },
+          ),
+          GestureDetector(
+            onTap: () {
+              _showFilterDialog();
+            },
+            child: Text('Filter Map',
+                style: GlobalStyles.contentPrimary(context).copyWith(
+                    fontSize: 16, color: AppColors.primaryColorLight)),
+          ),
+        ],
+      ),
     );
   }
 
@@ -121,10 +156,10 @@ class HeatMapState extends State<HeatMap> {
       top: 50,
       right: 10,
       child: Container(
+        height: 230,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: Colors.white
-              .withOpacity(0.9), // Slightly more opaque for better visibility
+          color: AppColors.backgroundColor(context).withOpacity(0.9),
           borderRadius: BorderRadius.circular(10), // Rounded corners
           boxShadow: [
             BoxShadow(
@@ -138,13 +173,10 @@ class HeatMapState extends State<HeatMap> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // Legend title
-            const Text(
+            Text(
               'Legend',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 14,
-                color: Colors.black,
-              ),
+              style: GlobalStyles.contentPrimary(context)
+                  .copyWith(fontSize: 16, color: AppColors.primaryColorLight),
             ),
             const SizedBox(height: 8), // Space between title and items
             // Create legend items
@@ -178,10 +210,8 @@ class HeatMapState extends State<HeatMap> {
             // Use Flexible instead of Expanded
             child: Text(
               label,
-              style: const TextStyle(
-                fontSize: 12, // Smaller font size
-                color: Colors.black,
-              ),
+              style:
+                  GlobalStyles.contentPrimary(context).copyWith(fontSize: 14),
             ),
           ),
         ],
@@ -194,56 +224,84 @@ class HeatMapState extends State<HeatMap> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Filters'),
-          backgroundColor: AppColors.backgroundColor(context),
-          content: Column(mainAxisSize: MainAxisSize.min, children: [
-            DropdownButtonFormField<String>(
-              value: _selectedMonth,
-              onChanged: (newValue) {
-                setState(() {
-                  _selectedMonth = newValue!;
-                });
-              },
-              items: <String>[
-                'Year-Round',
-                'January',
-                'February',
-                'March',
-                'April',
-                'May',
-                'June',
-                'July',
-                'August',
-                'September',
-                'October',
-                'November',
-                'December'
-              ].map<DropdownMenuItem<String>>((value) {
-                return DropdownMenuItem<String>(
-                  value: value,
-                  child: Text(
-                    value,
-                    style: GlobalStyles.contentPrimary(context),
-                  ),
-                );
-              }).toList(),
-              decoration: InputDecoration(
-                fillColor: AppColors.popupColor(context),
-                filled: true,
-                contentPadding:
-                    const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-              ),
-              style: GlobalStyles.contentPrimary(context),
-              dropdownColor: AppColors.popupColor(context),
-              iconEnabledColor: AppColors.secondaryColor(context),
+          title: Center(
+            child: Text(
+              'Map Filters',
+              style: GlobalStyles.smallHeadingPrimary(context),
             ),
-          ]),
+          ),
+          backgroundColor: AppColors.backgroundColor(context),
+          content: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(4.0),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_today,
+                        size: 20.0,
+                        color: AppColors.iconColor(context),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        'Filter by month:',
+                        style: GlobalStyles.contentPrimary(context)
+                            .copyWith(fontWeight: FontWeight.w400),
+                      ),
+                    ],
+                  ),
+                ),
+                const SizedBox(height: 4.0),
+                DropdownButtonFormField<String>(
+                  value: _selectedMonth,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _selectedMonth = newValue!;
+                    });
+                  },
+                  items: <String>[
+                    'Year-Round',
+                    'January',
+                    'February',
+                    'March',
+                    'April',
+                    'May',
+                    'June',
+                    'July',
+                    'August',
+                    'September',
+                    'October',
+                    'November',
+                    'December'
+                  ].map<DropdownMenuItem<String>>((value) {
+                    return DropdownMenuItem<String>(
+                      value: value,
+                      child: Text(
+                        value,
+                        style: GlobalStyles.contentPrimary(context)
+                            .copyWith(fontWeight: FontWeight.w400),
+                      ),
+                    );
+                  }).toList(),
+                  decoration: InputDecoration(
+                    fillColor: AppColors.popupColor(context),
+                    filled: true,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12.0, vertical: 8.0),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                    ),
+                  ),
+                  style: GlobalStyles.contentPrimary(context),
+                  dropdownColor: AppColors.popupColor(context),
+                  iconEnabledColor: AppColors.secondaryColor(context),
+                ),
+              ]),
           actions: [
             TextButton(
               onPressed: () {

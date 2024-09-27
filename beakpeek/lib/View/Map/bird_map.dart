@@ -103,48 +103,75 @@ class BirdMapState extends State<BirdMap> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        _buildFiltersRow(),
-        Expanded(
-          child: GoogleMap(
-            onMapCreated: (controller) {
-              mapController = controller;
-              if (_isLocationFetched) {
-                mapController.animateCamera(
-                    CameraUpdate.newCameraPosition(_cameraPosition));
-              }
-            },
-            initialCameraPosition: _cameraPosition,
-            polygons: _polygons,
-            myLocationEnabled: true, // Enable the blue dot marker
-            myLocationButtonEnabled: true, // Enable the "My Location" button
-          ),
+        Column(
+          children: [
+            Expanded(
+              child: GoogleMap(
+                onMapCreated: (controller) {
+                  mapController = controller;
+                  if (_isLocationFetched) {
+                    mapController.animateCamera(
+                        CameraUpdate.newCameraPosition(_cameraPosition));
+                  }
+                },
+                initialCameraPosition: _cameraPosition,
+                polygons: _polygons,
+                myLocationEnabled: true, // Enable the blue dot marker
+                myLocationButtonEnabled:
+                    true, // Enable the "My Location" button
+              ),
+            ),
+          ],
         ),
+        Padding(
+          padding: const EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildFiltersRow(),
+            ],
+          ),
+        )
       ],
     );
   }
 
   Widget _buildFiltersRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: [
-        const SizedBox(
-          width: 12.0,
-        ),
-        IconButton(
-          icon: Icon(Icons.filter_alt, color: AppColors.greyColor(context)),
-          onPressed: () {
-            _showFilterDialog();
-          },
-        ),
-        GestureDetector(
-          onTap: () {
-            _showFilterDialog();
-          },
-          child: Text('Filter map', style: GlobalStyles.smallContent(context)),
-        ),
-      ],
+    return Container(
+      width: 150,
+      decoration: BoxDecoration(
+        color: AppColors.backgroundColor(context).withOpacity(0.9),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 4,
+            offset: const Offset(2, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.filter_alt,
+                color: AppColors.primaryColorLight),
+            onPressed: () {
+              _showFilterDialog();
+            },
+          ),
+          GestureDetector(
+            onTap: () {
+              _showFilterDialog();
+            },
+            child: Text('Filter Map',
+                style: GlobalStyles.contentPrimary(context).copyWith(
+                    fontSize: 16, color: AppColors.primaryColorLight)),
+          ),
+        ],
+      ),
     );
   }
 
