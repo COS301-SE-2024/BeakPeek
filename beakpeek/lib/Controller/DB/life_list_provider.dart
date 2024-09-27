@@ -1,13 +1,10 @@
 // ignore_for_file: avoid_print
 
 import 'dart:async';
-import 'dart:typed_data';
-import 'dart:ui';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Model/BirdInfo/pentad.dart';
-import 'package:beakpeek/Model/BirdInfo/province.dart';
 import 'package:beakpeek/Model/BirdInfo/province_data.dart';
+import 'package:http/http.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -50,8 +47,7 @@ class LifeListProvider {
           commonSpecies TEXT, 
           genus TEXT, 
           species TEXT, 
-          reportingRate DOUBLE,
-          image_Url TEXT
+          reportingRate DOUBLE
           )''');
     await db.execute('''
         CREATE TABLE allBirds(
@@ -163,7 +159,10 @@ class LifeListProvider {
     return count;
   }
 
-  Future<void> insertBird(Bird bird) async {
+  Future<void> insertBird(int birdId) async {
+    print('inserting ');
+    final bird = await getBirdInByID(birdId);
+    print(bird.toString());
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
       await db
@@ -187,49 +186,10 @@ class LifeListProvider {
       'birds',
       orderBy: 'commonSpecies DESC',
     );
+    print('LifeList ${birdMap.toString()}');
     return birdMap.map(
       (map) {
-        return Bird(
-          id: map['id'] as int,
-          commonGroup:
-              map['commonGroup'] != null ? map['commonGroup'] as String : '',
-          commonSpecies: map['commonSpecies'] != null
-              ? map['commonSpecies'] as String
-              : '',
-          fullProtocolRR: 0.0,
-          fullProtocolNumber: 0,
-          latestFP: map['latestFP'] != null ? map['latestFP'] as String : '',
-          reportingRate: map['reportingRate'] != null
-              ? map['reportingRate'] as double
-              : 0.0,
-          genus: map['genus'] as String,
-          species: map['species'] as String,
-          pentad: Pentad(
-            pentadAllocation: map['pentad'].toString(),
-            pentadLongitude: 0.0,
-            pentadLatitude: 0.0,
-            province: Province(
-              id: 0,
-              name: ' ',
-            ),
-            totalCards: 0,
-          ),
-          jan: 0.0,
-          feb: 0.0,
-          mar: 0.0,
-          apr: 0.0,
-          may: 0.0,
-          jun: 0.0,
-          jul: 0.0,
-          aug: 0.0,
-          sep: 0.0,
-          oct: 0.0,
-          nov: 0.0,
-          dec: 0.0,
-          totalRecords: 0,
-          //population
-          population: 0,
-        );
+        return Bird.fromJsonLifeList(map);
       },
     ).toList();
   }
@@ -253,7 +213,7 @@ class LifeListProvider {
         bird.species
       ],
     );
-
+    print(maps);
     if (maps.isNotEmpty) {
       return true;
     } else {
@@ -278,16 +238,17 @@ class LifeListProvider {
 
   Future<void> initialInsert(List<Bird> allBirds) async {
     final db = await instance.database;
+    final batch = db.batch();
     if (await containsData() == 0) {
-      final batch = db.batch();
-      for (Bird bird in allBirds) {
-        if (bird.reportingRate > 1) {
-          batch.insert('allBirds', bird.toAllBirdsMap(),
+      for (Bird temp in allBirds) {
+        if (temp.reportingRate >= 1) {
+          batch.insert('allBirds', temp.toAllBirdsMap(),
               conflictAlgorithm: ConflictAlgorithm.replace);
         }
       }
-      await batch.commit();
+      batch.commit();
     }
+    //print(getFullBirdData().toString());
   }
 
   Future<void> initialProvInsert(List<Bird> allBirds) async {
@@ -376,44 +337,78 @@ class LifeListProvider {
           nov: map['nov'] as double,
           dec: map['dec'] as double,
           totalRecords: map['totalRecords'] as int,
-          imageBlob: map['image_Blob'] as Uint8List,
           imageUrl: map['image_Url'] as String,
-          //population
           population: map['birdPopulation'] as int,
         );
       },
     ).toList();
   }
 
-  Future<Map<String, Object?>> getBirdInByID(int id) async {
+  Future<Bird> getBirdInByID(int id) async {
+    final db = await instance.database;
+    print(getFullBirdData().toString());
+    final List<Map<String, Object?>> map =
+        await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
+    final Bird temp = Bird(
+      id: map[0]['id'] as int,
+      commonGroup:
+          map[0]['commonGroup'] != null ? map[0]['commonGroup'] as String : '',
+      commonSpecies: map[0]['commonSpecies'] != null
+          ? map[0]['commonSpecies'] as String
+          : '',
+      fullProtocolRR: map[0]['fullProtocolRR'] as double,
+      fullProtocolNumber: map[0]['fullProtocolNumber'] as int,
+      latestFP: map[0]['latestFP'] != null ? map[0]['latestFP'] as String : '',
+      reportingRate: map[0]['reportingRate'] != null
+          ? map[0]['reportingRate'] as double
+          : 0.0,
+      genus: map[0]['genus'] as String,
+      species: map[0]['species'] as String,
+      jan: map[0]['jan'] as double,
+      feb: map[0]['feb'] as double,
+      mar: map[0]['mar'] as double,
+      apr: map[0]['apr'] as double,
+      may: map[0]['may'] as double,
+      jun: map[0]['jun'] as double,
+      jul: map[0]['jul'] as double,
+      aug: map[0]['aug'] as double,
+      sep: map[0]['sep'] as double,
+      oct: map[0]['oct'] as double,
+      nov: map[0]['nov'] as double,
+      dec: map[0]['dec'] as double,
+      totalRecords: map[0]['totalRecords'] as int,
+      imageUrl: map[0]['image_Url'] as String,
+      population: map[0]['birdPopulation'] as int,
+    );
+    print(temp);
+    return temp;
+  }
+
+  Future<Bird> getBirdInfoByID(int id) async {
     final db = await instance.database;
     final List<Map<String, Object?>> birdMap =
         await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
-    return birdMap[0];
+    print('Check all birds');
+    print(birdMap.toString());
+    print(Bird.fromJsonLife(birdMap[0]));
+    return Bird.fromJsonLife(birdMap[0]);
   }
 
-  Future<void> addImage(int id, Image img) async {
-    // final db = await instance.database;
-    //  final dir = await getTemporaryDirectory();
-
-    // // Create an image name
-    // var filename = '${dir.path}/image.png';
-    // final file = File(filename);
-    // await file.writeAsBytes(img.bodyBytes);
-    // File imgFile = new File
-    // final bytes = img.readAsBytesSync();
-    // final String encodedImage = base64Encode(bytes);
-    // await db.rawUpdate(
-    //   '''UPDATE allBirds
-    //   SET image_Blob = ?
-    //   WHERE id = ?''',
-    //   [encodedImage, id],
-    // );
+  Future<void> addImage(int id, String img) async {
+    final db = await instance.database;
+    final image = await get(Uri.parse(img));
+    final bytes = image.bodyBytes;
+    //print(bytes);
+    await db.rawUpdate(
+      '''UPDATE allBirds
+      SET image_Blob = ?
+      WHERE id = ?''',
+      [bytes, id],
+    );
   }
 
   Future<List<Map<String, Object?>>> getLifeListForUser() async {
     final db = await instance.database;
-
     return await db.query('birds');
   }
 }

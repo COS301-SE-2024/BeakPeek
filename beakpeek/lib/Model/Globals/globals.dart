@@ -26,13 +26,14 @@ class Globals {
       lifeList.initialInsert(result);
       lifeList.initialProvInsert(result);
     });
-    // lifeList.deleteDatabaseFile();
+    //lifeList.deleteDatabaseFile();
   }
 
-  void updateLife() {
+  void updateLife() async {
     lifeList.fetchLifeList().then((result) {
       birdList = result;
     });
+    birdList = await lifeList.fetchLifeList();
   }
 
   Bird getDefualtBirdData(int id) {

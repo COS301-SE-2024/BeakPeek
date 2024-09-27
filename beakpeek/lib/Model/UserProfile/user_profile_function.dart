@@ -109,11 +109,11 @@ Future<List<int>> countProv() async {
   return provCount;
 }
 
-int birdexpByRarity(Bird bird) {
-  if (bird.reportingRate == 0) {
+int birdexpByRarity(double reportingRate) {
+  if (reportingRate == 0) {
     return 100;
   }
-  return (bird.reportingRate / 100).ceil();
+  return (reportingRate / 100).ceil();
 }
 
 String formatProvinceName(String province) {

@@ -23,9 +23,9 @@ void main() {
                 'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/authorize',
               );
               expect(methodCall.arguments['callbackUrlScheme'] as String,
-                  'com.example.beakpeek');
+                  'com.millennium.beakpeek');
 
-              return 'com.example.beakpeek://login-callback/?code=eyJraW';
+              return 'com.millennium.beakpeek://login-callback/?code=eyJraW';
             },
           );
         },
@@ -45,9 +45,9 @@ void main() {
             await FlutterWebAuth2.authenticate(
               url:
                   'https://beakpeak.b2clogin.com/beakpeak.onmicrosoft.com/B2C_1_SignUpAndSignInUserFlow/oauth2/v2.0/authorize',
-              callbackUrlScheme: 'com.example.beakpeek',
+              callbackUrlScheme: 'com.millennium.beakpeek',
             ),
-            'com.example.beakpeek://login-callback/?code=eyJraW',
+            'com.millennium.beakpeek://login-callback/?code=eyJraW',
           );
         },
       );
