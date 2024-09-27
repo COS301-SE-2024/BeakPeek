@@ -46,10 +46,7 @@ Widget getLifeListData(
       contentPadding:
           const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       leading: CircleAvatar(
-        radius: 25.0,
-        backgroundImage:
-            const AssetImage('assets/images/profileImages/images.jpg'),
-        backgroundColor: Colors.grey[200],
+        backgroundImage: NetworkImage(bird.imageUrl ?? ''),
       ),
       title: Text(
         bird.commonGroup.isNotEmpty
