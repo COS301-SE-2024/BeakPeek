@@ -13,6 +13,7 @@ abstract class AppColors {
   static const Color secondaryButtonTextColorLight = Color(0xff033a30);
   static const Color iconColorLight = primaryColorLight;
   static const Color filterColorLight = primaryColorLight;
+  static const Color lifelistLight = Color.fromARGB(255, 243, 241, 238);
 
   // Dark mode colors
   static const Color primaryColorDark = Color(0xffdde6e4);
@@ -26,6 +27,7 @@ abstract class AppColors {
   static const Color secondaryButtonTextColorDark = Color(0xffdde6e4);
   static const Color iconColorDark = primaryColorDark;
   static const Color filterColorDark = tertiaryColorDark;
+  static const Color lifelistDark = Color.fromARGB(255, 27, 43, 37);
 
   // Get primary color
   static Color primaryColor(BuildContext context) {
@@ -109,5 +111,11 @@ abstract class AppColors {
     return Theme.of(context).brightness == Brightness.dark
         ? secondaryButtonTextColorDark
         : secondaryButtonTextColorLight;
+  }
+
+  static Color lifelistColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? lifelistDark
+        : lifelistLight;
   }
 }

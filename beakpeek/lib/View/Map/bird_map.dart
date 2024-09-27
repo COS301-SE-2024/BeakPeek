@@ -119,13 +119,22 @@ class BirdMapState extends State<BirdMap> {
 
   Widget _buildFiltersRow() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
+        const SizedBox(
+          width: 12.0,
+        ),
         IconButton(
-          icon: Icon(Icons.filter_list, color: AppColors.iconColor(context)),
+          icon: Icon(Icons.filter_alt, color: AppColors.greyColor(context)),
           onPressed: () {
             _showFilterDialog();
           },
+        ),
+        GestureDetector(
+          onTap: () {
+            _showFilterDialog();
+          },
+          child: Text('Filter map', style: GlobalStyles.smallContent(context)),
         ),
       ],
     );
@@ -136,12 +145,35 @@ class BirdMapState extends State<BirdMap> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Filters'),
+          title: Center(
+            child: Text('Map Filters',
+                style: GlobalStyles.smallHeadingPrimary(context)),
+          ),
           backgroundColor: AppColors.backgroundColor(context),
           content: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Province Dropdown
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      size: 20.0,
+                      color: AppColors.iconColor(context),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Filter by province:',
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 4.0),
               DropdownButtonFormField<String>(
                 value: _selectedProvince,
                 onChanged: (newValue) {
@@ -163,7 +195,8 @@ class BirdMapState extends State<BirdMap> {
                     value: value,
                     child: Text(
                       value,
-                      style: GlobalStyles.contentPrimary(context),
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
                     ),
                   );
                 }).toList(),
@@ -173,10 +206,10 @@ class BirdMapState extends State<BirdMap> {
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
                 style: GlobalStyles.contentPrimary(context),
@@ -186,6 +219,26 @@ class BirdMapState extends State<BirdMap> {
               const SizedBox(height: 10.0),
 
               // Month Dropdown
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      size: 18.0,
+                      color: AppColors.iconColor(context),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Filter by month:',
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 4.0),
               DropdownButtonFormField<String>(
                 value: _selectedMonth,
                 onChanged: (newValue) {
@@ -212,7 +265,8 @@ class BirdMapState extends State<BirdMap> {
                     value: value,
                     child: Text(
                       value,
-                      style: GlobalStyles.contentPrimary(context),
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
                     ),
                   );
                 }).toList(),
@@ -222,10 +276,10 @@ class BirdMapState extends State<BirdMap> {
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
                 style: GlobalStyles.contentPrimary(context),
