@@ -42,7 +42,7 @@ class BottomNavItem extends StatelessWidget {
           TextButton(
             onPressed: () {
               if (label.toLowerCase().compareTo('home') == 0) {
-                context.go('home');
+                context.goNamed('home');
               }
               if (config.loggedIN) {
                 context.goNamed(label.toLowerCase());
@@ -50,7 +50,7 @@ class BottomNavItem extends StatelessWidget {
                 if (label.contains('Profile')) {
                   context.go('/');
                 } else {
-                  context.go('/${label.toLowerCase()}');
+                  context.goNamed('${label.toLowerCase()}');
                 }
               }
             },
