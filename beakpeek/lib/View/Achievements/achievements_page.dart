@@ -1,4 +1,5 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -39,6 +40,10 @@ class AchievementsPageState extends State<AchievementsPage> {
         title: Text('Achievements',
             style: GlobalStyles.smallHeadingPrimary(context)),
         centerTitle: true,
+        actions: const [
+          HelpIcon(content: '*implement achievements page help*'),
+          SizedBox(width: 14.0)
+        ],
       ),
       bottomNavigationBar: const BottomNavigation(),
       body: Scrollbar(
