@@ -47,7 +47,10 @@ class LifeListProvider {
           commonSpecies TEXT, 
           genus TEXT, 
           species TEXT, 
-          reportingRate DOUBLE
+          reportingRate DOUBLE,
+          image_Url Text,
+          image_Blob BLOB
+          
           )''');
     await db.execute('''
         CREATE TABLE allBirds(
@@ -186,7 +189,7 @@ class LifeListProvider {
       'birds',
       orderBy: 'commonSpecies DESC',
     );
-    print('LifeList ${birdMap.toString()}');
+    print('LifeList FetchLifeList ${birdMap.toString()}');
     return birdMap.map(
       (map) {
         return Bird.fromJsonLifeList(map);
@@ -398,10 +401,17 @@ class LifeListProvider {
   Future<void> addImage(int id, String img) async {
     final db = await instance.database;
     final image = await get(Uri.parse(img));
-    final bytes = image.bodyBytes;
+    final bytes = image.bodyBytes.toString();
     //print(bytes);
     await db.rawUpdate(
       '''UPDATE allBirds
+      SET image_Blob = ?
+      WHERE id = ?''',
+      [bytes, id],
+    );
+
+    await db.rawUpdate(
+      '''UPDATE birds
       SET image_Blob = ?
       WHERE id = ?''',
       [bytes, id],
@@ -411,5 +421,16 @@ class LifeListProvider {
   Future<List<Map<String, Object?>>> getLifeListForUser() async {
     final db = await instance.database;
     return await db.query('birds');
+  }
+
+  Future<String> getImage(int id) async {
+    final db = await instance.database;
+    final List<Map<String, Object?>> birdMap = await db.query(
+      'allBirds',
+      columns: ['image_Blob'],
+      where: 'id = ?',
+      whereArgs: [id],
+    );
+    return birdMap[0]['image_Blob'] as String;
   }
 }

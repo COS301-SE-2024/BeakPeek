@@ -27,7 +27,7 @@ class _SightingsState extends State<Sightings> {
   @override
   void initState() {
     global.updateLife();
-
+    loaded = global.birdList;
     super.initState();
   }
 
@@ -182,6 +182,7 @@ class _SightingsState extends State<Sightings> {
               future: lifeList.fetchLifeList(),
               builder: (context, snapshot) {
                 loaded = snapshot.data ?? [];
+                print('Loaded: ${loaded.toString()}');
                 return getLiveList(loaded, goBird, context);
               },
             ),
