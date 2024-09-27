@@ -61,6 +61,6 @@ class BirdPentad {
 
   @override
   String toString() {
-    return 'Bird: ${bird}';
+    return 'Bird: $bird';
   }
 }
