@@ -42,7 +42,7 @@ class RoutingData {
             routes: <RouteBase>[
               GoRoute(
                 path: 'heatmap/:id',
-                name: 'HeatMap',
+                name: 'heatmap',
                 builder: (context, state) {
                   return HeatMapInfo(
                     id: int.parse(state.pathParameters['id']!),

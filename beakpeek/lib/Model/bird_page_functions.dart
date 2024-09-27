@@ -58,7 +58,7 @@ class ApiService {
     final double viewRate = (bird.fullProtocolRR+detectionProbability) *
         bird.fullProtocolNumber *
         pentads /
-        12497; // multiply by num pentads/16673   12497    14288
+        16673; // multiply by num pentads/16673   12497    14288
     final int population = (constant * viewRate).round();
     if (population > 20000) {
       return -1;
