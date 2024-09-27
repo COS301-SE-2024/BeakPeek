@@ -102,7 +102,7 @@ class Bird {
       dec: 0.0,
       totalRecords: 0,
       imageUrl: birdJson['image_Url'] ?? '',
-      // imageBlob: birdJson['image_Blob'] ? birdJson['image_Blob'] as String : '',
+      // imageBlob: birdJson['image_Blob'] ? birdJson['image_Blob']asString:'',
       reportingRate: birdJson['reportingRate']?.toDouble() ??
           json['reportingRate']?.toDouble() ??
           0.0,
