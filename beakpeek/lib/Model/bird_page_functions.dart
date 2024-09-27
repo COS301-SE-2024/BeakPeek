@@ -55,12 +55,12 @@ class ApiService {
     //https://core.ac.uk/download/pdf/9821458.pdf
 
     //MULTIPLY HERE ->
-    final double viewRate = bird.fullProtocolRR *
+    final double viewRate = (bird.fullProtocolRR+detectionProbability) *
         bird.fullProtocolNumber *
         pentads /
-        16673; // multiply by num pentads/16673
-    final int population = (constant * viewRate / detectionProbability).round();
-    if (population > 50000) {
+        16673; // multiply by num pentads/16673   12497    14288
+    final int population = (constant * viewRate).round();
+    if (population > 20000) {
       return -1;
     }
     return population;
