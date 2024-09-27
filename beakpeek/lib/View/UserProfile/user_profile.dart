@@ -94,7 +94,7 @@ class UserProfileState extends State<UserProfile> {
                             icon: const Icon(Icons.settings),
                             color: AppColors.iconColor(context),
                             onPressed: () {
-                              context.go('/settings');
+                              context.goNamed('settings');
                             },
                           ),
                         ],

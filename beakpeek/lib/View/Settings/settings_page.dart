@@ -50,7 +50,7 @@ class SettingsPage extends StatelessWidget {
               _buildOptionTile(context, 'Delete Account', Icons.delete,
                   Icons.arrow_forward_ios, () {
                 deleteLocalUser();
-                context.go('/');
+                context.pop();
               }),
               const SizedBox(height: 20),
 

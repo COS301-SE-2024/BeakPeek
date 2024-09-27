@@ -3,8 +3,8 @@ import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/View/Login/terms_and_conditions_popup.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:go_router/go_router.dart';
 import 'package:flutter_popup_card/flutter_popup_card.dart';
+import 'package:go_router/go_router.dart';
 import 'package:localstorage/localstorage.dart';
 
 class LandingTab2 extends StatelessWidget {
@@ -14,6 +14,10 @@ class LandingTab2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+
+    void goHome(context) {
+      context.goNamed('home');
+    }
 
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
@@ -105,7 +109,9 @@ class LandingTab2 extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                child: TermsAndConditionsPopup(),
+                                child: TermsAndConditionsPopup(
+                                  login: loginFunction,
+                                ),
                               );
                             },
                           );
@@ -118,7 +124,25 @@ class LandingTab2 extends StatelessWidget {
                       child: Text('Sign In as Guest',
                           style: GlobalStyles.secondaryButtonText(context)),
                       onPressed: () {
-                        context.go('/home');
+                        if (localStorage.getItem('termsAndCondition') !=
+                            'true') {
+                          showPopupCard(
+                            dimBackground: true,
+                            context: context,
+                            builder: (context) {
+                              return PopupCard(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                                child: TermsAndConditionsPopup(
+                                  login: goHome,
+                                ),
+                              );
+                            },
+                          );
+                        } else {
+                          context.goNamed('home');
+                        }
                       },
                     ),
                   ],
