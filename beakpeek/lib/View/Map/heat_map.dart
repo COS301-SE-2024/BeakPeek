@@ -119,7 +119,7 @@ class HeatMapState extends State<HeatMap> {
     return Container(
       width: 150,
       decoration: BoxDecoration(
-        color: AppColors.backgroundColor(context).withOpacity(0.9),
+        color: Colors.white.withOpacity(0.9),
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
@@ -159,7 +159,7 @@ class HeatMapState extends State<HeatMap> {
         height: 230,
         padding: const EdgeInsets.all(8.0),
         decoration: BoxDecoration(
-          color: AppColors.backgroundColor(context).withOpacity(0.9),
+          color: Colors.white.withOpacity(0.9),
           borderRadius: BorderRadius.circular(10), // Rounded corners
           boxShadow: [
             BoxShadow(
@@ -210,8 +210,8 @@ class HeatMapState extends State<HeatMap> {
             // Use Flexible instead of Expanded
             child: Text(
               label,
-              style:
-                  GlobalStyles.contentPrimary(context).copyWith(fontSize: 14),
+              style: GlobalStyles.contentPrimary(context)
+                  .copyWith(fontSize: 14, color: AppColors.primaryColorLight),
             ),
           ),
         ],

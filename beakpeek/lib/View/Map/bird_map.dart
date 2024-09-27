@@ -126,7 +126,7 @@ class BirdMapState extends State<BirdMap> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 60.0, left: 20.0, right: 20.0),
+          padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -143,7 +143,7 @@ class BirdMapState extends State<BirdMap> {
     return Container(
       width: 150,
       decoration: BoxDecoration(
-        color: AppColors.backgroundColor(context).withOpacity(0.9),
+        color: Colors.white.withOpacity(0.9),
         borderRadius: BorderRadius.circular(10),
         boxShadow: [
           BoxShadow(
