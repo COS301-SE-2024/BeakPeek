@@ -1,12 +1,9 @@
 // ignore_for_file: non_constant_identifier_names, duplicate_ignore, use_build_context_synchronously, lines_longer_than_80_chars, avoid_print
-
-import 'dart:convert';
 import 'dart:math';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/quiz_instance.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 class QuizManager {
   factory QuizManager() {
@@ -46,24 +43,16 @@ class QuizManager {
 
 List<Bird> selectRandomBirds(List<Bird> birds, int count) {
   birds.shuffle(Random());
-  return birds.take(count).toList();
-}
+  List<Bird> selectedBirds = [];
 
-Future<List<String>> getImages(http.Client client, Bird bird) async {
-  try {
-    print('HELLLLO: ${bird.imageUrl}');
-    final String birdName = '${bird.commonSpecies} ${bird.commonGroup}';
-    final response = await client.get(Uri.parse(
-        'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/$birdName'));
+  while (selectedBirds.length < count) {
+    Bird randomBird = birds[Random().nextInt(birds.length)];
 
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonResponse = json.decode(response.body);
-      final List<dynamic> images = jsonResponse['images'];
-      return images.map<String>((image) => image['url'] as String).toList();
-    } else {
-      throw Exception('Failed to load bird images');
+    // Check if the bird has a valid imageUrl
+    if (randomBird.imageUrl != null && randomBird.imageUrl!.isNotEmpty) {
+      selectedBirds.add(randomBird);
     }
-  } catch (error) {
-    throw Exception('Error fetching bird images: $error');
   }
+
+  return selectedBirds;
 }

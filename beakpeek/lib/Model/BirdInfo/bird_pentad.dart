@@ -18,7 +18,8 @@ class BirdPentad {
       required this.sep,
       required this.oct,
       required this.nov,
-      required this.dec});
+      required this.dec,
+      required this.totalPentadReports});
 
   factory BirdPentad.fromJson(Map<String, dynamic> json) {
     return BirdPentad(
@@ -26,6 +27,7 @@ class BirdPentad {
       reportingRate: json['reportingRate'] ?? 0.0,
       pentadLatitude: json['pentad']?['pentad_Latitude'] ?? 0,
       pentadLongitude: json['pentad']?['pentad_Longitude'] ?? 0,
+      totalPentadReports: json['total_Records'] ?? 0,
       bird: Bird.fromJson(json['bird']),
       jan: json['jan']?.toDouble() ?? 0.0,
       feb: json['feb']?.toDouble() ?? 0.0,
@@ -45,6 +47,7 @@ class BirdPentad {
   final double reportingRate;
   final int pentadLatitude;
   final int pentadLongitude;
+  final int totalPentadReports;
   final Bird bird;
   final double jan;
   final double feb;
