@@ -27,8 +27,8 @@ class _SightingsState extends State<Sightings> {
   @override
   void initState() {
     global.updateLife();
-    loaded = global.birdList;
     listBirds = lifeList.fetchLifeList();
+
     super.initState();
   }
 
@@ -48,6 +48,14 @@ class _SightingsState extends State<Sightings> {
       global.updateLife();
       loaded = temp;
     });
+  }
+
+  void sortAlphaAsc() {
+    setLoaded(sortAlphabetically(loaded));
+  }
+
+  void sortAlphaDesc() {
+    setLoaded(sortAlphabeticallyDesc(loaded));
   }
 
   void reportRateDESC() {
@@ -131,7 +139,13 @@ class _SightingsState extends State<Sightings> {
                         height: 34.0,
                         child: OutlinedButton(
                           style: GlobalStyles.buttonPrimaryOutlined(context),
-                          onPressed: reportRateASC,
+                          onPressed: () {
+                            if (selectedFilter == 'name') {
+                              sortAlphaAsc();
+                            } else {
+                              reportRateASC();
+                            }
+                          },
                           child: Icon(
                             Icons.arrow_upward,
                             color: AppColors.iconColor(context),
@@ -144,7 +158,13 @@ class _SightingsState extends State<Sightings> {
                         height: 34.0,
                         child: OutlinedButton(
                           style: GlobalStyles.buttonPrimaryOutlined(context),
-                          onPressed: reportRateDESC,
+                          onPressed: () {
+                            if (selectedFilter == 'name') {
+                              sortAlphaDesc();
+                            } else {
+                              reportRateDESC();
+                            }
+                          },
                           child: Icon(
                             Icons.arrow_downward,
                             color: AppColors.iconColor(context),
@@ -159,7 +179,13 @@ class _SightingsState extends State<Sightings> {
           ),
           SizedBox(
             height: screenHeight * 0.75,
-            child: getLiveList(loaded, goBird, context),
+            child: FutureBuilder<List<Bird>>(
+              future: listBirds,
+              builder: (context, snapshot) {
+                loaded = snapshot.data!;
+                return getLiveList(snapshot.data!, goBird, context);
+              },
+            ),
           ),
         ],
       ),

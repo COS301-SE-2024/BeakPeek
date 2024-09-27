@@ -25,8 +25,7 @@ class ApiService {
     }
   }
 
-  Future<Map<String, Object?>> fetchBirdInfoOffline(
-      LifeListProvider lifeList, int id) async {
+  Future<Bird> fetchBirdInfoOffline(LifeListProvider lifeList, int id) async {
     return await lifeList.getBirdInByID(id);
   }
 
