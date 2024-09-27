@@ -186,35 +186,8 @@ class HomeState extends State<Home> {
                                 ),
                               );
                             } else if (snapshot.hasError) {
-                              if (snapshot.error.toString().contains(
-                                  'Location is outside South Africa')) {
-                                return Center(
-                                  child: Column(
-                                    children: [
-                                      Icon(Icons.error_outline,
-                                          size: 50, color: Colors.red),
-                                      const SizedBox(height: 15),
-                                      Text(
-                                        'You need to be in South Africa to view birds in this area.',
-                                        style: GlobalStyles.contentPrimary(
-                                            context),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                      const SizedBox(height: 10),
-                                      Text(
-                                        'Please enable location or move to a region within South Africa.',
-                                        style: GlobalStyles.smallContentPrimary(
-                                            context),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
-                                );
-                              } else {
-                                return Center(
-                                  child: Text('Error: ${snapshot.error}'),
-                                );
-                              }
+                              return Center(
+                                  child: Text('Error: ${snapshot.error}'));
                             } else if (!snapshot.hasData ||
                                 snapshot.data!.isEmpty) {
                               return const Center(
@@ -348,22 +321,11 @@ class HomeState extends State<Home> {
 
 Future<String> getPentadId() async {
   final Position position = await Geolocator.getCurrentPosition();
-  final latitude = position.latitude;
-  final longitude = position.longitude;
+  final latDegrees = position.latitude.ceil();
+  final lonDegrees = position.longitude.floor();
 
-  // Check if the location is within South Africa's boundaries
-  if (latitude < -35.0 ||
-      latitude > -22.0 ||
-      longitude < 16.0 ||
-      longitude > 33.0) {
-    throw Exception('Location is outside South Africa.');
-  }
-
-  final latDegrees = latitude.ceil();
-  final lonDegrees = longitude.floor();
-
-  final latDecimal = (latitude - latDegrees).abs();
-  final lonDecimal = longitude - lonDegrees;
+  final latDecimal = (position.latitude - latDegrees).abs();
+  final lonDecimal = position.longitude - lonDegrees;
 
   // Convert decimal part to minutes
   final latMinutes = ((latDecimal * 60) - (latDecimal * 60) % 5).toInt();

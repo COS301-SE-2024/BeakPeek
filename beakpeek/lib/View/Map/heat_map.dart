@@ -87,7 +87,7 @@ class HeatMapState extends State<HeatMap> {
           Padding(
             padding: const EdgeInsets.only(right: 8.0),
             child: Text(
-              'This is an Endangered Species! Est. Population: $population',
+              'This is an Endangered Species! Est. Population: ${population}',
               style: TextStyle(
                 color: AppColors.textColor(context),
                 fontSize: 14,

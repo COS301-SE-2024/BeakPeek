@@ -75,28 +75,20 @@ class BirdMapState extends State<BirdMap> {
     // Fetch current location
     try {
       final Position position = await Geolocator.getCurrentPosition();
-      final latitude = position.latitude;
-      final longitude = position.longitude;
 
-      // Check if the location is within South Africa's boundaries
-      if (!(latitude < -35.0 ||
-          latitude > -22.0 ||
-          longitude < 16.0 ||
-          longitude > 33.0)) {
-        setState(() {
-          _currentLocation = LatLng(position.latitude, position.longitude);
-          _cameraPosition = CameraPosition(
-            target: _currentLocation,
-            zoom: 11.0,
-          );
-          _isLocationFetched = true;
-        });
+      setState(() {
+        _currentLocation = LatLng(position.latitude, position.longitude);
+        _cameraPosition = CameraPosition(
+          target: _currentLocation,
+          zoom: 11.0,
+        );
+        _isLocationFetched = true;
+      });
 
-        // Update map camera if mapController is initialized
-        if (_isLocationFetched) {
-          mapController
-              .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
-        }
+      // Update map camera if mapController is initialized
+      if (_isLocationFetched) {
+        mapController
+            .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
       }
     } catch (e) {}
   }

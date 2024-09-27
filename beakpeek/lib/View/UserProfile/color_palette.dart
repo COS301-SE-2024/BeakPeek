@@ -5,8 +5,6 @@ import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Controller/Main/color_palette_functions.dart';
 
 class PaletteSelector extends StatelessWidget {
-  const PaletteSelector({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -102,6 +100,7 @@ class PaletteSelector extends StatelessWidget {
         Center(
           child: Expanded(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 _buildColorSwatch(palette.low, context), // No label
                 _buildColorSwatch(palette.mediumLow, context), // No label
