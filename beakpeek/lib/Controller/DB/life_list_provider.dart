@@ -378,6 +378,7 @@ class LifeListProvider {
       dec: map[0]['dec'] as double,
       totalRecords: map[0]['totalRecords'] as int,
       imageUrl: map[0]['image_Url'] as String,
+      info: map[0]['info'] as String,
       population: map[0]['birdPopulation'] as int,
     );
     print(temp);

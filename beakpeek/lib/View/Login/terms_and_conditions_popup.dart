@@ -1,12 +1,11 @@
-import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_media_downloader/flutter_media_downloader.dart';
 import 'package:localstorage/localstorage.dart';
 
 class TermsAndConditionsPopup extends StatelessWidget {
-  TermsAndConditionsPopup({super.key});
-
+  TermsAndConditionsPopup({required this.login, super.key});
+  final Function login;
   final _flutterMediaDownloaderPlugin = MediaDownload();
 
   @override
@@ -42,7 +41,7 @@ class TermsAndConditionsPopup extends StatelessWidget {
         OutlinedButton(
           onPressed: () {
             localStorage.setItem('termsAndCondition', 'true');
-            loginFunction(context);
+            login(context);
           },
           style: GlobalStyles.buttonPrimaryOutlined(context),
           child: const Text('Accept'),
