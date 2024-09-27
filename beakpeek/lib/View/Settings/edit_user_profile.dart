@@ -35,7 +35,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
           onPressed: () {
-            context.go('/settings');
+            context.pop();
           },
         ),
         title: Text(
@@ -175,7 +175,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
             child: ElevatedButton(
               onPressed: () {
                 storeUserLocally(user);
-                context.go('/editprofile');
+                context.pop();
               },
               style: GlobalStyles.buttonPrimaryFilled(context),
               child: Text(
@@ -221,7 +221,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
             child: const Text('Take a photo'),
             onPressed: () {
               selectOrTakePhoto(ImageSource.camera);
-              Navigator.pop(context);
+              context.pop();
             },
           ),
         ],

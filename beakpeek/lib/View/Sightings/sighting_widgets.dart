@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 Widget getLiveList(
     List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> items = getWidgetLifeList(birds, goBird, context);
+  // print('GetLiveList');
+  // print(birds.toString());
   if (items.isEmpty) {
     return Center(
       child: Text(
@@ -26,6 +28,9 @@ Widget getLiveList(
 
 Widget getLifeListData(
     Bird bird, Function(Bird) goBird, BuildContext context, int index) {
+  //print('Blob ${bird.imageBlob.toString()}');
+  late final ImageProvider birdImage = Image.network(bird.imageUrl!).image;
+
   return Container(
     decoration: BoxDecoration(
       color: index % 2 == 1
@@ -46,7 +51,7 @@ Widget getLifeListData(
       contentPadding:
           const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       leading: CircleAvatar(
-        backgroundImage: NetworkImage(bird.imageUrl ?? ''),
+        backgroundImage: birdImage,
       ),
       title: Text(
         bird.commonGroup.isNotEmpty
