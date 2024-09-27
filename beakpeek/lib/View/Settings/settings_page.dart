@@ -26,7 +26,7 @@ class SettingsPage extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
           onPressed: () {
-            context.go('/profile');
+            context.pop();
           },
         ),
         title:
