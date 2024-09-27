@@ -2,6 +2,7 @@ import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/UserProfile/user_profile_function.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
 import 'package:progress_bar_chart/progress_bar_chart.dart';
@@ -26,15 +27,15 @@ Widget getNumBirdsInProvAndLifeList(
   );
 }
 
-Widget levelProgressBar(int progress, int level) {
+Widget levelProgressBar() {
   final List<StatisticsItem> colors = [
     StatisticsItem(const Color.fromARGB(255, 238, 203, 135),
-        (progress / getNextLevelExpRequired(level) * 100),
+        (user.xp / getNextLevelExpRequired(user.level) * 100),
         title: 'Exp'),
     StatisticsItem(
         const Color(0xffecad31),
-        ((getNextLevelExpRequired(level) - progress).toDouble() /
-                getNextLevelExpRequired(level) *
+        ((getNextLevelExpRequired(user.level) - user.xp).toDouble() /
+                getNextLevelExpRequired(user.level) *
                 100)
             .toDouble(),
         title: 'Need Exp')

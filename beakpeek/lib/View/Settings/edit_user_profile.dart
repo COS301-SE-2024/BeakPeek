@@ -1,8 +1,14 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:go_router/go_router.dart';
+import 'package:image_picker/image_picker.dart';
 
 class EditUserProfile extends StatefulWidget {
   const EditUserProfile({super.key});
@@ -12,6 +18,10 @@ class EditUserProfile extends StatefulWidget {
 }
 
 class _EditUserProfileState extends State<EditUserProfile> {
+  ImageProvider profilePicture =
+      Image.memory(base64Decode(user.profilepicture)).image;
+  final picker = ImagePicker();
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -55,15 +65,14 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         children: [
                           CircleAvatar(
                             radius: screenWidth * 0.18,
-                            backgroundImage: const AssetImage(
-                                'assets/images/profileImages/images.jpg'),
+                            backgroundImage: profilePicture,
                           ),
                           Positioned(
                             bottom: 0,
                             right: 0,
                             child: GestureDetector(
                               onTap: () {
-                                // Change profile picture
+                                _showSelectionDialog();
                               },
                               child: CircleAvatar(
                                 backgroundColor: AppColors.popupColor(context),
@@ -96,6 +105,11 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         ],
                       ),
                       child: TextField(
+                        onChanged: (value) {
+                          setState(() {
+                            user.username = value;
+                          });
+                        },
                         decoration: InputDecoration(
                           labelText: 'Username',
                           labelStyle: GlobalStyles.smallContentPrimary(context)
@@ -129,6 +143,11 @@ class _EditUserProfileState extends State<EditUserProfile> {
                       ),
                       child: TextField(
                         maxLines: 3,
+                        onChanged: (value) {
+                          setState(() {
+                            user.description = value;
+                          });
+                        },
                         decoration: InputDecoration(
                           labelText: 'Bio',
                           labelStyle: GlobalStyles.smallContentPrimary(context)
@@ -155,7 +174,8 @@ class _EditUserProfileState extends State<EditUserProfile> {
             padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
             child: ElevatedButton(
               onPressed: () {
-                // Implement save functionality here
+                storeUserLocally(user);
+                context.go('/editprofile');
               },
               style: GlobalStyles.buttonPrimaryFilled(context),
               child: Text(
@@ -168,6 +188,45 @@ class _EditUserProfileState extends State<EditUserProfile> {
         ],
       ),
       bottomNavigationBar: const BottomNavigation(),
+    );
+  }
+
+  Future selectOrTakePhoto(ImageSource imageSource) async {
+    final pickedFile = await picker.pickImage(source: imageSource);
+    setState(
+      () {
+        if (pickedFile != null) {
+          final bytes = File(pickedFile.path).readAsBytesSync();
+          final String encodedImage = base64Encode(bytes);
+          user.profilepicture = encodedImage;
+          storeUserLocally(user);
+        }
+      },
+    );
+  }
+
+  Future _showSelectionDialog() async {
+    await showDialog(
+      builder: (context) => SimpleDialog(
+        title: const Text('Select photo'),
+        children: <Widget>[
+          SimpleDialogOption(
+            child: const Text('From gallery'),
+            onPressed: () {
+              selectOrTakePhoto(ImageSource.gallery);
+              Navigator.pop(context);
+            },
+          ),
+          SimpleDialogOption(
+            child: const Text('Take a photo'),
+            onPressed: () {
+              selectOrTakePhoto(ImageSource.camera);
+              Navigator.pop(context);
+            },
+          ),
+        ],
+      ),
+      context: context,
     );
   }
 }
