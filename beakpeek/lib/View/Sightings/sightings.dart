@@ -2,6 +2,7 @@ import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
+import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Sightings/sighting_widgets.dart';
@@ -91,6 +92,10 @@ class _SightingsState extends State<Sightings> {
         title:
             Text('Life List', style: GlobalStyles.smallHeadingPrimary(context)),
         centerTitle: true,
+        actions: const [
+          HelpIcon(content: '*implement lifelist page help*'),
+          SizedBox(width: 14.0)
+        ],
       ),
       body: Column(
         children: [
