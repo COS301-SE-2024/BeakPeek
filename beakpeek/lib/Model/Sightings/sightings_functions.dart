@@ -6,7 +6,7 @@ List<Widget> getWidgetLifeList(
     List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> listOfBirdWidgets = [];
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getLifeListData(birds[i], goBird, context));
+    listOfBirdWidgets.add(getLifeListData(birds[i], goBird, context, i));
   }
   return listOfBirdWidgets;
 }
