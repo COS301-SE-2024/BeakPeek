@@ -7,7 +7,9 @@ import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/config_azure.dart' as config;
 
 class LandingTab1 extends StatelessWidget {
-  const LandingTab1({super.key});
+  final PageController pageController; // Accept PageController for navigation
+
+  const LandingTab1({required this.pageController, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +59,7 @@ class LandingTab1 extends StatelessWidget {
                     SizedBox(
                       height: screenHeight * 0.03,
                     ),
+                    // Existing condition if needed
                     if (accessToken.isNotEmpty &&
                         localStorage.getItem('termsAndCondition') != null)
                       Center(
@@ -92,10 +95,17 @@ class LandingTab1 extends StatelessWidget {
                             Icons.arrow_forward_ios_rounded,
                             color: AppColors.greyColor(context),
                             size: 18,
-                          )
+                          ),
                         ],
                       ),
-                      onPressed: () => (),
+                      // Move to the second page in the PageView
+                      onPressed: () {
+                        pageController.animateToPage(
+                          1, // The second page in the PageView
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      },
                     ),
                   ],
                 ),
