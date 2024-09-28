@@ -21,7 +21,7 @@ class RoutingData {
           body: Center(
             child: FilledButton(
               onPressed: () => context.go('/home'),
-              child: Text('Home ${ModalRoute.of(context)?.settings.name}'),
+              child: const Text('Home'),
             ),
           ),
         )),
@@ -41,22 +41,20 @@ class RoutingData {
             },
             routes: <RouteBase>[
               GoRoute(
-                path: 'heatmap/:id',
-                name: 'heatmap',
+                path: 'bird/:id',
+                name: 'birdInfo',
                 builder: (context, state) {
-                  return HeatMapInfo(
+                  return BirdPage(
                     id: int.parse(state.pathParameters['id']!),
                   );
                 },
               ),
               GoRoute(
-                path: 'bird/:group/:species/:id',
-                name: 'birdInfo',
+                path: 'heatmap/:pentadID',
+                name: 'heatmap',
                 builder: (context, state) {
-                  return BirdPage(
-                    commonGroup: state.pathParameters['group']!,
-                    commonSpecies: state.pathParameters['species']!,
-                    id: int.parse(state.pathParameters['id']!),
+                  return HeatMapInfo(
+                    id: int.parse(state.pathParameters['pentadID']!),
                   );
                 },
               ),

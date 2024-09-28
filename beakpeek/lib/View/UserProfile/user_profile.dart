@@ -1,8 +1,8 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:convert';
 import 'dart:io';
-import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/View/Home/GuestUserBlock/guest_user_block.dart';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
@@ -75,136 +75,134 @@ class UserProfileState extends State<UserProfile> {
           SingleChildScrollView(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SizedBox(height: verticalPadding * 6),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back),
-                        color: AppColors.iconColor(context),
-                        onPressed: () {
-                          context.goNamed('home');
-                        },
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.settings),
-                            color: AppColors.iconColor(context),
-                            onPressed: () {
-                              context.goNamed('settings');
-                            },
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.edit),
-                            color: AppColors.iconColor(context),
-                            onPressed: () {
-                              context.go('/editprofile');
-                            },
-                          ),
-                          const HelpIcon(
-                              content: '*implement profile page help*'),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Center(
-                    child: Column(
+              child: !loggedIN
+                  ? Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        // Profile picture
-                        Material(
-                          elevation: 5, // Add elevation here
-                          shape: const CircleBorder(),
-                          child: CircleAvatar(
-                            radius: screenWidth * 0.20,
-                            backgroundColor: AppColors.iconColor(context),
-                            child: CircleAvatar(
-                              radius: screenWidth * 0.19,
-                              backgroundImage: _image.path.isEmpty
-                                  ? const AssetImage(
-                                      'assets/images/profileImages/images.jpg')
-                                  : FileImage(_image),
-                              foregroundImage: profilePicture,
+                        SizedBox(height: screenHeight * 0.4),
+                        const GuestUserBlock(),
+                      ],
+                    )
+                  : Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        SizedBox(height: verticalPadding * 6),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.arrow_back),
+                              color: AppColors.iconColor(context),
+                              onPressed: () {
+                                context.goNamed('home');
+                              },
                             ),
-                          ),
+                            Row(
+                              children: [
+                                IconButton(
+                                  icon: const Icon(Icons.settings),
+                                  color: AppColors.iconColor(context),
+                                  onPressed: () {
+                                    context.goNamed('settings');
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
-                        // Username
-                        SizedBox(height: verticalPadding),
-                        Text(
-                          username,
-                          style: GlobalStyles.subHeadingPrimary(context),
+                        Center(
+                          child: Column(
+                            children: [
+                              // Profile picture
+                              Material(
+                                elevation: 5, // Add elevation here
+                                shape: const CircleBorder(),
+                                child: CircleAvatar(
+                                  radius: screenWidth * 0.20,
+                                  backgroundColor: AppColors.iconColor(context),
+                                  child: CircleAvatar(
+                                    radius: screenWidth * 0.19,
+                                    backgroundImage: _image.path.isEmpty
+                                        ? const AssetImage(
+                                            'assets/images/profileImages/images.jpg')
+                                        : FileImage(_image),
+                                    foregroundImage: profilePicture,
+                                  ),
+                                ),
+                              ),
+                              // Username
+                              SizedBox(height: verticalPadding),
+                              Text(
+                                username,
+                                style: GlobalStyles.subHeadingPrimary(context),
+                              ),
+
+                              // Active since
+                              SizedBox(height: verticalPadding),
+                              Text(
+                                'Active since - June 2024',
+                                style: GlobalStyles.smallContent(context),
+                              ),
+                              SizedBox(height: verticalPadding),
+                            ],
+                          ),
                         ),
 
-                        // Active since
+                        // Level indicator
+                        Column(
+                          children: [
+                            Text(
+                              'Level $level',
+                              style: GlobalStyles.smallContent(context),
+                            ),
+                            const SizedBox(height: 6),
+                            SizedBox(
+                              height: verticalPadding * 3,
+                              width: screenWidth,
+                              child: Center(
+                                child: levelProgressBar(),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        SizedBox(height: screenHeight * 0.01),
+
+                        Divider(
+                          color: Colors.grey.shade300,
+                          thickness: 1,
+                        ),
+
+                        // Personal Information Section
                         SizedBox(height: verticalPadding),
                         Text(
-                          'Active since - June 2024',
-                          style: GlobalStyles.smallContent(context),
+                          'Personal Information',
+                          style: GlobalStyles.smallHeadingSecondary(context),
                         ),
                         SizedBox(height: verticalPadding),
+
+                        // Display static personal info with icons
+                        _buildProfileField(
+                          icon: Icons.person,
+                          label: 'Username',
+                          content: username,
+                          context: context,
+                        ),
+                        SizedBox(height: verticalPadding),
+                        _buildProfileField(
+                          icon: Icons.info,
+                          label: 'Bio',
+                          content: bio,
+                          context: context,
+                        ),
+                        SizedBox(height: verticalPadding),
+
+                        Divider(
+                          color: Colors.grey.shade300,
+                          thickness: 1,
+                        ),
                       ],
                     ),
-                  ),
-
-                  // Level indicator
-                  Column(
-                    children: [
-                      Text(
-                        'Level $level',
-                        style: GlobalStyles.smallContent(context),
-                      ),
-                      const SizedBox(height: 6),
-                      SizedBox(
-                        height: verticalPadding * 3,
-                        width: screenWidth,
-                        child: Center(
-                          child: levelProgressBar(),
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(height: screenHeight * 0.01),
-
-                  Divider(
-                    color: Colors.grey.shade300,
-                    thickness: 1,
-                  ),
-
-                  // Personal Information Section
-                  SizedBox(height: verticalPadding),
-                  Text(
-                    'Personal Information',
-                    style: GlobalStyles.smallHeadingSecondary(context),
-                  ),
-                  SizedBox(height: verticalPadding),
-
-                  // Display static personal info with icons
-                  _buildProfileField(
-                    icon: Icons.person,
-                    label: 'Username',
-                    content: username,
-                    context: context,
-                  ),
-                  SizedBox(height: verticalPadding),
-                  _buildProfileField(
-                    icon: Icons.info,
-                    label: 'Bio',
-                    content: bio,
-                    context: context,
-                  ),
-                  SizedBox(height: verticalPadding),
-
-                  Divider(
-                    color: Colors.grey.shade300,
-                    thickness: 1,
-                  ),
-                ],
-              ),
             ),
           ),
         ],

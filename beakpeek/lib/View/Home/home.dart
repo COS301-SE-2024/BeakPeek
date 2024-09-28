@@ -280,10 +280,6 @@ class HomeState extends State<Home> {
                                                         Scaffold(
                                                       body: BirdPage(
                                                         id: bird.id,
-                                                        commonGroup:
-                                                            bird.commonGroup,
-                                                        commonSpecies:
-                                                            bird.commonSpecies,
                                                       ),
                                                     ),
                                                   ),

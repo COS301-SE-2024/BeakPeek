@@ -254,8 +254,6 @@ class BirdList extends StatelessWidget {
                   builder: (context) => Scaffold(
                     body: BirdPage(
                       id: bird.id,
-                      commonGroup: bird.commonGroup,
-                      commonSpecies: bird.commonSpecies,
                     ),
                   ),
                 ),

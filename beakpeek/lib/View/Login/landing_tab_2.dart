@@ -13,11 +13,6 @@ class LandingTab2 extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-
-    void goHome(context) {
-      context.goNamed('home');
-    }
-
     return Scaffold(
       backgroundColor: AppColors.backgroundColor(context),
       body: SafeArea(
@@ -108,9 +103,7 @@ class LandingTab2 extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
-                                child: TermsAndConditionsPopup(
-                                  login: loginFunction,
-                                ),
+                                child: TermsAndConditionsPopup(guest: false),
                               );
                             },
                           );
@@ -123,23 +116,19 @@ class LandingTab2 extends StatelessWidget {
                       child: Text('Sign In as Guest',
                           style: GlobalStyles.secondaryButtonText(context)),
                       onPressed: () {
-                        if (localStorage.getItem('termsAndCondition') !=
-                            'true') {
-                          showPopupCard(
-                            dimBackground: true,
-                            context: context,
-                            builder: (context) {
-                              return PopupCard(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: TermsAndConditionsPopup(
-                                  login: goHome,
-                                ),
-                              );
-                            },
-                          );
-                        }
+                        showPopupCard(
+                          dimBackground: true,
+                          context: context,
+                          builder: (context) {
+                            return PopupCard(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              child: TermsAndConditionsPopup(guest: true),
+                            );
+                          },
+                        );
+
                       },
                     ),
                   ],

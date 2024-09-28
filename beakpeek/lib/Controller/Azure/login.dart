@@ -11,6 +11,7 @@ import 'package:localstorage/localstorage.dart';
 
 void loginFunction(BuildContext context) async {
   if (localStorage.getItem('accessToken') != null) {
+    loggedIN = true;
     context.go('/home');
     return;
   }

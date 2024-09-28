@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+// ignore: unused_import
 import 'package:beakpeek/config_azure.dart' as config;
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -44,15 +45,7 @@ class BottomNavItem extends StatelessWidget {
               if (label.toLowerCase().compareTo('home') == 0) {
                 context.goNamed('home');
               }
-              if (config.loggedIN) {
-                context.goNamed(label.toLowerCase());
-              } else {
-                if (label.contains('Profile')) {
-                  context.go('/');
-                } else {
-                  context.goNamed(label.toLowerCase());
-                }
-              }
+              context.goNamed(label.toLowerCase());
             },
             child: SvgPicture.asset(
               'assets/icons/$iconFile',

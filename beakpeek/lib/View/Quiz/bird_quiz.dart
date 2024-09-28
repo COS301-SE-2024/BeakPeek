@@ -65,7 +65,9 @@ class _BirdQuizState extends State<BirdQuiz>
   }
 
   void handleAnswer(Bird bird) async {
-    if (isAnswered) return; // Ignore input if already answered
+    if (isAnswered) {
+      return; // Ignore input if already answered
+    }
     setState(() {
       isAnswered = true;
       selectedBird = bird; // Highlight the selected bird
@@ -265,8 +267,8 @@ class _BirdQuizState extends State<BirdQuiz>
                                   79)) // Red for wrong, green for correct
                           : (isCorrectBird && isAnswered)
                               ? const Color.fromARGB(255, 105, 189, 108)
-                              : AppColors.popupColor(
-                                  context), // Green if it’s correct and answered
+                              : AppColors.popupColor(context),
+                      // Green if it’s correct and answered
                       minimumSize: const Size(320, 50),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30.0),

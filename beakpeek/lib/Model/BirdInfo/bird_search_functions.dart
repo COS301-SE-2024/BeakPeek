@@ -41,10 +41,8 @@ bool isSeen(Bird bird) {
   return false;
 }
 
-bool isSeenGS(String group, String species) {
-  final temp = global.birdList.where((test) =>
-      test.commonGroup.toLowerCase().compareTo(group.toLowerCase()) == 0 &&
-      test.commonSpecies.toLowerCase().compareTo(species.toLowerCase()) == 0);
+bool isSeenGS(int id) {
+  final temp = global.birdList.where((test) => test.id.compareTo(test.id) == 0);
   if (temp.isNotEmpty) {
     return true;
   }

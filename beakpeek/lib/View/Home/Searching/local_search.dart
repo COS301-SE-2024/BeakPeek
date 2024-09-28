@@ -37,7 +37,7 @@ class _LocalSearchState extends State<LocalSearch> {
 
   void goBird(Bird bird) {
     context.goNamed(
-      'birdInfo',
+      'birdInfoPentad',
       pathParameters: {
         'group': bird.commonGroup,
         'species': bird.commonSpecies,

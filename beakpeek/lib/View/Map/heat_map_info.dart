@@ -6,6 +6,7 @@ import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
 
+// ignore: must_be_immutable
 class HeatMapInfo extends StatelessWidget {
   const HeatMapInfo({super.key, required this.id});
   final int id;
