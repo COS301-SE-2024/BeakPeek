@@ -50,7 +50,7 @@ class BottomNavItem extends StatelessWidget {
                 if (label.contains('Profile')) {
                   context.go('/');
                 } else {
-                  context.goNamed('${label.toLowerCase()}');
+                  context.goNamed(label.toLowerCase());
                 }
               }
             },

@@ -43,10 +43,10 @@ class QuizManager {
 
 List<Bird> selectRandomBirds(List<Bird> birds, int count) {
   birds.shuffle(Random());
-  List<Bird> selectedBirds = [];
+  final List<Bird> selectedBirds = [];
 
   while (selectedBirds.length < count) {
-    Bird randomBird = birds[Random().nextInt(birds.length)];
+    final Bird randomBird = birds[Random().nextInt(birds.length)];
 
     // Check if the bird has a valid imageUrl
     if (randomBird.imageUrl != null && randomBird.imageUrl!.isNotEmpty) {

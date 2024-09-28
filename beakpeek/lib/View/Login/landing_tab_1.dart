@@ -7,9 +7,10 @@ import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/config_azure.dart' as config;
 
 class LandingTab1 extends StatelessWidget {
-  final PageController pageController; // Accept PageController for navigation
+  // Accept PageController for navigation
 
   const LandingTab1({required this.pageController, super.key});
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {

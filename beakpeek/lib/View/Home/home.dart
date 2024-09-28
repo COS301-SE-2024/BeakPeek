@@ -220,7 +220,7 @@ class HomeState extends State<Home> {
                               return Center(
                                 child: Column(
                                   children: [
-                                    Icon(Icons.error_outline,
+                                    const Icon(Icons.error_outline,
                                         size: 50, color: Colors.red),
                                     const SizedBox(height: 15),
                                     Text(

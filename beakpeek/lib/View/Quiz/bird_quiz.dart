@@ -199,7 +199,7 @@ class _BirdQuizState extends State<BirdQuiz>
           Row(
             children: [
               Expanded(
-                child: Container(
+                child: SizedBox(
                   height: 8, // Set the height of the timer bar
                   child: LinearProgressIndicator(
                     value: 1.0 -
