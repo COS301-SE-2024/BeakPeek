@@ -112,7 +112,14 @@ void deleteLocalUser() {
 }
 
 Future<void> updateOnline() async {
-  //TODO: user update
+  final response = await http.post(Uri.parse('$userApiUrl/User/UpdateProfile'),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+        HttpHeaders.contentTypeHeader: 'application/json'
+      },
+      body: user.toJson());
 
-  print('updated');
+  user = UserModel.fromJson(response.body);
+
+  // print('updated');
 }
