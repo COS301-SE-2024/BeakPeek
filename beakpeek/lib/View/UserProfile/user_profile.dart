@@ -195,12 +195,6 @@ class UserProfileState extends State<UserProfile> {
                           content: bio,
                           context: context,
                         ),
-                        SizedBox(height: verticalPadding),
-
-                        Divider(
-                          color: Colors.grey.shade300,
-                          thickness: 1,
-                        ),
                       ],
                     ),
             ),
