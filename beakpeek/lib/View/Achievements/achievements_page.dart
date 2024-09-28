@@ -1,10 +1,15 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/UserProfile/achievement.dart';
+import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:dynamic_icons/dynamic_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:localstorage/localstorage.dart';
 
 class AchievementsPage extends StatefulWidget {
   const AchievementsPage({super.key});
@@ -16,6 +21,8 @@ class AchievementsPage extends StatefulWidget {
 class AchievementsPageState extends State<AchievementsPage> {
   final LifeListProvider lifeList = LifeListProvider.instance;
   late List<double> birdPercentages = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  final Future<AchievementList> _achievementlist = getOnlineAchivementList();
   @override
   void initState() {
     lifeList.precentLifeListBirds().then((birds) {
@@ -46,89 +53,38 @@ class AchievementsPageState extends State<AchievementsPage> {
         ],
       ),
       bottomNavigationBar: const BottomNavigation(),
-      body: Scrollbar(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                AchievementSection(
-                  title: 'Provincial Achievements',
-                  achievements: [
-                    Achievement(
-                      title: 'Gauteng Explorer',
-                      description: 'Spot birds in Gauteng',
-                      progress: birdPercentages[1],
-                      badge: Icons.location_on,
-                    ),
-                    Achievement(
-                      title: 'Western Cape Wanderer',
-                      description: 'Spot birds in Western Cape',
-                      progress: birdPercentages[7],
-                      badge: Icons.location_on,
-                    ),
-                    Achievement(
-                      title: 'Mpumalanga Adventurer',
-                      description: 'Spot birds in Mpumalanga',
-                      progress: birdPercentages[4],
-                      badge: Icons.location_on,
-                    ),
-                  ],
+      body: FutureBuilder<AchievementList>(
+          future: _achievementlist,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error loading achievements: ${snapshot.error}'),
+              );
+            } else if (!snapshot.hasData ||
+                snapshot.data!.achievements.isEmpty) {
+              return const Center(
+                child: Text('No achievements found.'),
+              );
+            }
+
+            return Scrollbar(
+              child: SingleChildScrollView(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        for (String category in getAchievementCategories())
+                          AchievementSection(
+                              title: category,
+                              achievements: getAchievementByCategory(category))
+                      ]),
                 ),
-                const SizedBox(height: 20),
-                const AchievementSection(
-                  title: 'Bird Species Achievements',
-                  achievements: [
-                    Achievement(
-                      title: 'Waterfowl Watcher',
-                      description: 'Spot all birds in the Waterfowl species',
-                      progress: 0.6,
-                      badge: Icons.water,
-                    ),
-                    Achievement(
-                      title: 'Raptor Ranger',
-                      description: 'Spot all birds in the Raptor species',
-                      progress: 0.2,
-                      badge: Icons.flight,
-                    ),
-                    Achievement(
-                      title: 'Songbird Specialist',
-                      description: 'Spot all birds in the Songbird species',
-                      progress: 0.4,
-                      badge: Icons.music_note,
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                const AchievementSection(
-                  title: 'Monthly Achievements',
-                  achievements: [
-                    Achievement(
-                      title: '15 Birds in 3 Months',
-                      description: 'See 15 birds for 3 consecutive months',
-                      progress: 0.8,
-                      badge: Icons.calendar_today,
-                    ),
-                    Achievement(
-                      title: 'Quiz Master',
-                      description: 'Get 10 quizzes correct in a row',
-                      progress: 0.0,
-                      badge: Icons.quiz,
-                    ),
-                    Achievement(
-                      title: 'Birding Streak',
-                      description: 'Go birdwatching for 7 consecutive days',
-                      progress: 0.9,
-                      badge: Icons.trending_up,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            );
+          }),
     );
   }
 }
@@ -163,20 +119,6 @@ class AchievementSection extends StatelessWidget {
   }
 }
 
-class Achievement {
-  const Achievement({
-    required this.title,
-    required this.description,
-    required this.progress,
-    required this.badge,
-  });
-
-  final String title;
-  final String description;
-  final double progress;
-  final IconData badge;
-}
-
 class AchievementTile extends StatelessWidget {
   const AchievementTile({super.key, required this.achievement});
 
@@ -193,18 +135,14 @@ class AchievementTile extends StatelessWidget {
         padding: const EdgeInsets.all(12.0),
         child: Row(
           children: [
-            Icon(
-              achievement.badge,
-              size: 40,
-              color: AppColors.tertiaryColor(context),
-            ),
+            achievement.getIcon(40, AppColors.tertiaryColor(context)),
             const SizedBox(width: 12),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    achievement.title,
+                    achievement.name,
                     style: GlobalStyles.contentPrimary(context).copyWith(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
