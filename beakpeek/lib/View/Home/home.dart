@@ -134,7 +134,7 @@ class HomeState extends State<Home> {
                                       right: 16.0,
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          context.go('/quiz');
+                                          context.goNamed('quiz');
                                         },
                                         style: ElevatedButton.styleFrom(
                                             shape: RoundedRectangleBorder(
@@ -260,10 +260,6 @@ class HomeState extends State<Home> {
                                                         Scaffold(
                                                       body: BirdPage(
                                                         id: bird.id,
-                                                        commonGroup:
-                                                            bird.commonGroup,
-                                                        commonSpecies:
-                                                            bird.commonSpecies,
                                                       ),
                                                     ),
                                                   ),

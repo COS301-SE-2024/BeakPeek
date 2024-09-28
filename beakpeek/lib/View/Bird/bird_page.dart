@@ -16,14 +16,7 @@ import 'package:beakpeek/config_azure.dart' as config;
 
 class BirdPage extends StatefulWidget {
   // ignore: lines_longer_than_80_chars
-  const BirdPage(
-      {super.key,
-      required this.commonGroup,
-      required this.commonSpecies,
-      required this.id});
-
-  final String commonGroup;
-  final String commonSpecies;
+  const BirdPage({super.key, required this.id});
   final int id;
 
   @override
@@ -45,7 +38,7 @@ class _BirdPageState extends State<BirdPage> {
   }
 
   void addToLifeList() {
-    if (!isSeenGS(widget.commonGroup, widget.commonSpecies)) {
+    if (!isSeenGS(widget.id)) {
       setState(
         () {
           seenText = 'Seen';
@@ -121,8 +114,8 @@ class _BirdPageState extends State<BirdPage> {
                         Row(
                           children: [
                             BirdSoundPlayer(
-                                commonGroup: widget.commonGroup,
-                                commonSpecies: widget.commonSpecies),
+                                commonGroup: birdData.commonGroup,
+                                commonSpecies: birdData.commonSpecies),
                             const SizedBox(width: 8),
                             Text(
                               'Play Bird Call',
@@ -251,10 +244,10 @@ class _BirdPageState extends State<BirdPage> {
                       child: Text('Show Heat Map',
                           style: GlobalStyles.primaryButtonText(context)),
                       onPressed: () {
-                        context.goNamed(
+                        context.pushNamed(
                           'heatmap',
                           pathParameters: {
-                            'id': widget.id.toString(),
+                            'pentadID': widget.id.toString(),
                           },
                         );
                       },

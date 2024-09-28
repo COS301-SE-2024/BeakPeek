@@ -2,14 +2,17 @@ import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Sightings/sightings_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/Home/GuestUserBlock/guest_user_block.dart';
 import 'package:flutter/material.dart';
+import 'package:beakpeek/config_azure.dart';
 
 Widget getLiveList(
     List<Bird> birds, Function(Bird) goBird, BuildContext context) {
   final List<Widget> items = getWidgetLifeList(birds, goBird, context);
-  // print('GetLiveList');
-  // print(birds.toString());
-  if (items.isEmpty) {
+
+  if (loggedIN == false) {
+    return const GuestUserBlock();
+  } else if (items.isEmpty) {
     return Center(
       child: Text(
         '''Time to go spot some birds! \n
@@ -18,6 +21,7 @@ Widget getLiveList(
       ),
     );
   }
+
   return ListView.builder(
     itemCount: items.length,
     itemBuilder: (context, index) {
