@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using System.Text.Json;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -49,7 +50,23 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> AddAchievment(int id)
+    public async Task<IActionResult> UpdateProfile([FromBody] UserDto userJsonString)
+    {
+
+        var userId = GetUserId();
+        if (userId is null)
+            return Unauthorized();
+
+        var user = await GetUser(userId);
+        if (user is null)
+            return NotFound("User not found.");
+        user.FromDto(userJsonString);
+        await _userManager.UpdateAsync(user);
+        return Ok(user.ToDto());
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> AddAchievment(int id, double progress)
     {
         var achievement = await _context.Achievement.FindAsync(id);
 
@@ -66,16 +83,39 @@ public class UserController : ControllerBase
         if (user is null)
             return NotFound("User not found");
 
-        if (user.Achievements.Contains(achievement))
-            return BadRequest("User already has that achievment");
+        var existingUserAchievement = await _context.UserAchievements
+            .FirstOrDefaultAsync(ua => ua.AppUserId == userId && ua.AchievementId == id);
+        if (existingUserAchievement != null)
+        {
+            existingUserAchievement.Progress = progress;
+            _context.UserAchievements.Update(existingUserAchievement);
+            await _context.SaveChangesAsync();
+            return Ok("Achievment upated for user");
+        }
 
-        user.Achievements.Add(achievement);
+        var userAchievement = new UserAchievement
+        {
+            AppUserId = userId,
+            AchievementId = id,
+            Progress = progress
+        };
+        _context.UserAchievements.Add(userAchievement);
 
-        user.XP += achievement.XP;
+        await _context.SaveChangesAsync();
+        return Ok("Achievment added to user");
+    }
 
-        await _userManager.UpdateAsync(user);
+    [HttpGet]
+    public async Task<IActionResult> GetAchievments()
+    {
+        var achievements = await _context.Achievement.ToListAsync();
 
-        return Ok(new { data = user.XP });
+        if (achievements == null || achievements.Count <= 0)
+        {
+            return NotFound("No achievments found");
+        }
+
+        return Ok(achievements);
     }
 
     [AllowAnonymous]
@@ -130,7 +170,10 @@ public class UserController : ControllerBase
     }
     private async Task<AppUser?> GetUser(string userId)
     {
-        return await _context.Users.Include(a => a.Achievements).FirstOrDefaultAsync(user => user.Id == userId);
+        return await _context.Users
+            .Include(a => a.Achievements)
+                .ThenInclude(ua => ua.Achievement)
+            .FirstOrDefaultAsync(user => user.Id == userId);
         // return await _userManager.FindByIdAsync(userId);
     }
 }
