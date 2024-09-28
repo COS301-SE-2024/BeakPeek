@@ -140,8 +140,6 @@ class LandingTab2 extends StatelessWidget {
                               );
                             },
                           );
-                        } else {
-                          context.goNamed('home');
                         }
                       },
                     ),
