@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,11 @@ void loginFunction(BuildContext context) async {
     config.loggedIN = true;
     localStorage.setItem('accessToken', token);
     user = await getOnlineUser();
+    achievementList = await getOnlineAchivementList();
     // print(
     //     '---------------------------------------------------- \n ${user.toJson()} \n ---------------------------------');
     storeUserLocally(user);
+    storeAchievementListLocally(achievementList);
     context.go('/home');
     return;
   } else {

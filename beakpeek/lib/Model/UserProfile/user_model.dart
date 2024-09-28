@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/UserProfile/user_achievment.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart' as http;
 import 'package:beakpeek/Model/UserProfile/achievement.dart';
@@ -18,8 +19,8 @@ class UserModel {
       username: map['userName'] ?? map['username'],
       email: map['email'],
       profilepicture: map['profilePicture'] ?? map['profilepicture'] ?? '',
-      achievements: List<Achievement>.from(
-          map['achievements']?.map((x) => Achievement.fromMap(x))),
+      achievements: List<UserAchievement>.from(
+          map['achievements']?.map((x) => UserAchievement.fromMap(x))),
       description: map['description'] ?? 'Tell us about yourself...',
       level: map['level'] ?? 0,
       xp: map['xp'] ?? 0,
@@ -41,7 +42,7 @@ class UserModel {
   String username;
   String email;
   String profilepicture;
-  List<Achievement> achievements;
+  List<UserAchievement> achievements;
   String description;
   int level;
   int xp;
@@ -87,7 +88,14 @@ class UserModel {
 Future<UserModel> getOnlineUser() async {
   final response = await http.get(Uri.parse('$userApiUrl/User/Profile'),
       headers: {HttpHeaders.authorizationHeader: 'Bearer $accessToken'});
-  return UserModel.fromJson(response.body);
+
+  if (response.statusCode != 200) {
+    storeUserLocally(user);
+    return user;
+  }
+  user = UserModel.fromJson(response.body);
+  storeUserLocally(user);
+  return user;
 }
 
 void storeUserLocally(UserModel user) {
@@ -120,6 +128,6 @@ Future<void> updateOnline() async {
       body: user.toJson());
 
   user = UserModel.fromJson(response.body);
-
+  print(user.toJson());
   // print('updated');
 }
