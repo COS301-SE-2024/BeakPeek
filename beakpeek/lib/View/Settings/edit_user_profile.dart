@@ -175,6 +175,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
             child: ElevatedButton(
               onPressed: () {
                 storeUserLocally(user);
+                updateOnline();
                 context.pop();
               },
               style: GlobalStyles.buttonPrimaryFilled(context),
