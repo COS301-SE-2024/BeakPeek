@@ -23,7 +23,7 @@ class UserModel {
       description: map['description'] ?? 'Tell us about yourself...',
       level: map['level'] ?? 0,
       xp: map['xp'],
-      lifelist: map['lifelist'],
+      lifelist: map['lifelist'] ?? '',
     );
   }
 
