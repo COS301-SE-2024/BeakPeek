@@ -50,18 +50,36 @@ public class UserController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> UpdateProfile([FromBody] UserDto userJsonString)
+    public async Task<IActionResult> UpdateProfile([FromBody] UserDto updatedUser)
     {
 
         var userId = GetUserId();
         if (userId is null)
             return Unauthorized();
 
-        var user = await GetUser(userId);
+        // var user = await GetUser(userId);
+        var user = await _userManager.FindByIdAsync(userId);
         if (user is null)
             return NotFound("User not found.");
-        user.FromDto(userJsonString);
-        await _userManager.UpdateAsync(user);
+
+
+        var setUsernameSuccess = await _userManager.SetUserNameAsync(user, updatedUser.UserName);
+        var setEmailSucces = await _userManager.SetEmailAsync(user, updatedUser.Email);
+        if (!setEmailSucces.Succeeded || !setUsernameSuccess.Succeeded)
+        {
+            return BadRequest($"Couldn't update username or email address. ${setEmailSucces.Errors} ${setUsernameSuccess.Errors}");
+        }
+
+        user.FromDto(updatedUser);
+        var updateResult = await _userManager.UpdateAsync(user);
+
+        if (!updateResult.Succeeded)
+        {
+            return BadRequest("Error occurred while updating the user.");
+        }
+
+        await _userManager.UpdateSecurityStampAsync(user);
+        await _signInManager.RefreshSignInAsync(user);
         return Ok(user.ToDto());
     }
 
@@ -122,13 +140,18 @@ public class UserController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Login(string email, string password)
     {
-        var result = await _signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: false);
+        var userTryingtoLogin = await _userManager.FindByNameAsync(email) ?? await _userManager.FindByEmailAsync(email);
+        if (userTryingtoLogin == null)
+        {
+            return BadRequest("No user found with that email or username");
+        }
+        var result = await _signInManager.PasswordSignInAsync(userTryingtoLogin, password, false, lockoutOnFailure: false);
 
         if (result.Succeeded)
         {
             _logger.LogInformation("User logged in from User Api");
 
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByNameAsync(email) ?? await _userManager.FindByEmailAsync(email);
             if (user is null)
             {
                 return BadRequest("Something went wrong user with email not found");
@@ -137,7 +160,7 @@ public class UserController : ControllerBase
             return Ok(token);
         }
 
-        return Unauthorized("Bad password or email address");
+        return Unauthorized($"Bad password or email address ${result}");
     }
 
     [HttpGet]

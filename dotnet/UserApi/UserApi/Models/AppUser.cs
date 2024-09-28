@@ -42,8 +42,6 @@ public class AppUser : IdentityUser
 
     public void FromDto(UserDto userDto)
     {
-        UserName = userDto.UserName;
-        Email = userDto.Email;
         ProfilePicture = userDto.ProfilePicture;
         Description = userDto.Description;
         XP = userDto.XP;
