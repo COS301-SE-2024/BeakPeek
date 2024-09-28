@@ -86,7 +86,12 @@ public class UserController : ControllerBase
         var existingUserAchievement = await _context.UserAchievements
             .FirstOrDefaultAsync(ua => ua.AppUserId == userId && ua.AchievementId == id);
         if (existingUserAchievement != null)
-            return BadRequest("User already has that achievment");
+        {
+            existingUserAchievement.Progress = progress;
+            _context.UserAchievements.Update(existingUserAchievement);
+            await _context.SaveChangesAsync();
+            return Ok("Achievment upated for user");
+        }
 
         var userAchievement = new UserAchievement
         {
@@ -95,11 +100,6 @@ public class UserController : ControllerBase
             Progress = progress
         };
         _context.UserAchievements.Add(userAchievement);
-        // user.Achievements.Add(achievement);
-
-        // user.XP += achievement.XP;
-
-        // await _userManager.UpdateAsync(user);
 
         await _context.SaveChangesAsync();
         return Ok("Achievment added to user");
