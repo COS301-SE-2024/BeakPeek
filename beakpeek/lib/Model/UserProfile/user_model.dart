@@ -22,8 +22,8 @@ class UserModel {
           map['achievements']?.map((x) => Achievement.fromMap(x))),
       description: map['description'] ?? 'Tell us about yourself...',
       level: map['level'] ?? 0,
-      xp: map['xp'],
-      lifelist: map['lifelist'],
+      xp: map['xp'] ?? 0,
+      lifelist: map['lifelist'] ?? '',
     );
   }
 

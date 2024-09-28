@@ -7,7 +7,8 @@ namespace UserApi.Data;
 
 public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
 {
-    public DbSet<UserApi.Models.Achievement> Achievement { get; set; } = default!;
+    public DbSet<Achievement> Achievement { get; set; } = default!;
+    public DbSet<UserAchievement> UserAchievements { get; set; }
 
     public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
         : base(options)
@@ -20,10 +21,20 @@ public class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, string>
         builder.HasDefaultSchema("Identity");
 
         builder
-            .Entity<AppUser>()
-            .HasMany(entity => entity.Achievements)
-            .WithMany();
+            .Entity<UserAchievement>()
+            .HasKey(ua => new { ua.AppUserId, ua.AchievementId });
 
+        builder
+            .Entity<UserAchievement>()
+            .HasOne(ua => ua.User)
+            .WithMany(u => u.Achievements)
+            .HasForeignKey(ua => ua.AppUserId);
+
+        builder
+            .Entity<UserAchievement>()
+            .HasOne(ua => ua.Achievement)
+            .WithMany()
+            .HasForeignKey(ua => ua.AchievementId);
 
         builder.Entity<AppUser>(entity =>
         {

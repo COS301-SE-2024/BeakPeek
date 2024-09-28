@@ -148,6 +148,7 @@ catch (Exception ex)
 }
 
 app.MapIdentityApi<AppUser>();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseMigrationsEndPoint();
