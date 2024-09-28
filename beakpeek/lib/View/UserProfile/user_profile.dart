@@ -1,7 +1,6 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:convert';
 import 'dart:io';
-import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Home/GuestUserBlock/guest_user_block.dart';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
