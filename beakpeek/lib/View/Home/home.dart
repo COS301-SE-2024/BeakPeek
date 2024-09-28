@@ -217,8 +217,28 @@ class HomeState extends State<Home> {
                               }
                             } else if (!snapshot.hasData ||
                                 snapshot.data!.isEmpty) {
-                              return const Center(
-                                  child: Text('No birds found.'));
+                              return Center(
+                                child: Column(
+                                  children: [
+                                    const Icon(Icons.error_outline,
+                                        size: 50, color: Colors.red),
+                                    const SizedBox(height: 15),
+                                    Text(
+                                      'Unable to Load Birds near you!',
+                                      style:
+                                          GlobalStyles.contentPrimary(context),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                    const SizedBox(height: 10),
+                                    Text(
+                                      'Please try again soon.',
+                                      style: GlobalStyles.smallContentPrimary(
+                                          context),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
+                                ),
+                              );
                             } else {
                               final birdsList = snapshot.data!;
                               return Container(

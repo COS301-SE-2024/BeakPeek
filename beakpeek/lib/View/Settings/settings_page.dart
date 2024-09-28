@@ -33,64 +33,104 @@ class SettingsPage extends StatelessWidget {
             Text('Settings', style: GlobalStyles.smallHeadingPrimary(context)),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: EdgeInsets.only(
-          top: screenHeight * 0.02,
-        ),
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildSectionHeader(context, 'Your Account'),
-              _buildOptionTile(context, 'Edit Personal Information', Icons.edit,
-                  Icons.arrow_forward_ios, () {
-                context.goNamed('editprofile');
-              }),
-              _buildOptionTile(context, 'Delete Account', Icons.delete,
-                  Icons.arrow_forward_ios, () {
-                deleteLocalUser();
-                context.pop();
-              }),
-              const SizedBox(height: 20),
-
-              _buildSectionHeader(context, 'App Settings'),
-              _buildToggleThemeTile(context), // Dark mode toggle
-              _buildOptionTile(context, 'Colour Palette', Icons.notifications,
-                  Icons.arrow_forward_ios, () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PaletteSelector()),
-                );
-              }),
-              _buildOptionTile(context, 'Privacy Settings', Icons.lock,
-                  Icons.arrow_forward_ios, () {
-                // Handle Privacy Settings tap
-              }),
-              const SizedBox(height: 20),
-
-              _buildSectionHeader(context, 'Support'),
-              _buildOptionTile(context, 'Help & Support', Icons.help_outline,
-                  Icons.arrow_forward_ios, () {
-                // Handle Help & Support tap
-              }),
-              _buildOptionTile(context, 'Legal Policies', Icons.gavel,
-                  Icons.arrow_forward_ios, () async {
-                _flutterMediaDownloaderPlugin.downloadMedia(context,
-                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekTermsOfUse.pdf');
-                _flutterMediaDownloaderPlugin.downloadMedia(context,
-                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekCookiePolicy.pdf');
-                _flutterMediaDownloaderPlugin.downloadMedia(context,
-                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekPrivacyPolicy.pdf');
-              }),
-              _buildOptionTile(
-                  context, 'About', Icons.info_outline, Icons.arrow_forward_ios,
-                  () {
-                // Handle About tap
-              }),
-              const Spacer(),
-            ],
+      body: SafeArea(
+        child: Scrollbar(
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(top: screenHeight * 0.02),
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.03),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _buildSectionHeader(context, 'Your Account'),
+                  _buildOptionTile(
+                    context,
+                    'Edit Personal Information',
+                    Icons.edit,
+                    Icons.arrow_forward_ios,
+                    () {
+                      context.goNamed('editprofile');
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'Delete Account',
+                    Icons.delete,
+                    Icons.arrow_forward_ios,
+                    () {
+                      deleteLocalUser();
+                      context.pop();
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  _buildSectionHeader(context, 'App Settings'),
+                  _buildToggleThemeTile(context), // Dark mode toggle
+                  _buildOptionTile(
+                    context,
+                    'Colour Palette',
+                    Icons.notifications,
+                    Icons.arrow_forward_ios,
+                    () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const PaletteSelector(),
+                        ),
+                      );
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'Privacy Settings',
+                    Icons.lock,
+                    Icons.arrow_forward_ios,
+                    () {
+                      // Handle Privacy Settings tap
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  _buildSectionHeader(context, 'Support'),
+                  _buildOptionTile(
+                    context,
+                    'Help & Support',
+                    Icons.help_outline,
+                    Icons.arrow_forward_ios,
+                    () {
+                      // Handle Help & Support tap
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'Legal Policies',
+                    Icons.gavel,
+                    Icons.arrow_forward_ios,
+                    () async {
+                      _flutterMediaDownloaderPlugin.downloadMedia(
+                        context,
+                        'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekTermsOfUse.pdf',
+                      );
+                      _flutterMediaDownloaderPlugin.downloadMedia(
+                        context,
+                        'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekCookiePolicy.pdf',
+                      );
+                      _flutterMediaDownloaderPlugin.downloadMedia(
+                        context,
+                        'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekPrivacyPolicy.pdf',
+                      );
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'About',
+                    Icons.info_outline,
+                    Icons.arrow_forward_ios,
+                    () {
+                      // Handle About tap
+                    },
+                  ),
+                ],
+              ),
+            ),
           ),
         ),
       ),

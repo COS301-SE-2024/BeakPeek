@@ -22,8 +22,8 @@ class UserModel {
           map['achievements']?.map((x) => Achievement.fromMap(x))),
       description: map['description'] ?? 'Tell us about yourself...',
       level: map['level'] ?? 0,
-      xp: map['xp'],
-      lifelist: map['lifelist'],
+      xp: map['xp'] ?? 0,
+      lifelist: map['lifelist'] ?? '',
     );
   }
 
@@ -112,7 +112,14 @@ void deleteLocalUser() {
 }
 
 Future<void> updateOnline() async {
-  //TODO: user update
+  final response = await http.post(Uri.parse('$userApiUrl/User/UpdateProfile'),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+        HttpHeaders.contentTypeHeader: 'application/json'
+      },
+      body: user.toJson());
 
-  print('updated');
+  user = UserModel.fromJson(response.body);
+
+  // print('updated');
 }

@@ -78,15 +78,13 @@ class RoutingData {
                     builder: (context, state) {
                       return SettingsPage();
                     },
-                    routes: <RouteBase>[
-                      GoRoute(
-                        path: 'editprofile',
-                        name: 'editprofile',
-                        builder: (context, state) {
-                          return const EditUserProfile();
-                        },
-                      ),
-                    ],
+                  ),
+                  GoRoute(
+                    path: 'editprofile',
+                    name: 'editprofile',
+                    builder: (context, state) {
+                      return const EditUserProfile();
+                    },
                   ),
                 ],
               ),

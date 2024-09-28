@@ -43,9 +43,8 @@ class BottomNavItem extends StatelessWidget {
           TextButton(
             onPressed: () {
               if (label.toLowerCase().compareTo('home') == 0) {
-                context.go('home');
+                context.goNamed('home');
               }
-
               context.goNamed(label.toLowerCase());
             },
             child: SvgPicture.asset(

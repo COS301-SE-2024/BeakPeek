@@ -22,9 +22,11 @@ class _LandingPageState extends State<LandingPage> {
         children: [
           PageView(
             controller: _pageController,
-            children: const [
-              LandingTab1(),
-              LandingTab2(),
+            children: [
+              LandingTab1(
+                pageController: _pageController,
+              ),
+              const LandingTab2(),
             ],
           ),
           Positioned(

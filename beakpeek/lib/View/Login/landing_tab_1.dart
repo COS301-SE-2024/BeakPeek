@@ -7,7 +7,10 @@ import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/config_azure.dart' as config;
 
 class LandingTab1 extends StatelessWidget {
-  const LandingTab1({super.key});
+  // Accept PageController for navigation
+
+  const LandingTab1({required this.pageController, super.key});
+  final PageController pageController;
 
   @override
   Widget build(BuildContext context) {
@@ -57,21 +60,54 @@ class LandingTab1 extends StatelessWidget {
                     SizedBox(
                       height: screenHeight * 0.03,
                     ),
+                    // Existing condition if needed
                     if (accessToken.isNotEmpty &&
                         localStorage.getItem('termsAndCondition') != null)
                       Center(
-                        child: FilledButton(
-                          style: GlobalStyles.buttonPrimaryOutlined(context),
-                          child: Text(
-                            '''Welcome Back ${user.username}''',
-                            style: GlobalStyles.secondaryButtonText(context),
-                          ),
-                          onPressed: () {
-                            config.loggedIN = true;
-                            context.go('/home');
-                          },
+                        child: Column(
+                          children: [
+                            FilledButton(
+                              style:
+                                  GlobalStyles.buttonPrimaryOutlined(context),
+                              child: Text(
+                                '''Welcome Back ${user.username}''',
+                                style:
+                                    GlobalStyles.secondaryButtonText(context),
+                              ),
+                              onPressed: () {
+                                config.loggedIN = true;
+                                context.go('/home');
+                              },
+                            ),
+                          ],
                         ),
                       ),
+                    SizedBox(height: screenHeight * 0.02),
+                    TextButton(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            'Next',
+                            style: GlobalStyles.smallContent(context),
+                          ),
+                          const SizedBox(width: 8.0),
+                          Icon(
+                            Icons.arrow_forward_ios_rounded,
+                            color: AppColors.greyColor(context),
+                            size: 18,
+                          ),
+                        ],
+                      ),
+                      // Move to the second page in the PageView
+                      onPressed: () {
+                        pageController.animateToPage(
+                          1, // The second page in the PageView
+                          duration: const Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
