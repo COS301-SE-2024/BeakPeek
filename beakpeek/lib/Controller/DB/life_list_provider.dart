@@ -185,14 +185,14 @@ class LifeListProvider {
   }
 
   Future<void> updateUserLifelist() async {
-    final db = await instance.database;
+    // final db = await instance.database;
+    //
+    // final List<Map<String, Object?>> birdMap = await db.query(
+    //   'birds',
+    //   orderBy: 'commonSpecies DESC',
+    // );
 
-    final List<Map<String, Object?>> birdMap = await db.query(
-      'birds',
-      orderBy: 'commonSpecies DESC',
-    );
-
-    user.lifelist = birdMap.toString();
+    // user.lifelist = birdMap.toString();
     storeUserLocally(user);
   }
 
