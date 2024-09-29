@@ -18,9 +18,18 @@ class EditUserProfile extends StatefulWidget {
 }
 
 class _EditUserProfileState extends State<EditUserProfile> {
+  final myController = TextEditingController();
   ImageProvider profilePicture =
       Image.memory(base64Decode(user.profilepicture)).image;
   final picker = ImagePicker();
+
+  @override
+  void dispose() {
+    // Clean up the controller when the widget is removed from the
+    // widget tree.
+    myController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -108,9 +117,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         controller: TextEditingController()
                           ..text = user.username,
                         onChanged: (value) {
-                          setState(() {
-                            user.username = value;
-                          });
+                          user.username = value;
                         },
                         decoration: InputDecoration(
                           labelText: 'Username',
@@ -148,9 +155,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                           ..text = user.description,
                         maxLines: 3,
                         onChanged: (value) {
-                          setState(() {
-                            user.description = value;
-                          });
+                          user.description = value;
                         },
                         decoration: InputDecoration(
                           labelText: 'Bio',
@@ -180,7 +185,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
               onPressed: () {
                 storeUserLocally(user);
                 updateOnline();
-                context.pop();
+                context.goNamed('home');
               },
               style: GlobalStyles.buttonPrimaryFilled(context),
               child: Text(

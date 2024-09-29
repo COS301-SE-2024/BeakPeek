@@ -68,9 +68,17 @@ double progressPercentage(int progress, int level) {
   return ((progress / getNextLevelExpRequired(level)) * 100);
 }
 
-void addExp(int amount) {
+void addExp(int id) async {
+  final LifeListProvider lifelist = LifeListProvider.instance;
+  final bird = await lifelist.getBirdInByID(id);
+  int amount = bird.reportingRate.toInt();
+  if (amount <= 1) {
+    amount = 100;
+  } else {
+    amount = 100 - amount;
+  }
   final int newExp = amount + user.xp;
-  user.set('xp', newExp);
+  user.xp = newExp;
   updateLevelStats();
 }
 
@@ -83,7 +91,7 @@ void updateLevelStats() {
     if (expProgress < 0) {
       expProgress = 0;
     }
-    user.set('xp', expProgress);
+    user.xp = expProgress;
     nextLevelEXP = getNextLevelExpRequired(user.level);
   }
   storeUserLocally(user);
@@ -136,6 +144,6 @@ String formatProvinceName(String province) {
 Future<void> updateUserModel() async {
   late final LifeListProvider lifeList = LifeListProvider.instance;
   final List<Map<String, Object?>> birds = await lifeList.getLifeListForUser();
-  user.set('lifelist', birds.toString());
+  user.lifelist = birds.toString();
   storeUserLocally(user);
 }
