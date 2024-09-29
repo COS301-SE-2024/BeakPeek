@@ -12,6 +12,8 @@ if (localPropertiesFile.exists()) {
     }
 }
 
+def googleMapsApiKey = localProperties.getProperty('GOOGLE_MAPS_API_KEY')
+
 def flutterVersionCode = localProperties.getProperty("flutter.versionCode")
 if (flutterVersionCode == null) {
     flutterVersionCode = "3"
@@ -52,6 +54,7 @@ android {
         applicationId = "com.millennium.beakpeek"
         minSdk = 24
         targetSdk = 34
+        resValue "string", "google_maps_key", googleMapsApiKey
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
