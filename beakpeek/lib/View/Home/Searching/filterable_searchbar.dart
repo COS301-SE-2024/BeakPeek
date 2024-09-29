@@ -59,8 +59,6 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
     context.pushNamed(
       'birdInfo',
       pathParameters: {
-        'group': bird.commonGroup,
-        'species': bird.commonSpecies,
         'id': bird.id.toString(),
       },
     );
