@@ -46,6 +46,7 @@ class _BirdPageState extends State<BirdPage> {
     if (!isSeenGS(widget.id)) {
       setState(
         () {
+          lifeList.updateUserLifelist();
           seenText = 'Seen';
           addExp(widget.id);
           global.updateLife();

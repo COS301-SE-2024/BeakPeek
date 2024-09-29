@@ -1,6 +1,7 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/UserProfile/achievement.dart';
 import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
@@ -27,7 +28,7 @@ class AchievementsPageState extends State<AchievementsPage> {
     lifeList.precentLifeListBirds().then((birds) {
       birdPercentages = birds;
     });
-    // checkprogress here
+    updateOnline();
     super.initState();
   }
 

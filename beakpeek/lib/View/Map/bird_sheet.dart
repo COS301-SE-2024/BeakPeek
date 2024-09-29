@@ -37,8 +37,9 @@ class _BirdSheetState extends State<BirdSheet> {
 
   void _refreshBirdList() async {
     try {
-      List<Bird> allBirds = await fetchBirds(widget.pentadId, http.Client());
-      List<Bird> seenBirds =
+      final List<Bird> allBirds =
+          await fetchBirds(widget.pentadId, http.Client());
+      final List<Bird> seenBirds =
           await global.birdList; // Get the list of seen birds
 
       List<Bird> filteredBirds = _filterBirds(allBirds, seenBirds);

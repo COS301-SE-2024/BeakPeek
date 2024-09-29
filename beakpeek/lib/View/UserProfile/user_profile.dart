@@ -62,7 +62,7 @@ class UserProfileState extends State<UserProfile> {
       },
     );
     retrieveLostData();
-    updateOnline(lifelist: lifeList);
+    updateOnline();
     super.initState();
   }
 

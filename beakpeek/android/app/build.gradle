@@ -55,8 +55,8 @@ android {
         minSdk = 24
         targetSdk = 34
         resValue "string", "google_maps_key", googleMapsApiKey
-        versionCode flutterVersionCode.toInteger()
-        versionName flutterVersionName
+        versionCode 2
+        versionName "1.1"
         multiDexEnabled true
     }
 
