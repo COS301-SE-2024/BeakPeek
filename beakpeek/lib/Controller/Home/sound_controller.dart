@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print, library_private_types_in_public_api
-
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -22,11 +20,31 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
   bool isPlaying = false;
   String? fileUrl;
   bool isLoading = true;
+  Duration totalDuration = Duration.zero;
+  Duration currentPosition = Duration.zero;
 
   @override
   void initState() {
     super.initState();
     fetchBirdSoundUrl();
+    _audioPlayer.onDurationChanged.listen((duration) {
+      setState(() {
+        totalDuration = duration;
+      });
+    });
+
+    _audioPlayer.onPositionChanged.listen((position) {
+      setState(() {
+        currentPosition = position;
+      });
+    });
+
+    _audioPlayer.onPlayerComplete.listen((event) {
+      setState(() {
+        isPlaying = false;
+        currentPosition = Duration.zero;
+      });
+    });
   }
 
   void preloadAudio() async {
@@ -115,12 +133,25 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
               strokeWidth: 2.0,
             ),
           )
-        : IconButton(
-            icon: Icon(
-              isPlaying ? Icons.stop : Icons.play_arrow,
-              color: AppColors.tertiaryColor(context),
-            ),
-            onPressed: fileUrl != null ? togglePlayPause : null,
+        : Stack(
+            alignment: Alignment.center,
+            children: [
+              CircularProgressIndicator(
+                value: totalDuration.inMilliseconds == 0
+                    ? 0.0
+                    : currentPosition.inMilliseconds /
+                        totalDuration.inMilliseconds,
+                color: AppColors.primaryColor(context),
+                strokeWidth: 4.0,
+              ),
+              IconButton(
+                icon: Icon(
+                  isPlaying ? Icons.stop : Icons.play_arrow,
+                  color: AppColors.tertiaryColor(context),
+                ),
+                onPressed: fileUrl != null ? togglePlayPause : null,
+              ),
+            ],
           );
   }
 }
