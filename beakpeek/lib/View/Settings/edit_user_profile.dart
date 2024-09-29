@@ -172,29 +172,29 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         ),
                       ),
                     ),
+                    // Save Button
+                    SizedBox(height: screenHeight * 0.3), // Add a small spacing
+                    Padding(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          storeUserLocally(user);
+                          updateOnline();
+                          context.goNamed('home');
+                        },
+                        style: GlobalStyles.buttonPrimaryFilled(context),
+                        child: Text(
+                          'Save',
+                          style: GlobalStyles.primaryButtonText(context),
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
           ),
-
-          // Save Button
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.1),
-            child: ElevatedButton(
-              onPressed: () {
-                storeUserLocally(user);
-                updateOnline();
-                context.goNamed('home');
-              },
-              style: GlobalStyles.buttonPrimaryFilled(context),
-              child: Text(
-                'Save',
-                style: GlobalStyles.primaryButtonText(context),
-              ),
-            ),
-          ),
-          SizedBox(height: screenHeight * 0.02), // Add a small spacing
         ],
       ),
       bottomNavigationBar: const BottomNavigation(),
