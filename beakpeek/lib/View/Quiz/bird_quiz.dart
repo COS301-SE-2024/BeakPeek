@@ -160,14 +160,14 @@ class _BirdQuizState extends State<BirdQuiz>
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                     vertical: 12.0, horizontal: 24.0),
-                backgroundColor: AppColors.primaryButtonColor(context),
+                backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
               child: Text(
                 'Try Again',
-                style: GlobalStyles.primaryButtonText(context),
+                style: GlobalStyles.smallContent(context),
               ),
             ),
             TextButton(
@@ -191,14 +191,14 @@ class _BirdQuizState extends State<BirdQuiz>
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(
                     vertical: 12.0, horizontal: 24.0),
-                backgroundColor: AppColors.primaryButtonColor(context),
+                backgroundColor: Colors.transparent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
               child: Text(
                 'View Bird',
-                style: GlobalStyles.primaryButtonText(context),
+                style: GlobalStyles.smallContent(context),
               ),
             ),
             // ),
