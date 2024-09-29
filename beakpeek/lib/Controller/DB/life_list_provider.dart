@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/province_data.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -180,6 +182,18 @@ class LifeListProvider {
         },
       );
     }
+  }
+
+  Future<void> updateUserLifelist() async {
+    final db = await instance.database;
+
+    final List<Map<String, Object?>> birdMap = await db.query(
+      'birds',
+      orderBy: 'commonSpecies DESC',
+    );
+
+    user.lifelist = birdMap.toString();
+    storeUserLocally(user);
   }
 
   Future<List<Bird>> fetchLifeList() async {

@@ -35,6 +35,10 @@ class _BirdPageState extends State<BirdPage> {
     global.updateLife();
     super.initState();
     birdFuture = ApiService().fetchBirdInfoOffline(lifeList, widget.id);
+
+    if (isSeenGS(widget.id)) {
+      seenText = 'Seen';
+    }
   }
 
   void addToLifeList() {

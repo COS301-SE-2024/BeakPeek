@@ -29,11 +29,8 @@ class Globals {
     //lifeList.deleteDatabaseFile();
   }
 
-  void updateLife() async {
-    lifeList.fetchLifeList().then((result) {
-      birdList = result;
-    });
-    birdList = await lifeList.fetchLifeList();
+  Future<List<Bird>> updateLife() async {
+    return birdList = await lifeList.fetchLifeList();
   }
 
   Bird getDefualtBirdData(int id) {
