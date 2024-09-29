@@ -3,12 +3,10 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'dart:convert';
 import 'dart:io';
-import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
 import 'package:beakpeek/Model/UserProfile/user_achievment.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart' as http;
-import 'package:beakpeek/Model/UserProfile/achievement.dart';
 import 'package:localstorage/localstorage.dart';
 
 class UserModel {

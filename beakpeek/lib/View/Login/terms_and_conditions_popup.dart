@@ -2,16 +2,54 @@ import 'package:beakpeek/Controller/Azure/login.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_media_downloader/flutter_media_downloader.dart';
 import 'package:go_router/go_router.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 
-class TermsAndConditionsPopup extends StatelessWidget {
-  TermsAndConditionsPopup(
+class TermsAndConditionsPopup extends StatefulWidget {
+  const TermsAndConditionsPopup(
       {super.key, required this.guest, required this.outerContext});
-  final _flutterMediaDownloaderPlugin = MediaDownload();
   final bool guest;
   final BuildContext outerContext;
+  @override
+  TermsAndConditionsPopupState createState() => TermsAndConditionsPopupState();
+}
+
+class TermsAndConditionsPopupState extends State<TermsAndConditionsPopup> {
+  PDFDocument? document;
+  bool viewTandC = false;
+  void loadPdfT() {
+    setState(() {
+      viewTandC = true;
+    });
+  }
+
+  @override
+  void initState() {
+    loadPDf();
+    super.initState();
+  }
+
+  void loadPDf() async {
+    document =
+        await PDFDocument.fromAsset('assets/Legal/BeakPeekTermsOfUse.pdf');
+  }
+
+  void loadCookie() async {
+    setState(() {
+      PDFDocument.fromAsset('assets/Legal/BeakPeekCookiePolicy.pdf')
+          .then((value) => document);
+    });
+    loadPdfT();
+  }
+
+  void loadPriv() async {
+    setState(() {
+      PDFDocument.fromAsset('assets/Legal/BeakPeekPrivacyPolicy.pdf')
+          .then((value) => document);
+    });
+    loadPdfT();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,14 +87,14 @@ class TermsAndConditionsPopup extends StatelessWidget {
           SizedBox(height: screenHeight * 0.01),
           OutlinedButton(
             onPressed: () {
-              if (guest) {
+              if (widget.guest) {
                 loggedIN = false;
                 Navigator.pop(context);
                 context.go('/home');
               } else {
                 localStorage.setItem('termsAndCondition', 'true');
                 Navigator.pop(context);
-                loginFunction(outerContext);
+                loginFunction(widget.outerContext);
               }
             },
             style: GlobalStyles.buttonPrimaryOutlined(context),
@@ -65,19 +103,52 @@ class TermsAndConditionsPopup extends StatelessWidget {
           const SizedBox(height: 10.0),
           Center(
             child: OutlinedButton(
-              onPressed: () async {
-                _flutterMediaDownloaderPlugin.downloadMedia(context,
-                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekTermsOfUse.pdf');
-                _flutterMediaDownloaderPlugin.downloadMedia(context,
-                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekCookiePolicy.pdf');
-                _flutterMediaDownloaderPlugin.downloadMedia(context,
-                    'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekPrivacyPolicy.pdf');
+              onPressed: () {
+                loadPdfT();
               },
               style: GlobalStyles.buttonSecondaryOutlined(context),
               child: const Text('Terms and conditions'),
             ),
           ),
+          const SizedBox(height: 10.0),
+          Center(
+            child: OutlinedButton(
+              onPressed: () {
+                loadCookie();
+              },
+              style: GlobalStyles.buttonSecondaryOutlined(context),
+              child: const Text('Cookies'),
+            ),
+          ),
+          const SizedBox(height: 10.0),
+          Center(
+            child: OutlinedButton(
+              onPressed: () {
+                loadCookie();
+              },
+              style: GlobalStyles.buttonSecondaryOutlined(context),
+              child: const Text('Privacy'),
+            ),
+          ),
           SizedBox(height: screenHeight * 0.05),
+          viewTandC
+              ? SizedBox(
+                  height: screenHeight * 0.4,
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                        flex: (screenHeight * 0.5).floor(),
+                        child: PDFViewer(
+                          document: document!,
+                          zoomSteps: 2,
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              : const SizedBox(
+                  height: 0,
+                ),
         ],
       ),
     );

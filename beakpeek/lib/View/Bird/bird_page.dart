@@ -10,6 +10,7 @@ import 'package:beakpeek/Model/bird_page_functions.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:beakpeek/config_azure.dart' as config;
@@ -46,7 +47,7 @@ class _BirdPageState extends State<BirdPage> {
       setState(
         () {
           seenText = 'Seen';
-          addExp(20);
+          addExp(widget.id);
           global.updateLife();
           lifeList.insertBird(widget.id);
         },
@@ -225,6 +226,7 @@ class _BirdPageState extends State<BirdPage> {
                     child: FilledButton(
                       onPressed: () {
                         if (config.loggedIN) {
+                          user.lifelist = user.lifelist + widget.id.toString();
                           addToLifeList();
                         }
                       },

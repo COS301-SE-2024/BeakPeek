@@ -47,6 +47,9 @@ class UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     super.initState();
+    name = user.username;
+    username = user.username;
+    bio = user.description;
     birds = lifeList.fetchLifeList();
     level = user.level;
     userExp = user.xp;
