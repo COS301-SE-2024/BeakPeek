@@ -121,10 +121,14 @@ class HomeState extends State<Home> {
                                 decoration: BoxDecoration(
                                   color: AppColors.popupColor(context),
                                   borderRadius: BorderRadius.circular(10.0),
-                                  image: const DecorationImage(
-                                    image: AssetImage(
+                                  image: DecorationImage(
+                                    image: const AssetImage(
                                         'assets/images/quiz_placeholder.png'),
                                     fit: BoxFit.cover,
+                                    alignment: screenWidth >= 600
+                                        ? Alignment.topCenter
+                                        : Alignment
+                                            .center, // Adjust alignment for tablets
                                   ),
                                 ),
                                 child: Stack(
@@ -137,16 +141,16 @@ class HomeState extends State<Home> {
                                           context.goNamed('quiz');
                                         },
                                         style: ElevatedButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10.0),
-                                            ),
-                                            elevation: 10,
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16.0,
-                                                vertical: 8.0),
-                                            backgroundColor:
-                                                AppColors.popupColor(context)),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          elevation: 10,
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16.0, vertical: 8.0),
+                                          backgroundColor:
+                                              AppColors.popupColor(context),
+                                        ),
                                         child: Text(
                                           'Start Quiz',
                                           style: GlobalStyles.contentSecondary(
