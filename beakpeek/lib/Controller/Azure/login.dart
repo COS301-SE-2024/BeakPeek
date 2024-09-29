@@ -6,7 +6,6 @@ import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:go_router/go_router.dart';
-import 'package:beakpeek/config_azure.dart';
 import 'package:localstorage/localstorage.dart';
 
 void loginFunction(BuildContext context) async {
@@ -28,7 +27,7 @@ void loginFunction(BuildContext context) async {
     localStorage.setItem('accessToken', token);
     user = await getOnlineUser();
     achievementList = await getOnlineAchivementList();
-    // print(
+
     //     '---------------------------------------------------- \n ${user.toJson()} \n ---------------------------------');
     storeUserLocally(user);
     storeAchievementListLocally(achievementList);

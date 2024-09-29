@@ -1,9 +1,9 @@
-// ignore_for_file: avoid_print
-
 import 'dart:async';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/province_data.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -37,6 +37,7 @@ class LifeListProvider {
 
     // Delete the database file
     await deleteDatabase(path);
+    // ignore: avoid_print
     print('Database deleted');
   }
 
@@ -163,9 +164,7 @@ class LifeListProvider {
   }
 
   Future<void> insertBird(int birdId) async {
-    print('inserting ');
     final bird = await getBirdInByID(birdId);
-    print(bird.toString());
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
       await db
@@ -176,10 +175,23 @@ class LifeListProvider {
       )
           .then(
         (value) {
+          // ignore: avoid_print
           print('inserted $value + $bird');
         },
       );
     }
+  }
+
+  Future<void> updateUserLifelist() async {
+    // final db = await instance.database;
+    //
+    // final List<Map<String, Object?>> birdMap = await db.query(
+    //   'birds',
+    //   orderBy: 'commonSpecies DESC',
+    // );
+
+    // user.lifelist = birdMap.toString();
+    storeUserLocally(user);
   }
 
   Future<List<Bird>> fetchLifeList() async {
@@ -189,7 +201,6 @@ class LifeListProvider {
       'birds',
       orderBy: 'commonSpecies DESC',
     );
-    print('LifeList FetchLifeList ${birdMap.toString()}');
     return birdMap.map(
       (map) {
         return Bird.fromJsonLifeList(map);
@@ -216,7 +227,6 @@ class LifeListProvider {
         bird.species
       ],
     );
-    print(maps);
     if (maps.isNotEmpty) {
       return true;
     } else {
@@ -251,7 +261,6 @@ class LifeListProvider {
       }
       batch.commit();
     }
-    //print(getFullBirdData().toString());
   }
 
   Future<void> initialProvInsert(List<Bird> allBirds) async {
@@ -349,7 +358,6 @@ class LifeListProvider {
 
   Future<Bird> getBirdInByID(int id) async {
     final db = await instance.database;
-    print(getFullBirdData().toString());
     final List<Map<String, Object?>> map =
         await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
     final Bird temp = Bird(
@@ -384,7 +392,6 @@ class LifeListProvider {
       info: map[0]['info'] as String,
       population: map[0]['birdPopulation'] as int,
     );
-    print(temp);
     return temp;
   }
 
@@ -392,9 +399,6 @@ class LifeListProvider {
     final db = await instance.database;
     final List<Map<String, Object?>> birdMap =
         await db.query('allBirds', where: 'id = ?', whereArgs: [id]);
-    print('Check all birds');
-    print(birdMap.toString());
-    print(Bird.fromJsonLife(birdMap[0]));
     return Bird.fromJsonLife(birdMap[0]);
   }
 
@@ -402,7 +406,6 @@ class LifeListProvider {
     final db = await instance.database;
     final image = await get(Uri.parse(img));
     final bytes = image.bodyBytes.toString();
-    //print(bytes);
     await db.rawUpdate(
       '''UPDATE allBirds
       SET image_Blob = ?

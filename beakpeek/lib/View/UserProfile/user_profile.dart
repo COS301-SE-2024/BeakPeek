@@ -1,6 +1,7 @@
 // ignore_for_file: unnecessary_null_comparison
 import 'dart:convert';
 import 'dart:io';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/View/Home/GuestUserBlock/guest_user_block.dart';
 import 'package:beakpeek/View/UserProfile/user_profile_widgets.dart';
@@ -46,6 +47,9 @@ class UserProfileState extends State<UserProfile> {
   @override
   void initState() {
     super.initState();
+    name = user.username;
+    username = user.username;
+    bio = user.description;
     birds = lifeList.fetchLifeList();
     level = user.level;
     userExp = user.xp;
@@ -58,6 +62,7 @@ class UserProfileState extends State<UserProfile> {
       },
     );
     retrieveLostData();
+    updateOnline(lifelist: lifeList);
     super.initState();
   }
 
@@ -152,7 +157,7 @@ class UserProfileState extends State<UserProfile> {
                         Column(
                           children: [
                             Text(
-                              'Level $level',
+                              'Level ${user.level}',
                               style: GlobalStyles.smallContent(context),
                             ),
                             const SizedBox(height: 6),

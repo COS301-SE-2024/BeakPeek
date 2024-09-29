@@ -398,24 +398,28 @@ class HeatMapState extends State<HeatMap> {
           );
         }
 
-        if (polygons.length % 100 == 0) {
+        if (polygons.length % 100 == 0 && mounted) {
           setState(() {
             _polygons.addAll(polygons);
           });
         }
       }
 
-      setState(() {
-        _polygons.addAll(polygons);
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _polygons.addAll(polygons);
+          _isLoading = false;
+        });
+      }
     } catch (e) {
       if (kDebugMode) {
         print('Error loading Pentad data: $e');
       }
-      setState(() {
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoading = false;
+        });
+      }
     }
   }
 }

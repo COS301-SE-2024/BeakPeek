@@ -1,15 +1,12 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/UserProfile/achievement.dart';
 import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
-import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:dynamic_icons/dynamic_icons.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:localstorage/localstorage.dart';
 
 class AchievementsPage extends StatefulWidget {
   const AchievementsPage({super.key});

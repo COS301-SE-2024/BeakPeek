@@ -32,7 +32,6 @@ Widget getLiveList(
 
 Widget getLifeListData(
     Bird bird, Function(Bird) goBird, BuildContext context, int index) {
-  //print('Blob ${bird.imageBlob.toString()}');
   late final ImageProvider birdImage = Image.network(bird.imageUrl!).image;
 
   return Container(
