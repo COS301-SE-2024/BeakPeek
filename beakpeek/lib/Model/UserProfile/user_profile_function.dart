@@ -134,8 +134,5 @@ String formatProvinceName(String province) {
 }
 
 Future<void> updateUserModel() async {
-  late final LifeListProvider lifeList = LifeListProvider.instance;
-  final List<Map<String, Object?>> birds = await lifeList.getLifeListForUser();
-  user.set('lifelist', birds.toString());
   storeUserLocally(user);
 }
