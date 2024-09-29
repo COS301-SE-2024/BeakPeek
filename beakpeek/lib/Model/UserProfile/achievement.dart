@@ -19,7 +19,7 @@ class Achievement {
         iconname: map['iconname'] ?? '');
   }
   Achievement(
-      {this.id = 0,
+      {this.id = -1,
       this.name = '',
       this.xp = 0,
       this.description = '',
