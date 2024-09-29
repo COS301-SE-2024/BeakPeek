@@ -116,7 +116,7 @@ class LandingTab2 extends StatelessWidget {
                           context: context,
                           builder: (dialogContext) {
                             return TermsAndConditionsPopup(
-                              guest: false,
+                              guest: true,
                               outerContext: context,
                             );
                           },
