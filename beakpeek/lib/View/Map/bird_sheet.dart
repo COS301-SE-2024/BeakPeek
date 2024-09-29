@@ -35,16 +35,36 @@ class _BirdSheetState extends State<BirdSheet> {
         http.Client()); // Fetch and sort birds from the API initially
   }
 
-  void _refreshBirdList() {
-    _birdList = fetchBirds(widget.pentadId, http.Client()).then((birds) {
-      // Sort the list of birds based on the selected sort option
-      print(birds[0]);
-      return _sortBirds(birds, _selectedSortOption);
-    }).catchError((error) {
-      // Handle error fetching birds
+  void _refreshBirdList() async {
+    try {
+      List<Bird> allBirds = await fetchBirds(widget.pentadId, http.Client());
+      List<Bird> seenBirds =
+          await global.birdList; // Get the list of seen birds
+
+      List<Bird> filteredBirds = _filterBirds(allBirds, seenBirds);
+      filteredBirds = _sortBirds(filteredBirds, _selectedSortOption);
+
+      setState(() {
+        _birdList = Future.value(filteredBirds);
+      });
+    } catch (error) {
       print('Error fetching birds: $error');
       throw Exception('Failed to load birds: $error');
-    });
+    }
+  }
+
+  List<Bird> _filterBirds(List<Bird> birds, List<Bird> seenBirds) {
+    if (_selectedFilterOption == 'Seen') {
+      return birds
+          .where((bird) => seenBirds.any((seenBird) => seenBird.id == bird.id))
+          .toList();
+    } else if (_selectedFilterOption == 'Haven\'t Seen') {
+      return birds
+          .where(
+              (bird) => seenBirds.every((seenBird) => seenBird.id != bird.id))
+          .toList();
+    }
+    return birds; // Return all birds if filter is 'All'
   }
 
   List<Bird> _sortBirds(List<Bird> birds, String sortOption) {
@@ -67,8 +87,6 @@ class _BirdSheetState extends State<BirdSheet> {
             .compareTo('${a.commonSpecies}${a.commonGroup}'));
         break;
       default:
-        birds.sort((a, b) => '${a.commonSpecies}${a.commonGroup}'
-            .compareTo('${b.commonSpecies}${b.commonGroup}'));
         break;
     }
     return birds;
