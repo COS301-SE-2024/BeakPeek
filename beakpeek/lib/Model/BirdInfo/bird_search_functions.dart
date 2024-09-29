@@ -80,10 +80,16 @@ List<Bird> sortRepotRateASC(List<Bird> birds) {
 }
 
 List<Bird> searchForBird(List<Bird> birds, String value) {
-  final List<Bird> results = birds
-      .where((bird) =>
-          (bird.commonSpecies).toLowerCase().contains(value.toLowerCase()))
-      .toList();
+  final pattern = RegExp(
+      r'\b' + RegExp.escape(value.toLowerCase())); // Match at word boundaries
+  final List<Bird> results = birds.where((bird) {
+    final commonSpeciesMatch =
+        pattern.hasMatch(bird.commonSpecies.toLowerCase());
+    final commonGroupMatch = pattern.hasMatch(bird.commonGroup.toLowerCase());
+
+    return commonSpeciesMatch || commonGroupMatch;
+  }).toList();
+
   return results;
 }
 
