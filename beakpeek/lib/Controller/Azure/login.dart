@@ -26,7 +26,7 @@ void loginFunction(BuildContext context) async {
     loggedIN = true;
     localStorage.setItem('accessToken', token);
     user = await getOnlineUser();
-    achievementList = await getOnlineAchivementList();
+    achievementList = await getAchivementList();
 
     //     '---------------------------------------------------- \n ${user.toJson()} \n ---------------------------------');
     storeUserLocally(user);

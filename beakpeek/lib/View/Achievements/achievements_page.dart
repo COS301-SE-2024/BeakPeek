@@ -18,13 +18,16 @@ class AchievementsPage extends StatefulWidget {
 class AchievementsPageState extends State<AchievementsPage> {
   final LifeListProvider lifeList = LifeListProvider.instance;
   late List<double> birdPercentages = [0, 0, 0, 0, 0, 0, 0, 0, 0];
-
-  final Future<AchievementList> _achievementlist = getOnlineAchivementList();
+  /* This final is what loads all achievements and also 
+   * will be used to track achievement progress
+   */
+  final Future<AchievementList> _achievementlist = getAchivementList();
   @override
   void initState() {
     lifeList.precentLifeListBirds().then((birds) {
       birdPercentages = birds;
     });
+    // checkprogress here
     super.initState();
   }
 
