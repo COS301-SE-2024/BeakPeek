@@ -24,7 +24,7 @@ class HeatMapState extends State<HeatMap> {
   late GoogleMapController mapController;
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
   late CameraPosition _cameraPosition;
-  final Set<Polygon> _polygons = {};
+  Set<Polygon> _polygons = {};
   late List<dynamic> birdData = [];
   bool _isLoading = true;
   String _selectedMonth = 'Year-Round';
@@ -259,6 +259,7 @@ class HeatMapState extends State<HeatMap> {
                   onChanged: (newValue) {
                     setState(() {
                       _selectedMonth = newValue!;
+                      _polygons.clear();
                     });
                   },
                   items: <String>[
@@ -305,9 +306,13 @@ class HeatMapState extends State<HeatMap> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
-                _polygons.clear();
+                setState(() {
+                  _polygons.clear();
+                });
+
                 loadPentadData();
+
+                Navigator.of(context).pop();
               },
               child: Text(
                 'Close',
@@ -358,6 +363,7 @@ class HeatMapState extends State<HeatMap> {
   Future<void> loadPentadData() async {
     setState(() {
       _isLoading = true;
+      _polygons.clear();
     });
 
     try {
