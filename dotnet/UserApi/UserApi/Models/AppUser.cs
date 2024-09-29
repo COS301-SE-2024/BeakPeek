@@ -25,6 +25,9 @@ public class AppUser : IdentityUser
     [PersonalData]
     public string Lifelist { get; set; } = "";
 
+    [PersonalData]
+    public int Highscore { get; set; } = 0;
+
     public UserDto ToDto()
     {
         return new UserDto
@@ -36,7 +39,8 @@ public class AppUser : IdentityUser
             Description = Description,
             XP = XP,
             Level = Level,
-            Lifelist = Lifelist
+            Lifelist = Lifelist,
+            Highscore = Highscore
         };
     }
 
@@ -47,6 +51,7 @@ public class AppUser : IdentityUser
         XP = userDto.XP;
         Level = userDto.Level;
         Lifelist = userDto.Lifelist ?? "";
+        Highscore = userDto.Highscore;
     }
 }
 
@@ -87,4 +92,5 @@ public class UserDto
     public int XP { get; set; }
     public int Level { get; set; }
     public string Lifelist { get; set; } = "";
+    public int Highscore { get; set; } = 0;
 }

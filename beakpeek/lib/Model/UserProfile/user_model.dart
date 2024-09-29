@@ -13,32 +13,31 @@ import 'package:localstorage/localstorage.dart';
 class UserModel {
   factory UserModel.fromJson(String source) =>
       UserModel.fromMap(json.decode(source));
-// TODO: Update api so that it returns every key in lowercase
 
   factory UserModel.fromMap(Map<String, dynamic> map) {
     return UserModel(
-      username: map['userName'] ?? map['username'],
-      email: map['email'],
-      profilepicture: map['profilePicture'] ?? map['profilepicture'] ?? '',
-      achievements: List<UserAchievement>.from(
-          map['achievements']?.map((x) => UserAchievement.fromMap(x))),
-      description: map['description'] ?? 'Tell us about yourself...',
-      level: map['level'] ?? 0,
-      xp: map['xp'] ?? 0,
-      lifelist: map['lifelist'] ?? '',
-    );
+        username: map['userName'] ?? map['username'],
+        email: map['email'],
+        profilepicture: map['profilePicture'] ?? map['profilepicture'] ?? '',
+        achievements: List<UserAchievement>.from(
+            map['achievements']?.map((x) => UserAchievement.fromMap(x))),
+        description: map['description'] ?? 'Tell us about yourself...',
+        level: map['level'] ?? 0,
+        xp: map['xp'] ?? 0,
+        lifelist: map['lifelist'] ?? '',
+        highscore: map['highscore'] ?? 0);
   }
 
-  UserModel({
-    this.username = 'Unknown',
-    this.email = '',
-    this.profilepicture = '',
-    this.achievements = const [],
-    this.description = '',
-    this.xp = 0,
-    this.lifelist = '',
-    this.level = 0,
-  });
+  UserModel(
+      {this.username = 'Unknown',
+      this.email = '',
+      this.profilepicture = '',
+      this.achievements = const [],
+      this.description = '',
+      this.xp = 0,
+      this.lifelist = '',
+      this.level = 0,
+      this.highscore = 0});
 
   String username;
   String email;
@@ -48,6 +47,7 @@ class UserModel {
   int level;
   int xp;
   String lifelist;
+  int highscore;
 
   Map<String, dynamic> toMap() {
     return {
@@ -59,6 +59,7 @@ class UserModel {
       'xp': xp,
       'level': level,
       'lifelist': lifelist,
+      'highscore': highscore
     };
   }
 
