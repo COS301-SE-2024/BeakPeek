@@ -50,22 +50,25 @@ class _BirdSheetState extends State<BirdSheet> {
   List<Bird> _sortBirds(List<Bird> birds, String sortOption) {
     // Sorting logic based on the selected sort option
     switch (sortOption) {
-      case 'Rarity Asc':
+      case 'Rarity Asc.':
         birds.sort((a, b) => getReportingRateForMonth(a, widget.month)
             .compareTo(getReportingRateForMonth(b, widget.month)));
         break;
-      case 'Rarity Desc':
+      case 'Rarity Desc.':
         birds.sort((a, b) => getReportingRateForMonth(b, widget.month)
             .compareTo(getReportingRateForMonth(a, widget.month)));
         break;
-      case 'Alphabetically Asc':
-        birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
+      case 'A-Z':
+        birds.sort((a, b) => '${a.commonSpecies}${a.commonGroup}'
+            .compareTo('${b.commonSpecies}${b.commonGroup}'));
         break;
-      case 'Alphabetically Desc':
-        birds.sort((a, b) => b.commonGroup.compareTo(a.commonGroup));
+      case 'Z-A':
+        birds.sort((a, b) => '${b.commonSpecies}${b.commonGroup}'
+            .compareTo('${a.commonSpecies}${a.commonGroup}'));
         break;
       default:
-        birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
+        birds.sort((a, b) => '${a.commonSpecies}${a.commonGroup}'
+            .compareTo('${b.commonSpecies}${b.commonGroup}'));
         break;
     }
     return birds;
@@ -130,8 +133,8 @@ class _BirdSheetState extends State<BirdSheet> {
                           'Sort',
                           'Rarity Asc.',
                           'Rarity Desc.',
-                          'Alphabetically Asc.',
-                          'Alphabetically Desc.'
+                          'A-Z',
+                          'Z-A'
                         ].map((value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -162,11 +165,8 @@ class _BirdSheetState extends State<BirdSheet> {
                         isExpanded:
                             true, // Ensures the dropdown items fit inside
                         value: _selectedFilterOption,
-                        items: <String>[
-                          'Birds You\'ve Seen',
-                          'Birds You Haven\'t Seen',
-                          'All'
-                        ].map((value) {
+                        items: <String>['All', 'Seen', 'Haven\'t Seen']
+                            .map((value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(
