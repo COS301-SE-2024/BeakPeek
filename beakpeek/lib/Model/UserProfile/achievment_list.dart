@@ -43,6 +43,18 @@ Future<AchievementList> getAchivementList() async {
 
 /// All checks for user progress should go here
 Future<void> updateAchievmentProgress() async {
+  /// Quiz Master
+  final Achievement? quizMaster = getAchievementByName('Quiz Master');
+  if (quizMaster != null) {
+    double progress = user.highscore / 10;
+    progress = progress < 1 ? progress : 1;
+    await updateUsersAchievement(quizMaster.id, progress);
+    for (UserAchievement ua in user.achievements) {
+      print(ua.toJson());
+    }
+    print('Quiz Master');
+  }
+
   for (UserAchievement userAchievement in user.achievements) {
     achievementList
         .achievements[achievementList.achievements
