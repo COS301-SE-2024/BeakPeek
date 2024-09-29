@@ -95,18 +95,14 @@ class LandingTab2 extends StatelessWidget {
                             'true') {
                           loginFunction(context);
                         } else {
-                          showPopupCard(
-                            dimBackground: true,
-                            context: context,
-                            builder: (context) {
-                              return PopupCard(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                ),
-                                child: TermsAndConditionsPopup(guest: false),
-                              );
-                            },
-                          );
+                          showDialog(
+                              context: context,
+                              builder: (dialogContex) {
+                                return TermsAndConditionsPopup(
+                                  guest: false,
+                                  outerContext: context,
+                                );
+                              });
                         }
                       },
                     ),
@@ -116,19 +112,15 @@ class LandingTab2 extends StatelessWidget {
                       child: Text('Sign In as Guest',
                           style: GlobalStyles.secondaryButtonText(context)),
                       onPressed: () {
-                        showPopupCard(
-                          dimBackground: true,
+                        showDialog(
                           context: context,
-                          builder: (context) {
-                            return PopupCard(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                              child: TermsAndConditionsPopup(guest: true),
+                          builder: (dialogContext) {
+                            return TermsAndConditionsPopup(
+                              guest: true,
+                              outerContext: context,
                             );
                           },
                         );
-
                       },
                     ),
                   ],

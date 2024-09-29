@@ -19,6 +19,17 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        return View();
+    }
+
+    public IActionResult Privacy()
+    {
+        return View();
+    }
+
+    public IActionResult Mobile()
+    {
+
         Console.WriteLine(_detectionService.Device.Type);
 
         var isAuthenticated = User.Identity?.IsAuthenticated ?? false;
@@ -43,12 +54,7 @@ public class HomeController : Controller
                 return Redirect(androidAppRedirectUrl);
             }
         }
-        return View();
-    }
-
-    public IActionResult Privacy()
-    {
-        return View();
+        return View("Home");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

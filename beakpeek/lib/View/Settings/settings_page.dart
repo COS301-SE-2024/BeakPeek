@@ -62,6 +62,16 @@ class SettingsPage extends StatelessWidget {
                       context.pop();
                     },
                   ),
+                  _buildOptionTile(
+                    context,
+                    'Logout',
+                    Icons.logout,
+                    Icons.arrow_forward_ios,
+                    () {
+                      logoutUser();
+                      context.go('/');
+                    },
+                  ),
                   const SizedBox(height: 20),
                   _buildSectionHeader(context, 'App Settings'),
                   _buildToggleThemeTile(context), // Dark mode toggle

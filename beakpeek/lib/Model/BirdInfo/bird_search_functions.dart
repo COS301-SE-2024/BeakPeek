@@ -42,7 +42,7 @@ bool isSeen(Bird bird) {
 }
 
 bool isSeenGS(int id) {
-  final temp = global.birdList.where((test) => test.id.compareTo(test.id) == 0);
+  final temp = global.birdList.where((test) => test.id == id);
   if (temp.isNotEmpty) {
     return true;
   }

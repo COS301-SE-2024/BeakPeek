@@ -124,6 +124,7 @@ public class UserController : ControllerBase
     }
 
     [HttpGet]
+    [AllowAnonymous]
     public async Task<IActionResult> GetAchievments()
     {
         var achievements = await _context.Achievement.ToListAsync();

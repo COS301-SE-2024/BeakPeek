@@ -2,6 +2,7 @@ import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/Globals/globals.dart';
 import 'package:beakpeek/Model/BirdInfo/bird_search_functions.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/help_icon.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
@@ -70,6 +71,7 @@ class _SightingsState extends State<Sightings> {
     setState(() {
       selectedFilter = newValue;
     });
+    updateOnline(lifelist: lifeList);
   }
 
   @override
