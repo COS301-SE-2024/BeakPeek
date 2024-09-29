@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'dart:convert';
 import 'dart:io';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
@@ -22,7 +23,7 @@ class UserModel {
         achievements: List<UserAchievement>.from(
             map['achievements']?.map((x) => UserAchievement.fromMap(x))),
         description: map['description'] ?? 'Tell us about yourself...',
-        level: map['level'] ?? 0,
+        level: map['level'] ?? 1,
         xp: map['xp'] ?? 0,
         lifelist: map['lifelist'] ?? '',
         highscore: map['highscore'] ?? 0);
@@ -36,7 +37,7 @@ class UserModel {
       this.description = '',
       this.xp = 0,
       this.lifelist = '',
-      this.level = 0,
+      this.level = 1,
       this.highscore = 0});
 
   String username;
@@ -82,6 +83,7 @@ class UserModel {
       throw ArgumentError('property not found');
     }
     mapRep.update(propertyName, (x) => value);
+    user = UserModel.fromMap(mapRep);
   }
 
   String toJson() => json.encode(toMap());
@@ -121,7 +123,10 @@ void deleteLocalUser() {
   localStorage.setItem('accessToken', '');
 }
 
-Future<void> updateOnline() async {
+Future<void> updateOnline({LifeListProvider? lifelist}) async {
+  // if (lifelist != null) {
+  //   await lifelist.updateUserLifelist();
+  // }
   final response = await http.post(Uri.parse('$userApiUrl/User/UpdateProfile'),
       headers: {
         HttpHeaders.authorizationHeader: 'Bearer $accessToken',
@@ -129,9 +134,12 @@ Future<void> updateOnline() async {
       },
       body: user.toJson());
 
+  if (response.statusCode != 200) {
+    storeUserLocally(user);
+    return;
+  }
   user = UserModel.fromJson(response.body);
-  print(user.toJson());
-  // print('updated');
+  storeUserLocally(user);
 }
 
 void logoutUser() {

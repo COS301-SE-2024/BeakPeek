@@ -76,9 +76,9 @@ void addExp(int amount) {
 
 void updateLevelStats() {
   int expProgress = user.xp;
-  int nextLevelEXP = getNextLevelExpRequired(user.xp);
+  int nextLevelEXP = getNextLevelExpRequired(user.level);
   if (nextLevelEXP <= expProgress) {
-    user.set('level', user.level + 1);
+    user.level = user.level + 1;
     expProgress = expProgress - nextLevelEXP;
     if (expProgress < 0) {
       expProgress = 0;
@@ -86,6 +86,7 @@ void updateLevelStats() {
     user.set('xp', expProgress);
     nextLevelEXP = getNextLevelExpRequired(user.level);
   }
+  storeUserLocally(user);
 }
 
 Future<List<int>> countProv() async {
