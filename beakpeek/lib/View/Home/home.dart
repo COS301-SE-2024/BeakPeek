@@ -212,7 +212,26 @@ class HomeState extends State<Home> {
                                 );
                               } else {
                                 return Center(
-                                  child: Text('Error: ${snapshot.error}'),
+                                  child: Column(
+                                    children: [
+                                      const Icon(Icons.error_outline,
+                                          size: 50, color: Colors.red),
+                                      const SizedBox(height: 15),
+                                      Text(
+                                        'Unable to Load Birds near you!',
+                                        style: GlobalStyles.contentPrimary(
+                                            context),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                      const SizedBox(height: 10),
+                                      Text(
+                                        'Please try again soon.',
+                                        style: GlobalStyles.smallContentPrimary(
+                                            context),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 );
                               }
                             } else if (!snapshot.hasData ||
