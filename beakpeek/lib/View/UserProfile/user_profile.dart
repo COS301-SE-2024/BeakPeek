@@ -103,7 +103,15 @@ class UserProfileState extends State<UserProfile> {
                               },
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  color: AppColors.iconColor(context),
+                                  onPressed: () {
+                                    context.goNamed('editprofile');
+                                  },
+                                ),
                                 IconButton(
                                   icon: const Icon(Icons.settings),
                                   color: AppColors.iconColor(context),
