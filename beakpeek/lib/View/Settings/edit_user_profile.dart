@@ -105,6 +105,8 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         ],
                       ),
                       child: TextField(
+                        controller: TextEditingController()
+                          ..text = user.username,
                         onChanged: (value) {
                           setState(() {
                             user.username = value;
@@ -142,6 +144,8 @@ class _EditUserProfileState extends State<EditUserProfile> {
                         ],
                       ),
                       child: TextField(
+                        controller: TextEditingController()
+                          ..text = user.description,
                         maxLines: 3,
                         onChanged: (value) {
                           setState(() {
