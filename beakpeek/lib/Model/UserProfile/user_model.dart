@@ -88,6 +88,7 @@ class UserModel {
 }
 
 Future<UserModel> getOnlineUser() async {
+  final LifeListProvider lifelist = LifeListProvider.instance;
   final response = await http.get(Uri.parse('$userApiUrl/User/Profile'),
       headers: {HttpHeaders.authorizationHeader: 'Bearer $accessToken'});
 
@@ -96,6 +97,16 @@ Future<UserModel> getOnlineUser() async {
     return user;
   }
   user = UserModel.fromJson(response.body);
+
+  final String localLife = await lifelist.updateUserLifelist();
+  if (localLife.length < user.lifelist.length) {
+    final Map<String, int> valueMap = json.decode(localLife);
+    valueMap.forEach((key, value) {
+      lifelist.insertBird(value);
+    });
+  } else {
+    user.lifelist = localLife;
+  }
   storeUserLocally(user);
   return user;
 }

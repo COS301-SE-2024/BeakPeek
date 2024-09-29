@@ -28,6 +28,7 @@ class _SightingsState extends State<Sightings> {
 
   @override
   void initState() {
+    updateOnline();
     global.updateLife();
     loaded = global.birdList;
     super.initState();
@@ -71,7 +72,6 @@ class _SightingsState extends State<Sightings> {
     setState(() {
       selectedFilter = newValue;
     });
-    updateOnline(lifelist: lifeList);
   }
 
   @override

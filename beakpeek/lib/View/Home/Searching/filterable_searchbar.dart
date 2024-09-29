@@ -27,6 +27,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   final SearchController controller = SearchController();
   late List<Bird> filteredBirds = global.allBirdsList;
   late List<Bird> birds = global.allBirdsList;
+
   List<Widget> items = [];
   @override
   void initState() {
@@ -48,19 +49,9 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   }
 
   void goBird(Bird bird) {
-    // context.goNamed(
-    //   'birdInfo',
-    //   pathParameters: {
-    //     'group': bird.commonGroup,
-    //     'species': bird.commonSpecies,
-    //     'id': bird.id.toString(),
-    //   },
-    // );
     context.pushNamed(
       'birdInfo',
       pathParameters: {
-        'group': bird.commonGroup,
-        'species': bird.commonSpecies,
         'id': bird.id.toString(),
       },
     );

@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/province_data.dart';
@@ -182,16 +183,17 @@ class LifeListProvider {
     }
   }
 
-  Future<void> updateUserLifelist() async {
-    // final db = await instance.database;
-    //
-    // final List<Map<String, Object?>> birdMap = await db.query(
-    //   'birds',
-    //   orderBy: 'commonSpecies DESC',
-    // );
-
-    // user.lifelist = birdMap.toString();
+  Future<String> updateUserLifelist() async {
+    final db = await instance.database;
+    final List<Map<String, Object?>> birdMap = await db.query(
+      'birds',
+      orderBy: 'commonSpecies DESC',
+      columns: ['id'],
+    );
+    final String encodedString = jsonEncode(birdMap);
+    user.lifelist = encodedString;
     storeUserLocally(user);
+    return encodedString;
   }
 
   Future<List<Bird>> fetchLifeList() async {
@@ -268,8 +270,10 @@ class LifeListProvider {
     if (await containsProvData() == 0) {
       final batchProv = db.batch();
       for (Bird bird in allBirds) {
-        batchProv.insert('provinces', bird.toMapProvince(),
-            conflictAlgorithm: ConflictAlgorithm.replace);
+        if (bird.reportingRate >= 1) {
+          batchProv.insert('provinces', bird.toMapProvince(),
+              conflictAlgorithm: ConflictAlgorithm.replace);
+        }
       }
       await batchProv.commit();
     }
