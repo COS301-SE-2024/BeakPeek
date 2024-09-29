@@ -6,7 +6,6 @@ import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:go_router/go_router.dart';
-import 'package:beakpeek/config_azure.dart';
 import 'package:localstorage/localstorage.dart';
 
 void loginFunction(BuildContext context) async {

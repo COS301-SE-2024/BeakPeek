@@ -3,10 +3,9 @@ import 'dart:io';
 import 'package:beakpeek/Model/UserProfile/user_achievment.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
-import 'achievement.dart';
+import 'package:beakpeek/Model/UserProfile/achievement.dart';
 
 class AchievementList {
   factory AchievementList.fromJson(String source) =>
@@ -59,7 +58,7 @@ List<Achievement> getAchievementByCategory(String category) {
 }
 
 List<String> getAchievementCategories() {
-  var categorySet = <String>{};
+  final categorySet = <String>{};
   for (Achievement achiement in achievementList.achievements) {
     categorySet.add(achiement.category);
   }
