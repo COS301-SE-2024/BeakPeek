@@ -3,6 +3,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
 import 'package:beakpeek/Model/UserProfile/user_achievment.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart' as http;
@@ -130,4 +131,13 @@ Future<void> updateOnline() async {
   user = UserModel.fromJson(response.body);
   print(user.toJson());
   // print('updated');
+}
+
+void logoutUser() {
+  updateOnline();
+  user = UserModel();
+  loggedIN = false;
+  accessToken = '';
+  achievementList = AchievementList();
+  localStorage.clear();
 }
