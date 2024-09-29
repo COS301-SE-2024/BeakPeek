@@ -86,31 +86,29 @@ class PaletteSelector extends StatelessWidget {
     // Get the screen width
     final screenWidth = MediaQuery.of(context).size.width;
 
-    return Center(
-        child: Row(
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         // Left label
         Text(
           'Low',
           style: TextStyle(
-              fontSize: screenWidth * 0.03,
-              color: AppColors.primaryColor(
-                  context)), // Adjust font size based on screen width
+            fontSize: screenWidth * 0.03,
+            color: AppColors.primaryColor(context),
+          ), // Adjust font size based on screen width
         ),
-        // Color swatches
-        Center(
-          child: Expanded(
-            child: Row(
-              children: [
-                _buildColorSwatch(palette.low, context), // No label
-                _buildColorSwatch(palette.mediumLow, context), // No label
-                _buildColorSwatch(palette.medium, context), // No label
-                _buildColorSwatch(palette.mediumHigh, context), // No label
-                _buildColorSwatch(palette.high, context), // No label
-                _buildColorSwatch(palette.veryHigh, context), // No label
-              ],
-            ),
+        // Color swatches with Flexible widget
+        Flexible(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              _buildColorSwatch(palette.low, context), // No label
+              _buildColorSwatch(palette.mediumLow, context), // No label
+              _buildColorSwatch(palette.medium, context), // No label
+              _buildColorSwatch(palette.mediumHigh, context), // No label
+              _buildColorSwatch(palette.high, context), // No label
+              _buildColorSwatch(palette.veryHigh, context), // No label
+            ],
           ),
         ),
         // Right label
@@ -118,12 +116,11 @@ class PaletteSelector extends StatelessWidget {
           'Very High',
           style: TextStyle(
             fontSize: screenWidth * 0.03,
-            color: AppColors.primaryColor(
-                context), // Adjust font size based on screen width
-          ),
-        )
+            color: AppColors.primaryColor(context),
+          ), // Adjust font size based on screen width
+        ),
       ],
-    ));
+    );
   }
 
   Widget _buildColorSwatch(Color color, BuildContext context) {
