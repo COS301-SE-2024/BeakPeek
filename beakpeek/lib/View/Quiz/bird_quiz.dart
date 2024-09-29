@@ -3,9 +3,12 @@
 import 'dart:math';
 import 'package:beakpeek/Controller/Home/quiz_manager.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/quiz_instance.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/Bird/bird_page.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 
 class BirdQuiz extends StatefulWidget {
@@ -87,7 +90,9 @@ class _BirdQuizState extends State<BirdQuiz>
         selectedBird = bird;
         // Update the correct bird to green
       });
-      highScore = max(highScore, correctAnswersInRow);
+      user.highscore = max(user.highscore, correctAnswersInRow);
+      storeUserLocally(user);
+      updateOnline();
       showGameOverPopup();
     }
   }
@@ -133,7 +138,7 @@ class _BirdQuizState extends State<BirdQuiz>
                   children: [
                     const TextSpan(text: 'High score: '),
                     TextSpan(
-                      text: '$highScore',
+                      text: '${user.highscore}',
                       style: GlobalStyles.contentTertiary(context)
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
@@ -143,29 +148,60 @@ class _BirdQuizState extends State<BirdQuiz>
             ],
           ),
           actions: [
-            Align(
-              child: TextButton(
-                onPressed: () {
-                  setState(() {
-                    correctAnswersInRow = 0;
-                  });
-                  Navigator.of(context).pop();
-                  loadNextQuiz();
-                },
-                style: TextButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 12.0, horizontal: 24.0),
-                  backgroundColor: AppColors.primaryButtonColor(context),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                ),
-                child: Text(
-                  'Try Again',
-                  style: GlobalStyles.primaryButtonText(context),
+            // Align(
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  correctAnswersInRow = 0;
+                });
+                Navigator.of(context).pop();
+                loadNextQuiz();
+              },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 24.0),
+                backgroundColor: AppColors.primaryButtonColor(context),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
               ),
+              child: Text(
+                'Try Again',
+                style: GlobalStyles.primaryButtonText(context),
+              ),
             ),
+            TextButton(
+              onPressed: () {
+                // setState(() {
+                //   correctAnswersInRow = 0;
+                // });
+                // Navigator.of(context).pop();
+                // loadNextQuiz();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      body: BirdPage(
+                        id: currentQuiz!.correctBird.id,
+                      ),
+                    ),
+                  ),
+                );
+              },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 24.0),
+                backgroundColor: AppColors.primaryButtonColor(context),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child: Text(
+                'View Bird',
+                style: GlobalStyles.primaryButtonText(context),
+              ),
+            ),
+            // ),
           ],
         );
       },
@@ -226,7 +262,7 @@ class _BirdQuizState extends State<BirdQuiz>
                   style: GlobalStyles.contentPrimary(context),
                 ),
                 Text(
-                  'High Score: $highScore',
+                  'High Score: ${user.highscore}',
                   style: GlobalStyles.contentPrimary(context),
                 ),
               ],

@@ -5,6 +5,7 @@ import 'package:beakpeek/View/Home/Searching/filterable_searchbar.dart';
 import 'package:beakpeek/View/Map/heat_map.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Model/nav.dart';
+import 'package:go_router/go_router.dart';
 
 // ignore: must_be_immutable
 class HeatMapInfo extends StatelessWidget {
@@ -38,7 +39,15 @@ class HeatMapInfo extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            const Icon(Icons.arrow_back),
+                            IconButton(
+                              icon: Icon(
+                                Icons.arrow_back,
+                                color: AppColors.iconColor(context),
+                              ),
+                              onPressed: () {
+                                context.pop();
+                              },
+                            ),
                             SizedBox(
                               width: screenWidth * 0.8,
                               child: const FilterableSearchbar(

@@ -35,37 +35,58 @@ class _BirdSheetState extends State<BirdSheet> {
         http.Client()); // Fetch and sort birds from the API initially
   }
 
-  void _refreshBirdList() {
-    _birdList = fetchBirds(widget.pentadId, http.Client()).then((birds) {
-      // Sort the list of birds based on the selected sort option
-      print(birds[0]);
-      return _sortBirds(birds, _selectedSortOption);
-    }).catchError((error) {
-      // Handle error fetching birds
+  void _refreshBirdList() async {
+    try {
+      List<Bird> allBirds = await fetchBirds(widget.pentadId, http.Client());
+      List<Bird> seenBirds =
+          await global.birdList; // Get the list of seen birds
+
+      List<Bird> filteredBirds = _filterBirds(allBirds, seenBirds);
+      filteredBirds = _sortBirds(filteredBirds, _selectedSortOption);
+
+      setState(() {
+        _birdList = Future.value(filteredBirds);
+      });
+    } catch (error) {
       print('Error fetching birds: $error');
       throw Exception('Failed to load birds: $error');
-    });
+    }
+  }
+
+  List<Bird> _filterBirds(List<Bird> birds, List<Bird> seenBirds) {
+    if (_selectedFilterOption == 'Seen') {
+      return birds
+          .where((bird) => seenBirds.any((seenBird) => seenBird.id == bird.id))
+          .toList();
+    } else if (_selectedFilterOption == 'Haven\'t Seen') {
+      return birds
+          .where(
+              (bird) => seenBirds.every((seenBird) => seenBird.id != bird.id))
+          .toList();
+    }
+    return birds; // Return all birds if filter is 'All'
   }
 
   List<Bird> _sortBirds(List<Bird> birds, String sortOption) {
     // Sorting logic based on the selected sort option
     switch (sortOption) {
-      case 'Rarity Asc':
+      case 'Rarity Asc.':
         birds.sort((a, b) => getReportingRateForMonth(a, widget.month)
             .compareTo(getReportingRateForMonth(b, widget.month)));
         break;
-      case 'Rarity Desc':
+      case 'Rarity Desc.':
         birds.sort((a, b) => getReportingRateForMonth(b, widget.month)
             .compareTo(getReportingRateForMonth(a, widget.month)));
         break;
-      case 'Alphabetically Asc':
-        birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
+      case 'A-Z':
+        birds.sort((a, b) => '${a.commonSpecies}${a.commonGroup}'
+            .compareTo('${b.commonSpecies}${b.commonGroup}'));
         break;
-      case 'Alphabetically Desc':
-        birds.sort((a, b) => b.commonGroup.compareTo(a.commonGroup));
+      case 'Z-A':
+        birds.sort((a, b) => '${b.commonSpecies}${b.commonGroup}'
+            .compareTo('${a.commonSpecies}${a.commonGroup}'));
         break;
       default:
-        birds.sort((a, b) => a.commonGroup.compareTo(b.commonGroup));
         break;
     }
     return birds;
@@ -130,8 +151,8 @@ class _BirdSheetState extends State<BirdSheet> {
                           'Sort',
                           'Rarity Asc.',
                           'Rarity Desc.',
-                          'Alphabetically Asc.',
-                          'Alphabetically Desc.'
+                          'A-Z',
+                          'Z-A'
                         ].map((value) {
                           return DropdownMenuItem<String>(
                             value: value,
@@ -162,11 +183,8 @@ class _BirdSheetState extends State<BirdSheet> {
                         isExpanded:
                             true, // Ensures the dropdown items fit inside
                         value: _selectedFilterOption,
-                        items: <String>[
-                          'Birds You\'ve Seen',
-                          'Birds You Haven\'t Seen',
-                          'All'
-                        ].map((value) {
+                        items: <String>['All', 'Seen', 'Haven\'t Seen']
+                            .map((value) {
                           return DropdownMenuItem<String>(
                             value: value,
                             child: Text(

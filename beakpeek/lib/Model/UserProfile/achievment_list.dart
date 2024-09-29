@@ -27,7 +27,8 @@ class AchievementList {
   String toJson() => json.encode(toMap());
 }
 
-Future<AchievementList> getOnlineAchivementList() async {
+/// Gets achievements online and checks progress of achievements
+Future<AchievementList> getAchivementList() async {
   final response = await http.get(Uri.parse('$userApiUrl/User/GetAchievments'),
       headers: {HttpHeaders.authorizationHeader: 'Bearer $accessToken'});
   if (response.statusCode != 200) {
@@ -36,11 +37,24 @@ Future<AchievementList> getOnlineAchivementList() async {
   user = await getOnlineUser();
   achievementList = AchievementList.fromJson(response.body);
   storeAchievementListLocally(achievementList);
-  updateAchievmentProgress();
+  await updateAchievmentProgress();
   return achievementList;
 }
 
-void updateAchievmentProgress() {
+/// All checks for user progress should go here
+Future<void> updateAchievmentProgress() async {
+  /// Quiz Master
+  final Achievement? quizMaster = getAchievementByName('Quiz Master');
+  if (quizMaster != null) {
+    double progress = user.highscore / 10;
+    progress = progress < 1 ? progress : 1;
+    await updateUsersAchievement(quizMaster.id, progress);
+    for (UserAchievement ua in user.achievements) {
+      print(ua.toJson());
+    }
+    print('Quiz Master');
+  }
+
   for (UserAchievement userAchievement in user.achievements) {
     achievementList
         .achievements[achievementList.achievements
@@ -55,6 +69,11 @@ List<Achievement> getAchievementByCategory(String category) {
   return achievementList.achievements
       .where((x) => x.category == category)
       .toList();
+}
+
+Achievement? getAchievementByName(String name) {
+  return achievementList.achievements
+      .firstWhere((a) => a.name == name, orElse: () => Achievement());
 }
 
 List<String> getAchievementCategories() {
