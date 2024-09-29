@@ -17,7 +17,7 @@ class PaletteSelector extends StatelessWidget {
         leading: IconButton(
           icon: Icon(Icons.arrow_back, color: AppColors.iconColor(context)),
           onPressed: () {
-            Navigator.pop(context); // Go back to the previous screen
+            Navigator.pop(context);
           },
         ),
         title: Text(
@@ -29,6 +29,15 @@ class PaletteSelector extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(10.0),
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(
+              'Select an option to change the colour palette used for heat maps.',
+              style:
+                  GlobalStyles.contentPrimary(context).copyWith(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          ),
           _buildPaletteOption(context, greenRedPalette, 'Green-Red'),
           _buildPaletteOption(context, bluePurplePalette, 'Blue-Purple'),
           _buildPaletteOption(context, earthyPalette, 'Earthy'),
