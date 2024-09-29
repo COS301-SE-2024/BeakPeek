@@ -44,9 +44,8 @@ class PaletteSelector extends StatelessWidget {
       BuildContext context, ColorPalette palette, String title) {
     return GestureDetector(
       onTap: () {
-        // Update the global palette
         global.palette = palette;
-        Navigator.pop(context); // Go back after selecting
+        Navigator.pop(context);
       },
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8.0),
@@ -83,41 +82,39 @@ class PaletteSelector extends StatelessWidget {
   }
 
   Widget _buildColorSwatches(ColorPalette palette, BuildContext context) {
-    // Get the screen width
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        // Left label
         Text(
           'Low',
           style: TextStyle(
             fontSize: screenWidth * 0.03,
             color: AppColors.primaryColor(context),
-          ), // Adjust font size based on screen width
+          ),
         ),
-        // Color swatches with Flexible widget
+        const SizedBox(width: 10),
         Flexible(
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              _buildColorSwatch(palette.low, context), // No label
-              _buildColorSwatch(palette.mediumLow, context), // No label
-              _buildColorSwatch(palette.medium, context), // No label
-              _buildColorSwatch(palette.mediumHigh, context), // No label
-              _buildColorSwatch(palette.high, context), // No label
-              _buildColorSwatch(palette.veryHigh, context), // No label
+              _buildColorSwatch(palette.low, context),
+              _buildColorSwatch(palette.mediumLow, context),
+              _buildColorSwatch(palette.medium, context),
+              _buildColorSwatch(palette.mediumHigh, context),
+              _buildColorSwatch(palette.high, context),
+              _buildColorSwatch(palette.veryHigh, context),
             ],
           ),
         ),
-        // Right label
+        const SizedBox(width: 10),
         Text(
           'Very High',
           style: TextStyle(
             fontSize: screenWidth * 0.03,
             color: AppColors.primaryColor(context),
-          ), // Adjust font size based on screen width
+          ),
         ),
       ],
     );
