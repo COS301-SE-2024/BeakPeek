@@ -148,3 +148,19 @@ void logoutUser() {
   achievementList = AchievementList();
   localStorage.clear();
 }
+
+Future<void> updateAllUserAchievementsOnline() async {
+  for (UserAchievement userAchievement in user.achievements) {
+    final response = await http.post(
+        Uri.parse(
+            '$userApiUrl/User/AddAchievement?id=${userAchievement.id}&progress=${userAchievement.progress}'),
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+          HttpHeaders.contentTypeHeader: 'application/json'
+        });
+
+    if (response.statusCode != 200) {
+      return;
+    }
+  }
+}
