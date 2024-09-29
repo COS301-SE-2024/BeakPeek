@@ -45,15 +45,6 @@ class SettingsPage extends StatelessWidget {
                   _buildSectionHeader(context, 'Your Account'),
                   _buildOptionTile(
                     context,
-                    'Edit Personal Information',
-                    Icons.edit,
-                    Icons.arrow_forward_ios,
-                    () {
-                      context.goNamed('editprofile');
-                    },
-                  ),
-                  _buildOptionTile(
-                    context,
                     'Delete Account',
                     Icons.delete,
                     Icons.arrow_forward_ios,
@@ -127,15 +118,6 @@ class SettingsPage extends StatelessWidget {
                         context,
                         'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekPrivacyPolicy.pdf',
                       );
-                    },
-                  ),
-                  _buildOptionTile(
-                    context,
-                    'About',
-                    Icons.info_outline,
-                    Icons.arrow_forward_ios,
-                    () {
-                      // Handle About tap
                     },
                   ),
                 ],
