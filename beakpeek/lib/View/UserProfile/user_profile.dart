@@ -200,12 +200,6 @@ class UserProfileState extends State<UserProfile> {
                           content: bio,
                           context: context,
                         ),
-                        SizedBox(height: verticalPadding),
-
-                        Divider(
-                          color: Colors.grey.shade300,
-                          thickness: 1,
-                        ),
                       ],
                     ),
             ),
@@ -247,11 +241,13 @@ class UserProfileState extends State<UserProfile> {
               children: [
                 Text(
                   label,
-                  style: GlobalStyles.smallHeadingPrimary(context),
+                  style: GlobalStyles.smallContent(context)
+                      .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
                 ),
                 Text(
                   content,
-                  style: GlobalStyles.smallContent(context),
+                  style: GlobalStyles.smallHeadingPrimary(context)
+                      .copyWith(fontWeight: FontWeight.w500, fontSize: 18),
                 ),
               ],
             ),

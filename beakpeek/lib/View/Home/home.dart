@@ -80,7 +80,7 @@ class HomeState extends State<Home> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: screenHeight * 0.05),
+                        SizedBox(height: screenHeight * 0.025),
                         const FilterableSearchbar(
                           helpContent: 'Help for home page',
                         ),
@@ -262,7 +262,7 @@ class HomeState extends State<Home> {
                               final birdsList = snapshot.data!;
                               return Container(
                                 width: sectionWidth,
-                                height: screenHeight * 0.37,
+                                height: screenHeight * 0.39,
                                 padding: const EdgeInsets.all(16.0),
                                 decoration: BoxDecoration(
                                   color: AppColors.popupColor(context),

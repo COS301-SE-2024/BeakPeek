@@ -28,7 +28,7 @@ class _BirdPageState extends State<BirdPage> {
   late final LifeListProvider lifeList = LifeListProvider.instance;
   late final Bird temp;
   late Future<Bird> birdFuture;
-  late String seenText = 'Add to Life List';
+  late String seenText = 'Add Bird';
   late Bird bird;
   late ImageProvider tempImage;
   @override
@@ -151,6 +151,7 @@ class _BirdPageState extends State<BirdPage> {
                                 birdData.imageUrl!,
                                 width: screenWidth * 0.92,
                                 fit: BoxFit.cover,
+                                alignment: const Alignment(0.0, -0.5),
                               ),
                             ),
                           ),
@@ -218,57 +219,63 @@ class _BirdPageState extends State<BirdPage> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: screenWidth * 0.8,
-                    child: FilledButton(
-                      onPressed: () {
-                        if (config.loggedIN) {
-                          user.lifelist = user.lifelist + widget.id.toString();
-                          addToLifeList();
-                        }
-                      },
-                      style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
-                        shadowColor: WidgetStateProperty.all(
-                            Colors.black.withOpacity(0.15)),
-                        elevation: WidgetStateProperty.all(6.0),
-                      ),
-                      child: Text(
-                        seenText,
-                        style: GlobalStyles.primaryButtonText(context),
+              padding: const EdgeInsets.symmetric(horizontal: 6.0),
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width: screenWidth * 0.45,
+                      child: OutlinedButton.icon(
+                        onPressed: () {
+                          if (config.loggedIN) {
+                            user.lifelist =
+                                user.lifelist + widget.id.toString();
+                            addToLifeList();
+                          }
+                        },
+                        icon: Icon(
+                          Icons.check,
+                          color: AppColors.iconColor(context),
+                        ),
+                        label: Text(
+                          seenText,
+                          style: GlobalStyles.secondaryButtonText(context),
+                        ),
+                        style: GlobalStyles.buttonPrimaryOutlined(context),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 8.0),
-                  SizedBox(
-                    width: screenWidth * 0.8,
-                    child: OutlinedButton(
-                      style: GlobalStyles.buttonPrimaryFilled(context).copyWith(
-                        shadowColor: WidgetStateProperty.all(
-                            Colors.black.withOpacity(0.15)),
-                        elevation: WidgetStateProperty.all(6.0),
+                    SizedBox(width: screenWidth * 0.02),
+                    SizedBox(
+                      width: screenWidth * 0.45,
+                      child: OutlinedButton.icon(
+                        style: GlobalStyles.buttonPrimaryOutlined(context),
+                        icon: Icon(
+                          Icons.map,
+                          color: AppColors.iconColor(context),
+                        ),
+                        label: Text(
+                          'Heat Map',
+                          style: GlobalStyles.secondaryButtonText(context),
+                        ),
+                        onPressed: () {
+                          context.pushNamed(
+                            'heatmap',
+                            pathParameters: {
+                              'pentadID': widget.id.toString(),
+                            },
+                          );
+                        },
                       ),
-                      child: Text('Show Heat Map',
-                          style: GlobalStyles.primaryButtonText(context)),
-                      onPressed: () {
-                        context.pushNamed(
-                          'heatmap',
-                          pathParameters: {
-                            'pentadID': widget.id.toString(),
-                          },
-                        );
-                      },
                     ),
-                  ),
-                  const BottomNavigation(),
-                ],
+                  ],
+                ),
               ),
             ),
           ],
         ),
       ),
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }
