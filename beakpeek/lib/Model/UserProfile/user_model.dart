@@ -149,6 +149,30 @@ void logoutUser() {
   localStorage.clear();
 }
 
+Future<void> updateUsersAchievement(int id, double progress) async {
+  final response = await http.post(
+      Uri.parse('$userApiUrl/User/AddAchievement?id=$id&progress=$progress'),
+      headers: {
+        HttpHeaders.authorizationHeader: 'Bearer $accessToken',
+        HttpHeaders.contentTypeHeader: 'application/json'
+      });
+
+  if (response.statusCode == 200) {
+    updateOnline();
+  }
+
+  final int achievementIndex =
+      user.achievements.indexWhere((element) => element.id == id);
+
+  if (achievementIndex == -1) {
+    user.achievements.add(UserAchievement(id: id, progress: progress));
+    return;
+  }
+  user.achievements[achievementIndex].progress = progress;
+
+  storeUserLocally(user);
+}
+
 Future<void> updateAllUserAchievementsOnline() async {
   for (UserAchievement userAchievement in user.achievements) {
     final response = await http.post(
