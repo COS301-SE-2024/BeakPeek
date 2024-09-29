@@ -6,7 +6,7 @@ import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_web_auth_2/flutter_web_auth_2.dart';
 import 'package:go_router/go_router.dart';
-import 'package:beakpeek/config_azure.dart' as config;
+import 'package:beakpeek/config_azure.dart';
 import 'package:localstorage/localstorage.dart';
 
 void loginFunction(BuildContext context) async {
@@ -17,14 +17,14 @@ void loginFunction(BuildContext context) async {
   }
 
   final result = await FlutterWebAuth2.authenticate(
-      url: config.loginUrl, callbackUrlScheme: 'beakpeek');
+      url: loginUrl, callbackUrlScheme: 'beakpeek');
 
   final uri = Uri.parse(result);
   final token = uri.queryParameters['token'];
 
   if (token != null) {
-    config.accessToken = token;
-    config.loggedIN = true;
+    accessToken = token;
+    loggedIN = true;
     localStorage.setItem('accessToken', token);
     user = await getOnlineUser();
     achievementList = await getOnlineAchivementList();
