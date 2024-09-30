@@ -17,7 +17,7 @@ namespace UserApi.Controllers;
 // [Authorize(AuthenticationSchemes = CookieAuthenticationDefaults.AuthenticationScheme)]
 [ApiController]
 [Authorize(Roles = "Admin,SuperAdmin")]
-[Route("[controller]")]
+[Route("[controller]/[action]")]
 public class AchievementController : BaseController
 {
     private readonly ApplicationDbContext _context;
@@ -144,7 +144,7 @@ public class AchievementController : BaseController
     }
 
     // GET: Achievement/Delete/5
-    [HttpGet("Delete/{id}")]
+    [HttpGet]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -163,11 +163,11 @@ public class AchievementController : BaseController
     }
 
     // POST: Achievement/Delete/5
-    [HttpPost, ActionName("Delete/{id}")]
+    [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int id)
+    public async Task<IActionResult> DeleteConfirmed([FromForm] int Id)
     {
-        var achievement = await _context.Achievement.FindAsync(id);
+        var achievement = await _context.Achievement.FindAsync(Id);
         if (achievement != null)
         {
             _context.Achievement.Remove(achievement);
