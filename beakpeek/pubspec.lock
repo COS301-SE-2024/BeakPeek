@@ -284,10 +284,11 @@ packages:
   easy_pdf_viewer:
     dependency: "direct main"
     description:
-      name: easy_pdf_viewer
-      sha256: "1a2e6708000952d9ada5a22f44fbcdc2b163a000369db94f89dc8d07e30a488f"
-      url: "https://pub.dev"
-    source: hosted
+      path: "."
+      ref: HEAD
+      resolved-ref: "7f6b2e0e7ba4fb1ee0b3408154680b08b6f60f90"
+      url: "https://github.com/ShankarKakumani/pdf_viewer.git"
+    source: git
     version: "1.0.8"
   fake_async:
     dependency: transitive

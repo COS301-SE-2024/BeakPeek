@@ -76,7 +76,7 @@ class RoutingData {
                     path: 'settings',
                     name: 'settings',
                     builder: (context, state) {
-                      return SettingsPage();
+                      return const SettingsPage();
                     },
                   ),
                   GoRoute(

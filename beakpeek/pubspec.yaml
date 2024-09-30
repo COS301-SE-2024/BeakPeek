@@ -50,8 +50,9 @@ dependencies:
   smooth_page_indicator: ^1.2.0+3
   progress_bar_chart: ^0.0.11
   dynamic_icons: ^1.0.0
-
-  easy_pdf_viewer: ^1.0.8
+  easy_pdf_viewer:
+    git:
+      url: https://github.com/ShankarKakumani/pdf_viewer.git
   file_picker: ^8.1.2
   # google_maps_flutter_heatmap: ^0.1.1
 
@@ -138,6 +139,7 @@ flutter:
     - assets/Legal/BeakPeekTermsOfUse.pdf
     - assets/Legal/BeakPeekPrivacyPolicy.pdf
     - assets/Legal/BeakPeekCookiePolicy.pdf
+    - assets/Legal/combinepdf.pdf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
