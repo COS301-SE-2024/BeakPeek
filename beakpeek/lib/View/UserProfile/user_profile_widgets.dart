@@ -5,7 +5,6 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
-import 'package:progress_bar_chart/progress_bar_chart.dart';
 
 Widget getNumBirdsInProvAndLifeList(
     List<int> birdNumsTotal, Future<List<Bird>> birds) {
