@@ -173,7 +173,7 @@ class UserProfileState extends State<UserProfile> {
                               height: verticalPadding * 3,
                               width: screenWidth,
                               child: Center(
-                                child: levelProgressBar(),
+                                child: levelProgressBar(context),
                               ),
                             ),
                           ],
@@ -186,7 +186,6 @@ class UserProfileState extends State<UserProfile> {
                           thickness: 1,
                         ),
 
-                        // Personal Information Section
                         SizedBox(height: verticalPadding),
                         Text(
                           'Personal Information',
@@ -194,7 +193,6 @@ class UserProfileState extends State<UserProfile> {
                         ),
                         SizedBox(height: verticalPadding),
 
-                        // Display static personal info with icons
                         _buildProfileField(
                           icon: Icons.person,
                           label: 'Username',
@@ -218,7 +216,6 @@ class UserProfileState extends State<UserProfile> {
     );
   }
 
-  // Static profile field builder
   Widget _buildProfileField({
     required IconData icon,
     required String label,
@@ -229,7 +226,7 @@ class UserProfileState extends State<UserProfile> {
     final fieldPadding = EdgeInsets.all(screenWidth * 0.03);
 
     return Material(
-      elevation: 5, // Add elevation here
+      elevation: 5,
       borderRadius: BorderRadius.circular(screenWidth * 0.05),
       child: Container(
         padding: fieldPadding,
@@ -238,8 +235,7 @@ class UserProfileState extends State<UserProfile> {
           borderRadius: BorderRadius.circular(screenWidth * 0.05),
         ),
         child: Row(
-          crossAxisAlignment:
-              CrossAxisAlignment.start, // Aligns items at the top
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Icon(
               icon,
@@ -259,8 +255,8 @@ class UserProfileState extends State<UserProfile> {
                     content,
                     style: GlobalStyles.smallHeadingPrimary(context)
                         .copyWith(fontWeight: FontWeight.w500, fontSize: 18),
-                    softWrap: true, // Enable text wrapping
-                    overflow: TextOverflow.visible, // Allow overflow visibility
+                    softWrap: true,
+                    overflow: TextOverflow.visible,
                   ),
                 ],
               ),
