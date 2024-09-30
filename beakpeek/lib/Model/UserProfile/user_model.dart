@@ -132,7 +132,8 @@ void deleteLocalUser() {
   localStorage.setItem('accessToken', '');
 }
 
-Future<void> updateOnline({LifeListProvider? lifelist}) async {
+Future<void> updateOnline(
+    {LifeListProvider? lifelist, bool logout = false}) async {
   // if (lifelist != null) {
   //   await lifelist.updateUserLifelist();
   // }
@@ -142,6 +143,10 @@ Future<void> updateOnline({LifeListProvider? lifelist}) async {
         HttpHeaders.contentTypeHeader: 'application/json'
       },
       body: user.toJson());
+
+  if (logout) {
+    return;
+  }
 
   if (response.statusCode != 200) {
     storeUserLocally(user);
