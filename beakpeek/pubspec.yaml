@@ -121,7 +121,7 @@ flutter:
     - assets/Legal/combinepdf.pdf
     - assets/Legal/BeakPeekTermsOfUse.pdf
     - assets/Legal/BeakPeekPrivacyPolicy.pdf
-    - assets/Legal/BeakPeekCookiePolicy.pdf    
+    - assets/Legal/BeakPeekCookiePolicy.pdf   
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -3,6 +3,7 @@ import 'dart:convert';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/province_data.dart';
+import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart';
@@ -166,6 +167,7 @@ class LifeListProvider {
 
   Future<void> insertBird(int birdId) async {
     final bird = await getBirdInByID(birdId);
+    await updateLifeListAchievments(bird.commonGroup, birdId);
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
       await db
@@ -286,6 +288,30 @@ class LifeListProvider {
             'allBirds',
             columns: ['COUNT(*)'],
           ),
+        ) ??
+        0;
+    return count;
+  }
+
+  Future<int> allBirdCount(String commonGroup) async {
+    final db = await instance.database;
+    final int count = Sqflite.firstIntValue(
+          await db.query('allBirds',
+              columns: ['COUNT(*)'],
+              where: 'commonGroup = ?',
+              whereArgs: [commonGroup]),
+        ) ??
+        0;
+    return count;
+  }
+
+  Future<int> lifeBirdCount(String commonGroup) async {
+    final db = await instance.database;
+    final int count = Sqflite.firstIntValue(
+          await db.query('birds',
+              columns: ['COUNT(*)'],
+              where: 'commonGroup = ?',
+              whereArgs: [commonGroup]),
         ) ??
         0;
     return count;
