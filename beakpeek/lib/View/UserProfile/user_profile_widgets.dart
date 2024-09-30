@@ -5,7 +5,6 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animation_progress_bar/flutter_animation_progress_bar.dart';
-import 'package:progress_bar_chart/progress_bar_chart.dart';
 
 Widget getNumBirdsInProvAndLifeList(
     List<int> birdNumsTotal, Future<List<Bird>> birds) {
@@ -27,25 +26,50 @@ Widget getNumBirdsInProvAndLifeList(
   );
 }
 
-Widget levelProgressBar() {
-  final List<StatisticsItem> colors = [
-    StatisticsItem(const Color.fromARGB(255, 238, 203, 135),
-        (user.xp / getNextLevelExpRequired(user.level) * 100),
-        title: 'Exp'),
-    StatisticsItem(
-        const Color(0xffecad31),
-        ((getNextLevelExpRequired(user.level) - user.xp).toDouble() /
-                getNextLevelExpRequired(user.level) *
-                100)
-            .toDouble(),
-        title: 'Need Exp')
-  ];
-  return ProgressBarChart(
-    values: colors,
-    height: 30,
-    totalPercentage: 100,
-    borderRadius: 20,
-    unitLabel: 'Exp',
+Widget levelProgressBar(BuildContext context) {
+  final double progressPercentage =
+      user.xp / getNextLevelExpRequired(user.level);
+
+  final String xpLabel = '${user.xp}/${getNextLevelExpRequired(user.level)} XP';
+
+  return Stack(
+    alignment: Alignment.center,
+    children: [
+      Container(
+        height: 30,
+        width: double.infinity,
+        decoration: BoxDecoration(
+          color: const Color.fromARGB(255, 235, 225, 204),
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 6,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+      ),
+      Align(
+        alignment: Alignment.centerLeft,
+        child: Container(
+          height: 30,
+          width: MediaQuery.of(context).size.width * progressPercentage,
+          decoration: BoxDecoration(
+            color: const Color(0xffecad31),
+            borderRadius: BorderRadius.circular(20),
+          ),
+        ),
+      ),
+      Text(
+        xpLabel,
+        style: GlobalStyles.contentPrimary(context).copyWith(
+          fontWeight: FontWeight.bold,
+          color: AppColors.primaryColor(context),
+          fontSize: 16,
+        ),
+      ),
+    ],
   );
 }
 
