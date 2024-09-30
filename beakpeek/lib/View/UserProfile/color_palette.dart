@@ -130,12 +130,11 @@ class PaletteSelector extends StatelessWidget {
   }
 
   Widget _buildColorSwatch(Color color, BuildContext context) {
-    // Get the screen width
     final screenWidth = MediaQuery.of(context).size.width;
 
     return Container(
-      width: screenWidth * 0.11, // Width as a percentage of screen width
-      height: screenWidth * 0.05, // Height as a percentage of screen width
+      width: screenWidth * 0.10,
+      height: screenWidth * 0.05,
       color: color,
     );
   }

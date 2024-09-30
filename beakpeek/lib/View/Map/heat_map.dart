@@ -6,6 +6,7 @@ import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
+import 'package:beakpeek/View/UserProfile/color_palette.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -152,40 +153,49 @@ class HeatMapState extends State<HeatMap> {
   }
 
   Widget _buildLegend(BuildContext context) {
-    return Container(
-      height: 230,
-      padding: const EdgeInsets.all(8.0),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.9),
-        borderRadius: BorderRadius.circular(10), // Rounded corners
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.2),
-            blurRadius: 4,
-            offset: const Offset(2, 2),
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PaletteSelector(),
+            ),
+          );
+        },
+        child: Container(
+          height: 230,
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(10), // Rounded corners
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 4,
+                offset: const Offset(2, 2),
+              ),
+            ],
           ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Legend title
-          Text(
-            'Legend',
-            style: GlobalStyles.contentPrimary(context)
-                .copyWith(fontSize: 16, color: AppColors.primaryColorLight),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Legend title
+              Text(
+                'Legend',
+                style: GlobalStyles.contentPrimary(context)
+                    .copyWith(fontSize: 16, color: AppColors.primaryColorLight),
+              ),
+              const SizedBox(height: 8), // Space between title and items
+              // Create legend items
+              _buildLegendItem(global.palette.low, '0-19%'),
+              _buildLegendItem(global.palette.mediumLow, '20-39%'),
+              _buildLegendItem(global.palette.medium, '40-59%'),
+              _buildLegendItem(global.palette.mediumHigh, '60-79%'),
+              _buildLegendItem(global.palette.high, '80-89%'),
+              _buildLegendItem(global.palette.veryHigh, '90-100%'),
+            ],
           ),
-          const SizedBox(height: 8), // Space between title and items
-          // Create legend items
-          _buildLegendItem(global.palette.low, '0-19%'),
-          _buildLegendItem(global.palette.mediumLow, '20-39%'),
-          _buildLegendItem(global.palette.medium, '40-59%'),
-          _buildLegendItem(global.palette.mediumHigh, '60-79%'),
-          _buildLegendItem(global.palette.high, '80-89%'),
-          _buildLegendItem(global.palette.veryHigh, '90-100%'),
-        ],
-      ),
-    );
+        ));
   }
 
 // Helper method to create individual legend items
