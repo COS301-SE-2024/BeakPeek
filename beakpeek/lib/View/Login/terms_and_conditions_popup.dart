@@ -58,7 +58,7 @@ class TermsAndConditionsPopupState extends State<TermsAndConditionsPopup> {
 
     return Dialog(
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12.0),
+        borderRadius: BorderRadius.circular(15.0),
       ),
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -77,57 +77,84 @@ class TermsAndConditionsPopupState extends State<TermsAndConditionsPopup> {
             child: SizedBox(
               width: screenWidth * 0.8,
               child: Text(
-                '''By clicking accept you agree to all terms and conditions set in the documents below:''',
+                '''By clicking accept you agree to all terms stipulated in the documents below:''',
                 style: GlobalStyles.contentPrimary(context)
                     .copyWith(fontWeight: FontWeight.w400)
                     .copyWith(fontSize: 14),
+                textAlign: TextAlign.center,
               ),
             ),
           ),
-          SizedBox(height: screenHeight * 0.01),
-          OutlinedButton(
-            onPressed: () {
-              if (widget.guest) {
-                loggedIN = false;
-                Navigator.pop(context);
-                context.go('/home');
-              } else {
-                localStorage.setItem('termsAndCondition', 'true');
-                Navigator.pop(context);
-                loginFunction(widget.outerContext);
-              }
-            },
-            style: GlobalStyles.buttonPrimaryOutlined(context),
-            child: const Text('Accept'),
-          ),
-          const SizedBox(height: 10.0),
+          SizedBox(height: screenHeight * 0.02),
           Center(
-            child: OutlinedButton(
-              onPressed: () {
-                loadPdfT();
-              },
-              style: GlobalStyles.buttonSecondaryOutlined(context),
-              child: const Text('Terms and conditions'),
+            child: SizedBox(
+              width: screenWidth * 0.7,
+              child: OutlinedButton(
+                onPressed: () {
+                  loadPdfT();
+                },
+                style: GlobalStyles.buttonSecondaryOutlined(context),
+                child: Text(
+                  'Terms and Conditions',
+                  style: GlobalStyles.secondaryButtonText(context),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 10.0),
           Center(
-            child: OutlinedButton(
-              onPressed: () {
-                loadCookie();
-              },
-              style: GlobalStyles.buttonSecondaryOutlined(context),
-              child: const Text('Cookies'),
+            child: SizedBox(
+              width: screenWidth * 0.7,
+              child: OutlinedButton(
+                onPressed: () {
+                  loadCookie();
+                },
+                style: GlobalStyles.buttonSecondaryOutlined(context),
+                child: Text(
+                  'Cookie Policy',
+                  style: GlobalStyles.secondaryButtonText(context),
+                ),
+              ),
             ),
           ),
           const SizedBox(height: 10.0),
           Center(
-            child: OutlinedButton(
-              onPressed: () {
-                loadCookie();
-              },
-              style: GlobalStyles.buttonSecondaryOutlined(context),
-              child: const Text('Privacy'),
+            child: SizedBox(
+              width: screenWidth * 0.7,
+              child: OutlinedButton(
+                onPressed: () {
+                  loadCookie();
+                },
+                style: GlobalStyles.buttonSecondaryOutlined(context),
+                child: Text(
+                  'Privacy Policy',
+                  style: GlobalStyles.secondaryButtonText(context),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(height: 10.0),
+          Center(
+            child: SizedBox(
+              width: screenWidth * 0.7,
+              child: OutlinedButton(
+                onPressed: () {
+                  if (widget.guest) {
+                    loggedIN = false;
+                    Navigator.pop(context);
+                    context.go('/home');
+                  } else {
+                    localStorage.setItem('termsAndCondition', 'true');
+                    Navigator.pop(context);
+                    loginFunction(widget.outerContext);
+                  }
+                },
+                style: GlobalStyles.buttonSecondaryOutlined(context),
+                child: Text(
+                  'Accept All',
+                  style: GlobalStyles.secondaryButtonText(context),
+                ),
+              ),
             ),
           ),
           SizedBox(height: screenHeight * 0.05),

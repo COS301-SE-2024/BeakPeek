@@ -3,6 +3,7 @@
 
 @{
 ViewData["Title"] = "Log in";
+@* Model.ReturnUrl = Request.Query["ReturnUrl"]; *@
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -25,6 +26,14 @@ ViewData["Title"] = "Log in";
                     <label asp-for="Input.Password" class="form-label">Password</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
+
+                <div class="checkbox mb-3">
+                    <label class="form-label">
+                        <input type="checkbox" name="showPassword" id="ckShowPass" onclick="myshowp(this)"
+                            class="form-check-input" />
+                        Show Password
+                    </label>
+                </div>
                 <div class="checkbox mb-3">
                     <label asp-for="Input.RememberMe" class="form-label">
                         <input class="form-check-input" asp-for="Input.RememberMe" />
@@ -36,18 +45,23 @@ ViewData["Title"] = "Log in";
                 </div>
 
                 <div>
-                    <p>
-                        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-                    </p>
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
+                    <br />
                     <p>
                         <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
                     </p>
+
+                    <br />
                     <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                     </p>
+
+                    <br />
+                    @* <p>
+                        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+                    </p> *@
+                    @* <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                    </p> *@
                 </div>
             </form>
         </section>
@@ -87,6 +101,17 @@ ViewData["Title"] = "Log in";
     </div>
 </div>
 
+<script>
+    function myshowp(e) {
+        txtBox = $('#Input_Password')
+        if (e.checked) {
+            txtBox.attr("Type", "Text");
+        }
+        else {
+            txtBox.attr("Type", "Password");
+        }
+    }
+</script>
 @section Scripts {
 <partial name="_ValidationScriptsPartial" />
 }

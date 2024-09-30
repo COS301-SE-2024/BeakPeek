@@ -103,7 +103,15 @@ class UserProfileState extends State<UserProfile> {
                               },
                             ),
                             Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
                               children: [
+                                IconButton(
+                                  icon: const Icon(Icons.edit),
+                                  color: AppColors.iconColor(context),
+                                  onPressed: () {
+                                    context.goNamed('editprofile');
+                                  },
+                                ),
                                 IconButton(
                                   icon: const Icon(Icons.settings),
                                   color: AppColors.iconColor(context),
@@ -230,24 +238,32 @@ class UserProfileState extends State<UserProfile> {
           borderRadius: BorderRadius.circular(screenWidth * 0.05),
         ),
         child: Row(
+          crossAxisAlignment:
+              CrossAxisAlignment.start, // Aligns items at the top
           children: [
             Icon(
               icon,
               color: AppColors.iconColor(context),
             ),
             SizedBox(width: screenWidth * 0.05),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  label,
-                  style: GlobalStyles.smallHeadingPrimary(context),
-                ),
-                Text(
-                  content,
-                  style: GlobalStyles.smallContent(context),
-                ),
-              ],
+            Flexible(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    label,
+                    style: GlobalStyles.smallContent(context)
+                        .copyWith(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  Text(
+                    content,
+                    style: GlobalStyles.smallHeadingPrimary(context)
+                        .copyWith(fontWeight: FontWeight.w500, fontSize: 18),
+                    softWrap: true, // Enable text wrapping
+                    overflow: TextOverflow.visible, // Allow overflow visibility
+                  ),
+                ],
+              ),
             ),
           ],
         ),

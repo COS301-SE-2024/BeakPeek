@@ -6,6 +6,7 @@ import 'package:beakpeek/Model/bird_map.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/Model/bird_page_functions.dart';
+import 'package:beakpeek/View/UserProfile/color_palette.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -24,7 +25,7 @@ class HeatMapState extends State<HeatMap> {
   late GoogleMapController mapController;
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
   late CameraPosition _cameraPosition;
-  final Set<Polygon> _polygons = {};
+  Set<Polygon> _polygons = {};
   late List<dynamic> birdData = [];
   bool _isLoading = true;
   String _selectedMonth = 'Year-Round';
@@ -152,44 +153,49 @@ class HeatMapState extends State<HeatMap> {
   }
 
   Widget _buildLegend(BuildContext context) {
-    return Positioned(
-      top: 50,
-      right: 10,
-      child: Container(
-        height: 230,
-        padding: const EdgeInsets.all(8.0),
-        decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.9),
-          borderRadius: BorderRadius.circular(10), // Rounded corners
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 4,
-              offset: const Offset(2, 2),
+    return GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const PaletteSelector(),
             ),
-          ],
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Legend title
-            Text(
-              'Legend',
-              style: GlobalStyles.contentPrimary(context)
-                  .copyWith(fontSize: 16, color: AppColors.primaryColorLight),
-            ),
-            const SizedBox(height: 8), // Space between title and items
-            // Create legend items
-            _buildLegendItem(global.palette.low, '0-19%'),
-            _buildLegendItem(global.palette.mediumLow, '20-39%'),
-            _buildLegendItem(global.palette.medium, '40-59%'),
-            _buildLegendItem(global.palette.mediumHigh, '60-79%'),
-            _buildLegendItem(global.palette.high, '80-89%'),
-            _buildLegendItem(global.palette.veryHigh, '90-100%'),
-          ],
-        ),
-      ),
-    );
+          );
+        },
+        child: Container(
+          height: 230,
+          padding: const EdgeInsets.all(8.0),
+          decoration: BoxDecoration(
+            color: Colors.white.withOpacity(0.9),
+            borderRadius: BorderRadius.circular(10), // Rounded corners
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.2),
+                blurRadius: 4,
+                offset: const Offset(2, 2),
+              ),
+            ],
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Legend title
+              Text(
+                'Legend',
+                style: GlobalStyles.contentPrimary(context)
+                    .copyWith(fontSize: 16, color: AppColors.primaryColorLight),
+              ),
+              const SizedBox(height: 8), // Space between title and items
+              // Create legend items
+              _buildLegendItem(global.palette.low, '0-19%'),
+              _buildLegendItem(global.palette.mediumLow, '20-39%'),
+              _buildLegendItem(global.palette.medium, '40-59%'),
+              _buildLegendItem(global.palette.mediumHigh, '60-79%'),
+              _buildLegendItem(global.palette.high, '80-89%'),
+              _buildLegendItem(global.palette.veryHigh, '90-100%'),
+            ],
+          ),
+        ));
   }
 
 // Helper method to create individual legend items
@@ -259,6 +265,7 @@ class HeatMapState extends State<HeatMap> {
                   onChanged: (newValue) {
                     setState(() {
                       _selectedMonth = newValue!;
+                      _polygons.clear();
                     });
                   },
                   items: <String>[
@@ -305,9 +312,13 @@ class HeatMapState extends State<HeatMap> {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.of(context).pop();
-                _polygons.clear();
+                setState(() {
+                  _polygons.clear();
+                });
+
                 loadPentadData();
+
+                Navigator.of(context).pop();
               },
               child: Text(
                 'Close',
@@ -358,6 +369,7 @@ class HeatMapState extends State<HeatMap> {
   Future<void> loadPentadData() async {
     setState(() {
       _isLoading = true;
+      _polygons.clear();
     });
 
     try {
