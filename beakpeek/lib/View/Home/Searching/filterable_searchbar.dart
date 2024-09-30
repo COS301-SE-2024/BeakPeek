@@ -129,6 +129,8 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                       );
                     },
                     suggestionsBuilder: (context, controller) {
+                      items = bsf.getWidgetListOfBirds(
+                          filteredBirds, goBird, context);
                       return items;
                     },
                   ),
