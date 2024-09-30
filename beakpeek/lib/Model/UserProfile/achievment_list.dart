@@ -3,12 +3,25 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/UserProfile/user_achievment.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart' as http;
 import 'package:localstorage/localstorage.dart';
 import 'package:beakpeek/Model/UserProfile/achievement.dart';
+
+final List<String> achivementNames = [
+  'Risk it for the Biscuits',
+  'Gauteng Explorer',
+  'Watch The Waves',
+  'Limpopo Hoopoe',
+  'Mpumalanga Adventurer',
+  'Diamond Hunter',
+  'Directionally challenged',
+  'Western Cape Wanderer',
+  'Freesest Alive'
+];
 
 class AchievementList {
   factory AchievementList.fromJson(String source) =>
@@ -58,6 +71,13 @@ Future<void> updateAchievmentProgress() async {
     print('Quiz Master');
   }
 
+  final LifeListProvider lifelist = LifeListProvider.instance;
+  final List<Bird> birdsLife = await lifelist.fetchLifeList();
+  for (Bird bird in birdsLife) {
+    await updateLifeListAchievments(bird.commonGroup);
+    await updateProvinces(bird.id);
+  }
+
   for (UserAchievement userAchievement in user.achievements) {
     achievementList
         .achievements[achievementList.achievements
@@ -99,34 +119,28 @@ AchievementList? getLocalAchievmentList() {
   return AchievementList.fromJson(userString);
 }
 
-Future<void> updateLifeListAchievments(String commonGroup, int id) async {
+Future<void> updateLifeListAchievments(String commonGroup) async {
   switch (commonGroup.toLowerCase()) {
     case 'weaver':
-      updateAchievmentProgressBirds('Weaver Believer', 'weaver');
-      updateProvinces(id);
+      await updateAchievmentProgressBirds('Weaver Believer', 'Weaver');
       break;
     case 'duck':
-      updateAchievmentProgressBirds('Duck Hunter', 'duck');
-      updateProvinces(id);
+      await updateAchievmentProgressBirds('Duck Hunter', 'Duck');
       break;
-    case 'egale':
-      updateAchievmentProgressBirds('USA', 'egale');
-      updateProvinces(id);
+    case 'eagle':
+      await updateAchievmentProgressBirds('USA', 'Eagle');
       break;
     case 'kingfisher':
-      updateAchievmentProgressBirds('Fisherman', 'kingfisher');
-      updateProvinces(id);
+      await updateAchievmentProgressBirds('Fisherman', 'Kingfisher');
       break;
     case 'hawk':
-      updateAchievmentProgressBirds('Hawk Spotter', 'hawk');
-      updateProvinces(id);
+      await updateAchievmentProgressBirds('Hawk Spotter', 'Hawk');
       break;
     case 'heron':
-      updateAchievmentProgressBirds('Heron Horror', 'heron');
+      await updateAchievmentProgressBirds('Heron Horror', 'Heron');
 
       break;
   }
-  updateProvinces(id);
 }
 
 Future<void> updateProvinces(int id) async {
@@ -136,8 +150,8 @@ Future<void> updateProvinces(int id) async {
     'Watch The Waves',
     'Limpopo Hoopoe',
     'Mpumalanga Adventurer',
-    'Dimond Hunter',
-    'Directionally challanged',
+    'Diamond Hunter',
+    'Directionally challenged',
     'Western Cape Wanderer',
     'Freesest Alive'
   ];
@@ -148,10 +162,6 @@ Future<void> updateProvinces(int id) async {
 
     if (provMaster != null) {
       await updateUsersAchievement(provMaster.id, progress[i]);
-      //print('progress at $i ${progress[i]}');
-      for (UserAchievement ua in user.achievements) {
-        print(ua.toJson());
-      }
       print(achivementNames[i]);
     }
   }
@@ -169,18 +179,6 @@ Future<void> updateAchievmentProgressBirds(
     double progress = countBird / totalBird;
     progress = progress < 1 ? progress : 1;
     await updateUsersAchievement(birdMaster.id, progress);
-    for (UserAchievement ua in user.achievements) {
-      print(ua.toJson());
-    }
     print(achievemntName);
   }
-
-  for (UserAchievement userAchievement in user.achievements) {
-    achievementList
-        .achievements[achievementList.achievements
-            .indexWhere((element) => element.id == userAchievement.id)]
-        .progress = userAchievement.progress;
-  }
-
-  storeAchievementListLocally(achievementList);
 }

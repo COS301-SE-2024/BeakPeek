@@ -22,9 +22,10 @@ class AchievementsPageState extends State<AchievementsPage> {
   /* This final is what loads all achievements and also 
    * will be used to track achievement progress
    */
-  final Future<AchievementList> _achievementlist = getAchivementList();
+  late Future<AchievementList> _achievementlist = getAchivementList();
   @override
   void initState() {
+    _achievementlist = getAchivementList();
     lifeList.precentLifeListBirds().then((birds) {
       birdPercentages = birds;
     });
@@ -127,6 +128,8 @@ class AchievementTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(achievement.name);
+    print(achievement.progress);
     return Card(
       color: AppColors.popupColor(context),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

@@ -168,7 +168,7 @@ class LifeListProvider {
   Future<void> insertBird(int birdId) async {
     final bird = await getBirdInByID(birdId);
     print(bird);
-    await updateLifeListAchievments(bird.commonGroup, birdId);
+    //await updateLifeListAchievments(bird.commonGroup, birdId);
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
       await db
@@ -316,6 +316,7 @@ class LifeListProvider {
               whereArgs: [commonGroup]),
         ) ??
         0;
+    print('count $count');
     return count;
   }
 
