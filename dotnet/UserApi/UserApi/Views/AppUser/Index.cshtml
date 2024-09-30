@@ -1,75 +1,100 @@
 @model IEnumerable<UserApi.Models.AppUser>
 
-@{
+    @{
     ViewData["Title"] = "Index";
-}
+    }
 
-<h1>Index</h1>
+    <h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ProfilePicture)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NormalizedUserName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.NormalizedEmail)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.EmailConfirmed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.TwoFactorEnabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LockoutEnd)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LockoutEnabled)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AccessFailedCount)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ProfilePicture, "imageDisplay")
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NormalizedUserName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NormalizedEmail)
-            </td>
-            <td>
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ProfilePicture)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.UserName)
+                </th>
+                <!-- <th>
+                    @Html.DisplayNameFor(model => model.NormalizedUserName)
+                </th> -->
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <!-- <th>
+                    @Html.DisplayNameFor(model => model.NormalizedEmail)
+                </th> -->
+                <th>
+                    @Html.DisplayNameFor(model => model.XP)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Level)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Lifelist)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Highscore)
+                </th>
+                <!-- <th>
+                    @Html.DisplayNameFor(model => model.EmailConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PhoneNumberConfirmed)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.TwoFactorEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEnd)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LockoutEnabled)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessFailedCount)
+                </th> -->
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProfilePicture, "imageDisplay")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.UserName)
+                </td>
+                <!-- <td>
+                    @Html.DisplayFor(modelItem => item.NormalizedUserName)
+                </td> -->
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+                <!-- <td>
+                    @Html.DisplayFor(modelItem => item.NormalizedEmail)
+                </td> -->
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.XP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Level)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Lifelist)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Highscore)
+                </td>
+                <!-- <td>
                 @Html.DisplayFor(modelItem => item.EmailConfirmed)
             </td>
             <td>
@@ -89,13 +114,13 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AccessFailedCount)
-            </td>
-            <td>
-                @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+            </td> -->
+                <td>
+                    @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
