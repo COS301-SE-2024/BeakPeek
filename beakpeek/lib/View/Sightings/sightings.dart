@@ -106,34 +106,10 @@ class _SightingsState extends State<Sightings> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'Filter by:',
+                    'Sort by name:',
                     style: GlobalStyles.contentPrimary(context),
                   ),
-                  const SizedBox(width: 8.0),
-                  DropdownButton<String>(
-                    dropdownColor: AppColors.popupColor(context),
-                    value: selectedFilter,
-                    items: [
-                      DropdownMenuItem(
-                        value: 'name',
-                        child: Text(
-                          'Name',
-                          style: GlobalStyles.contentPrimary(context),
-                        ),
-                      ),
-                      DropdownMenuItem(
-                        value: 'rarity',
-                        child: Text(
-                          'Rarity',
-                          style: GlobalStyles.contentPrimary(context),
-                        ),
-                      ),
-                    ],
-                    onChanged: onFilterChanged,
-                    style: GlobalStyles.primaryButtonText(context),
-                    underline: Container(),
-                  ),
-                  const SizedBox(width: 16.0),
+                  SizedBox(width: screenWidth * 0.08),
                   Row(
                     children: [
                       SizedBox(
@@ -148,13 +124,13 @@ class _SightingsState extends State<Sightings> {
                               reportRateASC();
                             }
                           },
-                          child: Icon(
-                            Icons.arrow_upward,
-                            color: AppColors.iconColor(context),
+                          child: Text(
+                            'A-Z',
+                            style: GlobalStyles.secondaryButtonText(context),
                           ),
                         ),
                       ),
-                      const SizedBox(width: 8.0),
+                      const SizedBox(width: 6.0),
                       SizedBox(
                         width: 80.0,
                         height: 34.0,
@@ -167,12 +143,13 @@ class _SightingsState extends State<Sightings> {
                               reportRateDESC();
                             }
                           },
-                          child: Icon(
-                            Icons.arrow_downward,
-                            color: AppColors.iconColor(context),
+                          child: Text(
+                            'Z-A',
+                            style: GlobalStyles.secondaryButtonText(context),
                           ),
                         ),
                       ),
+                      SizedBox(height: screenHeight * 0.05),
                     ],
                   ),
                 ],
