@@ -65,7 +65,7 @@ Widget levelProgressBar(BuildContext context) {
         xpLabel,
         style: GlobalStyles.contentPrimary(context).copyWith(
           fontWeight: FontWeight.bold,
-          color: AppColors.primaryColor(context),
+          color: AppColors.primaryColorLight,
           fontSize: 16,
         ),
       ),
