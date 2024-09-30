@@ -1,25 +1,30 @@
-import 'package:beakpeek/Styles/theme_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:localstorage/localstorage.dart';
 
 class ThemeProvider with ChangeNotifier {
-  late ThemeMode _themeMode = ThemeMode.system;
-  late ColorScheme _darkScheme = darkColorScheme;
-  late ColorScheme _lightScheme = lightColorScheme;
+  ThemeMode _themeMode = ThemeMode.system;
+
   ThemeMode get themeMode => _themeMode;
-  void setThemeMode(ThemeMode value) {
-    _themeMode = value;
-    notifyListeners();
+
+  final ColorScheme lightScheme = const ColorScheme.light(
+    primary: Color(0xFF033A30),
+    secondary: Color(0xFFECAD31),
+    // Add other colors as needed
+  );
+
+  final ColorScheme darkScheme = const ColorScheme.dark(
+    primary: Color(0xFF1A1A1A), // Dark grey background
+    secondary: Color(0xFFECAD31),
+    // Add other colors as needed
+  );
+
+  void setInitialTheme(String theme) {
+    _themeMode = theme.isEmpty ? ThemeMode.light : ThemeMode.dark;
   }
 
-  ColorScheme get darkScheme => _darkScheme;
-  void setDarkScheme(ColorScheme value) {
-    _darkScheme = value;
-    notifyListeners();
-  }
-
-  ColorScheme get lightScheme => _lightScheme;
-  void setLightScheme(ColorScheme value) {
-    _lightScheme = value;
+  void toggleTheme(bool isDarkMode) {
+    _themeMode = isDarkMode ? ThemeMode.dark : ThemeMode.light;
+    localStorage.setItem('theme', isDarkMode ? 'dark' : '');
     notifyListeners();
   }
 }

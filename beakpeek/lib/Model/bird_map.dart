@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, deprecated_member_use
 
 import 'dart:convert';
 
@@ -62,13 +62,13 @@ class BirdMapFunctions {
       final response = await http.get(uri);
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
-        print('Decoded Data: $data');
+        // print('Decoded Data: $data');
 
         final List<BirdPentad> birdPentads = data.map((item) {
           return BirdPentad.fromJson(item);
         }).toList();
 
-        print('BirdPentads: $birdPentads');
+        // print('BirdPentads: $birdPentads');
         return birdPentads;
       } else {
         print('Failed to load data: ${response.statusCode}');

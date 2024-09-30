@@ -7,10 +7,11 @@ EXPOSE 443
 # Use the official Microsoft .NET SDK image to build the application
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["dotnet/BeakPeekApi/BeakPeekApi.csproj", "dotnet/BeakPeekApi/"]
-RUN dotnet restore "dotnet/BeakPeekApi/BeakPeekApi.csproj"
+# COPY ["dotnet/BirdApi/BeakPeekApi/BeakPeekApi.csproj", "dotnet/BeakPeekApi/"]
+COPY ["dotnet/BirdApi/BeakPeekApi/BeakPeekApi.csproj", "dotnet/BirdApi/BeakPeekApi/"]
+RUN dotnet restore "dotnet/BirdApi/BeakPeekApi/BeakPeekApi.csproj"
 COPY . .
-WORKDIR "/src/dotnet/BeakPeekApi"
+WORKDIR "/src/dotnet/BirdApi/BeakPeekApi"
 RUN dotnet build "BeakPeekApi.csproj" -c Release -o /app/build
 
 FROM build AS publish
