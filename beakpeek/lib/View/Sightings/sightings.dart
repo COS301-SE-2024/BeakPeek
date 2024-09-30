@@ -48,6 +48,7 @@ class _SightingsState extends State<Sightings> {
   void setLoaded(List<Bird> temp) {
     setState(() {
       global.updateLife();
+      print(loaded);
       loaded = temp;
     });
   }
@@ -185,7 +186,9 @@ class _SightingsState extends State<Sightings> {
             child: FutureBuilder<List<Bird>>(
               future: lifeList.fetchLifeList(),
               builder: (context, snapshot) {
-                loaded = snapshot.data ?? [];
+                if (snapshot.hasData && snapshot.data!.length > loaded.length) {
+                  loaded = snapshot.data!;
+                }
                 return getLiveList(loaded, goBird, context);
               },
             ),

@@ -118,7 +118,7 @@ flutter:
     - assets/province_limpopo.kml
     - assets/province_northerncape.kml
     - assets/province_northwest.kml
-    - assets/Legal/combinepdf.pdf
+    # - assets/Legal/combinepdf.pdf
     - assets/Legal/BeakPeekTermsOfUse.pdf
     - assets/Legal/BeakPeekPrivacyPolicy.pdf
     - assets/Legal/BeakPeekCookiePolicy.pdf   
