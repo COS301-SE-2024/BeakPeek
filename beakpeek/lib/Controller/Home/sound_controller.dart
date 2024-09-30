@@ -1,3 +1,6 @@
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: library_private_types_in_public_api, avoid_redundant_argument_values
+
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:audioplayers/audioplayers.dart';

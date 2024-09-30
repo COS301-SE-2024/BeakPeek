@@ -53,6 +53,8 @@ dependencies:
   easy_pdf_viewer:
     git:
       url: https://github.com/ShankarKakumani/pdf_viewer.git
+  file_picker: ^8.1.2
+  # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
   flutter_test:
@@ -116,9 +118,10 @@ flutter:
     - assets/province_limpopo.kml
     - assets/province_northerncape.kml
     - assets/province_northwest.kml
+    - assets/Legal/combinepdf.pdf
     - assets/Legal/BeakPeekTermsOfUse.pdf
     - assets/Legal/BeakPeekPrivacyPolicy.pdf
-    - assets/Legal/BeakPeekCookiePolicy.pdf
+    - assets/Legal/BeakPeekCookiePolicy.pdf    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -22,11 +22,9 @@ class Globals {
       birdList = result;
     });
     listBirdFromAssets().then((result) {
+      allBirdsList = result;
       lifeList.initialInsert(result);
       lifeList.initialProvInsert(result);
-    });
-    lifeList.getFullBirdData().then((data) {
-      allBirdsList = data;
     });
     //lifeList.deleteDatabaseFile();
   }

@@ -25,7 +25,7 @@ class HeatMapState extends State<HeatMap> {
   late GoogleMapController mapController;
   final LatLng _defaultCenter = const LatLng(-25.7559141, 28.2330593);
   late CameraPosition _cameraPosition;
-  Set<Polygon> _polygons = {};
+  final Set<Polygon> _polygons = {};
   late List<dynamic> birdData = [];
   bool _isLoading = true;
   String _selectedMonth = 'Year-Round';

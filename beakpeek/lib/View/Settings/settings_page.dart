@@ -2,16 +2,38 @@ import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/Model/nav.dart';
 import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/View/UserProfile/color_palette.dart';
+import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
-import 'package:flutter_media_downloader/flutter_media_downloader.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
 
-class SettingsPage extends StatelessWidget {
-  SettingsPage({super.key});
-  final _flutterMediaDownloaderPlugin = MediaDownload();
+class SettingsPage extends StatefulWidget {
+  const SettingsPage({super.key});
+
+  @override
+  SettingsPageState createState() => SettingsPageState();
+}
+
+class SettingsPageState extends State<SettingsPage> {
+  PDFDocument? document;
+  bool viewTandC = false;
+  void loadPdfT() {
+    setState(() {
+      viewTandC = true;
+    });
+  }
+
+  void loadPDf() async {
+    document = await PDFDocument.fromAsset('assets/Legal/combinepdf.pdf');
+  }
+
+  @override
+  void initState() {
+    loadPDf();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,21 +127,29 @@ class SettingsPage extends StatelessWidget {
                     'Legal Policies',
                     Icons.gavel,
                     Icons.arrow_forward_ios,
-                    () async {
-                      _flutterMediaDownloaderPlugin.downloadMedia(
-                        context,
-                        'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekTermsOfUse.pdf',
-                      );
-                      _flutterMediaDownloaderPlugin.downloadMedia(
-                        context,
-                        'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekCookiePolicy.pdf',
-                      );
-                      _flutterMediaDownloaderPlugin.downloadMedia(
-                        context,
-                        'https://github.com/COS301-SE-2024/BeakPeek/blob/documention/doc/Legal/BeakPeekPrivacyPolicy.pdf',
-                      );
+                    () {
+                      loadPdfT();
                     },
                   ),
+                  SizedBox(height: screenHeight * 0.05),
+                  viewTandC
+                      ? SizedBox(
+                          height: screenHeight * 0.4,
+                          child: Column(
+                            children: <Widget>[
+                              Expanded(
+                                flex: (screenHeight * 0.5).floor(),
+                                child: PDFViewer(
+                                  document: document!,
+                                  zoomSteps: 2,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : const SizedBox(
+                          height: 0,
+                        ),
                 ],
               ),
             ),

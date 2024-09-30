@@ -32,7 +32,7 @@ class PaletteSelector extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              'Select an option to change the colour palette used for heat maps.',
+              '''Select an option to change the colour palette used for heat maps.''',
               style:
                   GlobalStyles.contentPrimary(context).copyWith(fontSize: 16),
               textAlign: TextAlign.center,

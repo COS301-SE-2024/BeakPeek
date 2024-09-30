@@ -49,6 +49,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   }
 
   void goBird(Bird bird) {
+    context.pop();
     context.pushNamed(
       'birdInfo',
       pathParameters: {
@@ -128,6 +129,8 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
                       );
                     },
                     suggestionsBuilder: (context, controller) {
+                      items = bsf.getWidgetListOfBirds(
+                          filteredBirds, goBird, context);
                       return items;
                     },
                   ),
