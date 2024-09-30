@@ -139,8 +139,10 @@ public class UserController : ControllerBase
 
     [AllowAnonymous]
     [HttpPost]
-    public async Task<IActionResult> Login(string email, string password)
+    public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
     {
+        string email = loginModel.email;
+        string password = loginModel.password;
         var userTryingtoLogin = await _userManager.FindByNameAsync(email) ?? await _userManager.FindByEmailAsync(email);
         if (userTryingtoLogin == null)
         {
@@ -200,4 +202,10 @@ public class UserController : ControllerBase
             .FirstOrDefaultAsync(user => user.Id == userId);
         // return await _userManager.FindByIdAsync(userId);
     }
+}
+
+public class LoginModel
+{
+    public string email { get; set; }
+    public string password { get; set; }
 }
