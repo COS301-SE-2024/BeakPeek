@@ -256,7 +256,7 @@ class LifeListProvider {
     final batch = db.batch();
     if (await containsData() == 0) {
       for (Bird temp in allBirds) {
-        if (temp.reportingRate >= 1) {
+        if (temp.reportingRate >= 0.1) {
           batch.insert('allBirds', temp.toAllBirdsMap(),
               conflictAlgorithm: ConflictAlgorithm.replace);
         }

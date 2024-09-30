@@ -49,6 +49,7 @@ class _FilterableSearchbarState extends State<FilterableSearchbar> {
   }
 
   void goBird(Bird bird) {
+    context.pop();
     context.pushNamed(
       'birdInfo',
       pathParameters: {

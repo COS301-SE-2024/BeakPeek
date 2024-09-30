@@ -54,7 +54,9 @@ List<Widget> getWidgetListOfBirds(
   final List<Widget> listOfBirdWidgets = [];
 
   for (var i = 0; i < birds.length; i++) {
-    listOfBirdWidgets.add(getData(birds[i], goBird, context));
+    if (birds[i].reportingRate > 0.1) {
+      listOfBirdWidgets.add(getData(birds[i], goBird, context));
+    }
   }
   return listOfBirdWidgets;
 }

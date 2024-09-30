@@ -58,7 +58,8 @@ class BottomNavItem extends StatelessWidget {
           TextButton(
             onPressed: () {
               if (label.toLowerCase().compareTo('home') == 0) {
-                context.goNamed('home');
+                context.pop();
+                context.go('/home');
               }
               context.goNamed(label.toLowerCase());
             },

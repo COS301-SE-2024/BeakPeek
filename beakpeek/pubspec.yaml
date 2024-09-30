@@ -71,6 +71,7 @@ dependencies:
   flutter_profile_picture: ^2.0.0
   dynamic_icons: ^1.0.0
   easy_pdf_viewer: ^1.0.8
+  file_picker: ^8.1.2
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:

@@ -29709,37 +29709,6 @@
         "Cards": 1417
     },
     {
-        "ref": 10014,
-        "common_group": "Duck",
-        "common_species": "Unidentified",
-        "genus": "N/A",
-        "species": "N/A",
-        "full_Protocol_RR": 0.0063,
-        "full_Protocol_Number": 21,
-        "latest_FP": "2017-10-21T00:00:00",
-        "image_Url": null,
-        "info": null,
-        "provinces": [
-            "gauteng",
-            "northwest"
-        ],
-        "Jan": 0.3,
-        "Feb": 0.2,
-        "Mar": 0.1,
-        "Apr": 0.0,
-        "May": 0.2,
-        "Jun": 0.0,
-        "Jul": 0.0,
-        "Aug": 0.1,
-        "Sep": 0.1,
-        "Oct": 0.3,
-        "Nov": 0.0,
-        "Dec": 0.4,
-        "reportingRate": 0.2,
-        "Records": 21,
-        "Cards": 13813
-    },
-    {
         "ref": 10015,
         "common_group": "",
         "common_species": "Hybrid Mallard",

@@ -40,7 +40,7 @@ class _BirdSheetState extends State<BirdSheet> {
       final List<Bird> allBirds =
           await fetchBirds(widget.pentadId, http.Client());
       final List<Bird> seenBirds =
-          await global.birdList; // Get the list of seen birds
+          global.birdList; // Get the list of seen birds
 
       List<Bird> filteredBirds = _filterBirds(allBirds, seenBirds);
       filteredBirds = _sortBirds(filteredBirds, _selectedSortOption);
