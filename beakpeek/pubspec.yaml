@@ -52,7 +52,6 @@ dependencies:
   slider_button: ^2.1.0
   slidable_button: ^3.0.0+1
   profile_photo: ^1.0.3
-  flutter_azure_b2c: ^0.0.10
   flutter_web_auth_2: ^4.0.0
   provider: ^6.1.2
   property_change_notifier: ^0.4.0
@@ -70,7 +69,10 @@ dependencies:
   progress_bar_chart: ^0.0.11
   flutter_profile_picture: ^2.0.0
   dynamic_icons: ^1.0.0
-  easy_pdf_viewer: ^1.0.8
+  # easy_pdf_viewer: ^1.0.8
+  easy_pdf_viewer:
+    git:
+      url: https://github.com/ShankarKakumani/pdf_viewer.git
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
