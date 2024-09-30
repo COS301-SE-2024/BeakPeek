@@ -62,12 +62,14 @@ List<Widget> getWidgetListOfBirds(
 }
 
 List<Bird> sortAlphabetically(List<Bird> birds) {
-  birds.sort((a, b) => a.commonSpecies.compareTo(b.commonSpecies));
+  birds.sort((a, b) => '${a.commonSpecies}${a.commonGroup}'
+      .compareTo('${b.commonSpecies}${b.commonGroup}'));
   return birds;
 }
 
 List<Bird> sortAlphabeticallyDesc(List<Bird> birds) {
-  birds.sort((a, b) => b.commonSpecies.compareTo(a.commonSpecies));
+  birds.sort((a, b) => '${b.commonSpecies}${b.commonGroup}'
+      .compareTo('${a.commonSpecies}${a.commonGroup}'));
   return birds;
 }
 
