@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'dart:io';
+import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/UserProfile/user_achievment.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
@@ -96,4 +97,90 @@ AchievementList? getLocalAchievmentList() {
     return null;
   }
   return AchievementList.fromJson(userString);
+}
+
+Future<void> updateLifeListAchievments(String commonGroup, int id) async {
+  switch (commonGroup.toLowerCase()) {
+    case 'weaver':
+      updateAchievmentProgressBirds('Weaver Believer', 'weaver');
+      updateProvinces(id);
+      break;
+    case 'duck':
+      updateAchievmentProgressBirds('Duck Hunter', 'duck');
+      updateProvinces(id);
+      break;
+    case 'egale':
+      updateAchievmentProgressBirds('USA', 'egale');
+      updateProvinces(id);
+      break;
+    case 'kingfisher':
+      updateAchievmentProgressBirds('Fisherman', 'kingfisher');
+      updateProvinces(id);
+      break;
+    case 'hawk':
+      updateAchievmentProgressBirds('Hawk Spotter', 'hawk');
+      updateProvinces(id);
+      break;
+    case 'heron':
+      updateAchievmentProgressBirds('Heron Horror', 'heron');
+
+      break;
+  }
+  updateProvinces(id);
+}
+
+Future<void> updateProvinces(int id) async {
+  final List<String> achivementNames = [
+    'Risk it for the Biscuits',
+    'Gauteng Explorer',
+    'Watch The Waves',
+    'Limpopo Hoopoe',
+    'Mpumalanga Adventurer',
+    'Dimond Hunter',
+    'Directionally challanged',
+    'Western Cape Wanderer',
+    'Freesest Alive'
+  ];
+  final LifeListProvider lifeList = LifeListProvider.instance;
+  final List<double> progress = await lifeList.precentLifeListBirds();
+  for (int i = 0; i < achivementNames.length; i++) {
+    final Achievement? provMaster = getAchievementByName(achivementNames[i]);
+
+    if (provMaster != null) {
+      await updateUsersAchievement(provMaster.id, progress[i]);
+      //print('progress at $i ${progress[i]}');
+      for (UserAchievement ua in user.achievements) {
+        print(ua.toJson());
+      }
+      print(achivementNames[i]);
+    }
+  }
+}
+
+/// All checks for user progress should go here
+Future<void> updateAchievmentProgressBirds(
+    String achievemntName, String commonGroup) async {
+  /// Quiz Master
+  final Achievement? birdMaster = getAchievementByName(achievemntName);
+  final LifeListProvider lifeList = LifeListProvider.instance;
+  if (birdMaster != null) {
+    final int countBird = await lifeList.lifeBirdCount(commonGroup);
+    final int totalBird = await lifeList.allBirdCount(commonGroup);
+    double progress = countBird / totalBird;
+    progress = progress < 1 ? progress : 1;
+    await updateUsersAchievement(birdMaster.id, progress);
+    for (UserAchievement ua in user.achievements) {
+      print(ua.toJson());
+    }
+    print(achievemntName);
+  }
+
+  for (UserAchievement userAchievement in user.achievements) {
+    achievementList
+        .achievements[achievementList.achievements
+            .indexWhere((element) => element.id == userAchievement.id)]
+        .progress = userAchievement.progress;
+  }
+
+  storeAchievementListLocally(achievementList);
 }

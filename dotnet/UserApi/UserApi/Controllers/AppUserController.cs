@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,12 @@ namespace UserApi.Controllers;
 public class AppUserController : BaseController
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<AppUser> _userManager;
 
-    public AppUserController(ApplicationDbContext context)
+    public AppUserController(ApplicationDbContext context, UserManager<AppUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     // GET: AppUser
@@ -147,15 +150,14 @@ public class AppUserController : BaseController
     // POST: AppUser/Delete/5
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(string id)
+    public async Task<IActionResult> DeleteConfirmed([FromForm] string Id)
     {
-        var appUser = await _context.Users.FindAsync(id);
+        var appUser = await _userManager.FindByIdAsync(Id);
         if (appUser != null)
         {
-            _context.Users.Remove(appUser);
+            await _userManager.DeleteAsync(appUser);
         }
 
-        await _context.SaveChangesAsync();
         return RedirectToAction(nameof(Index));
     }
 
