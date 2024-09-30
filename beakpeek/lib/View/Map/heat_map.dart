@@ -70,7 +70,7 @@ class HeatMapState extends State<HeatMap> {
                   'This is an Endangered Species! Est. Population: $population',
                   style: GlobalStyles.contentPrimary(context).copyWith(
                     fontWeight: FontWeight.w400,
-                    color: const Color.fromARGB(255, 202, 110, 104),
+                    color: AppColors.textColor(context),
                     fontSize: 12,
                   ),
                   textAlign: TextAlign.left, // Align the text to the right
@@ -84,7 +84,7 @@ class HeatMapState extends State<HeatMap> {
                   'This is not an Endangered Species!',
                   style: GlobalStyles.contentPrimary(context).copyWith(
                     fontWeight: FontWeight.w400,
-                    color: const Color.fromARGB(255, 119, 189, 121),
+                    color: AppColors.textColor(context),
                     fontSize: 16,
                   ),
                   textAlign: TextAlign.left, // Align the text to the right
