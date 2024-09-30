@@ -38,8 +38,6 @@ class _SightingsState extends State<Sightings> {
     context.goNamed(
       'birdInfo',
       pathParameters: {
-        'group': bird.commonGroup,
-        'species': bird.commonSpecies,
         'id': bird.id.toString(),
       },
     );

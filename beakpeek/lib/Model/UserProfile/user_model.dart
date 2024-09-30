@@ -97,12 +97,12 @@ Future<UserModel> getOnlineUser() async {
     return user;
   }
   user = UserModel.fromJson(response.body);
-
-  final String localLife = await lifelist.updateUserLifelist();
+  final String localLife = await lifelist.fetchUserLifelistString();
   if (localLife.length < user.lifelist.length) {
-    final Map<String, int> valueMap = json.decode(localLife);
-    valueMap.forEach((key, value) {
-      lifelist.insertBird(value);
+    final List<dynamic> valueList = json.decode(user.lifelist);
+    valueList.forEach((element) {
+      final int birdId = element['id'];
+      lifelist.insertBird(birdId);
     });
   } else {
     user.lifelist = localLife;
@@ -134,9 +134,11 @@ void deleteLocalUser() {
 
 Future<void> updateOnline(
     {LifeListProvider? lifelist, bool logout = false}) async {
-  // if (lifelist != null) {
-  //   await lifelist.updateUserLifelist();
-  // }
+  lifelist = LifeListProvider.instance;
+  if (lifelist != null) {
+    String list = await lifelist.updateUserLifelist();
+    user.set('lifelist', list);
+  }
   final response = await http.post(Uri.parse('$userApiUrl/User/UpdateProfile'),
       headers: {
         HttpHeaders.authorizationHeader: 'Bearer $accessToken',
@@ -144,6 +146,7 @@ Future<void> updateOnline(
       },
       body: user.toJson());
 
+  // print(json.decode(response.body));
   if (logout) {
     return;
   }
