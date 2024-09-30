@@ -3,6 +3,7 @@
 
 @{
 ViewData["Title"] = "Log in";
+@* Model.ReturnUrl = Request.Query["ReturnUrl"]; *@
 }
 
 <h1>@ViewData["Title"]</h1>
@@ -24,6 +25,14 @@ ViewData["Title"] = "Log in";
                         aria-required="true" placeholder="password" />
                     <label asp-for="Input.Password" class="form-label">Password</label>
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
+                </div>
+
+                <div class="checkbox mb-3">
+                    <label class="form-label">
+                        <input type="checkbox" name="showPassword" id="ckShowPass" onclick="myshowp(this)"
+                            class="form-check-input" />
+                        Show Password
+                    </label>
                 </div>
                 <div class="checkbox mb-3">
                     <label asp-for="Input.RememberMe" class="form-label">
