@@ -7,33 +7,45 @@ class GuestUserBlock extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(
-            '''You need to Login To make a LifeList
-            Or a Profile''',
+            'You need to be logged in!',
             style: GlobalStyles.smallHeadingPrimary(context),
           ),
-          OutlinedButton(
-            style: GlobalStyles.buttonPrimaryFilled(context),
-            child: Text('Please Login',
-                style: GlobalStyles.primaryButtonText(context)),
-            onPressed: () {
-              context.go('/');
-            },
+          SizedBox(height: screenHeight * 0.01),
+          Text(
+            'Please log in or create an account.',
+            style: GlobalStyles.contentPrimary(context),
           ),
-          const SizedBox(
-            height: 10,
+          SizedBox(height: screenHeight * 0.02),
+          SizedBox(
+            width: screenWidth * 0.7,
+            child: OutlinedButton(
+              style: GlobalStyles.buttonPrimaryFilled(context),
+              child: Text('Sign Up / Sign In',
+                  style: GlobalStyles.primaryButtonText(context)),
+              onPressed: () {
+                context.go('/');
+              },
+            ),
           ),
-          FilledButton(
-            style: GlobalStyles.buttonPrimaryOutlined(context),
-            child:
-                Text('Back', style: GlobalStyles.secondaryButtonText(context)),
-            onPressed: () {
-              context.goNamed('home');
-            },
+          SizedBox(height: screenHeight * 0.01),
+          SizedBox(
+            width: screenWidth * 0.7,
+            child: FilledButton(
+              style: GlobalStyles.buttonPrimaryOutlined(context),
+              child: Text('Continue as Guest',
+                  style: GlobalStyles.secondaryButtonText(context)),
+              onPressed: () {
+                context.goNamed('home');
+              },
+            ),
           ),
         ],
       ),
