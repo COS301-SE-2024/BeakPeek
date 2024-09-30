@@ -160,7 +160,10 @@ class HeatMapState extends State<HeatMap> {
             MaterialPageRoute(
               builder: (context) => const PaletteSelector(),
             ),
-          );
+          ).then((_) {
+            _polygons.clear(); // Clear the polygons
+            loadPentadData(); // Load the pentad data
+          });
         },
         child: Container(
           height: 230,
