@@ -187,7 +187,7 @@ class LifeListProvider {
     final db = await instance.database;
     final List<Map<String, Object?>> birdMap = await db.query(
       'birds',
-      orderBy: 'commonSpecies DESC',
+      orderBy: 'commonGroup DESC',
       columns: ['id'],
     );
     final String encodedString = jsonEncode(birdMap);
@@ -201,7 +201,7 @@ class LifeListProvider {
 
     final List<Map<String, Object?>> birdMap = await db.query(
       'birds',
-      orderBy: 'commonSpecies DESC',
+      orderBy: 'commonGroup DESC',
     );
     return birdMap.map(
       (map) {
