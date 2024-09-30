@@ -106,13 +106,11 @@ class _SightingsState extends State<Sightings> {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Text label for dropdown
                   Text(
                     'Filter by:',
                     style: GlobalStyles.contentPrimary(context),
                   ),
                   const SizedBox(width: 8.0),
-                  // Dropdown Button
                   DropdownButton<String>(
                     dropdownColor: AppColors.popupColor(context),
                     value: selectedFilter,
@@ -137,7 +135,6 @@ class _SightingsState extends State<Sightings> {
                     underline: Container(),
                   ),
                   const SizedBox(width: 16.0),
-                  // Ascending and Descending buttons
                   Row(
                     children: [
                       SizedBox(
@@ -189,15 +186,13 @@ class _SightingsState extends State<Sightings> {
               future: lifeList.fetchLifeList(),
               builder: (context, snapshot) {
                 loaded = snapshot.data ?? [];
-                //print('Loaded: ${loaded.toString()}');
                 return getLiveList(loaded, goBird, context);
               },
             ),
           ),
         ],
       ),
-      bottomNavigationBar:
-          const BottomNavigation(), // Add BottomNavigation widget here
+      bottomNavigationBar: const BottomNavigation(),
     );
   }
 }

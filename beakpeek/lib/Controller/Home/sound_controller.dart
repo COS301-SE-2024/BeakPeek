@@ -74,7 +74,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
               isLoading = false;
             });
           }
-          print('No recordings found for this bird.');
+          // print('No recordings found for this bird.');
         }
       } else {
         if (mounted) {
@@ -82,7 +82,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
             isLoading = false;
           });
         }
-        print('Failed to load bird sound: ${response.statusCode}');
+        // print('Failed to load bird sound: ${response.statusCode}');
       }
     } catch (e) {
       if (mounted) {
@@ -90,7 +90,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
           isLoading = false;
         });
       }
-      print('Error fetching bird sound: $e');
+      // print('Error fetching bird sound: $e');
     }
   }
 
@@ -112,7 +112,7 @@ class _BirdSoundPlayerState extends State<BirdSoundPlayer> {
         });
       }
     } catch (e) {
-      print('Error during playback: $e');
+      // print('Error during playback: $e');
     }
   }
 
