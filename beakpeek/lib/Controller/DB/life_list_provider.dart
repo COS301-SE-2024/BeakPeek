@@ -167,6 +167,7 @@ class LifeListProvider {
 
   Future<void> insertBird(int birdId) async {
     final bird = await getBirdInByID(birdId);
+    print(bird);
     await updateLifeListAchievments(bird.commonGroup, birdId);
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
@@ -195,6 +196,19 @@ class LifeListProvider {
     final String encodedString = jsonEncode(birdMap);
     user.lifelist = encodedString;
     storeUserLocally(user);
+    return encodedString;
+  }
+
+  Future<String> fetchUserLifelistString() async {
+    final db = await instance.database;
+    final List<Map<String, Object?>> birdMap = await db.query(
+      'birds',
+      orderBy: 'commonGroup DESC',
+      columns: ['id'],
+    );
+    final String encodedString = jsonEncode(birdMap);
+    // user.lifelist = encodedString;
+    // storeUserLocally(user);
     return encodedString;
   }
 
