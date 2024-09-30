@@ -713,6 +713,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  intl:
+    dependency: transitive
+    description:
+      name: intl
+      sha256: d6f56758b7d3014a48af9701c085700aac781a92a87a62b1333b46d8879661cf
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.19.0"
   io:
     dependency: transitive
     description:
@@ -725,10 +733,10 @@ packages:
     dependency: transitive
     description:
       name: js
-      sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
+      sha256: c1b2e9b5ea78c45e1a0788d29606ba27dc5f71f019f32ca5140f61ef071838cf
       url: "https://pub.dev"
     source: hosted
-    version: "0.6.7"
+    version: "0.7.1"
   json_annotation:
     dependency: transitive
     description:
@@ -997,10 +1005,10 @@ packages:
     dependency: "direct main"
     description:
       name: progress_bar_chart
-      sha256: "7f0fba787a0c2b3b1010c0a45be51e66316955f43e5f556d251921592eca67de"
+      sha256: e9bb66d2c1ad617e4ca629731855d31c0f745ae828f18f246656a8f03533196a
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.11"
+    version: "0.0.12"
   property_change_notifier:
     dependency: "direct main"
     description:
