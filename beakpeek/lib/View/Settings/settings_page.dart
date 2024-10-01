@@ -29,6 +29,13 @@ class SettingsPageState extends State<SettingsPage> {
     document = await PDFDocument.fromAsset('assets/Legal/combinepdf.pdf');
   }
 
+  void loadPDfU() async {
+    document = await PDFDocument.fromAsset('assets/Legal/UserManual.pdf');
+    setState(() {
+      viewTandC = true;
+    });
+  }
+
   @override
   void initState() {
     loadPDf();
@@ -119,7 +126,7 @@ class SettingsPageState extends State<SettingsPage> {
                     Icons.help_outline,
                     Icons.arrow_forward_ios,
                     () {
-                      // Handle Help & Support tap
+                      loadPDfU();
                     },
                   ),
                   _buildOptionTile(

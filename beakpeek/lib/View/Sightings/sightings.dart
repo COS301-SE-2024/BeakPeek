@@ -93,7 +93,10 @@ class _SightingsState extends State<Sightings> {
             Text('Life List', style: GlobalStyles.smallHeadingPrimary(context)),
         centerTitle: true,
         actions: const [
-          HelpIcon(content: '*implement lifelist page help*'),
+          HelpIcon(
+              content:
+                  // ignore: lines_longer_than_80_chars
+                  'All birds that you have saved to your life list will appear here. You can easily access all their information by tapping on a tile.\n\nSort the birds you’ve seen by name in ascending or descending order.\n\nYou can return to the home menu by tapping on the arrow in the top left corner.\n\nImport your life list from another app (.csv format only) or export it.'),
           SizedBox(width: 14.0)
         ],
       ),
