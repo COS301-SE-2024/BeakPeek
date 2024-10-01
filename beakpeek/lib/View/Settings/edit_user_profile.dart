@@ -142,7 +142,7 @@ class _EditUserProfileState extends State<EditUserProfile> {
                 onPressed: () {
                   storeUserLocally(user);
                   updateOnline();
-                  context.goNamed('home');
+                  context.goNamed('profile');
                 },
                 style: GlobalStyles.buttonPrimaryFilled(context),
                 child: Text(
