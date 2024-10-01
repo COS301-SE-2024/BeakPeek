@@ -74,7 +74,26 @@ Future<void> updateAchievmentProgress() async {
   final LifeListProvider lifelist = LifeListProvider.instance;
   final List<Bird> birdsLife = await lifelist.fetchLifeList();
   for (Bird bird in birdsLife) {
-    await updateLifeListAchievments(bird.commonGroup);
+    switch (bird.commonGroup.toLowerCase()) {
+      case 'weaver':
+        await updateAchievmentProgressBirds('Weaver Believer', 'Weaver');
+        break;
+      case 'duck':
+        await updateAchievmentProgressBirds('Duck Hunter', 'Duck');
+        break;
+      case 'eagle':
+        await updateAchievmentProgressBirds('USA', 'Eagle');
+        break;
+      case 'kingfisher':
+        await updateAchievmentProgressBirds('Fisherman', 'Kingfisher');
+        break;
+      case 'hawk':
+        await updateAchievmentProgressBirds('Hawk Spotter', 'Hawk');
+        break;
+      case 'heron':
+        await updateAchievmentProgressBirds('Heron Horror', 'Heron');
+        break;
+    }
     await updateProvinces(bird.id);
   }
 
@@ -120,27 +139,7 @@ AchievementList? getLocalAchievmentList() {
 }
 
 Future<void> updateLifeListAchievments(String commonGroup) async {
-  switch (commonGroup.toLowerCase()) {
-    case 'weaver':
-      await updateAchievmentProgressBirds('Weaver Believer', 'Weaver');
-      break;
-    case 'duck':
-      await updateAchievmentProgressBirds('Duck Hunter', 'Duck');
-      break;
-    case 'eagle':
-      await updateAchievmentProgressBirds('USA', 'Eagle');
-      break;
-    case 'kingfisher':
-      await updateAchievmentProgressBirds('Fisherman', 'Kingfisher');
-      break;
-    case 'hawk':
-      await updateAchievmentProgressBirds('Hawk Spotter', 'Hawk');
-      break;
-    case 'heron':
-      await updateAchievmentProgressBirds('Heron Horror', 'Heron');
-
-      break;
-  }
+  
 }
 
 Future<void> updateProvinces(int id) async {
