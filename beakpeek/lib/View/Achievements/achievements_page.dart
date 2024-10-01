@@ -50,7 +50,9 @@ class AchievementsPageState extends State<AchievementsPage> {
             style: GlobalStyles.smallHeadingPrimary(context)),
         centerTitle: true,
         actions: const [
-          HelpIcon(content: '*implement achievements page help*'),
+          HelpIcon(
+              content:
+                  'Follow the instructions to get the achievement! \n\nThis will earn you some profile experience points and helps you unlock ultimate bragging rights.'),
           SizedBox(width: 14.0)
         ],
       ),
