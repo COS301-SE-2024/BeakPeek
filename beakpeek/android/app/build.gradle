@@ -55,8 +55,8 @@ android {
         minSdk = 24
         targetSdk = 34
         resValue "string", "google_maps_key", googleMapsApiKey
-        versionCode 5
-        versionName "1.4"
+        versionCode 7
+        versionName "2.0"
         multiDexEnabled true
     }
 
