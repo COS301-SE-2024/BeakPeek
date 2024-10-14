@@ -6,6 +6,7 @@ import 'package:beakpeek/Model/BirdInfo/province_data.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -165,8 +166,28 @@ class LifeListProvider {
   }
 
   Future<void> insertBird(int birdId) async {
-    final bird = await getBirdInByID(birdId);
-    print(bird);
+    final bird = await getBirdInByID(birdId).then((temp) {
+      switch (temp.commonGroup.toLowerCase()) {
+        case 'weaver':
+          updateProgress(temp.commonGroup, 'Weaver Believer');
+          break;
+        case 'duck':
+          updateProgress(temp.commonGroup, 'Duck Hunter');
+          break;
+        case 'eagle':
+          updateProgress(temp.commonGroup, 'USA');
+          break;
+        case 'kingfisher':
+          updateProgress(temp.commonGroup, 'Fisherman');
+          break;
+        case 'hawk':
+          updateProgress(temp.commonGroup, 'Hawk Spotter');
+          break;
+        case 'heron':
+          updateProgress(temp.commonGroup, 'Heron Horror');
+          break;
+      }
+    });
     //await updateLifeListAchievments(bird.commonGroup, birdId);
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
@@ -315,8 +336,34 @@ class LifeListProvider {
               whereArgs: [commonGroup]),
         ) ??
         0;
-    print('count $count');
     return count;
+  }
+
+  Future<void> updateProgress(String commonGroup, String achievmentName) async {
+    final int countBird = await lifeBirdCount(commonGroup);
+    final int totalBird = await allBirdCount(commonGroup);
+    double progress = countBird / totalBird;
+    progress = progress < 1 ? progress : 1;
+    localStorage.setItem(achievmentName, progress.toString());
+    updateProvinces();
+  }
+
+  Future<void> updateProvinces() async {
+    final List<String> achivementNamesProvinces = [
+      'Risk it for the Biscuits',
+      'Gauteng Explorer',
+      'Watch The Waves',
+      'Limpopo Hoopoe',
+      'Mpumalanga Adventurer',
+      'Diamond Hunter',
+      'Directionally challenged',
+      'Western Cape Wanderer',
+      'Freesest Alive'
+    ];
+    final List<double> progress = await precentLifeListBirds();
+    for (int i = 0; i < achivementNamesProvinces.length; i++) {
+      localStorage.setItem(achivementNamesProvinces[i], progress.toString());
+    }
   }
 
   Future<int> lifeBirdCount(String commonGroup) async {

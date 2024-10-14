@@ -46,7 +46,6 @@ class _SightingsState extends State<Sightings> {
   void setLoaded(List<Bird> temp) {
     setState(() {
       global.updateLife();
-      print(loaded);
       loaded = temp;
     });
   }

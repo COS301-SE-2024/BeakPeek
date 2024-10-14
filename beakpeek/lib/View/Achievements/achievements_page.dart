@@ -52,7 +52,7 @@ class AchievementsPageState extends State<AchievementsPage> {
         actions: const [
           HelpIcon(
               content:
-                  'Follow the instructions to get the achievement! \n\nThis will earn you some profile experience points and helps you unlock ultimate bragging rights.'),
+                  '''Follow the instructions to get the achievement! \n\nThis will earn you some profile experience points and helps you unlock ultimate bragging rights.'''),
           SizedBox(width: 14.0)
         ],
       ),
@@ -130,8 +130,6 @@ class AchievementTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(achievement.name);
-    print(achievement.progress);
     return Card(
       color: AppColors.popupColor(context),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

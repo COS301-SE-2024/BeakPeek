@@ -57,6 +57,7 @@ class _BirdQuizState extends State<BirdQuiz>
       _controller.forward(); // Start the timer
       try {
         _quizManager.preloadQuizzes(1, context);
+        // ignore: empty_catches
       } catch (e) {}
     });
   }
