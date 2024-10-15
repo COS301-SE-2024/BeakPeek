@@ -54,6 +54,10 @@ dependencies:
     git:
       url: https://github.com/ShankarKakumani/pdf_viewer.git
   file_picker: ^8.1.2
+  to_csv: ^4.0.4
+  permission_handler: ^11.3.1
+  csv: ^5.1.1
+  path_provider: ^2.1.4
   # google_maps_flutter_heatmap: ^0.1.1
 
 dev_dependencies:
