@@ -206,8 +206,7 @@ class SettingsPageState extends State<SettingsPage> {
 
   // Builds the toggle theme option with dynamic icon on the left
   Widget _buildToggleThemeTile(BuildContext context) {
-    final isDarkMode =
-        Provider.of<ThemeProvider>(context).themeMode == ThemeMode.dark;
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10.0),

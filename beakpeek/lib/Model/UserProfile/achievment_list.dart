@@ -138,9 +138,7 @@ AchievementList? getLocalAchievmentList() {
   return AchievementList.fromJson(userString);
 }
 
-Future<void> updateLifeListAchievments(String commonGroup) async {
-  
-}
+Future<void> updateLifeListAchievments(String commonGroup) async {}
 
 Future<void> updateProvinces(int id) async {
   final List<String> achivementNames = [

@@ -52,7 +52,7 @@ class AchievementsPageState extends State<AchievementsPage> {
         actions: const [
           HelpIcon(
               content:
-                  'Follow the instructions to get the achievement! \n\nThis will earn you some profile experience points and helps you unlock ultimate bragging rights.'),
+                  '''Follow the instructions to get the achievement! \n\nThis will earn you some profile experience points and helps you unlock ultimate bragging rights.'''),
           SizedBox(width: 14.0)
         ],
       ),
@@ -61,7 +61,10 @@ class AchievementsPageState extends State<AchievementsPage> {
           future: _achievementlist,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                  child: CircularProgressIndicator(
+                color: AppColors.iconColor(context),
+              ));
             } else if (snapshot.hasError) {
               return Center(
                 child: Text('Error loading achievements: ${snapshot.error}'),
@@ -130,8 +133,6 @@ class AchievementTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(achievement.name);
-    print(achievement.progress);
     return Card(
       color: AppColors.popupColor(context),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),

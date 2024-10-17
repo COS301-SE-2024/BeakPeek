@@ -210,7 +210,10 @@ class _BirdSheetState extends State<BirdSheet> {
                   future: _birdList,
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
+                      return Center(
+                          child: CircularProgressIndicator(
+                        color: AppColors.iconColor(context),
+                      ));
                     } else if (snapshot.hasError) {
                       return const Center(child: Text('No birds found.'));
                     }
