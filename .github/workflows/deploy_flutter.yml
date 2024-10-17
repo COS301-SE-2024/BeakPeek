@@ -17,10 +17,11 @@ env:
 #         working-directory: ./beakpeek
 jobs:
   test:
-    uses: ./github/workflows/flutter.yml
+    uses: ./.github/workflows/flutter.yml
 
   build_android:
     name: Build Android
+    needs: [test]
     runs-on: ubuntu-latest
     defaults:
           run:
