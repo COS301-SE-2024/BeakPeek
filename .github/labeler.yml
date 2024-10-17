@@ -19,6 +19,7 @@ Documentation:
   - any-glob-to-any-file:
     - doc/*
     - '**/*.md'
+- head-branch: ['^doc', 'doc']
 
 Dotnet:
   - changed-files:
