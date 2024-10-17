@@ -1,9 +1,10 @@
-// ignore_for_file: avoid_redundant_argument_values, empty_catches
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: avoid_redundant_argument_values, empty_catches, unused_element, avoid_print
 
 import 'package:beakpeek/Model/bird_map.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:beakpeek/View/Map/bird_sheet.dart';
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -20,21 +21,30 @@ class BirdMap extends StatefulWidget {
 
 class BirdMapState extends State<BirdMap> {
   late GoogleMapController mapController;
-  LatLng _currentLocation = const LatLng(-25.7559141, 28.2330593);
-  // Default location
-  String _selectedProvince = 'gauteng'; // Default selected province
+  LatLng _currentLocation =
+      const LatLng(-25.7559141, 28.2330593); // Default location
+  String _selectedProvince = 'Gauteng'; // Capitalized default province
   String _selectedMonth = 'Year-Round'; // Default selected month
   late CameraPosition _cameraPosition;
   Set<Polygon> _polygons = {};
   bool _isLocationFetched = false;
 
+  final Map<String, LatLng> provinceCenters = {
+    'Gauteng': const LatLng(-25.7559141, 28.2330593),
+    'Western Cape': const LatLng(-33.9249, 18.4241),
+    'Eastern Cape': const LatLng(-32.2968, 26.4194),
+    'KwaZulu-Natal': const LatLng(-29.8587, 31.0218),
+    'Limpopo': const LatLng(-23.8962, 29.4486),
+    'Mpumalanga': const LatLng(-25.5653, 30.5276),
+    'Free State': const LatLng(-29.0852, 26.1596),
+    'Northern Cape': const LatLng(-28.7281, 24.7499),
+    'North West': const LatLng(-25.6696, 25.9323),
+  };
+
   @override
   void initState() {
     super.initState();
-    _cameraPosition = CameraPosition(
-      target: _currentLocation,
-      zoom: 11.0,
-    );
+    _cameraPosition = CameraPosition(target: _currentLocation, zoom: 11.0);
     _getCurrentLocation();
     _loadKmlData();
   }
@@ -65,60 +75,103 @@ class BirdMapState extends State<BirdMap> {
     // Fetch current location
     try {
       final Position position = await Geolocator.getCurrentPosition();
+      final latitude = position.latitude;
+      final longitude = position.longitude;
 
-      setState(() {
-        _currentLocation = LatLng(position.latitude, position.longitude);
-        _cameraPosition = CameraPosition(
-          target: _currentLocation,
-          zoom: 11.0,
-        );
-        _isLocationFetched = true;
-      });
+      // Check if the location is within South Africa's boundaries
+      if (!(latitude < -35.0 ||
+          latitude > -22.0 ||
+          longitude < 16.0 ||
+          longitude > 33.0)) {
+        setState(() {
+          _currentLocation = LatLng(position.latitude, position.longitude);
+          _cameraPosition = CameraPosition(
+            target: _currentLocation,
+            zoom: 11.0,
+          );
+          _isLocationFetched = true;
+        });
 
-      // Update map camera if mapController is initialized
-      if (_isLocationFetched) {
-        mapController
-            .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+        // Update map camera if mapController is initialized
+        if (_isLocationFetched) {
+          mapController
+              .animateCamera(CameraUpdate.newCameraPosition(_cameraPosition));
+        }
       }
     } catch (e) {}
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Stack(
       children: [
-        _buildFiltersRow(),
-        Expanded(
-          child: GoogleMap(
-            onMapCreated: (controller) {
-              mapController = controller;
-              if (_isLocationFetched) {
-                mapController.animateCamera(
-                    CameraUpdate.newCameraPosition(_cameraPosition));
-              }
-            },
-            initialCameraPosition: _cameraPosition,
-            polygons: _polygons,
-            myLocationEnabled: true, // Enable the blue dot marker
-            myLocationButtonEnabled: true, // Enable the "My Location" button
-          ),
+        Column(
+          children: [
+            Expanded(
+              child: GoogleMap(
+                onMapCreated: (controller) {
+                  mapController = controller;
+                  if (_isLocationFetched) {
+                    mapController.animateCamera(
+                        CameraUpdate.newCameraPosition(_cameraPosition));
+                  }
+                },
+                initialCameraPosition: _cameraPosition,
+                polygons: _polygons,
+                myLocationEnabled: true, // Enable the blue dot marker
+                myLocationButtonEnabled:
+                    true, // Enable the "My Location" button
+              ),
+            ),
+          ],
         ),
+        Padding(
+          padding: const EdgeInsets.only(top: 20.0, left: 20.0, right: 20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildFiltersRow(),
+            ],
+          ),
+        )
       ],
     );
   }
 
   Widget _buildFiltersRow() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: [
-        IconButton(
-          icon:
-              const Icon(Icons.filter_list, color: GlobalStyles.secondaryColor),
-          onPressed: () {
-            _showFilterDialog();
-          },
-        ),
-      ],
+    return Container(
+      width: 150,
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.9),
+        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 4,
+            offset: const Offset(2, 2),
+          ),
+        ],
+      ),
+      child: Row(
+        children: [
+          IconButton(
+            icon: const Icon(Icons.filter_alt,
+                color: AppColors.primaryColorLight),
+            onPressed: () {
+              _showFilterDialog();
+            },
+          ),
+          GestureDetector(
+            onTap: () {
+              _showFilterDialog();
+            },
+            child: Text('Filter Map',
+                style: GlobalStyles.contentPrimary(context).copyWith(
+                    fontSize: 16, color: AppColors.primaryColorLight)),
+          ),
+        ],
+      ),
     );
   }
 
@@ -127,17 +180,43 @@ class BirdMapState extends State<BirdMap> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: const Text('Filters'),
+          title: Center(
+            child: Text('Map Filters',
+                style: GlobalStyles.smallHeadingPrimary(context)),
+          ),
+          backgroundColor: AppColors.backgroundColor(context),
           content: Column(
             mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Province Dropdown
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.location_on,
+                      size: 20.0,
+                      color: AppColors.iconColor(context),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Filter by province:',
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 4.0),
               DropdownButtonFormField<String>(
                 value: _selectedProvince,
                 onChanged: (newValue) {
                   setState(() {
+                    _polygons = {};
                     _selectedProvince = newValue!;
-                    _cameraPosition = _getCameraPositionForProvince(newValue);
+                    _cameraPosition = CameraPosition(
+                        target: provinceCenters[newValue]!, zoom: 11.0);
                     _loadKmlData();
                   });
 
@@ -145,39 +224,56 @@ class BirdMapState extends State<BirdMap> {
                   mapController.animateCamera(
                       CameraUpdate.newCameraPosition(_cameraPosition));
                 },
-                items: <String>['gauteng', 'westerncape', 'Eastern Cape']
-                    .map<DropdownMenuItem<String>>((value) {
+                items:
+                    provinceCenters.keys.map<DropdownMenuItem<String>>((value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(
                       value,
-                      style: const TextStyle(fontSize: 14.0),
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
                     ),
                   );
                 }).toList(),
                 decoration: InputDecoration(
-                  fillColor: Colors.white,
+                  fillColor: AppColors.popupColor(context),
                   filled: true,
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                style: const TextStyle(color: Colors.black, fontSize: 14.0),
-                dropdownColor: Colors.white,
-                iconEnabledColor: GlobalStyles.secondaryColor,
+                style: GlobalStyles.contentPrimary(context),
+                dropdownColor: AppColors.popupColor(context),
+                iconEnabledColor: AppColors.secondaryColor(context),
               ),
               const SizedBox(height: 10.0),
 
               // Month Dropdown
+              Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.calendar_today,
+                      size: 18.0,
+                      color: AppColors.iconColor(context),
+                    ),
+                    const SizedBox(width: 6),
+                    Text(
+                      'Filter by month:',
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
+                    ),
+                  ],
+                ),
+              ),
+
+              const SizedBox(height: 4.0),
               DropdownButtonFormField<String>(
                 value: _selectedMonth,
                 onChanged: (newValue) {
@@ -204,29 +300,26 @@ class BirdMapState extends State<BirdMap> {
                     value: value,
                     child: Text(
                       value,
-                      style: const TextStyle(fontSize: 14.0),
+                      style: GlobalStyles.contentPrimary(context)
+                          .copyWith(fontWeight: FontWeight.w400),
                     ),
                   );
                 }).toList(),
                 decoration: InputDecoration(
-                  fillColor: Colors.white,
+                  fillColor: AppColors.popupColor(context),
                   filled: true,
                   contentPadding: const EdgeInsets.symmetric(
                       horizontal: 12.0, vertical: 8.0),
                   enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                   focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: GlobalStyles.secondaryColor, width: 2.0),
-                    borderRadius: BorderRadius.circular(30.0),
+                    borderRadius: BorderRadius.circular(15.0),
                   ),
                 ),
-                style: const TextStyle(color: Colors.black, fontSize: 14.0),
-                dropdownColor: Colors.white,
-                iconEnabledColor: GlobalStyles.secondaryColor,
+                style: GlobalStyles.contentPrimary(context),
+                dropdownColor: AppColors.popupColor(context),
+                iconEnabledColor: AppColors.secondaryColor(context),
               ),
             ],
           ),
@@ -235,7 +328,10 @@ class BirdMapState extends State<BirdMap> {
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Close'),
+              child: Text(
+                'Close',
+                style: GlobalStyles.smallContentPrimary(context),
+              ),
             ),
           ],
         );
@@ -244,27 +340,14 @@ class BirdMapState extends State<BirdMap> {
   }
 
   CameraPosition _getCameraPositionForProvince(String province) {
-    switch (province) {
-      case 'gauteng':
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
-
-      case 'westerncape':
-        return const CameraPosition(
-            target: LatLng(-33.9249, 18.4241), zoom: 11.0);
-      case 'Eastern Cape':
-        return const CameraPosition(
-            target: LatLng(-32.2968, 26.4194), zoom: 11.0);
-      default:
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 11.0);
-    }
+    return CameraPosition(target: provinceCenters[province]!, zoom: 11.0);
   }
 
   Future<void> _loadKmlData() async {
     try {
-      final kmlString =
-          await rootBundle.loadString('assets/province_$_selectedProvince.kml');
+      // print(_selectedProvince);
+      final kmlString = await rootBundle.loadString(
+          'assets/province_${_selectedProvince.toLowerCase().replaceAll(" ", "")}.kml');
       final polygonsData = KmlParser.parseKml(kmlString);
 
       setState(() {
@@ -277,7 +360,7 @@ class BirdMapState extends State<BirdMap> {
           return Polygon(
             polygonId: PolygonId(id),
             points: coordinates,
-            strokeColor: Colors.transparent,
+            strokeColor: Colors.grey.withOpacity(0.1),
             fillColor: Colors.transparent,
             strokeWidth: 2,
             consumeTapEvents: true,

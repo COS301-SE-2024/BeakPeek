@@ -1,0 +1,185 @@
+\documentclass{article}
+
+\usepackage{listings}
+
+\title{
+
+\\
+{Algorithms}
+}
+
+\author{Millenium}
+
+\begin{document}
+
+\tableofcontents
+
+\newpage
+
+\section{Explanation of Algorithms in BirdMap}
+
+The BirdMap feature utilizes several key algorithms that enhance both performance and user experience. These algorithms ensure that the map is interactive, efficient, and responsive, making the app user-friendly and scalable.
+
+\subsection{Geolocation and Dynamic Camera Adjustment}
+The \texttt{\_getCurrentLocation} function leverages the \textit{Geolocator} package to obtain the user’s real-time location. The algorithm first checks if location services are enabled and if the necessary permissions are granted. Once a valid location within the boundaries of South Africa is obtained, the camera on the map is dynamically adjusted to center on the user’s location.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Efficiency:} By updating the map's camera position based on the user’s current location, the feature provides real-time relevance without unnecessary user input.
+    \item \textbf{User-Centric Design:} Automatically centering the map improves navigation and location-based features, enhancing the overall user experience.
+\end{itemize}
+
+\subsection{Dynamic KML Parsing for Polygon Data}
+The \texttt{\_loadKmlData} function loads KML data corresponding to the selected province. This data is parsed into polygon shapes using a custom \textit{KmlParser}, and the resulting polygons are then drawn on the map.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Scalability:} The algorithm dynamically loads KML data for specific provinces, avoiding the need to load unnecessary data, which improves memory usage and performance.
+    \item \textbf{Modularity:} By separating the parsing logic from the map itself, the design remains flexible and allows for the reuse of this functionality in other regions or datasets.
+\end{itemize}
+
+\subsection{Filtering by Province and Month}
+Users can filter the map’s content based on province and month. When a new province is selected, the camera is adjusted to focus on that province, and the corresponding KML data is reloaded. The month filter allows for further refinement of bird data shown on the map.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Interactivity:} The filter system allows users to explore different regions and times with ease, keeping the interface intuitive and engaging.
+    \item \textbf{Performance:} The dynamic reloading of only the necessary map data (polygons) helps in reducing the computational load and enhances the speed of the application.
+\end{itemize}
+
+\subsection{Interactive Polygon Tapping}
+The \texttt{\_onPolygonTapped} function is triggered when users tap on any polygon on the map. This action opens a modal sheet with detailed bird data for the selected region.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{User Engagement:} The ability to interact with specific map regions encourages users to explore the data, creating a more immersive experience.
+    \item \textbf{Clean User Interface:} By using modal sheets, the app avoids cluttering the map with too much information, providing details on demand.
+\end{itemize}
+
+\subsection{Overall Design}
+These algorithms work together to optimize both the performance and usability of the BirdMap feature. By loading data dynamically and offering interactive filters, the system is able to present relevant information to users while minimizing unnecessary resource usage. The modular and scalable design allows for easy future expansion and adaptability to other datasets or regions.
+
+\section{Explanation of Algorithms in the HeatMap}
+
+The HeatMap feature incorporates several effective algorithms to ensure efficient display and interactivity for bird population data, with dynamic filtering by month and species. Here's an overview of the key components and why they work so well.
+
+\subsection{Dynamic Pentad Data Loading}
+The \texttt{loadPentadData} function dynamically loads bird sighting data. It retrieves population information for different species, computes polygons for regions (called pentads), and colors these polygons based on the reporting rate, i.e., how often birds are sighted in a particular region.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Dynamic Data Handling:} The map only loads the data it needs when required, keeping the app fast and responsive. It processes and adds polygons in batches, ensuring that the user experience remains smooth even with large datasets.
+    \item \textbf{Modularity:} The function that retrieves bird data is separate from the map rendering logic. This modular design makes the system more flexible and reusable in other parts of the app.
+\end{itemize}
+
+\subsection{Color Palette and Visualization}
+The \texttt{getColorForReportingRate} function assigns colors to the polygons based on the percentage of bird sightings (called the reporting rate). The color scale ranges from low to high, helping users quickly identify areas with high bird activity.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Visual Clarity:} The color-coded map makes it easy to understand bird distribution patterns at a glance. It turns raw data into meaningful visual insights.
+    \item \textbf{User Engagement:} Users can customize the color palette through the \texttt{PaletteSelector}, allowing them to personalize their experience and making the app more interactive.
+\end{itemize}
+
+\subsection{Interactive Map Filtering}
+The map allows users to filter the displayed data by month. By selecting a month, users can see how bird populations change throughout the year. This is managed via a dropdown menu that updates the polygons and the displayed data accordingly.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Real-time Updates:} The polygons are cleared and redrawn every time the user changes the month, ensuring the map always reflects the latest data.
+    \item \textbf{User Flexibility:} Users can easily explore different time periods, providing a more engaging and informative experience.
+\end{itemize}
+
+\subsection{Efficient Map Rendering}
+The Google Map widget efficiently renders polygons on the map. The polygons represent pentads and are generated dynamically based on bird sighting data. To maintain performance, the polygons are processed and added to the map in small batches.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Efficiency:} By only rendering relevant polygons and doing so in small increments, the map stays responsive and avoids performance bottlenecks.
+    \item \textbf{Interactivity:} The map allows for zooming and panning, ensuring users can explore the data interactively without any lag or slowdowns.
+\end{itemize}
+
+\subsection{Endangered Species Alerts}
+The app includes a dynamic alert that informs users if the bird species they are viewing is endangered. The app checks the bird's population size and displays an appropriate message, enhancing the user's awareness of conservation efforts.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Dynamic Warnings:} Users are alerted about endangered species, adding a layer of education to the app and increasing awareness of conservation issues.
+    \item \textbf{Seamless Integration:} These warnings are displayed alongside the map in a way that feels natural, without interrupting the user's experience.
+\end{itemize}
+
+\subsection{Overall Design}
+These algorithms ensure that the HeatMap feature is not only efficient but also interactive and user-friendly. By dynamically loading data, using intuitive visual cues, and providing interactive filtering, the app offers an engaging experience that adapts to the user's needs.
+
+\section{Explanation of Algorithms in LifeList}
+The LifeList's algorithms are geared towards performance ensuring that the user always has access to the data with minimal delays, ensuring that it the App remains efficient and responsive.The SQLite database that is used has also been designed to be scalable whilst still maintaining efficiency. 
+
+\subsection{SQLite Tables}
+The LifeList database is comprised of 3 tables Birds, allBirds and Provinces
+
+\subsubsection{AllBirds Table}
+The allBirds table stores all the data for the 800+ birds in South Africa.Images are also store as a Blob of base64. The user also has the ability to request for this table to be updated giving the latest data when they require it.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Offline access:} By keeping this table the user is able to access all information about all the birds in South Africa at anytime regardless of internet access.
+    \item \textbf{Better response time:} Having no need to constantly make request to the online API means that the information is always readily available and able to be displayed.
+    \item \textbf{Lower storage requirements:} By storing images as a string of base64 we drastically decease the size of the database 
+    \item \textbf{Redundancy:} All birds also stores the online URL for the images this means that should the image fail to load the online image is retrieved and stored in the table for next usage.
+\end{itemize}
+
+\subsubsection{Bird Table }
+The \texttt{Bird} table stores rudimentary bird data for birds that have been seen.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Saves storage:} By keeping this table small we minimize storage requirements.
+    \item \textbf{Seamless Integration:} As the \texttt{Bird} stores minimal information it make it easier to upload to the users online account allowing for the transfer of data to be quicker and more cost effective.
+\end{itemize}
+
+\subsubsection{Provinces Table }
+The \texttt{Provinces} table stores the Bird is and a list of provinces that the bird is found in.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Efficiency :} This table allows for 1 query to be made to find number of birds in a province and which birds are found in which provinces.
+    \item \textbf{Storage Efficiency:} This allows the \texttt{AllBirds} table to be made smaller and faster.
+\end{itemize}
+
+\subsubsection{Online Profile Update}
+The\texttt{\ fetchUserLifelistString} retrieves the necessary data from the \texttt{\ Birds} table that is need for online profile storage.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Efficiency :} This allows for efficient retrieval of the life list to be stored online .
+    \item \textbf{Storage Efficiency:} This allows the online storage to be smaller and more manageable.
+\end{itemize}
+
+\subsubsection{Duplicate inserting}
+The\texttt{\ isDuplicate} checks if the bird to be inserted is in the life list already.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Efficiency :} This prevents duplicate data from even being attempted to be inserted and it allows the front end to identify if a bird is in the Life List without being queried.
+\end{itemize}
+
+\subsubsection{Bird Provinces}
+The\texttt{\ getBirdProvinces} return all the provices that a bird is in.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Efficiency :} Allow for 1 query that retrieves all provinces that a bird is seen in.
+\end{itemize}
+
+\subsubsection{Achievement Progress}
+The\texttt{\ precentLifeListBirds} returns the percentage of the current achievement. By querying \texttt{\ Provinces} and \texttt{\ Birds} tables we are able to calculate the percentage of the achievements.This query is called upon inserting a bird into life list and the value is stored in the user model.
+
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Efficiency :} Allow for 1 query that retrieves the current percentage.
+    \item  \textbf{Seamless Integration :} By storing this data in the user model it is always available when need so loading time is minimized.
+\end{itemize}
+
+\subsubsection{Overall Design}
+These tables and algorithms ensure that the LifeList as well as all bird information is available at all times. By loading the LifeList as the app starts we ensure that the data is always readily available to the user anytime the user needs it. These algorithms are also geared to minimize loading times and save storage space by breaking the data down into smaller and more manageable tables. 
+\end{document}

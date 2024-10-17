@@ -99,15 +99,15 @@ Azure Config which just needs to be added to the lib directory in the beakpeek
 directory. The file should be called azure_config.dart
 
 ```dart
-String domain = 'com.example.beakpeek';
+String domain = 'com.millennium.beakpeek';
 String clientID = '<clientID>';
 String issuer =
     'https://<Issuer Url>';
-String bundlerID = 'com.example.beakpeek';
-String redirectURL = 'com.example.beakpeek://login-callback';
+String bundlerID = 'com.millennium.beakpeek';
+String redirectURL = 'com.millennium.beakpeek://login-callback';
 String discoveryURL =
     'https://<Url that the signing can be discovered on>';
-String scope = 'https://beakpeak.onmicrosoft.com/com.example.beakpeek/callback';
+String scope = 'https://beakpeak.onmicrosoft.com/com.millennium.beakpeek/callback';
 
 String initialUrl = '<Initial Url>';
 String tokenUrl =

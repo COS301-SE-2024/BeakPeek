@@ -1,14 +1,15 @@
-// ignore_for_file: library_private_types_in_public_api,
+// ignore_for_file: library_private_types_in_public_api,, empty_catches
 // unnecessary_to_list_in_spreads
-
-import 'dart:convert';
 import 'dart:math';
-
+import 'package:beakpeek/Controller/Home/quiz_manager.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Model/UserProfile/user_model.dart';
+import 'package:beakpeek/Model/quiz_instance.dart';
+import 'package:beakpeek/Styles/colors.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
+import 'package:beakpeek/View/Bird/bird_page.dart';
+import 'package:beakpeek/config_azure.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:http/http.dart' as http;
 
 class BirdQuiz extends StatefulWidget {
   const BirdQuiz({super.key});
@@ -17,86 +18,190 @@ class BirdQuiz extends StatefulWidget {
   _BirdQuizState createState() => _BirdQuizState();
 }
 
-class _BirdQuizState extends State<BirdQuiz> {
-  late Future<List<Bird>> futureBirds;
-  List<Bird> selectedBirds = [];
-  late Bird correctBird;
-  late Future<List<String>> birdImages;
+class _BirdQuizState extends State<BirdQuiz>
+    with SingleTickerProviderStateMixin {
+  final QuizManager _quizManager = QuizManager();
+  QuizInstance? currentQuiz;
+  Bird? selectedBird;
+  bool isAnswered = false;
+  int correctAnswersInRow = 0;
+  int highScore = 0;
+  late AnimationController _controller;
 
   @override
   void initState() {
     super.initState();
-    futureBirds = fetchBirds(http.Client());
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 10), // 10-second timer for each bird
+    );
+
+    // Call setState on each tick to rebuild and update the timer bar
+    _controller.addListener(() {
+      setState(() {});
+      if (_controller.isCompleted && !isAnswered) {
+        // Time runs out and the player hasn't answered
+        showGameOverPopup();
+      }
+    });
+
+    loadNextQuiz();
   }
 
-  void startQuiz(List<Bird> birds) {
-    selectedBirds = selectRandomBirds(birds, 4);
-    correctBird = selectedBirds[Random().nextInt(4)];
-    birdImages = getImages(http.Client(), correctBird);
+  void loadNextQuiz() {
+    setState(() {
+      currentQuiz = _quizManager.getNextQuizInstance();
+      selectedBird = null;
+      isAnswered = false;
+      _controller.reset(); // Reset the timer
+      _controller.forward(); // Start the timer
+      try {
+        _quizManager.preloadQuizzes(1, context);
+      } catch (e) {}
+    });
   }
 
-  void showWinDialog(List<Bird> birds) {
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void handleAnswer(Bird bird) async {
+    if (isAnswered) {
+      return; // Ignore input if already answered
+    }
+    setState(() {
+      isAnswered = true;
+      selectedBird = bird; // Highlight the selected bird
+    });
+
+    if (bird == currentQuiz!.correctBird) {
+      setState(() {
+        correctAnswersInRow++;
+      });
+      await Future.delayed(const Duration(seconds: 1));
+      loadNextQuiz();
+    } else {
+      // Highlight the correct answer
+      await Future.delayed(const Duration(seconds: 1));
+      setState(() {
+        // Set the selected wrong answer to red
+        selectedBird = bird;
+        // Update the correct bird to green
+      });
+      user.highscore = max(user.highscore, correctAnswersInRow);
+      storeUserLocally(user);
+      updateOnline();
+      showGameOverPopup();
+    }
+  }
+
+  void showGameOverPopup() {
+    _controller.stop();
+
     showDialog(
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Colors.white,
-          title: const Center(
+          backgroundColor: AppColors.popupColor(context),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          title: Center(
             child: Text(
-              'Congratulations!',
-              style: TextStyle(
-                color: GlobalStyles.secondaryColor,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              'Game Over!',
+              style: GlobalStyles.smallHeadingPrimary(context),
             ),
           ),
-          content: const Text(
-            'You selected the correct bird!',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              RichText(
+                text: TextSpan(
+                  style: GlobalStyles.contentPrimary(context),
+                  children: [
+                    const TextSpan(text: 'Correct answers in a row: '),
+                    TextSpan(
+                      text: '$correctAnswersInRow',
+                      style: GlobalStyles.contentTertiary(context)
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10),
+              RichText(
+                text: TextSpan(
+                  style: GlobalStyles.contentPrimary(context),
+                  children: [
+                    const TextSpan(text: 'High score: '),
+                    TextSpan(
+                      text: '${user.highscore}',
+                      style: GlobalStyles.contentTertiary(context)
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
           actions: [
-            ButtonBar(
-              alignment: MainAxisAlignment.center,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    setState(() {
-                      startQuiz(birds);
-                    });
-                  },
-                  child: const Text(
-                    'Next Bird',
-                    style: TextStyle(
-                      color: GlobalStyles.secondaryColor,
-                    ),
-                  ),
+            // Align(
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  correctAnswersInRow = 0;
+                });
+                Navigator.of(context).pop();
+                loadNextQuiz();
+              },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 24.0),
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
                 ),
-                TextButton(
-                  onPressed: () {
-                    context.pop();
-                    context.goNamed(
-                      'birdInfo',
-                      pathParameters: {
-                        'group': correctBird.commonGroup,
-                        'species': correctBird.commonSpecies,
-                        'id': correctBird.id.toString(),
-                      },
-                    );
-                  },
-                  child: const Text(
-                    'View Bird',
-                    style: TextStyle(
-                      color: GlobalStyles.secondaryColor,
-                    ),
-                  ),
-                ),
-              ],
+              ),
+              child: Text(
+                'Try Again',
+                style: GlobalStyles.smallContent(context),
+              ),
             ),
+            TextButton(
+              onPressed: () {
+                // setState(() {
+                //   correctAnswersInRow = 0;
+                // });
+                // Navigator.of(context).pop();
+                // loadNextQuiz();
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => Scaffold(
+                      body: BirdPage(
+                        id: currentQuiz!.correctBird.id,
+                      ),
+                    ),
+                  ),
+                );
+              },
+              style: TextButton.styleFrom(
+                padding: const EdgeInsets.symmetric(
+                    vertical: 12.0, horizontal: 24.0),
+                backgroundColor: Colors.transparent,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10.0),
+                ),
+              ),
+              child: Text(
+                'View Bird',
+                style: GlobalStyles.smallContent(context),
+              ),
+            ),
+            // ),
           ],
         );
       },
@@ -106,185 +211,118 @@ class _BirdQuizState extends State<BirdQuiz> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-    final padding = EdgeInsets.symmetric(
-      horizontal: screenWidth * 0.05,
-      vertical: screenHeight * 0.02,
-    );
+
+    if (currentQuiz == null) {
+      return const Scaffold(
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF3F1ED),
+      backgroundColor: AppColors.backgroundColor(context),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF3F1ED),
+        backgroundColor: AppColors.backgroundColor(context),
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: GlobalStyles.primaryColor,
-          ),
-          onPressed: () => context.go('/home'),
-        ),
-        title: const Text(
+        title: Text(
           'Bird Quiz',
-          style: GlobalStyles.smallHeadingDark,
-          textAlign: TextAlign.center,
+          style: GlobalStyles.smallHeadingPrimary(context),
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: padding,
-        child: FutureBuilder<List<Bird>>(
-          future: futureBirds,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                      GlobalStyles.secondaryColor),
+      body: Column(
+        children: [
+          // Timer Bar
+          Row(
+            children: [
+              Expanded(
+                child: SizedBox(
+                  height: 8, // Set the height of the timer bar
+                  child: LinearProgressIndicator(
+                    value: 1.0 -
+                        _controller.value, // Inverted so it shrinks over time
+                    backgroundColor: Colors.grey[300],
+                    color: AppColors.tertiaryColor(context), // Customize color
+                  ),
                 ),
-              );
-            } else if (snapshot.hasError) {
-              return Center(child: Text('Error: ${snapshot.error}'));
-            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-              return const Center(child: Text('No birds found'));
-            } else {
-              startQuiz(snapshot.data!);
-              return Column(
-                children: [
-                  Expanded(
-                    child: FutureBuilder<List<String>>(
-                      future: birdImages,
-                      builder: (context, imageSnapshot) {
-                        if (imageSnapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const Center(
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                  GlobalStyles.secondaryColor),
-                            ),
-                          );
-                        } else if (imageSnapshot.hasError) {
-                          return Center(
-                              child: Text('Error: ${imageSnapshot.error}'));
-                        } else if (imageSnapshot.data == null ||
-                            imageSnapshot.data!.isEmpty) {
-                          return const Center(
-                              child: Text('No images available'));
-                        } else {
-                          return PageView(
-                            children: imageSnapshot.data!
-                                .map((url) => SizedBox(
-                                      width: screenWidth * 0.9,
-                                      child: Image.network(
-                                        url,
-                                        width: screenWidth * 0.9,
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ))
-                                .toList(),
-                          );
-                        }
-                      },
+              ),
+            ],
+          ),
+          const SizedBox(height: 8),
+
+          // Score Tracker
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Current Score: $correctAnswersInRow',
+                  style: GlobalStyles.contentPrimary(context),
+                ),
+                Text(
+                  'High Score: ${user.highscore}',
+                  style: GlobalStyles.contentPrimary(context),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 16),
+
+          Expanded(
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(15.0), // Add border radius
+              child: Image.network(
+                currentQuiz?.images ?? '', // The image URL
+                fit: BoxFit.cover, // Adjust image to cover the container
+                width: screenWidth * 0.9,
+              ),
+            ),
+          ),
+          const SizedBox(height: 16),
+          Text(
+            'Select the correct bird:',
+            style: GlobalStyles.smallHeadingPrimary(context),
+          ),
+          const SizedBox(height: 16),
+          Column(
+            children: currentQuiz!.selectedBirds.map((bird) {
+              final isCorrectBird = bird == currentQuiz!.correctBird;
+              final isSelectedBird = bird == selectedBird;
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 6.0),
+                child: SizedBox(
+                  width: min(screenWidth * 0.75, 320),
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: isSelectedBird
+                          ? (isCorrectBird
+                              ? const Color.fromARGB(255, 105, 189, 108)
+                              : const Color.fromARGB(255, 219, 89,
+                                  79)) // Red for wrong, green for correct
+                          : (isCorrectBird && isAnswered)
+                              ? const Color.fromARGB(255, 105, 189, 108)
+                              : AppColors.popupColor(context),
+                      // Green if it’s correct and answered
+                      minimumSize: const Size(320, 50),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30.0),
+                      ),
+                    ),
+                    onPressed: () => handleAnswer(bird),
+                    child: Text(
+                      '${bird.commonSpecies} ${bird.commonGroup}',
+                      style: GlobalStyles.contentPrimary(context),
                     ),
                   ),
-                  const SizedBox(height: 16.0),
-                  const Text(
-                    'Select the correct bird:',
-                    style: GlobalStyles.smallHeadingDark,
-                    textAlign: TextAlign.center,
-                  ),
-                  const SizedBox(height: 8.0),
-                  Column(
-                    children: selectedBirds
-                        .map((bird) => Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 6.0),
-                              child: SizedBox(
-                                width: min(screenWidth * 0.75, 320),
-                                child: ElevatedButton(
-                                  style: ElevatedButton.styleFrom(
-                                    backgroundColor: GlobalStyles.primaryColor,
-                                    minimumSize: const Size(320, 50),
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30.0),
-                                    ),
-                                    shadowColor: Colors.grey,
-                                    elevation: 5,
-                                  ),
-                                  onPressed: () {
-                                    if (bird == correctBird) {
-                                      showWinDialog(snapshot.data!);
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text('Try again!'),
-                                          backgroundColor: Colors.red,
-                                          duration: Duration(seconds: 1),
-                                        ),
-                                      );
-                                    }
-                                  },
-                                  child: Text(
-                                    '${bird.commonSpecies} ${bird.commonGroup}',
-                                    style: const TextStyle(
-                                      color: Color(0xFFFFFFFF),
-                                      fontFamily: 'SF Pro Display',
-                                      fontWeight: FontWeight.w400,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ))
-                        .toList(),
-                  ),
-                  const SizedBox(height: 16.0),
-                ],
+                ),
               );
-            }
-          },
-        ),
+            }).toList(),
+          ),
+          const SizedBox(height: 16),
+        ],
       ),
     );
-  }
-}
-
-Future<List<Bird>> fetchBirds(http.Client client) async {
-  try {
-    final response = await client
-        .get(Uri.parse('https://beakpeekbirdapi.azurewebsites.net/api/Bird/'));
-
-    if (response.statusCode == 200) {
-      final List<dynamic> jsonResponse = json.decode(response.body);
-      return jsonResponse.map((data) => Bird.fromJson(data)).toList();
-    } else {
-      throw Exception('Failed to load birds');
-    }
-  } catch (error) {
-    throw Exception('Error fetching birdsYelllaosd: $error');
-  }
-}
-
-List<Bird> selectRandomBirds(List<Bird> birds, int count) {
-  birds.shuffle(Random());
-  return birds.take(count).toList();
-}
-
-Future<List<String>> getImages(http.Client client, Bird bird) async {
-  try {
-    final String birdName = '${bird.commonSpecies} ${bird.commonGroup}';
-    final response = await client.get(Uri.parse(
-        'https://beakpeekbirdapi.azurewebsites.net/api/BirdInfo/$birdName'));
-
-    if (response.statusCode == 200) {
-      final Map<String, dynamic> jsonResponse = json.decode(response.body);
-      final List<dynamic> images = jsonResponse['images'];
-      return images.map<String>((image) => image['url'] as String).toList();
-    } else {
-      throw Exception('Failed to load bird images');
-    }
-  } catch (error) {
-    throw Exception('Error fetching bird images: $error');
   }
 }

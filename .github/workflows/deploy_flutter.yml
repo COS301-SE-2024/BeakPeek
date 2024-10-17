@@ -1,0 +1,166 @@
+name: Publish Android release
+
+on:
+  release:
+    types: [published]
+  push:
+    branches:
+      - 'dev/feat/devops'
+  workflow_dispatch:
+
+env:
+  FLUTTER_CHANNEL: "stable"
+  RUBY_VERSION: "3.2.2"
+
+# defaults:
+#       run:
+#         working-directory: ./beakpeek
+jobs:
+  test:
+    uses: ./.github/workflows/flutter.yml
+
+  build_android:
+    name: Build Android
+    # needs: [test]
+    runs-on: ubuntu-latest
+    defaults:
+          run:
+            working-directory: ./beakpeek
+    timeout-minutes: 20
+    outputs:
+      artifact_url: ${{ steps.artifact-upload-step.outputs.artifact-url}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        if: ${{ env.ACT }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        if: ${{ env.ACT }}
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+          working-directory: './beakpeek/android'
+
+      - name: Run Flutter tasks
+        uses: subosito/flutter-action@v2.16.0
+        with:
+          flutter-version-file: 'beakpeek/pubspec.yaml'
+          channel: ${{ env.FLUTTER_CHANNEL }}
+          cache: true
+
+      - name: Create google_service_account.json
+        run: |
+          pwd
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64 }}" | base64 --decode > google_service_account.json
+
+      - name: Create key.jks
+        run: |
+          pwd
+          echo "${{ secrets.ANDROID_KEYSTORE_FILE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+
+      - name: Create local.properties
+        run: |
+          pwd
+          echo "${{ secrets.ANDROID_LOCAL_PROPERTIES_FILE_BASE64 }}" | base64 --decode > android/local.properties
+
+      - name: Create key.properties
+        run: |
+          echo $PATH
+          pwd
+          cat <<EOF > android/key.properties
+          storePassword=${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          keyPassword=${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          keyAlias=upload
+          storeFile=\\\upload-keystore.jks
+          EOF
+        env:
+          ANDROID_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+
+      - name: Build and Release to Google Play
+        uses: maierj/fastlane-action@v3.1.0
+        with:
+          # lane: 'release_play_store'
+          lane: 'build'
+          subdirectory: ./beakpeek/android
+          options: '{ "version_number": "${{ github.ref_name }}" }'
+        env:
+          APP_PACKAGE_NAME: ${{ secrets.APP_PACKAGE_NAME }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        id: artifact-upload-step
+        with:
+          name: app-release
+          path: beakpeek/build/app/outputs/bundle/release/app-release.aab
+
+  notify_discord:
+    needs: [build_android]
+    name: 🔔 Send Discord notification about Build
+    runs-on: ubuntu-latest
+    env:
+      ARTIFACT_URL: ${{ needs.build_android.outputs.artifact_url}}
+    steps:
+      
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set current time and date
+        run: |
+          echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_ENV
+
+      - name: List files
+        run: |
+          echo $(ls)
+          echo "$NOW"
+
+      - name: 🔔 Notify discord
+        uses: tsickert/discord-webhook@v5.3.0
+        if: ${{ !cancelled() && (success() || failure()) }}
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          username: Android Deploy
+          avatar-url: https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true 
+          content: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
+          embed-title: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
+          embed-url: ${{env.ARTIFACT_URL}}
+          embed-description:  "${{ contains(needs.build_android.result, 'success') && 'Released:' || 'Release failed:' }} ${{ github.event.head_commit.message }}"
+          embed-author-name: "github"
+          embed-author-icon-url: https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true
+          embed-author-url: "https://github.com/COS301-SE-2024/BeakPeek"
+          embed-thumbnail-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
+          embed-image-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
+          embed-footer-icon-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
+          embed-timestamp: ${{ env.NOW }}
+          embed-color: ${{ contains(needs.build_android.result, 'success') && 65280 || 16711680 }}
+          embed-footer-text: "DevOps"
+          wait: true
+
+  notify_android:
+    name: Send Slack Notification about Android build
+    needs: [build_android]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Send Slack Notification about Android build
+        uses: rtCamp/action-slack-notify@v2
+        if: ${{ !cancelled() && (success() || failure()) && env.SLACK_LOGS_WEBHOOK_PRESENT == 'true' }}
+        env:
+          SLACK_LOGS_WEBHOOK_PRESENT: ${{ secrets.SLACK_LOGS_WEBHOOK && 'true' || 'false' }}
+          SLACK_WEBHOOK: ${{ secrets.SLACK_LOGS_WEBHOOK }}
+          SLACK_CHANNEL: logs
+          SLACK_USERNAME: "${{ github.repository_owner }}"
+          SLACK_ICON: "https://github.com/${{ github.repository_owner }}.png?size=250"
+          SLACK_COLOR: "${{ contains(needs.*.result, 'success') && 'good' || 'danger' }}"
+          SLACK_TITLE: "${{ contains(needs.*.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
+          SLACK_FOOTER: "DevOps"
+          SLACK_MESSAGE: "${{ contains(needs.*.result, 'success') && 'Released:' || 'Release failed:' }} ${{github.event.head_commit.message}}"

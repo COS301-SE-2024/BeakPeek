@@ -76,23 +76,5 @@ void main() {
 
       expect(fetchAllBirds('gauteng', mockClient), throwsException);
     });
-
-    test('getNumberOfBirdsInProvinces returns numbers on success', () async {
-      when(mockClient.get(any))
-          .thenAnswer((_) async => http.Response('10', 200));
-
-      final List<int> numbers = await getNumberOfBirdsInProvinces(mockClient);
-
-      expect(numbers.length, provinces.length);
-      expect(numbers, List.generate(provinces.length, (index) => 10));
-    });
-
-    test('getNumberOfBirdsInProvinces throws an exception on non-200 response',
-        () async {
-      when(mockClient.get(any))
-          .thenAnswer((_) async => http.Response('Not Found', 404));
-
-      expect(getNumberOfBirdsInProvinces(mockClient), throwsException);
-    });
   });
 }

@@ -14,6 +14,7 @@ on:
     paths:
       - beakpeek/**
   workflow_dispatch:
+  workflow_call:
 
 defaults:
   run:

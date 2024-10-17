@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:beakpeek/config_azure.dart' as config;
+import 'package:flutter_svg/flutter_svg.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({super.key});
@@ -8,28 +8,48 @@ class BottomNavigation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
-    final itemWidth = screenWidth / 4; // Divide screen width by number of items
+
+    double itemWidth;
+    double iconSize;
+
+    if (screenWidth < 600) {
+      itemWidth = screenWidth / 5;
+      iconSize = itemWidth * 0.5;
+    } else if (screenWidth < 900) {
+      itemWidth = screenWidth / 6;
+      iconSize = itemWidth * 0.4;
+    } else {
+      itemWidth = screenWidth / 7;
+      iconSize = itemWidth * 0.35;
+    }
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        BottomNavItem('Home', 'home.png', itemWidth),
-        BottomNavItem('Map', 'map.png', itemWidth),
-        BottomNavItem('Sightings', 'sightings.png', itemWidth),
-        BottomNavItem('Profile', 'profile.png', itemWidth),
+        BottomNavItem('Home', 'home.svg', itemWidth, iconSize),
+        BottomNavItem('Map', 'map.svg', itemWidth, iconSize),
+        BottomNavItem('Sightings', 'sightings.svg', itemWidth, iconSize),
+        BottomNavItem('Achievements', 'achievements.svg', itemWidth, iconSize),
+        BottomNavItem('Profile', 'profile.svg', itemWidth, iconSize),
       ],
     );
   }
 }
 
 class BottomNavItem extends StatelessWidget {
-  const BottomNavItem(this.label, this.file, this.itemWidth, {super.key});
+  const BottomNavItem(this.label, this.file, this.itemWidth, this.iconSize,
+      {super.key});
+
   final String label;
   final String file;
   final double itemWidth;
+  final double iconSize;
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final iconFile = isDarkMode ? file.replaceAll('.svg', 'Dark.svg') : file;
+
     return SizedBox(
       width: itemWidth,
       child: Column(
@@ -37,29 +57,14 @@ class BottomNavItem extends StatelessWidget {
         children: [
           TextButton(
             onPressed: () {
-              if (config.loggedIN) {
-                context.go('/${label.toLowerCase()}');
-              } else {
-                if (label.contains('Profile')) {
-                  context.go('/');
-                } else {
-                  context.go('/${label.toLowerCase()}');
-                }
+              if (label.toLowerCase().compareTo('home') == 0) {
+                context.go('/home');
               }
+              context.goNamed(label.toLowerCase());
             },
-            child: Image.asset(
-              'assets/icons/$file',
-              width: itemWidth * 0.5,
-            ),
-          ),
-          const SizedBox(height: 1),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.black,
-              fontSize: 14,
-              fontFamily: 'SF Pro Display',
-              fontWeight: FontWeight.w500,
+            child: SvgPicture.asset(
+              'assets/icons/$iconFile',
+              width: iconSize,
             ),
           ),
         ],
