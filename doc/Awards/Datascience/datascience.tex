@@ -22,239 +22,100 @@
 
 BeakPeek was developed with a backend and frontend and will there fore have two
 seperate sub sections for installation for the frontend and backend installation
+\section{Algorithms}
+\subsection{Data Science behind the HeatMap}
 
-\section{Prerequisites}
+The HeatMap feature processes and visualizes a vast dataset, encompassing over \textbf{16,000 pentads} (geographic regions) and more than \textbf{1.2 million bird entries}. To manage such large-scale data, the app utilizes various algorithms to optimize data handling, visualization, and performance.
 
-\subsubsection{Frontend}
+\subsubsection{Dynamic Pentad Data Loading}
+Given the scale of the data, the \texttt{loadPentadData} function dynamically loads bird sighting data only as needed. Instead of attempting to load all 16,000 pentads and millions of bird entries simultaneously, the algorithm fetches data relevant to the user's selections, such as species and month, and updates the map accordingly.
 
+\textbf{Why it's effective:}
 \begin{itemize}
-    \item Flutter SDK
-    \item Android SDK Platform, API 35.0.1
-    \item Android SDK Command-line Tools
-    \item Android SDK Build-Tools
-    \item Android SDK Platform-Tools
-    \item Android Emulator
+    \item \textbf{Data Efficiency:} By fetching only necessary data based on user input, the app minimizes memory usage and processing time, allowing it to handle a database with over 1.2 million entries efficiently.
+    \item \textbf{Batch Processing:} The large dataset is processed in small increments (batches), preventing performance degradation and ensuring smooth interaction even with vast amounts of data.
 \end{itemize}
 
-The full guide on how to install of of these can be found at the URL
-<https://docs.flutter.dev/get-started/install>
+\subsubsection{Data Visualization with Color Coding}
+With a database of this size, data visualization is key to transforming raw data into actionable insights. The \texttt{getColorForReportingRate} function assigns colors to polygons based on the reporting rate (i.e., bird sighting percentages in each pentad). This color coding makes it easier to interpret patterns across thousands of pentads.
 
+\textbf{Why it's effective:}
 \begin{itemize}
-    \item Select the operating system you are using
-    \item Select android
+    \item \textbf{Data-Driven Visualization:} Transforming over a million bird entries into an intuitive color-coded map allows users to quickly understand the distribution and frequency of sightings.
+    \item \textbf{Scalable Visualization:} As users zoom in or filter the data, the map dynamically recolors the polygons to reflect updated sighting patterns, providing immediate visual feedback.
 \end{itemize}
 
-\subsubsection{Backend}
+\subsubsection{Interactive Map Filtering}
+With 16,000 pentads in the dataset, filtering is essential for managing data. The app allows users to filter bird sighting data by month, significantly reducing the dataset to a manageable size while maintaining interactivity.
 
+\textbf{Why it's effective:}
 \begin{itemize}
-    \item .Net SDK 8.0
-    \item ASP.Net Core Runtime 8.0
-    \item .Net Runtime 8.0
-    \item Docker Desktop 4.42 >=
+    \item \textbf{Time-Based Filtering:} Birds migrate seasonally, and sightings vary by month. The app allows users to focus on specific months, making the data more relevant and easier to interpret.
+    \item \textbf{Interactive Scalability:} Filtering by time and species reduces the complexity of rendering the data, allowing the system to handle large datasets efficiently and update the map in real-time.
 \end{itemize}
 
-The full guide on how to install all of the .Net dependencies can be found at
-the URL:
-<https://learn.microsoft.com/en-us/dotnet/core/install/>
+\subsubsection{Efficient Data Rendering}
+Rendering polygons for 16,000 pentads and over a million bird entries is computationally intensive. The app uses the Google Map widget to render polygons dynamically, processing bird sighting data in small batches to avoid performance bottlenecks.
 
+\textbf{Why it's effective:}
 \begin{itemize}
-    \item Then select the operating system you are using from the choices available
+    \item \textbf{Real-Time Data Processing:} The app only processes and renders polygons relevant to the current view or filter, keeping the performance optimized.
+    \item \textbf{Performance Optimization:} By processing and rendering polygons in batches, the app remains responsive, even when dealing with large datasets.
 \end{itemize}
 
-The full guide on how to install docker desktop can be found at the URL:
-<https://docs.docker.com/desktop/>
+\subsubsection{Endangered Species Alerts}
+The app also tracks bird population data, providing real-time alerts when a species is endangered. The population size is checked against thresholds, and users are alerted if the species they are viewing is at risk.
 
+\textbf{Why it's effective:}
 \begin{itemize}
-    \item Then select the operating system you are using from the choices available
+    \item \textbf{Real-Time Alerts:} The app dynamically analyzes bird population data, providing conservation insights and warnings if a species is endangered.
+    \item \textbf{Data-Driven Decision Making:} Based on the vast dataset, the app can make real-time decisions on whether to show alerts about endangered species, enhancing both the educational and conservation aspects of the feature.
 \end{itemize}
 
-\section{Installation}
+\subsubsection{Conclusion}
+These algorithms enable the HeatMap feature to efficiently manage and visualize over 1.2 million bird sightings across 16,000 pentads. By dynamically loading, filtering, and rendering data, the app delivers a responsive and scalable user experience, leveraging data science to provide actionable insights on bird populations and conservation.
 
-To start with installing BeakPeek for local development first clone the
-repository onto your local machine.
+\subsection{Data Science behind the BirdMap}
 
+The BirdMap feature handles a large dataset consisting of \textbf{16,000 pentads} (geographic regions) and over \textbf{1.2 million bird entries}. The following algorithms ensure efficient data management, visualization, and interactivity on the map.
 
-\begin{lstlisting}
-git clone https://github.com/COS301-SE-2024/BeakPeek
-\end{lstlisting}
+\subsubsection{Dynamic Location and KML Data Loading}
+The \texttt{\_getCurrentLocation} function dynamically centers the map based on the user's current location, while the \texttt{\_loadKmlData} function loads KML data that represents polygon shapes for provinces. This approach allows the app to manage large datasets and visualize geographic information in real-time.
 
-Then open the directory/folder that you cloned the repository into either with a
-file explorer or preferably with the command line of your operating system
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Data Efficiency:} By dynamically loading polygon data for specific provinces, the app minimizes the amount of data that needs to be processed, ensuring that only the relevant information is displayed.
+    \item \textbf{Scalable Processing:} Instead of attempting to load all 16,000 pentads or 1.2 million bird entries at once, the app fetches data on demand, optimizing performance and memory usage.
+\end{itemize}
 
-\subsubsection{Frontend Installation}
+\subsubsection{Data Filtering by Province and Month}
+The map provides filtering options based on province and month, allowing users to narrow down the data to specific geographic areas and time frames. This significantly reduces the amount of data the app needs to process and display.
 
-If you are only interested in using/working on the frontend of BeakPeek then you
-can clone only the frontend directory of BeakPeek by running these commmands:
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Interactive Data Reduction:} Filtering helps manage the large dataset by focusing on a specific province or month, making the data more relevant and easier to handle.
+    \item \textbf{Efficient Querying:} By querying the backend for bird sightings based on the selected filters, the app reduces the need to handle unnecessary data, improving both performance and responsiveness.
+\end{itemize}
 
-\begin{lstlisting}
-git clone -n --depth=1 --filter=tree:0 \
-    https://github.com/COS301-SE-2024/BeakPeek
-cd BeakPeek
-git sparse-checkout set --no-cone beakpeek
-git checkout
-\end{lstlisting}
+\subsubsection{Polygon-Based Data Visualization}
+The polygons representing each pentad are color-coded based on bird sighting reporting rates. This visual approach transforms the large dataset into an easy-to-understand map, where users can quickly identify areas with high or low bird sightings.
 
-\subsubsection{Backend Installation}
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Visual Representation of Data:} Color-coded polygons provide an intuitive way to understand bird sighting distribution across thousands of pentads, transforming over 1.2 million entries into a simple visual format.
+    \item \textbf{Scalable Visualization:} As the user zooms in or filters the data, polygons are updated in real-time, ensuring the map stays relevant and responsive.
+\end{itemize}
 
+\subsubsection{Real-Time Map Interaction}
+The app leverages Google Maps for real-time interaction, allowing users to zoom, pan, and click on polygons to get more information about bird sightings in specific regions. Each polygon represents a pentad, and tapping on it provides detailed data about birds in that area.
 
-If you are only interested in using/working on the backend of BeakPeek then you
-can clone only the frontend directory of BeakPeek by running the following to
-clone the entire backend which includes the test
+\textbf{Why it's effective:}
+\begin{itemize}
+    \item \textbf{Real-Time Data Updates:} Users can interact with the map to view specific bird data, with the polygons and information updating in real-time based on user actions.
+    \item \textbf{Efficient Event Handling:} The app only updates the relevant portions of the map (such as polygons) based on user input, maintaining high performance even with large datasets.
+\end{itemize}
 
-\begin{lstlisting}
-git clone -n --depth=1 --filter=tree:0 \
-    https://github.com/COS301-SE-2024/BeakPeek
-cd BeakPeek
-git sparse-checkout set --no-cone dotnet
-git checkout
-\end{lstlisting}
-
-Or if you only want the Main Api
-
-\begin{lstlisting}
-git clone -n --depth=1 --filter=tree:0 \
-    https://github.com/COS301-SE-2024/BeakPeek
-cd BeakPeek
-git sparse-checkout set --no-cone dotnet/BeakPeekApi
-git checkout
-\end{lstlisting}
-
-\section{Running the code}
-
-\subsection{Running the Frontend}
-
-You will have to add a single file filled with your own details for connecting
-to your own login provider, BeakPeek uses Azure so the following is used for the
-Azure Config which just needs to be added to the lib directory in the beakpeek
-directory. The file should be called azure_config.dart
-
-\begin{lstlisting}
-String domain = 'com.millennium.beakpeek';
-String clientID = '<clientID>';
-String issuer =
-    'https://<Issuer Url>';
-String bundlerID = 'com.millennium.beakpeek';
-String redirectURL = 'com.millennium.beakpeek://login-callback';
-String discoveryURL =
-    'https://<Url that the signing can be discovered on>';
-String scope = 'https://beakpeak.onmicrosoft.com/com.millennium.beakpeek/callback';
-
-String initialUrl = '<Initial Url>';
-String tokenUrl =
-    '<Url path that the token is retrieved from>';
-
-String accessToken = '';
-bool loggedIN = false;
-\end{lstlisting}
-
-To run the frontend you will have to make sure that there is an android phone
-installed on the android emulator and that all of the dependencies are
-installed.
-
-To ensure that all of the flutter dependencies are installed run the following
-in the './beakpeek' directory using the command line:
-
-\begin{lstlisting}
-flutter pub get
-\end{lstlisting}
-
-To verify that you have a running emulator for running the fronend run the
-following command:
-
-\begin{lstlisting}
-flutter devices
-\end{lstlisting}
-
-To run the app run the following command
-
-\begin{lstlisting}
-flutter run
-\end{lstlisting}
-
-\subsection{Running the Backend}
-
-You will have to add a single file to the './dotnet/BeakPeekApi' directory as
-usually it contains api keys, to add it you can make a new file with the
-following contents in it giving your own flickr api key where necessary
-
-\begin{lstlisting}
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
-  "FLICKR_API_KEY": "<Your Flickr Api Key"
-}
-\end{lstlisting}
-
-To run the backend there are two methods one being using docker to host the api
-and to host the database and the other is running it locally using your own
-database.
-
-\subsubsection{Using Docker}
-
-To run the api locally using docker is really simple. First ensure that docker
-and docker-compose are installed and then run the following command from the
-
-\begin{lstlisting}
-docker compose up --build
-\end{lstlisting}
-
-The api will now be accessable from 'localhost:5000' and then to view the
-swagger documents of the api go to the following link 'localhost:5000/swagger/index.html'
-
-\subsubsection{Using Your own database}
-
-To run the api locally using your own database you will first need to find the
-databases connection string which can be found in various methods depending on
-the database you are using and how it is hosted on your machine or over the
-internet.
-
-Next to connect to your database you will have to change the value of the 'DefaultConnection'
-the key value pair found in the appsettings.development.json file, to the
-connection string of your database.
-
-next to run the api you will have to use the command line in the './dotent/BeakPeekApi'
-and run the following command:
-
-\begin{lstlisting}
-dotnet run
-\end{lstlisting}
-
-This will run the dotnet api locally where it will be accessable on the 'localhost:5050'
-url and the swagger api documentation can be found at 'localhost:5050/swagger/index.html'
-
-\subsubsection{Running tests}
-
-\subsubsection{Frontend Tests}
-
-To run the tests for the flutter frontend open the command prompt in the the
-'./beakpeek' directory and run the following command:
-
-\begin{lstlisting}
-flutter test --coverage
-\end{lstlisting}
-
-\subsubsection{Backend Tests}
-
-To run the tests for dotnet backend open the command prompt in the './dotnet'
-directory and run the following command:
-
-\begin{lstlisting}
-dotnet test
-\end{lstlisting}
-
-\section{Extra notes}
-
-The database that is created when using the docker method for running the
-backend uses only 500 entries from each province for the data as the database
-has approximately 1.4M entries on it and is very difficult to run locally.
-
-To import the full data set to your own database use the endpoints that have
-been provided by the api at the urls for importing that can be found on the
-swagger documentation when running the api in development.
+\subsubsection{Conclusion}
+The BirdMap feature efficiently handles over 1.2 million bird entries and 16,000 pentads using dynamic data loading, filtering, and polygon-based visualization. These algorithms ensure that the app remains responsive, interactive, and scalable, providing users with real-time insights into bird populations and sightings.
 
 \end{document}
