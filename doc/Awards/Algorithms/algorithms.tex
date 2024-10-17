@@ -16,18 +16,11 @@
 
 \newpage
 
-
-\section{Introduction}
-
-
-BeakPeek was developed with a backend and frontend and will there fore have two
-seperate sub sections for installation for the frontend and backend installation
-\section{Algorithms}
-\subsection{Explanation of Algorithms in BirdMap}
+\section{Explanation of Algorithms in BirdMap}
 
 The BirdMap feature utilizes several key algorithms that enhance both performance and user experience. These algorithms ensure that the map is interactive, efficient, and responsive, making the app user-friendly and scalable.
 
-\subsubsection{Geolocation and Dynamic Camera Adjustment}
+\subsection{Geolocation and Dynamic Camera Adjustment}
 The \texttt{\_getCurrentLocation} function leverages the \textit{Geolocator} package to obtain the user’s real-time location. The algorithm first checks if location services are enabled and if the necessary permissions are granted. Once a valid location within the boundaries of South Africa is obtained, the camera on the map is dynamically adjusted to center on the user’s location.
 
 \textbf{Why it's effective:}
@@ -36,7 +29,7 @@ The \texttt{\_getCurrentLocation} function leverages the \textit{Geolocator} pac
     \item \textbf{User-Centric Design:} Automatically centering the map improves navigation and location-based features, enhancing the overall user experience.
 \end{itemize}
 
-\subsubsection{Dynamic KML Parsing for Polygon Data}
+\subsection{Dynamic KML Parsing for Polygon Data}
 The \texttt{\_loadKmlData} function loads KML data corresponding to the selected province. This data is parsed into polygon shapes using a custom \textit{KmlParser}, and the resulting polygons are then drawn on the map.
 
 \textbf{Why it's effective:}
@@ -45,7 +38,7 @@ The \texttt{\_loadKmlData} function loads KML data corresponding to the selected
     \item \textbf{Modularity:} By separating the parsing logic from the map itself, the design remains flexible and allows for the reuse of this functionality in other regions or datasets.
 \end{itemize}
 
-\subsubsection{Filtering by Province and Month}
+\subsection{Filtering by Province and Month}
 Users can filter the map’s content based on province and month. When a new province is selected, the camera is adjusted to focus on that province, and the corresponding KML data is reloaded. The month filter allows for further refinement of bird data shown on the map.
 
 \textbf{Why it's effective:}
@@ -54,7 +47,7 @@ Users can filter the map’s content based on province and month. When a new pro
     \item \textbf{Performance:} The dynamic reloading of only the necessary map data (polygons) helps in reducing the computational load and enhances the speed of the application.
 \end{itemize}
 
-\subsubsection{Interactive Polygon Tapping}
+\subsection{Interactive Polygon Tapping}
 The \texttt{\_onPolygonTapped} function is triggered when users tap on any polygon on the map. This action opens a modal sheet with detailed bird data for the selected region.
 
 \textbf{Why it's effective:}
@@ -63,14 +56,14 @@ The \texttt{\_onPolygonTapped} function is triggered when users tap on any polyg
     \item \textbf{Clean User Interface:} By using modal sheets, the app avoids cluttering the map with too much information, providing details on demand.
 \end{itemize}
 
-\subsubsection{Overall Design}
+\subsection{Overall Design}
 These algorithms work together to optimize both the performance and usability of the BirdMap feature. By loading data dynamically and offering interactive filters, the system is able to present relevant information to users while minimizing unnecessary resource usage. The modular and scalable design allows for easy future expansion and adaptability to other datasets or regions.
 
-\subsection{Key Algorithms in the HeatMap Feature}
+\section{Explanation of Algorithms in the HeatMap}
 
 The HeatMap feature incorporates several effective algorithms to ensure efficient display and interactivity for bird population data, with dynamic filtering by month and species. Here's an overview of the key components and why they work so well.
 
-\subsubsection{Dynamic Pentad Data Loading}
+\subsection{Dynamic Pentad Data Loading}
 The \texttt{loadPentadData} function dynamically loads bird sighting data. It retrieves population information for different species, computes polygons for regions (called pentads), and colors these polygons based on the reporting rate, i.e., how often birds are sighted in a particular region.
 
 \textbf{Why it's effective:}
@@ -79,7 +72,7 @@ The \texttt{loadPentadData} function dynamically loads bird sighting data. It re
     \item \textbf{Modularity:} The function that retrieves bird data is separate from the map rendering logic. This modular design makes the system more flexible and reusable in other parts of the app.
 \end{itemize}
 
-\subsubsection{Color Palette and Visualization}
+\subsection{Color Palette and Visualization}
 The \texttt{getColorForReportingRate} function assigns colors to the polygons based on the percentage of bird sightings (called the reporting rate). The color scale ranges from low to high, helping users quickly identify areas with high bird activity.
 
 \textbf{Why it's effective:}
@@ -88,7 +81,7 @@ The \texttt{getColorForReportingRate} function assigns colors to the polygons ba
     \item \textbf{User Engagement:} Users can customize the color palette through the \texttt{PaletteSelector}, allowing them to personalize their experience and making the app more interactive.
 \end{itemize}
 
-\subsubsection{Interactive Map Filtering}
+\subsection{Interactive Map Filtering}
 The map allows users to filter the displayed data by month. By selecting a month, users can see how bird populations change throughout the year. This is managed via a dropdown menu that updates the polygons and the displayed data accordingly.
 
 \textbf{Why it's effective:}
@@ -97,7 +90,7 @@ The map allows users to filter the displayed data by month. By selecting a month
     \item \textbf{User Flexibility:} Users can easily explore different time periods, providing a more engaging and informative experience.
 \end{itemize}
 
-\subsubsection{Efficient Map Rendering}
+\subsection{Efficient Map Rendering}
 The Google Map widget efficiently renders polygons on the map. The polygons represent pentads and are generated dynamically based on bird sighting data. To maintain performance, the polygons are processed and added to the map in small batches.
 
 \textbf{Why it's effective:}
@@ -106,7 +99,7 @@ The Google Map widget efficiently renders polygons on the map. The polygons repr
     \item \textbf{Interactivity:} The map allows for zooming and panning, ensuring users can explore the data interactively without any lag or slowdowns.
 \end{itemize}
 
-\subsubsection{Endangered Species Alerts}
+\subsection{Endangered Species Alerts}
 The app includes a dynamic alert that informs users if the bird species they are viewing is endangered. The app checks the bird's population size and displays an appropriate message, enhancing the user's awareness of conservation efforts.
 
 \textbf{Why it's effective:}
@@ -115,7 +108,7 @@ The app includes a dynamic alert that informs users if the bird species they are
     \item \textbf{Seamless Integration:} These warnings are displayed alongside the map in a way that feels natural, without interrupting the user's experience.
 \end{itemize}
 
-\subsubsection{Overall Design}
+\subsection{Overall Design}
 These algorithms ensure that the HeatMap feature is not only efficient but also interactive and user-friendly. By dynamically loading data, using intuitive visual cues, and providing interactive filtering, the app offers an engaging experience that adapts to the user's needs.
 
 \section{Explanation of Algorithms in LifeList}
