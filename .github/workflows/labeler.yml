@@ -2,9 +2,10 @@ name: 🔀 Label Pull Requests
 
 on:
   schedule:
-    - cron: "0 1 * * *"
+    - cron: "0 8-22 * * *"
 
   pull_request:
+  workflow_dispatch:
 
 jobs:
   labeler:
