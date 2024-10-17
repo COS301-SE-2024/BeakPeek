@@ -1,0 +1,54 @@
+# Add 'root' label to any root file changes
+# Quotation marks are required for the leading asterisk
+root:
+- changed-files:
+  - any-glob-to-any-file: '*'
+
+# Add 'AnyChange' label to any changes within the entire repository
+AnyChange:
+- changed-files:
+  - any-glob-to-any-file: '**'
+
+DevOps:
+- changed-files:
+    - any-glob-to-any-file:
+      - '.github/*'
+# Add 'Documentation' label to any file changes within 'docs' or 'guides' folders
+Documentation:
+- changed-files:
+  - any-glob-to-any-file:
+    - doc/*
+    - '**/*.md'
+
+Dotnet:
+  - changed-files:
+    - any-glob-to-any-file:
+      - dotnet/*
+
+BirdApi:
+- changed-files:
+  - any-glob-to-any-file:
+    - dotnet/BirdApi/*
+
+UserApi:
+- changed-files:
+  - any-glob-to-any-file:
+    - dotnet/BirdApi/*
+
+flutter:
+- changed-files:
+    - any-glob-to-any-file:
+      - beakpeek/*
+
+# Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
+feature:
+- head-branch: ['^dev/feat', 'feat']
+
+fix:
+  - head-branch: ['^dev/fix', 'fix']
+
+test:
+  - head-branch: ['^dev/test', 'test']
+
+release:
+ - base-branch: 'main'
