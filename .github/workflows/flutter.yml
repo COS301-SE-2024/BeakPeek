@@ -1,4 +1,4 @@
-name: CICD
+name: 🐦 Flutter tests and coverage
 on:
   push:
     branches:
@@ -15,6 +15,9 @@ on:
       - beakpeek/**
   workflow_dispatch:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
 
 defaults:
   run:
