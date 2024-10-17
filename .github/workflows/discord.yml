@@ -1,0 +1,55 @@
+name: 🔔 Notify discord
+
+on:
+  # push:
+  workflow_dispatch:
+  workflow_call:
+    inputs:
+      content:
+        type: string
+        required: true
+      title:
+        type: string
+        required: true
+      url:
+        type: string
+        required: true
+      description:
+        type: string
+        required: true
+      color:
+        type: number
+        required: true
+
+jobs:
+  notify:
+    name: 🔔 Send Discord notification about Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set current time and date
+        run: |
+          echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_ENV
+
+      - name: 🔔 Notify discord
+        uses: tsickert/discord-webhook@v5.3.0
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          username: Android Deploy
+          avatar-url: https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true 
+          content: ${{ inputs.content }}
+          embed-title: ${{ inputs.title }}
+          embed-url: ${{ inputs.url }}
+          embed-description:  ${{ inputs.description }}
+          embed-author-name: "github"
+          embed-author-icon-url: https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true
+          embed-author-url: "https://github.com/COS301-SE-2024/BeakPeek"
+          embed-thumbnail-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
+          embed-image-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
+          embed-footer-icon-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
+          embed-timestamp: ${{ env.NOW }}
+          embed-color: ${{ inputs.color }}
+          embed-footer-text: "DevOps"
+          wait: true
