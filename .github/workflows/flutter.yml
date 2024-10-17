@@ -42,7 +42,7 @@ jobs:
           path: |
             ~/.pub-cache
             ~/.flutter
-          keys: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
           restore-keys: |
             ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
 
@@ -53,6 +53,7 @@ jobs:
         run: flutter test --coverage
 
       - name: Upload Flutter Coverage to Codecov
+        if: ${{ !env.ACT }}
         uses: codecov/codecov-action@v3
         with:
           files: ./beakpeek/coverage/lcov.info

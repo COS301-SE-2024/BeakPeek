@@ -18,7 +18,8 @@ jobs:
   build:
     name: 🏛️ Build UserApi
     runs-on: ubuntu-latest
-
+    outputs:
+      artifact_url: ${{ steps.artifact-upload-step.outputs.artifact-url}}
     steps:
       - uses: actions/checkout@v4
 
@@ -39,6 +40,7 @@ jobs:
         run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/UserApi ./dotnet/UserApi/UserApi/UserApi.csproj
 
       - name: Upload artifact for deployment job
+        id: artifact-upload-step
         uses: actions/upload-artifact@v4
         with:
           name: .net-app
@@ -59,7 +61,7 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: .net-app
-      
+
       - name: Login to Azure
         uses: azure/login@v2
         with:
@@ -74,4 +76,16 @@ jobs:
           app-name: 'BeakPeekUserApi'
           slot-name: 'Production'
           package: .
-          
+
+  notify_discord:
+    name: 🔔 Send Discord notification about deployment
+    needs: [ deploy, build]
+    if: ${{ !cancelled() && (success() || failure()) }}
+    uses: ./.github/workflows/discord.yml
+    with:
+      content: "${{ contains(needs.deploy.result, 'success') && 'Successfully deployed' || 'Error during deployment of' }} ${{ github.ref_name }} for Azure"
+      title: "${{ contains(needs.deploy.result, 'success') && 'Successfully deployed' || 'Error during deployment of' }} ${{ github.ref_name }} for Azure"
+      url: ${{ needs.build.outputs.artifact_url }}
+      description: "${{ contains(needs.deploy.result, 'success') && 'Deployed:' || 'Deployment failed:' }} ${{ github.event.head_commit.message }}"
+      color: ${{ contains(needs.deploy.result, 'success') && 65280 || 16711680 }}
+    secrets: inherit

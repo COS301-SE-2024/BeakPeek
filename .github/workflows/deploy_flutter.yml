@@ -3,10 +3,11 @@ name: 📢 Publish Android release
 on:
   release:
     types: [published]
-  push:
-    branches:
-      - 'dev/feat/devops'
+  # push:
+  #   branches:
+  #     - 'dev/feat/devops'
   workflow_dispatch:
+  workflow_call:
 
 env:
   FLUTTER_CHANNEL: "stable"
@@ -103,43 +104,15 @@ jobs:
           path: beakpeek/build/app/outputs/bundle/release/app-release.aab
 
   notify_discord:
-    needs: [build_android]
     name: 🔔 Send Discord notification about Build
-    runs-on: ubuntu-latest
-    env:
-      ARTIFACT_URL: ${{ needs.build_android.outputs.artifact_url}}
-    steps:
-      
-      - name: Checkout
-        uses: actions/checkout@v4
+    needs: [build_android]
+    if: ${{ !cancelled() && (success() || failure()) }}
+    uses: ./.github/workflows/discord.yml
+    with:
+      content: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
+      title: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
+      url: ${{ needs.build_android.outputs.artifact_url }}
+      description: "${{ contains(needs.build_android.result, 'success') && 'Released:' || 'Release failed:' }} ${{ github.event.head_commit.message }}"
+      color: ${{ contains(needs.build_android.result, 'success') && 65280 || 16711680 }}
+    secrets: inherit
 
-      - name: Set current time and date
-        run: |
-          echo "NOW=$(date +'%Y-%m-%dT%H:%M:%S%z')" >> $GITHUB_ENV
-
-      - name: List files
-        run: |
-          echo $(ls)
-          echo "$NOW"
-
-      - name: 🔔 Notify discord
-        uses: tsickert/discord-webhook@v5.3.0
-        if: ${{ !cancelled() && (success() || failure()) }}
-        with:
-          webhook-url: ${{ secrets.WEBHOOK_URL }}
-          username: Android Deploy
-          avatar-url: https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true 
-          content: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
-          embed-title: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
-          embed-url: ${{env.ARTIFACT_URL}}
-          embed-description:  "${{ contains(needs.build_android.result, 'success') && 'Released:' || 'Release failed:' }} ${{ github.event.head_commit.message }}"
-          embed-author-name: "github"
-          embed-author-icon-url: https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true
-          embed-author-url: "https://github.com/COS301-SE-2024/BeakPeek"
-          embed-thumbnail-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
-          embed-image-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
-          embed-footer-icon-url: "https://github.com/COS301-SE-2024/BeakPeek/blob/main/res/Logo.png?raw=true"
-          embed-timestamp: ${{ env.NOW }}
-          embed-color: ${{ contains(needs.build_android.result, 'success') && 65280 || 16711680 }}
-          embed-footer-text: "DevOps"
-          wait: true

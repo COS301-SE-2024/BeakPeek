@@ -26,15 +26,15 @@ jobs:
     name: 🏛️ Build BirdApi
     runs-on: ubuntu-latest
     needs: [ test_dotnet ]
-
+    outputs:
+      artifact_url: ${{ steps.artifact-upload-step.outputs.artifact-url}}
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
-          include-prerelease: true
 
       - name: Get App Setting
         run: |
@@ -55,7 +55,8 @@ jobs:
           cp -r ./res/species_list/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species_list/
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
+        id: artifact-upload-step
         with:
           name: .net-app
           path: ${{env.DOTNET_ROOT}}/BeakPeekApi
@@ -72,7 +73,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: .net-app
       
@@ -90,4 +91,16 @@ jobs:
           app-name: 'BeakPeekBirdApi'
           slot-name: 'Production'
           package: .
-          
+
+  notify_discord:
+    name: 🔔 Send Discord notification about deployment
+    needs: [deploy, build]
+    if: ${{ !cancelled() && (success() || failure()) }}
+    uses: ./.github/workflows/discord.yml
+    with:
+      content: "${{ contains(needs.deploy.result, 'success') && 'Successfully deployed' || 'Error during deployment of' }} ${{ github.ref_name }} for Azure"
+      title: "${{ contains(needs.deploy.result, 'success') && 'Successfully deployed' || 'Error during deployment of' }} ${{ github.ref_name }} for Azure"
+      url: ${{ needs.build.outputs.artifact_url }}
+      description: "${{ contains(needs.deploy.result, 'success') && 'Deployed:' || 'Deployment failed:' }} ${{ github.event.head_commit.message }}"
+      color: ${{ contains(needs.deploy.result, 'success') && 65280 || 16711680 }}
+    secrets: inherit

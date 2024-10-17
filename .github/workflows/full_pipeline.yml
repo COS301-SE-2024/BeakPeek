@@ -1,0 +1,37 @@
+name: 🚀 Run full CICD pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - dev/feat/devops
+  workflow_dispatch:
+
+jobs:
+  flutter:
+    name: 🐦 Flutter pipeline
+    uses: ./.github/workflows/deploy_flutter.yml
+    secrets: inherit
+
+  birdapi:
+    name: 🦜 Dotnet BirdApi pipeline
+    uses: ./.github/workflows/deploy_dotnet.yml
+    secrets: inherit
+
+  userapi:
+    name: 🪪 Dotnet UserApi pipeline
+    uses: ./.github/workflows/deploy_userapi.yml
+    secrets: inherit
+
+  notify_discord:
+    name: 🔔 Notify Discord
+    needs: [flutter, userapi, birdapi]
+    uses: ./.github/workflows/discord.yml
+    with:
+      content: "All Workflows Passed"
+      title: "Full Pipeline Run"
+      url: "https://github.com/COS301-SE-2024/BeakPeek"
+      description: "Run all pipelines"
+      color: 111111
+    secrets: inherit
+
