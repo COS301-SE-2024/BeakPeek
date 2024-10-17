@@ -1,7 +1,8 @@
 name: 🚀 Deploy Dotnet UserApi
 
-# env:
-  # DOTNET_ROOT: ./dotnet/UserApi/UserApi
+env:
+  DOTNET_ROOT: .
+
 on:
   push:
     branches:

@@ -1,4 +1,4 @@
-name: 🚀 Deploy BeakPeekBirdApi
+name: 🚀 Deploy Dotnet BirdApi
 
 env:
   # DOTNET_ROOT: ./dotnet/BeakPeekApi/
