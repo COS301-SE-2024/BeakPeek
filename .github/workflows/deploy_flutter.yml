@@ -1,0 +1,128 @@
+name: 📢 Publish Android release
+
+on:
+  release:
+    types: [published]
+  # push:
+  #   branches:
+  #     - 'dev/feat/devops'
+  workflow_dispatch:
+  workflow_call:
+
+env:
+  FLUTTER_CHANNEL: "stable"
+  RUBY_VERSION: "3.2.2"
+
+jobs:
+  test_android:
+    name: 🧪 Test Flutter
+    uses: ./.github/workflows/flutter.yml
+    secrets: inherit
+
+  build_android:
+    name: 🏛️ Build Android
+    needs: [test_android]
+    runs-on: ubuntu-latest
+    defaults:
+          run:
+            working-directory: ./beakpeek
+    timeout-minutes: 20
+    outputs:
+      artifact_url: ${{ steps.artifact-upload-step.outputs.artifact-url}}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        if: ${{ env.ACT }}
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Setup Android SDK
+        if: ${{ env.ACT }}
+        uses: android-actions/setup-android@v3
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ env.RUBY_VERSION }}
+          bundler-cache: true
+          working-directory: './beakpeek/android'
+
+      - name: Run Flutter tasks
+        uses: subosito/flutter-action@v2.16.0
+        with:
+          channel: stable
+          cache: true
+          pub-cache-key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+
+      - name: Create google_service_account.json
+        run: |
+          pwd
+          echo "${{ secrets.FIREBASE_SERVICE_ACCOUNT_BASE64 }}" | base64 --decode > google_service_account.json
+
+      - name: Create key.jks
+        run: |
+          pwd
+          echo "${{ secrets.ANDROID_KEYSTORE_FILE_BASE64 }}" | base64 --decode > android/app/upload-keystore.jks
+
+      - name: Create local.properties
+        run: |
+          pwd
+          echo "${{ secrets.ANDROID_LOCAL_PROPERTIES_FILE_BASE64 }}" | base64 --decode > android/local.properties
+
+      - name: Create key.properties
+        run: |
+          echo $PATH
+          pwd
+          cat <<EOF > android/key.properties
+          storePassword=${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          keyPassword=${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+          keyAlias=upload
+          storeFile=\\\upload-keystore.jks
+          EOF
+        env:
+          ANDROID_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+
+      # - name: Cache Flutter dependancies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       ~/.pub-cache
+      #       ~/.flutter
+      #     key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+
+      - name: Build and Release to Google Play
+        uses: maierj/fastlane-action@v3.1.0
+        with:
+          # lane: 'release_play_store'
+          lane: 'build'
+          subdirectory: ./beakpeek/android
+          options: '{ "version_number": "${{ github.ref_name }}" }'
+        env:
+          APP_PACKAGE_NAME: ${{ secrets.APP_PACKAGE_NAME }}
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        id: artifact-upload-step
+        with:
+          name: app-release
+          path: beakpeek/build/app/outputs/bundle/release/app-release.aab
+
+  notify_discord:
+    name: 🔔 Send Discord notification about Build
+    needs: [build_android]
+    if: ${{ !cancelled() && (success() || failure()) }}
+    uses: ./.github/workflows/discord.yml
+    with:
+      content: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
+      title: "${{ contains(needs.build_android.result, 'success') && 'Successfully released' || 'Error during release of' }} ${{ github.ref_name }} for Android to Play Store"
+      url: ${{ needs.build_android.outputs.artifact_url }}
+      description: "${{ contains(needs.build_android.result, 'success') && 'Released:' || 'Release failed:' }} ${{ github.event.head_commit.message }}"
+      color: ${{ contains(needs.build_android.result, 'success') && 65280 || 16711680 }}
+    secrets: inherit
+

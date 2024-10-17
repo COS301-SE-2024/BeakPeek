@@ -1,4 +1,4 @@
-name: Test Dotnet and Upload Code Coverage
+name: 🥅 Test Dotnet and Upload Code Coverage
 
 on:
   push:
@@ -16,9 +16,13 @@ on:
       - dotnet/BirdApi/**
   workflow_dispatch:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
 
 jobs:
   dotnet-codecov:
+    name: 🧪 Test and Upload dotnet
     runs-on: ubuntu-latest
     
     env:

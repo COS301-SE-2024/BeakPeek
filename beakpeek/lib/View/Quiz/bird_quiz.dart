@@ -57,6 +57,7 @@ class _BirdQuizState extends State<BirdQuiz>
       _controller.forward(); // Start the timer
       try {
         _quizManager.preloadQuizzes(1, context);
+        // ignore: empty_catches
       } catch (e) {}
     });
   }
@@ -102,107 +103,153 @@ class _BirdQuizState extends State<BirdQuiz>
 
     showDialog(
       context: context,
-      builder: (context) {
+      builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: AppColors.popupColor(context),
+          backgroundColor: AppColors.backgroundColor(context),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
-          title: Center(
-            child: Text(
-              'Game Over!',
-              style: GlobalStyles.smallHeadingPrimary(context),
-            ),
-          ),
+          contentPadding: const EdgeInsets.all(0), // Remove default padding
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              RichText(
-                text: TextSpan(
-                  style: GlobalStyles.contentPrimary(context),
-                  children: [
-                    const TextSpan(text: 'Correct answers in a row: '),
-                    TextSpan(
-                      text: '$correctAnswersInRow',
-                      style: GlobalStyles.contentTertiary(context)
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
+              // Add a back button at the top left
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back,
+                        color: AppColors.iconColor(context)),
+                    onPressed: () {
+                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop(); // Exit the quiz
+                    },
+                  ), // Spacer to align content
+                ],
               ),
-              const SizedBox(height: 10),
-              RichText(
-                text: TextSpan(
-                  style: GlobalStyles.contentPrimary(context),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 24.0),
+                child: Column(
                   children: [
-                    const TextSpan(text: 'High score: '),
-                    TextSpan(
-                      text: '${user.highscore}',
-                      style: GlobalStyles.contentTertiary(context)
-                          .copyWith(fontWeight: FontWeight.bold),
+                    const Icon(
+                      Icons.sentiment_dissatisfied,
+                      size: 64,
+                      color: Colors.redAccent,
                     ),
+                    const SizedBox(height: 10),
+                    Text(
+                      'Game Over!',
+                      style: GlobalStyles.smallHeadingPrimary(context).copyWith(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 20),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: GlobalStyles.contentPrimary(context),
+                        children: [
+                          const TextSpan(text: 'Correct answers in a row: '),
+                          TextSpan(
+                            text: '$correctAnswersInRow',
+                            style:
+                                GlobalStyles.contentTertiary(context).copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: GlobalStyles.contentPrimary(context),
+                        children: [
+                          const TextSpan(text: 'High score: '),
+                          TextSpan(
+                            text: '${user.highscore}',
+                            style:
+                                GlobalStyles.contentTertiary(context).copyWith(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(height: 30),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            setState(() {
+                              correctAnswersInRow = 0;
+                            });
+                            Navigator.of(context).pop();
+                            loadNextQuiz();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 24.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            backgroundColor: AppColors.popupColorDark,
+                          ),
+                          icon: Icon(Icons.refresh,
+                              color: AppColors.iconColorDark),
+                          label: Text(
+                            'Try Again',
+                            style: GlobalStyles.smallContent(context).copyWith(
+                              color: AppColors.primaryButtonTextColor(context),
+                            ),
+                          ),
+                        ),
+                        SizedBox(width: 10),
+                        ElevatedButton.icon(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Scaffold(
+                                  body: BirdPage(
+                                    id: currentQuiz!.correctBird.id,
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 12.0, horizontal: 24.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0),
+                            ),
+                            backgroundColor: AppColors.tertiaryColor(context),
+                          ),
+                          icon: Icon(Icons.visibility,
+                              color: AppColors.iconColor(context)),
+                          label: Text(
+                            'View Bird',
+                            style: GlobalStyles.smallContent(context).copyWith(
+                              color: AppColors.textColor(context),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 30),
                   ],
                 ),
               ),
             ],
           ),
-          actions: [
-            // Align(
-            TextButton(
-              onPressed: () {
-                setState(() {
-                  correctAnswersInRow = 0;
-                });
-                Navigator.of(context).pop();
-                loadNextQuiz();
-              },
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 12.0, horizontal: 24.0),
-                backgroundColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              child: Text(
-                'Try Again',
-                style: GlobalStyles.smallContent(context),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                // setState(() {
-                //   correctAnswersInRow = 0;
-                // });
-                // Navigator.of(context).pop();
-                // loadNextQuiz();
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => Scaffold(
-                      body: BirdPage(
-                        id: currentQuiz!.correctBird.id,
-                      ),
-                    ),
-                  ),
-                );
-              },
-              style: TextButton.styleFrom(
-                padding: const EdgeInsets.symmetric(
-                    vertical: 12.0, horizontal: 24.0),
-                backgroundColor: Colors.transparent,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-              ),
-              child: Text(
-                'View Bird',
-                style: GlobalStyles.smallContent(context),
-              ),
-            ),
-            // ),
-          ],
         );
       },
     );
