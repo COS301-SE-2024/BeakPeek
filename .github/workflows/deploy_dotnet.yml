@@ -36,11 +36,18 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
+          cache: true
+          cache-dependency-path: ./dotnet/BirdApi/BeakPeekApi/packages.lock.json
 
       - name: Get App Setting
         run: |
           cd ./dotnet/BirdApi/BeakPeekApi
           cp ../../../appsettings.json .
+
+      - name: Restore Dependencies
+        run: |
+          cd ./dotnet/BirdApi/BeakPeekApi
+          dotnet restore --locked-mode
 
       - name: Build with dotnet
         run: dotnet build --configuration Release ./dotnet/BirdApi/BeakPeekApi/BeakPeekApi.csproj
@@ -59,7 +66,7 @@ jobs:
         uses: actions/upload-artifact@v4
         id: artifact-upload-step
         with:
-          name: .net-app
+          name: dotnet-birdapi
           path: ${{env.DOTNET_ROOT}}/BeakPeekApi
 
   deploy:
@@ -76,8 +83,8 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
-      
+          name: dotnet-birdapi
+
       - name: Login to Azure
         uses: azure/login@v1
         with:

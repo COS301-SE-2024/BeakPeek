@@ -54,9 +54,9 @@ jobs:
       - name: Run Flutter tasks
         uses: subosito/flutter-action@v2.16.0
         with:
-          flutter-version-file: 'beakpeek/pubspec.yaml'
-          channel: ${{ env.FLUTTER_CHANNEL }}
+          channel: stable
           cache: true
+          pub-cache-key: ${{hashFiles('**/pubspec.yaml')}} 
 
       - name: Create google_service_account.json
         run: |
@@ -85,6 +85,16 @@ jobs:
           EOF
         env:
           ANDROID_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
+
+      - name: Cache Flutter dependancies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            ~/.flutter
+          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
 
       - name: Build and Release to Google Play
         uses: maierj/fastlane-action@v3.1.0

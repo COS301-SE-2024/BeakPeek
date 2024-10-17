@@ -28,11 +28,18 @@ jobs:
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
+          cache: true
+          cache-dependency-path: ./dotnet/UserApi/UserApi/packages.lock.json
 
       - name: Get App Setting
         run: |
           cd ./dotnet/UserApi/UserApi
           cp ../../../appsettings.json .
+
+      - name: Restore Dependencies
+        run: |
+          cd ./dotnet/UserApi/UserApi
+          dotnet restore --locked-mode
 
       - name: Build with dotnet
         run: dotnet build --configuration Release ./dotnet/UserApi/UserApi/UserApi.csproj
@@ -44,7 +51,7 @@ jobs:
         id: artifact-upload-step
         uses: actions/upload-artifact@v4
         with:
-          name: .net-app
+          name: dotnet-userapi
           path: ${{env.DOTNET_ROOT}}/UserApi
 
   deploy:
@@ -61,7 +68,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v4
         with:
-          name: .net-app
+          name: dotnet-userapi
 
       - name: Login to Azure
         uses: azure/login@v2
