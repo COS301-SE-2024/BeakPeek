@@ -19,6 +19,8 @@ jobs:
   build:
     name: 🏛️ Build UserApi
     runs-on: ubuntu-latest
+    env:
+        NUGET_PACKAGES: ${{ github.workspace }}/.nuget/userapi/packages
     outputs:
       artifact_url: ${{ steps.artifact-upload-step.outputs.artifact-url}}
     steps:

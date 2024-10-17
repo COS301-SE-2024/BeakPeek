@@ -56,7 +56,7 @@ jobs:
         with:
           channel: stable
           cache: true
-          pub-cache-key: ${{hashFiles('**/pubspec.yaml')}} 
+          pub-cache-key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
 
       - name: Create google_service_account.json
         run: |
@@ -86,15 +86,15 @@ jobs:
         env:
           ANDROID_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
 
-      - name: Cache Flutter dependancies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-            ~/.flutter
-          key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+      # - name: Cache Flutter dependancies
+      #   uses: actions/cache@v3
+      #   with:
+      #     path: |
+      #       ~/.pub-cache
+      #       ~/.flutter
+      #     key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
 
       - name: Build and Release to Google Play
         uses: maierj/fastlane-action@v3.1.0
