@@ -15,6 +15,7 @@ on:
       - 'beakpeek/**'
       - 'dotnet/UserApi/**'
   workflow_dispatch:
+  workflow_call:
 
 jobs:
   test_dotnet:
