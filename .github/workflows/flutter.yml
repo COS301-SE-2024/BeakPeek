@@ -25,6 +25,7 @@ defaults:
 
 jobs:
   Run-Flutter-Tests:
+    name: 🧪 Test flutter
     runs-on: ubuntu-latest
     
     steps:

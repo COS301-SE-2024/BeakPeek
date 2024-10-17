@@ -20,7 +20,7 @@ jobs:
 
   build_android:
     name: 🏛️ Build Android
-    needs: [test]
+    needs: [test_android]
     runs-on: ubuntu-latest
     defaults:
           run:
