@@ -17,6 +17,7 @@ else
 fi
 
 BIRDS=birds.csv
+IS_TEST=false
 if [[ -z "$3" ]]; then
     echo "Getting birds"
     curl -L -o birds.csv "https://api.birdmap.africa/sabap2/v2/coverage/country/southafrica/species?format=csv"
@@ -45,14 +46,14 @@ do
     echo "Downloading ${line} CSV"
 
     if curl -L "$FULL_URL" -o ${line}.csv  ; then
-    if [[ IS_TEST ]]; then
-        awk '{FS=","} {print } NR==10{exit}' ${line}.csv > ${line}_short.csv
-        cat ${line}_short.csv
-    fi
-    curl -X 'POST' \
-        "$URL/api/Import/import?province=${line}" \
-        -H 'accept: */*' \
-        -H 'Content-Type: multipart/form-data' \
-        -F "file=@${line}_short.csv;type=text/csv"
+        if [[ -z $IS_TEST ]]; then
+            awk '{FS=","} {print } NR==10{exit}' ${line}.csv > ${line}_short.csv
+            cat ${line}_short.csv
+        fi
+        curl -X 'POST' \
+            "$URL/api/Import/import?province=${line}" \
+            -H 'accept: */*' \
+            -H 'Content-Type: multipart/form-data' \
+            -F "file=@${line}.csv;type=text/csv"
     fi
 done < "$PROVINCE_LIST"

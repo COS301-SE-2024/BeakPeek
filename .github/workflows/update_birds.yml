@@ -5,6 +5,9 @@ on:
     - cron: "0 8 * * *"
   workflow_dispatch:
   workflow_call:
+  push:
+    branches:
+      - dev/fix/auto_import
 
 jobs:
   update_data:
