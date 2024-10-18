@@ -108,10 +108,13 @@ jobs:
         with:
           name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
 
+      - name: test
+        run: echo ${{ steps.has-coverage.outputs.exists }}
+
       - name: Get Flutter Code Coverage
+        if: ${{ steps.has-coverage.outputs.exists == false }}
         uses: actions/download-artifact@v4
         id: get-coverage
-        if: ${{ steps.has-coverage.outputs.exists }}
         with:
           name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
 
