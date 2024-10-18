@@ -114,3 +114,9 @@ jobs:
       description: "${{ contains(needs.deploy.result, 'success') && 'Deployed:' || 'Deployment failed:' }} ${{ github.event.head_commit.message }}"
       color: ${{ contains(needs.deploy.result, 'success') && 65280 || 16711680 }}
     secrets: inherit
+
+  update_birds:
+    needs: [deploy]
+    name: 🦚 Update production birds
+    uses: ./.github/workflows/update_birds.yml
+    secrets: inherit

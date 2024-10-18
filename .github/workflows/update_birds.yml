@@ -1,0 +1,45 @@
+name: 🦜 Update Bird data
+
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+  workflow_call:
+
+jobs:
+  update_data:
+    name: 🦜 Get bird data
+    outputs:
+      artifact_url: ${{ steps.artifact-upload-step.outputs.artifact-url}}
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - name: 🪽 Run auto import script
+      if: ${{ !env.ACT }}
+      run: ./scripts/bash/auto_import.sh ./scripts/bash/provinces.txt ${{ secrets.DATA_URL }}
+
+    - name: 🧪 Test auto update script
+      if: ${{ env.ACT }}
+      run: ./scripts/bash/auto_import.sh ./scripts/bash/provinces.txt ${{ secrets.DATA_URL }} ./res/species_list/south_africa.csv
+
+    - uses: actions/upload-artifact@v4
+      id: artifact-upload-step
+      with:
+        name: bird-data
+        path: |
+            *.csv
+
+  notify_discord:
+    name: 🔔 Send Discord notification about deployment
+    needs: [update_data]
+    if: ${{ !cancelled() && (success() || failure()) }}
+    uses: ./.github/workflows/discord.yml
+    with:
+      content: "${{ contains(needs.update_data.result, 'success') && 'Successfully updated bird data' || 'Error during update of' }} ${{ github.ref_name }} for bird data"
+      title: "${{ contains(needs.update_data.result, 'success') && 'Successfully updated bird data' || 'Error during update of' }} ${{ github.ref_name }} for bird data"
+      url: ${{ needs.update_data.outputs.artifact_url }}
+      description: "${{ contains(needs.update_data.result, 'success') && 'Updated:' || 'Update failed:' }} ${{ github.event.head_commit.message }}"
+      color: ${{ contains(needs.update_data.result, 'success') && 65280 || 16711680 }}
+    secrets: inherit
