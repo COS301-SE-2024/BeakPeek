@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 
 class BirdMap extends StatefulWidget {
   const BirdMap({super.key, this.testController});
@@ -378,7 +379,8 @@ class BirdMapState extends State<BirdMap> {
       context: context,
       isScrollControlled: true,
       builder: (context) {
-        return BirdSheet(pentadId: id, month: _selectedMonth);
+        return BirdSheet(
+            pentadId: id, month: _selectedMonth, client: http.Client());
       },
     );
   }
