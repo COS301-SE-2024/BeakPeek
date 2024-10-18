@@ -1,12 +1,16 @@
 name: 🐦 Flutter tests and coverage
+
 on:
   push:
     branches:
       - main
       - development
       - 'dev/test/**'
+      - '**devops**'
     paths:
       - beakpeek/**
+      - .github/workflows/flutter.yml
+
   pull_request:
     branches:
      - main
@@ -18,19 +22,41 @@ on:
     secrets:
       CODECOV_TOKEN:
         required: true
-
-defaults:
-  run:
-    working-directory: ./beakpeek
+    inputs:
+      upload-coverage:
+        type: boolean
+        default: false
 
 jobs:
-  Run-Flutter-Tests:
-    name: 🧪 Test flutter
+  get-coverage:
+    if: ${{ inputs.upload-coverage }}
+    name: 📄 Generate Coverage If not there
     runs-on: ubuntu-latest
-    
+    outputs:
+      generate-coverage: ${{ steps.result.outputs.exists }}
+
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
+    - uses: actions/checkout@v4
+    - name: check if artifact already exists
+      uses: softwareforgood/check-artifact-v4-existence@v0.3.0
+      id: check-exists
+      with:
+        name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
+
+    - name: set output
+      id: result
+      run: |
+        echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
+
+  flutter-tests-coverage:
+    needs: [ get-coverage ]
+    if: ${{ always() && ( !inputs.upload-coverage || !needs.get-coverage.outputs.generate-coverage ) }}
+    name: 🧪 Run tests and upload coverage
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2.16.0
         with:
@@ -39,16 +65,35 @@ jobs:
           pub-cache-key: ${{hashFiles('**/pubspec.yaml')}} 
 
       - name: Install Flutter dependecies
-        run: flutter pub get
+        run: cd beakpeek && flutter pub get
 
       - name: Run Flutter tests
-        run: flutter test --coverage
+        run: cd beakpeek && flutter test --coverage
+
+      - name: Cache Flutter Code Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
+          path: ./beakpeek/coverage/lcov.info
+
+      - name: check if artifact already exists
+        uses: softwareforgood/check-artifact-v4-existence@v0.3.0
+        id: has-coverage
+        with:
+          name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
+      
+      - name: Get Dotnet Code Coverage
+        if: ${{ steps.has-coverage.outputs.exists == false }}
+        uses: actions/download-artifact@v4
+        id: get-coverage
+        with:
+          name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
 
       - name: Upload Flutter Coverage to Codecov
-        if: ${{ !env.ACT }}
-        uses: codecov/codecov-action@v3
+        if: ${{ !env.ACT && !inputs.upload-coverage }}
+        uses: codecov/codecov-action@v4
         with:
-          files: ./beakpeek/coverage/lcov.info
+          files: ./beakpeek/coverage/lcov.info, ./coverage.cobertura.xml
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
           verbose: true
