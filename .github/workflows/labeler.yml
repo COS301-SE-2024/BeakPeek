@@ -1,0 +1,17 @@
+name: 🔀 Label Pull Requests
+
+on:
+  schedule:
+    - cron: "0 8-23 * * *"
+
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/labeler@v5

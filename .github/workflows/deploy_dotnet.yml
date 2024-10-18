@@ -1,7 +1,4 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Deploy BeakPeekBirdApi
+name: 🚀 Deploy Dotnet BirdApi
 
 env:
   # DOTNET_ROOT: ./dotnet/BeakPeekApi/
@@ -12,34 +9,44 @@ on:
     branches:
       - main
       - development
-    paths-ignore:
-      - 'doc/**'
-      - 'res/**'
-      - 'beakpeek/**'
-      - 'dotnet/UserApi/**'
+    paths:
+      - 'dotnet/BirdApi/**'
   workflow_dispatch:
+  workflow_call:
 
 jobs:
-  test:
+  test_dotnet:
+    name: 🧪 Test dotnet BirdApi
     uses: ./.github/workflows/dotnet.yml
+    secrets: inherit
 
   build:
+    name: 🏛️ Build BirdApi
     runs-on: ubuntu-latest
-    # needs: test
-
+    needs: [ test_dotnet ]
+    env:
+        NUGET_PACKAGES: ${{ github.workspace }}/.nuget/birdapi/packages
+    outputs:
+      artifact_url: ${{ steps.artifact-upload-step.outputs.artifact-url}}
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
+        uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '8.x'
-          include-prerelease: true
+          cache: true
+          cache-dependency-path: ./dotnet/BirdApi/BeakPeekApi/packages.lock.json
 
       - name: Get App Setting
         run: |
           cd ./dotnet/BirdApi/BeakPeekApi
           cp ../../../appsettings.json .
+
+      - name: Restore Dependencies
+        run: |
+          cd ./dotnet/BirdApi/BeakPeekApi
+          dotnet restore --locked-mode
 
       - name: Build with dotnet
         run: dotnet build --configuration Release ./dotnet/BirdApi/BeakPeekApi/BeakPeekApi.csproj
@@ -55,14 +62,16 @@ jobs:
           cp -r ./res/species_list/* ${{env.DOTNET_ROOT}}/BeakPeekApi/res/species_list/
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
+        id: artifact-upload-step
         with:
-          name: .net-app
+          name: dotnet-birdapi
           path: ${{env.DOTNET_ROOT}}/BeakPeekApi
 
   deploy:
     runs-on: ubuntu-latest
-    needs: build
+    name: 🚀 Deploy BirdApi
+    needs: [ build ]
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -71,10 +80,10 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          name: .net-app
-      
+          name: dotnet-birdapi
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
@@ -89,4 +98,22 @@ jobs:
           app-name: 'BeakPeekBirdApi'
           slot-name: 'Production'
           package: .
-          
+
+  notify_discord:
+    name: 🔔 Send Discord notification about deployment
+    needs: [deploy, build]
+    if: ${{ !cancelled() && (success() || failure()) }}
+    uses: ./.github/workflows/discord.yml
+    with:
+      content: "${{ contains(needs.deploy.result, 'success') && 'Successfully deployed' || 'Error during deployment of' }} ${{ github.ref_name }} for Azure"
+      title: "${{ contains(needs.deploy.result, 'success') && 'Successfully deployed' || 'Error during deployment of' }} ${{ github.ref_name }} for Azure"
+      url: ${{ needs.build.outputs.artifact_url }}
+      description: "${{ contains(needs.deploy.result, 'success') && 'Deployed:' || 'Deployment failed:' }} ${{ github.event.head_commit.message }}"
+      color: ${{ contains(needs.deploy.result, 'success') && 65280 || 16711680 }}
+    secrets: inherit
+
+  update_birds:
+    needs: [deploy]
+    name: 🦚 Update production birds
+    uses: ./.github/workflows/update_birds.yml
+    secrets: inherit
