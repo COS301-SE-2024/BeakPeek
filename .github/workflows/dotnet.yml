@@ -27,10 +27,6 @@ on:
         type: boolean
         default: false
 
-concurrency:
-  group: ${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   get-coverage:
     if: ${{ inputs.upload-coverage }}

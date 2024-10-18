@@ -17,10 +17,6 @@ on:
 
 # Don't forget that "!" is used to check if something is set
 
-# concurrency:
-#   group: ${{ github.ref }}
-#   cancel-in-progress: false
-
 jobs:
   flutter-coverage:
     name: 🦚 Flutter Coverage
