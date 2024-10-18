@@ -19,12 +19,14 @@ concurrency:
   cancel-in-progress: true
 jobs:
   flutter-coverage:
+    name: 🦚 Flutter Coverage
     uses: ./.github/workflows/flutter.yml
     with: 
       upload-coverage: true # this has to be true to not upload coverage
     secrets: inherit
 
   dotnet-coverage:
+    name: 🥅 Dotnet Coverage
     uses: ./.github/workflows/dotnet.yml
     with:
       upload-coverage: true
