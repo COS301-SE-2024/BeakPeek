@@ -27,9 +27,9 @@ on:
         type: boolean
         default: false
 
-concurrency:
-  group: coverage-${{ github.ref }}
-  cancel-in-progress: false
+# concurrency:
+#   group: coverage-${{ github.ref }}
+#   cancel-in-progress: false
 
 jobs:
   get-coverage:
@@ -52,16 +52,16 @@ jobs:
       run: |
           echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
 
-  get-flutter-coverage:
-    if: ${{ !inputs.upload-coverage }}
-    name: 📄 Get Flutter coverage
-    uses: ./.github/workflows/flutter.yml 
-    with:
-      upload-coverage: true
-    secrets: inherit
+  # get-flutter-coverage:
+  #   if: ${{ !inputs.upload-coverage }}
+  #   name: 📄 Get Flutter coverage
+  #   uses: ./.github/workflows/flutter.yml 
+  #   with:
+  #     upload-coverage: true
+  #   secrets: inherit
 
   dotnet-tests-coverage:
-    needs: [ get-coverage, get-flutter-coverage ]
+    needs: [ get-coverage ]
     if: ${{ always() && ( !inputs.upload-coverage || !needs.get-coverage.outputs.generate-coverage ) }}
     name: 🧪 Run tests and upload coverage
     runs-on: ubuntu-latest
@@ -102,9 +102,15 @@ jobs:
           name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
           path: ./dotnet/BirdApi/BeakPeekApi.Tests/coverage.cobertura.xml
 
+      - name: check if artifact already exists
+        uses: softwareforgood/check-artifact-v4-existence@v0.3.0
+        id: has-coverage
+        with:
+          name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
+
       - name: Get Flutter Code Coverage
         uses: actions/download-artifact@v4
-        if: ${{ !inputs.upload-coverage }}
+        if: ${{ !inputs.upload-coverage && steps.has-coverage.outputs.exists }}
         id: get-coverage
         with:
           name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}

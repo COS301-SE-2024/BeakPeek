@@ -1,0 +1,47 @@
+name: 📄 Generate coverage for both 🥅 dotnet and 🦚 Flutter
+
+on:
+  push:
+    branches:
+      - main
+      - development
+      - '**devops**'
+    paths:
+      - 'beakpeek/**'
+      - 'dotnet/BirdApi'
+
+  workflow_call:
+  workflow_dispatch:
+
+concurrency:
+  group: coverage-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  flutter-coverage:
+    uses: ./.github/workflows/flutter.yml
+    with: 
+      upload-coverage: true # this has to be true to not upload coverage
+    secrets: inherit
+
+  dotnet-coverage:
+    uses: ./.github/workflows/dotnet.yml
+    with:
+      upload-coverage: true
+    secrets: inherit
+
+  upload-coverage:
+    runs-on: ubuntu-latest
+    name: 📔 Upload to codecov
+    needs: [flutter-coverage, dotnet-coverage]
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Upload coverage
+      if: ${{ !env.ACT }}
+      uses: codecov/codecov-action@v4
+      with:
+        files: ./beakpeek/coverage/lcov.info, ./coverage.cobertura.xml
+        token: ${{ secrets.CODECOV_TOKEN }}
+        fail_ci_if_error: true
+        verbose: true
+        name: BeakPeek Coverage

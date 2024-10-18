@@ -31,9 +31,9 @@ defaults:
   run:
     working-directory: ./beakpeek
 
-concurrency:
-  group: coverage-${{ github.ref }}
-  cancel-in-progress: true
+# concurrency:
+#   group: coverage-${{ github.ref }}
+#   cancel-in-progress: true
 
 jobs:
   get-coverage:
@@ -71,8 +71,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
       - name: Set up Flutter
         uses: subosito/flutter-action@v2.16.0
         with:
@@ -92,10 +92,16 @@ jobs:
           name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
           path: ./beakpeek/coverage/lcov.info
 
+      - name: check if artifact already exists
+        uses: softwareforgood/check-artifact-v4-existence@v0.3.0
+        id: has-coverage
+        with:
+          name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
+      
       - name: Get Dotnet Code Coverage
         uses: actions/download-artifact@v4
         id: get-coverage
-        if: ${{ !inputs.upload-coverage }}
+        if: ${{ !inputs.upload-coverage && steps.has-coverage.outputs.exists }}
         with:
           name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
 
