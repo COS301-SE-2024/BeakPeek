@@ -138,7 +138,6 @@ shows that our User API can handle a high qauntity of users easily.
 
 
 \subsubsection{Statistics}
-insert image here
 
 \subsection{Security}
 To ensure our users security and ensure that their data stays secure and that 
@@ -150,7 +149,15 @@ are validated against a secret key on our user API.
 
 \subsubsection{User Portal/Api}
 
-We use JWT (Json Web Tokens) to authenticate our users when they login.
+We used the .Net Identity framework for our user management because it is a widely 
+used and trusted tool made by Microsoft which meant that it worked smoothly with 
+the tools built into Azure and enabled a much more comprehensive DevOps experience.
+\newline
+Using Identity framework also allowed for easy integration of other login and web auth 
+providers such as Google and also allowed easy role based authorization which was important 
+as the user portal/api also serves as an admin portal allowing us to easily give manage 
+our user, roles and Achievements which were also integrated into the user api along with 
+the users life list and other user claims.
 
 \subsubsection{Usability}
 
@@ -161,53 +168,204 @@ We use JWT (Json Web Tokens) to authenticate our users when they login.
 
 \subsection{Tools}
 
+To ensure the best possible developer experience we used a multitude of tools and integrations
+in the CI/CD pipelines. \newline
+
+Some of the most important tools were:
+\begin{itemize}
+    \item Fastlane for easy builds and releases to Google play for our mobile app
+    \item JMeter was used for load testing our Api
+    \item Codecov for unit testing tracking
+    \item Github actions for automated workflows and tasks
+\end{itemize}
+
 \subsubsection{Fastlane}
-We have used Fastlane to automate the building and release of the flutter android frontend onto the 
-Google play store.
+
+Fastlane is a tool made especially for the building and releasing of mobile apps to the Google 
+Play store and to Apples App store. It is configured in ruby and has plenty of integrations,
+such as for deploying using firebase and of course building different flutter environments.
+
 
 \subsubsection{JMeter}
-JMeter
+
+JMeter was used primarily for our perfomance requirement as JMeter allows for easy configuration
+using different inputs such as CSV files which as useful for ensuring that every user that 
+was created in the load test was a unique user and was consistent across different runs.
 
 \subsubsection{Codecov}
 To ensure that our the anything we make is up to the proper standards and that 
 there are no unintended consequences of any new features we add we have employed
 the use of Codecov to be able to track our code coverage across our project and 
-across the different sections of the project.\newline
+across the different sections of the project.
+\newline
 
-We have split up our code coverage tracking into two primary sections
-
-\begin{itemize}
-    \item The Flutter front-end
-    \item The .Net backend
-\end{itemize}
+We have split up our code coverage tracking into two primary areas, the flutter frontend and the 
+.Net backend. This allowed us to easily track and monitor changes in the environment and ensure
+that any time we made a release or deployment we could be certain that there would be minimal 
+issues in production.
 
 To ensure that our code is properly tested and up to industry standards we have
 aimed for atleast a 75\%  line coverage for each different scope of our project.
 \newline
-In this regard we habe managed to maintain a 91\% code coverage for the BirdApi.
+In this regard we have managed to maintain a 91\% code coverage for the BirdApi.
 
 \subsection{Workflows}
 
+Probably the most important and useful tool at our disposal was GitHub actions as it allowed for 
+easily configurable and integrated automations in the form of workflows for automating tedious or 
+otherwise impossible tasks directly from GitHub.\newline
+
+All of the workflows were written by our DevOps engineer (Ivan Horak), who ensured that our developer
+experience was always as easy as it possibly could be. 
+\newline 
+
+Ivan wrote a number of workflows and full pipelines to automate most of the tasks that are often 
+done manually. Bellow is a list of some of the workflows and pipelines. 
+
 \subsubsection{Discord Notify}
 
+The discord notification workflow is a reusable workflow used to send embed messages 
+to the Millennium discord server which allows for easy observability of what is happening
+in the project and if there are any failing workflows, releases or deployments.
 
+\subsubsection{Deploy BirdApi, UserApi}
+
+There are two main workflows for deploying the BirdApi and UserApi to Azure, these are the 
+essential for the easy management of the two backends as it gave us a lot of control over 
+how and when the APIs would be deployed.
+\newline \newline
+
+These workflows also use best practices in that they cache any dependencies for future workflows 
+which significantly reduces deployment times.
+
+\subsubsection{Update Bird data}
+
+The update bird data workflow is a custom workflow that uses in house scripts to download 
+all 9 provinces data as CSV's along with a CSV for all the birds in South Africa which it 
+then uses to import all the data into the Bird database using the Bird API which 
+has a couple endpoints that accept CSV files as input and transform the data in the files to match
+our Bird and Province models. These CSV files have approximately 1.5 million rows of data 
+that would be difficult for anyone to manage efficiently. For our use case some of the 
+birds that would get fetched from SABAP would have invalid data such as a low report rate 
+which don't work with the population estimates that we make using the data that is imported 
+through this workflow. 
+
+\subsubsection{Label Pull Requests}
+
+The label pull requests workflow is a simple yet useful workflow that is used to add the appropriate
+labels to any pull requests based on the branch name and contents which are configured 
+in the labeler.yml file making for easy extensibility and ensuring that every pull
+request is always appropriately labeled. 
+
+\subsection{The coverage workflows}
+
+The coverage workflows are run for the flutter frontend and the .Net backend. These are usually run 
+together as Codecov does not track any directories that are not included in the commit. This proves 
+problematic as more often than not the frontend and backend workflows are not run together, as 
+changes should very rarely effect both sources in the same commit. To get around this problem 
+we have made use of artifacts that are used to store coverage reports in between workflows for later
+useage, Ivan has leveraged artifacts by first checking if there is an existing artifact with the 
+same name as the hash of the different sources package lock files, this allows us to only run 
+the tests when a change that would effect the test runs output. We have used this to in a sense 
+short circuit the coverage uploads as if there is an artifact for either of the reports that will be 
+used alongside any new reports that are generated by these workflows. 
+\newline \newline
+
+These workflows can still run independently if needed allowing for rapid iteration. We have also 
+used a seperate workflow as a sort of manager for both of these workflows that if they need to be 
+run without changing the actual source code, the workflows can still be run either manually or 
+automatically.
+
+\subsubsection{Publish Android release}
+
+The publish Android release is a workflow that uses the Fastlane tool set to build, test and release 
+the flutter frontend as an Android aab file which is a requirement of Google for more secure 
+applications. This workflow also uses dependency caching to allow for faster runs of the workflows.
 
 \subsection{Pipelines}
+
+To connect all of the seperate workflows that have been mentioned above there 
+is a full CICD pipeline that is used to connect all of the other workflows 
+in a way that ensures that all of the industry best practices are used. This
+is done by chaining all of the workflows together to ensure that if any step 
+in the build, test or deployment stages fails nothing permanent is 
+done to either of the production databases and the Google play release along with the 
+deployed APIs. 
+\newline \newline 
+
+The full pipeline is made up of all of the other workflows in such a way that discord notifications 
+are sent at each stage of the pipeline with links to any build artifacts or errors from any of 
+the steps and or jobs. The final steps in the pipeline is releasing the app and also updating the 
+bird data.
 
 \newpage
 \section{Observability Principles}
 
-\subsection{Dashboads}
+To ensure that we follow all of the best observability principles Ivan has put together a 
+couple different tools for monitoring the APIs and database as well as the traffic 
+to the APIs. He has also added in other methods which are used to monitor workflows and 
+builds as well as the projects repository itself.
+
+\subsection{Dashboards}
+
+One of the primary tools that we have used to monitor our APIs is through the use of 
+different Dashboards for all of the different tools that we use. 
+
+\subsubsection{Azure Metrics}
+
+Azure offers an extensive list of tools that can be used and that we use to make dashboards for 
+monitoring metrics like the response time of the APIs or the usage of the CPU for the 
+different virtual machines that are hosted on Azure. 
+
 \subsection{Azure Monitoring}
+
+Azure also offers a service called application insights which we have used for tracking the hosted APIs on Azure and sending alerts if an error or some exception is raised. 
+\newline \newline
+
+Azure also offers tools for automatic up scaling and downscaling of the resources that we manage 
+and host on Azure. We have in particular used the health check service to ping the server and 
+alert us if any of the containers become unhealthy.
+
+\subsection{Azure Logs}
+
+We have also used the azure storage account along with the provided logging tools to ensure that 
+if any of our deployments go down or stop working for any reason we can always go back and 
+look at what happened at the time of the incident.
+
 \subsection{GitHub Actions}
-We monitor with GitHub Actions
+We also use GitHub actions to ensure that we have maximum observability at any given time. As 
+we can't always be at our computers however all of us do have discord on our phones which 
+allows us to get notified easily and quickly any time an incident occurs.
 
 \newpage
 \section{Operational Practices}
-We have methods of recovering from data loss
+
+In terms of the operational practices we have used to ensure that we can always recover from 
+a fatal mistake, we have made backups of the data stored on SABAP to ensure that we its 
+unlikely that we could find ourselves in a situation where we cannot recover any lost bird data. 
+\newline \newline
+
+The bird data is also automatically updated once a day through the usage of the update bird 
+date workflow which has a schedule that it runs on as well as any other actions that can 
+cause the workflow to be run, such as the BirdApi being deployed.
+
 \subsection{Data Ingress}
-Github action and script for downloading and importing birds from sabab
-\subsection{Azure Georedundency}
-Azure offers Georedundency
+
+As it was mentioned above we ensure that any data we use is easily managed and should never require 
+manual transformations or editing. This extends to the bird images which are stored in an Azure 
+storage account and are automatically fetched and updated as bird info is requested.
+
+\subsection{Users data is stored locally on device}
+
+One of the features that we implemented for BeakPeek was the ability for the mobile app to run 
+without an internet connection. This means that even if a problem were to arise on our side our 
+users should be minimally effected.
+
+\subsection{Repository Management}
+
+Finally the most important resource we have is the repository and to make sure that nothing 
+effects the operation and usage of the repository we have put Ivan in charge of anything related 
+to it. In this role Ivan reviews all pull requests ensuring that they use proper form and 
+proper descriptions and that there are no other problems.
 
 \end{document}
