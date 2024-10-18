@@ -9,11 +9,8 @@ on:
     branches:
       - main
       - development
-    paths-ignore:
-      - 'doc/**'
-      - 'res/**'
-      - 'beakpeek/**'
-      - 'dotnet/UserApi/**'
+    paths:
+      - 'dotnet/BirdApi/**'
   workflow_dispatch:
   workflow_call:
 
