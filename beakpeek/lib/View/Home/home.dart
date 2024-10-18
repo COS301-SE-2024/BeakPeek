@@ -28,7 +28,7 @@ class HomeState extends State<Home> {
   void initState() {
     //globel.init();
     super.initState();
-    pentadId = _getPentadIdWithCache(); // Initialize pentadId
+    pentadId = getPentadIdWithCache(); // Initialize pentadId
     preloadQuizzes();
   }
 
@@ -38,7 +38,7 @@ class HomeState extends State<Home> {
     } catch (e) {}
   }
 
-  Future<List<Bird>> _fetchBirdsWithCache() async {
+  Future<List<Bird>> fetchBirdsWithCache() async {
     if (global.cachedBirds != null) {
       // Return cached birds if available
       return global.cachedBirds!;
@@ -49,7 +49,7 @@ class HomeState extends State<Home> {
     return global.cachedBirds!;
   }
 
-  Future<String> _getPentadIdWithCache() async {
+  Future<String> getPentadIdWithCache() async {
     if (global.cachedPentadId != null) {
       // Return cached pentadId if available
       return global.cachedPentadId!;
@@ -169,7 +169,7 @@ class HomeState extends State<Home> {
 
                         // Birds Near You Section
                         FutureBuilder<List<Bird>>(
-                          future: _fetchBirdsWithCache(),
+                          future: fetchBirdsWithCache(),
                           builder: (context, snapshot) {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
