@@ -54,7 +54,7 @@ jobs:
     - name: set output
       id: result
       run: |
-          echo "generate-coverage=${{steps.check-exists.exists}}" >> $GITHUB_OUTPUT
+          echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
 
   get-dotnet-coverage:
     if: ${{ !inputs.upload-coverage }}
