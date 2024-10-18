@@ -149,4 +149,285 @@ void main() {
       );
     },
   );
+  group(
+    'LifeListProvider Calculation Tests',
+    () {
+      test(
+        'GetNumBirdsInProvinces',
+        () async {
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'easterncape = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'gauteng = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'kwazulunatal = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'limpopo = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'mpumalanga = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'northerncape = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'northwest = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'westerncape = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'freestate = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          final isDuplicate = await lifeListProvider.getNumBirdsInProvinces();
+
+          expect(isDuplicate[0], 5);
+          expect(isDuplicate[1], 5);
+          expect(isDuplicate[2], 5);
+          expect(isDuplicate[3], 5);
+          expect(isDuplicate[4], 5);
+          expect(isDuplicate[5], 5);
+          expect(isDuplicate[6], 5);
+          expect(isDuplicate[7], 5);
+          expect(isDuplicate[8], 5);
+        },
+      );
+
+      test('precentLifeListBirds', () async {
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'easterncape = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'gauteng = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'kwazulunatal = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'limpopo = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'mpumalanga = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'northerncape = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'northwest = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'westerncape = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['COUNT(*)'],
+            where: 'freestate = true',
+          ),
+        ).thenAnswer((_) async => [
+              {'COUNT(*)': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'birds',
+            orderBy: anyNamed('orderBy'),
+          ),
+        ).thenAnswer((_) async => [testBird.toMap()]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['easterncape'],
+            where: 'easterncape = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'easterncape': 1}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['gauteng'],
+            where: 'gauteng = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'gauteng': 1}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['kwazulunatal'],
+            where: 'kwazulunatal = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'kwazulunatal': 1}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['limpopo'],
+            where: 'limpopo = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'limpopo': 1}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['mpumalanga'],
+            where: 'mpumalanga = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'mpumalanga': 5}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['northerncape'],
+            where: 'northerncape = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'northerncape': 1}
+            ]);
+
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['northwest'],
+            where: 'northwest = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'northwest': 1}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['westerncape'],
+            where: 'westerncape = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'westerncape': 1}
+            ]);
+        when(
+          mockDatabase.query(
+            'provinces',
+            columns: ['freestate'],
+            where: 'freestate = true AND id = ${testBird.id}',
+          ),
+        ).thenAnswer((_) async => [
+              {'freestate': 1}
+            ]);
+
+        final progress = await lifeListProvider.precentLifeListBirds();
+
+        expect(progress[0], 0.2);
+      });
+    },
+  );
 }
