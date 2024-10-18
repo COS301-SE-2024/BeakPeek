@@ -43,10 +43,10 @@ void main() {
 
     testWidgets('Test if Home widget renders correctly',
         (WidgetTester tester) async {
+      global.cachedPentadId = Future.value('');
       await tester.pumpWidget(
         MaterialApp(
           home: Home(),
-          navigatorObservers: [mockNavigatorObserver],
         ),
       );
 
@@ -59,6 +59,7 @@ void main() {
 
     testWidgets('Test FutureBuilder loading state in Home',
         (WidgetTester tester) async {
+      global.cachedPentadId = Future.value('');
       await tester.pumpWidget(MaterialApp(home: Home()));
 
       // Initially, it should show loading indicator
