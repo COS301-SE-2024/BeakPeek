@@ -8,7 +8,7 @@ on:
     branches:
       - main
       - development
-    paths-ignore:
+    paths:
       - 'dotnet/UserApi/**'
   workflow_dispatch:
   workflow_call:
