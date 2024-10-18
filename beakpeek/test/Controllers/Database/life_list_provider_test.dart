@@ -1,10 +1,13 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:convert';
+
 import 'package:beakpeek/Model/BirdInfo/pentad.dart';
 import 'package:beakpeek/Model/BirdInfo/province.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
+import 'package:localstorage/localstorage.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -22,7 +25,7 @@ void main() {
   late MockDatabase mockDatabase;
   late Bird testBird;
   setUp(
-    () {
+    () async {
       mockDatabase = MockDatabase();
       lifeListProvider = LifeListProvider.instance;
       LifeListProvider.lifeList = mockDatabase;
@@ -428,6 +431,41 @@ void main() {
 
         expect(progress[0], 0.2);
       });
+
+      test(
+        'fetchUserLifelistString',
+        () async {
+          lifeListProvider = LifeListProvider.instance;
+          when(
+            mockDatabase.query(
+              'birds',
+              orderBy: 'commonGroup DESC',
+              columns: ['id'],
+            ),
+          ).thenAnswer((_) async => [
+                {'id': testBird.id}
+              ]);
+          final String temp = await lifeListProvider.fetchUserLifelistString();
+          expect(temp, '[{"id":1}]');
+        },
+      );
+
+      test(
+        'containsData',
+        () async {
+          lifeListProvider = LifeListProvider.instance;
+          when(
+            mockDatabase.query(
+              'allBirds',
+              columns: ['COUNT(*)'],
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 0}
+              ]);
+          final int temp = await lifeListProvider.containsData();
+          expect(temp, 0);
+        },
+      );
     },
   );
 }
