@@ -120,6 +120,58 @@ void main() {
         expect(result[0].imageUrl, 'https://example.com/image.png');
       });
 
+      test('returns a Bird object when bird with specific ID is found',
+          () async {
+        // Arrange
+        final mockBirdData = [
+          {
+            'id': 1,
+            'commonGroup': 'Weaver',
+            'commonSpecies': 'Weaver Bird',
+            'fullProtocolRR': 0.85,
+            'fullProtocolNumber': 150,
+            'latestFP': '2024-10-18',
+            'reportingRate': 0.75,
+            'genus': 'Ploceus',
+            'species': 'Ploceus velatus',
+            'jan': 0.1,
+            'feb': 0.2,
+            'mar': 0.3,
+            'apr': 0.4,
+            'may': 0.5,
+            'jun': 0.6,
+            'jul': 0.7,
+            'aug': 0.8,
+            'sep': 0.9,
+            'oct': 1.0,
+            'nov': 1.1,
+            'dec': 1.2,
+            'totalRecords': 1000,
+            'image_Url': 'https://example.com/image.png',
+            'info': 'Bird information',
+            'birdPopulation': 500,
+          }
+        ];
+
+        when(mockDatabase.query(
+          'allBirds',
+          where: 'id = ?',
+          whereArgs: [1],
+        )).thenAnswer((_) async => mockBirdData);
+
+        // Act
+        final result = await lifeListProvider.getBirdInByID(1);
+
+        // Assert
+        expect(result, isA<Bird>());
+        expect(result.id, 1);
+        expect(result.commonGroup, 'Weaver');
+        expect(result.commonSpecies, 'Weaver Bird');
+        expect(result.fullProtocolRR, 0.85);
+        expect(result.totalRecords, 1000);
+        expect(result.imageUrl, 'https://example.com/image.png');
+        expect(result.info, 'Bird information');
+      });
       test(
         'Insert Bird LifeList',
         () async {
