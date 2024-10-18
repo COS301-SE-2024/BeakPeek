@@ -71,6 +71,55 @@ void main() {
   group(
     'LifeListProvider Tests',
     () {
+      test('returns a list of Bird objects from database', () async {
+        // Arrange
+        final mockBirdData = [
+          {
+            'id': 1,
+            'commonGroup': 'Weaver',
+            'commonSpecies': 'Weaver Bird',
+            'fullProtocolRR': 0.85,
+            'fullProtocolNumber': 150,
+            'latestFP': '2024-10-18',
+            'reportingRate': 0.75,
+            'genus': 'Ploceus',
+            'species': 'Ploceus velatus',
+            'jan': 0.1,
+            'feb': 0.2,
+            'mar': 0.3,
+            'apr': 0.4,
+            'may': 0.5,
+            'jun': 0.6,
+            'jul': 0.7,
+            'aug': 0.8,
+            'sep': 0.9,
+            'oct': 1.0,
+            'nov': 1.1,
+            'dec': 1.2,
+            'totalRecords': 1000,
+            'image_Url': 'https://example.com/image.png',
+            'birdPopulation': 500,
+          },
+          // Add more mock bird data if necessary
+        ];
+
+        when(mockDatabase.query('allBirds'))
+            .thenAnswer((_) async => mockBirdData);
+
+        // Act
+        final result = await lifeListProvider.getFullBirdData();
+
+        // Assert
+        expect(result, isA<List<Bird>>());
+        expect(result.length, 1);
+        expect(result[0].id, 1);
+        expect(result[0].commonGroup, 'Weaver');
+        expect(result[0].commonSpecies, 'Weaver Bird');
+        expect(result[0].fullProtocolRR, 0.85);
+        expect(result[0].totalRecords, 1000);
+        expect(result[0].imageUrl, 'https://example.com/image.png');
+      });
+
       test(
         'Insert Bird LifeList',
         () async {
