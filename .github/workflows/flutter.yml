@@ -6,6 +6,7 @@ on:
       - main
       - development
       - 'dev/test/**'
+      - '**devops**'
     paths:
       - beakpeek/**
       - .github/workflows/flutter.yml
