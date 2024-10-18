@@ -1,260 +1,371 @@
-\documentclass{article}
-
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[absolute]{textpos}
 \usepackage{listings}
 
 \title{
 
 \\
-{Installation Manual}
+{DevOps}
 }
 
-\author{Millenium}
+\author{Millennium}
 
 \begin{document}
 
-\tableofcontents
+\begin{titlepage}
+
+\begin{center}
+
+{\Huge \bf BeakPeek}\\[10pt]
+\rule{\textwidth}{1pt}\\[20pt]
+{\bf \huge \sc Millennium} \\[10pt]
+{\huge University Of Pretoria} \\[15pt]
+\includegraphics[width=7cm]{../../../res/MillenniumLogo.jpeg}\\[15pt]
+{\huge Algorithmic Innovation Award}\\[60pt]
+\rule{8cm}{1pt}\\[5pt]
+{\bf \huge \sc In Partnership With}\\[15pt]
+{\huge \bf AgileBridge}\\[5pt]
+\rule{8cm}{1pt}\\[50pt]
+
+\begin{minipage}[t]{10cm}
+	{\Large{\bf Group:\\ 22}}
+\end{minipage}\hfill\begin{minipage}[t]{5cm}\raggedleft
+	{\Large{\bf Mentor: \\Ayaaz\\ }}
+\end{minipage} \\[90pt]
+{\Large 2024/10/18} \\ [5pt]
+
+\rule{\textwidth}{1pt}\\[10pt]
+
+\end{center}
+
+\vfill
+
+\end{titlepage}
 
 \newpage
 
-
 \section{Introduction}
 
+We as Millennium have from the start of the capstone project placed a high 
+level of importance on DevOps which was managed by and maintained by Ivan Horak
+who has been our DevOps engineer.\newline
 
-BeakPeek was developed with a backend and frontend and will there fore have two
-seperate sub sections for installation for the frontend and backend installation
+Seeing that the scale of this project is so large we feel it is important that we 
+give a summary of what BeakPeek is and how we have structured the repository and 
+all of the different parts of how BeakPeek functions.
 
-\section{Prerequisites}
+\subsection{What is BeakPeek}
+BeakPeek is a bird watching app that intends to making birding as easy as fly.\newline
 
-\subsubsection{Frontend}
-
+Our core functional requirements are:
 \begin{itemize}
-    \item Flutter SDK
-    \item Android SDK Platform, API 35.0.1
-    \item Android SDK Command-line Tools
-    \item Android SDK Build-Tools
-    \item Android SDK Platform-Tools
-    \item Android Emulator
+    \item Data ingress and transformation
+    \item Usage of the data from SABAP (South African Bird Atlas Project) for
+        \begin{itemize}
+            \item Heat map generation by pentad (A 5 minute by 5 minute area)
+            \item Bird population estimation
+            \item Bird quiz generation
+        \end{itemize}
+    \item User management
+    \item Bird Achievements
+    \item Lifelists (list of birds that a user has seen)
 \end{itemize}
 
-The full guide on how to install of of these can be found at the URL
-<https://docs.flutter.dev/get-started/install>
+\subsection{Project/Repository structure}
 
+Our project has been split into a couple common directories. 
+Those being:
 \begin{itemize}
-    \item Select the operating system you are using
-    \item Select android
+    \item doc: For documentation
+    \item res: For resources
+    \item scripts: For bash and SQL scripts
+    \item beakpeek: For our flutter frontend
+    \item dotnet: For our two .Net backends
+        \begin{itemize}
+            \item BirdApi: For the bird API 
+            \item UserApi: For our user portal and management API 
+        \end{itemize}
 \end{itemize}
 
-\subsubsection{Backend}
-
+\subsection{What we use?}
+The tools that we have used are:
 \begin{itemize}
-    \item .Net SDK 8.0
-    \item ASP.Net Core Runtime 8.0
-    \item .Net Runtime 8.0
-    \item Docker Desktop 4.42 >=
+    \item Azure to host the bird API and User API
+    \item .Net entity framework core for both API's
+    \item .Net identity for the User portal and API
+    \item Flutter for mobile app development
+    \item MSSQL for both databases also on Azure
 \end{itemize}
 
-The full guide on how to install all of the .Net dependencies can be found at
-the URL:
-<https://learn.microsoft.com/en-us/dotnet/core/install/>
+\subsection{Most Important things to note for DevOps}
 
 \begin{itemize}
-    \item Then select the operating system you are using from the choices available
+    \item We use Azure to host our 2 .Net backends/API's
+    \item We use MSSQL for our database
+    \item We have an Android release on Google Play
+    \item We use GitHub actions for our CI/CD Workflows
+    \item We get our data from SABAP
 \end{itemize}
 
-The full guide on how to install docker desktop can be found at the URL:
-<https://docs.docker.com/desktop/>
+\section{Non-Functional Requirements}
 
+We as Millennium set out for ourselve 3 main Non-Functional requirements that we
+thought would be the most important and applicable to BeakPeek and would best show 
+our wide range of skills and show our abilities as software engineers.
+
+\subsection{Performance}
+One of the most important skills as software engineers is the ability to make performant
+and scalable solutions. \newline
+
+\subsubsection{Load Testing}
+We use Azure Load Testing to simulate 50 users constantly signing up, logging in, 
+getting their profile, updating their profile and then finally deleting their profile
+
+To show that we can make highly performant and highly scalable solution we have 
+used a load test which is hosted on azure in conjunction with our api's. \newline
+
+To ensure that our users are never unable to login and manage their profiles we 
+used a load test to ensure that even if and when we have high volumes of users we 
+never drop a request. This is done by simulating 50 users simultaneously and 
+constantly signing up, logging in, getting their profile, updating their profile
+and finally deleting their account. This is done over 10 minutes which gives us
+approximately 2.49 thousand requests with an error percentage of 0.36\%. This 
+shows that our User API can handle a high qauntity of users easily.
+
+
+\subsubsection{Statistics}
+
+\subsection{Security}
+To ensure our users security and ensure that their data stays secure and that 
+only users who are authenticated are allowed to login and edit their data we 
+have used Json Web Tokens which are an easy to transport and easy to use authentication
+token as it ensures that only users who have been issued a token from our user Api
+as anyone could decrypt a JWT but only JWTs issued by our user api are valid as they 
+are validated against a secret key on our user API.
+
+\subsubsection{User Portal/Api}
+
+We used the .Net Identity framework for our user management because it is a widely 
+used and trusted tool made by Microsoft which meant that it worked smoothly with 
+the tools built into Azure and enabled a much more comprehensive DevOps experience.
+\newline
+Using Identity framework also allowed for easy integration of other login and web auth 
+providers such as Google and also allowed easy role based authorization which was important 
+as the user portal/api also serves as an admin portal allowing us to easily give manage 
+our user, roles and Achievements which were also integrated into the user api along with 
+the users life list and other user claims.
+
+\subsubsection{Usability}
+
+
+\newpage
+
+\section{CI/CD tools and pipelines}
+
+\subsection{Tools}
+
+To ensure the best possible developer experience we used a multitude of tools and integrations
+in the CI/CD pipelines. \newline
+
+Some of the most important tools were:
 \begin{itemize}
-    \item Then select the operating system you are using from the choices available
+    \item Fastlane for easy builds and releases to Google play for our mobile app
+    \item JMeter was used for load testing our Api
+    \item Codecov for unit testing tracking
+    \item Github actions for automated workflows and tasks
 \end{itemize}
 
-\section{Installation}
+\subsubsection{Fastlane}
 
-To start with installing BeakPeek for local development first clone the
-repository onto your local machine.
-
-
-\begin{lstlisting}
-git clone https://github.com/COS301-SE-2024/BeakPeek
-\end{lstlisting}
-
-Then open the directory/folder that you cloned the repository into either with a
-file explorer or preferably with the command line of your operating system
-
-\subsubsection{Frontend Installation}
-
-If you are only interested in using/working on the frontend of BeakPeek then you
-can clone only the frontend directory of BeakPeek by running these commmands:
-
-\begin{lstlisting}
-git clone -n --depth=1 --filter=tree:0 \
-    https://github.com/COS301-SE-2024/BeakPeek
-cd BeakPeek
-git sparse-checkout set --no-cone beakpeek
-git checkout
-\end{lstlisting}
-
-\subsubsection{Backend Installation}
+Fastlane is a tool made especially for the building and releasing of mobile apps to the Google 
+Play store and to Apples App store. It is configured in ruby and has plenty of integrations,
+such as for deploying using firebase and of course building different flutter environments.
 
 
-If you are only interested in using/working on the backend of BeakPeek then you
-can clone only the frontend directory of BeakPeek by running the following to
-clone the entire backend which includes the test
+\subsubsection{JMeter}
 
-\begin{lstlisting}
-git clone -n --depth=1 --filter=tree:0 \
-    https://github.com/COS301-SE-2024/BeakPeek
-cd BeakPeek
-git sparse-checkout set --no-cone dotnet
-git checkout
-\end{lstlisting}
+JMeter was used primarily for our perfomance requirement as JMeter allows for easy configuration
+using different inputs such as CSV files which as useful for ensuring that every user that 
+was created in the load test was a unique user and was consistent across different runs.
 
-Or if you only want the Main Api
+\subsubsection{Codecov}
+To ensure that our the anything we make is up to the proper standards and that 
+there are no unintended consequences of any new features we add we have employed
+the use of Codecov to be able to track our code coverage across our project and 
+across the different sections of the project.
+\newline
 
-\begin{lstlisting}
-git clone -n --depth=1 --filter=tree:0 \
-    https://github.com/COS301-SE-2024/BeakPeek
-cd BeakPeek
-git sparse-checkout set --no-cone dotnet/BeakPeekApi
-git checkout
-\end{lstlisting}
+We have split up our code coverage tracking into two primary areas, the flutter frontend and the 
+.Net backend. This allowed us to easily track and monitor changes in the environment and ensure
+that any time we made a release or deployment we could be certain that there would be minimal 
+issues in production.
 
-\section{Running the code}
+To ensure that our code is properly tested and up to industry standards we have
+aimed for atleast a 75\%  line coverage for each different scope of our project.
+\newline
+In this regard we have managed to maintain a 91\% code coverage for the BirdApi.
 
-\subsection{Running the Frontend}
+\subsection{Workflows}
 
-You will have to add a single file filled with your own details for connecting
-to your own login provider, BeakPeek uses Azure so the following is used for the
-Azure Config which just needs to be added to the lib directory in the beakpeek
-directory. The file should be called azure_config.dart
+Probably the most important and useful tool at our disposal was GitHub actions as it allowed for 
+easily configurable and integrated automations in the form of workflows for automating tedious or 
+otherwise impossible tasks directly from GitHub.\newline
 
-\begin{lstlisting}
-String domain = 'com.millennium.beakpeek';
-String clientID = '<clientID>';
-String issuer =
-    'https://<Issuer Url>';
-String bundlerID = 'com.millennium.beakpeek';
-String redirectURL = 'com.millennium.beakpeek://login-callback';
-String discoveryURL =
-    'https://<Url that the signing can be discovered on>';
-String scope = 'https://beakpeak.onmicrosoft.com/com.millennium.beakpeek/callback';
+All of the workflows were written by our DevOps engineer (Ivan Horak), who ensured that our developer
+experience was always as easy as it possibly could be. 
+\newline 
 
-String initialUrl = '<Initial Url>';
-String tokenUrl =
-    '<Url path that the token is retrieved from>';
+Ivan wrote a number of workflows and full pipelines to automate most of the tasks that are often 
+done manually. Bellow is a list of some of the workflows and pipelines. 
 
-String accessToken = '';
-bool loggedIN = false;
-\end{lstlisting}
+\subsubsection{Discord Notify}
 
-To run the frontend you will have to make sure that there is an android phone
-installed on the android emulator and that all of the dependencies are
-installed.
+The discord notification workflow is a reusable workflow used to send embed messages 
+to the Millennium discord server which allows for easy observability of what is happening
+in the project and if there are any failing workflows, releases or deployments.
 
-To ensure that all of the flutter dependencies are installed run the following
-in the './beakpeek' directory using the command line:
+\subsubsection{Deploy BirdApi, UserApi}
 
-\begin{lstlisting}
-flutter pub get
-\end{lstlisting}
+There are two main workflows for deploying the BirdApi and UserApi to Azure, these are the 
+essential for the easy management of the two backends as it gave us a lot of control over 
+how and when the APIs would be deployed.
+\newline \newline
 
-To verify that you have a running emulator for running the fronend run the
-following command:
+These workflows also use best practices in that they cache any dependencies for future workflows 
+which significantly reduces deployment times.
 
-\begin{lstlisting}
-flutter devices
-\end{lstlisting}
+\subsubsection{Update Bird data}
 
-To run the app run the following command
+The update bird data workflow is a custom workflow that uses in house scripts to download 
+all 9 provinces data as CSV's along with a CSV for all the birds in South Africa which it 
+then uses to import all the data into the Bird database using the Bird API which 
+has a couple endpoints that accept CSV files as input and transform the data in the files to match
+our Bird and Province models. These CSV files have approximately 1.5 million rows of data 
+that would be difficult for anyone to manage efficiently. For our use case some of the 
+birds that would get fetched from SABAP would have invalid data such as a low report rate 
+which don't work with the population estimates that we make using the data that is imported 
+through this workflow. 
 
-\begin{lstlisting}
-flutter run
-\end{lstlisting}
+\subsubsection{Label Pull Requests}
 
-\subsection{Running the Backend}
+The label pull requests workflow is a simple yet useful workflow that is used to add the appropriate
+labels to any pull requests based on the branch name and contents which are configured 
+in the labeler.yml file making for easy extensibility and ensuring that every pull
+request is always appropriately labeled. 
 
-You will have to add a single file to the './dotnet/BeakPeekApi' directory as
-usually it contains api keys, to add it you can make a new file with the
-following contents in it giving your own flickr api key where necessary
+\subsection{The coverage workflows}
 
-\begin{lstlisting}
-{
-  "Logging": {
-    "LogLevel": {
-      "Default": "Information",
-      "Microsoft.AspNetCore": "Warning"
-    }
-  },
-  "AllowedHosts": "*",
-  "FLICKR_API_KEY": "<Your Flickr Api Key"
-}
-\end{lstlisting}
+The coverage workflows are run for the flutter frontend and the .Net backend. These are usually run 
+together as Codecov does not track any directories that are not included in the commit. This proves 
+problematic as more often than not the frontend and backend workflows are not run together, as 
+changes should very rarely effect both sources in the same commit. To get around this problem 
+we have made use of artifacts that are used to store coverage reports in between workflows for later
+useage, Ivan has leveraged artifacts by first checking if there is an existing artifact with the 
+same name as the hash of the different sources package lock files, this allows us to only run 
+the tests when a change that would effect the test runs output. We have used this to in a sense 
+short circuit the coverage uploads as if there is an artifact for either of the reports that will be 
+used alongside any new reports that are generated by these workflows. 
+\newline \newline
 
-To run the backend there are two methods one being using docker to host the api
-and to host the database and the other is running it locally using your own
-database.
+These workflows can still run independently if needed allowing for rapid iteration. We have also 
+used a seperate workflow as a sort of manager for both of these workflows that if they need to be 
+run without changing the actual source code, the workflows can still be run either manually or 
+automatically.
 
-\subsubsection{Using Docker}
+\subsubsection{Publish Android release}
 
-To run the api locally using docker is really simple. First ensure that docker
-and docker-compose are installed and then run the following command from the
+The publish Android release is a workflow that uses the Fastlane tool set to build, test and release 
+the flutter frontend as an Android aab file which is a requirement of Google for more secure 
+applications. This workflow also uses dependency caching to allow for faster runs of the workflows.
 
-\begin{lstlisting}
-docker compose up --build
-\end{lstlisting}
+\subsection{Pipelines}
 
-The api will now be accessable from 'localhost:5000' and then to view the
-swagger documents of the api go to the following link 'localhost:5000/swagger/index.html'
+To connect all of the seperate workflows that have been mentioned above there 
+is a full CICD pipeline that is used to connect all of the other workflows 
+in a way that ensures that all of the industry best practices are used. This
+is done by chaining all of the workflows together to ensure that if any step 
+in the build, test or deployment stages fails nothing permanent is 
+done to either of the production databases and the Google play release along with the 
+deployed APIs. 
+\newline \newline 
 
-\subsubsection{Using Your own database}
+The full pipeline is made up of all of the other workflows in such a way that discord notifications 
+are sent at each stage of the pipeline with links to any build artifacts or errors from any of 
+the steps and or jobs. The final steps in the pipeline is releasing the app and also updating the 
+bird data.
 
-To run the api locally using your own database you will first need to find the
-databases connection string which can be found in various methods depending on
-the database you are using and how it is hosted on your machine or over the
-internet.
+\newpage
+\section{Observability Principles}
 
-Next to connect to your database you will have to change the value of the 'DefaultConnection'
-the key value pair found in the appsettings.development.json file, to the
-connection string of your database.
+To ensure that we follow all of the best observability principles Ivan has put together a 
+couple different tools for monitoring the APIs and database as well as the traffic 
+to the APIs. He has also added in other methods which are used to monitor workflows and 
+builds as well as the projects repository itself.
 
-next to run the api you will have to use the command line in the './dotent/BeakPeekApi'
-and run the following command:
+\subsection{Dashboards}
 
-\begin{lstlisting}
-dotnet run
-\end{lstlisting}
+One of the primary tools that we have used to monitor our APIs is through the use of 
+different Dashboards for all of the different tools that we use. 
 
-This will run the dotnet api locally where it will be accessable on the 'localhost:5050'
-url and the swagger api documentation can be found at 'localhost:5050/swagger/index.html'
+\subsubsection{Azure Metrics}
 
-\subsubsection{Running tests}
+Azure offers an extensive list of tools that can be used and that we use to make dashboards for 
+monitoring metrics like the response time of the APIs or the usage of the CPU for the 
+different virtual machines that are hosted on Azure. 
 
-\subsubsection{Frontend Tests}
+\subsection{Azure Monitoring}
 
-To run the tests for the flutter frontend open the command prompt in the the
-'./beakpeek' directory and run the following command:
+Azure also offers a service called application insights which we have used for tracking the hosted APIs on Azure and sending alerts if an error or some exception is raised. 
+\newline \newline
 
-\begin{lstlisting}
-flutter test --coverage
-\end{lstlisting}
+Azure also offers tools for automatic up scaling and downscaling of the resources that we manage 
+and host on Azure. We have in particular used the health check service to ping the server and 
+alert us if any of the containers become unhealthy.
 
-\subsubsection{Backend Tests}
+\subsection{Azure Logs}
 
-To run the tests for dotnet backend open the command prompt in the './dotnet'
-directory and run the following command:
+We have also used the azure storage account along with the provided logging tools to ensure that 
+if any of our deployments go down or stop working for any reason we can always go back and 
+look at what happened at the time of the incident.
 
-\begin{lstlisting}
-dotnet test
-\end{lstlisting}
+\subsection{GitHub Actions}
+We also use GitHub actions to ensure that we have maximum observability at any given time. As 
+we can't always be at our computers however all of us do have discord on our phones which 
+allows us to get notified easily and quickly any time an incident occurs.
 
-\section{Extra notes}
+\newpage
+\section{Operational Practices}
 
-The database that is created when using the docker method for running the
-backend uses only 500 entries from each province for the data as the database
-has approximately 1.4M entries on it and is very difficult to run locally.
+In terms of the operational practices we have used to ensure that we can always recover from 
+a fatal mistake, we have made backups of the data stored on SABAP to ensure that we its 
+unlikely that we could find ourselves in a situation where we cannot recover any lost bird data. 
+\newline \newline
 
-To import the full data set to your own database use the endpoints that have
-been provided by the api at the urls for importing that can be found on the
-swagger documentation when running the api in development.
+The bird data is also automatically updated once a day through the usage of the update bird 
+date workflow which has a schedule that it runs on as well as any other actions that can 
+cause the workflow to be run, such as the BirdApi being deployed.
+
+\subsection{Data Ingress}
+
+As it was mentioned above we ensure that any data we use is easily managed and should never require 
+manual transformations or editing. This extends to the bird images which are stored in an Azure 
+storage account and are automatically fetched and updated as bird info is requested.
+
+\subsection{Users data is stored locally on device}
+
+One of the features that we implemented for BeakPeek was the ability for the mobile app to run 
+without an internet connection. This means that even if a problem were to arise on our side our 
+users should be minimally effected.
+
+\subsection{Repository Management}
+
+Finally the most important resource we have is the repository and to make sure that nothing 
+effects the operation and usage of the repository we have put Ivan in charge of anything related 
+to it. In this role Ivan reviews all pull requests ensuring that they use proper form and 
+proper descriptions and that there are no other problems.
 
 \end{document}

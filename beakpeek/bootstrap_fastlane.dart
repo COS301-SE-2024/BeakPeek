@@ -1,4 +1,5 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_print, prefer_final_locals, avoid_function_literals_in_, lines_longer_than_80_chars
+// foreach_calls
 
 import 'dart:io';
 
@@ -594,6 +595,7 @@ jobs:
   // ask if he wish to override the file
   if (existingFiles.isNotEmpty) {
     print('The following files already exist:');
+    // ignore: avoid_function_literals_in_foreach_calls
     existingFiles.forEach((file) {
       print(file);
     });

@@ -103,7 +103,7 @@ class _BirdQuizState extends State<BirdQuiz>
 
     showDialog(
       context: context,
-      builder: (BuildContext context) {
+      builder: (context) {
         return AlertDialog(
           backgroundColor: AppColors.backgroundColor(context),
           shape: RoundedRectangleBorder(
@@ -202,7 +202,7 @@ class _BirdQuizState extends State<BirdQuiz>
                             ),
                             backgroundColor: AppColors.popupColorDark,
                           ),
-                          icon: Icon(Icons.refresh,
+                          icon: const Icon(Icons.refresh,
                               color: AppColors.iconColorDark),
                           label: Text(
                             'Try Again',
@@ -211,7 +211,7 @@ class _BirdQuizState extends State<BirdQuiz>
                             ),
                           ),
                         ),
-                        SizedBox(width: 10),
+                        const SizedBox(width: 10),
                         ElevatedButton.icon(
                           onPressed: () {
                             Navigator.push(

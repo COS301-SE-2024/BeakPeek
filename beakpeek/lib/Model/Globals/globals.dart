@@ -1,16 +1,11 @@
 library global;
 
-import 'dart:io';
-
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/search.dart';
 import 'package:beakpeek/Controller/Main/color_palette_functions.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
-import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
-import 'package:beakpeek/View/Home/home.dart';
 import 'package:beakpeek/View/Map/bird_sheet.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:localstorage/localstorage.dart';
 import 'package:http/http.dart' as http;
 
 Globals global = Globals();
@@ -49,25 +44,6 @@ class Globals {
     return allBirdsList.firstWhere((bird) => bird.id == id);
   }
 
-  void getAchievments() {
-    getAchivementList().then((result) {
-      for (int i = 0; i < result.achievements.length; i++) {
-        if (localStorage.getItem(result.achievements[i].name) != null) {
-          final double localProgress =
-              double.parse(localStorage.getItem(result.achievements[i].name)!);
-
-          if (result.achievements[i].progress > localProgress) {
-            localStorage.setItem(result.achievements[i].name,
-                result.achievements[i].progress.toString());
-          }
-        } else {
-          localStorage.setItem(result.achievements[i].name,
-              result.achievements[i].progress.toString());
-        }
-      }
-    });
-  }
-
   Future<String> getPentadId() async {
     final Position position = await Geolocator.getCurrentPosition();
     final latitude = position.latitude;
@@ -98,6 +74,7 @@ class Globals {
         '${lonDegrees.abs()}${lonMinutes.toString().padLeft(2, "0")}';
 
     // Combine with underscore
+    // ignore: unnecessary_brace_in_string_interps
     return '${formattedLat}_${formattedLon}';
   }
 }
