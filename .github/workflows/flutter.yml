@@ -31,9 +31,9 @@ on:
 #   run:
 #     working-directory: ./beakpeek
 
-# concurrency:
-#   group: coverage-${{ github.ref }}
-#   cancel-in-progress: true
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   get-coverage:
@@ -54,7 +54,7 @@ jobs:
     - name: set output
       id: result
       run: |
-          echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
+        echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
 
   # get-dotnet-coverage:
   #   if: ${{ !inputs.upload-coverage }}

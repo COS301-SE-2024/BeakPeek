@@ -27,9 +27,9 @@ on:
         type: boolean
         default: false
 
-# concurrency:
-#   group: coverage-${{ github.ref }}
-#   cancel-in-progress: false
+concurrency:
+  group: ${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   get-coverage:
@@ -107,9 +107,6 @@ jobs:
         id: has-coverage
         with:
           name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
-
-      - name: test
-        run: echo ${{ steps.has-coverage.outputs.exists }}
 
       - name: Get Flutter Code Coverage
         if: ${{ steps.has-coverage.outputs.exists == false }}
