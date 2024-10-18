@@ -1,5 +1,5 @@
 // ignore: lines_longer_than_80_chars
-// ignore_for_file: avoid_print, library_private_types_in_public_api, sized_box_for_whitespace
+// ignore_for_file:  library_private_types_in_public_api, sized_box_for_whitespace
 
 import 'dart:convert';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
@@ -13,15 +13,20 @@ import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 
 class BirdSheet extends StatefulWidget {
-  const BirdSheet({super.key, required this.pentadId, required this.month});
+  const BirdSheet(
+      {super.key,
+      required this.pentadId,
+      required this.month,
+      required this.client});
   final String pentadId;
   final String month;
+  final http.Client client;
 
   @override
-  _BirdSheetState createState() => _BirdSheetState();
+  BirdSheetState createState() => BirdSheetState();
 }
 
-class _BirdSheetState extends State<BirdSheet> {
+class BirdSheetState extends State<BirdSheet> {
   double _heightFactor = 0.5; // Initial height factor
   double rate = 0.0;
   String _selectedSortOption = 'Sort';
@@ -32,13 +37,13 @@ class _BirdSheetState extends State<BirdSheet> {
   void initState() {
     super.initState();
     _birdList = fetchBirds(widget.pentadId,
-        http.Client()); // Fetch and sort birds from the API initially
+        widget.client); // Fetch and sort birds from the API initially
   }
 
   void _refreshBirdList() async {
     try {
       final List<Bird> allBirds =
-          await fetchBirds(widget.pentadId, http.Client());
+          await fetchBirds(widget.pentadId, widget.client);
       final List<Bird> seenBirds =
           global.birdList; // Get the list of seen birds
 
@@ -49,7 +54,7 @@ class _BirdSheetState extends State<BirdSheet> {
         _birdList = Future.value(filteredBirds);
       });
     } catch (error) {
-      print('Error fetching birds: $error');
+      // print('Error fetching birds: $error');
       throw Exception('Failed to load birds: $error');
     }
   }
@@ -231,19 +236,19 @@ class _BirdSheetState extends State<BirdSheet> {
 
 Future<List<Bird>> fetchBirds(String pentadId, http.Client client) async {
   try {
-    // print(pentadId);
     final response = await client.get(Uri.parse(
         'https://beakpeekbirdapi.azurewebsites.net/api/Bird/$pentadId/pentad'));
 
     if (response.statusCode == 200) {
       final List<dynamic> jsonResponse = json.decode(response.body);
+
       return jsonResponse.map((data) => Bird.fromJson(data)).toList();
     } else {
-      print('Request failed with status: ${response.statusCode}');
+      // print('Request failed with status: ${response.statusCode}');
       throw Exception('Failed to load birds');
     }
   } catch (error) {
-    print('Error fetching birds: $error');
+    // print('Error fetching birds: $error');
     throw Exception(error);
   }
 }
