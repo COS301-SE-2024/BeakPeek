@@ -1,4 +1,4 @@
-name: CICD
+name: 🐦 Flutter tests and coverage
 on:
   push:
     branches:
@@ -15,6 +15,9 @@ on:
       - beakpeek/**
   workflow_dispatch:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
 
 defaults:
   run:
@@ -22,25 +25,18 @@ defaults:
 
 jobs:
   Run-Flutter-Tests:
+    name: 🧪 Test flutter
     runs-on: ubuntu-latest
     
     steps:
       - name: Clone repository
         uses: actions/checkout@v4
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2.16.0
         with:
           channel: stable
-      
-      - name: Cache Flutter dependancies
-        uses: actions/cache@v3
-        with:
-          path: |
-            ~/.pub-cache
-            ~/.flutter
-          keys: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
+          cache: true
+          pub-cache-key: ${{hashFiles('**/pubspec.yaml')}} 
 
       - name: Install Flutter dependecies
         run: flutter pub get
@@ -49,6 +45,7 @@ jobs:
         run: flutter test --coverage
 
       - name: Upload Flutter Coverage to Codecov
+        if: ${{ !env.ACT }}
         uses: codecov/codecov-action@v3
         with:
           files: ./beakpeek/coverage/lcov.info

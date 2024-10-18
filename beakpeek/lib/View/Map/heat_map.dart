@@ -91,6 +91,20 @@ class HeatMapState extends State<HeatMap> {
                   overflow: TextOverflow.ellipsis, // Prevent overflow
                 ),
               ),
+            ] else ...[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'This is an Endangered Species!',
+                  style: GlobalStyles.contentPrimary(context).copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textColor(context),
+                    fontSize: 12,
+                  ),
+                  textAlign: TextAlign.left, // Align the text to the right
+                  overflow: TextOverflow.ellipsis, // Prevent overflow
+                ),
+              ),
             ],
             Expanded(
               child: GoogleMap(

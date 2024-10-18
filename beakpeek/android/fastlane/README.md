@@ -66,6 +66,14 @@ For _fastlane_ installation instructions, see [Installing _fastlane_](https://do
 
 ## Android
 
+### android get_release_names
+
+```sh
+[bundle exec] fastlane android get_release_names
+```
+
+
+
 ### android build
 
 ```sh

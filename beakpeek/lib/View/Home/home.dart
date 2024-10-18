@@ -55,7 +55,7 @@ class HomeState extends State<Home> {
       return global.cachedPentadId!;
     }
 
-    global.cachedPentadId = await getPentadId(); // Cache pentadId
+    global.cachedPentadId = getPentadId(); // Cache pentadId
     return global.cachedPentadId!;
   }
 

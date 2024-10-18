@@ -100,6 +100,7 @@ Future<UserModel> getOnlineUser() async {
   final String localLife = await lifelist.fetchUserLifelistString();
   if (localLife.length < user.lifelist.length) {
     final List<dynamic> valueList = json.decode(user.lifelist);
+    // ignore: avoid_function_literals_in_foreach_calls
     valueList.forEach((element) {
       final int birdId = element['id'];
       lifelist.insertBird(birdId);
@@ -135,8 +136,9 @@ void deleteLocalUser() {
 Future<void> updateOnline(
     {LifeListProvider? lifelist, bool logout = false}) async {
   lifelist = LifeListProvider.instance;
+  // ignore: unnecessary_null_comparison
   if (lifelist != null) {
-    String list = await lifelist.updateUserLifelist();
+    final String list = await lifelist.updateUserLifelist();
     user.set('lifelist', list);
   }
   final response = await http.post(Uri.parse('$userApiUrl/User/UpdateProfile'),
