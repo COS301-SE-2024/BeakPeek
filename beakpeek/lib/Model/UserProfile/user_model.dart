@@ -73,15 +73,31 @@ class UserModel {
 
   void set(String propertyName, dynamic value) {
     propertyName = propertyName.toLowerCase();
+
     if (value == null) {
-      return;
+      return; // Handle null values based on your requirements
     }
-    final mapRep = toMap();
+
+    final mapRep = toMap(); // Get a map representation of the user model
+
     if (!mapRep.containsKey(propertyName)) {
-      throw ArgumentError('property not found');
+      throw ArgumentError('Property not found: $propertyName');
     }
-    mapRep.update(propertyName, (x) => value);
-    user = UserModel.fromMap(mapRep);
+
+    // Update the property in the map
+    mapRep[propertyName] = value;
+
+    // Now, instead of creating a new UserModel, update the current instance
+    final updatedUser = UserModel.fromMap(mapRep);
+    username = updatedUser.username;
+    email = updatedUser.email;
+    profilepicture = updatedUser.profilepicture;
+    achievements = updatedUser.achievements;
+    description = updatedUser.description;
+    level = updatedUser.level;
+    xp = updatedUser.xp;
+    lifelist = updatedUser.lifelist;
+    highscore = updatedUser.highscore;
   }
 
   String toJson() => json.encode(toMap());
