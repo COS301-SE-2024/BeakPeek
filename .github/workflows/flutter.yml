@@ -101,7 +101,7 @@ jobs:
       - name: Get Dotnet Code Coverage
         uses: actions/download-artifact@v4
         id: get-coverage
-        if: ${{ !inputs.upload-coverage && steps.has-coverage.outputs.exists }}
+        if: ${{ steps.has-coverage.outputs.exists }}
         with:
           name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
 

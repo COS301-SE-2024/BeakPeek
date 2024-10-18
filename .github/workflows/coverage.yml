@@ -9,6 +9,7 @@ on:
     paths:
       - 'beakpeek/**'
       - 'dotnet/BirdApi'
+      - '.github/workflows/coverage.yml'
 
   workflow_call:
   workflow_dispatch:
