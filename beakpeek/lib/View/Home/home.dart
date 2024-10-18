@@ -1,4 +1,4 @@
-// ignore_for_file: lines_longer_than_80_chars, unnecessary_brace_in_string_interps, empty_catches
+// ignore_for_file: lines_longer_than_80_chars, unnecessary_brace_in_string_interps, empty_catches, unnecessary_null_comparison
 
 import 'package:beakpeek/Controller/Home/quiz_manager.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';

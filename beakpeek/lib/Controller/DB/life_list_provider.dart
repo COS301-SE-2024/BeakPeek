@@ -3,8 +3,6 @@ import 'dart:convert';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/province_data.dart';
-import 'package:beakpeek/Model/UserProfile/achievement.dart';
-import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart';
