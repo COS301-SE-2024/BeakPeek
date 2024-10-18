@@ -3,9 +3,6 @@ name: 📢 Publish Android release
 on:
   release:
     types: [published]
-  # push:
-  #   branches:
-  #     - 'dev/feat/devops'
   workflow_dispatch:
   workflow_call:
 
@@ -86,21 +83,10 @@ jobs:
         env:
           ANDROID_KEY_STORE_PASSWORD: ${{ secrets.ANDROID_KEY_STORE_PASSWORD }}
 
-      # - name: Cache Flutter dependancies
-      #   uses: actions/cache@v3
-      #   with:
-      #     path: |
-      #       ~/.pub-cache
-      #       ~/.flutter
-      #     key: ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
-      #     restore-keys: |
-      #       ${{ runner.os }}-pub-${{ hashFiles('**/pubspec.yaml') }}
-
       - name: Build and Release to Google Play
         uses: maierj/fastlane-action@v3.1.0
         with:
-          # lane: 'release_play_store'
-          lane: 'build'
+          lane: 'release_play_store'
           subdirectory: ./beakpeek/android
           options: '{ "version_number": "${{ github.ref_name }}" }'
         env:

@@ -31,7 +31,7 @@ lane :build_flutter_app do |options|
 
   type = options[:type]
   build_number = options[:build_number] || get_build_number(options[:store])
-  version_number = options[:version_number] || pubspec_version_number
+  version_number = pubspec_version_number  || options[:version_number]
   no_codesign = options[:no_codesign] || false
   config_only = options[:config_only] || false
   commit = last_git_commit
@@ -90,6 +90,13 @@ def get_build_number(store)
     package_name: store == "playstore" ? ENV["APP_PACKAGE_NAME"] : nil,
     google_play_json_key_path: google_service_account_json_path
   ).to_s
+end
+
+def get_release_name()
+  return google_play_track_release_names(
+    track: "internal",
+    json_key: google_service_account_json_path
+  )
 end
 
 
