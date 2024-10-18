@@ -3,6 +3,8 @@ import 'dart:convert';
 
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/BirdInfo/province_data.dart';
+import 'package:beakpeek/Model/UserProfile/achievement.dart';
+import 'package:beakpeek/Model/UserProfile/achievment_list.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
 import 'package:http/http.dart';
@@ -187,6 +189,7 @@ class LifeListProvider {
         updateProgress(bird.commonGroup, 'Heron Horror');
         break;
     }
+    updateProvinces();
     //await updateLifeListAchievments(bird.commonGroup, birdId);
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
@@ -344,7 +347,6 @@ class LifeListProvider {
     double progress = countBird / totalBird;
     progress = progress < 1 ? progress : 1;
     localStorage.setItem(achievmentName, progress.toString());
-    updateProvinces();
   }
 
   Future<void> updateProvinces() async {
@@ -361,7 +363,7 @@ class LifeListProvider {
     ];
     final List<double> progress = await precentLifeListBirds();
     for (int i = 0; i < achivementNamesProvinces.length; i++) {
-      localStorage.setItem(achivementNamesProvinces[i], progress.toString());
+      localStorage.setItem(achivementNamesProvinces[i], progress[i].toString());
     }
   }
 
