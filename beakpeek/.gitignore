@@ -10,7 +10,8 @@
 .svn/
 migrate_working_dir/
 windows/**
-
+linux/**
+macos/**
 # IntelliJ related
 *.iml
 *.ipr
@@ -44,7 +45,11 @@ app.*.map.json
 /android/app/release
 
 # Azure Config file
-/test/home_test.dart
-/test/bird_sheet_test.dart
-/test/Map/map_info_test.dart
-/test/Map/map_test.dart
+.env
+*.jks
+key.properties
+google_service_account.json
+**/fastlane/report.xml
+**/fastlane/Preview.html
+**/fastlane/screenshots
+**/fastlane/test_output

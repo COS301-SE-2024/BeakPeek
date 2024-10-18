@@ -40,6 +40,7 @@ class MainState extends State<Main> {
     if (accessToken.isNotEmpty) {
       loggedIN = true;
       user = getLocalUser();
+      //global.getAchievments();
       RoutingData().router.go('/home');
     }
 

@@ -15,6 +15,7 @@ coverage/
 .github/workflows/test.yml
 **/*.bak**
 
+
 # IntelliJ related
 *.iml
 *.ipr

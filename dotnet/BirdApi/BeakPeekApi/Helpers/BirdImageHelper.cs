@@ -31,7 +31,7 @@ namespace BeakPeekApi.Helpers
                 return bird;
             }
 
-            string birdName = bird.Common_species + " " + bird.Common_group;
+            string birdName = bird.Genus + " " + bird.Species;
 
             var description = await _birdInfoHelper.FetchBirdInfoFromWikipedia(birdName, httpClient);
             var images = await _birdInfoHelper.FetchBirdImagesFromFlickr(birdName, httpClient);

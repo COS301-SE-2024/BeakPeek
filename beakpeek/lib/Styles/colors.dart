@@ -50,6 +50,12 @@ abstract class AppColors {
         : primaryColorLight;
   }
 
+  static Color secondaryButtonColor(BuildContext context) {
+    return Theme.of(context).brightness == Brightness.dark
+        ? popupColorDark
+        : primaryColorLight;
+  }
+
 // Get secondary color
   static Color secondaryColor(BuildContext context) {
     return Theme.of(context).brightness == Brightness.dark

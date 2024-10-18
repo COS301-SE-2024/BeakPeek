@@ -41,6 +41,23 @@ class HeatMapState extends State<HeatMap> {
     loadPentadData(); // Use this instead of KML loading
   }
 
+  CameraPosition getCameraPositionForProvince(String province) {
+    switch (province) {
+      case 'gauteng':
+        return const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0);
+      case 'westerncape':
+        return const CameraPosition(
+            target: LatLng(-33.9249, 18.4241), zoom: 8.0);
+      case 'Eastern Cape':
+        return const CameraPosition(
+            target: LatLng(-32.2968, 26.4194), zoom: 8.0);
+      default:
+        return const CameraPosition(
+            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0);
+    }
+  }
+
   Color getColorForReportingRate(double reportingRate) {
     if (reportingRate < 20) {
       return global.palette.low.withOpacity(0.8);
@@ -86,6 +103,20 @@ class HeatMapState extends State<HeatMap> {
                     fontWeight: FontWeight.w400,
                     color: AppColors.textColor(context),
                     fontSize: 16,
+                  ),
+                  textAlign: TextAlign.left, // Align the text to the right
+                  overflow: TextOverflow.ellipsis, // Prevent overflow
+                ),
+              ),
+            ] else ...[
+              Padding(
+                padding: const EdgeInsets.all(10.0),
+                child: Text(
+                  'This is an Endangered Species!',
+                  style: GlobalStyles.contentPrimary(context).copyWith(
+                    fontWeight: FontWeight.w400,
+                    color: AppColors.textColor(context),
+                    fontSize: 12,
                   ),
                   textAlign: TextAlign.left, // Align the text to the right
                   overflow: TextOverflow.ellipsis, // Prevent overflow
@@ -334,28 +365,11 @@ class HeatMapState extends State<HeatMap> {
     );
   }
 
-  CameraPosition getCameraPositionForProvince(String province) {
-    switch (province) {
-      case 'gauteng':
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0);
-      case 'westerncape':
-        return const CameraPosition(
-            target: LatLng(-33.9249, 18.4241), zoom: 8.0);
-      case 'Eastern Cape':
-        return const CameraPosition(
-            target: LatLng(-32.2968, 26.4194), zoom: 8.0);
-      default:
-        return const CameraPosition(
-            target: LatLng(-25.7559141, 28.2330593), zoom: 8.0);
-    }
-  }
-
   void _onMapCreated(GoogleMapController controller) {
     mapController = widget.testController ?? controller;
   }
 
-  LatLng _calculateCoordinatesFromPentad(String lonPart, String latPart) {
+  LatLng calculateCoordinatesFromPentad(String lonPart, String latPart) {
     final latDegrees = int.parse(latPart.substring(0, 2));
     final latMinutes = int.parse(latPart.substring(2, 4));
 
@@ -387,15 +401,13 @@ class HeatMapState extends State<HeatMap> {
         final id = bird.pentadAllocation;
         if (id != '') {
           final coordinates = [
-            _calculateCoordinatesFromPentad(bird.pentadLatitude.toString(),
+            calculateCoordinatesFromPentad(bird.pentadLatitude.toString(),
                 bird.pentadLongitude.toString()),
-            _calculateCoordinatesFromPentad(
-                (bird.pentadLatitude + 5).toString(),
+            calculateCoordinatesFromPentad((bird.pentadLatitude + 5).toString(),
                 bird.pentadLongitude.toString()),
-            _calculateCoordinatesFromPentad(
-                (bird.pentadLatitude + 5).toString(),
+            calculateCoordinatesFromPentad((bird.pentadLatitude + 5).toString(),
                 (bird.pentadLongitude + 5).toString()),
-            _calculateCoordinatesFromPentad(bird.pentadLatitude.toString(),
+            calculateCoordinatesFromPentad(bird.pentadLatitude.toString(),
                 (bird.pentadLongitude + 5).toString()),
           ];
 

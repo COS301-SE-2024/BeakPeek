@@ -1,11 +1,12 @@
 library global;
 
-import 'dart:io';
-
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Controller/Home/search.dart';
 import 'package:beakpeek/Controller/Main/color_palette_functions.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/View/Map/bird_sheet.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:http/http.dart' as http;
 
 Globals global = Globals();
 
@@ -13,20 +14,26 @@ class Globals {
   final LifeListProvider lifeList = LifeListProvider.instance;
   late List<Bird> birdList = [];
   late List<Bird> allBirdsList = [];
-  String? cachedPentadId;
+  late Future<String> cachedPentadId;
   List<Bird>? cachedBirds;
   ColorPalette palette = greenRedPalette;
 
-  void init() {
-    lifeList.fetchLifeList().then((result) {
-      birdList = result;
+  void init() async {
+    // Fetch cached Pentad ID and birds if available
+
+    cachedPentadId = getPentadId();
+
+    // Fetch birds using the cached or newly fetched Pentad ID
+    cachedPentadId.then((pentadId) {
+      fetchBirds(pentadId, http.Client());
     });
+
+    // Load bird data from assets and insert into lifeList
     listBirdFromAssets().then((result) {
       allBirdsList = result;
       lifeList.initialInsert(result);
       lifeList.initialProvInsert(result);
     });
-    //lifeList.deleteDatabaseFile();
   }
 
   Future<List<Bird>> updateLife() async {
@@ -37,5 +44,37 @@ class Globals {
     return allBirdsList.firstWhere((bird) => bird.id == id);
   }
 
-  late File image;
+  Future<String> getPentadId() async {
+    final Position position = await Geolocator.getCurrentPosition();
+    final latitude = position.latitude;
+    final longitude = position.longitude;
+
+    // Check if the location is within South Africa's boundaries
+    if (latitude < -35.0 ||
+        latitude > -22.0 ||
+        longitude < 16.0 ||
+        longitude > 33.0) {
+      throw Exception('Location is outside South Africa.');
+    }
+
+    final latDegrees = latitude.ceil();
+    final lonDegrees = longitude.floor();
+
+    final latDecimal = (latitude - latDegrees).abs();
+    final lonDecimal = longitude - lonDegrees;
+
+    // Convert decimal part to minutes
+    final latMinutes = ((latDecimal * 60) - (latDecimal * 60) % 5).toInt();
+    final lonMinutes = ((lonDecimal * 60) - (lonDecimal * 60) % 5).toInt();
+
+    // Format the result
+    final formattedLat =
+        '${latDegrees.abs()}${latMinutes.toString().padLeft(2, "0")}';
+    final formattedLon =
+        '${lonDegrees.abs()}${lonMinutes.toString().padLeft(2, "0")}';
+
+    // Combine with underscore
+    // ignore: unnecessary_brace_in_string_interps
+    return '${formattedLat}_${formattedLon}';
+  }
 }

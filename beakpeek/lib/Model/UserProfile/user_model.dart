@@ -73,15 +73,31 @@ class UserModel {
 
   void set(String propertyName, dynamic value) {
     propertyName = propertyName.toLowerCase();
+
     if (value == null) {
-      return;
+      return; // Handle null values based on your requirements
     }
-    final mapRep = toMap();
+
+    final mapRep = toMap(); // Get a map representation of the user model
+
     if (!mapRep.containsKey(propertyName)) {
-      throw ArgumentError('property not found');
+      throw ArgumentError('Property not found: $propertyName');
     }
-    mapRep.update(propertyName, (x) => value);
-    user = UserModel.fromMap(mapRep);
+
+    // Update the property in the map
+    mapRep[propertyName] = value;
+
+    // Now, instead of creating a new UserModel, update the current instance
+    final updatedUser = UserModel.fromMap(mapRep);
+    username = updatedUser.username;
+    email = updatedUser.email;
+    profilepicture = updatedUser.profilepicture;
+    achievements = updatedUser.achievements;
+    description = updatedUser.description;
+    level = updatedUser.level;
+    xp = updatedUser.xp;
+    lifelist = updatedUser.lifelist;
+    highscore = updatedUser.highscore;
   }
 
   String toJson() => json.encode(toMap());
@@ -100,6 +116,7 @@ Future<UserModel> getOnlineUser() async {
   final String localLife = await lifelist.fetchUserLifelistString();
   if (localLife.length < user.lifelist.length) {
     final List<dynamic> valueList = json.decode(user.lifelist);
+    // ignore: avoid_function_literals_in_foreach_calls
     valueList.forEach((element) {
       final int birdId = element['id'];
       lifelist.insertBird(birdId);
@@ -135,8 +152,9 @@ void deleteLocalUser() {
 Future<void> updateOnline(
     {LifeListProvider? lifelist, bool logout = false}) async {
   lifelist = LifeListProvider.instance;
+  // ignore: unnecessary_null_comparison
   if (lifelist != null) {
-    String list = await lifelist.updateUserLifelist();
+    final String list = await lifelist.updateUserLifelist();
     user.set('lifelist', list);
   }
   final response = await http.post(Uri.parse('$userApiUrl/User/UpdateProfile'),

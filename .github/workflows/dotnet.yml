@@ -1,4 +1,4 @@
-name: Test Dotnet and Upload Code Coverage
+name: 🥅 Test Dotnet and Upload Code Coverage
 
 on:
   push:
@@ -6,8 +6,11 @@ on:
       - 'main'
       - 'development'
       - 'dev/test/**'
+      - '**devops**'
     paths:
       - dotnet/BirdApi/**
+      - .github/workflows/dotnet.yml
+
   pull_request:
     branches:
      - main
@@ -16,9 +19,39 @@ on:
       - dotnet/BirdApi/**
   workflow_dispatch:
   workflow_call:
+    secrets:
+      CODECOV_TOKEN:
+        required: true
+    inputs:
+      upload-coverage:
+        type: boolean
+        default: false
 
 jobs:
-  dotnet-codecov:
+  get-coverage:
+    if: ${{ inputs.upload-coverage }}
+    name: 📄 Generate Coverage If not there
+    runs-on: ubuntu-latest
+    outputs:
+      generate-coverage: ${{ steps.result.outputs.exists }}
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: check if artifact already exists
+      uses: softwareforgood/check-artifact-v4-existence@v0.3.0
+      id: check-exists
+      with:
+        name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
+
+    - name: set output
+      id: result
+      run: |
+          echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
+
+  dotnet-tests-coverage:
+    needs: [ get-coverage ]
+    if: ${{ always() && ( !inputs.upload-coverage || !needs.get-coverage.outputs.generate-coverage ) }}
+    name: 🧪 Run tests and upload coverage
     runs-on: ubuntu-latest
     
     env:
@@ -51,12 +84,30 @@ jobs:
         working-directory: dotnet/BirdApi
         run: dotnet test --no-restore --verbosity normal /p:CollectCoverage=true /p:CoverletOutputFormat=cobertura
 
+      - name: Cache Dotnet Code Coverage
+        uses: actions/upload-artifact@v4
+        with:
+          name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
+          path: ./dotnet/BirdApi/BeakPeekApi.Tests/coverage.cobertura.xml
+
+      - name: check if artifact already exists
+        uses: softwareforgood/check-artifact-v4-existence@v0.3.0
+        id: has-coverage
+        with:
+          name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
+
+      - name: Get Flutter Code Coverage
+        if: ${{ steps.has-coverage.outputs.exists == false }}
+        uses: actions/download-artifact@v4
+        id: get-coverage
+        with:
+          name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
+
       - name: Upload Coverage
-        if: ${{ !env.ACT }}
+        if: ${{ !env.ACT && !inputs.upload-coverage }}
         uses: codecov/codecov-action@v4
         with:
-          directory: ./dotnet/BirdApi/BeakPeekApi.Tests/
-          files: ./coverage.cobertura.xml
+          files: ./dotnet/BirdApi/BeakPeekApi.Tests/coverage.cobertura.xml, ./lcov.info
           name: Dotnet Coverage
           token: ${{ secrets.CODECOV_TOKEN }}
           verbose: true
