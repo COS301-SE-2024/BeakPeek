@@ -27,10 +27,6 @@ on:
         type: boolean
         default: false
 
-# defaults:
-#   run:
-#     working-directory: ./beakpeek
-
 concurrency:
   group: ${{ github.ref }}
   cancel-in-progress: true
@@ -55,14 +51,6 @@ jobs:
       id: result
       run: |
         echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
-
-  # get-dotnet-coverage:
-  #   if: ${{ !inputs.upload-coverage }}
-  #   name: 📄 Get Dotnet coverage
-  #   uses: ./.github/workflows/dotnet.yml 
-  #   with:
-  #     upload-coverage: true
-  #   secrets: inherit
 
   flutter-tests-coverage:
     needs: [ get-coverage ]

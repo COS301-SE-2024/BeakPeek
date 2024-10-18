@@ -52,14 +52,6 @@ jobs:
       run: |
           echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
 
-  # get-flutter-coverage:
-  #   if: ${{ !inputs.upload-coverage }}
-  #   name: 📄 Get Flutter coverage
-  #   uses: ./.github/workflows/flutter.yml 
-  #   with:
-  #     upload-coverage: true
-  #   secrets: inherit
-
   dotnet-tests-coverage:
     needs: [ get-coverage ]
     if: ${{ always() && ( !inputs.upload-coverage || !needs.get-coverage.outputs.generate-coverage ) }}
