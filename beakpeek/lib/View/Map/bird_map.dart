@@ -163,13 +163,21 @@ class BirdMapState extends State<BirdMap> {
               _showFilterDialog();
             },
           ),
-          GestureDetector(
-            onTap: () {
-              _showFilterDialog();
-            },
-            child: Text('Filter Map',
+          Flexible(
+            child: GestureDetector(
+              onTap: () {
+                _showFilterDialog();
+              },
+              child: Text(
+                'Filter Map',
                 style: GlobalStyles.contentPrimary(context).copyWith(
-                    fontSize: 16, color: AppColors.primaryColorLight)),
+                  fontSize: 16,
+                  color: AppColors.primaryColorLight,
+                ),
+                overflow: TextOverflow
+                    .ellipsis, // Prevents overflow by showing ellipsis
+              ),
+            ),
           ),
         ],
       ),
