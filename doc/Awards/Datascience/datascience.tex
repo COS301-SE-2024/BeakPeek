@@ -1,6 +1,11 @@
-\documentclass{article}
-
+\documentclass[a4paper]{article}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[absolute]{textpos}
 \usepackage{listings}
+\usepackage{hyperref}
 
 \title{
 
@@ -8,13 +13,68 @@
 {Installation Manual}
 }
 
-\author{Millenium}
+\author{Millennium}
 
 \begin{document}
+
+\begin{titlepage}
+
+\begin{center}
+
+{\Huge \bf BeakPeek}\\[10pt]
+\rule{\textwidth}{1pt}\\[20pt]
+{\bf \huge \sc Millennium} \\[10pt]
+{\huge University Of Pretoria} \\[15pt]
+\includegraphics[width=7cm]{BeakPeekLogoNoBackground.png}\\[15pt]
+{\huge Algorithmic Innovation Award}\\[60pt]
+\rule{8cm}{1pt}\\[5pt]
+{\bf \huge \sc In Partnership With}\\[15pt]
+{\huge \bf AgileBridge}\\[5pt]
+\rule{8cm}{1pt}\\[50pt]
+
+\begin{minipage}[t]{10cm}
+	{\Large{\bf Group:\\ 22}}
+\end{minipage}\hfill\begin{minipage}[t]{5cm}\raggedleft
+	{\Large{\bf Mentor: \\Ayaaz\\ }}
+\end{minipage} \\[90pt]
+{\Large 2024/10/18} \\ [5pt]
+
+\rule{\textwidth}{1pt}\\[10pt]
+
+\end{center}
+
+\vfill
+
+\end{titlepage}
+
+\newpage
 
 \tableofcontents
 
 \newpage
+
+\section{Bird Population Calculation For Endangered Birds}
+\subsection{Generating Modification Constant}
+
+Using information from : \href{https://core.ac.uk/download/pdf/9821458.pdf}{Estimating bird abundance: making methods work} and \href{https://www.fs.usda.gov/psw/publications/documents/psw_gtr149/psw_gtr149_pg117_124.pdf}{Point Counts of Birds: What Are We Estimating?} in combination with the few known bird populations in South Africa a constant, 9.01, was created. A massive issue that was encountered was that most bird population estimates are calculated for the bird species regardless of its habitat, this data clashes with our attempt to estimate the population of a bird species only for South Africa.
+
+\subsection{Detection Probability Problems}
+SABAP2, the database we use to get our raw data, relies on the sightings provided by South African birding professionals. This means that the viewing of birds is biased. From literature mentioned above and our own research it was established that the following skews the reporting rate of a bird: is the bird nocturnal, how popular is the location of their habitat, the rarity of a bird (the same bird may be reported by multiple birders a lot), a large group of birders going to a location only at a certain time of year meaning that migratory birds may be missed.
+
+Towards solving this issue a standard reporting rate increase of 0.3 was added to all bird species. Since the goal of the  algorithm is to estimate the population of endangered birds the issue of a reporting rate going above one does not need to be handled.
+
+\subsection{Habitat Size}
+The habitat size of a bird is calculated by taking the amount of pentads (9km x 9km area) they appear in and dividing it by 16 673 (The total number of pentads). This helps normalise the reporting rate between bird species.
+
+\subsection{Final Formula}
+At last all of this information comes together in this formula: \\ \\ viewRate = 
+(bird.fullProtocolRR+detectionProbability) * bird.fullProtocolNumber * pentads /
+        16673; \\ \\ 16673 all pentads ; 12497 pentads with more than 5 sightings ; 14288 pentads with atleast one sighting
+        \\ \\population = (constant * viewRate).round();\\ \\
+        Then all birds with a population of less than 20 000 individuals are considered endangered.
+
+\subsection{Conclusion}
+This formula accurately estimates the population of all South African birds so long as their report rate is above 1\%, the formula also aims to always underestimate the population of birds by a small margin so that an endangered bird cannot falsely be reported as safe. We are currently working to try and further improve this formula and recently have started collaboration with Dr. Bernard Coetzee and his team towards this end. The biggest problem with the formula is that birds with a reporting rate of less than 1\% have their population size grossly underestimated. In a perfect world a formula and constant as mentioned above would be created for each species of bird but we believed this to be out of the scope for this project.
 
 \section{Algorithms}
 \subsection{Data Science behind the HeatMap}
