@@ -75,6 +75,59 @@ void main() {
     'LifeListProvider Tests',
     () {
       test(
+        'Insert Bird LifeList',
+        () async {
+          when(
+            mockDatabase.query(
+              'allBirds',
+              where: 'id = ${testBird.id}',
+            ),
+          ).thenAnswer((_) async => [testBird.toMap()]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'easterncape = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'gauteng = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'kwazulunatal = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.query(
+              'provinces',
+              columns: ['COUNT(*)'],
+              where: 'limpopo = true',
+            ),
+          ).thenAnswer((_) async => [
+                {'COUNT(*)': 5}
+              ]);
+          when(
+            mockDatabase.insert(
+              'birds',
+              testBird.toMapLIfe(),
+            ),
+          ).thenAnswer((_) async => 1);
+        },
+      );
+      test(
         'Fetch Life List',
         () async {
           when(
