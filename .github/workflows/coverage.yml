@@ -6,6 +6,7 @@ on:
       - main
       - development
       - '**devops**'
+      - '**test**'
     paths:
       - 'beakpeek/**'
       - 'dotnet/BirdApi'
@@ -41,8 +42,34 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Get Flutter Code Coverage
+      if: ${{ steps.has-coverage.outputs.exists == false }}
+      uses: actions/download-artifact@v4
+      id: get-coverage
+      with:
+        name: flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}
+
+    - name: Get Dotnet Code Coverage
+      if: ${{ steps.has-coverage.outputs.exists == false }}
+      uses: actions/download-artifact@v4
+      id: get-coverage
+      with:
+        name: dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}
+
+
+    - name: unzip dotnet coverage
+      run: |
+        unzip "dotnet-code-coverage-${{hashFiles('dotnet/BirdApi/BeakPeekApi/packages.lock.json', 'dotnet/BirdApi/BeakPeekApi.Tests/packages.lock.json')}}" "dotnet-coverage"
+
+    - name: unzip flutter
+      run: |
+        unzip "flutter-code-coverage-${{hashFiles('beakpeek/pubspec.lock')}}" "flutter-coverage"
+
+    - name: list files
+      run: ls
+
     - name: Upload coverage
-      if: ${{ !env.ACT }}
+      # if: ${{ !env.ACT }}
       uses: codecov/codecov-action@v4
       with:
         files: ./beakpeek/coverage/lcov.info, ./coverage.cobertura.xml
