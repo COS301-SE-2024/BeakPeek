@@ -45,10 +45,6 @@ app.*.map.json
 /android/app/release
 
 # Azure Config file
-/test/home_test.dart
-/test/bird_sheet_test.dart
-/test/Map/map_info_test.dart
-/test/Map/map_test.dart
 .env
 *.jks
 key.properties

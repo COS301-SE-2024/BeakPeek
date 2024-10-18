@@ -14,7 +14,7 @@ migrate_working_dir/
 coverage/
 .github/workflows/test.yml
 **/*.bak**
-BeakPeek/*
+
 
 # IntelliJ related
 *.iml
