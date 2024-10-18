@@ -52,11 +52,11 @@ class HomeState extends State<Home> {
   Future<String> _getPentadIdWithCache() async {
     if (global.cachedPentadId != null) {
       // Return cached pentadId if available
-      return global.cachedPentadId!;
+      return global.cachedPentadId;
     }
 
     global.cachedPentadId = getPentadId(); // Cache pentadId
-    return global.cachedPentadId!;
+    return global.cachedPentadId;
   }
 
   @override
