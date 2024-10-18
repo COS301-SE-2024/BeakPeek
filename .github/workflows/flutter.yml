@@ -56,16 +56,16 @@ jobs:
       run: |
           echo "generate-coverage=${{steps.check-exists.outputs.exists}}" >> $GITHUB_OUTPUT
 
-  get-dotnet-coverage:
-    if: ${{ !inputs.upload-coverage }}
-    name: 📄 Get Dotnet coverage
-    uses: ./.github/workflows/dotnet.yml 
-    with:
-      upload-coverage: true
-    secrets: inherit
+  # get-dotnet-coverage:
+  #   if: ${{ !inputs.upload-coverage }}
+  #   name: 📄 Get Dotnet coverage
+  #   uses: ./.github/workflows/dotnet.yml 
+  #   with:
+  #     upload-coverage: true
+  #   secrets: inherit
 
   flutter-tests-coverage:
-    needs: [ get-coverage, get-dotnet-coverage]
+    needs: [ get-coverage ]
     if: ${{ always() && ( !inputs.upload-coverage || !needs.get-coverage.outputs.generate-coverage ) }}
     name: 🧪 Run tests and upload coverage
     runs-on: ubuntu-latest
