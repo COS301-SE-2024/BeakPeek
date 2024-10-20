@@ -100,6 +100,7 @@
     <td>
       <a href="https://github.com/CharlSparrow" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/charl-pretorius-computer-scientist/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
+      <a href="mailto:youremail@example.com"><img src="https://skillicons.dev/icons?i=email" alt="Email"></a>
     </td>
   </tr>
   <tr>
