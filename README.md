@@ -59,7 +59,7 @@
 
 <h2 id="demos"> App Demo </h2>
 
-[![App Demo]([https://www.youtube.com/watch?v=GC36XTkkWr4/0.jpg)](https://www.youtube.com/watch?v=GC36XTkkWr4)
+[![App Demo]([https://img.youtube.com/vi/GC36XTkkWr4/0.jpg)](https://youtu.be/GC36XTkkWr4)
 
   <h2 href="">System Requirement Specification</h2>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v4" > SRSv4 </a>
