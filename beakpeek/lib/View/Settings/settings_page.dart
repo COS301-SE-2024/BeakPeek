@@ -20,6 +20,7 @@ class SettingsPage extends StatefulWidget {
 class SettingsPageState extends State<SettingsPage> {
   PDFDocument? document;
   bool viewTandC = false;
+
   void loadPdfT() {
     setState(() {
       viewTandC = true;
@@ -76,7 +77,7 @@ class SettingsPageState extends State<SettingsPage> {
                   _buildOptionTile(
                     context,
                     'Delete Account',
-                    Icons.file_download,
+                    Icons.delete, // Changed icon
                     Icons.arrow_forward_ios,
                     () {
                       deleteLocalUser();
@@ -86,10 +87,19 @@ class SettingsPageState extends State<SettingsPage> {
                   _buildOptionTile(
                     context,
                     'Export Life List',
-                    Icons.delete,
+                    Icons.download, // Changed icon
                     Icons.arrow_forward_ios,
                     () {
                       ImportExport().exportLifeList();
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'Import Life List', // New option
+                    Icons.upload, // Correct icon for importing
+                    Icons.arrow_forward_ios,
+                    () {
+                      ImportExport().importLifeList();
                     },
                   ),
                   _buildOptionTile(
@@ -108,7 +118,7 @@ class SettingsPageState extends State<SettingsPage> {
                   _buildOptionTile(
                     context,
                     'Colour Palette',
-                    Icons.notifications,
+                    Icons.palette, // Correct icon for color palette
                     Icons.arrow_forward_ios,
                     () {
                       Navigator.push(
