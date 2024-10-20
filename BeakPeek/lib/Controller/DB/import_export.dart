@@ -5,7 +5,8 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart';
+// ignore: unused_import
+import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
@@ -30,7 +31,6 @@ class ImportExport {
     }
 
     final exPath = directory.path;
-    print('Saved Path: $exPath');
     await Directory(exPath).create(recursive: true);
     return exPath;
   }
@@ -142,24 +142,30 @@ class ImportExport {
   }
 
   Future<void> importLifeList() async {
-    late final LifeListProvider lifeList = LifeListProvider.instance;
-    final List<List<String>> listOfLists = [];
-    final FilePickerResult? result =
-        await FilePicker.platform.pickFiles(allowedExtensions: ['csv']);
-
+    await Permission.storage.request();
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['csv'],
+    );
     if (result != null) {
       final File file = File(result.files.single.path!);
-      final contents = await file.readAsString();
-      final List<List<String>> csvTable =
-          const CsvToListConverter().convert(contents);
-      // ignore: avoid_print
-      print(csvTable.toString());
-      for (final row in csvTable) {
-        final bool inserted =
-            await lifeList.insertBirdByGroupAndSpeciesImport(row[1], row[2]);
-        if (!inserted) {
-          listOfLists.add(row);
-        }
+      handleFile(file);
+    }
+  }
+
+  Future<void> handleFile(File file) async {
+    late final LifeListProvider lifeList = LifeListProvider.instance;
+    final List<List<String>> listOfLists = [];
+    final contents = await file.readAsString();
+    final List<List<String>> csvTable =
+        const CsvToListConverter().convert(contents);
+    // ignore: avoid_print
+    print(csvTable.toString());
+    for (final row in csvTable) {
+      final bool inserted =
+          await lifeList.insertBirdByGroupAndSpeciesImport(row[1], row[2]);
+      if (!inserted) {
+        listOfLists.add(row);
       }
     }
   }
