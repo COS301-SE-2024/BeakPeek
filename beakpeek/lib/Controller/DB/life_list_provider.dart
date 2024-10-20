@@ -206,6 +206,23 @@ class LifeListProvider {
     }
   }
 
+  Future<bool> insertBirdByGroupAndSpeciesImport(
+      String group, String species) async {
+    final db = await instance.database;
+    final int id = Sqflite.firstIntValue(
+          await db.query('allBirds',
+              columns: ['id'],
+              where: 'commonGroup = ? and commonSpecies = ?',
+              whereArgs: [group, species]),
+        ) ??
+        -1;
+    if (id != -1) {
+      insertBird(id);
+      return true;
+    }
+    return false;
+  }
+
   Future<String> updateUserLifelist() async {
     final db = await instance.database;
     final List<Map<String, Object?>> birdMap = await db.query(

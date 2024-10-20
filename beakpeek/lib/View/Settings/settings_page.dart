@@ -8,6 +8,7 @@ import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
+import 'package:beakpeek/Controller/DB/import_export.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -75,11 +76,20 @@ class SettingsPageState extends State<SettingsPage> {
                   _buildOptionTile(
                     context,
                     'Delete Account',
-                    Icons.delete,
+                    Icons.file_download,
                     Icons.arrow_forward_ios,
                     () {
                       deleteLocalUser();
                       context.pop();
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'Export Life List',
+                    Icons.delete,
+                    Icons.arrow_forward_ios,
+                    () {
+                      ImportExport().exportLifeList();
                     },
                   ),
                   _buildOptionTile(
