@@ -83,7 +83,7 @@
   <tr>
     <th>Name</th>
     <th>Profile</th>
-    <th>Role</th>
+    <th>Role and Email</th>
     <th>Description</th>
     <th>Links</th>
   </tr>
@@ -95,12 +95,11 @@
       <a href="https://github.com/CharlSparrow" target="_blank">CharlSparrow</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Charl.jpg" alt="Charl Pretorius"></td>
-    <td>Team Lead / Data Architect</td>
+    <td><a>Team Lead / Data Architect</a><a>charlp.pretorius@gmail.com</a></td>
     <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
     <td>
       <a href="https://github.com/CharlSparrow" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/charl-pretorius-computer-scientist/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
-      <a href="mailto:youremail@example.com"><img src="https://skillicons.dev/icons?i=email" alt="Email"></a>
     </td>
   </tr>
   <tr>
