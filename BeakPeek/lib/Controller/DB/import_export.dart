@@ -7,17 +7,47 @@ import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
 
 class ImportExport {
-  ImportExport() {
-    header = [];
-    header.add('ref');
-    header.add('common_group');
-    header.add('common_species');
-    header.add('genus');
-    header.add('species');
+  List<String> header = [
+    'ref',
+    'common_group',
+    'common_species',
+    'genus',
+    'species'
+  ];
+
+  Future<String> getExternalDocumentPath() async {
+    // To check whether permission is given for this app or not.
+    Directory directory = Directory('');
+    if (Platform.isAndroid) {
+      // Redirects it to download folder in android
+      directory = Directory('/storage/emulated/0/Download');
+    } else {
+      directory = await getApplicationDocumentsDirectory();
+    }
+
+    final exPath = directory.path;
+    print('Saved Path: $exPath');
+    await Directory(exPath).create(recursive: true);
+    return exPath;
   }
-  List<String> header = [];
+
+  Future<String> get _localPath async {
+    // final directory = await getApplicationDocumentsDirectory();
+    // return directory.path;
+    // To get the external path from device of download folder
+    final String directory = await getExternalDocumentPath();
+    return directory;
+  }
+
+  Future<File> createTextFile(String fileName, String content) async {
+    final directory = await getApplicationDocumentsDirectory();
+    final file = File('${directory.path}/$fileName');
+    await file.writeAsString(content);
+    return file;
+  }
 
   Future<void> exportLifeList() async {
+    final path = await _localPath;
     late final LifeListProvider lifeList = LifeListProvider.instance;
     final List<List<String>> listOfLists = [];
     final List<Bird> birdsLife = await lifeList.fetchLifeList();
@@ -31,21 +61,12 @@ class ImportExport {
       ]);
     }
     final String csv = const ListToCsvConverter().convert(listOfLists);
-    final Map<Permission, PermissionStatus> statuses = await [
-      Permission.storage,
-    ].request();
-    // ignore: avoid_print
-    print(statuses);
-    if (await Permission.storage.isGranted) {
-      final directory = await getApplicationDocumentsDirectory();
-      // ignore: avoid_print
-      print('dir $directory');
-      final String file = '$directory';
 
-      final File f = File('$file/lifelist.csv');
+    final File file = File('$path/lifelist.csv');
+    print("Save file");
 
-      f.writeAsString(csv);
-    }
+    // Write the data in the file you have created
+    file.writeAsString(csv);
   }
 
   Future<void> importLifeList() async {

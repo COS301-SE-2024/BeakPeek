@@ -159,7 +159,7 @@ Future<void> updateProvinces(int id) async {
 
     if (provMaster != null) {
       await updateUsersAchievement(provMaster.id, progress[i]);
-      print(achivementNames[i]);
+      //print(achivementNames[i]);
     }
   }
 }
@@ -176,6 +176,6 @@ Future<void> updateAchievmentProgressBirds(
     double progress = countBird / totalBird;
     progress = progress < 1 ? progress : 1;
     await updateUsersAchievement(birdMaster.id, progress);
-    print(achievemntName);
+    //print(achievemntName);
   }
 }
