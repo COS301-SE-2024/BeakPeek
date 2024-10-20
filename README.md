@@ -9,10 +9,12 @@
   <img src="https://img.shields.io/github/issues/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   <img src="https://img.shields.io/github/issues-closed/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   </br>
-  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/main_beakpeekapi.yml/badge.svg" alt="dotnet deploy">
+    <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/update_birds.yml/badge.svg" alt="dotnet deploy">
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/full_pipeline.yml/badge.svg" alt="dotnet deploy">
   <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/flutter.yml/badge.svg" alt="dotnet deploy">
   <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/dotnet.yml/badge.svg" alt="dotnet deploy">
-  
+      <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/deploy_flutter.yml/badge.svg" alt="dotnet deploy">
+
 </p>
 
 <h2>☁️About</h2>
@@ -56,9 +58,6 @@
 [![Demo 2](https://img.youtube.com/vi/BeQJ7puoda4/0.jpg)](https://youtu.be/BeQJ7puoda4)
 
   <h2 href="">System Requirement Specification</h2>
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v1" > SRSv1 </a>
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v2" > SRSv2 </a>
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v3" > SRSv3 </a>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v4" > SRSv4 </a>
 
   <h2 href="">Code Quality</h2>
@@ -75,6 +74,12 @@
   <h2 href=""> SRS </h2>
 
   <a href="doc/SRS_SoftwareRequirementSpecification/SRS v4.pdf" > SRSv4 pdf</a>
+
+  <h2> Award Proposals</h2>
+  <a href="doc/Awards/DevOps/devops.pdf" >DevOps</a>
+  <a href="doc/Awards/Algorithms/BeakPeek_Algorithmic_Innovation_Award.pdf" >Agorithms</a>
+  <a href="doc/Awards/Datascience/BeakPeek_Data_Science_Award.pdf" >Data Science</a>
+
 </div>
 
 <h2>🤝Team</h2>
@@ -83,7 +88,7 @@
   <tr>
     <th>Name</th>
     <th>Profile</th>
-    <th>Role</th>
+    <th>Role and Email</th>
     <th>Description</th>
     <th>Links</th>
   </tr>
@@ -95,8 +100,11 @@
       <a href="https://github.com/CharlSparrow" target="_blank">CharlSparrow</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Charl.jpg" alt="Charl Pretorius"></td>
-    <td>Team Lead / Data Architect</td>
-    <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He contributed greatly towards the success of a civil lawsuit gaining valuable insight into real world legal disputes. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
+    <td>
+    <a style="display: block;">Team Lead / Data Architect</a>
+    <a style="display: block;">charlp.pretorius@gmail.com</a>
+    </td>
+    <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
     <td>
       <a href="https://github.com/CharlSparrow" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/charl-pretorius-computer-scientist/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
@@ -110,7 +118,10 @@
       <a href="https://github.com/ChuufMaster" target="_blank">ChuufMaster</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
-    <td>DevOps Engineer</td>
+    <td>
+        <a style="display: block;">DevOps Engineer</a>
+        <a style="display: block;">ivanhorak20@gmail.com</a>
+    </td>
     <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
     <td>
       <a href="https://github.com/ChuufMaster" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -125,7 +136,10 @@
       <a href="https://github.com/u21543152" target="_blank">u21456552</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Justin.jpg" alt="Justin Hudson"></td>
-    <td>Integration/Services Engineer</td>
+    <td>
+        <a style="display: block;">Integration/Services Engineer</a>
+        <a style="display: block;">justinhudson1@gmail.com</a>
+    </td>
     <td>Justin loves making programs efficient and effective and enjoys seeing how everything functions.</td>
     <td>
       <a href="https://github.com/u21543152" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -140,7 +154,10 @@
       <a href="https://github.com/JarodJeffery" target="_blank">JarodJeffery</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Jarod.png" alt="Jarod Jeffery"></td>
-    <td>Backend/Frontend/Integration</td>
+    <td>
+        <a style="display: block;">Backend/Frontend/Integration</a>
+        <a style="display: block;">jarodjeffery@gmail.com</a>
+    </td>
     <td>Jarod enjoys working on complex problems and finding unique solutions to them. His personal motto is "If I do not know I can find out!". This motto is shown in his numerous qualifications in various development languages.</td>
     <td>
       <a href="https://github.com/JarodJeffery" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -155,7 +172,10 @@
       <a href="https://github.com/mattgbotha" target="_blank">mattgbotha</a>
     </td>
     <td><img heigth="140" width="auto" src="res/IMG_1427.jpeg" alt="Matthew Botha"></td>
-    <td>Designer/UI Engineer</td>
+    <td>
+    <a style="display: block;">Designer/UI Engineer</a>
+    <a style="display: block;">mattgbotha@gmail.com</a>
+    </td>
     <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
     <td>
       <a href="https://github.com/mattgbotha" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>

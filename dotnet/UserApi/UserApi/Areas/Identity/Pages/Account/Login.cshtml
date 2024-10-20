@@ -1,14 +1,12 @@
 ﻿@page
 @model LoginModel
-
 @{
-ViewData["Title"] = "Log in";
-@* Model.ReturnUrl = Request.Query["ReturnUrl"]; *@
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Log in";
 }
 
 <style>
     body {
-        background-color: #f3f1eD;
         font-family: Arial, Helvetica, sans-serif;
     }
 
@@ -18,7 +16,6 @@ ViewData["Title"] = "Log in";
     }
 
     .login-container {
-        background-color: #f3f1eD;
         padding: 30px;
         border-radius: 10px;
         box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
@@ -62,7 +59,6 @@ ViewData["Title"] = "Log in";
 
     .login-section {
         padding: 10px;
-        background-color: #f3f1eD;
     }
 
     .form-check-label {

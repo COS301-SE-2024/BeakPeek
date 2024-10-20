@@ -5,6 +5,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[absolute]{textpos}
 \usepackage{listings}
+\usepackage{hyperref}
 
 \title{
 
@@ -24,7 +25,7 @@
 \rule{\textwidth}{1pt}\\[20pt]
 {\bf \huge \sc Millennium} \\[10pt]
 {\huge University Of Pretoria} \\[15pt]
-\includegraphics[width=7cm]{../../../res/MillenniumLogo.jpeg}\\[15pt]
+\includegraphics[width=7cm]{../Assets/BeakPeekLogoNoBackground.png}\\[15pt]
 {\huge Algorithmic Innovation Award}\\[60pt]
 \rule{8cm}{1pt}\\[5pt]
 {\bf \huge \sc In Partnership With}\\[15pt]
@@ -45,6 +46,10 @@
 \vfill
 
 \end{titlepage}
+
+\newpage
+
+\tableofcontents
 
 \newpage
 
@@ -139,6 +144,20 @@ shows that our User API can handle a high qauntity of users easily.
 
 \subsubsection{Statistics}
 
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/load_test_load.png}
+  \caption{Load test metrics.}
+  \label{fig:load test metrics}
+\end{figure}
+
+\newpage
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/load_test_graph.png}
+  \caption{Load test graphs.}
+  \label{fig:load graphs}
+\end{figure}
+
 \subsection{Security}
 To ensure our users security and ensure that their data stays secure and that 
 only users who are authenticated are allowed to login and edit their data we 
@@ -161,7 +180,7 @@ the users life list and other user claims.
 
 \subsubsection{Usability}
 
-
+\href{https://drive.google.com/file/d/1Z1uJoobU4Lq9xowMiZFRgySqosirVy0d/view?usp=sharing}{Usability Test Report}
 \newpage
 
 \section{CI/CD tools and pipelines}
@@ -185,6 +204,11 @@ Fastlane is a tool made especially for the building and releasing of mobile apps
 Play store and to Apples App store. It is configured in ruby and has plenty of integrations,
 such as for deploying using firebase and of course building different flutter environments.
 
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/andoird.png}
+  \caption{Android Deploy.}
+  \label{fig:load graphs}
+\end{figure}
 
 \subsubsection{JMeter}
 
@@ -208,6 +232,12 @@ To ensure that our code is properly tested and up to industry standards we have
 aimed for atleast a 75\%  line coverage for each different scope of our project.
 \newline
 In this regard we have managed to maintain a 91\% code coverage for the BirdApi.
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/codecov.png}
+  \caption{Codecov.}
+  \label{fig:load graphs}
+\end{figure}
 
 \subsection{Workflows}
 
@@ -238,6 +268,12 @@ how and when the APIs would be deployed.
 These workflows also use best practices in that they cache any dependencies for future workflows 
 which significantly reduces deployment times.
 
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/deploy_user.png}
+  \caption{Deploy User.}
+  \label{fig:load graphs}
+\end{figure}
+
 \subsubsection{Update Bird data}
 
 The update bird data workflow is a custom workflow that uses in house scripts to download 
@@ -249,6 +285,12 @@ that would be difficult for anyone to manage efficiently. For our use case some 
 birds that would get fetched from SABAP would have invalid data such as a low report rate 
 which don't work with the population estimates that we make using the data that is imported 
 through this workflow. 
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/get_bird.png}
+  \caption{Get Bird.}
+  \label{fig:load graphs}
+\end{figure}
 
 \subsubsection{Label Pull Requests}
 
@@ -276,11 +318,23 @@ used a seperate workflow as a sort of manager for both of these workflows that i
 run without changing the actual source code, the workflows can still be run either manually or 
 automatically.
 
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/coverage_yml.png}
+  \caption{Generate Coverage.}
+  \label{fig:load graphs}
+\end{figure}
+
 \subsubsection{Publish Android release}
 
 The publish Android release is a workflow that uses the Fastlane tool set to build, test and release 
 the flutter frontend as an Android aab file which is a requirement of Google for more secure 
 applications. This workflow also uses dependency caching to allow for faster runs of the workflows.
+
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/andoird.png}
+  \caption{Generate Coverage.}
+  \label{fig:load graphs}
+\end{figure}
 
 \subsection{Pipelines}
 
@@ -298,6 +352,12 @@ are sent at each stage of the pipeline with links to any build artifacts or erro
 the steps and or jobs. The final steps in the pipeline is releasing the app and also updating the 
 bird data.
 
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/full.png}
+  \caption{Full Pipeline}
+  \label{fig:load graphs}
+\end{figure}
+
 \newpage
 \section{Observability Principles}
 
@@ -310,7 +370,11 @@ builds as well as the projects repository itself.
 
 One of the primary tools that we have used to monitor our APIs is through the use of 
 different Dashboards for all of the different tools that we use. 
-
+\begin{figure}[h]
+  \includegraphics[width=\linewidth]{../Assets/grafan_user_api.png}
+  \caption{Grafana Dashboard.}
+  \label{fig:load graphs}
+\end{figure}
 \subsubsection{Azure Metrics}
 
 Azure offers an extensive list of tools that can be used and that we use to make dashboards for 
