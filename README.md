@@ -88,7 +88,7 @@
   <tr>
     <th>Name</th>
     <th>Profile</th>
-    <th>Role</th>
+    <th>Role and Email</th>
     <th>Description</th>
     <th>Links</th>
   </tr>
@@ -100,8 +100,11 @@
       <a href="https://github.com/CharlSparrow" target="_blank">CharlSparrow</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Charl.jpg" alt="Charl Pretorius"></td>
-    <td>Team Lead / Data Architect</td>
-    <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He contributed greatly towards the success of a civil lawsuit gaining valuable insight into real world legal disputes. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
+    <td>
+    <a style="display: block;">Team Lead / Data Architect</a>
+    <a style="display: block;">charlp.pretorius@gmail.com</a>
+    </td>
+    <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
     <td>
       <a href="https://github.com/CharlSparrow" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/charl-pretorius-computer-scientist/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
@@ -115,7 +118,10 @@
       <a href="https://github.com/ChuufMaster" target="_blank">ChuufMaster</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
-    <td>DevOps Engineer</td>
+    <td>
+        <a style="display: block;">DevOps Engineer</a>
+        <a style="display: block;">ivanhorak20@gmail.com</a>
+    </td>
     <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
     <td>
       <a href="https://github.com/ChuufMaster" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -130,7 +136,10 @@
       <a href="https://github.com/u21543152" target="_blank">u21456552</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Justin.jpg" alt="Justin Hudson"></td>
-    <td>Integration/Services Engineer</td>
+    <td>
+        <a style="display: block;">Integration/Services Engineer</a>
+        <a style="display: block;">justinhudson1@gmail.com</a>
+    </td>
     <td>Justin loves making programs efficient and effective and enjoys seeing how everything functions.</td>
     <td>
       <a href="https://github.com/u21543152" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -145,7 +154,10 @@
       <a href="https://github.com/JarodJeffery" target="_blank">JarodJeffery</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Jarod.png" alt="Jarod Jeffery"></td>
-    <td>Backend/Frontend/Integration</td>
+    <td>
+        <a style="display: block;">Backend/Frontend/Integration</a>
+        <a style="display: block;">jarodjeffery@gmail.com</a>
+    </td>
     <td>Jarod enjoys working on complex problems and finding unique solutions to them. His personal motto is "If I do not know I can find out!". This motto is shown in his numerous qualifications in various development languages.</td>
     <td>
       <a href="https://github.com/JarodJeffery" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -160,7 +172,10 @@
       <a href="https://github.com/mattgbotha" target="_blank">mattgbotha</a>
     </td>
     <td><img heigth="140" width="auto" src="res/IMG_1427.jpeg" alt="Matthew Botha"></td>
-    <td>Designer/UI Engineer</td>
+    <td>
+    <a style="display: block;">Designer/UI Engineer</a>
+    <a style="display: block;">mattgbotha@gmail.com</a>
+    </td>
     <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
     <td>
       <a href="https://github.com/mattgbotha" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
