@@ -20,7 +20,7 @@ void main() {
   });
 
   testWidgets('BirdSheet shows loading and displays birds correctly',
-      (WidgetTester tester) async {
+      (tester) async {
     // Set up mock to return mockBirds
     when(mockClient.get(Uri.parse(
             'https://beakpeekbirdapi.azurewebsites.net/api/Bird/pentad123/pentad')))
@@ -48,7 +48,7 @@ void main() {
     expect(find.byType(BirdList), findsOneWidget);
   });
 
-  testWidgets('BirdSheet filters birds correctly', (WidgetTester tester) async {
+  testWidgets('BirdSheet filters birds correctly', (tester) async {
     // Set up mock to return mockBirds
     when(mockClient.get(Uri.parse(
             'https://beakpeekbirdapi.azurewebsites.net/api/Bird/pentad123/pentad')))

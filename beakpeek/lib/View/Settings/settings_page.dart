@@ -6,6 +6,7 @@ import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
 import 'package:beakpeek/Controller/DB/import_export.dart';
@@ -41,6 +42,10 @@ class SettingsPageState extends State<SettingsPage> {
   void initState() {
     loadPDf();
     super.initState();
+  }
+
+  Future<void> getPermissions() async {
+    await Permission.storage.request();
   }
 
   @override
@@ -89,7 +94,7 @@ class SettingsPageState extends State<SettingsPage> {
                     Icons.delete,
                     Icons.arrow_forward_ios,
                     () {
-                      ImportExport().exportLifeList();
+                      ImportExport().importLifeList();
                     },
                   ),
                   _buildOptionTile(
