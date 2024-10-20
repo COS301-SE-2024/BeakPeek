@@ -1,7 +1,11 @@
 import 'package:beakpeek/Controller/DB/life_list_provider.dart';
 import 'package:beakpeek/Model/BirdInfo/bird.dart';
+import 'package:beakpeek/Styles/colors.dart';
+import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:csv/csv.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:permission_handler/permission_handler.dart';
@@ -46,11 +50,12 @@ class ImportExport {
     return file;
   }
 
-  Future<void> exportLifeList() async {
+  Future<void> exportLifeList(BuildContext context) async {
     final path = await _localPath;
     late final LifeListProvider lifeList = LifeListProvider.instance;
     final List<List<String>> listOfLists = [];
     final List<Bird> birdsLife = await lifeList.fetchLifeList();
+
     for (final bird in birdsLife) {
       listOfLists.add([
         bird.id.toString(),
@@ -60,13 +65,80 @@ class ImportExport {
         bird.species,
       ]);
     }
-    final String csv = const ListToCsvConverter().convert(listOfLists);
 
+    final String csv = const ListToCsvConverter().convert(listOfLists);
     final File file = File('$path/lifelist.csv');
-    print("Save file");
 
     // Write the data in the file you have created
     file.writeAsString(csv);
+
+    // Show confirmation
+    _showExportSuccessDialog(context);
+  }
+
+  void _showExportSuccessDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          backgroundColor: AppColors.popupColor(context),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15.0),
+          ),
+          contentPadding: const EdgeInsets.symmetric(
+              vertical: 20.0,
+              horizontal: 24.0), // Add more padding for better spacing
+          title: Center(
+            child: Text(
+              'Export Successful',
+              style: GlobalStyles.smallHeadingPrimary(context),
+              textAlign: TextAlign.center, // Align title to center
+            ),
+          ),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Icon(
+                Icons.check_circle_outline,
+                color: AppColors.tertiaryColor(context),
+                size: 50.0,
+              ),
+              const SizedBox(height: 20),
+              Text(
+                'Your Life List has been exported to your downloads folder.',
+                style: GlobalStyles.contentPrimary(context),
+                textAlign: TextAlign.center, // Align message text to center
+              ),
+            ],
+          ),
+          actions: <Widget>[
+            Center(
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 12.0, horizontal: 30.0),
+                  backgroundColor: AppColors.tertiaryColor(context),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'OK',
+                  style: TextStyle(
+                    color: Color.fromARGB(255, 27, 27, 27),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16.0,
+                  ),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   Future<void> importLifeList() async {
