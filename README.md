@@ -95,7 +95,10 @@
       <a href="https://github.com/CharlSparrow" target="_blank">CharlSparrow</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Charl.jpg" alt="Charl Pretorius"></td>
-    <td><a>Team Lead / Data Architect</a><a>charlp.pretorius@gmail.com</a></td>
+    <td>
+    <a style="display: block;">Team Lead / Data Architect</a>
+    <a style="display: block;">charlp.pretorius@gmail.com</a>
+    </td>
     <td>Charl is a natural born leader, having led his team in every major project that UP has thrown his way to success, but his greatest attribute is his ability to learn and adapt to new situations. He enjoys little more than efficiency and while he’s not hiking on a random mountain you can find him expanding his knowledge on his field.</td>
     <td>
       <a href="https://github.com/CharlSparrow" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
