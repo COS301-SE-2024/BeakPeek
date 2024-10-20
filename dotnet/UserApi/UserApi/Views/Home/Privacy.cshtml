@@ -1,26 +1,60 @@
 ﻿@{
-ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Privacy Policy";
 }
-<h1>@ViewData["Title"]</h1>
+<div class="privacy-policy-container">
+    <h1 class="page-title">@ViewData["Title"]</h1>
 
-<ul>
-    <li>
+    <ul class="policy-list">
+        <li>
+            <a href="https://raw.githubusercontent.com/COS301-SE-2024/BeakPeek/cb066fb4f7cc46b292ec81bc170e9b7094243be9/doc/Legal/BeakPeekPrivacyPolicy.pdf" class="policy-link">Privacy Policy</a>
+        </li>
+        <li>
+            <a href="https://raw.githubusercontent.com/COS301-SE-2024/BeakPeek/refs/heads/development/doc/Legal/BeakPeekCookiePolicy.pdf" class="policy-link">Cookie Policy</a>
+        </li>
+        <li>
+            <a href="https://github.com/COS301-SE-2024/BeakPeek/raw/refs/heads/development/doc/Legal/BeakPeekTermsOfUse.pdf" class="policy-link">Terms of Use</a>
+        </li>
+    </ul>
+</div>
 
-        <a
-            href="https://raw.githubusercontent.com/COS301-SE-2024/BeakPeek/cb066fb4f7cc46b292ec81bc170e9b7094243be9/doc/Legal/BeakPeekPrivacyPolicy.pdf">Privacy
-            policy
-        </a>
-    </li>
-    <li>
-        <a
-            href="https://raw.githubusercontent.com/COS301-SE-2024/BeakPeek/refs/heads/development/doc/Legal/BeakPeekCookiePolicy.pdf">
-            Cookie policy
-        </a>
-    </li>
-    <li>
-        <a
-            href="https://github.com/COS301-SE-2024/BeakPeek/raw/refs/heads/development/doc/Legal/BeakPeekTermsOfUse.pdf">
-            Terms of Use
-        </a>
-    </li>
-</ul>
+<style>
+
+    .privacy-policy-container {
+        max-width: 500px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+
+    .page-title {
+        font-size: 24px;
+        margin-bottom: 20px;
+        color: #033a30;
+        text-align: center;
+    }
+
+    .policy-list {
+        list-style-position: inside;
+        padding: 0;
+        text-align: center;
+    }
+
+    .policy-list li {
+        margin: 6px 0;
+        padding-left: 20px;
+    }
+
+    .policy-link {
+        font-size: 16px;
+        color: #1d695b;
+        text-decoration: none;
+        transition: color 0.3s ease;
+    }
+
+    .policy-link:hover {
+        color: #0d3b33;
+    }
+</style>
