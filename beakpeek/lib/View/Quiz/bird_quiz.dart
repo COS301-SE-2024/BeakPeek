@@ -109,12 +109,11 @@ class _BirdQuizState extends State<BirdQuiz>
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20.0),
           ),
-          contentPadding: const EdgeInsets.all(0), // Remove default padding
+          contentPadding: const EdgeInsets.all(0),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Add a back button at the top left
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -122,10 +121,10 @@ class _BirdQuizState extends State<BirdQuiz>
                     icon: Icon(Icons.arrow_back,
                         color: AppColors.iconColor(context)),
                     onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog
-                      Navigator.of(context).pop(); // Exit the quiz
+                      Navigator.of(context).pop();
+                      Navigator.of(context).pop();
                     },
-                  ), // Spacer to align content
+                  ),
                 ],
               ),
               Padding(
@@ -152,7 +151,7 @@ class _BirdQuizState extends State<BirdQuiz>
                       text: TextSpan(
                         style: GlobalStyles.contentPrimary(context),
                         children: [
-                          const TextSpan(text: 'Correct answers in a row: '),
+                          const TextSpan(text: 'Correct Answers in a Row: '),
                           TextSpan(
                             text: '$correctAnswersInRow',
                             style:
@@ -170,7 +169,7 @@ class _BirdQuizState extends State<BirdQuiz>
                       text: TextSpan(
                         style: GlobalStyles.contentPrimary(context),
                         children: [
-                          const TextSpan(text: 'High score: '),
+                          const TextSpan(text: 'High Score: '),
                           TextSpan(
                             text: '${user.highscore}',
                             style:
@@ -195,13 +194,13 @@ class _BirdQuizState extends State<BirdQuiz>
                             loadNextQuiz();
                           },
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12.0, horizontal: 24.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            backgroundColor: AppColors.popupColorDark,
-                          ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 24.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: AppColors.popupColorDark,
+                              elevation: 5),
                           icon: const Icon(Icons.refresh,
                               color: AppColors.iconColorDark),
                           label: Text(
@@ -226,13 +225,13 @@ class _BirdQuizState extends State<BirdQuiz>
                             );
                           },
                           style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 12.0, horizontal: 24.0),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            backgroundColor: AppColors.tertiaryColor(context),
-                          ),
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 12.0, horizontal: 24.0),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0),
+                              ),
+                              backgroundColor: AppColors.tertiaryColor(context),
+                              elevation: 5),
                           icon: Icon(Icons.visibility,
                               color: AppColors.iconColor(context)),
                           label: Text(
