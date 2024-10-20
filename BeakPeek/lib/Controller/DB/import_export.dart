@@ -71,7 +71,10 @@ class ImportExport {
 
   Future<void> importLifeList() async {
     await Permission.storage.request();
-    final FilePickerResult? result = await FilePicker.platform.pickFiles();
+    final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['csv'],
+    );
     if (result != null) {
       final File file = File(result.files.single.path!);
       handleFile(file);
