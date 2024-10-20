@@ -25,7 +25,7 @@ public class ImportControllerTests
         var stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(fileContent));
         var formFile = new FormFile(stream, 0, stream.Length, "file", fileName);
 
-        _mockCsvImporter.Setup(m => m.ImportCsvData(It.IsAny<string>(), It.IsAny<string>()));
+        _mockCsvImporter.Setup(m => m.ImportCsvData(It.IsAny<string>(), It.IsAny<string>())).Returns(Task.Delay(100));
 
         // Act
         var result = await _controller.ImportData(formFile, "TestProvince");

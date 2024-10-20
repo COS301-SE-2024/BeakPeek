@@ -18,7 +18,6 @@ class AchievementsPage extends StatefulWidget {
 
 class AchievementsPageState extends State<AchievementsPage> {
   final LifeListProvider lifeList = LifeListProvider.instance;
-  late List<double> birdPercentages = [0, 0, 0, 0, 0, 0, 0, 0, 0];
   /* This final is what loads all achievements and also 
    * will be used to track achievement progress
    */
@@ -26,9 +25,6 @@ class AchievementsPageState extends State<AchievementsPage> {
   @override
   void initState() {
     _achievementlist = getAchivementList();
-    lifeList.precentLifeListBirds().then((birds) {
-      birdPercentages = birds;
-    });
     updateOnline();
     super.initState();
   }
@@ -61,7 +57,10 @@ class AchievementsPageState extends State<AchievementsPage> {
           future: _achievementlist,
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return Center(
+                  child: CircularProgressIndicator(
+                color: AppColors.iconColor(context),
+              ));
             } else if (snapshot.hasError) {
               return Center(
                 child: Text('Error loading achievements: ${snapshot.error}'),

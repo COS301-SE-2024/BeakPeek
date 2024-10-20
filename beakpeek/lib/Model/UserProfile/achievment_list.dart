@@ -2,8 +2,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-import 'package:beakpeek/Controller/DB/life_list_provider.dart';
-import 'package:beakpeek/Model/BirdInfo/bird.dart';
 import 'package:beakpeek/Model/UserProfile/user_achievment.dart';
 import 'package:beakpeek/Model/UserProfile/user_model.dart';
 import 'package:beakpeek/config_azure.dart';
@@ -20,7 +18,13 @@ final List<String> achivementNames = [
   'Diamond Hunter',
   'Directionally challenged',
   'Western Cape Wanderer',
-  'Freesest Alive'
+  'Freesest Alive',
+  'Weaver Believer',
+  'Duck Hunter',
+  'USA',
+  'Fisherman',
+  'Hawk Spotter',
+  'Heron Horror'
 ];
 
 class AchievementList {
@@ -71,37 +75,25 @@ Future<void> updateAchievmentProgress() async {
     print('Quiz Master');
   }
 
-  final LifeListProvider lifelist = LifeListProvider.instance;
-  final List<Bird> birdsLife = await lifelist.fetchLifeList();
-  for (Bird bird in birdsLife) {
-    switch (bird.commonGroup.toLowerCase()) {
-      case 'weaver':
-        await updateAchievmentProgressBirds('Weaver Believer', 'Weaver');
-        break;
-      case 'duck':
-        await updateAchievmentProgressBirds('Duck Hunter', 'Duck');
-        break;
-      case 'eagle':
-        await updateAchievmentProgressBirds('USA', 'Eagle');
-        break;
-      case 'kingfisher':
-        await updateAchievmentProgressBirds('Fisherman', 'Kingfisher');
-        break;
-      case 'hawk':
-        await updateAchievmentProgressBirds('Hawk Spotter', 'Hawk');
-        break;
-      case 'heron':
-        await updateAchievmentProgressBirds('Heron Horror', 'Heron');
-        break;
-    }
-    await updateProvinces(bird.id);
-  }
-
   for (UserAchievement userAchievement in user.achievements) {
     achievementList
         .achievements[achievementList.achievements
             .indexWhere((element) => element.id == userAchievement.id)]
         .progress = userAchievement.progress;
+  }
+
+  for (final name in achivementNames) {
+    final Achievement? achive = getAchievementByName(name);
+    if (achive != null) {
+      final int id = achive.id;
+      final String? progress = localStorage.getItem(name);
+      if (progress != null) {
+        achievementList
+            .achievements[achievementList.achievements
+                .indexWhere((element) => element.id == id)]
+            .progress = double.parse(progress);
+      }
+    }
   }
 
   storeAchievementListLocally(achievementList);
@@ -136,46 +128,4 @@ AchievementList? getLocalAchievmentList() {
     return null;
   }
   return AchievementList.fromJson(userString);
-}
-
-Future<void> updateLifeListAchievments(String commonGroup) async {}
-
-Future<void> updateProvinces(int id) async {
-  final List<String> achivementNames = [
-    'Risk it for the Biscuits',
-    'Gauteng Explorer',
-    'Watch The Waves',
-    'Limpopo Hoopoe',
-    'Mpumalanga Adventurer',
-    'Diamond Hunter',
-    'Directionally challenged',
-    'Western Cape Wanderer',
-    'Freesest Alive'
-  ];
-  final LifeListProvider lifeList = LifeListProvider.instance;
-  final List<double> progress = await lifeList.precentLifeListBirds();
-  for (int i = 0; i < achivementNames.length; i++) {
-    final Achievement? provMaster = getAchievementByName(achivementNames[i]);
-
-    if (provMaster != null) {
-      await updateUsersAchievement(provMaster.id, progress[i]);
-      //print(achivementNames[i]);
-    }
-  }
-}
-
-/// All checks for user progress should go here
-Future<void> updateAchievmentProgressBirds(
-    String achievemntName, String commonGroup) async {
-  /// Quiz Master
-  final Achievement? birdMaster = getAchievementByName(achievemntName);
-  final LifeListProvider lifeList = LifeListProvider.instance;
-  if (birdMaster != null) {
-    final int countBird = await lifeList.lifeBirdCount(commonGroup);
-    final int totalBird = await lifeList.allBirdCount(commonGroup);
-    double progress = countBird / totalBird;
-    progress = progress < 1 ? progress : 1;
-    await updateUsersAchievement(birdMaster.id, progress);
-    //print(achievemntName);
-  }
 }

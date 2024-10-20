@@ -166,28 +166,28 @@ class LifeListProvider {
   }
 
   Future<void> insertBird(int birdId) async {
-    final bird = await getBirdInByID(birdId).then((temp) {
-      switch (temp.commonGroup.toLowerCase()) {
-        case 'weaver':
-          updateProgress(temp.commonGroup, 'Weaver Believer');
-          break;
-        case 'duck':
-          updateProgress(temp.commonGroup, 'Duck Hunter');
-          break;
-        case 'eagle':
-          updateProgress(temp.commonGroup, 'USA');
-          break;
-        case 'kingfisher':
-          updateProgress(temp.commonGroup, 'Fisherman');
-          break;
-        case 'hawk':
-          updateProgress(temp.commonGroup, 'Hawk Spotter');
-          break;
-        case 'heron':
-          updateProgress(temp.commonGroup, 'Heron Horror');
-          break;
-      }
-    });
+    final bird = await getBirdInByID(birdId);
+    switch (bird.commonGroup.toLowerCase()) {
+      case 'weaver':
+        updateProgress(bird.commonGroup, 'Weaver Believer');
+        break;
+      case 'duck':
+        updateProgress(bird.commonGroup, 'Duck Hunter');
+        break;
+      case 'eagle':
+        updateProgress(bird.commonGroup, 'USA');
+        break;
+      case 'kingfisher':
+        updateProgress(bird.commonGroup, 'Fisherman');
+        break;
+      case 'hawk':
+        updateProgress(bird.commonGroup, 'Hawk Spotter');
+        break;
+      case 'heron':
+        updateProgress(bird.commonGroup, 'Heron Horror');
+        break;
+    }
+    updateProvinces();
     //await updateLifeListAchievments(bird.commonGroup, birdId);
     final db = await instance.database;
     if (!await isDuplicate(bird)) {
@@ -362,7 +362,6 @@ class LifeListProvider {
     double progress = countBird / totalBird;
     progress = progress < 1 ? progress : 1;
     localStorage.setItem(achievmentName, progress.toString());
-    updateProvinces();
   }
 
   Future<void> updateProvinces() async {
@@ -379,7 +378,7 @@ class LifeListProvider {
     ];
     final List<double> progress = await precentLifeListBirds();
     for (int i = 0; i < achivementNamesProvinces.length; i++) {
-      localStorage.setItem(achivementNamesProvinces[i], progress.toString());
+      localStorage.setItem(achivementNamesProvinces[i], progress[i].toString());
     }
   }
 

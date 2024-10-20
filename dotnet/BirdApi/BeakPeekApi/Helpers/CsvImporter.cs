@@ -57,7 +57,7 @@ namespace BeakPeekApi.Helpers
             }
         }
 
-        public virtual void ImportCsvData<T>(string filepath, string provinceName) where T : Province, new()
+        public virtual async Task ImportCsvData<T>(string filepath, string provinceName) where T : Province, new()
         {
             var province = _context.ProvincesList.FirstOrDefault(p => p.Name == provinceName);
 
@@ -104,8 +104,8 @@ namespace BeakPeekApi.Helpers
 
                             pentads.Add(pentad_allocation);
 
-                            _context.Pentads.Add(new_pentad);
-                            _context.SaveChanges();
+                            await _context.Pentads.AddAsync(new_pentad);
+                            await _context.SaveChangesAsync();
                         }
                         tmp_pentad = new_pentad;
                     }
@@ -120,9 +120,15 @@ namespace BeakPeekApi.Helpers
 
                     if (!does_bird_have_province)
                     {
-                        _context.Birds.Find(record.Spp)?.Bird_Provinces.Add(province);
-                        _context.SaveChanges();
-                        birds_in_province.Add(record.Spp);
+                        // await _context.Birds.FindAsync(record.Spp).Bird_Provinces.Add(province);
+                        var found_bird = await _context.Birds.FindAsync(record.Spp);
+                        if (found_bird != null)
+                        {
+                            found_bird.Bird_Provinces ??= new List<ProvinceList> { };
+                            found_bird.Bird_Provinces.Add(province);
+                            await _context.SaveChangesAsync();
+                            birds_in_province.Add(record.Spp);
+                        }
                     }
 
                     var bird_record = _context.Birds.Find(record.Spp);
@@ -155,92 +161,92 @@ namespace BeakPeekApi.Helpers
                 {
                     case "easterncape":
                         // List<Easterncape> Easterncape_list_to_add = (List<Easterncape>)records_to_be_add.Cast<Easterncape>().ToList();
-                        _context.Easterncape.AddRange((IEnumerable<Easterncape>)records_to_be_add);
+                        await _context.Easterncape.AddRangeAsync((IEnumerable<Easterncape>)records_to_be_add);
                         break;
                     case "freestate":
                         // List<Freestate> Freestate_list_to_add = (List<Freestate>)records_to_be_add.Cast<Freestate>().ToList();
-                        _context.Freestate.AddRange((IEnumerable<Freestate>)records_to_be_add);
+                        await _context.Freestate.AddRangeAsync((IEnumerable<Freestate>)records_to_be_add);
                         break;
                     case "gauteng":
                         // List<Gauteng> Gauteng_list_to_add = (List<Gauteng>)records_to_be_add.Cast<Gauteng>();
-                        _context.Gauteng.AddRange((IEnumerable<Gauteng>)records_to_be_add);
+                        await _context.Gauteng.AddRangeAsync((IEnumerable<Gauteng>)records_to_be_add);
                         break;
                     case "kwazulunatal":
                         // List<Kwazulunatal> Kwazulunatal_list_to_add = (List<Kwazulunatal>)records_to_be_add.Cast<Kwazulunatal>();
-                        _context.Kwazulunatal.AddRange((IEnumerable<Kwazulunatal>)records_to_be_add);
+                        await _context.Kwazulunatal.AddRangeAsync((IEnumerable<Kwazulunatal>)records_to_be_add);
                         break;
                     case "limpopo":
                         // List<Limpopo> Limpopo_list_to_add = (List<Limpopo>)records_to_be_add.Cast<Limpopo>();
-                        _context.Limpopo.AddRange((IEnumerable<Limpopo>)records_to_be_add);
+                        await _context.Limpopo.AddRangeAsync((IEnumerable<Limpopo>)records_to_be_add);
                         break;
                     case "mpumalanga":
                         // List<Mpumalanga> Mpumalanga_list_to_add = (List<Mpumalanga>)records_to_be_add.Cast<Mpumalanga>();
-                        _context.Mpumalanga.AddRange((IEnumerable<Mpumalanga>)records_to_be_add);
+                        await _context.Mpumalanga.AddRangeAsync((IEnumerable<Mpumalanga>)records_to_be_add);
                         break;
                     case "northerncape":
                         // List<Northerncape> Northerncape_list_to_add = (List<Northerncape>)records_to_be_add.Cast<Northerncape>();
-                        _context.Northerncape.AddRange((IEnumerable<Northerncape>)records_to_be_add);
+                        await _context.Northerncape.AddRangeAsync((IEnumerable<Northerncape>)records_to_be_add);
                         break;
                     case "northwest":
                         // List<Northwest> Northwest_list_to_add = (List<Northwest>)records_to_be_add.Cast<Northwest>();
-                        _context.Northwest.AddRange((IEnumerable<Northwest>)records_to_be_add);
+                        await _context.Northwest.AddRangeAsync((IEnumerable<Northwest>)records_to_be_add);
                         break;
                     case "westerncape":
                         // List<Westerncape> Westerncape_list_to_add = (List<Westerncape>)records_to_be_add.Cast<Westerncape>();
-                        _context.Westerncape.AddRange((IEnumerable<Westerncape>)records_to_be_add);
+                        await _context.Westerncape.AddRangeAsync((IEnumerable<Westerncape>)records_to_be_add);
                         break;
                     default:
                         throw new Exception($"No province found that matches the province name given. {provinceName}");
                 }
 
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
         }
 
-        public virtual void ImportCsvData(string filepath, string provinceName)
+        public virtual async Task ImportCsvData(string filepath, string provinceName)
         {
 
             switch (provinceName)
             {
                 case "easterncape":
-                    ImportCsvData<Easterncape>(filepath, provinceName);
+                    await ImportCsvData<Easterncape>(filepath, provinceName);
                     break;
                 case "freestate":
-                    ImportCsvData<Freestate>(filepath, provinceName);
+                    await ImportCsvData<Freestate>(filepath, provinceName);
                     break;
                 case "gauteng":
-                    ImportCsvData<Gauteng>(filepath, provinceName);
+                    await ImportCsvData<Gauteng>(filepath, provinceName);
                     break;
                 case "kwazulunatal":
-                    ImportCsvData<Kwazulunatal>(filepath, provinceName);
+                    await ImportCsvData<Kwazulunatal>(filepath, provinceName);
                     break;
                 case "limpopo":
-                    ImportCsvData<Limpopo>(filepath, provinceName);
+                    await ImportCsvData<Limpopo>(filepath, provinceName);
                     break;
                 case "mpumalanga":
-                    ImportCsvData<Mpumalanga>(filepath, provinceName);
+                    await ImportCsvData<Mpumalanga>(filepath, provinceName);
                     break;
                 case "northerncape":
-                    ImportCsvData<Northerncape>(filepath, provinceName);
+                    await ImportCsvData<Northerncape>(filepath, provinceName);
                     break;
                 case "northwest":
-                    ImportCsvData<Northwest>(filepath, provinceName);
+                    await ImportCsvData<Northwest>(filepath, provinceName);
                     break;
                 case "westerncape":
-                    ImportCsvData<Westerncape>(filepath, provinceName);
+                    await ImportCsvData<Westerncape>(filepath, provinceName);
                     break;
                 default:
                     throw new Exception("No province found that matches the province name given.");
             }
         }
 
-        public void ImportAllCsvData(string directoryPath)
+        public async Task ImportAllCsvData(string directoryPath)
         {
             var csvFiles = Directory.GetFiles(directoryPath, "*.csv");
             foreach (var csvFile in csvFiles)
             {
                 var province = Path.GetFileNameWithoutExtension(csvFile);
-                ImportCsvData(csvFile, province);
+                await ImportCsvData(csvFile, province);
             }
         }
     }
