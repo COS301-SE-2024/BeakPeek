@@ -9,10 +9,12 @@
   <img src="https://img.shields.io/github/issues/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   <img src="https://img.shields.io/github/issues-closed/COS301-SE-2024/BeakPeek?style=for-the-badge" alt="Issues">
   </br>
-  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/main_beakpeekapi.yml/badge.svg" alt="dotnet deploy">
+    <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/update_birds.yml/badge.svg" alt="dotnet deploy">
+  <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/full_pipeline.yml/badge.svg" alt="dotnet deploy">
   <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/flutter.yml/badge.svg" alt="dotnet deploy">
   <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/dotnet.yml/badge.svg" alt="dotnet deploy">
-  
+      <img src="https://github.com/COS301-SE-2024/BeakPeek/actions/workflows/deploy_flutter.yml/badge.svg" alt="dotnet deploy">
+
 </p>
 
 <h2>☁️About</h2>
@@ -56,9 +58,6 @@
 [![Demo 2](https://img.youtube.com/vi/BeQJ7puoda4/0.jpg)](https://youtu.be/BeQJ7puoda4)
 
   <h2 href="">System Requirement Specification</h2>
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v1" > SRSv1 </a>
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v2" > SRSv2 </a>
-  <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v3" > SRSv3 </a>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v4" > SRSv4 </a>
 
   <h2 href="">Code Quality</h2>
@@ -75,6 +74,12 @@
   <h2 href=""> SRS </h2>
 
   <a href="doc/SRS_SoftwareRequirementSpecification/SRS v4.pdf" > SRSv4 pdf</a>
+
+  <h2> Award Proposals</h2>
+  <a href="doc/Awards/DevOps/devops.pdf" >DevOps</a>
+  <a href="doc/Awards/Algorithms/BeakPeek_Algorithmic_Innovation_Award.pdf" >Agorithms</a>
+  <a href="doc/Awards/Datascience/BeakPeek_Data_Science_Award.pdf" >Data Science</a>
+
 </div>
 
 <h2>🤝Team</h2>
