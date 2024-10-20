@@ -113,7 +113,10 @@
       <a href="https://github.com/ChuufMaster" target="_blank">ChuufMaster</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
-    <td>DevOps Engineer</td>
+    <td>
+        <a style="display: block;">DevOps Engineer</a>
+        <a style="display: block;">EMAIL</a>
+    </td>
     <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
     <td>
       <a href="https://github.com/ChuufMaster" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -128,7 +131,10 @@
       <a href="https://github.com/u21543152" target="_blank">u21456552</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Justin.jpg" alt="Justin Hudson"></td>
-    <td>Integration/Services Engineer</td>
+    <td>
+        <a style="display: block;">Integration/Services Engineer</a>
+        <a style="display: block;">EMAIL</a>
+    </td>
     <td>Justin loves making programs efficient and effective and enjoys seeing how everything functions.</td>
     <td>
       <a href="https://github.com/u21543152" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -143,7 +149,10 @@
       <a href="https://github.com/JarodJeffery" target="_blank">JarodJeffery</a>
     </td>
     <td><img heigth="140" width="auto" src="res/Jarod.png" alt="Jarod Jeffery"></td>
-    <td>Backend/Frontend/Integration</td>
+    <td>
+        <a style="display: block;">Backend/Frontend/Integration</a>
+        <a style="display: block;">EMAIL</a>
+    </td>
     <td>Jarod enjoys working on complex problems and finding unique solutions to them. His personal motto is "If I do not know I can find out!". This motto is shown in his numerous qualifications in various development languages.</td>
     <td>
       <a href="https://github.com/JarodJeffery" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
@@ -158,7 +167,10 @@
       <a href="https://github.com/mattgbotha" target="_blank">mattgbotha</a>
     </td>
     <td><img heigth="140" width="auto" src="res/IMG_1427.jpeg" alt="Matthew Botha"></td>
-    <td>Designer/UI Engineer</td>
+    <td>
+    <a style="display: block;">Designer/UI Engineer</a>
+    <a style="display: block;">EMAIL</a>
+    </td>
     <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
     <td>
       <a href="https://github.com/mattgbotha" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
