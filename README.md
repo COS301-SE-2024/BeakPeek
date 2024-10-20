@@ -57,6 +57,10 @@
 
 [![Demo 2](https://img.youtube.com/vi/BeQJ7puoda4/0.jpg)](https://youtu.be/BeQJ7puoda4)
 
+<h2 id="demos"> Demos</h2>
+
+[![Demo 2](<link here>/0.jpg)](<link here>)
+
   <h2 href="">System Requirement Specification</h2>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v4" > SRSv4 </a>
 
@@ -75,11 +79,15 @@
 
   <a href="doc/SRS_SoftwareRequirementSpecification/SRS v4.pdf" > SRSv4 pdf</a>
 
-  <h2> Award Proposals</h2>
+  <h2> Award Proposals (Extra Research)</h2>
   <a href="doc/Awards/DevOps/devops.pdf" >DevOps</a>
   <a href="doc/Awards/Algorithms/BeakPeek_Algorithmic_Innovation_Award.pdf" >Agorithms</a>
   <a href="doc/Awards/Datascience/BeakPeek_Data_Science_Award.pdf" >Data Science</a>
 
+  <h2> Project Day Slides</h2>
+  <a href="doc/DemoPowerPoints/ProjectDaySlides.pptx"> Poject Day Slide </a>
+
+  
 </div>
 
 <h2>🤝Team</h2>
@@ -119,7 +127,7 @@
     </td>
     <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
     <td>
-        <a style="display: block;">DevOps Engineer</a>
+        <a style="display: block;">DevOps Engineer/Backend Engineer</a>
         <a style="display: block;">ivanhorak20@gmail.com</a>
     </td>
     <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
