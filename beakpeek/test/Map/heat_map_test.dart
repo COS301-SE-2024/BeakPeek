@@ -4,10 +4,11 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('HeatMap', () {
+    // ignore: unused_local_variable
     late HeatMap heatMap;
     late HeatMapState heatMapState;
     setUp(() {
-      heatMap = HeatMap(id: 1);
+      heatMap = const HeatMap(id: 1);
       heatMapState = HeatMapState(); // Pass required parameters
     });
 

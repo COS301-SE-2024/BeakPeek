@@ -17,7 +17,7 @@ void main() {
       mockMapController = MockGoogleMapController();
     });
 
-    testWidgets('renders the GoogleMap widget', (WidgetTester tester) async {
+    testWidgets('renders the GoogleMap widget', (tester) async {
       // Build the BirdMap widget
       await tester.pumpWidget(
         MaterialApp(
@@ -31,8 +31,7 @@ void main() {
       expect(find.byType(GoogleMap), findsOneWidget);
     });
 
-    testWidgets('Filter button renders and opens dialog',
-        (WidgetTester tester) async {
+    testWidgets('Filter button renders and opens dialog', (tester) async {
       // Build the BirdMap widget
       await tester.pumpWidget(
         MaterialApp(
@@ -54,7 +53,7 @@ void main() {
     });
 
     testWidgets('Verify month dropdown renders and can be changed',
-        (WidgetTester tester) async {
+        (tester) async {
       // Build the BirdMap widget
       await tester.pumpWidget(
         MaterialApp(
@@ -81,8 +80,7 @@ void main() {
       expect(find.text('January'), findsOneWidget);
     });
 
-    testWidgets('Check if polygons load correctly',
-        (WidgetTester tester) async {
+    testWidgets('Check if polygons load correctly', (tester) async {
       // Mock KML data loading
       // You can mock the KmlParser or use a stubbed dataset here
 

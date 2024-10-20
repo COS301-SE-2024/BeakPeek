@@ -11,6 +11,7 @@ class MockHttpClient extends Mock implements http.Client {}
 class MockNavigatorObserver extends Mock implements NavigatorObserver {}
 
 void main() {
+  // ignore: unused_local_variable
   final MockNavigatorObserver mockNavigatorObserver = MockNavigatorObserver();
 
   group('Home Widget Unit and Widget Tests ', () {
@@ -41,11 +42,10 @@ void main() {
       expect(global.cachedBirds, isNotNull);
     });
 
-    testWidgets('Test if Home widget renders correctly',
-        (WidgetTester tester) async {
+    testWidgets('Test if Home widget renders correctly', (tester) async {
       global.cachedPentadId = Future.value('');
       await tester.pumpWidget(
-        MaterialApp(
+        const MaterialApp(
           home: Home(),
         ),
       );
@@ -57,10 +57,9 @@ void main() {
       expect(find.text('Start Quiz'), findsOneWidget);
     });
 
-    testWidgets('Test FutureBuilder loading state in Home',
-        (WidgetTester tester) async {
+    testWidgets('Test FutureBuilder loading state in Home', (tester) async {
       global.cachedPentadId = Future.value('');
-      await tester.pumpWidget(MaterialApp(home: Home()));
+      await tester.pumpWidget(const MaterialApp(home: Home()));
 
       // Initially, it should show loading indicator
       expect(find.byType(CircularProgressIndicator), findsOneWidget);

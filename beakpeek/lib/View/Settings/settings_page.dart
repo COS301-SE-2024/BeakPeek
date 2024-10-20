@@ -6,8 +6,10 @@ import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:beakpeek/Styles/global_styles.dart';
 import 'package:go_router/go_router.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:beakpeek/Controller/Main/theme_provider.dart';
+import 'package:beakpeek/Controller/DB/import_export.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -19,6 +21,7 @@ class SettingsPage extends StatefulWidget {
 class SettingsPageState extends State<SettingsPage> {
   PDFDocument? document;
   bool viewTandC = false;
+
   void loadPdfT() {
     setState(() {
       viewTandC = true;
@@ -40,6 +43,10 @@ class SettingsPageState extends State<SettingsPage> {
   void initState() {
     loadPDf();
     super.initState();
+  }
+
+  Future<void> getPermissions() async {
+    await Permission.storage.request();
   }
 
   @override
@@ -75,11 +82,29 @@ class SettingsPageState extends State<SettingsPage> {
                   _buildOptionTile(
                     context,
                     'Delete Account',
-                    Icons.delete,
+                    Icons.delete, // Changed icon
                     Icons.arrow_forward_ios,
                     () {
                       deleteLocalUser();
                       context.pop();
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'Export Life List',
+                    Icons.download, // Changed icon
+                    Icons.arrow_forward_ios,
+                    () {
+                      ImportExport().exportLifeList(context);
+                    },
+                  ),
+                  _buildOptionTile(
+                    context,
+                    'Import Life List', // New option
+                    Icons.upload, // Correct icon for importing
+                    Icons.arrow_forward_ios,
+                    () {
+                      ImportExport().importLifeList();
                     },
                   ),
                   _buildOptionTile(
@@ -98,7 +123,7 @@ class SettingsPageState extends State<SettingsPage> {
                   _buildOptionTile(
                     context,
                     'Colour Palette',
-                    Icons.notifications,
+                    Icons.palette, // Correct icon for color palette
                     Icons.arrow_forward_ios,
                     () {
                       Navigator.push(
@@ -141,14 +166,32 @@ class SettingsPageState extends State<SettingsPage> {
                   SizedBox(height: screenHeight * 0.05),
                   viewTandC
                       ? SizedBox(
-                          height: screenHeight * 0.4,
+                          height: screenHeight * 0.75,
                           child: Column(
                             children: <Widget>[
                               Expanded(
                                 flex: (screenHeight * 0.5).floor(),
-                                child: PDFViewer(
-                                  document: document!,
-                                  zoomSteps: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.popupColor(context),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        spreadRadius: 1,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: PDFViewer(
+                                    document: document!,
+                                    zoomSteps: 3,
+                                    lazyLoad: false,
+                                    scrollDirection: Axis.vertical,
+                                    pickerButtonColor: AppColors.popupColorDark,
+                                  ),
                                 ),
                               ),
                             ],

@@ -98,6 +98,7 @@ void main() {
 
     // Test for getIcon method if necessary
     // This would typically require a mock or actual image icon
-    // Add more tests as needed, especially if the getIcon method interacts with external dependencies
+    // Add more tests as needed, especially if the getIcon method interacts with
+    //external dependencies
   });
 }
