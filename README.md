@@ -115,7 +115,7 @@
     <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
     <td>
         <a style="display: block;">DevOps Engineer</a>
-        <a style="display: block;">EMAIL</a>
+        <a style="display: block;">ivanhorak20@gmail.com</a>
     </td>
     <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
     <td>
@@ -133,7 +133,7 @@
     <td><img heigth="140" width="auto" src="res/Justin.jpg" alt="Justin Hudson"></td>
     <td>
         <a style="display: block;">Integration/Services Engineer</a>
-        <a style="display: block;">EMAIL</a>
+        <a style="display: block;">justinhudson1@gmail.com</a>
     </td>
     <td>Justin loves making programs efficient and effective and enjoys seeing how everything functions.</td>
     <td>
@@ -151,7 +151,7 @@
     <td><img heigth="140" width="auto" src="res/Jarod.png" alt="Jarod Jeffery"></td>
     <td>
         <a style="display: block;">Backend/Frontend/Integration</a>
-        <a style="display: block;">EMAIL</a>
+        <a style="display: block;">jarodjeffery@gmail.com</a>
     </td>
     <td>Jarod enjoys working on complex problems and finding unique solutions to them. His personal motto is "If I do not know I can find out!". This motto is shown in his numerous qualifications in various development languages.</td>
     <td>
@@ -169,7 +169,7 @@
     <td><img heigth="140" width="auto" src="res/IMG_1427.jpeg" alt="Matthew Botha"></td>
     <td>
     <a style="display: block;">Designer/UI Engineer</a>
-    <a style="display: block;">EMAIL</a>
+    <a style="display: block;">mattgbotha@gmail.com</a>
     </td>
     <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
     <td>
