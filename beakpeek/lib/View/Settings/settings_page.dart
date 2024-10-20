@@ -141,14 +141,32 @@ class SettingsPageState extends State<SettingsPage> {
                   SizedBox(height: screenHeight * 0.05),
                   viewTandC
                       ? SizedBox(
-                          height: screenHeight * 0.4,
+                          height: screenHeight * 0.75,
                           child: Column(
                             children: <Widget>[
                               Expanded(
                                 flex: (screenHeight * 0.5).floor(),
-                                child: PDFViewer(
-                                  document: document!,
-                                  zoomSteps: 2,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: AppColors.popupColor(context),
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    boxShadow: [
+                                      BoxShadow(
+                                        color: Colors.black.withOpacity(0.1),
+                                        spreadRadius: 1,
+                                        blurRadius: 5,
+                                        offset: const Offset(0, 3),
+                                      ),
+                                    ],
+                                  ),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: PDFViewer(
+                                    document: document!,
+                                    zoomSteps: 3,
+                                    lazyLoad: false,
+                                    scrollDirection: Axis.vertical,
+                                    pickerButtonColor: AppColors.popupColorDark,
+                                  ),
                                 ),
                               ),
                             ],
