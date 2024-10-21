@@ -187,7 +187,7 @@
     <a style="display: block;">Designer/UI Engineer</a>
     <a style="display: block;">mattgbotha@gmail.com</a>
     </td>
-    <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
+    <td>Matt is a passionate front-end developer with a love for crafting beautiful and functional user interfaces. When not coding, you can find him playing instruments or out skating. Matt enjoys combining creativity with technical skills, both in development and in his hobbies.</td>
     <td>
       <a href="https://github.com/mattgbotha" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/matthew-botha-80b875181/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
