@@ -57,6 +57,10 @@
 
 [![Demo 2](https://img.youtube.com/vi/BeQJ7puoda4/0.jpg)](https://youtu.be/BeQJ7puoda4)
 
+<h2 id="demos"> App Demo </h2>
+
+[![App Demo]([https://img.youtube.com/vi/GC36XTkkWr4/0.jpg)](https://youtu.be/GC36XTkkWr4)
+
   <h2 href="">System Requirement Specification</h2>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v4" > SRSv4 </a>
 
@@ -75,11 +79,18 @@
 
   <a href="doc/SRS_SoftwareRequirementSpecification/SRS v4.pdf" > SRSv4 pdf</a>
 
-  <h2> Award Proposals</h2>
+  <h2> Award Proposals (Extra Research)</h2>
   <a href="doc/Awards/DevOps/devops.pdf" >DevOps</a>
   <a href="doc/Awards/Algorithms/BeakPeek_Algorithmic_Innovation_Award.pdf" >Agorithms</a>
   <a href="doc/Awards/Datascience/BeakPeek_Data_Science_Award.pdf" >Data Science</a>
 
+  <h2> Project Day Slides</h2>
+  <a href="doc/DemoPowerPoints/ProjectDaySlides.pptx"> Poject Day Slide </a>
+
+  <h2>App Download links </h2>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/releases/latest/download/app-release.apk"> BeaPeek APK</a>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/releases/latest/download/app-release.apk"> Google Play </a>
+  
 </div>
 
 <h2>🤝Team</h2>
@@ -119,7 +130,7 @@
     </td>
     <td><img heigth="140" width="auto" src="res/Ivan.JPG" alt="Ivan Horak"></td>
     <td>
-        <a style="display: block;">DevOps Engineer</a>
+        <a style="display: block;">DevOps Engineer/Backend Engineer</a>
         <a style="display: block;">ivanhorak20@gmail.com</a>
     </td>
     <td>Ivan has a passion for DevOps and becoming more efficient when Developing or coding</td>
@@ -176,7 +187,7 @@
     <a style="display: block;">Designer/UI Engineer</a>
     <a style="display: block;">mattgbotha@gmail.com</a>
     </td>
-    <td>Matthew is an experienced designer and frontend engineer with a knack for crafting beautiful and intuitive interfaces that both simplify ease of use and enhance user experience.</td>
+    <td>Matt is a passionate front-end developer with a love for crafting beautiful and functional user interfaces. When not coding, you can find him playing instruments or out skating. Matt enjoys combining creativity with technical skills, both in development and in his hobbies.</td>
     <td>
       <a href="https://github.com/mattgbotha" target="_blank"><img src="https://skillicons.dev/icons?i=github" alt="GitHub"></a>
       <a href="https://www.linkedin.com/in/matthew-botha-80b875181/" target="_blank"><img src="https://skillicons.dev/icons?i=linkedin" alt="LinkedIn"></a>
