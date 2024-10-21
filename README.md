@@ -87,6 +87,9 @@
   <h2> Project Day Slides</h2>
   <a href="doc/DemoPowerPoints/ProjectDaySlides.pptx"> Poject Day Slide </a>
 
+  <h2>App Download links </h2>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/releases/latest/download/app-release.apk"> BeaPeek APK</a>
+  <a href="https://github.com/COS301-SE-2024/BeakPeek/releases/latest/download/app-release.apk"> Google Play </a>
   
 </div>
 
