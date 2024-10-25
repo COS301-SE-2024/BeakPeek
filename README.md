@@ -47,10 +47,8 @@
   <img src="https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white" alt="Ubuntu">
   <img src="https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows">
   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub">
-  <img src="https://img.shields.io/badge/App_Store-0D96F6?style=for-the-badge&logo=app-store&logoColor=white" alt="App Store">
   <img src="https://img.shields.io/badge/Google_Play-414141?style=for-the-badge&logo=google-play&logoColor=white" alt="Google Play">
   <img src="https://img.shields.io/badge/powershell-5391FE?style=for-the-badge&logo=powershell&logoColor=white" alt="Powershell">
-  <img src="https://img.shields.io/badge/wezterm-4E49EE?style=for-the-badge&logo=wezterm&logoColor=white" alt="WezTerm">
 </p>
 
 <h2 id="demos"> Demos</h2>
@@ -65,27 +63,27 @@
   <a href="https://github.com/COS301-SE-2024/BeakPeek/wiki/SRS-v4" > SRSv4 </a>
 
   <h2 href="">Code Quality</h2>
-  <a href="doc/Code_Qaulity/CodeQaulity.pdf" >Code Quality</a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/Code_Qaulity/CodeQaulity.pdf" >Code Quality</a>
 
   <h2 href=""> Installation Manual </h2>
   
-  <a href="doc/Installation/Installation_Manual.pdf" >Installation Manual</a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/Installation/Installation_Manual.pdf" >Installation Manual</a>
 
   <h2 href="">User Manual</h2>
   
-  <a href="doc/Manuals/UserManual.pdf" >User Manual</a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/Manuals/UserManual.pdf" >User Manual</a>
   
   <h2 href=""> SRS </h2>
 
-  <a href="doc/SRS_SoftwareRequirementSpecification/SRS v4.pdf" > SRSv4 pdf</a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/SRS_SoftwareRequirementSpecification/SRSv4.pdf" > SRSv4 pdf</a>
 
   <h2> Award Proposals (Extra Research)</h2>
-  <a href="doc/Awards/DevOps/devops.pdf" >DevOps</a>
-  <a href="doc/Awards/Algorithms/BeakPeek_Algorithmic_Innovation_Award.pdf" >Agorithms</a>
-  <a href="doc/Awards/Datascience/BeakPeek_Data_Science_Award.pdf" >Data Science</a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/Awards/DevOps/devops.pdf" >DevOps</a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/Awards/Algorithms/BeakPeek_Algorithmic_Innovation_Award.pdf" >Algorithms</a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/Awards/Datascience/BeakPeek_Data_Science_Award.pdf" >Data Science</a>
 
   <h2> Project Day Slides</h2>
-  <a href="doc/DemoPowerPoints/ProjectDaySlides.pptx"> Poject Day Slide </a>
+  <a href="https://cos301-se-2024.github.io/BeakPeek/doc/DemoPowerPoints/ProjectDaySlides.pptx"> Poject Day Slide </a>
 
   <h2>App Download links </h2>
   <a href="https://github.com/COS301-SE-2024/BeakPeek/releases/latest/download/app-release.apk"> BeaPeek APK</a>
